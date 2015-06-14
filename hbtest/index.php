@@ -45,6 +45,7 @@ left:400px;
 right:0px;
 overflow:auto;
 padding:5px;
+font-size:20px;
 }
 
 #map {
@@ -123,13 +124,9 @@ text-align:left;
   type="text/javascript"></script>
 
 <?php
-  // establish connection to db
-  $con = mysql_connect("localhost","dbuser","dbpass") or die("Failed to connect to database");
+  // establish connection to db: mysql_ interface is deprecated, should learn new options
+  $con = mysql_connect("localhost","travmap","clinch") or die("Failed to connect to database");
   mysql_select_db("TravelMapping", $con);
-
-  // select all waypoints matching the root given in the "r=" query string parameter
-  $sql_command = "select pointName, latitude, longitude from waypoints where root = '".$_GET['r']."';";
-  $res = mysql_query($sql_command);
 
   # functions from http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php
   function startsWith($haystack, $needle) {
@@ -141,14 +138,39 @@ text-align:left;
     return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== FALSE);
   }
 ?>
-<script src="chmviewerfunc3.js" type="text/javascript"></script>
+<script src="chmviewerfunc3t.js" type="text/javascript"></script>
 <script>
   function waypointsFromSQL() {
   <?php
+    // select all waypoints matching the root given in the "r=" query string parameter
+    $sql_command = "select pointName, latitude, longitude from waypoints where root = '".$_GET['r']."';";
+    $res = mysql_query($sql_command);
+
     $pointnum = 0;
     while ($row = mysql_fetch_array($res)) {
       echo "waypoints[".$pointnum."] = new Waypoint(\"".$row[0]."\",".$row[1].",".$row[2].");\n";
       $pointnum = $pointnum + 1;
+    }
+
+    // check for query string parameter for traveler clinched mapping of route
+    if (array_key_exists("u",$_GET)) {
+       echo "traveler = '".$_GET['u']."';";
+       // retrieve list of segments for this route
+       $sql_command = "select segmentId from segments where root = '".$_GET['r']."';";
+       $res = mysql_query($sql_command);
+       $segmentIndex = 0;
+       while ($row = mysql_fetch_array($res)) {
+         echo "segments[".$segmentIndex."] = ".$row[0].";\n";
+         $segmentIndex = $segmentIndex + 1;
+       }
+       $sql_command = "select segments.segmentId from segments right join clinched on segments.segmentId = clinched.segmentId where segments.root='".$_GET['r']."' and clinched.traveler='".$_GET['u']."';";
+       $res = mysql_query($sql_command);
+       $segmentIndex = 0;
+       while ($row = mysql_fetch_array($res)) {
+         echo "clinched[".$segmentIndex."] = ".$row[0].";\n";
+         $segmentIndex = $segmentIndex + 1;
+       }
+       echo "mapClinched = true;\n";
     }
   ?>
     genEdges = true;
@@ -163,6 +185,7 @@ text-align:left;
 <div id="pointbox">
   <table class="gratable"><thead><tr><th colspan="2">Waypoints</th></tr><tr><th>Coordinates</th><th>Waypoint Name</th></tr></thead><tbody>
   <?php
+    $sql_command = "select pointName, latitude, longitude from waypoints where root = '".$_GET['r']."';";
     $res = mysql_query($sql_command);
     $waypointnum = 0;
     while ($row = mysql_fetch_array($res)) {
@@ -174,6 +197,24 @@ text-align:left;
     }
   ?>
 </table>
+</div>
+<div id="controlbox">
+  <span id="controlboxroute">
+    <?php
+       $sql_command = "select region, route, banner, city from routes where root = '".$_GET['r']."';";
+       $res = mysql_query($sql_command);
+       $row = mysql_fetch_array($res);
+       echo $row[0]." ".$row[1];
+       if (strlen($row[2]) > 0) {
+          echo " ".$row[2];
+       }
+       if (strlen($row[3]) > 0) {
+          echo " (".$row[3].")";
+       }
+       echo ": ";
+    ?>
+  </span>
+<span id="controlboxinfo"></span>
 </div>
 <div id="map">
 </div>

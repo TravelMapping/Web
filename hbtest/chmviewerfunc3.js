@@ -23,6 +23,7 @@
 // 2013-12-25 JDT  Click on GRA, PTH point label in table recenters map
 // 2014-11-17 JDT  Added .wpl file support (waypoint list)
 // 2015-06-10 JDT  Adapted for reading from database entries using PHP
+// 2015-06-14 JDT  Clinched segment support
 //
 // $Id: chmviewerfunc3.js 2535 2015-01-28 18:46:22Z terescoj $
 //
@@ -42,6 +43,13 @@ var polypoints = new Array();
 var connections = new Array();
 // array of graph edges (for graph data)
 var graphEdges = new Array();
+// array of segments and clinched for "clinched by traveler" mapping
+var segments = new Array();
+var clinched = new Array();
+// boolean to say if we're doing this
+var mapClinched = false;
+// traveler name for clinched
+var traveler;
 // boolean to determine if graph edges should be generated automatically
 var genEdges = false;
 
@@ -609,8 +617,32 @@ function updateMap()
 	    //map.addOverlay(connections[i]);
 	}
     }
+    else if (mapClinched) {
+	// clinched vs unclinched segments mapped with different colors
+	var nextClinchedCheck = 0;
+	var totalMiles = 0.0;
+	var clinchedMiles = 0.0;
+	for (var i=0; i<segments.length; i++) {
+	    var edgePoints = new Array(2);
+	    edgePoints[0] = new google.maps.LatLng(waypoints[i].lat, waypoints[i].lon);
+	    edgePoints[1] = new google.maps.LatLng(waypoints[i+1].lat, waypoints[i+1].lon);
+	    var segmentLength = Mileage(waypoints[i].lat,
+					waypoints[i].lon,
+					waypoints[i+1].lat,
+					waypoints[i+1].lon);
+	    totalMiles += segmentLength;
+	    var color = "#cccccc";
+	    if (segments[i] == clinched[nextClinchedCheck]) {
+		color = "#ff8080";
+		nextClinchedCheck++;
+		clinchedMiles += segmentLength;
+	    }
+	    connections[i] = new google.maps.Polyline({path: edgePoints, strokeColor: color, strokeWeight: 10, strokeOpacity: 0.75, map: map});
+	}
+	document.getElementById('controlboxinfo').innerHTML = clinchedMiles.toFixed(2) + " of " + totalMiles.toFixed(2) + " miles (" + (clinchedMiles/totalMiles*100).toFixed(1) + "%) clinched by " + traveler + ".";
+    }
     else if (genEdges) {
-	connections[0] = new google.maps.Polyline({path: polypoints, strokeColor: "#0000FF", strokeWeight: 10, strokeOpacity: 0.4, map: map});
+	connections[0] = new google.maps.Polyline({path: polypoints, strokeColor: "#0000FF", strokeWeight: 10, strokeOpacity: 0.75, map: map});
 	//map.addOverlay(connections[0]);
     }
     // don't think this should not be needed, but an attempt to get hidden waypoints
