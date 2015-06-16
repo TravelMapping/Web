@@ -138,37 +138,85 @@ text-align:left;
     return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== FALSE);
   }
 ?>
-<script src="chmviewerfunc3t.js" type="text/javascript"></script>
+<script src="chmviewerfunc3.js" type="text/javascript"></script>
 <script>
   function waypointsFromSQL() {
   <?php
-    // select all waypoints matching the root given in the "r=" query string parameter
-    $sql_command = "select pointName, latitude, longitude from waypoints where root = '".$_GET['r']."';";
-    $res = mysql_query($sql_command);
+    if (array_key_exists("r",$_GET)) {
+      // select all waypoints matching the root given in the "r=" query string parameter
+      $sql_command = "select pointName, latitude, longitude from waypoints where root = '".$_GET['r']."';";
+      $res = mysql_query($sql_command);
 
-    $pointnum = 0;
-    while ($row = mysql_fetch_array($res)) {
-      echo "waypoints[".$pointnum."] = new Waypoint(\"".$row[0]."\",".$row[1].",".$row[2].");\n";
-      $pointnum = $pointnum + 1;
+      $pointnum = 0;
+      while ($row = mysql_fetch_array($res)) {
+        echo "waypoints[".$pointnum."] = new Waypoint(\"".$row[0]."\",".$row[1].",".$row[2].");\n";
+        $pointnum = $pointnum + 1;
+      }
+    }
+    else if (array_key_exists("rg",$_GET)) {
+      // select all waypoints matching routes whose region is given in the "rg=" query string parameter
+      echo "// SQL: select waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root from waypoints join routes on routes.root = waypoints.root and routes.region='".$_GET['rg']."';\n";
+      $sql_command = "select waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root from waypoints join routes on routes.root = waypoints.root and routes.region='".$_GET['rg']."';";
+      $res = mysql_query($sql_command);
+
+      $routenum = 0;
+      $pointnum = 0;
+      $lastRoute = "";
+      while ($row = mysql_fetch_array($res)) {
+        if (!($row[3] == $lastRoute)) {
+           echo "newRouteIndices[".$routenum."] = ".$pointnum.";\n";
+           $lastRoute = $row[3];
+           $routenum = $routenum + 1;
+        }
+        echo "waypoints[".$pointnum."] = new Waypoint(\"".$row[0]."\",".$row[1].",".$row[2]."); // Route = ".$row[3]."\n";
+        $pointnum = $pointnum + 1;
+      }
+
+    }
+    else {
+      // nothing to select waypoints, we're done
+      echo "return;\n";
     }
 
     // check for query string parameter for traveler clinched mapping of route
     if (array_key_exists("u",$_GET)) {
-       echo "traveler = '".$_GET['u']."';";
-       // retrieve list of segments for this route
-       $sql_command = "select segmentId from segments where root = '".$_GET['r']."';";
-       $res = mysql_query($sql_command);
-       $segmentIndex = 0;
-       while ($row = mysql_fetch_array($res)) {
-         echo "segments[".$segmentIndex."] = ".$row[0].";\n";
-         $segmentIndex = $segmentIndex + 1;
+       echo "traveler = '".$_GET['u']."';\n";
+       if (array_key_exists("r",$_GET)) {
+         // retrieve list of segments for this route
+         echo "// SQL: select segmentId from segments where root = '".$_GET['r']."';\n";
+         $sql_command = "select segmentId from segments where root = '".$_GET['r']."';";
+         $res = mysql_query($sql_command);
+         $segmentIndex = 0;
+         while ($row = mysql_fetch_array($res)) {
+           echo "segments[".$segmentIndex."] = ".$row[0].";\n";
+           $segmentIndex = $segmentIndex + 1;
+         }
+         $sql_command = "select segments.segmentId from segments right join clinched on segments.segmentId = clinched.segmentId where segments.root='".$_GET['r']."' and clinched.traveler='".$_GET['u']."';";
+         $res = mysql_query($sql_command);
+         $segmentIndex = 0;
+         while ($row = mysql_fetch_array($res)) {
+           echo "clinched[".$segmentIndex."] = ".$row[0].";\n";
+           $segmentIndex = $segmentIndex + 1;
+         }
        }
-       $sql_command = "select segments.segmentId from segments right join clinched on segments.segmentId = clinched.segmentId where segments.root='".$_GET['r']."' and clinched.traveler='".$_GET['u']."';";
-       $res = mysql_query($sql_command);
-       $segmentIndex = 0;
-       while ($row = mysql_fetch_array($res)) {
-         echo "clinched[".$segmentIndex."] = ".$row[0].";\n";
-         $segmentIndex = $segmentIndex + 1;
+       else if (array_key_exists("rg",$_GET)) {
+         // retrieve list of segments for this region
+         echo "// SQL: select segments.segmentId, segments.root from segments join routes on routes.root = segments.root where region = '".$_GET['rg']."';\n";
+         $sql_command = "select segments.segmentId, segments.root from segments join routes on routes.root = segments.root where region = '".$_GET['rg']."';";
+         $res = mysql_query($sql_command);
+         $segmentIndex = 0;
+         while ($row = mysql_fetch_array($res)) {
+           echo "segments[".$segmentIndex."] = ".$row[0]."; // route=".$row[1]."\n";
+           $segmentIndex = $segmentIndex + 1;
+         }
+         echo "// SQL: select segments.segmentId from segments right join clinched on segments.segmentId = clinched.segmentId join routes on routes.root = segments.root where region='".$_GET['rg']."' and clinched.traveler='".$_GET['u']."';\n";
+         $sql_command = "select segments.segmentId from segments right join clinched on segments.segmentId = clinched.segmentId join routes on routes.root = segments.root where region='".$_GET['rg']."' and clinched.traveler='".$_GET['u']."';";
+         $res = mysql_query($sql_command);
+         $segmentIndex = 0;
+         while ($row = mysql_fetch_array($res)) {
+           echo "clinched[".$segmentIndex."] = ".$row[0].";\n";
+           $segmentIndex = $segmentIndex + 1;
+         }
        }
        echo "mapClinched = true;\n";
     }
@@ -201,17 +249,22 @@ text-align:left;
 <div id="controlbox">
   <span id="controlboxroute">
     <?php
-       $sql_command = "select region, route, banner, city from routes where root = '".$_GET['r']."';";
-       $res = mysql_query($sql_command);
-       $row = mysql_fetch_array($res);
-       echo $row[0]." ".$row[1];
-       if (strlen($row[2]) > 0) {
-          echo " ".$row[2];
+       if (array_key_exists("r",$_GET)) {
+         $sql_command = "select region, route, banner, city from routes where root = '".$_GET['r']."';";
+         $res = mysql_query($sql_command);
+         $row = mysql_fetch_array($res);
+         echo $row[0]." ".$row[1];
+         if (strlen($row[2]) > 0) {
+            echo " ".$row[2];
+         }
+         if (strlen($row[3]) > 0) {
+            echo " (".$row[3].")";
+         }
+         echo ": ";
        }
-       if (strlen($row[3]) > 0) {
-          echo " (".$row[3].")";
+       else if (array_key_exists("rg",$_GET)) {
+         echo "Displaying region: ".$_GET['rg'].".";
        }
-       echo ": ";
     ?>
   </span>
 <span id="controlboxinfo"></span>

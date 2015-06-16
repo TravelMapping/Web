@@ -33,6 +33,8 @@ var map;
 
 // array of waypoints displayed
 var waypoints = new Array();
+// array of waypoint indices where route changes for region mapping
+var newRouteIndices = new Array();
 // the markers at those waypoints
 var markers = new Array();
 // the info displayed when markers are clicked
@@ -622,22 +624,61 @@ function updateMap()
 	var nextClinchedCheck = 0;
 	var totalMiles = 0.0;
 	var clinchedMiles = 0.0;
-	for (var i=0; i<segments.length; i++) {
-	    var edgePoints = new Array(2);
-	    edgePoints[0] = new google.maps.LatLng(waypoints[i].lat, waypoints[i].lon);
-	    edgePoints[1] = new google.maps.LatLng(waypoints[i+1].lat, waypoints[i+1].lon);
-	    var segmentLength = Mileage(waypoints[i].lat,
-					waypoints[i].lon,
-					waypoints[i+1].lat,
-					waypoints[i+1].lon);
-	    totalMiles += segmentLength;
-	    var color = "#cccccc";
-	    if (segments[i] == clinched[nextClinchedCheck]) {
-		color = "#ff8080";
-		nextClinchedCheck++;
-		clinchedMiles += segmentLength;
+	if (newRouteIndices.length > 0) {
+	    // if newRouteIndices is not empty, we're plotting multiple routes
+	    //DBG.write("Multiple clinched routes!");
+	    var nextSegment = 0;
+	    for (var route = 0; route < newRouteIndices.length; route++) {
+		var start = newRouteIndices[route];
+		var end;
+		if (route == newRouteIndices.length-1) {
+		    end = waypoints.length;
+		}
+		else {
+		    end = newRouteIndices[route+1]-1;
+		}
+		//DBG.write("route = " + route + ", start = " + start + ", end = " + end);
+		for (var i=start; i<end; i++) {
+		    var edgePoints = new Array(2);
+		    edgePoints[0] = new google.maps.LatLng(waypoints[i].lat, waypoints[i].lon);
+		    edgePoints[1] = new google.maps.LatLng(waypoints[i+1].lat, waypoints[i+1].lon);
+		    var segmentLength = Mileage(waypoints[i].lat,
+						waypoints[i].lon,
+						waypoints[i+1].lat,
+						waypoints[i+1].lon);
+		    totalMiles += segmentLength;
+		    //DBG.write("i = " + i);
+		    var color = "#cccccc";
+		    if (segments[nextSegment] == clinched[nextClinchedCheck]) {
+			//DBG.write("Clinched!");
+			color = "#ff8080";
+			nextClinchedCheck++;
+			clinchedMiles += segmentLength;
+		    }
+		    connections[nextSegment] = new google.maps.Polyline({path: edgePoints, strokeColor: color, strokeWeight: 10, strokeOpacity: 0.75, map: map});
+		    nextSegment++;
+		}	
 	    }
-	    connections[i] = new google.maps.Polyline({path: edgePoints, strokeColor: color, strokeWeight: 10, strokeOpacity: 0.75, map: map});
+	}
+	else {
+	    // single route
+	    for (var i=0; i<segments.length; i++) {
+		var edgePoints = new Array(2);
+		edgePoints[0] = new google.maps.LatLng(waypoints[i].lat, waypoints[i].lon);
+		edgePoints[1] = new google.maps.LatLng(waypoints[i+1].lat, waypoints[i+1].lon);
+		var segmentLength = Mileage(waypoints[i].lat,
+					    waypoints[i].lon,
+					    waypoints[i+1].lat,
+					    waypoints[i+1].lon);
+		totalMiles += segmentLength;
+		var color = "#cccccc";
+		if (segments[i] == clinched[nextClinchedCheck]) {
+		    color = "#ff8080";
+		    nextClinchedCheck++;
+		    clinchedMiles += segmentLength;
+		}
+		connections[i] = new google.maps.Polyline({path: edgePoints, strokeColor: color, strokeWeight: 10, strokeOpacity: 0.75, map: map});
+	    }
 	}
 	document.getElementById('controlboxinfo').innerHTML = clinchedMiles.toFixed(2) + " of " + totalMiles.toFixed(2) + " miles (" + (clinchedMiles/totalMiles*100).toFixed(1) + "%) clinched by " + traveler + ".";
     }
