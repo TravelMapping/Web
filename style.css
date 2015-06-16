@@ -28,19 +28,6 @@ body {
 	display: none;
 }
 
-label[for="hamburger"] {
-	display: inline-block;
-	width: 15px;
-	height: 15px;
-	background-image: url("/menu.svg");
-	background-size: contain;
-	cursor: pointer;
-	vertical-align: middle;
-	margin-left: 10px;
-	margin-right: 20px;
-	line-height: 64px;
-}
-
 #nav ul {
 	list-style-type: none;
 	padding-left: 0;
@@ -84,11 +71,19 @@ label[for="hamburger"] {
 
 	label[for="hamburger"] {
 		display: inline-block;
+		width: 15px;
+		height: 15px;
+		background-image: url("/menu.svg");
+		background-size: contain;
+		cursor: pointer;
+		vertical-align: middle;
+		margin-left: 10px;
+		margin-right: 20px;
+		line-height: 64px;
 	}
 
 	#nav {
 		display: none;
-		transition: height 0.2s;
 	}
 
 	#hamburger:checked ~ #nav {
