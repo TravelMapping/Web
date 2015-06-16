@@ -11,7 +11,7 @@
 <div class="container">
 <input type="checkbox" id="hamburger">
 <label for="hamburger"></label>
-<img src="logo.svg">
+<div id="logo"></div>
 <div id="nav">
 <ul>
 <li><a href="/">Home</a></li>
