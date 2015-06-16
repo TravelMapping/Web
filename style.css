@@ -90,6 +90,10 @@ label[for="hamburger"] {
 		display: inline-block;
 	}
 
+	#nav ul {
+		margin-top: 0;
+	}
+
 	#nav ul li {
 		display: block;
 	}
