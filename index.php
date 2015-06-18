@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Travel Mapping</title>
 <link rel="stylesheet" type="text/css" href="style.css">
+<link rel="shortcut icon" type="image/png" href="favicon.png">
 </head>
 <body>
 <div id="header">
