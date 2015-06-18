@@ -24,6 +24,7 @@
 // 2014-11-17 JDT  Added .wpl file support (waypoint list)
 // 2015-06-10 JDT  Adapted for reading from database entries using PHP
 // 2015-06-14 JDT  Clinched segment support
+// 2015-06-17 JDT  All highways in region support
 //
 // $Id: chmviewerfunc3.js 2535 2015-01-28 18:46:22Z terescoj $
 //
@@ -655,7 +656,7 @@ function updateMap()
 			nextClinchedCheck++;
 			clinchedMiles += segmentLength;
 		    }
-		    connections[nextSegment] = new google.maps.Polyline({path: edgePoints, strokeColor: color, strokeWeight: 10, strokeOpacity: 0.75, map: map});
+		    connections[nextSegment] = new google.maps.Polyline({path: edgePoints, strokeColor: color, strokeWeight: 6, strokeOpacity: 0.75, map: map});
 		    nextSegment++;
 		}	
 	    }
@@ -755,6 +756,22 @@ function showHiddenClicked() {
 	    if (!waypoints[i].visible) {
 		markers[i].setMap(null);
 	    }
+	}
+    }
+}
+
+// callback for when the hideMarkers checkbox is clicked
+function showMarkersClicked() {
+
+    var showThem = document.getElementById('showMarkers').checked;
+    if (showThem) {
+	for (var i = 0; i < waypoints.length; i++) {
+	    AddMarker(markers[i], markerinfo[i], i);
+	}
+    }
+    else {
+	for (var i = 0; i < waypoints.length; i++) {
+	    markers[i].setMap(null);
 	}
     }
 }

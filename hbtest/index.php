@@ -155,8 +155,8 @@ text-align:left;
     }
     else if (array_key_exists("rg",$_GET)) {
       // select all waypoints matching routes whose region is given in the "rg=" query string parameter
-      echo "// SQL: select waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root from waypoints join routes on routes.root = waypoints.root and routes.region='".$_GET['rg']."';\n";
-      $sql_command = "select waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root from waypoints join routes on routes.root = waypoints.root and routes.region='".$_GET['rg']."';";
+      echo "// SQL: select waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root from waypoints join routes on routes.root = waypoints.root and routes.region='".$_GET['rg']."' join systems on routes.systemname = systems.systemname and systems.active='1';\n";
+      $sql_command = "select waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root from waypoints join routes on routes.root = waypoints.root and routes.region='".$_GET['rg']."' join systems on routes.systemname = systems.systemname and systems.active='1';";
       $res = mysql_query($sql_command);
 
       $routenum = 0;
@@ -201,16 +201,16 @@ text-align:left;
        }
        else if (array_key_exists("rg",$_GET)) {
          // retrieve list of segments for this region
-         echo "// SQL: select segments.segmentId, segments.root from segments join routes on routes.root = segments.root where region = '".$_GET['rg']."';\n";
-         $sql_command = "select segments.segmentId, segments.root from segments join routes on routes.root = segments.root where region = '".$_GET['rg']."';";
+         echo "// SQL: select segments.segmentId, segments.root from segments join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1' where region = '".$_GET['rg']."';\n";
+         $sql_command = "select segments.segmentId, segments.root from segments join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1' where region = '".$_GET['rg']."';";
          $res = mysql_query($sql_command);
          $segmentIndex = 0;
          while ($row = mysql_fetch_array($res)) {
            echo "segments[".$segmentIndex."] = ".$row[0]."; // route=".$row[1]."\n";
            $segmentIndex = $segmentIndex + 1;
          }
-         echo "// SQL: select segments.segmentId from segments right join clinched on segments.segmentId = clinched.segmentId join routes on routes.root = segments.root where region='".$_GET['rg']."' and clinched.traveler='".$_GET['u']."';\n";
-         $sql_command = "select segments.segmentId from segments right join clinched on segments.segmentId = clinched.segmentId join routes on routes.root = segments.root where region='".$_GET['rg']."' and clinched.traveler='".$_GET['u']."';";
+         echo "// SQL: select segments.segmentId from segments right join clinched on segments.segmentId = clinched.segmentId join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1' where region='".$_GET['rg']."' and clinched.traveler='".$_GET['u']."';\n";
+         $sql_command = "select segments.segmentId from segments right join clinched on segments.segmentId = clinched.segmentId join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1' where region='".$_GET['rg']."' and clinched.traveler='".$_GET['u']."';";
          $res = mysql_query($sql_command);
          $segmentIndex = 0;
          while ($row = mysql_fetch_array($res)) {
@@ -246,7 +246,9 @@ text-align:left;
   ?>
 </table>
 </div>
-<div id="controlbox">
+  <div id="controlbox">
+    <input id="showMarkers" type="checkbox" name="Show Markers" onclick="showMarkersClicked()" checked="false">&nbsp;Show Markers
+      
   <span id="controlboxroute">
     <?php
        if (array_key_exists("r",$_GET)) {
