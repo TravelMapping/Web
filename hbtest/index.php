@@ -155,8 +155,8 @@ text-align:left;
     }
     else if (array_key_exists("rg",$_GET)) {
       // select all waypoints matching routes whose region is given in the "rg=" query string parameter
-      echo "// SQL: select waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root from waypoints join routes on routes.root = waypoints.root and routes.region='".$_GET['rg']."' join systems on routes.systemname = systems.systemname and systems.active='1';\n";
-      $sql_command = "select waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root from waypoints join routes on routes.root = waypoints.root and routes.region='".$_GET['rg']."' join systems on routes.systemname = systems.systemname and systems.active='1';";
+      echo "// SQL: select waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier from waypoints join routes on routes.root = waypoints.root and routes.region='".$_GET['rg']."' join systems on routes.systemname = systems.systemname and systems.active='1';\n";
+      $sql_command = "select waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier from waypoints join routes on routes.root = waypoints.root and routes.region='".$_GET['rg']."' join systems on routes.systemname = systems.systemname and systems.active='1';";
       $res = mysql_query($sql_command);
 
       $routenum = 0;
@@ -165,6 +165,7 @@ text-align:left;
       while ($row = mysql_fetch_array($res)) {
         if (!($row[3] == $lastRoute)) {
            echo "newRouteIndices[".$routenum."] = ".$pointnum.";\n";
+           echo "routeTier[".$routenum."] = ".$row[4].";\n";
            $lastRoute = $row[3];
            $routenum = $routenum + 1;
         }

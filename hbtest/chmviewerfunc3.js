@@ -36,6 +36,8 @@ var map;
 var waypoints = new Array();
 // array of waypoint indices where route changes for region mapping
 var newRouteIndices = new Array();
+// tiers of each route included
+var routeTier = new Array();
 // the markers at those waypoints
 var markers = new Array();
 // the info displayed when markers are clicked
@@ -640,6 +642,7 @@ function updateMap()
 		}
 		//DBG.write("route = " + route + ", start = " + start + ", end = " + end);
 		for (var i=start; i<end; i++) {
+		    var zIndex = 10 - routeTier[route];
 		    var edgePoints = new Array(2);
 		    edgePoints[0] = new google.maps.LatLng(waypoints[i].lat, waypoints[i].lon);
 		    edgePoints[1] = new google.maps.LatLng(waypoints[i+1].lat, waypoints[i+1].lon);
@@ -653,10 +656,13 @@ function updateMap()
 		    if (segments[nextSegment] == clinched[nextClinchedCheck]) {
 			//DBG.write("Clinched!");
 			color = "#ff8080";
+			zIndex = zIndex + 10;
 			nextClinchedCheck++;
 			clinchedMiles += segmentLength;
 		    }
-		    connections[nextSegment] = new google.maps.Polyline({path: edgePoints, strokeColor: color, strokeWeight: 6, strokeOpacity: 0.75, map: map});
+		    connections[nextSegment] = new google.maps.Polyline(
+			{path: edgePoints, strokeColor: color, strokeWeight: 6, strokeOpacity: 0.75,
+			 zIndex : zIndex, map: map});
 		    nextSegment++;
 		}	
 	    }
