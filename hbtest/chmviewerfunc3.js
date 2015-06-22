@@ -568,7 +568,7 @@ function updateMap()
     }
 
     var showHidden = false;  // document.getElementById('showHidden').checked;
-    //DBG.write("updateMap: showHidden is " + showHidden);
+    var showMarkers = document.getElementById('showMarkers').checked;
 
     markers = new Array();
     markerinfo = new Array();
@@ -584,11 +584,11 @@ function updateMap()
 	markerinfo[i] = MarkerInfo(i, waypoints[i]);
 	markers[i] = new google.maps.Marker({
 	    position: polypoints[i],
-	    map: map,
+	    //map: map,
 	    title: waypoints[i].label,
 	    icon: intersectionimage
 	});
-	if (showHidden || waypoints[i].visible) {
+	if (showMarkers && (showHidden || waypoints[i].visible)) {
 	    AddMarker(markers[i], markerinfo[i], i);
 	}
 	bounds.extend(polypoints[i]);
@@ -627,6 +627,8 @@ function updateMap()
 	var nextClinchedCheck = 0;
 	var totalMiles = 0.0;
 	var clinchedMiles = 0.0;
+	var level = map.getZoom();
+	var weight = 2;
 	if (newRouteIndices.length > 0) {
 	    // if newRouteIndices is not empty, we're plotting multiple routes
 	    //DBG.write("Multiple clinched routes!");
@@ -635,7 +637,7 @@ function updateMap()
 		var start = newRouteIndices[route];
 		var end;
 		if (route == newRouteIndices.length-1) {
-		    end = waypoints.length;
+		    end = waypoints.length-1;
 		}
 		else {
 		    end = newRouteIndices[route+1]-1;
@@ -652,20 +654,32 @@ function updateMap()
 						waypoints[i+1].lon);
 		    totalMiles += segmentLength;
 		    //DBG.write("i = " + i);
-		    var color = "#cccccc";
+		    var color = "rgb(200,200,200)"; //"#cccccc";
 		    if (segments[nextSegment] == clinched[nextClinchedCheck]) {
 			//DBG.write("Clinched!");
-			color = "#ff8080";
+			color = "rgb(255,128,128)"; //"#ff8080";
 			zIndex = zIndex + 10;
 			nextClinchedCheck++;
 			clinchedMiles += segmentLength;
 		    }
 		    connections[nextSegment] = new google.maps.Polyline(
-			{path: edgePoints, strokeColor: color, strokeWeight: 6, strokeOpacity: 0.75,
+			{path: edgePoints, strokeColor: color, strokeWeight: weight, strokeOpacity: 0.75,
 			 zIndex : zIndex, map: map});
 		    nextSegment++;
 		}	
 	    }
+	    // set up listener for changes to zoom level and adjust strokeWeight in response
+	    //DBG.write("Setting up zoom_changed");
+	    google.maps.event.clearListeners(map, 'zoom_changed');
+	    google.maps.event.addListener(map, 'zoom_changed', zoomChange); 
+//	    google.maps.event.addListener(map, 'zoom_changed', function() {
+//		var level = map.getZoom();
+//		var weight = Math.floor(level);
+//		DBG.write("Zoom level " + level + ", weight = " + weight);
+//		for (var i=0; i<connections.length; i++) {
+//		    connections[i].setOptions({strokeWeight: weight});
+//		}
+//	    });
 	}
 	else {
 	    // single route
@@ -687,7 +701,7 @@ function updateMap()
 		connections[i] = new google.maps.Polyline({path: edgePoints, strokeColor: color, strokeWeight: 10, strokeOpacity: 0.75, map: map});
 	    }
 	}
-	document.getElementById('controlboxinfo').innerHTML = clinchedMiles.toFixed(2) + " of " + totalMiles.toFixed(2) + " miles (" + (clinchedMiles/totalMiles*100).toFixed(1) + "%) clinched by " + traveler + ".";
+	document.getElementById('controlboxinfo').innerHTML = clinchedMiles.toFixed(2) + " of " + totalMiles.toFixed(2) + " miles (" + (clinchedMiles/totalMiles*100).toFixed(1) + "%) clinched by " + traveler + ".";				    
     }
     else if (genEdges) {
 	connections[0] = new google.maps.Polyline({path: polypoints, strokeColor: "#0000FF", strokeWeight: 10, strokeOpacity: 0.75, map: map});
@@ -696,6 +710,21 @@ function updateMap()
     // don't think this should not be needed, but an attempt to get hidden waypoints
     // to be hidden when first created
     showHiddenClicked();
+}
+
+function zoomChange() {
+
+    var level = map.getZoom();
+    var newWeight;
+    if (level < 9) newWeight = 2;
+    else if (level < 12) newWeight = 6;
+    else if (level < 15) newWeight = 10;
+    else newWeight = 16;
+    //DBG.write("zoomChange: Zoom level " + level + ", newWeight = " + newWeight);
+    for (var i=0; i<connections.length; i++) {
+	//connections[i].setMap(null);
+	connections[i].setOptions({strokeWeight: newWeight});
+    }
 }
 
 function AddMarker(marker, markerinfo, i) {
