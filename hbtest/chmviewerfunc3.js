@@ -38,6 +38,8 @@ var waypoints = new Array();
 var newRouteIndices = new Array();
 // tiers of each route included
 var routeTier = new Array();
+// color code for each route included
+var routeColor = new Array();
 // the markers at those waypoints
 var markers = new Array();
 // the info displayed when markers are clicked
@@ -57,6 +59,16 @@ var mapClinched = false;
 var traveler;
 // boolean to determine if graph edges should be generated automatically
 var genEdges = false;
+
+// array of objects that define color codes from names in the DB
+var colorCodes = new Array();
+colorCodes[0] = { name: "blue", unclinched: "rgb(100,100,255)", clinched: "rgb(0,0,255)" };
+colorCodes[1] = { name: "brown", unclinched: "rgb(153,152,102)", clinched: "rgb(153,102,0)" };
+colorCodes[2] = { name: "red", unclinched: "rgb(255,100,100)", clinched: "rgb(255,0,0)" };
+colorCodes[3] = { name: "yellow", unclinched: "rgb(255,255,128)", clinched: "rgb(225,225,0)" };
+colorCodes[4] = { name: "teal", unclinched: "rgb(100,200,200)", clinched: "rgb(0,200,200)" };
+colorCodes[5] = { name: "green", unclinched: "rgb(100,255,100)", clinched: "rgb(0,255,0)" };
+colorCodes[6] = { name: "magenta", unclinched: "rgb(255,100,255)", clinched: "rgb(255,0,255)" };
 
 var infowindow = new google.maps.InfoWindow();
 
@@ -643,6 +655,15 @@ function updateMap()
 		    end = newRouteIndices[route+1]-1;
 		}
 		//DBG.write("route = " + route + ", start = " + start + ", end = " + end);
+		// support for clinch colors from systems.csv
+		var unclinchedColor = "rgb(200,200,200)"; //"#cccccc";
+		var clinchedColor = "rgb(255,128,128)"; //"#ff8080";
+		for (var c = 0; c<colorCodes.length; c++) {
+		    if (colorCodes[c].name == routeColor[route]) {
+			unclinchedColor = colorCodes[c].unclinched;
+			clinchedColor = colorCodes[c].clinched;
+		    }
+		}
 		for (var i=start; i<end; i++) {
 		    var zIndex = 10 - routeTier[route];
 		    var edgePoints = new Array(2);
@@ -654,16 +675,18 @@ function updateMap()
 						waypoints[i+1].lon);
 		    totalMiles += segmentLength;
 		    //DBG.write("i = " + i);
-		    var color = "rgb(200,200,200)"; //"#cccccc";
+		    var color = unclinchedColor;
+		    var opacity = 0.3;
 		    if (segments[nextSegment] == clinched[nextClinchedCheck]) {
 			//DBG.write("Clinched!");
-			color = "rgb(255,128,128)"; //"#ff8080";
+			color = clinchedColor;
 			zIndex = zIndex + 10;
 			nextClinchedCheck++;
 			clinchedMiles += segmentLength;
+			opacity = 0.85;
 		    }
 		    connections[nextSegment] = new google.maps.Polyline(
-			{path: edgePoints, strokeColor: color, strokeWeight: weight, strokeOpacity: 0.75,
+			{path: edgePoints, strokeColor: color, strokeWeight: weight, strokeOpacity: opacity,
 			 zIndex : zIndex, map: map});
 		    nextSegment++;
 		}	

@@ -143,11 +143,10 @@ text-align:left;
   <?php
     $regions = array();
     if (array_key_exists("rg",$_GET)) {
-
       $regions = explode(',',$_GET['rg']);
     }
 
-    // select all waypoints matching routes whose region is given in the "rg=" query string parameter
+    // restrict to waypoints matching routes whose region is given in the "rg=" query string parameter
     // build strings needed for later queries
     $select_regions = "";
     $where_regions = "";
@@ -168,7 +167,33 @@ text-align:left;
       $where_regions = $where_regions.")";
     }
 
-    $sql_command = "select waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier from waypoints join routes on routes.root = waypoints.root".$select_regions." join systems on routes.systemname = systems.systemname and systems.active='1';";
+    // select based on system?
+    $systems = array();
+    if (array_key_exists("sys",$_GET)) {
+      $systems = explode(',',$_GET['sys']);
+    }
+
+    // restrict to waypoints matching routes whose system is given in the "sys=" query string parameter
+    $select_systems = "";
+    $where_systems = "";
+    $num_systems = 0;
+    foreach ($systems as $system) {
+      if ($num_systems == 0) {
+        $select_systems = " and (routes.systemName='".$system."'";
+        $where_systems = " where (routes.systemName='".$system."'";
+      }
+      else {
+        $select_systems = $select_systems." or routes.systemName='".$system."'";
+        $where_systems = $where_systems." or routes.systemName='".$system."'";
+      }
+      $num_systems = $num_systems + 1;
+    }
+    if ($num_systems > 0) {
+      $select_systems = $select_systems.")";
+      $where_systems = $where_systems.")";
+    }
+
+    $sql_command = "select waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color from waypoints join routes on routes.root = waypoints.root".$select_regions.$select_systems." join systems on routes.systemname = systems.systemname and systems.active='1';";
     echo "// SQL: ".$sql_command."\n";
     $res = mysql_query($sql_command);
 
@@ -179,10 +204,11 @@ text-align:left;
       if (!($row[3] == $lastRoute)) {
          echo "newRouteIndices[".$routenum."] = ".$pointnum.";\n";
          echo "routeTier[".$routenum."] = ".$row[4].";\n";
+         echo "routeColor[".$routenum."] = '".$row[5]."';\n";
          $lastRoute = $row[3];
          $routenum = $routenum + 1;
       }
-      echo "waypoints[".$pointnum."] = new Waypoint(\"".$row[0]."\",".$row[1].",".$row[2]."); // Route = ".$row[3]."\n";
+      echo "waypoints[".$pointnum."] = new Waypoint(\"".$row[0]."\",".$row[1].",".$row[2]."); // Route = ".$row[3]." (".$row[5].")\n";
       $pointnum = $pointnum + 1;
     }
 
@@ -190,7 +216,7 @@ text-align:left;
     if (array_key_exists("u",$_GET)) {
        echo "traveler = '".$_GET['u']."';\n";
        // retrieve list of segments for this region or regions
-       $sql_command = "select segments.segmentId, segments.root from segments join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1'".$where_regions.";";
+       $sql_command = "select segments.segmentId, segments.root from segments join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1'".$where_regions.$where_systems.";";
        echo "// SQL: ".$sql_command."\n";
        $res = mysql_query($sql_command);
        $segmentIndex = 0;
@@ -198,7 +224,7 @@ text-align:left;
          echo "segments[".$segmentIndex."] = ".$row[0]."; // route=".$row[1]."\n";
          $segmentIndex = $segmentIndex + 1;
        }
-       $sql_command = "select segments.segmentId from segments right join clinched on segments.segmentId = clinched.segmentId join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1'".$where_regions." and clinched.traveler='".$_GET['u']."';";
+       $sql_command = "select segments.segmentId from segments right join clinched on segments.segmentId = clinched.segmentId join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1'".$where_regions.$where_systems." and clinched.traveler='".$_GET['u']."';";
        echo "// SQL: " .$sql_command."\n";
        $res = mysql_query($sql_command);
        $segmentIndex = 0;
