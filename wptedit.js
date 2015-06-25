@@ -19,6 +19,10 @@ var hiddenWptMarker = {
 	anchor: new google.maps.Point(4, 4)
 };
 
+function isHidden(wpt) {
+	return wpt.label[0] == "+";
+}
+
 function loadWaypoints(waypoints, map) {
 	var bounds = null;
 	var path = null;
@@ -32,7 +36,7 @@ function loadWaypoints(waypoints, map) {
 			draggable: true,
 			position: coords,
 			title: wpt.label,
-			icon: (wpt.hidden ? hiddenWptMarker : visibleWptMarker)
+			icon: (isHidden(wpt) ? hiddenWptMarker : visibleWptMarker)
 		});
 		if (bounds === null) {
 			bounds = new google.maps.LatLngBounds(coords, coords);
