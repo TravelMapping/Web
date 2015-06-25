@@ -15,17 +15,17 @@ var waypoints = [
 	{label: "EastAve", lat: 43.656732, lng: -79.352507},
 	{label: "QueStE", lat: 43.658005, lng: -79.353710},
 	{label: "DunStE", lat: 43.661781, lng: -79.355063},
-	{label: "+X00", lat: 43.669734, lng: -79.357418, hidden: true},
+	{label: "+X00", lat: 43.669734, lng: -79.357418},
 	{label: "DanAve", lat: 43.673286, lng: -79.360406},
-	{label: "+X01", lat: 43.678235, lng: -79.362220, hidden: true},
-	{label: "BayAve", lat: 43.682800, lng: -79.362187, hidden: true},
-	{label: "+X02", lat: 43.691107, lng: -79.359419, hidden: true},
-	{label: "+X03", lat: 43.697848, lng: -79.350450, hidden: true},
-	{label: "+X04", lat: 43.697444, lng: -79.342988, hidden: true},
+	{label: "+X01", lat: 43.678235, lng: -79.362220},
+	{label: "BayAve", lat: 43.682800, lng: -79.362187},
+	{label: "+X02", lat: 43.691107, lng: -79.359419},
+	{label: "+X03", lat: 43.697848, lng: -79.350450},
+	{label: "+X04", lat: 43.697444, lng: -79.342988},
 	{label: "DonMilRd", lat: 43.700192, lng: -79.337752},
-	{label: "+X05", lat: 43.703180, lng: -79.332442, hidden: true},
-	{label: "+X06", lat: 43.708074, lng: -79.330865, hidden: true},
-	{label: "+X07", lat: 43.714700, lng: -79.325286, hidden: true},
+	{label: "+X05", lat: 43.703180, lng: -79.332442},
+	{label: "+X06", lat: 43.708074, lng: -79.330865},
+	{label: "+X07", lat: 43.714700, lng: -79.325286},
 	{label: "EglAveE", lat: 43.723145, lng: -79.330200},
 	{label: "WynDr", altLabels: ["WynfordDr"], lat: 43.726756, lng: -79.330449},
 	{label: "LawAveE", lat: 43.739463, lng: -79.332182},
@@ -115,6 +115,9 @@ function expandWaypoint(label) {
 document.addEventListener("click", function (event) {
 	if (event.target.classList.contains("waypoint")) {
 		expandWaypoint(event.target.id.split("-")[1]);
+	} else if (event.target.classList.contains("disabled")) {
+		event.preventDefault();
+		return false;
 	}
 });
 
@@ -190,7 +193,7 @@ function update() {
 
 	var hidden = 0;
 	waypoints.forEach(function (wpt) {
-		if (wpt.hidden) hidden++;
+		if (isHidden(wpt.hidden)) hidden++;
 	});
 	document.getElementById("num-hidden-waypoints").innerText = hidden;
 
@@ -201,8 +204,7 @@ function update() {
 	document.getElementById("length").innerText = distance;
 	document.getElementById("length-units").innerText = units;
 
-	var errors = 0;
-	/* TODO: error checking */
+	var errors = document.getElementsByClassName("error").length;
 	document.getElementById("num-errors").innerText = errors;
 	document.getElementById("errors-plural").innerText = errors == 1 ? "" : "s";
 }
@@ -227,10 +229,17 @@ function onload() {
 (<span id="num-hidden-waypoints"></span> hidden),
 <span id="num-errors"></span> possible error<span id="errors-plural">s</span>.
 </p>
+<div>
+<a href="javascript: reverse()" id="reverse" class="button">Reverse</a>
+<a href="javascript: addwpt()" id="addwpt" class="button">Add Waypoint</a>
+<a href="javascript: delwpt()" id="delwpt" class="button disabled">Delete Waypoint</a>
+</div>
+<div>
 <a href="javascript: onimport()" id="import" class="button">Import</a>
 <a href="javascript: onexport()" id="export" class="button">Export</a>
 <input type="radio" name="units" id="units-mi" checked onchange="update()">mi</input>
 <input type="radio" name="units" id="units-km" onchange="update()">km</input>
+</div>
 </div>
 </div>
 <div id="map"></div>

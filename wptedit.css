@@ -91,10 +91,16 @@ body {
 }
 
 .button {
+	display: inline-block;
 	background-color: #214478;
 	padding: 5px 10px;
+	margin: 5px 0;
 	text-decoration: none;
 	color: white;
+}
+.button.disabled {
+	cursor: default;
+	background-color: #999999;
 }
 
 #import-dialog {
