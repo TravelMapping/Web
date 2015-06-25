@@ -27,7 +27,7 @@ var waypoints = [
 	{label: "+X06", lat: 43.708074, lng: -79.330865, hidden: true},
 	{label: "+X07", lat: 43.714700, lng: -79.325286, hidden: true},
 	{label: "EglAveE", lat: 43.723145, lng: -79.330200},
-	{label: "WynDr", lat: 43.726756, lng: -79.330449},
+	{label: "WynDr", altLabels: ["WynfordDr"], lat: 43.726756, lng: -79.330449},
 	{label: "LawAveE", lat: 43.739463, lng: -79.332182},
 	{label: "YorkMilRd", lat: 43.758290, lng: -79.335733},
 	{label: "ON401/404", lat: 43.767584, lng: -79.338034}
@@ -48,6 +48,39 @@ function loadMap() {
 	markers = loadWaypoints(waypoints, map);
 }
 
+function createWaypointElement(wpt) {
+	var el = document.createElement("div");
+	el.classList.add("waypoint");
+	el.id = "waypoint-" + wpt.label;
+	el.dataset.label = wpt.label;
+
+	var br = document.createElement("br");
+
+	var name = document.createElement("span");
+	name.classList.add("waypoint-name");
+	name.innerText = wpt.label;
+	el.appendChild(name);
+
+	if (wpt.altLabels) {
+		wpt.altLabels.forEach(function (label) {
+			var altl = document.createElement("span");
+			altl.classList.add("waypoint-alt-name");
+			altl.innerText = label;
+			el.appendChild(br);
+			el.appendChild(altl);
+		});
+	}
+
+	return el;
+}
+
+function loadSide(wpts) {
+	var wptlst = document.getElementById("waypoints");
+	wpts.forEach(function (wpt) {
+		wptlst.appendChild(createWaypointElement(wpt));
+	});
+}
+
 function expandWaypoint(label) {
 	win.close();
 	win.setContent("");
@@ -62,16 +95,22 @@ function expandWaypoint(label) {
 		wpt.classList.remove("expanded");
 	});
 
+	var wpt = null;
+	waypoints.forEach(function (w) {
+		if (w.label == label) wpt = w;
+	});
+	var lat = wpt.lat,
+		lng = wpt.lng;
+
 	el.classList.add("expanded");
-	win.setContent("<span class='waypoint-name'>" + label + "</span>");
+	win.setContent("<div class='waypoint-name'>" + label + "</div>" +
+		"<div class='waypoint-coords'>" + lat + ", " + lng + "</div>");
 	win.open(map, markers[label]);
-	map.setCenter(win.getPosition());
+	map.setCenter(markers[label].getPosition());
 }
 
 document.addEventListener("click", function (event) {
 	if (event.target.classList.contains("waypoint")) {
-		var label = event.target.id.split("-")[1];
-		console.log(label);
 		expandWaypoint(event.target.id.split("-")[1]);
 	}
 });
@@ -110,6 +149,7 @@ function update() {
 
 function onload() {
 	loadMap();
+	loadSide(waypoints);
 	update();
 }
 </script>
@@ -118,24 +158,7 @@ function onload() {
 <div id="wrapper">
 <div id="editor">
 <div id="waypoint-list">
-<div id="waypoints">
-<div class="waypoint" id="waypoint-GarExpy" data-label="GarExpy">
-	<span class="waypoint-name">GarExpy</span>
-	<span class="waypoint-alt-names"></span>
-	<div class="waypoint-coords">
-		<span id="waypoint-GarExpy-lat">43.650000</span>,
-		<span id="waypoint-GarExpy-lng">-79.349640</span>
-	</div>
-</div>
-<div class="waypoint" id="waypoint-DonRd" data-label="DonRd">
-	<span class="waypoint-name">DonRd</span>
-	<span class="waypoint-alt-names"></span>
-	<div class="waypoint-coords">
-		<span id="waypoint-GarExpy-lat">43.653578</span>,
-		<span id="waypoint-GarExpy-lng">-79.349087</span>
-	</div>
-</div>
-</div>
+<div id="waypoints"></div>
 </div>
 <div id="editor-footer">
 <p>

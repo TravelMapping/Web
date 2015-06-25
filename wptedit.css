@@ -30,9 +30,11 @@ body {
 }
 
 #waypoint-list {
-	flex-grow: 1;
+	flex: 3;
+	overflow-y: scroll;
 }
 .waypoint {
+	cursor: pointer;
 	box-shadow: 3px 3px 5px #dddddd;
 	background-color: white;
 	border-bottom: 1px solid #dddddd;
@@ -51,11 +53,6 @@ body {
 	font-size: 2em;
 	font-weight: 300;
 }
-.waypoint-alt-name {
-	font-size: 1.25em;
-	color: #cccccc;
-	font-weight: 300;
-}
 
 .waypoint.expanded {
 	margin-top: 20px;
@@ -68,12 +65,18 @@ body {
 	margin-bottom: 0;
 }
 
-.waypoint-coords {
+.waypoint-alt-name, .waypoint-coords {
 	display: none;
 }
-.waypoint.expanded .waypoint-coords {
-	display: block;
+.waypoint.expanded .waypoint-alt-name {
+	display: inline;
+	font-size: 1.25em;
 	color: #cccccc;
+	font-weight: 300;
+}
+.waypoint-coords {
+	display: inline;
+	color: #999999;
 }
 
 #editor-footer {
