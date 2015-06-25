@@ -35,7 +35,7 @@ body {
 
 #waypoint-list {
 	flex: 3;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 .waypoint {
 	cursor: pointer;
@@ -98,13 +98,30 @@ body {
 }
 
 #import-dialog {
-/*	display: none; */
+	display: flex;
+	flex-direction: column;
 	transition: left 0.3s ease;
 	position: fixed;
 	top: 0;
-	left: 0;
+	left: -500px;
 	width: 450px;
 	height: 100%;
+	padding: 20px;
 	box-shadow: 3px 3px 5px #dddddd;
-	background-color: white;
+	background-color: #eeeeee;
+}
+#import-dialog.open {
+	left: 0;
+}
+
+#import-dialog textarea {
+	display: block;
+	flex: 3;
+	width: 100%;
+	font-family: monospace;
+	font-size: 16px;
+	margin-bottom: 15px;
+	resize: none;
+	border: none;
+	padding: 10px;
 }

@@ -33,6 +33,7 @@ var waypoints = [
 	{label: "ON401/404", lat: 43.767584, lng: -79.338034}
 ];
 var markers = {};
+var path = null;
 var map;
 var win = new google.maps.InfoWindow({});
 
@@ -45,7 +46,9 @@ function loadMap() {
 	};
 	map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-	markers = loadWaypoints(waypoints, map);
+	var x = loadWaypoints(waypoints, map);
+	markers = x.markers;
+	path = x.path;
 }
 
 function createWaypointElement(wpt) {
@@ -117,6 +120,48 @@ document.addEventListener("click", function (event) {
 
 function onimport() {
 	/* Import waypoint data into the application */
+	document.getElementById("import-dialog").classList.add("open");
+}
+function ondoimport() {
+	if (!window.confirm("This will delete the existing waypoints. " +
+			"Are you sure you want to proceed?")) {
+		return;
+	}
+
+	Object.getOwnPropertyNames(markers).forEach(function (label) {
+		markers[label].setMap(null);
+	});
+	path.setMap(null);
+
+	var list = document.getElementById("waypoints");
+	while (list.firstChild) {
+		list.removeChild(list.firstChild);
+	}
+
+	waypoints = [];
+	var data = document.getElementById("import-data").value;
+	var lines = data.split(/\n/);
+	lines.forEach(function (line) {
+		var fields = line.split(/ +/);
+		if (fields.length < 3) {
+			return;
+		}
+
+		var lat = fields[0], lng = fields[1], main = fields[2], alts = fields.slice(3);
+		waypoints.push({label: main, altLabels: alts, lat: lat, lng: lng});
+	});
+
+	var x = loadWaypoints(waypoints, map);
+	markers = x.markers;
+	path = x.path;
+	loadSide(waypoints);
+	update();
+	closeimport();
+}
+
+function closeimport() {
+	document.getElementById("import-data").value = "";
+	document.getElementById("import-dialog").classList.remove("open");
 }
 
 function onexport() {
@@ -191,6 +236,11 @@ function onload() {
 <div id="map"></div>
 </div>
 <div id="import-dialog">
+<textarea id="import-data" placeholder="Paste waypoint lines here."></textarea>
+<div>
+<a href="javascript: ondoimport()" id="import-import" class="button">Import</a>
+<a href="javascript: closeimport()" id="import-cancel" class="button">Cancel</a>
+</div>
 </div>
 </body>
 </html>

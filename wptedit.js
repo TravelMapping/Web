@@ -74,5 +74,5 @@ function loadWaypoints(waypoints, map) {
 
 	map.fitBounds(bounds);
 
-	return markers;
+	return {markers: markers, path: path};
 }
