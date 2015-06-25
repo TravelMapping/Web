@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Travel Mapping Waypoint Editor</title>
+<link rel="stylesheet" type="text/css" href="wptedit.css">
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,300,700">
+<link rel="shortcut icon" type="image/png" href="favicon.png">
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5FRPdvrX3-EkC-pwufXee7hLGrqRW4b4"></script>
+<script type="text/javascript" src="wptedit.js"></script>
+<script type="text/javascript">
+var waypoints = [
+	{label: "GarExpy", lat: 43.650000, lng: -79.349640},
+	{label: "DonRd", lat: 43.653578, lng: -79.349087},
+	{label: "EastAve", lat: 43.656732, lng: -79.352507},
+	{label: "QueStE", lat: 43.658005, lng: -79.353710},
+	{label: "DunStE", lat: 43.661781, lng: -79.355063},
+	{label: "+X00", lat: 43.669734, lng: -79.357418, hidden: true},
+	{label: "DanAve", lat: 43.673286, lng: -79.360406},
+	{label: "+X01", lat: 43.678235, lng: -79.362220, hidden: true},
+	{label: "BayAve", lat: 43.682800, lng: -79.362187, hidden: true},
+	{label: "+X02", lat: 43.691107, lng: -79.359419, hidden: true},
+	{label: "+X03", lat: 43.697848, lng: -79.350450, hidden: true},
+	{label: "+X04", lat: 43.697444, lng: -79.342988, hidden: true},
+	{label: "DonMilRd", lat: 43.700192, lng: -79.337752},
+	{label: "+X05", lat: 43.703180, lng: -79.332442, hidden: true},
+	{label: "+X06", lat: 43.708074, lng: -79.330865, hidden: true},
+	{label: "+X07", lat: 43.714700, lng: -79.325286, hidden: true},
+	{label: "EglAveE", lat: 43.723145, lng: -79.330200},
+	{label: "WynDr", altLabels: ["WynfordDr"], lat: 43.726756, lng: -79.330449},
+	{label: "LawAveE", lat: 43.739463, lng: -79.332182},
+	{label: "YorkMilRd", lat: 43.758290, lng: -79.335733},
+	{label: "ON401/404", lat: 43.767584, lng: -79.338034}
+];
+var markers = {};
+var map;
+var win = new google.maps.InfoWindow({});
+
+function loadMap() {
+	var Toronto = new google.maps.LatLng(43.65, -79.38);
+	var mapOptions = {
+		center: Toronto,
+		zoom: 13,
+		streetViewControl: false
+	};
+	map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+	markers = loadWaypoints(waypoints, map);
+}
+
+function createWaypointElement(wpt) {
+	var el = document.createElement("div");
+	el.classList.add("waypoint");
+	el.id = "waypoint-" + wpt.label;
+	el.dataset.label = wpt.label;
+
+	var br = document.createElement("br");
+
+	var name = document.createElement("span");
+	name.classList.add("waypoint-name");
+	name.innerText = wpt.label;
+	el.appendChild(name);
+
+	if (wpt.altLabels) {
+		wpt.altLabels.forEach(function (label) {
+			var altl = document.createElement("span");
+			altl.classList.add("waypoint-alt-name");
+			altl.innerText = label;
+			el.appendChild(br);
+			el.appendChild(altl);
+		});
+	}
+
+	return el;
+}
+
+function loadSide(wpts) {
+	var wptlst = document.getElementById("waypoints");
+	wpts.forEach(function (wpt) {
+		wptlst.appendChild(createWaypointElement(wpt));
+	});
+}
+
+function expandWaypoint(label) {
+	win.close();
+	win.setContent("");
+	var el = document.getElementById("waypoint-" + label);
+	if (el.classList.contains("expanded")) {
+		el.classList.remove("expanded");
+		return;
+	}
+
+	var wpts = Array.prototype.slice.call(document.getElementsByClassName("expanded"));
+	wpts.forEach(function (wpt) {
+		wpt.classList.remove("expanded");
+	});
+
+	var wpt = null;
+	waypoints.forEach(function (w) {
+		if (w.label == label) wpt = w;
+	});
+	var lat = wpt.lat,
+		lng = wpt.lng;
+
+	el.classList.add("expanded");
+	win.setContent("<div class='waypoint-name'>" + label + "</div>" +
+		"<div class='waypoint-coords'>" + lat + ", " + lng + "</div>");
+	win.open(map, markers[label]);
+	map.setCenter(markers[label].getPosition());
+}
+
+document.addEventListener("click", function (event) {
+	if (event.target.classList.contains("waypoint")) {
+		expandWaypoint(event.target.id.split("-")[1]);
+	}
+});
+
+function onimport() {
+	/* Import waypoint data into the application */
+}
+
+function onexport() {
+	/* Export waypoint data from the application */
+	var exportedLines = "";
+	waypoints.forEach(function (wpt) {
+		exportedLines += wpt.lat + " " + wpt.lng + " " + wpt.label;
+		if (wpt.altLabels) {
+			wpt.altLabels.forEach(function (label) {
+				exportedLines += " " + label;
+			});
+		}
+		exportedLines += "\r\n";
+	});
+
+	var el = document.createElement("a");
+	el.href = "data:text/plain;base64," + btoa(exportedLines);
+	el.download = "waypoints.wpt";
+	el.click();
+}
+
+function update() {
+	var length = waypoints.length;
+	document.getElementById("num-waypoints").innerText = length;
+	document.getElementById("waypoints-plural").innerText = length == 1 ? "" : "s";
+
+	var hidden = 0;
+	waypoints.forEach(function (wpt) {
+		if (wpt.hidden) hidden++;
+	});
+	document.getElementById("num-hidden-waypoints").innerText = hidden;
+
+	var distance = 0.25;
+	/* TODO: distance calculation, in miles by default */
+	var units = document.getElementById("units-mi").checked ? "mi" : "km";
+	distance = Math.round((units == "mi" ? distance : distance * 1.609344) * 100) / 100;
+	document.getElementById("length").innerText = distance;
+	document.getElementById("length-units").innerText = units;
+
+	var errors = 0;
+	/* TODO: error checking */
+	document.getElementById("num-errors").innerText = errors;
+	document.getElementById("errors-plural").innerText = errors == 1 ? "" : "s";
+}
+
+function onload() {
+	loadMap();
+	loadSide(waypoints);
+	update();
+}
+</script>
+</head>
+<body onload="onload()">
+<div id="wrapper">
+<div id="editor">
+<div id="waypoint-list">
+<div id="waypoints"></div>
+</div>
+<div id="editor-footer">
+<p>
+<span id="length"></span> <span id="length-units"></span>,
+<span id="num-waypoints"></span> waypoint<span id="waypoints-plural">s</span>
+(<span id="num-hidden-waypoints"></span> hidden),
+<span id="num-errors"></span> possible error<span id="errors-plural">s</span>.
+</p>
+<a href="javascript: onimport()" id="import" class="button">Import</a>
+<a href="javascript: onexport()" id="export" class="button">Export</a>
+<input type="radio" name="units" id="units-mi" checked onchange="update()">mi</input>
+<input type="radio" name="units" id="units-km" onchange="update()">km</input>
+</div>
+</div>
+<div id="map"></div>
+</div>
+</body>
+</html>
