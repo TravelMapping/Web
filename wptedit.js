@@ -42,9 +42,30 @@ function loadWaypoints(waypoints, map) {
 		points.push(coords);
 
 		markers[wpt.label] = marker;
+
+		google.maps.event.addListener(marker, "click", function () {
+			expandWaypoint(wpt.label);
+		});
+		google.maps.event.addListener(marker, "dragend", function () {
+			var pos = marker.getPosition();
+			wpt.lat = Math.round(1e6 * pos.lat()) / 1e6;
+			wpt.lng = Math.round(1e6 * pos.lng()) / 1e6;
+			update();
+
+			points = [];
+			waypoints.forEach(function (w) {
+				points.push(new google.maps.LatLng(w.lat, w.lng));
+			});
+			path.setPath(points);
+
+			if (document.getElementsByClassName("expanded").dataset.label == wpt.label) {
+				expandWaypoint(wpt.label);
+			}
+			expandWaypoint(wpt.label);
+		});
 	});
 
-	var path = new google.maps.Polyline({
+	path = new google.maps.Polyline({
 		map: map,
 		path: points,
 		strokeColor: "#214478",
