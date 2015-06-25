@@ -1,3 +1,7 @@
+* {
+	box-sizing: border-box;
+}
+
 html {
 	height: 100%;
 	font-family: "Roboto", sans-serif;
@@ -14,7 +18,7 @@ body {
 	height: 100%;
 }
 #editor {
-	width: 400px;
+	width: 450px;
 	height: 100%;
 	padding: 20px;
 	background-color: #eeeeee;
@@ -79,9 +83,6 @@ body {
 	color: #999999;
 }
 
-#editor-footer {
-	height: 120px;
-}
 #editor-footer p {
 	font-weight: 300;
 }
@@ -94,4 +95,16 @@ body {
 	padding: 5px 10px;
 	text-decoration: none;
 	color: white;
+}
+
+#import-dialog {
+/*	display: none; */
+	transition: left 0.3s ease;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 450px;
+	height: 100%;
+	box-shadow: 3px 3px 5px #dddddd;
+	background-color: white;
 }
