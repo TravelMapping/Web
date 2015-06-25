@@ -1,0 +1,94 @@
+html {
+	height: 100%;
+	font-family: "Roboto", sans-serif;
+}
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+#wrapper {
+	display: flex;
+	overflow: hidden;
+	height: 100%;
+}
+#editor {
+	width: 400px;
+	height: 100%;
+	padding: 20px;
+	background-color: #eeeeee;
+}
+#map {
+	flex-grow: 1;
+	height: 100%;
+}
+
+#editor {
+	display: flex;
+	flex-direction: column;
+}
+
+#waypoint-list {
+	flex-grow: 1;
+}
+.waypoint {
+	box-shadow: 3px 3px 5px #dddddd;
+	background-color: white;
+	border-bottom: 1px solid #dddddd;
+	padding: 8px 15px;
+	transition: all 0.3s ease;
+}
+.waypoint:last-child {
+	border-bottom: none;
+}
+.waypoint.error {
+	border: 1px solid #ff5555;
+	background-color: #ffd5d5;
+}
+
+.waypoint-name {
+	font-size: 2em;
+	font-weight: 300;
+}
+.waypoint-alt-name {
+	font-size: 1.25em;
+	color: #cccccc;
+	font-weight: 300;
+}
+
+.waypoint.expanded {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.waypoint.expanded:first-child {
+	margin-top: 0;
+}
+.waypoint.expanded:last-child {
+	margin-bottom: 0;
+}
+
+.waypoint-coords {
+	display: none;
+}
+.waypoint.expanded .waypoint-coords {
+	display: block;
+	color: #cccccc;
+}
+
+#editor-footer {
+	height: 120px;
+}
+#editor-footer p {
+	font-weight: 300;
+}
+#length, #num-waypoints, #num-hidden-waypoints, #num-errors {
+	font-weight: normal;
+}
+
+.button {
+	background-color: #214478;
+	padding: 5px 10px;
+	text-decoration: none;
+	color: white;
+}
