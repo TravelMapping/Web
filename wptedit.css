@@ -1,3 +1,7 @@
+* {
+	box-sizing: border-box;
+}
+
 html {
 	height: 100%;
 	font-family: "Roboto", sans-serif;
@@ -31,7 +35,10 @@ body {
 
 #waypoint-list {
 	flex: 3;
-	overflow-y: scroll;
+	overflow-y: auto;
+}
+#waypoints {
+	transition: opacity 0.3s ease;
 }
 .waypoint {
 	cursor: pointer;
@@ -79,9 +86,6 @@ body {
 	color: #999999;
 }
 
-#editor-footer {
-	height: 120px;
-}
 #editor-footer p {
 	font-weight: 300;
 }
@@ -90,8 +94,47 @@ body {
 }
 
 .button {
+	display: inline-block;
 	background-color: #214478;
 	padding: 5px 10px;
+	margin: 5px 0;
 	text-decoration: none;
 	color: white;
+}
+.button.disabled {
+	cursor: default;
+	background-color: #999999;
+}
+
+#import-dialog {
+	display: flex;
+	flex-direction: column;
+	transition: left 0.3s ease;
+	position: fixed;
+	top: 0;
+	left: -500px;
+	width: 400px;
+	height: 100%;
+	padding: 20px;
+	box-shadow: 3px 3px 5px #dddddd;
+	background-color: #eeeeee;
+}
+#import-dialog.open {
+	left: 0;
+}
+
+#import-dialog textarea {
+	display: block;
+	flex: 3;
+	width: 100%;
+	font-family: monospace;
+	font-size: 16px;
+	margin-bottom: 15px;
+	resize: none;
+	border: none;
+	padding: 10px;
+}
+
+.gm-style-iw + div {
+	display: none;
 }

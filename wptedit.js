@@ -19,6 +19,10 @@ var hiddenWptMarker = {
 	anchor: new google.maps.Point(4, 4)
 };
 
+function isHidden(wpt) {
+	return wpt.label[0] == "+";
+}
+
 function loadWaypoints(waypoints, map) {
 	var bounds = null;
 	var path = null;
@@ -32,7 +36,7 @@ function loadWaypoints(waypoints, map) {
 			draggable: true,
 			position: coords,
 			title: wpt.label,
-			icon: (wpt.hidden ? hiddenWptMarker : visibleWptMarker)
+			icon: (isHidden(wpt) ? hiddenWptMarker : visibleWptMarker)
 		});
 		if (bounds === null) {
 			bounds = new google.maps.LatLngBounds(coords, coords);
@@ -42,9 +46,31 @@ function loadWaypoints(waypoints, map) {
 		points.push(coords);
 
 		markers[wpt.label] = marker;
+
+		google.maps.event.addListener(marker, "click", function () {
+			expandWaypoint(wpt.label);
+		});
+		google.maps.event.addListener(marker, "dragend", function () {
+			var pos = marker.getPosition();
+			wpt.lat = Math.round(1e6 * pos.lat()) / 1e6;
+			wpt.lng = Math.round(1e6 * pos.lng()) / 1e6;
+			update();
+
+			points = [];
+			waypoints.forEach(function (w) {
+				points.push(new google.maps.LatLng(w.lat, w.lng));
+			});
+			path.setPath(points);
+
+			var exp = document.getElementsByClassName("expanded");
+			if (exp && exp[0].dataset.label == wpt.label) {
+				expandWaypoint(wpt.label);
+			}
+			expandWaypoint(wpt.label);
+		});
 	});
 
-	var path = new google.maps.Polyline({
+	path = new google.maps.Polyline({
 		map: map,
 		path: points,
 		strokeColor: "#214478",
@@ -53,5 +79,17 @@ function loadWaypoints(waypoints, map) {
 
 	map.fitBounds(bounds);
 
-	return markers;
+	return {markers: markers, path: path};
+}
+
+function getSegmentDistance(p1, p2) {
+	return google.maps.geometry.spherical.computeDistanceBetween(p1, p2);
+}
+
+function getTotalDistance(points) {
+	var total = 0;
+	for (var i = 0; i < points.getLength() - 1; i++) {
+		total += getSegmentDistance(points.getAt(i), points.getAt(i + 1));
+	}
+	return total / 1000.;
 }

@@ -6,33 +6,21 @@
 <link rel="stylesheet" type="text/css" href="wptedit.css">
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,300,700">
 <link rel="shortcut icon" type="image/png" href="favicon.png">
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5FRPdvrX3-EkC-pwufXee7hLGrqRW4b4"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyA5FRPdvrX3-EkC-pwufXee7hLGrqRW4b4"></script>
 <script type="text/javascript" src="wptedit.js"></script>
 <script type="text/javascript">
 var waypoints = [
-	{label: "GarExpy", lat: 43.650000, lng: -79.349640},
-	{label: "DonRd", lat: 43.653578, lng: -79.349087},
-	{label: "EastAve", lat: 43.656732, lng: -79.352507},
-	{label: "QueStE", lat: 43.658005, lng: -79.353710},
-	{label: "DunStE", lat: 43.661781, lng: -79.355063},
-	{label: "+X00", lat: 43.669734, lng: -79.357418, hidden: true},
-	{label: "DanAve", lat: 43.673286, lng: -79.360406},
-	{label: "+X01", lat: 43.678235, lng: -79.362220, hidden: true},
-	{label: "BayAve", lat: 43.682800, lng: -79.362187, hidden: true},
-	{label: "+X02", lat: 43.691107, lng: -79.359419, hidden: true},
-	{label: "+X03", lat: 43.697848, lng: -79.350450, hidden: true},
-	{label: "+X04", lat: 43.697444, lng: -79.342988, hidden: true},
-	{label: "DonMilRd", lat: 43.700192, lng: -79.337752},
-	{label: "+X05", lat: 43.703180, lng: -79.332442, hidden: true},
-	{label: "+X06", lat: 43.708074, lng: -79.330865, hidden: true},
-	{label: "+X07", lat: 43.714700, lng: -79.325286, hidden: true},
-	{label: "EglAveE", lat: 43.723145, lng: -79.330200},
-	{label: "WynDr", altLabels: ["WynfordDr"], lat: 43.726756, lng: -79.330449},
-	{label: "LawAveE", lat: 43.739463, lng: -79.332182},
-	{label: "YorkMilRd", lat: 43.758290, lng: -79.335733},
-	{label: "ON401/404", lat: 43.767584, lng: -79.338034}
+	{label: "RR7", lat: 43.686735, lng: -79.613250, altLabels: ["AirportRd"]},
+	{label: "VisRd", lat: 43.689560, lng: -79.612384},
+	{label: "ElmRd", lat: 43.693860, lng: -79.610943},
+	{label: "ON427", lat: 43.697150, lng: -79.607260},
+	{label: "AttDr", lat: 43.697235, lng: -79.590374},
+	{label: "MarGroRd", lat: 43.699023, lng: -79.574275},
+	{label: "KipAve", lat: 43.704340, lng: -79.563190},
+	{label: "ON401", lat: 43.706327, lng: -79.556535}
 ];
 var markers = {};
+var path = null;
 var map;
 var win = new google.maps.InfoWindow({});
 
@@ -45,7 +33,9 @@ function loadMap() {
 	};
 	map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-	markers = loadWaypoints(waypoints, map);
+	var x = loadWaypoints(waypoints, map);
+	markers = x.markers;
+	path = x.path;
 }
 
 function createWaypointElement(wpt) {
@@ -58,14 +48,14 @@ function createWaypointElement(wpt) {
 
 	var name = document.createElement("span");
 	name.classList.add("waypoint-name");
-	name.innerText = wpt.label;
+	name.textContent = wpt.label;
 	el.appendChild(name);
 
 	if (wpt.altLabels) {
 		wpt.altLabels.forEach(function (label) {
 			var altl = document.createElement("span");
 			altl.classList.add("waypoint-alt-name");
-			altl.innerText = label;
+			altl.textContent = label;
 			el.appendChild(br);
 			el.appendChild(altl);
 		});
@@ -112,11 +102,56 @@ function expandWaypoint(label) {
 document.addEventListener("click", function (event) {
 	if (event.target.classList.contains("waypoint")) {
 		expandWaypoint(event.target.id.split("-")[1]);
+	} else if (event.target.classList.contains("disabled")) {
+		event.preventDefault();
+		return false;
 	}
 });
 
 function onimport() {
 	/* Import waypoint data into the application */
+	document.getElementById("import-dialog").classList.add("open");
+}
+function ondoimport() {
+	if (!window.confirm("This will delete the existing waypoints. " +
+			"Are you sure you want to proceed?")) {
+		return;
+	}
+
+	Object.getOwnPropertyNames(markers).forEach(function (label) {
+		markers[label].setMap(null);
+	});
+	path.setMap(null);
+
+	var list = document.getElementById("waypoints");
+	while (list.firstChild) {
+		list.removeChild(list.firstChild);
+	}
+
+	waypoints = [];
+	var data = document.getElementById("import-data").value;
+	var lines = data.split(/\n/);
+	lines.forEach(function (line) {
+		var fields = line.split(/ +/);
+		if (fields.length < 3) {
+			return;
+		}
+
+		var lat = fields[0], lng = fields[1], main = fields[2], alts = fields.slice(3);
+		waypoints.push({label: main, altLabels: alts, lat: lat, lng: lng});
+	});
+
+	var x = loadWaypoints(waypoints, map);
+	markers = x.markers;
+	path = x.path;
+	loadSide(waypoints);
+	update();
+	closeimport();
+}
+
+function closeimport() {
+	document.getElementById("import-data").value = "";
+	document.getElementById("import-dialog").classList.remove("open");
 }
 
 function onexport() {
@@ -138,28 +173,57 @@ function onexport() {
 	el.click();
 }
 
+function reverse() {
+	/* If any waypoint is expanded, get the label */
+	var exp = document.getElementsByClassName("expanded");
+	var label;
+	if (exp.length != 0) {
+		label = exp[0].dataset.label;
+		expandWaypoint(label);
+	}
+
+	var list = document.getElementById("waypoints");
+	list.style.opacity = 0;
+	setTimeout(function () {
+		while (list.firstChild) {
+			list.removeChild(list.firstChild);
+		}
+
+		waypoints.reverse();
+		loadSide(waypoints);
+		update();
+
+		setTimeout(function () {
+			list.style.opacity = 1;
+
+			if (label) {
+				expandWaypoint(label);
+			}
+		}, 300);
+	}, 300);
+}
+
 function update() {
 	var length = waypoints.length;
-	document.getElementById("num-waypoints").innerText = length;
-	document.getElementById("waypoints-plural").innerText = length == 1 ? "" : "s";
+	document.getElementById("num-waypoints").textContent = length;
+	document.getElementById("waypoints-plural").textContent = length == 1 ? "" : "s";
 
 	var hidden = 0;
 	waypoints.forEach(function (wpt) {
-		if (wpt.hidden) hidden++;
+		if (isHidden(wpt)) hidden++;
 	});
-	document.getElementById("num-hidden-waypoints").innerText = hidden;
+	document.getElementById("num-hidden-waypoints").textContent = hidden;
 
-	var distance = 0.25;
-	/* TODO: distance calculation, in miles by default */
+	/* Distance along the path, in km */
+	var distance = getTotalDistance(path.getPath());
 	var units = document.getElementById("units-mi").checked ? "mi" : "km";
-	distance = Math.round((units == "mi" ? distance : distance * 1.609344) * 100) / 100;
-	document.getElementById("length").innerText = distance;
-	document.getElementById("length-units").innerText = units;
+	distance = Math.round((units == "km" ? distance : distance / 1.609344) * 100) / 100;
+	document.getElementById("length").textContent = distance;
+	document.getElementById("length-units").textContent = units;
 
-	var errors = 0;
-	/* TODO: error checking */
-	document.getElementById("num-errors").innerText = errors;
-	document.getElementById("errors-plural").innerText = errors == 1 ? "" : "s";
+	var errors = document.getElementsByClassName("error").length;
+	document.getElementById("num-errors").textContent = errors;
+	document.getElementById("errors-plural").textContent = errors == 1 ? "" : "s";
 }
 
 function onload() {
@@ -182,13 +246,27 @@ function onload() {
 (<span id="num-hidden-waypoints"></span> hidden),
 <span id="num-errors"></span> possible error<span id="errors-plural">s</span>.
 </p>
+<div>
+<a href="javascript: reverse()" id="reverse" class="button">Reverse</a>
+<a href="javascript: addwpt()" id="addwpt" class="button">Add Waypoint</a>
+<a href="javascript: delwpt()" id="delwpt" class="button disabled">Delete Waypoint</a>
+</div>
+<div>
 <a href="javascript: onimport()" id="import" class="button">Import</a>
 <a href="javascript: onexport()" id="export" class="button">Export</a>
 <input type="radio" name="units" id="units-mi" checked onchange="update()">mi</input>
 <input type="radio" name="units" id="units-km" onchange="update()">km</input>
 </div>
 </div>
+</div>
 <div id="map"></div>
+</div>
+<div id="import-dialog">
+<textarea id="import-data" placeholder="Paste waypoint lines here."></textarea>
+<div>
+<a href="javascript: ondoimport()" id="import-import" class="button">Import</a>
+<a href="javascript: closeimport()" id="import-cancel" class="button">Cancel</a>
+</div>
 </div>
 </body>
 </html>
