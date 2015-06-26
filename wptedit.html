@@ -8,6 +8,7 @@
 <link rel="shortcut icon" type="image/png" href="favicon.png">
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyA5FRPdvrX3-EkC-pwufXee7hLGrqRW4b4"></script>
 <script type="text/javascript" src="wptedit.js"></script>
+<script type="text/javascript" src="http://rubaxa.github.io/Sortable/Sortable.js"></script>
 <script type="text/javascript">
 var waypoints = [
 	{label: "RR7", lat: 43.686735, lng: -79.613250, altLabels: ["AirportRd"]},
@@ -85,6 +86,11 @@ function createWaypointElement(wpt) {
 	el.classList.add("waypoint");
 	el.id = "waypoint-" + wpt.label;
 	el.dataset.label = wpt.label;
+
+	var drag = document.createElement("div");
+	drag.classList.add("drag-handle");
+	drag.textContent = ": :";
+	el.appendChild(drag);
 
 	var br = document.createElement("br");
 
@@ -480,6 +486,25 @@ function onload() {
 	loadMap();
 	loadSide(waypoints);
 	update();
+
+	Sortable.create(document.getElementById("waypoints"), {
+		group: "waypoints",
+		handle: ".drag-handle",
+		animation: 200,
+		onEnd: function (e) {
+			waypoints.move(e.oldIndex, e.newIndex);
+
+			Object.getOwnPropertyNames(markers).forEach(function (label) {
+				markers[label].setMap(null);
+			});
+			path.setMap(null);
+
+			var x = loadWaypoints(waypoints, map);
+			markers = x.markers;
+			path = x.path;
+			update();
+		}
+	});
 }
 </script>
 </head>
