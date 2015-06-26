@@ -10,27 +10,14 @@
 <script type="text/javascript" src="wptedit.js"></script>
 <script type="text/javascript">
 var waypoints = [
-	{label: "GarExpy", lat: 43.650000, lng: -79.349640},
-	{label: "DonRd", lat: 43.653578, lng: -79.349087},
-	{label: "EastAve", lat: 43.656732, lng: -79.352507},
-	{label: "QueStE", lat: 43.658005, lng: -79.353710},
-	{label: "DunStE", lat: 43.661781, lng: -79.355063},
-	{label: "+X00", lat: 43.669734, lng: -79.357418},
-	{label: "DanAve", lat: 43.673286, lng: -79.360406},
-	{label: "+X01", lat: 43.678235, lng: -79.362220},
-	{label: "BayAve", lat: 43.682800, lng: -79.362187},
-	{label: "+X02", lat: 43.691107, lng: -79.359419},
-	{label: "+X03", lat: 43.697848, lng: -79.350450},
-	{label: "+X04", lat: 43.697444, lng: -79.342988},
-	{label: "DonMilRd", lat: 43.700192, lng: -79.337752},
-	{label: "+X05", lat: 43.703180, lng: -79.332442},
-	{label: "+X06", lat: 43.708074, lng: -79.330865},
-	{label: "+X07", lat: 43.714700, lng: -79.325286},
-	{label: "EglAveE", lat: 43.723145, lng: -79.330200},
-	{label: "WynDr", altLabels: ["WynfordDr"], lat: 43.726756, lng: -79.330449},
-	{label: "LawAveE", lat: 43.739463, lng: -79.332182},
-	{label: "YorkMilRd", lat: 43.758290, lng: -79.335733},
-	{label: "ON401/404", lat: 43.767584, lng: -79.338034}
+	{label: "RR7", lat: 43.686735, lng: -79.613250},
+	{label: "VisRd", lat: 43.689560, lng: -79.612384},
+	{label: "ElmRd", lat: 43.693860, lng: -79.610943},
+	{label: "ON427", lat: 43.697150, lng: -79.607260},
+	{label: "AttDr", lat: 43.697235, lng: -79.590374},
+	{label: "MarGroRd", lat: 43.699023, lng: -79.574275},
+	{label: "KipAve", lat: 43.704340, lng: -79.563190},
+	{label: "ON401", lat: 43.706327, lng: -79.556535}
 ];
 var markers = {};
 var path = null;
@@ -193,7 +180,7 @@ function update() {
 
 	var hidden = 0;
 	waypoints.forEach(function (wpt) {
-		if (isHidden(wpt.hidden)) hidden++;
+		if (isHidden(wpt)) hidden++;
 	});
 	document.getElementById("num-hidden-waypoints").innerText = hidden;
 
