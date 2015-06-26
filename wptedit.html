@@ -23,6 +23,11 @@ var markers = {};
 var path = null;
 var map;
 var win = new google.maps.InfoWindow({});
+var expanded = null;
+
+google.maps.event.addListener(win, "closeclick", function () {
+	expandWaypoint(expanded);
+});
 
 function loadMap() {
 	var Toronto = new google.maps.LatLng(43.65, -79.38);
@@ -99,6 +104,8 @@ function expandWaypoint(label) {
 		"<div class='waypoint-coords'>" + lat + ", " + lng + "</div>");
 	win.open(map, markers[label]);
 	map.setCenter(markers[label].getPosition());
+
+	expanded = label;
 
 	document.getElementById("delwpt").classList.remove("disabled");
 }
