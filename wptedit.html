@@ -48,14 +48,14 @@ function createWaypointElement(wpt) {
 
 	var name = document.createElement("span");
 	name.classList.add("waypoint-name");
-	name.innerText = wpt.label;
+	name.textContent = wpt.label;
 	el.appendChild(name);
 
 	if (wpt.altLabels) {
 		wpt.altLabels.forEach(function (label) {
 			var altl = document.createElement("span");
 			altl.classList.add("waypoint-alt-name");
-			altl.innerText = label;
+			altl.textContent = label;
 			el.appendChild(br);
 			el.appendChild(altl);
 		});
@@ -205,25 +205,25 @@ function reverse() {
 
 function update() {
 	var length = waypoints.length;
-	document.getElementById("num-waypoints").innerText = length;
-	document.getElementById("waypoints-plural").innerText = length == 1 ? "" : "s";
+	document.getElementById("num-waypoints").textContent = length;
+	document.getElementById("waypoints-plural").textContent = length == 1 ? "" : "s";
 
 	var hidden = 0;
 	waypoints.forEach(function (wpt) {
 		if (isHidden(wpt)) hidden++;
 	});
-	document.getElementById("num-hidden-waypoints").innerText = hidden;
+	document.getElementById("num-hidden-waypoints").textContent = hidden;
 
 	var distance = 0.25;
 	/* TODO: distance calculation, in miles by default */
 	var units = document.getElementById("units-mi").checked ? "mi" : "km";
 	distance = Math.round((units == "mi" ? distance : distance * 1.609344) * 100) / 100;
-	document.getElementById("length").innerText = distance;
-	document.getElementById("length-units").innerText = units;
+	document.getElementById("length").textContent = distance;
+	document.getElementById("length-units").textContent = units;
 
 	var errors = document.getElementsByClassName("error").length;
-	document.getElementById("num-errors").innerText = errors;
-	document.getElementById("errors-plural").innerText = errors == 1 ? "" : "s";
+	document.getElementById("num-errors").textContent = errors;
+	document.getElementById("errors-plural").textContent = errors == 1 ? "" : "s";
 }
 
 function onload() {
