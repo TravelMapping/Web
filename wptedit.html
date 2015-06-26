@@ -162,6 +162,8 @@ function onrelabel(wpt) {
 	/* Reload the info window. */
 	expandWaypoint(name);
 	expandWaypoint(name);
+
+	update();
 }
 
 function onrelabelalt(wpt, i) {
@@ -184,6 +186,8 @@ function onrelabelalt(wpt, i) {
 			label.firstChild.textContent = name;
 		}
 	});
+
+	update();
 }
 
 function expandWaypoint(label) {
