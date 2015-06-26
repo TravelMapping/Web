@@ -8,6 +8,7 @@
 <link rel="shortcut icon" type="image/png" href="favicon.png">
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyA5FRPdvrX3-EkC-pwufXee7hLGrqRW4b4"></script>
 <script type="text/javascript" src="wptedit.js"></script>
+<script type="text/javascript" src="http://rubaxa.github.io/Sortable/Sortable.js"></script>
 <script type="text/javascript">
 var waypoints = [
 	{label: "RR7", lat: 43.686735, lng: -79.613250, altLabels: ["AirportRd"]},
@@ -34,7 +35,8 @@ function loadMap() {
 	var mapOptions = {
 		center: Toronto,
 		zoom: 13,
-		streetViewControl: false
+		streetViewControl: false,
+		disableDoubleClickZoom: true
 	};
 	map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
@@ -42,11 +44,19 @@ function loadMap() {
 	markers = x.markers;
 	path = x.path;
 	map.fitBounds(x.bounds);
+
+	google.maps.event.addListener(map, "dblclick", function (e) {
+		e.stop();
+		addwpt(e.latLng);
+		return false;
+	});
 }
 
 function createAltLabelElement(wpt, label, i) {
 	var al = document.createElement("span");
 	al.id = "waypoint-" + wpt.label + "-alt-" + i;
+
+	al.appendChild(document.createElement("br"));
 
 	var altl = document.createElement("span");
 	altl.classList.add("waypoint-alt-name");
@@ -79,7 +89,10 @@ function createWaypointElement(wpt) {
 	el.id = "waypoint-" + wpt.label;
 	el.dataset.label = wpt.label;
 
-	var br = document.createElement("br");
+	var drag = document.createElement("div");
+	drag.classList.add("drag-handle");
+	drag.textContent = ": :";
+	el.appendChild(drag);
 
 	var name = document.createElement("span");
 	name.classList.add("waypoint-name");
@@ -108,7 +121,6 @@ function createWaypointElement(wpt) {
 		for (i = 0; i < wpt.altLabels.length; ++i) {
 			var label = wpt.altLabels[i];
 			var altl = createAltLabelElement(wpt, label, i);
-			el.appendChild(br);
 			el.appendChild(altl);
 		};
 	}
@@ -183,7 +195,7 @@ function onrelabelalt(wpt, i) {
 		if (w.label == wpt.dataset.label) {
 			w.altLabels[i] = name;
 			var label = document.getElementById(wpt.id + "-alt-" + i);
-			label.firstChild.textContent = name;
+			label.firstChild.nextSibling.textContent = name;
 		}
 	});
 
@@ -208,8 +220,7 @@ function onaddaltlabel(wpt) {
 			if (!w.altLabels) {
 				w.altLabels = [];
 			}
-			wpt.appendChild(document.createElement("br"));
-			wpt.appendChild(createAltLabelElement(wpt, name, w.altLabels.length));
+			wpt.appendChild(createAltLabelElement(w, name, w.altLabels.length));
 			w.altLabels.push(name);
 		}
 	});
@@ -382,7 +393,7 @@ function labelNotUsed(label) {
 	return !used;
 }
 
-function addwpt() {
+function addwpt(point) {
 	var name = "";
 	while (true) {
 		name = window.prompt("Enter a valid waypoint label:");
@@ -395,7 +406,9 @@ function addwpt() {
 		return;
 	}
 
-	var point = map.getCenter();
+	if (!point) {
+		point = map.getCenter();
+	}
 	var wpt = {label: name};
 	wpt.lat = Math.round(1e6 * point.lat()) / 1e6;
 	wpt.lng = Math.round(1e6 * point.lng()) / 1e6;
@@ -471,6 +484,34 @@ function onload() {
 	loadMap();
 	loadSide(waypoints);
 	update();
+
+	Sortable.create(document.getElementById("waypoints"), {
+		group: "waypoints",
+		handle: ".drag-handle",
+		animation: 200,
+		onEnd: function (e) {
+			waypoints.move(e.oldIndex, e.newIndex);
+
+			Object.getOwnPropertyNames(markers).forEach(function (label) {
+				markers[label].setMap(null);
+			});
+			path.setMap(null);
+
+			var x = loadWaypoints(waypoints, map);
+			markers = x.markers;
+			path = x.path;
+			update();
+
+			var exp = document.getElementsByClassName("expanded");
+			var label = waypoints[e.newIndex].label;
+			if (exp.length != 0) {
+				if (exp[0].dataset.label == label) {
+					expandWaypoint(label);
+				}
+			}
+			expandWaypoint(waypoints[e.newIndex].label);
+		}
+	});
 }
 </script>
 </head>

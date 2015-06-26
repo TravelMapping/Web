@@ -47,6 +47,7 @@ body {
 	background-color: white;
 	border-bottom: 1px solid #dddddd;
 	padding: 8px 15px;
+	padding-left: calc(20px + 1em);
 	transition: all 0.3s ease;
 }
 .waypoint:last-child {
@@ -55,6 +56,16 @@ body {
 .waypoint.error {
 	border: 1px solid #ff5555;
 	background-color: #ffd5d5;
+}
+
+.waypoint .drag-handle {
+	cursor: move;
+	position: absolute;
+	top: 12px;
+	left: 10px;
+	font-size: 1.5em;
+	color: #999999;
+	font-weight: 300;
 }
 
 .waypoint-name {
