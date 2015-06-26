@@ -37,6 +37,9 @@ body {
 	flex: 3;
 	overflow-y: auto;
 }
+#waypoints {
+	transition: opacity 0.3s ease;
+}
 .waypoint {
 	cursor: pointer;
 	box-shadow: 3px 3px 5px #dddddd;

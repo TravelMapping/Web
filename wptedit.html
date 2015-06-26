@@ -10,7 +10,7 @@
 <script type="text/javascript" src="wptedit.js"></script>
 <script type="text/javascript">
 var waypoints = [
-	{label: "RR7", lat: 43.686735, lng: -79.613250},
+	{label: "RR7", lat: 43.686735, lng: -79.613250, altLabels: ["AirportRd"]},
 	{label: "VisRd", lat: 43.689560, lng: -79.612384},
 	{label: "ElmRd", lat: 43.693860, lng: -79.610943},
 	{label: "ON427", lat: 43.697150, lng: -79.607260},
@@ -171,6 +171,36 @@ function onexport() {
 	el.href = "data:text/plain;base64," + btoa(exportedLines);
 	el.download = "waypoints.wpt";
 	el.click();
+}
+
+function reverse() {
+	/* If any waypoint is expanded, get the label */
+	var exp = document.getElementsByClassName("expanded");
+	var label;
+	if (exp.length != 0) {
+		label = exp[0].dataset.label;
+		expandWaypoint(label);
+	}
+
+	var list = document.getElementById("waypoints");
+	list.style.opacity = 0;
+	setTimeout(function () {
+		while (list.firstChild) {
+			list.removeChild(list.firstChild);
+		}
+
+		waypoints.reverse();
+		loadSide(waypoints);
+		update();
+
+		setTimeout(function () {
+			list.style.opacity = 1;
+
+			if (label) {
+				expandWaypoint(label);
+			}
+		}, 300);
+	}, 300);
 }
 
 function update() {
