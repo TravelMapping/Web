@@ -44,6 +44,35 @@ function loadMap() {
 	map.fitBounds(x.bounds);
 }
 
+function createAltLabelElement(wpt, label, i) {
+	var al = document.createElement("span");
+	al.id = "waypoint-" + wpt.label + "-alt-" + i;
+
+	var altl = document.createElement("span");
+	altl.classList.add("waypoint-alt-name");
+	altl.textContent = label;
+	al.appendChild(altl);
+
+	/* Add controls to add/edit/remove labels. */
+	var relabel = document.createElement("a");
+	relabel.classList.add("link");
+	relabel.textContent = "Relabel";
+	al.appendChild(relabel);
+	relabel.onclick = function (event) {
+		onrelabelalt(al.parentElement, i);
+	};
+
+	var del = document.createElement("a");
+	del.classList.add("link");
+	del.textContent = "Delete";
+	al.appendChild(del);
+	del.onclick = function (event) {
+		ondeletelabel(al.parentElement, i);
+	};
+
+	return al;
+}
+
 function createWaypointElement(wpt) {
 	var el = document.createElement("div");
 	el.classList.add("waypoint");
@@ -58,7 +87,7 @@ function createWaypointElement(wpt) {
 	el.appendChild(name);
 
 	/* Add controls to add/edit/remove labels. */
-	relabel = document.createElement("a");
+	var relabel = document.createElement("a");
 	relabel.classList.add("link");
 	relabel.textContent = "Relabel";
 	el.appendChild(relabel);
@@ -66,20 +95,22 @@ function createWaypointElement(wpt) {
 		onrelabel(event.target.parentElement);
 	};
 
-	del = document.createElement("a");
-	del.classList.add("link");
-	del.textContent = "Delete";
-	el.appendChild(del);
-	del.onclick = delwpt;
+	var altlbl = document.createElement("a");
+	altlbl.classList.add("link");
+	altlbl.textContent = "Add Alt";
+	el.appendChild(altlbl);
+	altlbl.onclick = function (event) {
+		onaddaltlabel(event.target.parentElement);
+	};
 
 	if (wpt.altLabels) {
-		wpt.altLabels.forEach(function (label) {
-			var altl = document.createElement("span");
-			altl.classList.add("waypoint-alt-name");
-			altl.textContent = label;
+		var i;
+		for (i = 0; i < wpt.altLabels.length; ++i) {
+			var label = wpt.altLabels[i];
+			var altl = createAltLabelElement(wpt, label, i);
 			el.appendChild(br);
 			el.appendChild(altl);
-		});
+		};
 	}
 
 	return el;
@@ -105,8 +136,10 @@ function onrelabel(wpt) {
 		return;
 	}
 
+	var wp;
 	waypoints.forEach(function (w) {
 		if (w.label == wpt.dataset.label) {
+			wp = w;
 			w.label = name;
 		}
 	});
@@ -114,14 +147,43 @@ function onrelabel(wpt) {
 	var marker = markers[wpt.dataset.label];
 	delete markers[wpt.dataset.label];
 
+	var id = wpt.id;
+
 	wpt.id = "waypoint-" + name;
 	wpt.dataset.label = name;
 	wpt.firstChild.textContent = name;
 	markers[name] = marker;
 
+	for (var i = 0; i < wp.altLabels.length; i++) {
+		var lbl = document.getElementById(id + "-alt-" + i);
+		lbl.id = wpt.id + "-alt-" + i;
+	}
+
 	/* Reload the info window. */
 	expandWaypoint(name);
 	expandWaypoint(name);
+}
+
+function onrelabelalt(wpt, i) {
+	var name = "";
+	while (true) {
+		name = window.prompt("Enter a valid waypoint label:");
+		if (isValidWaypointName(name)) {
+			break;
+		}
+	}
+
+	if (name === null) {
+		return;
+	}
+
+	waypoints.forEach(function (w) {
+		if (w.label == wpt.dataset.label) {
+			w.altLabels[i] = name;
+			var label = document.getElementById(wpt.id + "-alt-" + i);
+			label.firstChild.textContent = name;
+		}
+	});
 }
 
 function expandWaypoint(label) {
