@@ -57,6 +57,21 @@ function createWaypointElement(wpt) {
 	name.textContent = wpt.label;
 	el.appendChild(name);
 
+	/* Add controls to add/edit/remove labels. */
+	relabel = document.createElement("a");
+	relabel.classList.add("link");
+	relabel.textContent = "Relabel";
+	el.appendChild(relabel);
+	relabel.onclick = function (event) {
+		onrelabel(event.target.parentElement);
+	};
+
+	del = document.createElement("a");
+	del.classList.add("link");
+	del.textContent = "Delete";
+	el.appendChild(del);
+	del.onclick = delwpt;
+
 	if (wpt.altLabels) {
 		wpt.altLabels.forEach(function (label) {
 			var altl = document.createElement("span");
@@ -75,6 +90,38 @@ function loadSide(wpts) {
 	wpts.forEach(function (wpt) {
 		wptlst.appendChild(createWaypointElement(wpt));
 	});
+}
+
+function onrelabel(wpt) {
+	var name = "";
+	while (true) {
+		name = window.prompt("Enter a valid waypoint label:");
+		if (isValidWaypointName(name)) {
+			break;
+		}
+	}
+
+	if (name === null) {
+		return;
+	}
+
+	waypoints.forEach(function (w) {
+		if (w.label == wpt.dataset.label) {
+			w.label = name;
+		}
+	});
+
+	var marker = markers[wpt.dataset.label];
+	delete markers[wpt.dataset.label];
+
+	wpt.id = "waypoint-" + name;
+	wpt.dataset.label = name;
+	wpt.firstChild.textContent = name;
+	markers[name] = marker;
+
+	/* Reload the info window. */
+	expandWaypoint(name);
+	expandWaypoint(name);
 }
 
 function expandWaypoint(label) {
