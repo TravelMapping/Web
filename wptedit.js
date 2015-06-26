@@ -80,3 +80,15 @@ function loadWaypoints(waypoints, map) {
 
 	return {markers: markers, path: path};
 }
+
+function getSegmentDistance(p1, p2) {
+	return google.maps.geometry.spherical.computeDistanceBetween(p1, p2);
+}
+
+function getTotalDistance(points) {
+	var total = 0;
+	for (var i = 0; i < points.getLength() - 1; i++) {
+		total += getSegmentDistance(points.getAt(i), points.getAt(i + 1));
+	}
+	return total / 1000.;
+}

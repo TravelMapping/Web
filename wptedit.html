@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="wptedit.css">
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,300,700">
 <link rel="shortcut icon" type="image/png" href="favicon.png">
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5FRPdvrX3-EkC-pwufXee7hLGrqRW4b4"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyA5FRPdvrX3-EkC-pwufXee7hLGrqRW4b4"></script>
 <script type="text/javascript" src="wptedit.js"></script>
 <script type="text/javascript">
 var waypoints = [
@@ -214,10 +214,10 @@ function update() {
 	});
 	document.getElementById("num-hidden-waypoints").textContent = hidden;
 
-	var distance = 0.25;
-	/* TODO: distance calculation, in miles by default */
+	/* Distance along the path, in km */
+	var distance = getTotalDistance(path.getPath());
 	var units = document.getElementById("units-mi").checked ? "mi" : "km";
-	distance = Math.round((units == "mi" ? distance : distance * 1.609344) * 100) / 100;
+	distance = Math.round((units == "km" ? distance : distance / 1.609344) * 100) / 100;
 	document.getElementById("length").textContent = distance;
 	document.getElementById("length-units").textContent = units;
 
