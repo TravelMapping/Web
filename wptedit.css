@@ -134,7 +134,3 @@ body {
 	border: none;
 	padding: 10px;
 }
-
-.gm-style-iw + div {
-	display: none;
-}

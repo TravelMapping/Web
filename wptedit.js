@@ -54,17 +54,19 @@ function loadWaypoints(waypoints, map) {
 			var pos = marker.getPosition();
 			wpt.lat = Math.round(1e6 * pos.lat()) / 1e6;
 			wpt.lng = Math.round(1e6 * pos.lng()) / 1e6;
-			update();
 
 			points = [];
 			waypoints.forEach(function (w) {
 				points.push(new google.maps.LatLng(w.lat, w.lng));
 			});
 			path.setPath(points);
+			update();
 
 			var exp = document.getElementsByClassName("expanded");
-			if (exp && exp[0].dataset.label == wpt.label) {
-				expandWaypoint(wpt.label);
+			if (exp.length != 0) {
+				if (exp[0].dataset.label == wpt.label) {
+					expandWaypoint(wpt.label);
+				}
 			}
 			expandWaypoint(wpt.label);
 		});
@@ -77,9 +79,7 @@ function loadWaypoints(waypoints, map) {
 		strokeOpacity: 0.7
 	});
 
-	map.fitBounds(bounds);
-
-	return {markers: markers, path: path};
+	return {markers: markers, path: path, bounds: bounds};
 }
 
 function getSegmentDistance(p1, p2) {
@@ -92,4 +92,8 @@ function getTotalDistance(points) {
 		total += getSegmentDistance(points.getAt(i), points.getAt(i + 1));
 	}
 	return total / 1000.;
+}
+
+function isValidWaypointName(name) {
+	return name != "" /* and some other checks */;
 }

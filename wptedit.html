@@ -36,6 +36,7 @@ function loadMap() {
 	var x = loadWaypoints(waypoints, map);
 	markers = x.markers;
 	path = x.path;
+	map.fitBounds(x.bounds);
 }
 
 function createWaypointElement(wpt) {
@@ -77,6 +78,7 @@ function expandWaypoint(label) {
 	var el = document.getElementById("waypoint-" + label);
 	if (el.classList.contains("expanded")) {
 		el.classList.remove("expanded");
+		document.getElementById("delwpt").classList.add("disabled");
 		return;
 	}
 
@@ -97,6 +99,8 @@ function expandWaypoint(label) {
 		"<div class='waypoint-coords'>" + lat + ", " + lng + "</div>");
 	win.open(map, markers[label]);
 	map.setCenter(markers[label].getPosition());
+
+	document.getElementById("delwpt").classList.remove("disabled");
 }
 
 document.addEventListener("click", function (event) {
@@ -144,6 +148,7 @@ function ondoimport() {
 	var x = loadWaypoints(waypoints, map);
 	markers = x.markers;
 	path = x.path;
+	map.fitBounds(x.bounds);
 	loadSide(waypoints);
 	update();
 	closeimport();
@@ -201,6 +206,78 @@ function reverse() {
 			}
 		}, 300);
 	}, 300);
+}
+
+function labelNotUsed(label) {
+	var used = false;
+	waypoints.forEach(function (wpt) {
+		if (wpt.label.toLowerCase() == label.toLowerCase()) {
+			used = true;
+		}
+	});
+	return !used;
+}
+
+function addwpt() {
+	var name = "";
+	while (true) {
+		name = window.prompt("Enter a valid waypoint label:");
+		if (isValidWaypointName(name)) {
+			break;
+		}
+	}
+
+	if (name === null) {
+		return;
+	}
+
+	var point = map.getCenter();
+	var wpt = {label: name};
+	wpt.lat = Math.round(1e6 * point.lat()) / 1e6;
+	wpt.lng = Math.round(1e6 * point.lng()) / 1e6;
+	document.getElementById("waypoints").appendChild(createWaypointElement(wpt));
+	waypoints.push(wpt);
+
+	Object.getOwnPropertyNames(markers).forEach(function (label) {
+		markers[label].setMap(null);
+	});
+	path.setMap(null);
+
+	var x = loadWaypoints(waypoints, map);
+	markers = x.markers;
+	path = x.path;
+	update();
+}
+
+function delwpt() {
+	var exp = document.getElementsByClassName("expanded");
+	if (exp.length == 0) {
+		return;
+	}
+
+	var el = exp[0];
+	var label = el.dataset.label;
+	el.parentNode.removeChild(el);
+
+	var index;
+	for (index = 0; index < waypoints.length; ++index) {
+		if (waypoints[index].label == label) {
+			break;
+		}
+	}
+	waypoints.splice(index, 1);
+
+	Object.getOwnPropertyNames(markers).forEach(function (label) {
+		markers[label].setMap(null);
+	});
+	path.setMap(null);
+
+	var x = loadWaypoints(waypoints, map);
+	markers = x.markers;
+	path = x.path;
+	update();
+
+	document.getElementById("delwpt").classList.add("disabled");
 }
 
 function update() {
