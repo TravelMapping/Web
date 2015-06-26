@@ -41,6 +41,7 @@ body {
 	transition: opacity 0.3s ease;
 }
 .waypoint {
+	position: relative;
 	cursor: pointer;
 	box-shadow: 3px 3px 5px #dddddd;
 	background-color: white;
@@ -72,18 +73,29 @@ body {
 	margin-bottom: 0;
 }
 
-.waypoint-alt-name, .waypoint-coords {
+.waypoint-alt-name {
 	display: none;
-}
-.waypoint.expanded .waypoint-alt-name {
-	display: inline;
 	font-size: 1.25em;
 	color: #cccccc;
 	font-weight: 300;
 }
+.waypoint.expanded .waypoint-alt-name {
+	display: inline;
+}
 .waypoint-coords {
 	display: inline;
 	color: #999999;
+}
+
+.waypoint .link {
+	display: none;
+	margin-left: 10px;
+	font-size: 0.75em;
+	color: #214478;
+	font-weight: 300;
+}
+.waypoint.expanded .link {
+	display: inline;
 }
 
 #editor-footer p {
@@ -133,8 +145,4 @@ body {
 	resize: none;
 	border: none;
 	padding: 10px;
-}
-
-.gm-style-iw + div {
-	display: none;
 }
