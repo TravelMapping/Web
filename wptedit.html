@@ -216,7 +216,7 @@ function onaddaltlabel(wpt) {
 				w.altLabels = [];
 			}
 			wpt.appendChild(document.createElement("br"));
-			wpt.appendChild(createAltLabelElement(wpt, name, w.altLabels.length));
+			wpt.appendChild(createAltLabelElement(w, name, w.altLabels.length));
 			w.altLabels.push(name);
 		}
 	});
