@@ -18,7 +18,7 @@ body {
 	height: 100%;
 }
 #editor {
-	width: 450px;
+	width: 400px;
 	height: 100%;
 	padding: 20px;
 	background-color: #eeeeee;
@@ -113,7 +113,7 @@ body {
 	position: fixed;
 	top: 0;
 	left: -500px;
-	width: 450px;
+	width: 400px;
 	height: 100%;
 	padding: 20px;
 	box-shadow: 3px 3px 5px #dddddd;
