@@ -190,6 +190,50 @@ function onrelabelalt(wpt, i) {
 	update();
 }
 
+function onaddaltlabel(wpt) {
+	var name = "";
+	while (true) {
+		name = window.prompt("Enter a valid waypoint label:");
+		if (isValidWaypointName(name)) {
+			break;
+		}
+	}
+
+	if (name === null) {
+		return;
+	}
+
+	waypoints.forEach(function (w) {
+		if (w.label == wpt.dataset.label) {
+			if (!w.altLabels) {
+				w.altLabels = [];
+			}
+			wpt.appendChild(document.createElement("br"));
+			wpt.appendChild(createAltLabelElement(wpt, name, w.altLabels.length));
+			w.altLabels.push(name);
+		}
+	});
+
+	update();
+}
+
+function ondeletelabel(wpt, i) {
+	waypoints.forEach(function (w) {
+		if (w.label == wpt.dataset.label) {
+			w.altLabels.splice(i, 1);
+			var label = document.getElementById(wpt.id + "-alt-" + i);
+			label.parentElement.removeChild(label);
+			/* Renumber all the other labels. */
+			for (var j = i + 1; j < w.altLabels.length + 1; ++j) {
+				var label = document.getElementById(wpt.id + "-alt-" + j);
+				label.id = wpt.id + "-alt-" + (j - 1);
+			}
+		}
+	});
+
+	update();
+}
+
 function expandWaypoint(label) {
 	win.close();
 	win.setContent("");
