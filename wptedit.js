@@ -62,7 +62,8 @@ function loadWaypoints(waypoints, map) {
 			});
 			path.setPath(points);
 
-			if (document.getElementsByClassName("expanded").dataset.label == wpt.label) {
+			var exp = document.getElementsByClassName("expanded");
+			if (exp && exp[0].dataset.label == wpt.label) {
 				expandWaypoint(wpt.label);
 			}
 			expandWaypoint(wpt.label);
