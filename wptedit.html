@@ -56,6 +56,8 @@ function createAltLabelElement(wpt, label, i) {
 	var al = document.createElement("span");
 	al.id = "waypoint-" + wpt.label + "-alt-" + i;
 
+	al.appendChild(document.createElement("br"));
+
 	var altl = document.createElement("span");
 	altl.classList.add("waypoint-alt-name");
 	altl.textContent = label;
@@ -92,8 +94,6 @@ function createWaypointElement(wpt) {
 	drag.textContent = ": :";
 	el.appendChild(drag);
 
-	var br = document.createElement("br");
-
 	var name = document.createElement("span");
 	name.classList.add("waypoint-name");
 	name.textContent = wpt.label;
@@ -121,7 +121,6 @@ function createWaypointElement(wpt) {
 		for (i = 0; i < wpt.altLabels.length; ++i) {
 			var label = wpt.altLabels[i];
 			var altl = createAltLabelElement(wpt, label, i);
-			el.appendChild(br);
 			el.appendChild(altl);
 		};
 	}
@@ -196,7 +195,7 @@ function onrelabelalt(wpt, i) {
 		if (w.label == wpt.dataset.label) {
 			w.altLabels[i] = name;
 			var label = document.getElementById(wpt.id + "-alt-" + i);
-			label.firstChild.textContent = name;
+			label.firstChild.nextSibling.textContent = name;
 		}
 	});
 
@@ -503,6 +502,15 @@ function onload() {
 			markers = x.markers;
 			path = x.path;
 			update();
+
+			var exp = document.getElementsByClassName("expanded");
+			var label = waypoints[e.newIndex].label;
+			if (exp.length != 0) {
+				if (exp[0].dataset.label == label) {
+					expandWaypoint(label);
+				}
+			}
+			expandWaypoint(waypoints[e.newIndex].label);
 		}
 	});
 }
