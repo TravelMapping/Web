@@ -34,7 +34,8 @@ function loadMap() {
 	var mapOptions = {
 		center: Toronto,
 		zoom: 13,
-		streetViewControl: false
+		streetViewControl: false,
+		disableDoubleClickZoom: true
 	};
 	map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
@@ -42,6 +43,12 @@ function loadMap() {
 	markers = x.markers;
 	path = x.path;
 	map.fitBounds(x.bounds);
+
+	google.maps.event.addListener(map, "dblclick", function (e) {
+		e.stop();
+		addwpt(e.latLng);
+		return false;
+	});
 }
 
 function createAltLabelElement(wpt, label, i) {
@@ -382,7 +389,7 @@ function labelNotUsed(label) {
 	return !used;
 }
 
-function addwpt() {
+function addwpt(point) {
 	var name = "";
 	while (true) {
 		name = window.prompt("Enter a valid waypoint label:");
@@ -395,7 +402,9 @@ function addwpt() {
 		return;
 	}
 
-	var point = map.getCenter();
+	if (!point) {
+		point = map.getCenter();
+	}
 	var wpt = {label: name};
 	wpt.lat = Math.round(1e6 * point.lat()) / 1e6;
 	wpt.lng = Math.round(1e6 * point.lng()) / 1e6;
