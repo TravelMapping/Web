@@ -59,6 +59,7 @@ body {
 }
 
 .waypoint .drag-handle {
+	cursor: move;
 	position: absolute;
 	top: 12px;
 	left: 10px;
