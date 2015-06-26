@@ -220,7 +220,6 @@ function onaddaltlabel(wpt) {
 			if (!w.altLabels) {
 				w.altLabels = [];
 			}
-			wpt.appendChild(document.createElement("br"));
 			wpt.appendChild(createAltLabelElement(w, name, w.altLabels.length));
 			w.altLabels.push(name);
 		}
