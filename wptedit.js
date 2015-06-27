@@ -88,6 +88,18 @@ function readCHMFormatData(data) {
 	return waypoints;
 }
 
+function writeData(wpts) {
+	var lines = [];
+	wpts.forEach(function (wpt) {
+		var line = wpt.lat + " " + wpt.lng + " " + wpt.label;
+		if (wpt.altLabels) {
+			line += wpt.altLabels.join(" ");
+		}
+		lines.push(line);
+	});
+	return lines.join("\r\n");
+}
+
 function loadWaypoints(waypoints, map) {
 	var bounds = null;
 	var path = null;
