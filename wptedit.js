@@ -43,6 +43,51 @@ function dragEnd(i) {
 	}
 };
 
+function readData(data) {
+	var waypoints = [];
+	var lines = data.split(/\n/);
+	lines.forEach(function (line) {
+		line = line.trim();
+		var fields = line.split(/ +/);
+		if (fields.length < 3) {
+			return;
+		}
+
+		var lat = fields[0], lng = fields[1], main = fields[2], alts = fields.slice(3);
+		var wpt = {label: main, lat: lat, lng: lng};
+		if (alts) {
+			wpt.altLabels = alts;
+		}
+
+		waypoints.push(wpt);
+	});
+
+	return waypoints;
+}
+
+function readCHMFormatData(data) {
+	var waypoints = [];
+	var lines = data.split(/\n/);
+	lines.forEach(function (line) {
+		line = line.trim();
+		var fields = line.split(/ +/);
+		if (fields.length < 2) {
+			return;
+		}
+
+		var main = fields[1], alts = fields.slice(1, -1), url = fields[fields.length - 1];
+		var q = parseUri(url).queryKey;
+		var wpt = {label: main, lat: q.lat, lng: q.lon};
+		if (alts) {
+			wpt.altLabels = alts;
+		}
+
+		waypoints.push(wpt);
+	});
+
+	return waypoints;
+}
+
 function loadWaypoints(waypoints, map) {
 	var bounds = null;
 	var path = null;

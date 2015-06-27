@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,300,700">
 <link rel="shortcut icon" type="image/png" href="favicon.png">
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyA5FRPdvrX3-EkC-pwufXee7hLGrqRW4b4"></script>
+<script type="text/javascript" src="parseuri.js"></script>
 <script type="text/javascript" src="wptedit.js"></script>
 <script type="text/javascript" src="http://rubaxa.github.io/Sortable/Sortable.js"></script>
 <script type="text/javascript">
@@ -315,18 +316,7 @@ function ondoimport() {
 		list.removeChild(list.firstChild);
 	}
 
-	waypoints = [];
-	var data = document.getElementById("import-data").value;
-	var lines = data.split(/\n/);
-	lines.forEach(function (line) {
-		var fields = line.split(/ +/);
-		if (fields.length < 3) {
-			return;
-		}
-
-		var lat = fields[0], lng = fields[1], main = fields[2], alts = fields.slice(3);
-		waypoints.push({label: main, altLabels: alts, lat: lat, lng: lng});
-	});
+	waypoints = readData(document.getElementById("import-data").value);
 
 	var x = loadWaypoints(waypoints, map);
 	markers = x.markers;
@@ -516,8 +506,10 @@ function onload() {
 <div>
 <a href="javascript: onimport()" id="import" class="button">Import</a>
 <a href="javascript: onexport()" id="export" class="button">Export</a>
-<input type="radio" name="units" id="units-mi" checked onchange="update()">mi</input>
-<input type="radio" name="units" id="units-km" onchange="update()">km</input>
+<input type="radio" name="units" id="units-mi" checked onchange="update()"></input>
+<label for="units-mi">mi</label>
+<input type="radio" name="units" id="units-km" onchange="update()"></input>
+<label for="units-km">km</label>
 </div>
 </div>
 </div>

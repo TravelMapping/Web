@@ -109,12 +109,30 @@ body {
 .waypoint.expanded .link {
 	display: inline;
 }
+.link:hover {
+	text-decoration: underline;
+}
 
 #editor-footer p {
 	font-weight: 300;
 }
 #length, #num-waypoints, #num-hidden-waypoints, #num-errors {
 	font-weight: normal;
+}
+
+input[type=radio] {
+	display: none;
+}
+label[for=units-mi], label[for=units-km] {
+	cursor: pointer;
+	display: inline-block;
+	padding: 5px 10px;
+	margin: 5px 0;
+	background-color: #999999;
+	color: white;
+}
+input[type=radio]:checked + label {
+	background-color: #214478;
 }
 
 .button {
