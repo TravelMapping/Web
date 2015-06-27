@@ -30,6 +30,17 @@ google.maps.event.addListener(win, "closeclick", function () {
 	expandWaypoint(expanded);
 });
 
+function getExpanded() {
+	var wpts = Array.prototype.slice.call(document.getElementById("waypoints").children);
+	var i;
+	for (i = 0; i < wpts.length; i++) {
+		if (wpts[i].classList.contains("expanded")) {
+			return i;
+		}
+	}
+	return -1;
+}
+
 function loadMap() {
 	var Toronto = new google.maps.LatLng(43.65, -79.38);
 	var mapOptions = {
@@ -52,15 +63,12 @@ function loadMap() {
 	});
 }
 
-function createAltLabelElement(wpt, label, i) {
+function createAltLabelElement(index, i) {
 	var al = document.createElement("span");
-	al.id = "waypoint-" + wpt.label + "-alt-" + i;
-
-	al.appendChild(document.createElement("br"));
 
 	var altl = document.createElement("span");
 	altl.classList.add("waypoint-alt-name");
-	altl.textContent = label;
+	altl.textContent = waypoints[index].altLabels[i];
 	al.appendChild(altl);
 
 	/* Add controls to add/edit/remove labels. */
@@ -69,7 +77,7 @@ function createAltLabelElement(wpt, label, i) {
 	relabel.textContent = "Relabel";
 	al.appendChild(relabel);
 	relabel.onclick = function (event) {
-		onrelabelalt(al.parentElement, i);
+		onrelabelalt(index, i);
 	};
 
 	var del = document.createElement("a");
@@ -77,22 +85,20 @@ function createAltLabelElement(wpt, label, i) {
 	del.textContent = "Delete";
 	al.appendChild(del);
 	del.onclick = function (event) {
-		ondeletelabel(al.parentElement, i);
+		ondeletelabel(index, i);
 	};
+
+	al.appendChild(document.createElement("br"));
 
 	return al;
 }
 
-function createWaypointElement(wpt) {
+function createWaypointElement(index) {
+	var wpt = waypoints[index];
+
 	var el = document.createElement("div");
 	el.classList.add("waypoint");
-	el.id = "waypoint-" + wpt.label;
 	el.dataset.label = wpt.label;
-
-	var drag = document.createElement("div");
-	drag.classList.add("drag-handle");
-	drag.textContent = ": :";
-	el.appendChild(drag);
 
 	var name = document.createElement("span");
 	name.classList.add("waypoint-name");
@@ -105,7 +111,7 @@ function createWaypointElement(wpt) {
 	relabel.textContent = "Relabel";
 	el.appendChild(relabel);
 	relabel.onclick = function (event) {
-		onrelabel(event.target.parentElement);
+		onrelabel(index);
 	};
 
 	var altlbl = document.createElement("a");
@@ -113,15 +119,24 @@ function createWaypointElement(wpt) {
 	altlbl.textContent = "Add Alt";
 	el.appendChild(altlbl);
 	altlbl.onclick = function (event) {
-		onaddaltlabel(event.target.parentElement);
+		onaddaltlabel(index);
 	};
+
+	var drag = document.createElement("div");
+	drag.classList.add("drag-handle");
+	drag.textContent = ": :";
+	el.appendChild(drag);
+
+	var alts = document.createElement("div");
+	alts.classList.add("alternates");
+	el.appendChild(alts);
 
 	if (wpt.altLabels) {
 		var i;
 		for (i = 0; i < wpt.altLabels.length; ++i) {
 			var label = wpt.altLabels[i];
-			var altl = createAltLabelElement(wpt, label, i);
-			el.appendChild(altl);
+			var altl = createAltLabelElement(index, i);
+			alts.appendChild(altl);
 		};
 	}
 
@@ -130,12 +145,13 @@ function createWaypointElement(wpt) {
 
 function loadSide(wpts) {
 	var wptlst = document.getElementById("waypoints");
-	wpts.forEach(function (wpt) {
-		wptlst.appendChild(createWaypointElement(wpt));
-	});
+	var i;
+	for (i = 0; i < wpts.length; i++) {
+		wptlst.appendChild(createWaypointElement(i));
+	}
 }
 
-function onrelabel(wpt) {
+function onrelabel(i) {
 	var name = "";
 	while (true) {
 		name = window.prompt("Enter a valid waypoint label:");
@@ -147,6 +163,8 @@ function onrelabel(wpt) {
 	if (name === null) {
 		return;
 	}
+
+	var wpt = document.getElementById("waypoints").children[i];
 
 	var wp;
 	waypoints.forEach(function (w) {
@@ -159,26 +177,18 @@ function onrelabel(wpt) {
 	var marker = markers[wpt.dataset.label];
 	delete markers[wpt.dataset.label];
 
-	var id = wpt.id;
-
-	wpt.id = "waypoint-" + name;
 	wpt.dataset.label = name;
 	wpt.firstChild.textContent = name;
 	markers[name] = marker;
 
-	for (var i = 0; i < wp.altLabels.length; i++) {
-		var lbl = document.getElementById(id + "-alt-" + i);
-		lbl.id = wpt.id + "-alt-" + i;
-	}
-
 	/* Reload the info window. */
-	expandWaypoint(name);
-	expandWaypoint(name);
+	expandWaypoint(i);
+	expandWaypoint(i);
 
 	update();
 }
 
-function onrelabelalt(wpt, i) {
+function onrelabelalt(index, i) {
 	var name = "";
 	while (true) {
 		name = window.prompt("Enter a valid waypoint label:");
@@ -191,18 +201,13 @@ function onrelabelalt(wpt, i) {
 		return;
 	}
 
-	waypoints.forEach(function (w) {
-		if (w.label == wpt.dataset.label) {
-			w.altLabels[i] = name;
-			var label = document.getElementById(wpt.id + "-alt-" + i);
-			label.firstChild.nextSibling.textContent = name;
-		}
-	});
+	waypoints[index].altLabels[i] = name;
+	document.getElementById("waypoints").children[index].children[4].children[i].children[0].textContent = name;
 
 	update();
 }
 
-function onaddaltlabel(wpt) {
+function onaddaltlabel(index) {
 	var name = "";
 	while (true) {
 		name = window.prompt("Enter a valid waypoint label:");
@@ -215,40 +220,32 @@ function onaddaltlabel(wpt) {
 		return;
 	}
 
-	waypoints.forEach(function (w) {
-		if (w.label == wpt.dataset.label) {
-			if (!w.altLabels) {
-				w.altLabels = [];
-			}
-			wpt.appendChild(createAltLabelElement(w, name, w.altLabels.length));
-			w.altLabels.push(name);
-		}
-	});
+	var wpt = waypoints[index];
+	if (!wpt.altLabels)
+		wpt.altLabels = [];
+	wpt.altLabels.push(name);
+	document.getElementById("waypoints").children[index].children[4].appendChild(createAltLabelElement(index, wpt.altLabels.length - 1));
 
 	update();
 }
 
-function ondeletelabel(wpt, i) {
-	waypoints.forEach(function (w) {
-		if (w.label == wpt.dataset.label) {
-			w.altLabels.splice(i, 1);
-			var label = document.getElementById(wpt.id + "-alt-" + i);
-			label.parentElement.removeChild(label);
-			/* Renumber all the other labels. */
-			for (var j = i + 1; j < w.altLabels.length + 1; ++j) {
-				var label = document.getElementById(wpt.id + "-alt-" + j);
-				label.id = wpt.id + "-alt-" + (j - 1);
-			}
-		}
-	});
+function ondeletelabel(index, i) {
+	var wpt = waypoints[index];
+	wpt.altLabels.splice(i, 1);
+	if (wpt.altLabels.length == 0) {
+		delete wpt.altLabels;
+	}
+
+	var el = document.getElementById("waypoints").children[index].children[4].children[i];
+	el.parentElement.removeChild(el);
 
 	update();
 }
 
-function expandWaypoint(label) {
+function expandWaypoint(i) {
 	win.close();
 	win.setContent("");
-	var el = document.getElementById("waypoint-" + label);
+	var el = document.getElementById("waypoints").children[i];
 	if (el.classList.contains("expanded")) {
 		el.classList.remove("expanded");
 		document.getElementById("delwpt").classList.add("disabled");
@@ -259,6 +256,8 @@ function expandWaypoint(label) {
 	wpts.forEach(function (wpt) {
 		wpt.classList.remove("expanded");
 	});
+
+	var label = waypoints[i].label;
 
 	var wpt = null;
 	waypoints.forEach(function (w) {
@@ -280,7 +279,7 @@ function expandWaypoint(label) {
 
 document.addEventListener("click", function (event) {
 	if (event.target.classList.contains("waypoint")) {
-		expandWaypoint(event.target.id.split("-")[1]);
+		expandWaypoint(Array.prototype.indexOf.call(event.target.parentElement.children, event.target));
 	} else if (event.target.classList.contains("disabled")) {
 		event.preventDefault();
 		return false;
@@ -354,12 +353,9 @@ function onexport() {
 }
 
 function reverse() {
-	/* If any waypoint is expanded, get the label */
-	var exp = document.getElementsByClassName("expanded");
-	var label;
-	if (exp.length != 0) {
-		label = exp[0].dataset.label;
-		expandWaypoint(label);
+	var idx = getExpanded();
+	if (idx != -1) {
+		expandWaypoint(idx);
 	}
 
 	var list = document.getElementById("waypoints");
@@ -376,21 +372,11 @@ function reverse() {
 		setTimeout(function () {
 			list.style.opacity = 1;
 
-			if (label) {
-				expandWaypoint(label);
+			if (idx != -1) {
+				expandWaypoint(list.children.length - idx - 1);
 			}
 		}, 300);
 	}, 300);
-}
-
-function labelNotUsed(label) {
-	var used = false;
-	waypoints.forEach(function (wpt) {
-		if (wpt.label.toLowerCase() == label.toLowerCase()) {
-			used = true;
-		}
-	});
-	return !used;
 }
 
 function addwpt(point) {
@@ -412,8 +398,8 @@ function addwpt(point) {
 	var wpt = {label: name};
 	wpt.lat = Math.round(1e6 * point.lat()) / 1e6;
 	wpt.lng = Math.round(1e6 * point.lng()) / 1e6;
-	document.getElementById("waypoints").appendChild(createWaypointElement(wpt));
 	waypoints.push(wpt);
+	document.getElementById("waypoints").appendChild(createWaypointElement(waypoints.length - 1));
 
 	Object.getOwnPropertyNames(markers).forEach(function (label) {
 		markers[label].setMap(null);
@@ -427,22 +413,11 @@ function addwpt(point) {
 }
 
 function delwpt() {
-	var exp = document.getElementsByClassName("expanded");
-	if (exp.length == 0) {
-		return;
-	}
-
-	var el = exp[0];
-	var label = el.dataset.label;
+	var idx = getExpanded();
+	var el = document.getElementById("waypoints").children[idx];
 	el.parentNode.removeChild(el);
 
-	var index;
-	for (index = 0; index < waypoints.length; ++index) {
-		if (waypoints[index].label == label) {
-			break;
-		}
-	}
-	waypoints.splice(index, 1);
+	waypoints.splice(idx, 1);
 
 	Object.getOwnPropertyNames(markers).forEach(function (label) {
 		markers[label].setMap(null);

@@ -86,13 +86,13 @@ body {
 	margin-bottom: 0;
 }
 
-.waypoint-alt-name {
+.alternates {
 	display: none;
 	color: #cccccc;
 	font-weight: 300;
 }
-.waypoint.expanded .waypoint-alt-name {
-	display: inline;
+.waypoint.expanded .alternates {
+	display: block;
 }
 .waypoint-coords {
 	display: inline;
