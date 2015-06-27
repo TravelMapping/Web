@@ -128,7 +128,7 @@ function loadWaypoints(waypoints, map) {
 }
 
 function getSegmentDistance(p1, p2) {
-	return google.maps.geometry.spherical.computeDistanceBetween(p1, p2);
+	return google.maps.geometry.spherical.computeDistanceBetween(p1, p2) / 1000.;
 }
 
 function getTotalDistance(points) {
@@ -157,6 +157,7 @@ function latLngFromWaypoint(pt) {
 }
 
 var sharpAngleThreshold = 60;
+var longSegmentThreshold = 30;
 
 function checkErrors(wpts) {
 	var errors = [];
@@ -207,6 +208,16 @@ function checkErrors(wpts) {
 			});
 		}
 	});
+
+	/* Long segments */
+	for (var i = 0; i < wpts.length - 1; i++) {
+		var pt1 = wpts[i], pt2 = wpts[i + 1];
+		var p1 = new google.maps.LatLng(pt1.lat, pt1.lng),
+			p2 = new google.maps.LatLng(pt2.lat, pt2.lng);
+		if (getSegmentDistance(p1, p2) > longSegmentThreshold) {
+			errors.push({waypoint: i + 1, error: "Long segment"});
+		}
+	}
 
 	return errors;
 }
