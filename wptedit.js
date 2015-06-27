@@ -87,13 +87,63 @@ function getSegmentDistance(p1, p2) {
 }
 
 function getTotalDistance(points) {
-	var total = 0;
-	for (var i = 0; i < points.getLength() - 1; i++) {
-		total += getSegmentDistance(points.getAt(i), points.getAt(i + 1));
-	}
-	return total / 1000.;
+	return google.maps.geometry.spherical.computeLength(points) / 1000.;
 }
 
 function isValidWaypointName(name) {
 	return name != "" /* and some other checks */;
+}
+
+function getAngle(p1, p2, p3) {
+	var heading1 = google.maps.geometry.spherical.computeHeading(p2, p1);
+	var heading2 = google.maps.geometry.spherical.computeHeading(p2, p3);
+	var angle = heading2 - heading1;
+	if (angle < 0) {
+		angle = 360 + angle;
+	}
+	if (angle > 180) {
+		angle = 360 - angle;
+	}
+	return Math.round(angle * 100) / 100;
+}
+
+function latLngFromWaypoint(pt) {
+	return new google.maps.LatLng(pt.lat, pt.lng);
+}
+
+var sharpAngleThreshold = 60;
+
+function checkErrors(wpts) {
+	var errors = [];
+
+	/* Segments with an angle of less than 'sharpAngleThreshold' */
+	for (var i = 0; i < wpts.length - 2; i++) {
+		var angle = getAngle(latLngFromWaypoint(wpts[i]),
+			latLngFromWaypoint(wpts[i + 1]),
+			latLngFromWaypoint(wpts[i + 2]));
+		if (angle < sharpAngleThreshold) {
+			errors.push({waypoint: wpts[i], error: "Sharp angle (" + angle + "°)"});
+			errors.push({waypoint: wpts[i + 1], error: "Sharp angle (" + angle + "°)"});
+			errors.push({waypoint: wpts[i + 2], error: "Sharp angle (" + angle + "°)"});
+		}
+	}
+
+	/* Duplicate labels */
+	var labels = {};
+	waypoints.forEach(function (wpt) {
+		if (labels[wpt.label]) {
+			labels[wpt.label].push(wpt);
+		} else {
+			labels[wpt.label] = [wpt];
+		}
+	});
+	Object.getOwnPropertyNames(labels).forEach(function (label) {
+		if (labels[label].length > 1) {
+			labels[label].forEach(function (wpt) {
+				errors.push({waypoint: wpt, error: "Duplicate label"});
+			});
+		}
+	});
+
+	return errors;
 }
