@@ -30,6 +30,14 @@ google.maps.event.addListener(win, "closeclick", function () {
 	expandWaypoint(expanded);
 });
 
+function createExpandWaypoint(i) {
+	return function () { expandWaypoint(i); }
+}
+
+function createDragEnd(i) {
+	return function () { dragEnd(i); }
+}
+
 function getExpanded() {
 	var wpts = Array.prototype.slice.call(document.getElementById("waypoints").children);
 	var i;
@@ -77,7 +85,7 @@ function createAltLabelElement(index, i) {
 	relabel.textContent = "Relabel";
 	al.appendChild(relabel);
 	relabel.onclick = function (event) {
-		onrelabelalt(index, i);
+		onrelabelalt(index, Array.prototype.indexOf.call(al.parentElement.children, al));
 	};
 
 	var del = document.createElement("a");
@@ -85,7 +93,7 @@ function createAltLabelElement(index, i) {
 	del.textContent = "Delete";
 	al.appendChild(del);
 	del.onclick = function (event) {
-		ondeletelabel(index, i);
+		ondeletelabel(index, Array.prototype.indexOf.call(al.parentElement.children, al));
 	};
 
 	al.appendChild(document.createElement("br"));
@@ -237,6 +245,7 @@ function ondeletelabel(index, i) {
 	}
 
 	var el = document.getElementById("waypoints").children[index].children[4].children[i];
+	var lbls = el.parentElement.children;
 	el.parentElement.removeChild(el);
 
 	update();
@@ -269,8 +278,8 @@ function expandWaypoint(i) {
 	el.classList.add("expanded");
 	win.setContent("<div class='waypoint-name'>" + label + "</div>" +
 		"<div class='waypoint-coords'>" + lat + ", " + lng + "</div>");
-	win.open(map, markers[label]);
-	map.setCenter(markers[label].getPosition());
+	win.open(map, markers[i]);
+	map.setCenter(markers[i].getPosition());
 
 	expanded = label;
 
@@ -296,8 +305,8 @@ function ondoimport() {
 		return;
 	}
 
-	Object.getOwnPropertyNames(markers).forEach(function (label) {
-		markers[label].setMap(null);
+	markers.forEach(function (marker) {
+		marker.setMap(null);
 	});
 	path.setMap(null);
 
@@ -401,8 +410,8 @@ function addwpt(point) {
 	waypoints.push(wpt);
 	document.getElementById("waypoints").appendChild(createWaypointElement(waypoints.length - 1));
 
-	Object.getOwnPropertyNames(markers).forEach(function (label) {
-		markers[label].setMap(null);
+	markers.forEach(function (marker) {
+		marker.setMap(null);
 	});
 	path.setMap(null);
 
@@ -419,8 +428,8 @@ function delwpt() {
 
 	waypoints.splice(idx, 1);
 
-	Object.getOwnPropertyNames(markers).forEach(function (label) {
-		markers[label].setMap(null);
+	markers.forEach(function (marker) {
+		marker.setMap(null);
 	});
 	path.setMap(null);
 
@@ -467,8 +476,8 @@ function onload() {
 		onEnd: function (e) {
 			waypoints.move(e.oldIndex, e.newIndex);
 
-			Object.getOwnPropertyNames(markers).forEach(function (label) {
-				markers[label].setMap(null);
+			markers.forEach(function (marker) {
+				marker.setMap(null);
 			});
 			path.setMap(null);
 
@@ -477,14 +486,10 @@ function onload() {
 			path = x.path;
 			update();
 
-			var exp = document.getElementsByClassName("expanded");
-			var label = waypoints[e.newIndex].label;
-			if (exp.length != 0) {
-				if (exp[0].dataset.label == label) {
-					expandWaypoint(label);
-				}
+			expandWaypoint(e.newIndex);
+			if (getExpanded() == -1) {
+				expandWaypoint(e.newIndex);
 			}
-			expandWaypoint(waypoints[e.newIndex].label);
 		}
 	});
 }

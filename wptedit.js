@@ -23,13 +23,35 @@ function isHidden(wpt) {
 	return wpt.label[0] == "+";
 }
 
+function dragEnd(i) {
+	var marker = markers[i];
+	var wpt = waypoints[i];
+	var pos = marker.getPosition();
+	wpt.lat = Math.round(1e6 * pos.lat()) / 1e6;
+	wpt.lng = Math.round(1e6 * pos.lng()) / 1e6;
+
+	points = [];
+	waypoints.forEach(function (w) {
+		points.push(new google.maps.LatLng(w.lat, w.lng));
+	});
+	path.setPath(points);
+	update();
+
+	expandWaypoint(i);
+	if (getExpanded() == -1) {
+		expandWaypoint(i);
+	}
+};
+
 function loadWaypoints(waypoints, map) {
 	var bounds = null;
 	var path = null;
 	var points = [];
-	var markers = {};
+	var markers = [];
 
-	waypoints.forEach(function (wpt) {
+	for (var i = 0; i < waypoints.length; i++) {
+		var wpt = waypoints[i];
+		var idx = i;
 		var coords = new google.maps.LatLng(wpt.lat, wpt.lng);
 		var marker = new google.maps.Marker({
 			map: map,
@@ -44,33 +66,11 @@ function loadWaypoints(waypoints, map) {
 			bounds.extend(coords);
 		}
 		points.push(coords);
+		markers.push(marker);
 
-		markers[wpt.label] = marker;
-
-		google.maps.event.addListener(marker, "click", function () {
-			expandWaypoint(wpt.label);
-		});
-		google.maps.event.addListener(marker, "dragend", function () {
-			var pos = marker.getPosition();
-			wpt.lat = Math.round(1e6 * pos.lat()) / 1e6;
-			wpt.lng = Math.round(1e6 * pos.lng()) / 1e6;
-
-			points = [];
-			waypoints.forEach(function (w) {
-				points.push(new google.maps.LatLng(w.lat, w.lng));
-			});
-			path.setPath(points);
-			update();
-
-			var exp = document.getElementsByClassName("expanded");
-			if (exp.length != 0) {
-				if (exp[0].dataset.label == wpt.label) {
-					expandWaypoint(wpt.label);
-				}
-			}
-			expandWaypoint(wpt.label);
-		});
-	});
+		google.maps.event.addListener(marker, "click", createExpandWaypoint(i));
+		google.maps.event.addListener(marker, "dragend", createDragEnd(i));
+	};
 
 	path = new google.maps.Polyline({
 		map: map,
