@@ -467,10 +467,6 @@ function update() {
 		el.children[5].appendChild(createErrorElement(err.error));
 		el.children[5].appendChild(document.createElement("br"));
 	});
-
-	var numErrors = errors.length;
-	document.getElementById("num-errors").textContent = numErrors;
-	document.getElementById("errors-plural").textContent = numErrors == 1 ? "" : "s";
 }
 
 function onload() {
@@ -523,8 +519,7 @@ function onload() {
 <p>
 <span id="length"></span> <span id="length-units"></span>,
 <span id="num-waypoints"></span> waypoint<span id="waypoints-plural">s</span>
-(<span id="num-hidden-waypoints"></span> hidden),
-<span id="num-errors"></span> error<span id="errors-plural">s</span>.
+(<span id="num-hidden-waypoints"></span> hidden).
 </p>
 <div>
 <a href="javascript: reverse()" id="reverse" class="button">Reverse</a>

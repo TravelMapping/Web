@@ -55,6 +55,8 @@ body {
 }
 .waypoint.error {
 	border: 1px solid #ff5555;
+}
+.waypoint.true-error {
 	background-color: #ffd5d5;
 }
 
