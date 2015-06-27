@@ -149,6 +149,10 @@ function createWaypointElement(index) {
 		};
 	}
 
+	var errs = document.createElement("div");
+	errs.classList.add("errors");
+	el.appendChild(errs);
+
 	return el;
 }
 
@@ -175,20 +179,9 @@ function onrelabel(i) {
 
 	var wpt = document.getElementById("waypoints").children[i];
 
-	var wp;
-	waypoints.forEach(function (w) {
-		if (w.label == wpt.dataset.label) {
-			wp = w;
-			w.label = name;
-		}
-	});
-
-	var marker = markers[wpt.dataset.label];
-	delete markers[wpt.dataset.label];
-
+	waypoints[i].label = name;
 	wpt.dataset.label = name;
 	wpt.firstChild.textContent = name;
-	markers[name] = marker;
 
 	/* Reload the info window. */
 	expandWaypoint(i);
@@ -432,6 +425,14 @@ function delwpt() {
 	document.getElementById("delwpt").classList.add("disabled");
 }
 
+function createErrorElement(err) {
+	var el = document.createElement("div");
+	el.classList.add("error");
+	el.textContent = err;
+
+	return el;
+}
+
 function update() {
 	var length = waypoints.length;
 	document.getElementById("num-waypoints").textContent = length;
@@ -450,9 +451,24 @@ function update() {
 	document.getElementById("length").textContent = distance;
 	document.getElementById("length-units").textContent = units;
 
-	var errors = document.getElementsByClassName("error").length;
-	document.getElementById("num-errors").textContent = errors;
-	document.getElementById("errors-plural").textContent = errors == 1 ? "" : "s";
+	var errdivs = document.querySelectorAll(".waypoint.error");
+	if (errdivs) {
+		Array.prototype.forEach.call(errdivs, function (e) {
+			e.classList.remove("error");
+			e.children[5].textContent = "";
+		});
+	}
+	var wpts = document.getElementById("waypoints").children;
+	var errors = checkErrors(waypoints);
+	errors.forEach(function (err) {
+		var el = wpts[err.waypoint];
+		el.classList.add("error");
+		el.children[5].appendChild(createErrorElement(err.error));
+	});
+
+	var numErrors = errors.length;
+	document.getElementById("num-errors").textContent = numErrors;
+	document.getElementById("errors-plural").textContent = numErrors == 1 ? "" : "s";
 }
 
 function onload() {

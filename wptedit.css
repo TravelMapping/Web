@@ -113,6 +113,17 @@ body {
 	text-decoration: underline;
 }
 
+.errors {
+	display: none;
+	color: #ff5555;
+}
+.waypoint.error .errors {
+	display: block;
+}
+.waypoint.error .drag-handle {
+	color: #ff5555;
+}
+
 #editor-footer p {
 	font-weight: 300;
 }

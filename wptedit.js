@@ -167,21 +167,20 @@ function checkErrors(wpts) {
 			latLngFromWaypoint(wpts[i + 1]),
 			latLngFromWaypoint(wpts[i + 2]));
 		if (angle < sharpAngleThreshold) {
-			errors.push({waypoint: wpts[i], error: "Sharp angle (" + angle + "°)"});
-			errors.push({waypoint: wpts[i + 1], error: "Sharp angle (" + angle + "°)"});
-			errors.push({waypoint: wpts[i + 2], error: "Sharp angle (" + angle + "°)"});
+			errors.push({waypoint: i + 2, error: "Sharp angle (" + angle + "°)"});
 		}
 	}
 
 	/* Duplicate labels */
 	var labels = {};
-	waypoints.forEach(function (wpt) {
+	for (var i = 0; i < wpts.length; i++) {
+		var wpt = wpts[i];
 		if (labels[wpt.label]) {
-			labels[wpt.label].push(wpt);
+			labels[wpt.label].push(i);
 		} else {
-			labels[wpt.label] = [wpt];
+			labels[wpt.label] = [i];
 		}
-	});
+	};
 	Object.getOwnPropertyNames(labels).forEach(function (label) {
 		if (labels[label].length > 1) {
 			labels[label].forEach(function (wpt) {
