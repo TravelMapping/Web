@@ -180,11 +180,30 @@ function checkErrors(wpts) {
 		} else {
 			labels[wpt.label] = [i];
 		}
-	};
+	}
 	Object.getOwnPropertyNames(labels).forEach(function (label) {
 		if (labels[label].length > 1) {
 			labels[label].forEach(function (wpt) {
 				errors.push({waypoint: wpt, error: "Duplicate label"});
+			});
+		}
+	});
+
+	/* Duplicate coordinates */
+	var coords = {};
+	for (var i = 0; i < wpts.length; i++) {
+		var wpt = wpts[i];
+		var latlng = wpt.lat + "," + wpt.lng;
+		if (coords[latlng]) {
+			coords[latlng].push(i);
+		} else {
+			coords[latlng] = [i];
+		}
+	}
+	Object.getOwnPropertyNames(coords).forEach(function (coord) {
+		if (coords[coord].length > 1) {
+			coords[coord].forEach(function (wpt) {
+				errors.push({waypoint: wpt, error: "Duplicate coordinates"});
 			});
 		}
 	});
