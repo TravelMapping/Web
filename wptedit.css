@@ -123,7 +123,8 @@ body {
 input[type=radio] {
 	display: none;
 }
-label[for=units-mi], label[for=units-km] {
+label[for=units-mi], label[for=units-km],
+label[for=format-wp2], label[for=format-wpt] {
 	cursor: pointer;
 	display: inline-block;
 	padding: 5px 10px;

@@ -316,7 +316,8 @@ function ondoimport() {
 		list.removeChild(list.firstChild);
 	}
 
-	waypoints = readData(document.getElementById("import-data").value);
+	var newFormat = document.getElementById("format-wp2").checked;
+	waypoints = (newFormat ? readData : readCHMFormatData)(document.getElementById("import-data").value);
 
 	var x = loadWaypoints(waypoints, map);
 	markers = x.markers;
@@ -516,6 +517,13 @@ function onload() {
 <div id="map"></div>
 </div>
 <div id="import-dialog">
+<div>
+<input type="radio" name="format" id="format-wp2" checked></input>
+<label for="format-wp2">Travel Mapping (.wp2)</label>
+<input type="radio" name="format" id="format-wpt"></input>
+<label for="format-wpt">CHM (.wpt)</label>
+<br>&nbsp;
+</div>
 <textarea id="import-data" placeholder="Paste waypoint lines here."></textarea>
 <div>
 <a href="javascript: ondoimport()" id="import-import" class="button">Import</a>

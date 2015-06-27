@@ -75,7 +75,7 @@ function readCHMFormatData(data) {
 			return;
 		}
 
-		var main = fields[1], alts = fields.slice(1, -1), url = fields[fields.length - 1];
+		var main = fields[0], alts = fields.slice(1, -1), url = fields[fields.length - 1];
 		var q = parseUri(url).queryKey;
 		var wpt = {label: main, lat: q.lat, lng: q.lon};
 		if (alts) {
