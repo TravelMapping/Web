@@ -356,6 +356,16 @@ function reverse() {
 		}
 
 		waypoints.reverse();
+
+		markers.forEach(function (marker) {
+			marker.setMap(null);
+		});
+		path.setMap(null);
+
+		var x = loadWaypoints(waypoints, map);
+		markers = x.markers;
+		path = x.path;
+
 		loadSide(waypoints);
 		update();
 
