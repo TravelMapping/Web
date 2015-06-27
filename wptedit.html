@@ -28,7 +28,7 @@ var win = new google.maps.InfoWindow({});
 var expanded = null;
 
 google.maps.event.addListener(win, "closeclick", function () {
-	expandWaypoint(expanded);
+	expandWaypoint(getExpanded());
 });
 
 function createExpandWaypoint(i) {
