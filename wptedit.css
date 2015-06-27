@@ -47,7 +47,7 @@ body {
 	background-color: white;
 	border-bottom: 1px solid #dddddd;
 	padding: 8px 15px;
-	padding-left: calc(20px + 1em);
+	padding-left: calc(15px + 1em);
 	transition: all 0.3s ease;
 }
 .waypoint:last-child {
@@ -63,14 +63,16 @@ body {
 	position: absolute;
 	top: 12px;
 	left: 10px;
-	font-size: 1.5em;
 	color: #999999;
 	font-weight: 300;
 }
 
 .waypoint-name {
-	font-size: 2em;
+	font-size: 1.5em;
 	font-weight: 300;
+}
+.gm-style-iw .waypoint-name {
+	font-size: 2em;
 }
 
 .waypoint.expanded {
@@ -86,7 +88,6 @@ body {
 
 .waypoint-alt-name {
 	display: none;
-	font-size: 1.25em;
 	color: #cccccc;
 	font-weight: 300;
 }
