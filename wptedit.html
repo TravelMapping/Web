@@ -316,7 +316,7 @@ function ondoimport() {
 		list.removeChild(list.firstChild);
 	}
 
-	var newFormat = document.getElementById("format-wp2").checked;
+	var newFormat = document.getElementById("format-wpt2").checked;
 	waypoints = (newFormat ? readData : readCHMFormatData)(document.getElementById("import-data").value);
 
 	var x = loadWaypoints(waypoints, map);
@@ -348,7 +348,7 @@ function onexport() {
 
 	var el = document.createElement("a");
 	el.href = "data:text/plain;base64," + btoa(exportedLines);
-	el.download = "waypoints.wpt";
+	el.download = "waypoints.wpt2";
 	el.click();
 }
 
@@ -518,8 +518,8 @@ function onload() {
 </div>
 <div id="import-dialog">
 <div>
-<input type="radio" name="format" id="format-wp2" checked></input>
-<label for="format-wp2">Travel Mapping (.wp2)</label>
+<input type="radio" name="format" id="format-wpt2" checked></input>
+<label for="format-wpt2">Travel Mapping (.wpt2)</label>
 <input type="radio" name="format" id="format-wpt"></input>
 <label for="format-wpt">CHM (.wpt)</label>
 <br>&nbsp;
