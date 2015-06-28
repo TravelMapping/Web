@@ -8,6 +8,7 @@
 <link rel="shortcut icon" type="image/png" href="favicon.png">
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyA5FRPdvrX3-EkC-pwufXee7hLGrqRW4b4"></script>
 <script type="text/javascript" src="parseuri.js"></script>
+<script type="text/javascript" src="maptypes.js"></script>
 <script type="text/javascript" src="wptedit.js"></script>
 <script type="text/javascript" src="http://rubaxa.github.io/Sortable/Sortable.js"></script>
 <script type="text/javascript">
@@ -51,14 +52,30 @@ function getExpanded() {
 }
 
 function loadMap() {
+	var mapTypeIdList = [google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE,
+		google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN];
+	var mapTypesObj = [];
+	mapTypes.forEach(function (type) {
+		mapTypeIdList.push(type.name);
+	});
+
 	var Toronto = new google.maps.LatLng(43.65, -79.38);
 	var mapOptions = {
 		center: Toronto,
 		zoom: 13,
 		streetViewControl: false,
+		mapTypeControlOptions: {
+			mapTypeIds: mapTypeIdList,
+			style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+		},
 		disableDoubleClickZoom: true
 	};
 	map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+	mapTypes.forEach(function (type) {
+		map.mapTypes.set(type.name, new google.maps.ImageMapType(type));
+	});
+	map.setMapTypeId("OSM Mapnik");
 
 	var x = loadWaypoints(waypoints, map);
 	markers = x.markers;
