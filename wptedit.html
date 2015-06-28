@@ -77,6 +77,23 @@ function loadMap() {
 	});
 	map.setMapTypeId("OSM Mapnik");
 
+	copyrightDiv = document.createElement("div");
+	copyrightDiv.id = "map-copyright";
+	map.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push(copyrightDiv);
+
+	function onMapTypeChange() {
+		var newType = map.getMapTypeId();
+		var notice = copyrightNotices[newType];
+
+		if (notice) {
+			copyrightDiv.style.display = "block";
+			copyrightDiv.textContent = notice;
+		} else {
+			copyrightDiv.style.display = "none";
+			copyrightDiv.textContent = "";
+		}
+	}
+
 	var x = loadWaypoints(waypoints, map);
 	markers = x.markers;
 	path = x.path;
@@ -87,6 +104,9 @@ function loadMap() {
 		addwpt(e.latLng);
 		return false;
 	});
+	google.maps.event.addListener(map, "maptypeid_changed", onMapTypeChange);
+
+	setTimeout(onMapTypeChange, 50);
 }
 
 function createAltLabelElement(index, i) {
@@ -137,7 +157,8 @@ function createWaypointElement(index) {
 	relabel.textContent = "Relabel";
 	el.appendChild(relabel);
 	relabel.onclick = function (event) {
-		onrelabel(index);
+		var wp = event.target.parentElement;
+		onrelabel(Array.prototype.indexOf.call(wp.parentElement.children, wp));
 	};
 
 	var altlbl = document.createElement("a");
@@ -145,7 +166,8 @@ function createWaypointElement(index) {
 	altlbl.textContent = "Add Alt";
 	el.appendChild(altlbl);
 	altlbl.onclick = function (event) {
-		onaddaltlabel(index);
+		var wp = event.target.parentElement;
+		onaddaltlabel(Array.prototype.indexOf.call(wp.parentElement.children, wp));
 	};
 
 	var drag = document.createElement("div");

@@ -28,6 +28,16 @@ body {
 	height: 100%;
 }
 
+#map-copyright {
+	font-size: 10px;
+	padding: 0 4px;
+	margin-right: -5px;
+	white-space: nowrap;
+	color: #222222;
+	background-color: #eeeeee;
+	opacity: 0.8;
+}
+
 #editor {
 	display: flex;
 	flex-direction: column;

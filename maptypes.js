@@ -33,3 +33,9 @@ var mapTypes = [
 		tileSize: new google.maps.Size(256, 256)
 	}
 ];
+
+var copyrightNotices = {
+	"OSM Mapnik": "Map data © OpenStreetMap contributors",
+	"MapQuest Open": "Data, imagery and map information provided by MapQuest, OpenStreetMap and contributors, ODbL",
+	"MapQuest Open Sat": "Data, imagery and map information provided by MapQuest, OpenStreetMap and contributors, ODbL"
+};
