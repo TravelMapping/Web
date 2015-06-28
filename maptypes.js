@@ -13,7 +13,7 @@ var mapTypes = [
 	{
 		alt: "MapQuest road map tiles based on OpenStreetMap.org data",
 		getTileUrl: function (point, zoom) {
-			return 'http://cmap.m-plex.com/hb/ymaptile.php?t=m&s=mq&x=' + point.x + '&y=' + point.y + '&z=' + zoom;
+			return 'http://otile1.mqcdn.com/tiles/1.0.0/map/' + zoom + '/' + point.x + '/' + point.y + '.png';
 		},
 		maxZoom: 18,
 		minZoom: 0,
@@ -24,7 +24,7 @@ var mapTypes = [
 	{
 		alt: "MapQuest satellite tiles based on OpenStreetMap.org data",
 		getTileUrl: function (point, zoom) {
-			return 'http://cmap.m-plex.com/hb/ymaptile.php?t=s&s=mq&x=' + point.x + '&y=' + point.y + '&z=' + zoom;
+			return 'http://otile1.mqcdn.com/tiles/1.0.0/sat/' + zoom + '/' + point.x + '/' + point.y + '.png';
 		},
 		maxZoom: 17,
 		minZoom: 0,
