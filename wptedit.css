@@ -28,6 +28,20 @@ body {
 	height: 100%;
 }
 
+#map-copyright {
+	font-size: 10px;
+	padding: 0 4px;
+	margin-right: -5px;
+	white-space: nowrap;
+	color: #222222;
+	background-color: #eeeeee;
+	opacity: 0.8;
+}
+#map-copyright a {
+	color: #214478;
+	text-decoration: none;
+}
+
 #editor {
 	display: flex;
 	flex-direction: column;
@@ -55,6 +69,8 @@ body {
 }
 .waypoint.error {
 	border: 1px solid #ff5555;
+}
+.waypoint.true-error {
 	background-color: #ffd5d5;
 }
 
@@ -111,6 +127,17 @@ body {
 }
 .link:hover {
 	text-decoration: underline;
+}
+
+.errors {
+	display: none;
+	color: #ff5555;
+}
+.waypoint.error .errors {
+	display: block;
+}
+.waypoint.error .drag-handle {
+	color: #ff5555;
 }
 
 #editor-footer p {

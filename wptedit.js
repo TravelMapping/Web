@@ -88,6 +88,18 @@ function readCHMFormatData(data) {
 	return waypoints;
 }
 
+function writeData(wpts) {
+	var lines = [];
+	wpts.forEach(function (wpt) {
+		var line = wpt.lat + " " + wpt.lng + " " + wpt.label;
+		if (wpt.altLabels) {
+			line += wpt.altLabels.join(" ");
+		}
+		lines.push(line);
+	});
+	return lines.join("\r\n");
+}
+
 function loadWaypoints(waypoints, map) {
 	var bounds = null;
 	var path = null;
@@ -128,15 +140,11 @@ function loadWaypoints(waypoints, map) {
 }
 
 function getSegmentDistance(p1, p2) {
-	return google.maps.geometry.spherical.computeDistanceBetween(p1, p2);
+	return google.maps.geometry.spherical.computeDistanceBetween(p1, p2) / 1000.;
 }
 
 function getTotalDistance(points) {
 	return google.maps.geometry.spherical.computeLength(points) / 1000.;
-}
-
-function isValidWaypointName(name) {
-	return name != "" /* and some other checks */;
 }
 
 function getAngle(p1, p2, p3) {
@@ -156,7 +164,33 @@ function latLngFromWaypoint(pt) {
 	return new google.maps.LatLng(pt.lat, pt.lng);
 }
 
+function countParens(label) {
+	var parens = 0;
+	for (var i = 0; i < label.length; i++) {
+		chr = label.charAt(i);
+		if (chr == "(") {
+			parens++;
+		} else if (chr == ")") {
+			parens--;
+		}
+	}
+	return parens;
+}
+
+function countSlashes(label) {
+	var slashes = 0;
+	for (var i = 0; i < label.length; i++) {
+		chr = label.charAt(i);
+		if (chr == "/") {
+			slashes++;
+		}
+	}
+	return slashes;
+}
+
 var sharpAngleThreshold = 60;
+var longSegmentThreshold = 30;
+var validLabel = /^[A-Za-z0-9_\-()/+*]+$/;
 
 function checkErrors(wpts) {
 	var errors = [];
@@ -167,28 +201,113 @@ function checkErrors(wpts) {
 			latLngFromWaypoint(wpts[i + 1]),
 			latLngFromWaypoint(wpts[i + 2]));
 		if (angle < sharpAngleThreshold) {
-			errors.push({waypoint: wpts[i], error: "Sharp angle (" + angle + "°)"});
-			errors.push({waypoint: wpts[i + 1], error: "Sharp angle (" + angle + "°)"});
-			errors.push({waypoint: wpts[i + 2], error: "Sharp angle (" + angle + "°)"});
+			errors.push({waypoint: i + 2, error: "Sharp angle (" + angle + "°)"});
 		}
 	}
 
 	/* Duplicate labels */
 	var labels = {};
-	waypoints.forEach(function (wpt) {
+	for (var i = 0; i < wpts.length; i++) {
+		var wpt = wpts[i];
 		if (labels[wpt.label]) {
-			labels[wpt.label].push(wpt);
+			labels[wpt.label].push(i);
 		} else {
-			labels[wpt.label] = [wpt];
+			labels[wpt.label] = [i];
 		}
-	});
+	}
 	Object.getOwnPropertyNames(labels).forEach(function (label) {
 		if (labels[label].length > 1) {
 			labels[label].forEach(function (wpt) {
-				errors.push({waypoint: wpt, error: "Duplicate label"});
+				errors.push({waypoint: wpt, error: "Duplicate label", trueError: true});
 			});
 		}
 	});
+
+	/* Duplicate coordinates */
+	var coords = {};
+	for (var i = 0; i < wpts.length; i++) {
+		var wpt = wpts[i];
+		var latlng = wpt.lat + "," + wpt.lng;
+		if (coords[latlng]) {
+			coords[latlng].push(i);
+		} else {
+			coords[latlng] = [i];
+		}
+	}
+	Object.getOwnPropertyNames(coords).forEach(function (coord) {
+		if (coords[coord].length > 1) {
+			coords[coord].forEach(function (wpt) {
+				errors.push({waypoint: wpt, error: "Duplicate coordinates"});
+			});
+		}
+	});
+
+	/* Invalid characters */
+	for (var i = 0; i < wpts.length; i++) {
+		var wpt = wpts[i];
+		if (!wpt.label.match(validLabel)) {
+			errors.push({waypoint: i, error: "Invalid main label", trueError: true});
+		}
+		if (wpt.altLabels) {
+			var invalidAlt = false;
+			wpt.altLabels.forEach(function (alt) {
+				if (!alt.match(validLabel)) {
+					invalidAlt = true;
+				}
+			});
+			if (invalidAlt) {
+				errors.push({waypoint: i, error: "Invalid alt label(s)", trueError: true});
+			}
+		}
+	}
+
+	/* Long segments */
+	for (var i = 0; i < wpts.length - 1; i++) {
+		var pt1 = wpts[i], pt2 = wpts[i + 1];
+		var p1 = new google.maps.LatLng(pt1.lat, pt1.lng),
+			p2 = new google.maps.LatLng(pt2.lat, pt2.lng);
+		if (getSegmentDistance(p1, p2) > longSegmentThreshold) {
+			errors.push({waypoint: i + 1, error: "Long segment"});
+		}
+	}
+
+	/* Unbalanced parentheses */
+	for (var i = 0; i < wpts.length; i++) {
+		var wpt = wpts[i];
+		if (countParens(wpt.label) != 0) {
+			errors.push({waypoint: i, error: "Unmatched parentheses in main label", trueError: true});
+		}
+		if (wpt.altLabels) {
+			var unmatchedInAlt = false;
+			wpt.altLabels.forEach(function (alt) {
+				if (countParens(alt) != 0) {
+					unmatchedInAlt = true;
+				}
+			});
+			if (unmatchedInAlt) {
+				errors.push({waypoint: i, error: "Unmatched parentheses in alt label(s)", trueError: true});
+			}
+		}
+	}
+
+	/* Too many slashes */
+	for (var i = 0; i < wpts.length; i++) {
+		var wpt = wpts[i];
+		if (countSlashes(wpt.label) > 1) {
+			errors.push({waypoint: i, error: "Too many slashes in main label", trueError: true});
+		}
+		if (wpt.altLabels) {
+			var slashesInAlt = false;
+			wpt.altLabels.forEach(function (alt) {
+				if (countSlashes(alt) > 1) {
+					slashesInAlt = true;
+				}
+			});
+			if (slashesInAlt) {
+				errors.push({waypoint: i, error: "Too many slashes in alt label(s)", trueError: true});
+			}
+		}
+	}
 
 	return errors;
 }

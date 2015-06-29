@@ -8,19 +8,11 @@
 <link rel="shortcut icon" type="image/png" href="favicon.png">
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyA5FRPdvrX3-EkC-pwufXee7hLGrqRW4b4"></script>
 <script type="text/javascript" src="parseuri.js"></script>
+<script type="text/javascript" src="maptypes.js"></script>
 <script type="text/javascript" src="wptedit.js"></script>
 <script type="text/javascript" src="http://rubaxa.github.io/Sortable/Sortable.js"></script>
 <script type="text/javascript">
-var waypoints = [
-	{label: "RR7", lat: 43.686735, lng: -79.613250, altLabels: ["AirportRd"]},
-	{label: "VisRd", lat: 43.689560, lng: -79.612384},
-	{label: "ElmRd", lat: 43.693860, lng: -79.610943},
-	{label: "ON427", lat: 43.697150, lng: -79.607260},
-	{label: "AttDr", lat: 43.697235, lng: -79.590374},
-	{label: "MarGroRd", lat: 43.699023, lng: -79.574275},
-	{label: "KipAve", lat: 43.704340, lng: -79.563190},
-	{label: "ON401", lat: 43.706327, lng: -79.556535}
-];
+var waypoints = [];
 var markers = {};
 var path = null;
 var map;
@@ -51,25 +43,63 @@ function getExpanded() {
 }
 
 function loadMap() {
+	var mapTypeIdList = [google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE,
+		google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN];
+	var mapTypesObj = [];
+	mapTypes.forEach(function (type) {
+		mapTypeIdList.push(type.name);
+	});
+
 	var Toronto = new google.maps.LatLng(43.65, -79.38);
 	var mapOptions = {
 		center: Toronto,
 		zoom: 13,
 		streetViewControl: false,
+		mapTypeControlOptions: {
+			mapTypeIds: mapTypeIdList,
+			style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+		},
 		disableDoubleClickZoom: true
 	};
 	map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
+	mapTypes.forEach(function (type) {
+		map.mapTypes.set(type.name, new google.maps.ImageMapType(type));
+	});
+	map.setMapTypeId("OSM Mapnik");
+
+	copyrightDiv = document.createElement("div");
+	copyrightDiv.id = "map-copyright";
+	map.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push(copyrightDiv);
+
+	function onMapTypeChange() {
+		var newType = map.getMapTypeId();
+		var notice = copyrightNotices[newType];
+
+		if (notice) {
+			copyrightDiv.style.display = "block";
+			copyrightDiv.innerHTML = notice;
+		} else {
+			copyrightDiv.style.display = "none";
+			copyrightDiv.textContent = "";
+		}
+	}
+
 	var x = loadWaypoints(waypoints, map);
 	markers = x.markers;
 	path = x.path;
-	map.fitBounds(x.bounds);
+	if (x.bounds) {
+		map.fitBounds(x.bounds);
+	}
 
 	google.maps.event.addListener(map, "dblclick", function (e) {
 		e.stop();
 		addwpt(e.latLng);
 		return false;
 	});
+	google.maps.event.addListener(map, "maptypeid_changed", onMapTypeChange);
+
+	setTimeout(onMapTypeChange, 50);
 }
 
 function createAltLabelElement(index, i) {
@@ -120,7 +150,8 @@ function createWaypointElement(index) {
 	relabel.textContent = "Relabel";
 	el.appendChild(relabel);
 	relabel.onclick = function (event) {
-		onrelabel(index);
+		var wp = event.target.parentElement;
+		onrelabel(Array.prototype.indexOf.call(wp.parentElement.children, wp));
 	};
 
 	var altlbl = document.createElement("a");
@@ -128,7 +159,8 @@ function createWaypointElement(index) {
 	altlbl.textContent = "Add Alt";
 	el.appendChild(altlbl);
 	altlbl.onclick = function (event) {
-		onaddaltlabel(index);
+		var wp = event.target.parentElement;
+		onaddaltlabel(Array.prototype.indexOf.call(wp.parentElement.children, wp));
 	};
 
 	var drag = document.createElement("div");
@@ -149,6 +181,10 @@ function createWaypointElement(index) {
 		};
 	}
 
+	var errs = document.createElement("span");
+	errs.classList.add("errors");
+	el.appendChild(errs);
+
 	return el;
 }
 
@@ -163,8 +199,8 @@ function loadSide(wpts) {
 function onrelabel(i) {
 	var name = "";
 	while (true) {
-		name = window.prompt("Enter a valid waypoint label:");
-		if (isValidWaypointName(name)) {
+		name = window.prompt("Enter a waypoint label:");
+		if (name != "") {
 			break;
 		}
 	}
@@ -175,20 +211,9 @@ function onrelabel(i) {
 
 	var wpt = document.getElementById("waypoints").children[i];
 
-	var wp;
-	waypoints.forEach(function (w) {
-		if (w.label == wpt.dataset.label) {
-			wp = w;
-			w.label = name;
-		}
-	});
-
-	var marker = markers[wpt.dataset.label];
-	delete markers[wpt.dataset.label];
-
+	waypoints[i].label = name;
 	wpt.dataset.label = name;
 	wpt.firstChild.textContent = name;
-	markers[name] = marker;
 
 	/* Reload the info window. */
 	expandWaypoint(i);
@@ -200,8 +225,8 @@ function onrelabel(i) {
 function onrelabelalt(index, i) {
 	var name = "";
 	while (true) {
-		name = window.prompt("Enter a valid waypoint label:");
-		if (isValidWaypointName(name)) {
+		name = window.prompt("Enter a waypoint label:");
+		if (name != "") {
 			break;
 		}
 	}
@@ -219,8 +244,8 @@ function onrelabelalt(index, i) {
 function onaddaltlabel(index) {
 	var name = "";
 	while (true) {
-		name = window.prompt("Enter a valid waypoint label:");
-		if (isValidWaypointName(name)) {
+		name = window.prompt("Enter a waypoint label:");
+		if (name != "") {
 			break;
 		}
 	}
@@ -322,7 +347,9 @@ function ondoimport() {
 	var x = loadWaypoints(waypoints, map);
 	markers = x.markers;
 	path = x.path;
-	map.fitBounds(x.bounds);
+	if (x.bounds) {
+		map.fitBounds(x.bounds);
+	}
 	loadSide(waypoints);
 	update();
 	closeimport();
@@ -334,17 +361,14 @@ function closeimport() {
 }
 
 function onexport() {
+	if (document.querySelectorAll(".true-error").length != 0) {
+		/* This only checks for true errors; possible errors are fine. */
+		window.alert("Cannot export due to outstanding errors");
+		return;
+	}
+
 	/* Export waypoint data from the application */
-	var exportedLines = "";
-	waypoints.forEach(function (wpt) {
-		exportedLines += wpt.lat + " " + wpt.lng + " " + wpt.label;
-		if (wpt.altLabels) {
-			wpt.altLabels.forEach(function (label) {
-				exportedLines += " " + label;
-			});
-		}
-		exportedLines += "\r\n";
-	});
+	exportedLines = writeData(waypoints);
 
 	var el = document.createElement("a");
 	el.href = "data:text/plain;base64," + btoa(exportedLines);
@@ -366,6 +390,16 @@ function reverse() {
 		}
 
 		waypoints.reverse();
+
+		markers.forEach(function (marker) {
+			marker.setMap(null);
+		});
+		path.setMap(null);
+
+		var x = loadWaypoints(waypoints, map);
+		markers = x.markers;
+		path = x.path;
+
 		loadSide(waypoints);
 		update();
 
@@ -382,8 +416,8 @@ function reverse() {
 function addwpt(point) {
 	var name = "";
 	while (true) {
-		name = window.prompt("Enter a valid waypoint label:");
-		if (isValidWaypointName(name)) {
+		name = window.prompt("Enter a waypoint label:");
+		if (name != "") {
 			break;
 		}
 	}
@@ -432,6 +466,14 @@ function delwpt() {
 	document.getElementById("delwpt").classList.add("disabled");
 }
 
+function createErrorElement(err) {
+	var el = document.createElement("span");
+	el.classList.add("error");
+	el.textContent = err;
+
+	return el;
+}
+
 function update() {
 	var length = waypoints.length;
 	document.getElementById("num-waypoints").textContent = length;
@@ -450,12 +492,37 @@ function update() {
 	document.getElementById("length").textContent = distance;
 	document.getElementById("length-units").textContent = units;
 
-	var errors = document.getElementsByClassName("error").length;
-	document.getElementById("num-errors").textContent = errors;
-	document.getElementById("errors-plural").textContent = errors == 1 ? "" : "s";
+	var errdivs = document.querySelectorAll(".waypoint.error");
+	if (errdivs) {
+		Array.prototype.forEach.call(errdivs, function (e) {
+			e.classList.remove("error");
+			e.classList.remove("true-error");
+			e.children[5].textContent = "";
+		});
+	}
+	var wpts = document.getElementById("waypoints").children;
+	var errors = checkErrors(waypoints);
+	errors.forEach(function (err) {
+		var el = wpts[err.waypoint];
+		el.classList.add("error");
+		if (err.trueError) {
+			el.classList.add("true-error");
+		}
+		el.children[5].appendChild(createErrorElement(err.error));
+		el.children[5].appendChild(document.createElement("br"));
+	});
 }
 
 function onload() {
+	if (location.search) {
+		var unit = location.search.substr(1);
+		if (unit == "mi") {
+			document.getElementById("units-mi").checked = true;
+		} else if (unit == "km") {
+			document.getElementById("units-km").checked = true;
+		}
+	}
+
 	loadMap();
 	loadSide(waypoints);
 	update();
@@ -496,8 +563,7 @@ function onload() {
 <p>
 <span id="length"></span> <span id="length-units"></span>,
 <span id="num-waypoints"></span> waypoint<span id="waypoints-plural">s</span>
-(<span id="num-hidden-waypoints"></span> hidden),
-<span id="num-errors"></span> possible error<span id="errors-plural">s</span>.
+(<span id="num-hidden-waypoints"></span> hidden).
 </p>
 <div>
 <a href="javascript: reverse()" id="reverse" class="button">Reverse</a>
@@ -507,9 +573,9 @@ function onload() {
 <div>
 <a href="javascript: onimport()" id="import" class="button">Import</a>
 <a href="javascript: onexport()" id="export" class="button">Export</a>
-<input type="radio" name="units" id="units-mi" checked onchange="update()"></input>
+<input type="radio" name="units" id="units-mi" onchange="update()"></input>
 <label for="units-mi">mi</label>
-<input type="radio" name="units" id="units-km" onchange="update()"></input>
+<input type="radio" name="units" id="units-km" checked onchange="update()"></input>
 <label for="units-km">km</label>
 </div>
 </div>
