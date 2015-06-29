@@ -12,16 +12,7 @@
 <script type="text/javascript" src="wptedit.js"></script>
 <script type="text/javascript" src="http://rubaxa.github.io/Sortable/Sortable.js"></script>
 <script type="text/javascript">
-var waypoints = [
-	{label: "RR7", lat: 43.686735, lng: -79.613250, altLabels: ["AirportRd"]},
-	{label: "VisRd", lat: 43.689560, lng: -79.612384},
-	{label: "ElmRd", lat: 43.693860, lng: -79.610943},
-	{label: "ON427", lat: 43.697150, lng: -79.607260},
-	{label: "AttDr", lat: 43.697235, lng: -79.590374},
-	{label: "MarGroRd", lat: 43.699023, lng: -79.574275},
-	{label: "KipAve", lat: 43.704340, lng: -79.563190},
-	{label: "ON401", lat: 43.706327, lng: -79.556535}
-];
+var waypoints = [];
 var markers = {};
 var path = null;
 var map;
@@ -97,7 +88,9 @@ function loadMap() {
 	var x = loadWaypoints(waypoints, map);
 	markers = x.markers;
 	path = x.path;
-	map.fitBounds(x.bounds);
+	if (x.bounds) {
+		map.fitBounds(x.bounds);
+	}
 
 	google.maps.event.addListener(map, "dblclick", function (e) {
 		e.stop();
@@ -354,7 +347,9 @@ function ondoimport() {
 	var x = loadWaypoints(waypoints, map);
 	markers = x.markers;
 	path = x.path;
-	map.fitBounds(x.bounds);
+	if (x.bounds) {
+		map.fitBounds(x.bounds);
+	}
 	loadSide(waypoints);
 	update();
 	closeimport();
