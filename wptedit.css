@@ -37,6 +37,10 @@ body {
 	background-color: #eeeeee;
 	opacity: 0.8;
 }
+#map-copyright a {
+	color: #214478;
+	text-decoration: none;
+}
 
 #editor {
 	display: flex;
