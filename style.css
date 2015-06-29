@@ -1,0 +1,105 @@
+body {
+	margin: 0;
+}
+
+.container {
+	max-width: 800px;
+	margin: auto;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#header {
+	background-color: #214478;
+}
+
+#logo {
+	margin: 20px 0;
+	display: inline-block;
+	vertical-align: middle;
+	line-height: 64px;
+	width: 300px;
+	height: 60px;
+	background-image: url("/logo.svg");
+	background-size: contain;
+}
+
+#hamburger {
+	display: none;
+}
+
+#nav ul {
+	list-style-type: none;
+	padding-left: 0;
+}
+
+#nav ul li a {
+	display: inline-block;
+	padding: 10px;
+	color: white;
+	text-decoration: none;
+}
+#nav ul li a:hover {
+	color: #214478;
+	background-color: white;
+}
+
+@media (min-width: 500px) {
+	#nav ul {
+		display: inline;
+	}
+
+	#nav ul li {
+		display: inline;
+	}
+
+	label[for="hamburger"] {
+		display: none;
+	}
+
+	#main {
+		padding-top: 20px;
+	}
+}
+
+@media (max-width: 499px) {
+	#logo {
+		width: 200px;
+		height: 40px;
+		margin: 15px 0;
+	}
+
+	label[for="hamburger"] {
+		display: inline-block;
+		width: 15px;
+		height: 15px;
+		background-image: url("/menu.svg");
+		background-size: contain;
+		cursor: pointer;
+		vertical-align: middle;
+		margin-left: 10px;
+		margin-right: 20px;
+		line-height: 64px;
+	}
+
+	#nav {
+		display: none;
+	}
+
+	#hamburger:checked ~ #nav {
+		display: block;
+	}
+
+	#nav ul {
+		margin-top: 0;
+		padding-bottom: 10px;
+	}
+
+	#nav ul li {
+		display: block;
+	}
+
+	#main {
+		padding-top: 10px;
+	}
+}

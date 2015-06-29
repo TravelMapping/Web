@@ -1,0 +1,206 @@
+* {
+	box-sizing: border-box;
+}
+
+html {
+	height: 100%;
+	font-family: "Roboto", sans-serif;
+}
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+#wrapper {
+	display: flex;
+	overflow: hidden;
+	height: 100%;
+}
+#editor {
+	width: 400px;
+	height: 100%;
+	padding: 20px;
+	background-color: #eeeeee;
+}
+#map {
+	flex-grow: 1;
+	height: 100%;
+}
+
+#map-copyright {
+	font-size: 10px;
+	padding: 0 4px;
+	margin-right: -5px;
+	white-space: nowrap;
+	color: #222222;
+	background-color: #eeeeee;
+	opacity: 0.8;
+}
+#map-copyright a {
+	color: #214478;
+	text-decoration: none;
+}
+
+#editor {
+	display: flex;
+	flex-direction: column;
+}
+
+#waypoint-list {
+	flex: 3;
+	overflow-y: auto;
+}
+#waypoints {
+	transition: opacity 0.3s ease;
+}
+.waypoint {
+	position: relative;
+	cursor: pointer;
+	box-shadow: 3px 3px 5px #dddddd;
+	background-color: white;
+	border-bottom: 1px solid #dddddd;
+	padding: 8px 15px;
+	padding-left: calc(15px + 1em);
+	transition: all 0.3s ease;
+}
+.waypoint:last-child {
+	border-bottom: none;
+}
+.waypoint.error {
+	border: 1px solid #ff5555;
+}
+.waypoint.true-error {
+	background-color: #ffd5d5;
+}
+
+.waypoint .drag-handle {
+	cursor: move;
+	position: absolute;
+	top: 12px;
+	left: 10px;
+	color: #999999;
+	font-weight: 300;
+}
+
+.waypoint-name {
+	font-size: 1.5em;
+	font-weight: 300;
+}
+.gm-style-iw .waypoint-name {
+	font-size: 2em;
+}
+
+.waypoint.expanded {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.waypoint.expanded:first-child {
+	margin-top: 0;
+}
+.waypoint.expanded:last-child {
+	margin-bottom: 0;
+}
+
+.alternates {
+	display: none;
+	color: #cccccc;
+	font-weight: 300;
+}
+.waypoint.expanded .alternates {
+	display: block;
+}
+.waypoint-coords {
+	display: inline;
+	color: #999999;
+}
+
+.waypoint .link {
+	display: none;
+	margin-left: 10px;
+	font-size: 0.75em;
+	color: #214478;
+	font-weight: 300;
+}
+.waypoint.expanded .link {
+	display: inline;
+}
+.link:hover {
+	text-decoration: underline;
+}
+
+.errors {
+	display: none;
+	color: #ff5555;
+}
+.waypoint.error .errors {
+	display: block;
+}
+.waypoint.error .drag-handle {
+	color: #ff5555;
+}
+
+#editor-footer p {
+	font-weight: 300;
+}
+#length, #num-waypoints, #num-hidden-waypoints, #num-errors {
+	font-weight: normal;
+}
+
+input[type=radio] {
+	display: none;
+}
+label[for=units-mi], label[for=units-km],
+label[for=format-wpt2], label[for=format-wpt] {
+	cursor: pointer;
+	display: inline-block;
+	padding: 5px 10px;
+	margin: 5px 0;
+	background-color: #999999;
+	color: white;
+}
+input[type=radio]:checked + label {
+	background-color: #214478;
+}
+
+.button {
+	display: inline-block;
+	background-color: #214478;
+	padding: 5px 10px;
+	margin: 5px 0;
+	text-decoration: none;
+	color: white;
+}
+.button.disabled {
+	cursor: default;
+	background-color: #999999;
+}
+
+#import-dialog {
+	display: flex;
+	flex-direction: column;
+	transition: left 0.3s ease;
+	position: fixed;
+	top: 0;
+	left: -500px;
+	width: 400px;
+	height: 100%;
+	padding: 20px;
+	box-shadow: 3px 3px 5px #dddddd;
+	background-color: #eeeeee;
+}
+#import-dialog.open {
+	left: 0;
+}
+
+#import-dialog textarea {
+	display: block;
+	flex: 3;
+	width: 100%;
+	font-family: monospace;
+	font-size: 16px;
+	margin-bottom: 15px;
+	resize: none;
+	border: none;
+	padding: 10px;
+}
