@@ -27,14 +27,19 @@
 <h1>Travel Mapping Highway Data Updates</h1>
 
 <div id="updates">
-  <table><tr><th>Date</th><th>Region</th><th>Route</th><th>Description</th></tr>
+  <table border="1"><tr><th>Date</th><th>Region</th><th>Route</th><th>File Root</th><th>Description</th></tr>
   <?php
       // select all updates in the DB
       $sql_command = "select * from updates;";
       $res = $db->query($sql_command);
 
       while ($row = $res->fetch_assoc()) {
-        echo "<tr><td>".$row['date']."</td><td>".$row['region']."</td><td>".$row['route']."</td><td>".$row['description']."</td></tr>\n";
+        if (strcmp($row['root'],"") == 0) {
+          echo "<tr><td>".$row['date']."</td><td>".$row['region']."</td><td>".$row['route']."</td><td>(NONE)</td><td>".$row['description']."</td></tr>\n";
+        }
+        else {
+          echo "<tr><td>".$row['date']."</td><td>".$row['region']."</td><td>".$row['route']."</td><td><a href=\"../hbtest/?r=".$row['root']."\">".$row['root']."</a></td><td>".$row['description']."</td></tr>\n";
+        }
       }
       $res->free();
     ?>
