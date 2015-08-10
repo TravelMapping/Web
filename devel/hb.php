@@ -276,12 +276,12 @@ ENDB;
   	$sql_command = "select * from routes";
 
   	//check for query string parameter for system and region filters
-    if (array_key_exists("sys", $_GET)) {
+    if (array_key_exists("sys", $_GET) && strlen($_GET["sys"]) > 0) {
     	$sql_command .= " where systemName = '".$_GET["sys"]."'";
-    	if (array_key_exists("rg", $_GET)) {
+    	if (array_key_exists("rg", $_GET) && strlen($_GET["rg"]) > 0) {
     		$sql_command .= "and region = '".$_GET["rg"]."'";
     	}
-    } else if (array_key_exists("rg", $_GET)) {
+    } else if (array_key_exists("rg", $_GET) && strlen($_GET["rg"]) > 0) {
     	$sql_command .= " where region = '".$_GET["rg"]."'";
     }
     $sql_command .= ";";
