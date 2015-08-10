@@ -209,11 +209,21 @@ text-align:left;
 <?php
   if ($showingmap == 0) {
     echo "<body>\n";
+    echo <<<EOT
+    <form id="selectHighways" name="HighwaySearch" action="hb.php">
+	<label for="sys">Filter routes by...  System: </label>
+	<input id="sys" type="text" placeholder="usaus" name="sys"></input>
+	<label for="rg"> Region: </label>
+	<input id="rg" type="text" placeholder="AL" name="rg"></input>
+	<input type="submit" value="Search"></input>
+	</form>
+EOT;
   }
   else {
     echo "<body onload=\"loadmap();\">\n";
   }
 ?>
+
 <h1>Travel Mapping Highway Browser (Draft)</h1>
 
 <?php
@@ -263,9 +273,20 @@ echo <<<ENDB
 ENDB;
   }
   else {  // we have no r=, so we will show a list of all
+  	$sql_command = "select * from routes";
+
+  	//check for query string parameter for system and region filters
+    if (array_key_exists("sys", $_GET)) {
+    	$sql_command .= " where systemName = '".$_GET["sys"]."'";
+    	if (array_key_exists("rg", $_GET)) {
+    		$sql_command .= "and region = '".$_GET["rg"]."'";
+    	}
+    } else if (array_key_exists("rg", $_GET)) {
+    	$sql_command .= " where region = '".$_GET["rg"]."'";
+    }
+    $sql_command .= ";";
     echo "<div id=\"routebox\">\n";
     echo "<table class=\"gratable\"><thead><tr><th colspan=\"4\">Select Route to Display</th></tr><tr><th>System</th><th>Region</th><th>Route Name</th><th>Root</th></tr></thead><tbody>\n";
-    $sql_command = "select * from routes;";
     $res = $db->query($sql_command);
     while ($row = $res->fetch_assoc()) {
       echo "<tr><td>".$row['systemName']."</td><td>".$row['region']."</td><td>".$row['route'].$row['banner'];
