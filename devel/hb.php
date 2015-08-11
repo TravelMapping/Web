@@ -23,13 +23,13 @@ body, html {
 	text-align:center;
 	font-size:30px;
 	font-family: "Times New Roman", serif;
-	font-style:bold;
+	font-style:normal;
 }
 
 #routebox {
 position: fixed;
 left: 0px;
-top: 50px;
+top: 100px;
 bottom: 0px;
 width: 100%;
 overflow:auto;
@@ -208,16 +208,36 @@ text-align:left;
 
 <?php
   if ($showingmap == 0) {
-    echo "<body>\n";
-    echo <<<EOT
-    <form id="selectHighways" name="HighwaySearch" action="hb.php">
+    $sysval = "";
+    if(array_key_exists("sys", $_GET)) $sysval = $_GET['sys'];
+      $rgval = "";
+      if(array_key_exists("rg", $_GET)) $rgval = $_GET['rg'];
+      $sortval = 0;
+      if(array_key_exists("sort", $_GET)) $sortval = $_GET['sort'];
+
+    echo "<body>";
+    echo <<<FORM1
+<form id="selectHighways" name="HighwaySearch" action="hb.php">
 	<label for="sys">Filter routes by...  System: </label>
-	<input id="sys" type="text" placeholder="usaus" name="sys"></input>
+	<input id="sys" type="search" placeholder="usaus" name="sys" value="
+FORM1
+.$sysval.<<<FORM2
+" >\\n
 	<label for="rg"> Region: </label>
-	<input id="rg" type="text" placeholder="AL" name="rg"></input>
-	<input type="submit" value="Search"></input>
+	<input id="rg" type="search" placeholder="AL" name="rg" value="
+FORM2
+.$rgval.<<<FORM3
+" >\\n
+	<label for="sort">Order by: </label>
+	<select id="sort" name="sort" form="selectHighways" >\\n
+	<option value="0">Route</option>
+	<option value="1">Region</option>
+	<option value="2">System</option>
+	</select>
+	<input type="submit" value="Search">
+	<button href="hb.php">Clear</button>
 	</form>
-EOT;
+FORM3;
   }
   else {
     echo "<body onload=\"loadmap();\">\n";
@@ -284,6 +304,19 @@ ENDB;
     } else if (array_key_exists("rg", $_GET) && strlen($_GET["rg"]) > 0) {
     	$sql_command .= " where region = '".$_GET["rg"]."'";
     }
+
+    switch ($_GET['sort']) {
+        case 0:
+            $sql_command .= " order by route";
+            break;
+        case 1:
+            $sql_command .= " order by region";
+            break;
+        case 2:
+            $sql_command .= " order by systemName";
+            break;
+    }
+
     $sql_command .= ";";
     echo "<div id=\"routebox\">\n";
     echo "<table class=\"gratable\"><thead><tr><th colspan=\"4\">Select Route to Display</th></tr><tr><th>System</th><th>Region</th><th>Route Name</th><th>Root</th></tr></thead><tbody>\n";
