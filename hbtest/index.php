@@ -23,7 +23,7 @@ body, html {
 	text-align:center;
 	font-size:30px;
 	font-family: "Times New Roman", serif;
-	font-style:bold;
+	font-style:normal;
 }
 
 #pointbox {
@@ -50,7 +50,7 @@ font-size:20px;
 
 #map {
 position: absolute;
-top:100px;
+top:150px;
 bottom:0px;
 left:400px;
 right:0px;
@@ -124,6 +124,9 @@ text-align:left;
   type="text/javascript"></script>
 
 <?php
+  if (array_key_exists('r', $_GET) && strlen($_GET['r'])==0) unset($_GET['r']);
+  if (array_key_exists('rg', $_GET) && strlen($_GET['rg'])==0) unset($_GET['rg']);
+
   // establish connection to db: mysql_ interface is deprecated, should learn new options
   $con = mysql_connect("localhost","travmap","clinch") or die("Failed to connect to database");
   mysql_select_db("TravelMapping", $con);
@@ -245,14 +248,20 @@ text-align:left;
       $waypointnum = $waypointnum + 1;
     }
   ?>
-</table>
+  </table>
 </div>
   <div id="controlbox">
     <input id="showMarkers" type="checkbox" name="Show Markers" onclick="showMarkersClicked()" checked="false">&nbsp;Show Markers
+    <form action="index.php" id="selector">
+        Region: <input type="text" id="rg" name="rg" value="<?php if(array_key_exists("rg", $_GET)) echo $_GET["rg"]?>">
+        User: <input type="text" id="u" name="u" value="<?php if(array_key_exists("u", $_GET)) echo $_GET["u"]?>">
+        Route Code: <input type="text" id="r" name="r" value="<?php if(array_key_exists("r", $_GET)) echo $_GET["r"]?>">
+        <input type="submit">
+    </form>
       
   <span id="controlboxroute">
     <?php
-       if (array_key_exists("r",$_GET)) {
+       if (array_key_exists("r",$_GET) && strlen($_GET['r'] > 0)) {
          $sql_command = "select region, route, banner, city from routes where root = '".$_GET['r']."';";
          $res = mysql_query($sql_command);
          $row = mysql_fetch_array($res);
