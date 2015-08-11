@@ -17,7 +17,7 @@
 <ul>
 <li><a href="/">Home</a></li>
 <li><a href="/">Traveler Stats</a></li>
-<li><a href="/">Highway Browser</a></li>
+<li><a href="/devel/hb.php">Highway Browser</a></li>
 <!--<li><a href="/">Login</a></li>-->
 </ul>
 </div>
