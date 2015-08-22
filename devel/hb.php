@@ -13,7 +13,6 @@ body, html {
   font-size:9pt;
   background-color:#EEEEFF;
 }
-
 #headerbox {
 	position: absolute;
 	top:0px;
@@ -25,7 +24,6 @@ body, html {
 	font-family: "Times New Roman", serif;
 	font-style:bold;
 }
-
 #routebox {
 position: fixed;
 left: 0px;
@@ -34,7 +32,6 @@ bottom: 0px;
 width: 100%;
 overflow:auto;
 }
-
 #pointbox {
 position: fixed;
 left: 0px;
@@ -44,7 +41,6 @@ bottom: 0px;
 width: 400px;
 overflow:auto;
 }
-
 #controlbox {
 position: fixed;
 top:50px;
@@ -56,7 +52,6 @@ overflow:auto;
 padding:5px;
 font-size:20px;
 }
-
 #map {
 position: absolute;
 top:100px;
@@ -65,11 +60,9 @@ left:400px;
 right:0px;
 overflow:hidden;
 }
-
 #map * {
 cursor:crosshair;
 }
-
 table.nmptable {
 font-size:8pt;
 border: 1px solid black;
@@ -78,20 +71,16 @@ margin-left: auto;
 margin-right: auto;
 background-color:white;
 }
-
 table.nmptable  td, th {
 border: solid black;
 border-width: 1px;
 }
-
 table.nmptable2 td, th {
 border-width: 0px;
 }
-
 table.nmptable tr td {
 text-align:right;
 }
-
 table.pthtable {
 font-size:10pt;
 border: 1px solid black;
@@ -100,16 +89,13 @@ margin-left: auto;
 margin-right: auto;
 background-color:white;
 }
-
 table.pthtable  td, th {
 border: solid black;
 border-width: 1px;
 }
-
 table.pthtable tr td {
 text-align:left;
 }
-
 table.gratable {
 font-size:10pt;
 border: 1px solid black;
@@ -118,12 +104,10 @@ margin-left: auto;
 margin-right: auto;
 background-color:white;
 }
-
 table.gratable  td, th {
 border: solid black;
 border-width: 1px;
 }
-
 table.gratable tr td {
 text-align:left;
 }
@@ -135,7 +119,6 @@ text-align:left;
 <?php
   // establish connection to db: mysql_ interface is deprecated, should learn new options
   $db = new mysqli("localhost","travmap","clinch","TravelMapping") or die("Failed to connect to database");
-
   # functions from http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php
   function startsWith($haystack, $needle) {
     // search backwards starting from haystack length characters from the end
@@ -145,7 +128,6 @@ text-align:left;
     // search forward starting from end minus needle length characters
     return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== FALSE);
   }
-
   if (array_key_exists("r",$_GET)) {
     $showingmap = 1;
   }
@@ -161,10 +143,9 @@ text-align:left;
       // select all waypoints matching the root given in the "r=" query string parameter
       $sql_command = "select pointName, latitude, longitude from waypoints where root = '".$_GET['r']."';";
       $res = $db->query($sql_command);
-
       $pointnum = 0;
       while ($row = $res->fetch_assoc()) {
-        echo "waypoints[".$pointnum."] = new Waypoint(\"".$row['pointname']."\",".$row['latitude'].",".$row['longitude'].");\n";
+        echo "waypoints[".$pointnum."] = new Waypoint(\"".$row['pointName']."\",".$row['latitude'].",".$row['longitude'].");\n";
         $pointnum = $pointnum + 1;
       }
       $res->free();
@@ -173,7 +154,6 @@ text-align:left;
       // nothing to select waypoints, we're done
       echo "return;\n";
     }
-
     // check for query string parameter for traveler clinched mapping of route
     if (array_key_exists("u",$_GET)) {
        echo "traveler = '".$_GET['u']."';\n";
@@ -209,25 +189,34 @@ text-align:left;
 <?php
   if ($showingmap == 0) {
     echo "<body>\n";
+    echo <<<EOT
+    <form id="selectHighways" name="HighwaySearch" action="hb.php">
+	<label for="sys">Filter routes by...  System: </label>
+	<input id="sys" type="text" placeholder="usaus" name="sys"></input>
+	<label for="rg"> Region: </label>
+	<input id="rg" type="text" placeholder="AL" name="rg"></input>
+	<input type="submit" value="Search"></input>
+	</form>
+EOT;
   }
   else {
     echo "<body onload=\"loadmap();\">\n";
   }
 ?>
+
 <h1>Travel Mapping Highway Browser (Draft)</h1>
 
 <?php
   if ($showingmap == 1) {
     echo "<div id=\"pointbox\">\n";
     echo "<table class=\"gratable\"><thead><tr><th colspan=\"2\">Waypoints</th></tr><tr><th>Coordinates</th><th>Waypoint Name</th></tr></thead><tbody>\n";
-
     $sql_command = "select pointName, latitude, longitude from waypoints where root = '".$_GET['r']."';";
     $res = $db->query($sql_command);
     $waypointnum = 0;
     while ($row = $res->fetch_assoc()) {
       # only visible points should be in this table
       if (! startsWith($row['pointName'], "+")) {
-        echo "<tr><td>(".$row['latitude'].",".$row['longitude'].")</td><td><a onclick='javascript:LabelClick(".$waypointnum.",\"".$row['pointName']."\",".$row['latitude'].",".$row['longitude'].",0);'>".$row['pointName']."</a></td></tr>";
+        echo "<tr><td>(".$row['latitude'].",".$row['longitude'].")</td><td><a onclick='javascript:LabelClick(".$waypointnum.",\"".$row['pointName']."\",".$row['latitude'].",".$row['longitude'].",0);'>".$row['pointName']."</a></td></tr>\n";
       }
       $waypointnum = $waypointnum + 1;
     }
@@ -263,9 +252,19 @@ echo <<<ENDB
 ENDB;
   }
   else {  // we have no r=, so we will show a list of all
+  	$sql_command = "select * from routes";
+  	//check for query string parameter for system and region filters
+    if (array_key_exists("sys", $_GET) && strlen($_GET["sys"]) > 0) {
+    	$sql_command .= " where systemName = '".$_GET["sys"]."'";
+    	if (array_key_exists("rg", $_GET) && strlen($_GET["rg"]) > 0) {
+    		$sql_command .= "and region = '".$_GET["rg"]."'";
+    	}
+    } else if (array_key_exists("rg", $_GET) && strlen($_GET["rg"]) > 0) {
+    	$sql_command .= " where region = '".$_GET["rg"]."'";
+    }
+    $sql_command .= ";";
     echo "<div id=\"routebox\">\n";
     echo "<table class=\"gratable\"><thead><tr><th colspan=\"4\">Select Route to Display</th></tr><tr><th>System</th><th>Region</th><th>Route Name</th><th>Root</th></tr></thead><tbody>\n";
-    $sql_command = "select * from routes;";
     $res = $db->query($sql_command);
     while ($row = $res->fetch_assoc()) {
       echo "<tr><td>".$row['systemName']."</td><td>".$row['region']."</td><td>".$row['route'].$row['banner'];
