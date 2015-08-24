@@ -27,7 +27,7 @@
 <h1>Travel Mapping Highway Data Datacheck Errors</h1>
 
 <div id="errors">
-  <table border="1"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP?</th></tr>
+  <table border="1"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP?</th><th>FP Entry to Submit</th></tr>
   <?php
       // select all errors in the DB
       $sql_command = "select * from datacheckErrors;";
@@ -48,7 +48,8 @@
         if (strcmp($row['value'],"") != 0) {
           echo $row['value'];
         }
-        echo "</td><td>".$row['falsePositive']."</td></tr>\n";
+        echo "</td><td>".$row['falsePositive']."</td>";
+        echo "<td><tt>".$row['route'].";".$row['label1'].";".$row['label2'].";".$row['label3'].";".$row['code'].";".$row['value']."</tt></td></tr>\n";
       }
       $res->free();
     ?>
