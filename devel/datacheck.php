@@ -8,29 +8,11 @@
   // establish connection to db
   $db = new mysqli("localhost","travmap","clinch","TravelMapping") or die("Failed to connect to database");
 
-  # functions from http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php
-  function startsWith($haystack, $needle) {
-    // search backwards starting from haystack length characters from the end
-    return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;
-  }
-  function endsWith($haystack, $needle) {
-    // search forward starting from end minus needle length characters
-    return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== FALSE);
-  }
-?>
-<script>
-</script>
-<title>Travel Mapping Highway Data Datacheck Errors</title>
-</head>
-
-<body onload="populate_dbarrays()">
-<h1>Travel Mapping Highway Data Datacheck Errors</h1>
-
-<div id="errors">
-  <table border="1"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP?</th><th>FP Entry to Submit</th></tr>
-  <?php
-      // select all errors in the DB
-      $sql_command = "select * from datacheckErrors;";
+  # function to generate a table with FP or not
+  function writeTable($db, $fpVal, $joins) {
+      // select all errors in the DB with the given $fpVal
+      $sql_command = "select datacheckErrors.* from datacheckErrors ".$joins." falsePositive=".$fpVal.";";
+      echo "<!-- SQL: ".$sql_command." -->\n";
       $res = $db->query($sql_command);
 
       while ($row = $res->fetch_assoc()) {
@@ -48,10 +30,36 @@
         if (strcmp($row['value'],"") != 0) {
           echo $row['value'];
         }
-        echo "</td><td>".$row['falsePositive']."</td>";
-        echo "<td><tt>".$row['route'].";".$row['label1'].";".$row['label2'].";".$row['label3'].";".$row['code'].";".$row['value']."</tt></td></tr>\n";
+        echo "</td><td><tt>".$row['route'].";".$row['label1'].";".$row['label2'].";".$row['label3'].";".$row['code'].";".$row['value']."</tt></td></tr>\n";
       }
       $res->free();
+  }
+?>
+<script>
+</script>
+<title>Travel Mapping Highway Data Datacheck Errors</title>
+</head>
+
+<body onload="populate_dbarrays()">
+<h1>Travel Mapping Highway Data Datacheck Errors</h1>
+
+<div id="errors">
+  <h3>Errors to be Addressed (not FPs)</h3>
+  <table border="1"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry to Submit</th></tr>
+    <?php
+      writeTable($db, "0", "join routes on datacheckErrors.route = routes.root join systems on routes.systemName = systems.systemName where systems.active=\"1\" and ");
+    ?>
+  </table>
+  <h3>Errors in In-Development Systems (not FPs)</h3>
+  <table border="1"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry to Submit</th></tr>
+    <?php
+      writeTable($db, "0", "join routes on datacheckErrors.route = routes.root join systems on routes.systemName = systems.systemName where systems.active=\"0\" and ");
+    ?>
+  </table>
+  <h3>Errors Marked as FPs</h3>
+  <table border="1"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry Matched</th></tr>
+    <?php
+      writeTable($db, "1", " where ");
     ?>
   </table>
 </div>
