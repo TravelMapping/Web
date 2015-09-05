@@ -16,7 +16,7 @@
       $res = $db->query($sql_command);
 
       while ($row = $res->fetch_assoc()) {
-        echo "<tr><td>".$row['route']."</td><td>";
+        echo "<tr><td><a href=\"../hbtest/?r=".$row['route']."\">".$row['route']."</a></td><td>";
         if (strcmp($row['label1'],"") != 0) {
           echo $row['label1'];
         }
@@ -46,20 +46,20 @@
 <div id="errors">
   <h3>Errors to be Addressed (not FPs)</h3>
   <p>These errors should be corrected, or reported as false positives by adding the entry from the last column to <a href="https://github.com/TravelMapping/HighwayData/blob/master/datacheckfps.csv">the datacheck FP list</a> as soon as possible.</p>
-  <table border="1"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry to Submit</th></tr>
+  <table border="1" style="background-color:#fcc"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry to Submit</th></tr>
     <?php
       writeTable($db, "0", "join routes on datacheckErrors.route = routes.root join systems on routes.systemName = systems.systemName where systems.active=\"1\" and ");
     ?>
   </table>
   <h3>Errors in In-Development Systems (not FPs)</h3>
   <p>These errors should be corrected, or reported as false positives by adding the entry from the last column to <a href="https://github.com/TravelMapping/HighwayData/blob/master/datacheckfps.csv">the datacheck FP list</a> before the system is activated.</p>
-  <table border="1"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry to Submit</th></tr>
+  <table border="1" style="background-color:#cfc"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry to Submit</th></tr>
     <?php
       writeTable($db, "0", "join routes on datacheckErrors.route = routes.root join systems on routes.systemName = systems.systemName where systems.active=\"0\" and ");
     ?>
   </table>
   <h3>Errors Marked as FPs</h3>
-  <table border="1"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry Matched</th></tr>
+  <table border="1" style="background-color:#ccc"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry Matched</th></tr>
     <?php
       writeTable($db, "1", " where ");
     ?>
