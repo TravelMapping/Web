@@ -27,7 +27,7 @@ body, html {
 #routebox {
 position: fixed;
 left: 0px;
-top: 50px;
+top: 80px;
 bottom: 0px;
 width: 100%;
 overflow:auto;
@@ -264,14 +264,14 @@ ENDB;
     }
     $sql_command .= ";";
     echo "<div id=\"routebox\">\n";
-    echo "<table class=\"gratable\"><thead><tr><th colspan=\"4\">Select Route to Display</th></tr><tr><th>System</th><th>Region</th><th>Route Name</th><th>Root</th></tr></thead><tbody>\n";
+    echo "<table class=\"gratable\"><thead><tr><th colspan=\"5\">Select Route to Display</th></tr><tr><th>System</th><th>Region</th><th>Route Name</th><th>.list Name</th><th>Root</th></tr></thead><tbody>\n";
     $res = $db->query($sql_command);
     while ($row = $res->fetch_assoc()) {
       echo "<tr><td>".$row['systemName']."</td><td>".$row['region']."</td><td>".$row['route'].$row['banner'];
       if (strcmp($row['city'],"") != 0) {
         echo " (".$row['city'].")";
       }
-      echo "</td><td><a href=\"hb.php?r=".$row['root']."\">".$row['root']."</a></td></tr>\n";
+      echo "</td><td>".$row['region']." ".$row['route'].$row['banner'].$row['abbrev']."</td><td><a href=\"hb.php?r=".$row['root']."\">".$row['root']."</a></td></tr>\n";
     }
     $res->free();
     echo "</table></div>\n";
