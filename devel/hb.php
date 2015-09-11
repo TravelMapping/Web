@@ -262,9 +262,13 @@ ENDB;
     } else if (array_key_exists("rg", $_GET) && strlen($_GET["rg"]) > 0) {
     	$sql_command .= " where region = '".$_GET["rg"]."'";
     }
+    if (array_key_exists("order", $_GET) && strlen($_GET["order"]) > 0) {
+        $sql_command .= " order by ".$_GET["order"];
+    }
     $sql_command .= ";";
+    echo "<!-- SQL: ".$sql_command." -->\n";
     echo "<div id=\"routebox\">\n";
-    echo "<table class=\"gratable\"><thead><tr><th colspan=\"5\">Select Route to Display</th></tr><tr><th>System</th><th>Region</th><th>Route Name</th><th>.list Name</th><th>Root</th></tr></thead><tbody>\n";
+    echo "<table class=\"gratable\"><thead><tr><th colspan=\"5\">Select Route to Display (click a header to sort by that column)</th></tr><tr><th><a href=\"?order=systemName\">System</a></th><th><a href=\"?order=region\">Region</a></th><th><a href=\"?order=route\">Route Name</a></th><th>.list Name</th><th>Root</th></tr></thead><tbody>\n";
     $res = $db->query($sql_command);
     while ($row = $res->fetch_assoc()) {
       echo "<tr><td>".$row['systemName']."</td><td>".$row['region']."</td><td>".$row['route'].$row['banner'];
