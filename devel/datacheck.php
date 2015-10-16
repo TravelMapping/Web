@@ -59,9 +59,9 @@
       writeTable($db, "0", "join routes on datacheckErrors.route = routes.root join systems on routes.systemName = systems.systemName where systems.active=\"0\" and ");
     ?>
   </table>
-  <h3>Errors Marked as FPs</h3>
+  <h3>Errors Marked as FPs ("Crossed Off")</h3>
   <p><a name="marked"></a>These have been marked as FPs in <a href="https://github.com/TravelMapping/HighwayData/blob/master/datacheckfps.csv">the datacheck FP list</a> and can normally be safely ignored.  However, if any of these are discovered to be true errors, they should be removed from the list and fixed in the highway data.</p>
-  <table border="1" style="background-color:#ccc"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry Matched</th></tr>
+  <table border="1" style="background-color:#ccc;font-size:60%"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry Matched</th></tr>
     <?php
       writeTable($db, "1", " where ");
     ?>
