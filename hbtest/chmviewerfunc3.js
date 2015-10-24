@@ -73,7 +73,7 @@ colorCodes[6] = { name: "magenta", unclinched: "rgb(255,100,255)", clinched: "rg
 var infowindow = new google.maps.InfoWindow();
 
 // some map options, from http://cmap.m-plex.com/hb/maptypes.js by Timothy Reichard
-/*
+
 var MapnikOptions = { alt: "Show Mapnik road map tiles from OpenStreetMap.org",
 		            getTileUrl: getMapnikTileURL,
 		            maxZoom: 18,
@@ -99,7 +99,9 @@ var MQOpenMapOptions = { alt: "Show Mapquest Open Map road map tiles based on Op
 
 function getMQOpenMapTileURL(point, zoom)
 {
-    return 'http://cmap.m-plex.com/hb/ymaptile.php?t=m&s=mq&x=' + point.x + '&y=' + point.y + '&z=' + zoom;
+    var subdomain = Math.floor( Math.random() * (4 - 1 + 1) ) + 1; // Request tile from random subdomain.
+    return 'http://otile' + subdomain + '.mqcdn.com/tiles/1.0.0/map/' + zoom + '/' + point.x + '/' + point.y + '.jpg';
+    //return 'http://cmap.m-plex.com/hb/ymaptile.php?t=m&s=mq&x=' + point.x + '&y=' + point.y + '&z=' + zoom;
 }
 
 
@@ -115,9 +117,11 @@ var MQOpenSatOptions = { alt: "Show Mapquest Open Map satellite imagery tiles ba
 
 function getMQOpenSatTileURL(point, zoom)
 {
-    return 'http://cmap.m-plex.com/hb/ymaptile.php?t=s&s=mq&x=' + point.x + '&y=' + point.y + '&z=' + zoom;
+    var subdomain = Math.floor( Math.random() * (4 - 1 + 1) ) + 1; // Request tile from random subdomain.
+    return 'http://otile' + subdomain + '.mqcdn.com/tiles/1.0.0/sat/' + zoom + '/' + point.x + '/' + point.y + '.jpg';
+    //return 'http://cmap.m-plex.com/hb/ymaptile.php?t=s&s=mq&x=' + point.x + '&y=' + point.y + '&z=' + zoom;
 }
-*/
+
 
 
 var intersectionimage = {
@@ -132,17 +136,21 @@ var intersectionimage = {
 
 // loadmap constructs and sets up the initial map
 function loadmap() {
-    //var typeMQOpenMap = new google.maps.ImageMapType(MQOpenMapOptions);
-    //var typeMQOpenSat = new google.maps.ImageMapType(MQOpenSatOptions);
-    //var typeMapnik = new google.maps.ImageMapType(MapnikOptions);
+    var typeMQOpenMap = new google.maps.ImageMapType(MQOpenMapOptions);
+    var typeMQOpenSat = new google.maps.ImageMapType(MQOpenSatOptions);
+    var typeMapnik = new google.maps.ImageMapType(MapnikOptions);
 
-    //var maptypelist = ['MQOpenMap', 'MQOpenSat', 'Mapnik', google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN];
-    //var maptypecontroloptions = {mapTypeIds: maptypelist, position: google.maps.TOP_RIGHT, style: google.maps.MapTypeControlStyle.DROPDOWN_MENU};
+    var maptypelist = ['MQOpenMap', 'MQOpenSat', 'Mapnik', google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN];
+    var maptypecontroloptions = {mapTypeIds: maptypelist, position: google.maps.TOP_RIGHT, style: google.maps.MapTypeControlStyle.DROPDOWN_MENU};
     //var mapopt = {center: new google.maps.LatLng(42.664529, -73.786470), zoom: 12, mapTypeId: 'Mapnik', mapTypeControl: true, mapTypeControlOptions: maptypecontroloptions, streetViewControl: true, disableDefaultUI: true, panControl: true, zoomControl: true, scaleControl: true, overviewMapControl: true, keyboardShortcuts: true, disableDoubleClickZoom: false};
     // coordinates are Albertus Hall room 400-2 at The College of Saint Rose
-    var mapopt = {center: new google.maps.LatLng(42.664529, -73.786470), zoom: 16};
+    var mapopt = {center: new google.maps.LatLng(42.664529, -73.786470), zoom: 16, mapTypeControl: true, mapTypeControlOptions: maptypecontroloptions};
 
     map = new google.maps.Map(document.getElementById("map"), mapopt);
+    
+    map.mapTypes.set('MQOpenMap', typeMQOpenMap);
+    map.mapTypes.set('MQOpenSat', typeMQOpenSat);
+    map.mapTypes.set('Mapnik', typeMapnik);
 
     //document.getElementById('showHidden').checked=false;
     //var showHidden = document.getElementById('showHidden').checked;
