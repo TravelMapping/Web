@@ -193,7 +193,7 @@ text-align:left;
       $where_systems = $where_systems.")";
     }
 
-    $sql_command = "select waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color from waypoints join routes on routes.root = waypoints.root".$select_regions.$select_systems." join systems on routes.systemname = systems.systemname and systems.active='1' order by root;";
+    $sql_command = "select waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname from waypoints join routes on routes.root = waypoints.root".$select_regions.$select_systems." join systems on routes.systemname = systems.systemname and systems.active='1' order by root, waypoints.pointId;";
     echo "// SQL: ".$sql_command."\n";
     $res = mysql_query($sql_command);
 
@@ -205,6 +205,7 @@ text-align:left;
          echo "newRouteIndices[".$routenum."] = ".$pointnum.";\n";
          echo "routeTier[".$routenum."] = ".$row[4].";\n";
          echo "routeColor[".$routenum."] = '".$row[5]."';\n";
+         echo "routeSystem[".$routenum."] = '".$row[6]."';\n";
          $lastRoute = $row[3];
          $routenum = $routenum + 1;
       }
@@ -233,6 +234,18 @@ text-align:left;
          $segmentIndex = $segmentIndex + 1;
        }
      echo "mapClinched = true;\n";
+    }
+    // check for custom colors query string parameters
+    $customColors = array();
+    if (array_key_exists("colors",$_GET)) {
+       $customColors = explode(';',$_GET['colors']);
+       $colorNum = 0;
+       foreach ($customColors as $customColor) {
+          $colorEntry = array();
+          $colorEntry = explode(':',$customColor);
+          echo "customColorCodes[".$colorNum."] = { name: \"".$colorEntry[0]."\", unclinched: \"".$colorEntry[1]."\", clinched: \"".$colorEntry[2]."\" };\n";
+          $colorNum = $colorNum + 1;
+       }
     }
   ?>
     genEdges = true;
