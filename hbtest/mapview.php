@@ -123,9 +123,14 @@ text-align:left;
   type="text/javascript"></script>
 
 <?php
+  $dbname = "TravelMapping";
+  if (array_key_exists("db",$_GET)) {
+    $dbname = $_GET['db'];
+  }
+
   // establish connection to db: mysql_ interface is deprecated, should learn new options
   $con = mysql_connect("localhost","travmap","clinch") or die("Failed to connect to database");
-  mysql_select_db("TravelMapping", $con);
+  mysql_select_db($dbname, $con);
 
   # functions from http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php
   function startsWith($haystack, $needle) {
@@ -235,6 +240,7 @@ text-align:left;
        }
      echo "mapClinched = true;\n";
     }
+
     // check for custom colors query string parameters
     $customColors = array();
     if (array_key_exists("colors",$_GET)) {
@@ -247,6 +253,7 @@ text-align:left;
           $colorNum = $colorNum + 1;
        }
     }
+
   ?>
     genEdges = true;
   }
