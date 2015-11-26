@@ -44,7 +44,15 @@
 <h1>Travel Mapping Highway Data Datacheck Errors</h1>
 
 <p>Quick links: <a href="#active">[Errors to be Addressed]</a><a href="#indev">[Errors in In-Dev Systems]</a><a href="#marked">[Errors Marked as FPs]</a>.</p>
+
+<p>See also the <a href="../logs/unmatchedfps.log">[Log of Unmatched
+FPs from datacheckfps.csv]</a> and
+the <a href="../logs/unprocessedwpts.log">[Log of Unprocessed WPTs in
+the Repository]</a>.  Cleaning these up are low priority tasks for the
+project.</p>
+
 <div id="errors">
+
   <h3>Errors to be Addressed (not FPs)</h3>
   <p><a name="active"></a>These errors should be corrected, or reported as false positives by adding the entry from the last column to <a href="https://github.com/TravelMapping/HighwayData/blob/master/datacheckfps.csv">the datacheck FP list</a> as soon as possible.  Ideally, this list should always be empty.</p>
   <table border="1" style="background-color:#fcc"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry to Submit</th></tr>
