@@ -198,6 +198,13 @@ text-align:left;
       $where_systems = $where_systems.")";
     }
 
+    // make sure we have selected some region or system
+    if (($num_systems == 0) && ($num_regions == 0)) {
+       // for now, put in a default to usai, do something better later
+       $select_systems = " and (routes.systemName='usai')";
+       $where_systems = " where (routes.systemName='usai')";
+    }
+
     $sql_command = "select waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname from waypoints join routes on routes.root = waypoints.root".$select_regions.$select_systems." join systems on routes.systemname = systems.systemname and systems.active='1' order by root, waypoints.pointId;";
     echo "// SQL: ".$sql_command."\n";
     $res = mysql_query($sql_command);
