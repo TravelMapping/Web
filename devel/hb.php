@@ -117,8 +117,12 @@ text-align:left;
   type="text/javascript"></script>
 
 <?php
+  $dbname = "TravelMapping";
+  if (array_key_exists("db",$_GET)) {
+    $dbname = $_GET['db'];
+  }
   // establish connection to db: mysql_ interface is deprecated, should learn new options
-  $db = new mysqli("localhost","travmap","clinch","TravelMapping") or die("Failed to connect to database");
+  $db = new mysqli("localhost","travmap","clinch",$dbname) or die("Failed to connect to database");
   # functions from http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php
   function startsWith($haystack, $needle) {
     // search backwards starting from haystack length characters from the end
