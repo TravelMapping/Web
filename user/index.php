@@ -2,9 +2,10 @@
 <!-- 
 	A basic user stats page. 
 	URL Params:
-		u - the user
-		order - the way to order fields in the regions table
-		rg - region to view detailed stats for
+		u - the user.
+		rg_order - the way to order records in the regions table.
+		sys_order - the way to order the records in the systems table.
+		db - the database being used. Use 'TravelMappingDev' for in-development systems. 
 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -91,14 +92,23 @@ text-align:left;
 </style>
 <title>
 	<?php
+		$user = "null";
+		$rg_order = "region ascending";
+		$sys_order = "countryCode DESC";
+
 		if (array_key_exists("u",$_GET)) {
 			$user = $_GET['u'];
-			echo "Traveler Stats for ".$user;
 		}
 
-		if (array_key_exists("rg", $_GET)) {
-			$rg = $_GET['rg'];
+		if (array_key_exists("rg_order",$_GET)) {
+			$rg_order = $_GET['rg_order'];
 		}
+
+		if (array_key_exists("sys_order",$_GET)) {
+			$sys_order = $_GET['sys_order'];
+		}
+
+		echo "Traveler Stats for ".$user;
 
 		$dbname = "TravelMapping";
 		if (array_key_exists("db",$_GET)) {
@@ -119,7 +129,7 @@ text-align:left;
 		}
 
 		function colorScale($percent) {
-			
+
 		}
 	?>
 </title>
@@ -148,10 +158,10 @@ text-align:left;
 					<th colspan="5">Clinched Mileage by Region:</th>
 				</tr>
 				<tr>
-					<th><a href="?<?php echo "u=".$user."&rorder=region" ?>">Region</a></th>
-					<th><a href="?<?php echo "u=".$user."&rorder=clinchedMileage desc" ?>">Clinched Mileage</a></th>
-					<th><a href="?<?php echo "u=".$user."&rorder=totalMileage desc" ?>">Overall Mileage</a></th>
-					<th><a href="?<?php echo "u=".$user."&rorder=percentage" ?>">Percent Clinched</a></th>
+					<th><a href="?<?php echo "u=".$user."&sys_order=".$sys_order."&rg_order=region" ?>">Region</a></th>
+					<th><a href="?<?php echo "u=".$user."&sys_order=".$sys_order."&rg_order=clinchedMileage desc" ?>">Clinched Mileage</a></th>
+					<th><a href="?<?php echo "u=".$user."&sys_order=".$sys_order."&rg_order=totalMileage desc" ?>">Overall Mileage</a></th>
+					<th><a href="?<?php echo "u=".$user."&sys_order=".$sys_order."&rg_order=percentage" ?>">Percent Clinched</a></th>
 					<th>Map</th>
 				</tr>
 			</thead>
@@ -185,22 +195,23 @@ text-align:left;
 					<th colspan="7">Clinched Mileage by System</th>
 				</tr>
 				<tr>
-					<th>Country</th>
-					<th>System Code</th>
-					<th>System Name</th>
-					<th>Clinched Mileage</th>
-					<th>Overall Mileage</th>
-					<th>Percent Clinched</th>
+					<th><a href="?<?php echo "u=".$user."&sys_order=countryCode&rg_order=".$rg_order ?>">Country</a></th>
+					<th><a href="?<?php echo "u=".$user."&sys_order=systemName&rg_order=".$rg_order ?>">System Code</a></th>
+					<th><a href="?<?php echo "u=".$user."&sys_order=fullName&rg_order=".$rg_order ?>">System Name</a></th>
+					<th><a href="?<?php echo "u=".$user."&sys_order=clinchedMileage desc&rg_order=".$rg_order ?>">Clinched Mileage</a></th>
+					<th><a href="?<?php echo "u=".$user."&sys_order=totalMileage desc&rg_order=".$rg_order ?>">Total Mileage</a></th>
+					<th><a href="?<?php echo "u=".$user."&sys_order=percentage desc&rg_order=".$rg_order ?>">Percent</a></th>
 					<th>Map</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php 
-					$sql_command = "SELECT sys.countryCode, sys.systemName, sys.fullName, r.root, COALESCE(ROUND(SUM(cr.mileage), 2),0) AS clinchedMileage, COALESCE(ROUND(SUM(r.mileage), 2), 0) AS totalMileage, COALESCE(ROUND(SUM(cr.mileage) / SUM(r.mileage) * 100, 3), 0) AS percentage FROM systems as sys INNER JOIN routes AS r ON r.systemName = sys.systemName LEFT JOIN clinchedRoutes AS cr ON cr.route = r.root AND cr.traveler = '".$user."' GROUP BY r.systemName ORDER BY sys.countryCode DESC, sys.tier, sys.systemName;";
+					$sql_command = "SELECT sys.countryCode, sys.systemName, sys.fullName, r.root, COALESCE(ROUND(SUM(cr.mileage), 2),0) AS clinchedMileage, COALESCE(ROUND(SUM(r.mileage), 2), 0) AS totalMileage, COALESCE(ROUND(SUM(cr.mileage) / SUM(r.mileage) * 100, 3), 0) AS percentage FROM systems as sys INNER JOIN routes AS r ON r.systemName = sys.systemName LEFT JOIN clinchedRoutes AS cr ON cr.route = r.root AND cr.traveler = '".$user."' GROUP BY r.systemName";
+					$sql_command .= " ORDER BY ".$sys_order.", sys.tier, sys.systemName;";
 					echo "<!-- SQL: ".$sql_command."-->";
 					$res = $db->query($sql_command);
 					while ($row = $res->fetch_assoc()) {
-						echo "<tr><td>".$row['countryCode']."</td><td>".$row['systemName']."</td><td>".$row['fullName']."</td><td>".$row['clinchedMileage']."</td><td>".$row['totalMileage']."</td><td>".$row['percentage']."</td><td><a href=\"/hbtest/mapview.php?u=".$user."&sys=".$row['systemName']."\">Map</a></td></tr>";
+						echo "<tr><td>".$row['countryCode']."</td><td>".$row['systemName']."</td><td>".$row['fullName']."</td><td>".$row['clinchedMileage']."</td><td>".$row['totalMileage']."</td><td>".$row['percentage']."%</td><td><a href=\"/hbtest/mapview.php?u=".$user."&sys=".$row['systemName']."\">Map</a></td></tr>";
 					}
 					$res->free();
 				?>
