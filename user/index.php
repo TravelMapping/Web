@@ -109,28 +109,45 @@ text-align:left;
 </title>
 </head>
 <body>
+	<div id="header">
+	<form id="userselect">
+		<label>User: </label>
+		<input type="text" name="u" form="userselect" value="<?php echo $user ?>">
+		<input type="submit">
+	</form>
 	<h1>Traveler Stats for <?php echo $user ?>:</h1>
+	</div>
 	<div id="body">
 		<table class="gratable">
 			<thead>
 				<tr>
-					<th colspan="4">Clinched Mileage by Region:</th>
+					<th colspan="5">Clinched Mileage by Region:</th>
 				</tr>
 				<tr>
-					<th>Region</th>
-					<th>Clinched Mileage</th>
-					<th>Overall Mileage</th>
-					<th>Percent Clinched</th>
+					<th><a href="?<?php echo "u=".$user."&order=region" ?>">Region</a></th>
+					<th><a href="?<?php echo "u=".$user."&order=clinchedMileage desc" ?>">Clinched Mileage</a></th>
+					<th><a href="?<?php echo "u=".$user."&order=totalMileage desc" ?>">Overall Mileage</a></th>
+					<th><a href="?<?php echo "u=".$user."&order=percentage" ?>">Percent Clinched</a></th>
+					<th>Map</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php
-					$sql_command = "SELECT o.region, co.mileage as clinchedMileage, o.mileage as totalMileage FROM overallMileageByRegion AS o INNER JOIN clinchedOverallMileageByRegion AS co ON co.region = o.region WHERE co.traveler = '".$user."' ORDER BY o.region;";
+					$sql_command = "SELECT o.region, co.mileage as clinchedMileage, o.mileage as totalMileage FROM overallMileageByRegion AS o INNER JOIN clinchedOverallMileageByRegion AS co ON co.region = o.region WHERE co.traveler = '".$user."' ORDER BY ";
+					if (array_key_exists("order", $_GET) && strlen($_GET["order"]) > 0) {
+						if (!strcmp($_GET['order'], "percentage")) {
+							$sql_command .= "1 - clinchedMileage / totalMileage";
+						} else {
+							$sql_command .= $_GET["order"];
+						}
+				    } else {
+				    	$sql_command .= "o.region";
+				    }
 					echo "<!-- SQL: ".$sql_command."-->";
 					$res = $db->query($sql_command);
 					while ($row = $res->fetch_assoc()) {
 						$percent = round($row['clinchedMileage'] / $row['totalMileage'] * 100.0, 3);
-				        echo "<tr><td>".$row['region']."</td><td>".$row['clinchedMileage']."</td><td>".$row['totalMileage']."</td><td>".$percent."%</td></tr>";
+				        echo "<tr><td>".$row['region']."</td><td>".$row['clinchedMileage']."</td><td>".$row['totalMileage']."</td><td>".$percent."%</td><td><a href=\"/hbtest/mapview.php?u=".$user."&rg=".$row['region']."\">Map</a></td></tr>";
 				    }
 			        $res->free();
 				?>
