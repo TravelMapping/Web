@@ -16,7 +16,7 @@
 <div id="nav">
 <ul>
 <li><a href="/">Home</a></li>
-<li><a href="/">Traveler Stats</a></li>
+<li><a href="/user">Traveler Stats</a></li>
 <li><a href="/hbtest">Highway Browser</a></li>
 <!--<li><a href="/">Login</a></li>-->
 </ul>
