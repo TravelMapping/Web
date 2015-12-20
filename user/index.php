@@ -78,6 +78,7 @@ border: 1px solid black;
 border-spacing: 0px;
 margin-left: auto;
 margin-right: auto;
+width: 50%;
 background-color:white;
 }
 
@@ -88,6 +89,10 @@ border-width: 1px;
 
 table.gratable tr td {
 text-align:left;
+}
+
+table.gratable tr:hover td {
+	background-color: #CCCCCC;
 }
 </style>
 <title>
@@ -141,18 +146,11 @@ text-align:left;
 		<input type="text" name="u" form="userselect" value="<?php echo $user ?>">
 		<input type="submit">
 	</form>
-	<h1>Traveler Stats for 
-	<?php 
-		echo $user;
-		if (!is_null($rg)) {
-			echo " in ".$rg;
-		} 
-	?>
-	:</h1>
+	<h1>Traveler Stats for <?php echo $user; ?>:</h1>
 	</div>
 	<div id="body">
-		<h2>Stats by Region
-		<table class="gratable">
+		<h2>Stats by Region</h2>
+		<table class="gratable" id="regionsTable">
 			<thead>
 				<tr>
 					<th colspan="5">Clinched Mileage by Region:</th>
@@ -168,11 +166,11 @@ text-align:left;
 			<tbody>
 				<?php
 					$sql_command = "SELECT o.region, co.mileage as clinchedMileage, o.mileage as totalMileage FROM overallMileageByRegion AS o INNER JOIN clinchedOverallMileageByRegion AS co ON co.region = o.region WHERE co.traveler = '".$user."' ORDER BY ";
-					if (array_key_exists("rorder", $_GET) && strlen($_GET["rorder"]) > 0) {
-						if (!strcmp($_GET['rorder'], "percentage")) {
+					if (array_key_exists("rg_order", $_GET) && strlen($_GET["rg_order"]) > 0) {
+						if (!strcmp($_GET['rg_order'], "percentage")) {
 							$sql_command .= "1 - clinchedMileage / totalMileage";
 						} else {
-							$sql_command .= $_GET["rorder"];
+							$sql_command .= $_GET["rg_order"];
 						}
 				    } else {
 				    	$sql_command .= "o.region";
@@ -181,7 +179,7 @@ text-align:left;
 					$res = $db->query($sql_command);
 					while ($row = $res->fetch_assoc()) {
 						$percent = round($row['clinchedMileage'] / $row['totalMileage'] * 100.0, 3);
-				        echo "<tr><td>".$row['region']."</td><td>".$row['clinchedMileage']."</td><td>".$row['totalMileage']."</td><td>".$percent."%</td><td><a href=\"/hbtest/mapview.php?u=".$user."&rg=".$row['region']."\">Map</a></td></tr>";
+				        echo "<tr onClick=\"window.document.location='user/region.php?u=".$user."&rg=".$row['region']."'\"><td>".$row['region']."</td><td>".$row['clinchedMileage']."</td><td>".$row['totalMileage']."</td><td>".$percent."%</td><td><a href=\"/hbtest/mapview.php?u=".$user."&rg=".$row['region']."\">Map</a></td></tr>";
 				    }
 			        $res->free();
 				?>
@@ -189,7 +187,7 @@ text-align:left;
 			</tbody>
 		</table>
 		<h2>Stats by System</h2>
-		<table class="gratable">
+		<table class="gratable" id="systemsTable">
 			<thead>
 				<tr>
 					<th colspan="7">Clinched Mileage by System</th>
@@ -211,7 +209,7 @@ text-align:left;
 					echo "<!-- SQL: ".$sql_command."-->";
 					$res = $db->query($sql_command);
 					while ($row = $res->fetch_assoc()) {
-						echo "<tr><td>".$row['countryCode']."</td><td>".$row['systemName']."</td><td>".$row['fullName']."</td><td>".$row['clinchedMileage']."</td><td>".$row['totalMileage']."</td><td>".$row['percentage']."%</td><td><a href=\"/hbtest/mapview.php?u=".$user."&sys=".$row['systemName']."\">Map</a></td></tr>";
+						echo "<tr onClick=\"window.document.location='user/system.php?u=".$user."&sys=".$row['systemName']."'\"><td>".$row['countryCode']."</td><td>".$row['systemName']."</td><td>".$row['fullName']."</td><td>".$row['clinchedMileage']."</td><td>".$row['totalMileage']."</td><td>".$row['percentage']."%</td><td><a href=\"/hbtest/mapview.php?u=".$user."&sys=".$row['systemName']."\">Map</a></td></tr>";
 					}
 					$res->free();
 				?>
