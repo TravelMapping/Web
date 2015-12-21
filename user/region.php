@@ -288,8 +288,10 @@ table.gratable tr:hover td {
 </head>
 <body onload="loadmap();">
   <div id="header">
+  <a href="/user?u=<?php echo $user?>">Back</a>
+  <a href="/">Home</a>
+  <a href="/hbtest">Highway Browser</a>
   <form id="userselect">
-    <a href="/user?u=<?php echo $user?>">Back</a>
     <label>User: </label>
     <input type="text" name="u" form="userselect" value="<?php echo $user ?>">
     <label>Region: </label>

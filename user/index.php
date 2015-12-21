@@ -32,6 +32,12 @@ overflow:auto;
 padding: 20px;
 }
 
+#body h2{
+	margin: auto;
+	text-align: center;
+	padding: 10px;
+}
+
 table.nmptable {
 font-size:8pt;
 border: 1px solid black;
@@ -141,6 +147,8 @@ table.gratable tr:hover td {
 </head>
 <body>
 	<div id="header">
+  	<a href="/">Home</a>
+  	<a href="/hbtest">Highway Browser</a>
 	<form id="userselect">
 		<label>User: </label>
 		<input type="text" name="u" form="userselect" value="<?php echo $user ?>">
@@ -149,6 +157,59 @@ table.gratable tr:hover td {
 	<h1>Traveler Stats for <?php echo $user; ?>:</h1>
 	</div>
 	<div id="body">
+		<div id="overall" id="tierTable">
+			<h2>Overall Stats</h2>
+			<table class="gratable" style="width: 30%">
+				<thead>
+					<tr><th colspan="4">Clinched Mileage Overall</th></tr>
+					<tr>
+						<th>Tier</th>
+						<th>Clinched Mileage</th>
+						<th>Overall Mileage</th>
+						<th>Percent Clinched</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+						//First fetch overall mileage
+						$sql_command = "SELECT sys.tier, "; 
+    					$sql_command .= "ROUND(SUM(COALESCE(cr.mileage, 0)), 0) AS clinchedMileage, ";
+    					$sql_command .= "ROUND(SUM(COALESCE(routes.mileage, 0)), 0) AS totalMileage, ";
+    					$sql_command .= "ROUND(SUM(COALESCE(cr.mileage, 0)) / SUM(COALESCE(routes.mileage, 0)) * 100, 3) AS percentage ";
+    					$sql_command .= "FROM routes "; 
+						$sql_command .= "LEFT JOIN clinchedRoutes AS cr ";
+    					$sql_command .= "ON routes.root = cr.route AND traveler = '".$user."' ";
+    					$sql_command .= "INNER JOIN systems AS sys ";
+    					$sql_command .= "ON routes.systemName = sys.systemName;";
+    					echo "<!-- SQL:".$sql_command."-->";
+    					$res = $db->query($sql_command);
+    					$row = $res->fetch_assoc();
+    					$res->free();   					
+    					echo "<b><tr style=\"background-color:#EEEEFF\"><td>Overall</td><td>".$row['clinchedMileage']."</td><td>".$row['totalMileage']."</td><td>".$row['percentage']."%</td></tr></b>\n";
+
+    					//Then fetch mileage by tier
+						$sql_command = "SELECT sys.tier, "; 
+    					$sql_command .= "ROUND(SUM(COALESCE(cr.mileage, 0)), 0) AS clinchedMileage, ";
+    					$sql_command .= "ROUND(SUM(COALESCE(routes.mileage, 0)), 0) AS totalMileage, ";
+    					$sql_command .= "ROUND(SUM(COALESCE(cr.mileage, 0)) / SUM(COALESCE(routes.mileage, 0)) * 100, 3) AS percentage ";
+    					$sql_command .= "FROM routes "; 
+						$sql_command .= "LEFT JOIN clinchedRoutes AS cr ";
+    					$sql_command .= "ON routes.root = cr.route AND traveler = '".$user."' ";
+    					$sql_command .= "INNER JOIN systems AS sys ";
+    					$sql_command .= "ON routes.systemName = sys.systemName ";
+    					$sql_command .= "GROUP BY sys.tier;";
+ 						echo "<!-- SQL:".$sql_command."-->";
+
+ 						$res = $db->query($sql_command);
+						while ($row = $res->fetch_assoc()) {
+							echo "<tr><td>Tier ".$row['tier']."</td><td>".$row['clinchedMileage']."</td><td>".$row['totalMileage']."</td><td>".$row['percentage']."%</td></tr>\n";
+						}
+						$res->free();
+					?>
+				</tbody>
+				<tfoot><td colspan="4">*Mileage for routes on lower tiers may be missing or inaccurate.</td></tfoot>
+			</table>
+		</div>
 		<h2>Stats by Region</h2>
 		<table class="gratable" id="regionsTable">
 			<thead>
@@ -168,9 +229,9 @@ table.gratable tr:hover td {
 					$sql_command = "SELECT o.region, co.mileage as clinchedMileage, o.mileage as totalMileage FROM overallMileageByRegion AS o INNER JOIN clinchedOverallMileageByRegion AS co ON co.region = o.region WHERE co.traveler = '".$user."' ORDER BY ";
 					if (array_key_exists("rg_order", $_GET) && strlen($_GET["rg_order"]) > 0) {
 						if (!strcmp($_GET['rg_order'], "percentage")) {
-							$sql_command .= "1 - clinchedMileage / totalMileage";
+							$sql_command .= "1 - clinchedMileage / totalMileage".";";
 						} else {
-							$sql_command .= $_GET["rg_order"];
+							$sql_command .= $_GET["rg_order"].";";
 						}
 				    } else {
 				    	$sql_command .= "o.region";
