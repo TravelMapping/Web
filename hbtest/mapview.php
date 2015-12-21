@@ -227,9 +227,11 @@ text-align:left;
 
     // check for query string parameter for traveler clinched mapping of route
     if (array_key_exists("u",$_GET)) {
+       echo "// select_systems: ".$select_systems."\n";
+       echo "// where_systems: ".$where_systems."\n";
        echo "traveler = '".$_GET['u']."';\n";
        // retrieve list of segments for this region or regions
-       $sql_command = "select segments.segmentId, segments.root from segments join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1'".$where_regions.$where_systems." order by root, segments.segmentId;";
+       $sql_command = "select segments.segmentId, segments.root from segments join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1'".$where_regions.$select_systems." order by root, segments.segmentId;";
        echo "// SQL: ".$sql_command."\n";
        $res = mysql_query($sql_command);
        $segmentIndex = 0;
@@ -237,7 +239,7 @@ text-align:left;
          echo "segments[".$segmentIndex."] = ".$row[0]."; // route=".$row[1]."\n";
          $segmentIndex = $segmentIndex + 1;
        }
-       $sql_command = "select segments.segmentId, segments.root from segments right join clinched on segments.segmentId = clinched.segmentId join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1'".$where_regions.$where_systems." and clinched.traveler='".$_GET['u']."' order by root, segments.segmentId;";
+       $sql_command = "select segments.segmentId, segments.root from segments right join clinched on segments.segmentId = clinched.segmentId join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1'".$where_regions.$select_systems." and clinched.traveler='".$_GET['u']."' order by root, segments.segmentId;";
        echo "// SQL: " .$sql_command."\n";
        $res = mysql_query($sql_command);
        $segmentIndex = 0;
