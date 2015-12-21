@@ -115,6 +115,11 @@ text-align:left;
 <script
  src="http://maps.googleapis.com/maps/api/js?sensor=false"
   type="text/javascript"></script>
+<!-- jQuery -->
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- TableSorter -->
+<script src="/lib/jquery.tablesorter.min.js"></script>
+<style type="text/css" src="css/tablesorter.css"></style>
 
 <?php
   $dbname = "TravelMapping";
@@ -186,6 +191,15 @@ text-align:left;
   ?>
     genEdges = true;
   }
+
+  $(document).ready(function()
+    {
+      $("#routes").tablesorter({
+        sortList: [[0,0]],
+        headers: {4:{sorter:false}, 5:{sorter:false}}
+      });
+    }
+  );
 </script>
 <title>Travel Mapping Highway Browser (Draft)</title>
 </head>
@@ -193,15 +207,13 @@ text-align:left;
 <?php
   if ($showingmap == 0) {
     echo "<body>\n";
-    echo <<<EOT
-    <form id="selectHighways" name="HighwaySearch" action="hb.php">
-	<label for="sys">Filter routes by...  System: </label>
-	<input id="sys" type="text" placeholder="usaus" name="sys"></input>
-	<label for="rg"> Region: </label>
-	<input id="rg" type="text" placeholder="AL" name="rg"></input>
-	<input type="submit" value="Search"></input>
-	</form>
-EOT;
+    echo "<form id=\"selectHighways\" name=\"HighwaySearch\" action=\"hb.php\">";
+	  echo "<label for=\"sys\">Filter routes by...  System: </label>";
+	  echo "<input id=\"sys\" type=\"text\" placeholder=\"usaus\" name=\"sys\" value=\"".$_GET["sys"]."\"></input>";
+	  echo "<label for=\"rg\"> Region: </label>";
+	  echo "<input id=\"rg\" type=\"text\" placeholder=\"AL\" name=\"rg\" value=\"".$_GET["rg"]."\"></input>";
+	  echo "<input type=\"submit\" value=\"Search\"></input></form>";
+
   }
   else {
     echo "<body onload=\"loadmap();\">\n";
@@ -266,13 +278,11 @@ ENDB;
     } else if (array_key_exists("rg", $_GET) && strlen($_GET["rg"]) > 0) {
     	$sql_command .= " where region = '".$_GET["rg"]."'";
     }
-    if (array_key_exists("order", $_GET) && strlen($_GET["order"]) > 0) {
-        $sql_command .= " order by ".$_GET["order"];
-    }
+
     $sql_command .= ";";
     echo "<!-- SQL: ".$sql_command." -->\n";
     echo "<div id=\"routebox\">\n";
-    echo "<table class=\"gratable\"><thead><tr><th colspan=\"5\">Select Route to Display (click a header to sort by that column)</th></tr><tr><th><a href=\"?order=systemName\">System</a></th><th><a href=\"?order=region\">Region</a></th><th><a href=\"?order=route\">Route Name</a></th><th>.list Name</th><th>Root</th></tr></thead><tbody>\n";
+    echo "<table class=\"gratable tablesorter ws_data_table\" id=\"routes\"><thead><tr><th colspan=\"5\">Select Route to Display (click a header to sort by that column)</th></tr><tr><th>System</th><th>Region</th><th>Route Name</th><th>.list Name</th><th>Root</th></tr></thead><tbody>\n";
     $res = $db->query($sql_command);
     while ($row = $res->fetch_assoc()) {
       echo "<tr><td>".$row['systemName']."</td><td>".$row['region']."</td><td>".$row['route'].$row['banner'];
