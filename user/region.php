@@ -25,7 +25,7 @@ body, html {
 #mapholder {
 position: relative;
 margin: auto;
-width:700px;
+width:800px;
 }
 
 #map {
@@ -115,6 +115,18 @@ table.gratable tr:hover td {
   background-color: #CCCCCC;
 }
 
+table.tablesorter th.sortable:hover {
+  background-color: #CCCCFF;
+}
+table tr.status-active td {
+  background-color: #CCFFCC;
+}
+table tr.status-preview td {
+  background-color: #FFFFCC;
+}
+table tr.status-devel td {
+  background-color: #FFCCCC;
+}
 </style>
 <?php
     $user = "null";
@@ -163,6 +175,10 @@ table.gratable tr:hover td {
  src="http://maps.googleapis.com/maps/api/js?sensor=false"
   type="text/javascript"></script>
 <script src="chmviewerfunc3.js" type="text/javascript"></script>
+<!-- jQuery -->
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- TableSorter -->
+<script src="/lib/jquery.tablesorter.min.js"></script>
   <script>
   function waypointsFromSQL() {
   <?php
@@ -287,6 +303,16 @@ table.gratable tr:hover td {
 </script>
 </head>
 <body onload="loadmap();">
+  <script type="text/javascript">
+  $(document).ready(function()
+    {
+      $("#systemsTable").tablesorter({
+        sortList: [[0,0]],
+        headers: {0:{sorter:false},}
+      });
+    }
+    );
+  </script>
   <div id="header">
   <a href="/user?u=<?php echo $user?>">Back</a>
   <a href="/">Home</a>
@@ -305,17 +331,19 @@ table.gratable tr:hover td {
       <input id="showMarkers" type="checkbox" name="Show Markers" onclick="showMarkersClicked()">&nbsp;Show Markers
       <div id="controlboxinfo"></div>
       <div id="map"></div>
-      <table class="gratable">
+      <table class="gratable tablesorter" id="systemsTable">
         <thead>
           <tr>
-            <th colspan="6">Clinched Mileage by System</th>
+            <th colspan="7">Clinched Mileage by System</th>
           </tr>
           <tr>
-            <th><a href="?<?php echo "u=".$user."&sys_order=systemName" ?>">System Code</a></th>
-            <th><a href="?<?php echo "u=".$user."&sys_order=fullName" ?>">System Name</a></th>
-            <th><a href="?<?php echo "u=".$user."&sys_order=clinchedMileage desc" ?>">Clinched Mileage</a></th>
-            <th><a href="?<?php echo "u=".$user."&sys_order=totalMileage desc" ?>">Total Mileage</a></th>
-            <th><a href="?<?php echo "u=".$user."&sys_order=percentage desc" ?>">Percent</a></th>
+            <th class="sortable">System Code</th>
+            <th class="sortable">System Name</th>
+            <th class="sortable">Tier</th>
+            <th class="sortable">Status</th>
+            <th class="sortable">Clinched Mileage</th>
+            <th class="sortable">Total Mileage</th>
+            <th class="sortable">Percent</th>
           </tr>
         </thead>
         <tbody>
@@ -323,6 +351,8 @@ table.gratable tr:hover td {
             $sql_command = <<<SQL
             SELECT
               sys.systemName,
+              sys.tier,
+              sys.level AS status,
               sys.fullName,
               r.root,
               COALESCE(ROUND(SUM(cr.mileage), 2), 0) AS clinchedMileage,
@@ -344,9 +374,11 @@ SQL;
 
           $res = mysql_query($sql_command);
           while ($row = mysql_fetch_array($res)) {
-            echo "<tr onClick=\"window.document.location='/hbtest/mapview.php?u=".$user."&sys=".$row['systemName']."&rg=".$region."'\">";
+            echo "<tr onClick=\"window.document.location='/hbtest/mapview.php?u=".$user."&sys=".$row['systemName']."&rg=".$region."'\" class=\"status-".$row['status']."\">";
             echo "<td>".$row['systemName']."</td>";
             echo "<td>".$row['fullName']."</td>";
+            echo "<td>Tier ".$row['tier']."</td>";
+            echo "<td>".$row['status']."</td>";
             echo "<td>".$row['clinchedMileage']."</td>";
             echo "<td>".$row['totalMileage']."</td>";
             echo "<td>".$row['percentage']."%</td></tr>";

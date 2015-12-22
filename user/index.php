@@ -100,7 +100,25 @@ text-align:left;
 table.gratable tr:hover td {
 	background-color: #CCCCCC;
 }
+
+table.tablesorter th.sortable:hover {
+  background-color: #CCCCFF;
+}
+
+table tr.status-active td {
+  background-color: #CCFFCC;
+}
+table tr.status-preview td {
+  background-color: #FFFFCC;
+}
+table tr.status-devel td {
+  background-color: #FFCCCC;
+}
 </style>
+<!-- jQuery -->
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- TableSorter -->
+<script src="/lib/jquery.tablesorter.min.js"></script>
 <title>
 	<?php
 		$user = "null";
@@ -146,6 +164,24 @@ table.gratable tr:hover td {
 </title>
 </head>
 <body>
+	<script type="text/javascript">
+	$(document).ready(function()
+    {
+      $("#tierTable").tablesorter({
+        sortList: [[0,0]],
+        headers: {}
+      });
+      $("#regionsTable").tablesorter({
+        sortList: [[0,0]],
+        headers: {0:{sorter:false}, 5:{sorter:false}}
+      });
+      $("#systemsTable").tablesorter({
+        sortList: [[0,0]],
+        headers: {0:{sorter:false}, 9:{sorter:false}}
+      });
+    }
+  	);
+	</script>
 	<div id="header">
   	<a href="/">Home</a>
   	<a href="/hbtest">Highway Browser</a>
@@ -157,16 +193,16 @@ table.gratable tr:hover td {
 	<h1>Traveler Stats for <?php echo $user; ?>:</h1>
 	</div>
 	<div id="body">
-		<div id="overall" id="tierTable">
+		<div id="overall">
 			<h2>Overall Stats</h2>
-			<table class="gratable" style="width: 30%">
+			<table class="tablesorter gratable" style="width: 30%" id="tierTable">
 				<thead>
 					<tr><th colspan="4">Clinched Mileage Overall</th></tr>
 					<tr>
-						<th>Tier</th>
-						<th>Clinched Mileage</th>
-						<th>Overall Mileage</th>
-						<th>Percent Clinched</th>
+						<th class="sortable">Tier</th>
+						<th class="sortable">Clinched Mileage</th>
+						<th class="sortable">Overall Mileage</th>
+						<th class="sortable">Percent Clinched</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -211,31 +247,22 @@ table.gratable tr:hover td {
 			</table>
 		</div>
 		<h2>Stats by Region</h2>
-		<table class="gratable" id="regionsTable">
+		<table class="gratable tablesorter" id="regionsTable">
 			<thead>
 				<tr>
 					<th colspan="5">Clinched Mileage by Region:</th>
 				</tr>
 				<tr>
-					<th><a href="?<?php echo "u=".$user."&sys_order=".$sys_order."&rg_order=region" ?>">Region</a></th>
-					<th><a href="?<?php echo "u=".$user."&sys_order=".$sys_order."&rg_order=clinchedMileage desc" ?>">Clinched Mileage</a></th>
-					<th><a href="?<?php echo "u=".$user."&sys_order=".$sys_order."&rg_order=totalMileage desc" ?>">Overall Mileage</a></th>
-					<th><a href="?<?php echo "u=".$user."&sys_order=".$sys_order."&rg_order=percentage" ?>">Percent Clinched</a></th>
+					<th class="sortable">Region</th>
+					<th class="sortable">Clinched Mileage</th>
+					<th class="sortable">Overall Mileage</th>
+					<th class="sortable">Percent Clinched</th>
 					<th>Map</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php
-					$sql_command = "SELECT o.region, co.mileage as clinchedMileage, o.mileage as totalMileage FROM overallMileageByRegion AS o INNER JOIN clinchedOverallMileageByRegion AS co ON co.region = o.region WHERE co.traveler = '".$user."' ORDER BY ";
-					if (array_key_exists("rg_order", $_GET) && strlen($_GET["rg_order"]) > 0) {
-						if (!strcmp($_GET['rg_order'], "percentage")) {
-							$sql_command .= "1 - clinchedMileage / totalMileage".";";
-						} else {
-							$sql_command .= $_GET["rg_order"].";";
-						}
-				    } else {
-				    	$sql_command .= "o.region";
-				    }
+					$sql_command = "SELECT o.region, co.mileage as clinchedMileage, o.mileage as totalMileage FROM overallMileageByRegion AS o INNER JOIN clinchedOverallMileageByRegion AS co ON co.region = o.region WHERE co.traveler = '".$user."';";
 					echo "<!-- SQL: ".$sql_command."-->";
 					$res = $db->query($sql_command);
 					while ($row = $res->fetch_assoc()) {
@@ -248,29 +275,40 @@ table.gratable tr:hover td {
 			</tbody>
 		</table>
 		<h2>Stats by System</h2>
-		<table class="gratable" id="systemsTable">
+		<table class="gratable tablesorter" id="systemsTable">
 			<thead>
 				<tr>
-					<th colspan="7">Clinched Mileage by System</th>
+					<th colspan="9">Clinched Mileage by System</th>
 				</tr>
 				<tr>
-					<th><a href="?<?php echo "u=".$user."&sys_order=countryCode&rg_order=".$rg_order ?>">Country</a></th>
-					<th><a href="?<?php echo "u=".$user."&sys_order=systemName&rg_order=".$rg_order ?>">System Code</a></th>
-					<th><a href="?<?php echo "u=".$user."&sys_order=fullName&rg_order=".$rg_order ?>">System Name</a></th>
-					<th><a href="?<?php echo "u=".$user."&sys_order=clinchedMileage desc&rg_order=".$rg_order ?>">Clinched Mileage</a></th>
-					<th><a href="?<?php echo "u=".$user."&sys_order=totalMileage desc&rg_order=".$rg_order ?>">Total Mileage</a></th>
-					<th><a href="?<?php echo "u=".$user."&sys_order=percentage desc&rg_order=".$rg_order ?>">Percent</a></th>
+					<th class="sortable">Country</th>
+					<th class="sortable">System Code</th>
+					<th class="sortable">System Name</th>
+					<th class="sortable">Tier</th>
+					<th class="sortable">Status</th>
+					<th class="sortable">Clinched Mileage</th>
+					<th class="sortable">Total Mileage</th>
+					<th class="sortable">Percent</th>
 					<th>Map</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php 
-					$sql_command = "SELECT sys.countryCode, sys.systemName, sys.fullName, r.root, COALESCE(ROUND(SUM(cr.mileage), 2),0) AS clinchedMileage, COALESCE(ROUND(SUM(r.mileage), 2), 0) AS totalMileage, COALESCE(ROUND(SUM(cr.mileage) / SUM(r.mileage) * 100, 3), 0) AS percentage FROM systems as sys INNER JOIN routes AS r ON r.systemName = sys.systemName LEFT JOIN clinchedRoutes AS cr ON cr.route = r.root AND cr.traveler = '".$user."' GROUP BY r.systemName";
-					$sql_command .= " ORDER BY ".$sys_order.", sys.tier, sys.systemName;";
+					$sql_command = "SELECT sys.countryCode, sys.systemName, sys.level, sys.tier, sys.fullName, r.root, COALESCE(ROUND(SUM(cr.mileage), 2),0) AS clinchedMileage, COALESCE(ROUND(SUM(r.mileage), 2), 0) AS totalMileage, COALESCE(ROUND(SUM(cr.mileage) / SUM(r.mileage) * 100, 3), 0) AS percentage FROM systems as sys INNER JOIN routes AS r ON r.systemName = sys.systemName LEFT JOIN clinchedRoutes AS cr ON cr.route = r.root AND cr.traveler = '".$user."' GROUP BY r.systemName";
+					$sql_command .= ";";
 					echo "<!-- SQL: ".$sql_command."-->";
 					$res = $db->query($sql_command);
 					while ($row = $res->fetch_assoc()) {
-						echo "<tr onClick=\"window.document.location='user/system.php?u=".$user."&sys=".$row['systemName']."'\"><td>".$row['countryCode']."</td><td>".$row['systemName']."</td><td>".$row['fullName']."</td><td>".$row['clinchedMileage']."</td><td>".$row['totalMileage']."</td><td>".$row['percentage']."%</td><td><a href=\"/hbtest/mapview.php?u=".$user."&sys=".$row['systemName']."\">Map</a></td></tr>";
+						echo "<tr onClick=\"window.document.location='user/system.php?u=".$user."&sys=".$row['systemName']."'\" class=\"status-".$row['level']."\">";
+						echo "<td>".$row['countryCode']."</td>";
+						echo "<td>".$row['systemName']."</td>";
+						echo "<td>".$row['fullName']."</td>";
+						echo "<td>Tier ".$row['tier']."</td>";
+						echo "<td>".$row['level']."</td>";
+						echo "<td>".$row['clinchedMileage']."</td>";
+						echo "<td>".$row['totalMileage']."</td>";
+						echo "<td>".$row['percentage']."%</td>";
+						echo "<td><a href=\"/hbtest/mapview.php?u=".$user."&sys=".$row['systemName']."\">Map</a></td></tr>";
 					}
 					$res->free();
 				?>

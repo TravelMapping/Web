@@ -114,7 +114,7 @@ text-align:left;
 table.tablesorter th.sortable:hover {
   background-color: #CCCCFF;
 }
-table tr.status-active {
+table tr.status-active td {
   background-color: #CCFFCC;
 }
 table tr.status-preview td {
