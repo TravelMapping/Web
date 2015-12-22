@@ -111,6 +111,9 @@ border-width: 1px;
 table.gratable tr td {
 text-align:left;
 }
+table.tablesorter th.sortable:hover {
+  background-color: #CCCCFF;
+}
 </style>
 <script
  src="http://maps.googleapis.com/maps/api/js?sensor=false"
@@ -119,7 +122,6 @@ text-align:left;
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <!-- TableSorter -->
 <script src="/lib/jquery.tablesorter.min.js"></script>
-<style type="text/css" src="css/tablesorter.css"></style>
 
 <?php
   $dbname = "TravelMapping";
@@ -196,7 +198,7 @@ text-align:left;
     {
       $("#routes").tablesorter({
         sortList: [[0,0]],
-        headers: {4:{sorter:false}, 5:{sorter:false}}
+        headers: {0:{sorter:false}, 4:{sorter:false}, 5:{sorter:false}}
       });
     }
   );
@@ -282,7 +284,7 @@ ENDB;
     $sql_command .= ";";
     echo "<!-- SQL: ".$sql_command." -->\n";
     echo "<div id=\"routebox\">\n";
-    echo "<table class=\"gratable tablesorter ws_data_table\" id=\"routes\"><thead><tr><th colspan=\"5\">Select Route to Display (click a header to sort by that column)</th></tr><tr><th>System</th><th>Region</th><th>Route Name</th><th>.list Name</th><th>Root</th></tr></thead><tbody>\n";
+    echo "<table class=\"gratable tablesorter ws_data_table\" id=\"routes\"><thead><tr><th colspan=\"5\">Select Route to Display (click a header to sort by that column)</th></tr><tr><th class=\"sortable\">System</th><th class=\"sortable\">Region</th><th class=\"sortable\">Route Name</th><th>.list Name</th><th>Root</th></tr></thead><tbody>\n";
     $res = $db->query($sql_command);
     while ($row = $res->fetch_assoc()) {
       echo "<tr><td>".$row['systemName']."</td><td>".$row['region']."</td><td>".$row['route'].$row['banner'];
