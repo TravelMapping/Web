@@ -111,6 +111,15 @@ border-width: 1px;
 table.gratable tr td {
 text-align:left;
 }
+table tr.status-active{
+  background-color: #CCFFCC;
+}
+table tr.status-preview td {
+  background-color: #FFFFCC;
+}
+table tr.status-devel td {
+  background-color: #FFCCCC;
+}
 </style>
 <script
  src="http://maps.googleapis.com/maps/api/js?sensor=false"
@@ -256,15 +265,15 @@ echo <<<ENDB
 ENDB;
   }
   else {  // we have no r=, so we will show a list of all
-  	$sql_command = "select * from routes";
+  	$sql_command = "select * from routes left join systems on systems.systemName = routes.systemName";
   	//check for query string parameter for system and region filters
     if (array_key_exists("sys", $_GET) && strlen($_GET["sys"]) > 0) {
-    	$sql_command .= " where systemName = '".$_GET["sys"]."'";
+    	$sql_command .= " where routes.systemName = '".$_GET["sys"]."'";
     	if (array_key_exists("rg", $_GET) && strlen($_GET["rg"]) > 0) {
-    		$sql_command .= "and region = '".$_GET["rg"]."'";
+    		$sql_command .= "and routes.region = '".$_GET["rg"]."'";
     	}
     } else if (array_key_exists("rg", $_GET) && strlen($_GET["rg"]) > 0) {
-    	$sql_command .= " where region = '".$_GET["rg"]."'";
+    	$sql_command .= " where routes.region = '".$_GET["rg"]."'";
     }
     if (array_key_exists("order", $_GET) && strlen($_GET["order"]) > 0) {
         $sql_command .= " order by ".$_GET["order"];
@@ -272,14 +281,14 @@ ENDB;
     $sql_command .= ";";
     echo "<!-- SQL: ".$sql_command." -->\n";
     echo "<div id=\"routebox\">\n";
-    echo "<table class=\"gratable\"><thead><tr><th colspan=\"5\">Select Route to Display (click a header to sort by that column)</th></tr><tr><th><a href=\"?order=systemName\">System</a></th><th><a href=\"?order=region\">Region</a></th><th><a href=\"?order=route\">Route Name</a></th><th>.list Name</th><th>Root</th></tr></thead><tbody>\n";
+    echo "<table class=\"gratable\"><thead><tr><th colspan=\"6\">Select Route to Display (click a header to sort by that column)</th></tr><tr><th><a href=\"?order=systemName\">System</a></th><th><a href=\"?order=region\">Region</a></th><th><a href=\"?order=route\">Route Name</a></th><th>.list Name</th><th>Level</th><th>Root</th></tr></thead><tbody>\n";
     $res = $db->query($sql_command);
     while ($row = $res->fetch_assoc()) {
-      echo "<tr><td>".$row['systemName']."</td><td>".$row['region']."</td><td>".$row['route'].$row['banner'];
+      echo "<tr class=\"status-".$row['level']."\"><td>".$row['systemName']."</td><td>".$row['region']."</td><td>".$row['route'].$row['banner'];
       if (strcmp($row['city'],"") != 0) {
         echo " (".$row['city'].")";
       }
-      echo "</td><td>".$row['region']." ".$row['route'].$row['banner'].$row['abbrev']."</td><td><a href=\"hb.php?r=".$row['root']."\">".$row['root']."</a></td></tr>\n";
+      echo "</td><td>".$row['region']." ".$row['route'].$row['banner'].$row['abbrev']."</td><td>".$row['level']."</td><td><a href=\"hb.php?r=".$row['root']."\">".$row['root']."</a></td></tr>\n";
     }
     $res->free();
     echo "</table></div>\n";
