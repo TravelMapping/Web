@@ -3,8 +3,6 @@
 	A basic user stats page. 
 	URL Params:
 		u - the user.
-		rg_order - the way to order records in the regions table.
-		sys_order - the way to order the records in the systems table.
 		db - the database being used. Use 'TravelMappingDev' for in-development systems. 
 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
