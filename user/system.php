@@ -118,6 +118,11 @@ table.gratable tr:hover td {
 table.tablesorter th.sortable:hover {
   background-color: #CCCCFF;
 }
+
+table.tablesorter th.nonsortable {
+  background-color: #DDDDDD;
+}
+
 table tr.status-active td {
   background-color: #CCFFCC;
 }
@@ -129,19 +134,22 @@ table tr.status-devel td {
 }
 </style>
 <?php
-    $user = "null";
-    $system = "null";
 
     if (array_key_exists("u",$_GET)) {
       $user = $_GET['u'];
     }
 
-    if (array_key_exists("rg",$_GET)) {
+    if (array_key_exists("rg",$_GET) && strlen($_GET["rg"]) > 0) {
       $region = $_GET['rg'];
     }
-
     if (array_key_exists("sys",$_GET)) {
       $system = $_GET['sys'];
+    }
+
+    if (is_null($user) || is_null($system)) {
+      header('HTTP/ 400 Missing user (u=) or system(sys=) params');
+      echo "<h1>ERROR: 400 Missing user (u=) or system (sys=) params</h1>";
+      exit();
     }
 
     $dbname = "TravelMapping";
@@ -186,8 +194,8 @@ if (!is_null($region)) {
   function waypointsFromSQL() {
   <?php
     $regions = array();
-    if (array_key_exists("rg",$_GET)) {
-      $regions = explode(',',$_GET['rg']);
+    if (array_key_exists("rg",$_GET) && strlen($region) > 0) {
+      $regions[0] = $region;
     }
 
     // restrict to waypoints matching routes whose region is given in the "rg=" query string parameter
@@ -195,14 +203,14 @@ if (!is_null($region)) {
     $select_regions = "";
     $where_regions = "";
     $num_regions = 0;
-    foreach ($regions as $region) {
+    foreach ($regions as $aregion) {
       if ($num_regions == 0) {
-        $select_regions = " and (routes.region='".$region."'";
-        $where_regions = " where (region='".$region."'";
+        $select_regions = " and (routes.region='".$aregion."'";
+        $where_regions = " where (region='".$aregion."'";
       }
       else {
-        $select_regions = $select_regions." or routes.region='".$region."'";
-        $where_regions = $where_regions." or region='".$region."'";
+        $select_regions = $select_regions." or routes.region='".$aregion."'";
+        $where_regions = $where_regions." or region='".$aregion."'";
       }
       $num_regions = $num_regions + 1;
     }
@@ -268,7 +276,7 @@ if (!is_null($region)) {
     if (array_key_exists("u",$_GET)) {
        echo "traveler = '".$_GET['u']."';\n";
        // retrieve list of segments for this region or regions
-       $sql_command = "select segments.segmentId, segments.root from segments join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1'".$where_regions.$where_systems." order by root, segments.segmentId;";
+       $sql_command = "select segments.segmentId, segments.root from segments join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1'".$where_regions.$select_systems." order by root, segments.segmentId;";
        echo "// SQL: ".$sql_command."\n";
        $res = mysql_query($sql_command);
        $segmentIndex = 0;
@@ -276,7 +284,7 @@ if (!is_null($region)) {
          echo "segments[".$segmentIndex."] = ".$row[0]."; // route=".$row[1]."\n";
          $segmentIndex = $segmentIndex + 1;
        }
-       $sql_command = "select segments.segmentId, segments.root from segments right join clinched on segments.segmentId = clinched.segmentId join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1'".$where_regions.$where_systems." and clinched.traveler='".$_GET['u']."' order by root, segments.segmentId;";
+       $sql_command = "select segments.segmentId, segments.root from segments right join clinched on segments.segmentId = clinched.segmentId join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1'".$where_regions.$select_systems." and clinched.traveler='".$_GET['u']."' order by root, segments.segmentId;";
        echo "// SQL: " .$sql_command."\n";
        $res = mysql_query($sql_command);
        $segmentIndex = 0;
@@ -311,7 +319,7 @@ if (!is_null($region)) {
     {
       $("#routeTable").tablesorter({
         sortList: [[0,0]],
-        headers: {0:{sorter:false},}
+        headers: {0:{sorter:false}, 1:{sorter:false}, 3:{sorter:false},}
       });
     }
     );
@@ -322,9 +330,9 @@ if (!is_null($region)) {
   <a href="/hbtest">Highway Browser</a>
   <form id="userselect">
     <label>User: </label>
-    <input type="text" name="u" form="userselect" value="<?php echo $user ?>">
+    <input type="text" name="u" form="userselect" value="<?php echo $user ?>" required>
     <label>System: </label>
-    <input type="text" name="sys" form="userselect" value="<?php echo $system ?>">
+    <input type="text" name="sys" form="userselect" value="<?php echo $system ?>" required>
     <label>Region: </label>
     <input type="text" name="rg" form="userselect" value="<?php echo $region ?>">
     <input type="submit">
@@ -347,7 +355,9 @@ if (!is_null($region)) {
             <th colspan="7">Statistics per Route</th>
           </tr>
           <tr>
-            <th class="sortable">Route</th>
+            <th class="nonsortable">Route</th>
+            <th class="sortable">#</th>
+            <th class="nonsortable">Section</th>
             <th class="sortable">Clinched Mileage</th>
             <th class="sortable">Total Mileage</th>
             <th class="sortable">Percentage</th>
@@ -355,20 +365,26 @@ if (!is_null($region)) {
         </thead>
         <tbody>
           <?php
-          $regionClause = "";
+          $sql_command = "";
           if (!is_null($region)) {
-            $regionClause = " AND routes.region = '".$region."'";
+            $sql_command = "SELECT r.route, r.root, r.city, ROUND((COALESCE(r.mileage, 0)),2) AS totalMileage, ROUND((COALESCE(cr.mileage, 0)),2) AS clinchedMileage, ROUND((COALESCE(cr.mileage,0)) / (COALESCE(r.mileage, 0)) * 100,2) AS percentage, SUBSTRING(root, LOCATE('.', root)) AS routeNum FROM routes AS r LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = 'xxxxxxxxxxxxxxxxx' WHERE systemName = 'yyyyyyyyyyyyyyyyy' AND region = '".$region."' ORDER BY routeNum;";
+          } else {
+            $sql_command = "SELECT r.route, r.groupName AS city, r.firstRoot as root, ROUND((COALESCE(r.mileage, 0)),2) AS totalMileage, ROUND((COALESCE(cr.mileage, 0)),2) AS clinchedMileage, ROUND((COALESCE(cr.mileage,0)) / (COALESCE(r.mileage, 0)) * 100,2) AS percentage, SUBSTRING(firstRoot, LOCATE('.', firstRoot)) AS routeNum FROM connectedRoutes AS r LEFT JOIN clinchedConnectedRoutes AS cr ON r.firstRoot = cr.route AND traveler = 'xxxxxxxxxxxxxxxxx' WHERE systemName = 'yyyyyyyyyyyyyyyyy' ".$regionClause." ORDER BY routeNum;";
           }
-          $sql_command = "SELECT routes.route, routes.root, ROUND(SUM(COALESCE(routes.mileage, 0)),2) AS totalMileage, ROUND(SUM(COALESCE(cr.mileage, 0)),2) AS clinchedMileage, ROUND(SUM(COALESCE(cr.mileage,0)) / SUM(COALESCE(routes.mileage, 0)) * 100,2) AS percentage FROM routes LEFT JOIN clinchedRoutes AS cr ON routes.root = cr.route AND traveler = 'xxxxxxxxxxxxxxxxx' WHERE systemName = 'yyyyyyyyyyyyyyyyy' ".$regionClause." GROUP BY routes.route ORDER BY percentage DESC;";
 
           $sql_command = str_replace("xxxxxxxxxxxxxxxxx", $user, $sql_command);
           $sql_command = str_replace("yyyyyyyyyyyyyyyyy", $system, $sql_command);
           echo "<!--".$sql_command."-->";
 
           $res = mysql_query($sql_command);
+
           while ($row = mysql_fetch_array($res)) {
-            echo "<tr onClick=\"window.document.location='/devel/hb.php?u=".$user."&r=".$row['root']."'\">";
+            $link = "window.document.location='/devel/hb.php?u=".$user."&r=".$row['root']."'";
+
+            echo "<tr onClick=\"".$link."\">";
             echo "<td>".$row['route']."</td>";
+            echo "<td>".$row['routeNum']."</td>";
+            echo "<td>".$row['city']."</td>";
             echo "<td>".$row['clinchedMileage']."</td>";
             echo "<td>".$row['totalMileage']."</td>";
             echo "<td>".$row['percentage']."%</td></tr>";
