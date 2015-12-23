@@ -323,7 +323,7 @@ table tr.status-devel td {
     <input type="text" name="rg" form="userselect" value="<?php echo $region ?>">
     <input type="submit">
   </form>
-  <h1>Traveler Stats for <?php echo $user." in ".$region?>:</h1>
+  <h1>Traveler Stats for <?php echo $user." in Region ".$region?>:</h1>
   </div>
   <div id="body">
     <div id="mapholder">
