@@ -125,22 +125,23 @@ table tr.status-devel td {
 
 		if (array_key_exists("u",$_GET)) {
 			$user = $_GET['u'];
-		}
-
-		if (array_key_exists("rg_order",$_GET)) {
-			$rg_order = $_GET['rg_order'];
-		}
-
-		if (array_key_exists("sys_order",$_GET)) {
-			$sys_order = $_GET['sys_order'];
+			setcookie("lastuser", $user, time() + (86400 * 30), "/");
+		} else if (isset($_COOKIE['lastuser'])) {
+			header("Location: user?u=".$_COOKIE['lastuser']); /* Redirect browser */
+			exit();
 		}
 
 		echo "Traveler Stats for ".$user;
 
 		$dbname = "TravelMapping";
-		if (array_key_exists("db",$_GET)) {
-		  $dbname = $_GET['db'];
-		}
+	    if(isset($_COOKIE['currentdb'])) {
+	      $dbname = $_COOKIE['currentdb'];
+	    }
+
+	    if (array_key_exists("db",$_GET)) {
+	      $dbname = $_GET['db'];
+	      setcookie("currentdb", $dbname, time() + (86400 * 30), "/");
+	    }
 
 		// establish connection to db: mysql_ interface is deprecated, should learn new options
 		$db = new mysqli("localhost","travmap","clinch",$dbname) or die("Failed to connect to database");
@@ -171,7 +172,7 @@ table tr.status-devel td {
       });
       $("#regionsTable").tablesorter({
         sortList: [[0,0]],
-        headers: {0:{sorter:false}, 5:{sorter:false}}
+        headers: {0:{sorter:false}, 6:{sorter:false}}
       });
       $("#systemsTable").tablesorter({
         sortList: [[0,0]],
@@ -241,16 +242,16 @@ table tr.status-devel td {
 						$res->free();
 					?>
 				</tbody>
-				<tfoot><td colspan="4">*Mileage for routes on lower tiers may be missing or inaccurate.</td></tfoot>
 			</table>
 		</div>
 		<h2>Stats by Region</h2>
 		<table class="gratable tablesorter" id="regionsTable">
 			<thead>
 				<tr>
-					<th colspan="5">Clinched Mileage by Region:</th>
+					<th colspan="6">Clinched Mileage by Region:</th>
 				</tr>
 				<tr>
+					<th class="sortable">Country</th>
 					<th class="sortable">Region</th>
 					<th class="sortable">Clinched Mileage</th>
 					<th class="sortable">Overall Mileage</th>
@@ -260,16 +261,15 @@ table tr.status-devel td {
 			</thead>
 			<tbody>
 				<?php
-					$sql_command = "SELECT o.region, co.mileage as clinchedMileage, o.mileage as totalMileage FROM overallMileageByRegion AS o INNER JOIN clinchedOverallMileageByRegion AS co ON co.region = o.region WHERE co.traveler = '".$user."';";
+					$sql_command = "SELECT rg.country, rg.code, rg.name, co.mileage as clinchedMileage, o.mileage as totalMileage FROM overallMileageByRegion AS o INNER JOIN clinchedOverallMileageByRegion AS co ON co.region = o.region INNER JOIN regions AS rg ON rg.code = co.region WHERE co.traveler = '".$user."';";
 					echo "<!-- SQL: ".$sql_command."-->";
 					$res = $db->query($sql_command);
 					while ($row = $res->fetch_assoc()) {
 						$percent = round($row['clinchedMileage'] / $row['totalMileage'] * 100.0, 3);
-				        echo "<tr onClick=\"window.document.location='user/region.php?u=".$user."&rg=".$row['region']."'\"><td>".$row['region']."</td><td>".$row['clinchedMileage']."</td><td>".$row['totalMileage']."</td><td>".$percent."%</td><td><a href=\"/hbtest/mapview.php?u=".$user."&rg=".$row['region']."\">Map</a></td></tr>";
+				        echo "<tr onClick=\"window.document.location='user/region.php?u=".$user."&rg=".$row['code']."'\"><td>".$row['country']."</td><td>".$row['name']."</td><td>".$row['clinchedMileage']."</td><td>".$row['totalMileage']."</td><td>".$percent."%</td><td><a href=\"/hbtest/mapview.php?u=".$user."&rg=".$row['region']."\">Map</a></td></tr>";
 				    }
 			        $res->free();
 				?>
-				<tr><td colspan="5">*Regions with no mileage not shown</td>
 			</tbody>
 		</table>
 		<h2>Stats by System</h2>

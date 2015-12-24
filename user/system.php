@@ -134,9 +134,21 @@ table tr.status-devel td {
 }
 </style>
 <?php
-
     if (array_key_exists("u",$_GET)) {
       $user = $_GET['u'];
+      setcookie("lastuser", $user, time() + (86400 * 30), "/");
+    } else if (isset($_COOKIE['lastuser'])) {
+      $user = $_COOKIE['lastuser'];
+    }
+
+    $dbname = "TravelMapping";
+    if(isset($_COOKIE['currentdb'])) {
+      $dbname = $_COOKIE['currentdb'];
+    }
+
+    if (array_key_exists("db",$_GET)) {
+      $dbname = $_GET['db'];
+      setcookie("currentdb", $dbname, time() + (86400 * 30), "/");
     }
 
     if (array_key_exists("rg",$_GET) && strlen($_GET["rg"]) > 0) {
@@ -150,11 +162,6 @@ table tr.status-devel td {
       header('HTTP/ 400 Missing user (u=) or system(sys=) params');
       echo "<h1>ERROR: 400 Missing user (u=) or system (sys=) params</h1>";
       exit();
-    }
-
-    $dbname = "TravelMapping";
-    if (array_key_exists("db",$_GET)) {
-      $dbname = $_GET['db'];
     }
 
     // establish connection to db: mysql_ interface is deprecated, should learn new options
@@ -252,7 +259,7 @@ if (!is_null($region)) {
        $where_systems = " where (routes.systemName='usai')";
     }
 
-    $sql_command = "select waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname from waypoints join routes on routes.root = waypoints.root".$select_regions.$select_systems." join systems on routes.systemname = systems.systemname and systems.active='1' order by root, waypoints.pointId;";
+    $sql_command = "select waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname from waypoints join routes on routes.root = waypoints.root".$select_regions.$select_systems." join systems on routes.systemname = systems.systemname order by root, waypoints.pointId;";
     echo "// SQL: ".$sql_command."\n";
     $res = mysql_query($sql_command);
 
@@ -276,7 +283,7 @@ if (!is_null($region)) {
     if (array_key_exists("u",$_GET)) {
        echo "traveler = '".$_GET['u']."';\n";
        // retrieve list of segments for this region or regions
-       $sql_command = "select segments.segmentId, segments.root from segments join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1'".$where_regions.$select_systems." order by root, segments.segmentId;";
+       $sql_command = "select segments.segmentId, segments.root from segments join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname".$where_regions.$select_systems." order by root, segments.segmentId;";
        echo "// SQL: ".$sql_command."\n";
        $res = mysql_query($sql_command);
        $segmentIndex = 0;
@@ -284,7 +291,7 @@ if (!is_null($region)) {
          echo "segments[".$segmentIndex."] = ".$row[0]."; // route=".$row[1]."\n";
          $segmentIndex = $segmentIndex + 1;
        }
-       $sql_command = "select segments.segmentId, segments.root from segments right join clinched on segments.segmentId = clinched.segmentId join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1'".$where_regions.$select_systems." and clinched.traveler='".$_GET['u']."' order by root, segments.segmentId;";
+       $sql_command = "select segments.segmentId, segments.root from segments right join clinched on segments.segmentId = clinched.segmentId join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname".$where_regions.$select_systems." and clinched.traveler='".$_GET['u']."' order by root, segments.segmentId;";
        echo "// SQL: " .$sql_command."\n";
        $res = mysql_query($sql_command);
        $segmentIndex = 0;
@@ -313,7 +320,7 @@ if (!is_null($region)) {
   }
 </script>
 </head>
-<body onload="loadmap();">
+<body onload="<?php if(!$_GET['renderMap'] || !array_key_exists('renderMap', $_GET)) echo "loadmap();" ?>">
   <script type="text/javascript">
   $(document).ready(function()
     {
@@ -325,9 +332,9 @@ if (!is_null($region)) {
     );
   </script>
   <div id="header">
-  <a href="/user?u=<?php echo $user?>">Back</a>
-  <a href="/">Home</a>
-  <a href="/hbtest">Highway Browser</a>
+  <a href="/user?u=<?php echo $user?>">Back</a>-
+  <a href="/">Home</a>-
+  <a href="/hbtest">Highway Browser</a>-
   <form id="userselect">
     <label>User: </label>
     <input type="text" name="u" form="userselect" value="<?php echo $user ?>" required>

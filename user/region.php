@@ -144,6 +144,19 @@ table tr.status-devel td {
 
     if (array_key_exists("u",$_GET)) {
       $user = $_GET['u'];
+      setcookie("lastuser", $user, time() + (86400 * 30), "/");
+    } else if (isset($_COOKIE['lastuser'])) {
+      $user = $_COOKIE['lastuser'];
+    }
+
+    $dbname = "TravelMapping";
+    if(isset($_COOKIE['currentdb'])) {
+      $dbname = $_COOKIE['currentdb'];
+    }
+
+    if (array_key_exists("db",$_GET)) {
+      $dbname = $_GET['db'];
+      setcookie("currentdb", $dbname, time() + (86400 * 30), "/");
     }
 
     if (array_key_exists("rg",$_GET)) {
@@ -154,11 +167,6 @@ table tr.status-devel td {
       header('HTTP/ 400 Missing user (u=) or region (rg=) params');
       echo "</head><body><h1>ERROR: 400 Missing user (u=) or region (rg=) params</h1></body></html>";
       exit();
-    }
-
-    $dbname = "TravelMapping";
-    if (array_key_exists("db",$_GET)) {
-      $dbname = $_GET['db'];
     }
 
     // establish connection to db: mysql_ interface is deprecated, should learn new options

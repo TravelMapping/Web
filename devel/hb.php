@@ -133,10 +133,22 @@ table tr.status-devel td {
 <script src="/lib/jquery.tablesorter.min.js"></script>
 
 <?php
+  if (array_key_exists("u",$_GET)) {
+    setcookie("lastuser", $user, time() + (86400 * 30), "/");
+  } elseif (isset($_COOKIE['lastuser'])) {
+    $_GET['u'] = $_COOKIE['lastuser'];
+  }
+
   $dbname = "TravelMapping";
+  if(isset($_COOKIE['currentdb'])) {
+    $dbname = $_COOKIE['currentdb'];
+  }
+
   if (array_key_exists("db",$_GET)) {
     $dbname = $_GET['db'];
+    setcookie("currentdb", $dbname, time() + (86400 * 30), "/");
   }
+
   // establish connection to db: mysql_ interface is deprecated, should learn new options
   $db = new mysqli("localhost","travmap","clinch",$dbname) or die("Failed to connect to database");
   # functions from http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php
