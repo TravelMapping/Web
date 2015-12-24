@@ -200,12 +200,19 @@ text-align:left;
 
     // make sure we have selected some region or system
     if (($num_systems == 0) && ($num_regions == 0)) {
+      if (array_key_exists("rte", $_GET)) {
+        $rteClause = " where (routes.route = '".$_GET['rte']."')";
+        $sql_command = "select waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname from waypoints join routes on routes.root = waypoints.root join systems on routes.systemname = systems.systemname and systems.active='1' ".$rteClause." order by root, waypoints.pointId;";
+      } else {
        // for now, put in a default to usai, do something better later
        $select_systems = " and (routes.systemName='usai')";
        $where_systems = " where (routes.systemName='usai')";
+       $sql_command = "select waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname from waypoints join routes on routes.root = waypoints.root".$select_regions.$select_systems." join systems on routes.systemname = systems.systemname and systems.active='1' order by root, waypoints.pointId;";
+      }
+    } else {
+      $sql_command = "select waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname from waypoints join routes on routes.root = waypoints.root".$select_regions.$select_systems." join systems on routes.systemname = systems.systemname and systems.active='1' order by root, waypoints.pointId;";
     }
 
-    $sql_command = "select waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname from waypoints join routes on routes.root = waypoints.root".$select_regions.$select_systems." join systems on routes.systemname = systems.systemname and systems.active='1' order by root, waypoints.pointId;";
     echo "// SQL: ".$sql_command."\n";
     $res = mysql_query($sql_command);
 
@@ -231,7 +238,11 @@ text-align:left;
        echo "// where_systems: ".$where_systems."\n";
        echo "traveler = '".$_GET['u']."';\n";
        // retrieve list of segments for this region or regions
-       $sql_command = "select segments.segmentId, segments.root from segments join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1'".$where_regions.$select_systems." order by root, segments.segmentId;";
+       if(isset($rteClause)) {
+        $sql_command = "select segments.segmentId, segments.root from segments join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1'".$rteClause." order by root, segments.segmentId;"; 
+       } else {
+        $sql_command = "select segments.segmentId, segments.root from segments join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1'".$where_regions.$select_systems." order by root, segments.segmentId;";
+       }
        echo "// SQL: ".$sql_command."\n";
        $res = mysql_query($sql_command);
        $segmentIndex = 0;
@@ -239,7 +250,11 @@ text-align:left;
          echo "segments[".$segmentIndex."] = ".$row[0]."; // route=".$row[1]."\n";
          $segmentIndex = $segmentIndex + 1;
        }
-       $sql_command = "select segments.segmentId, segments.root from segments right join clinched on segments.segmentId = clinched.segmentId join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1'".$where_regions.$select_systems." and clinched.traveler='".$_GET['u']."' order by root, segments.segmentId;";
+       if(isset($rteClause)) {
+        $sql_command = "select segments.segmentId, segments.root from segments right join clinched on segments.segmentId = clinched.segmentId join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1'".$rteClause." and clinched.traveler='".$_GET['u']."' order by root, segments.segmentId;";
+       } else {
+        $sql_command = "select segments.segmentId, segments.root from segments right join clinched on segments.segmentId = clinched.segmentId join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1'".$where_regions.$select_systems." and clinched.traveler='".$_GET['u']."' order by root, segments.segmentId;";
+       }
        echo "// SQL: " .$sql_command."\n";
        $res = mysql_query($sql_command);
        $segmentIndex = 0;
