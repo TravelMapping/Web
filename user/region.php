@@ -24,18 +24,31 @@ body, html {
 #mapholder {
 position: relative;
 margin: auto;
-width:800px;
+width:1000px;
 }
 
 #map {
   height: 500px;
   overflow:hidden;
+  clear: left;
+}
+
+#colorBox {
+  position: relative;
+  float: right;
+  margin: auto;
+  padding: 10px;
+}
+
+#systemsTable {
+  clear: both;
 }
 
 @media screen and (max-width: 720px) {
-    #mapholder {
-      width:100%;
-    }
+
+  #mapholder {
+    width:100%;
+  }
 }
 
 #map * {
@@ -128,10 +141,6 @@ table tr.status-devel td {
 }
 </style>
 <?php
-    $user = "null";
-    $region = "null";
-    $rg_order = "region ascending";
-    $sys_order = "countryCode DESC";
 
     if (array_key_exists("u",$_GET)) {
       $user = $_GET['u'];
@@ -141,8 +150,10 @@ table tr.status-devel td {
       $region = $_GET['rg'];
     }
 
-    if (array_key_exists("sys_order",$_GET)) {
-      $sys_order = $_GET['sys_order'];
+    if (is_null($user) || is_null($region)) {
+      header('HTTP/ 400 Missing user (u=) or region (rg=) params');
+      echo "</head><body><h1>ERROR: 400 Missing user (u=) or region (rg=) params</h1></body></html>";
+      exit();
     }
 
     $dbname = "TravelMapping";
@@ -329,62 +340,66 @@ table tr.status-devel td {
     <div id="mapholder">
       <input id="showMarkers" type="checkbox" name="Show Markers" onclick="showMarkersClicked()">&nbsp;Show Markers
       <div id="controlboxinfo"></div>
+      <div id="colorBox">
+        
+      </div>
       <div id="map"></div>
-      <table class="gratable tablesorter" id="systemsTable">
-        <thead>
-          <tr>
-            <th colspan="7">Clinched Mileage by System</th>
-          </tr>
-          <tr>
-            <th class="sortable">System Code</th>
-            <th class="sortable">System Name</th>
-            <th class="sortable">Tier</th>
-            <th class="sortable">Status</th>
-            <th class="sortable">Clinched Mileage</th>
-            <th class="sortable">Total Mileage</th>
-            <th class="sortable">Percent</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php
-            $sql_command = <<<SQL
-            SELECT
-              sys.systemName,
-              sys.tier,
-              sys.level AS status,
-              sys.fullName,
-              r.root,
-              COALESCE(ROUND(SUM(cr.mileage), 2), 0) AS clinchedMileage,
-              COALESCE(ROUND(SUM(r.mileage), 2), 0) AS totalMileage,
-              COALESCE(ROUND(SUM(cr.mileage) / SUM(r.mileage) * 100, 3), 0) AS percentage
-            FROM systems as sys
-            INNER JOIN routes AS r
-              ON r.systemName = sys.systemName
-            LEFT JOIN clinchedRoutes AS cr
-              ON cr.route = r.root AND cr.traveler = 'xxxxxxxxxxxxxxxxx'
-            WHERE r.region = 'yyyyyyyyyyyyyyyyy'
-            GROUP BY r.systemName
-            ORDER BY sys.tier, sys.systemName;
+    </div>
+    <table class="gratable tablesorter" id="systemsTable">
+      <thead>
+        <tr>
+          <th colspan="7">Clinched Mileage by System</th>
+        </tr>
+        <tr>
+          <th class="sortable">System Code</th>
+          <th class="sortable">System Name</th>
+          <th class="sortable">Tier</th>
+          <th class="sortable">Status</th>
+          <th class="sortable">Clinched Mileage</th>
+          <th class="sortable">Total Mileage</th>
+          <th class="sortable">Percent</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+          $sql_command = <<<SQL
+          SELECT
+            sys.systemName,
+            sys.tier,
+            sys.level AS status,
+            sys.fullName,
+            r.root,
+            COALESCE(ROUND(SUM(cr.mileage), 2), 0) AS clinchedMileage,
+            COALESCE(ROUND(SUM(r.mileage), 2), 0) AS totalMileage,
+            COALESCE(ROUND(SUM(cr.mileage) / SUM(r.mileage) * 100, 3), 0) AS percentage
+          FROM systems as sys
+          INNER JOIN routes AS r
+            ON r.systemName = sys.systemName
+          LEFT JOIN clinchedRoutes AS cr
+            ON cr.route = r.root AND cr.traveler = 'xxxxxxxxxxxxxxxxx'
+          WHERE r.region = 'yyyyyyyyyyyyyyyyy'
+          GROUP BY r.systemName
+          ORDER BY sys.tier, sys.systemName;
 SQL;
 
-          $sql_command = str_replace("xxxxxxxxxxxxxxxxx", $user, $sql_command);
-          $sql_command = str_replace("yyyyyyyyyyyyyyyyy", $region, $sql_command);
-          echo "<!--".$sql_command."-->";
+        $sql_command = str_replace("xxxxxxxxxxxxxxxxx", $user, $sql_command);
+        $sql_command = str_replace("yyyyyyyyyyyyyyyyy", $region, $sql_command);
+        echo "<!--".$sql_command."-->";
 
-          $res = mysql_query($sql_command);
-          while ($row = mysql_fetch_array($res)) {
-            echo "<tr onClick=\"window.document.location='/hbtest/mapview.php?u=".$user."&sys=".$row['systemName']."&rg=".$region."'\" class=\"status-".$row['status']."\">";
-            echo "<td>".$row['systemName']."</td>";
-            echo "<td>".$row['fullName']."</td>";
-            echo "<td>Tier ".$row['tier']."</td>";
-            echo "<td>".$row['status']."</td>";
-            echo "<td>".$row['clinchedMileage']."</td>";
-            echo "<td>".$row['totalMileage']."</td>";
-            echo "<td>".$row['percentage']."%</td></tr>";
-          }
-          ?>
-        </tbody>
-      </table>
+        $res = mysql_query($sql_command);
+        while ($row = mysql_fetch_array($res)) {
+          echo "<tr onClick=\"window.document.location='/user/system.php?u=".$user."&sys=".$row['systemName']."&rg=".$region."'\" class=\"status-".$row['status']."\">";
+          echo "<td>".$row['systemName']."</td>";
+          echo "<td>".$row['fullName']."</td>";
+          echo "<td>Tier ".$row['tier']."</td>";
+          echo "<td>".$row['status']."</td>";
+          echo "<td>".$row['clinchedMileage']."</td>";
+          echo "<td>".$row['totalMileage']."</td>";
+          echo "<td>".$row['percentage']."%</td></tr>";
+        }
+        ?>
+      </tbody>
+    </table>
     </div>
   </div>
 </body>

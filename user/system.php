@@ -179,7 +179,7 @@ table tr.status-devel td {
 <title><?php 
 echo "Traveler Stats for ".$user." on ".$system;
 if (!is_null($region)) {
-  echo "in ".$region;
+  echo " in ".$region;
 } 
 ?></title>
 <script
