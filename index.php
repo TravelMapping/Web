@@ -25,7 +25,6 @@
 </div>
 <div id="main">
 <div class="container">
-<!-- Add content here -->
 </div>
 </div>
 </body>
