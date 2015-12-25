@@ -386,7 +386,7 @@ if (!is_null($region)) {
           $res = mysql_query($sql_command);
 
           while ($row = mysql_fetch_array($res)) {
-            $link = "window.document.location='/devel/hb.php?u=".$user."&r=".$row['root']."'";
+            $link = "window.document.location='/hbtest/mapview.php?u=".$user."&rte=".$row['route']."'";
 
             echo "<tr onClick=\"".$link."\">";
             echo "<td>".$row['route']."</td>";
