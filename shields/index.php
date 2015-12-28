@@ -29,7 +29,13 @@
 			break;
 		
 		default:
-			# code...
+			$region = strtoupper(explode(".", $r)[0]);
+			$routeNum = str_replace($region, "", $row['route']);
+            if (strlen($routeNum) > 2) {
+                $svg = file_get_contents("template_".$row['systemName']."_wide.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            echo $svg;
 			break;
 	}	
 ?>
