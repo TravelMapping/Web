@@ -28,7 +28,7 @@
         #pointbox {
             position: fixed;
             left: 0px;
-            top: 50px;
+            top: 70px;
             right: 400px;
             bottom: 0px;
             width: 400px;
@@ -37,7 +37,7 @@
 
         #controlbox {
             position: fixed;
-            top: 50px;
+            top: 60px;
             bottom: 100px;
             height: 100%;
             left: 400px;
