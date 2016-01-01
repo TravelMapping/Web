@@ -37,7 +37,7 @@
 
         #controlbox {
             position: fixed;
-            top: 60px;
+            top: 65px;
             bottom: 100px;
             height: 100%;
             left: 400px;
