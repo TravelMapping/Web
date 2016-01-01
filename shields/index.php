@@ -19,7 +19,7 @@
 			echo $svg;
 			break;
 
-		case 'usaus':
+		case 'usaus': case 'usausb':
 			$routeNum = str_replace("US", "", $row['route']);
 			if (strlen($routeNum) > 2) {
 				$svg = file_get_contents("template_usaus_wide.svg");

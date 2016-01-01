@@ -2,18 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
     <style type="text/css">
-        body, html {
-            margin: 0;
-            border: 0;
-            padding: 0;
-            height: 100%;
-            max-height: 100%;
-            overflow: hidden;
-            font-size: 9pt;
-            background-color: #EEEEFF;
-        }
-
         #headerbox {
             position: absolute;
             top: 0px;
@@ -66,73 +56,7 @@
             top: 110px;
             bottom: 10px;
             overflow-y: scroll;
-            overflow-x: hidden;
-        }
-
-        table.nmptable {
-            font-size: 8pt;
-            border: 1px solid black;
-            border-spacing: 0px;
-            margin-left: auto;
-            margin-right: auto;
-            background-color: white;
-        }
-
-        table.nmptable td, th {
-            border: solid black;
-            border-width: 1px;
-        }
-
-        table.nmptable2 td, th {
-            border-width: 0px;
-        }
-
-        table.nmptable tr td {
-            text-align: right;
-        }
-
-        table.pthtable {
-            font-size: 10pt;
-            border: 1px solid black;
-            border-spacing: 0px;
-            margin-left: auto;
-            margin-right: auto;
-            background-color: white;
-        }
-
-        table.pthtable td, th {
-            border: solid black;
-            border-width: 1px;
-        }
-
-        table.pthtable tr td {
-            text-align: left;
-        }
-
-        table.gratable {
-            font-size: 10pt;
-            border: 1px solid black;
-            border-spacing: 0px;
-            margin-left: auto;
-            margin-right: auto;
-            background-color: white;
-        }
-
-        table.gratable td, th {
-            border: solid black;
-            border-width: 1px;
-        }
-
-        table.gratable tr td {
-            text-align: left;
-        }
-
-        table.gratable tr:hover td {
-            background-color: #CCCCCC;
-        }
-
-        table.tablesorter th.sortable:hover {
-            background-color: #CCCCFF;
+            max-width: 25%;
         }
     </style>
     <script
@@ -240,6 +164,7 @@
               if (($num_systems == 0) && ($num_regions == 0)) {
                 if (array_key_exists("rte", $_GET)) {
                   $rteClause = " where (routes.route like '".$_GET['rte']."' or route regexp '".$_GET['rte']."[a-z]')";
+                  $rteClause = str_replace("*", "%", $rteClause);
                   $sql_command = "SELECT waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname FROM waypoints JOIN routes ON routes.root = waypoints.root JOIN systems ON routes.systemname = systems.systemname AND systems.active='1' ".$rteClause." ORDER BY root, waypoints.pointId;";
                 } else {
                  // for now, put in a default to usai, do something better later
@@ -344,6 +269,9 @@
         }
     );
 </script>
+<a href="/user?u=<?php echo $_GET['u'] ?>"><?php echo $_GET['u'] ?></a>-
+<a href="/">Home</a>-
+<a href="/hbtest">Highway Browser</a>
 <h1 style="text-align: center">Travel Mapping: Draft Map Overlay Viewer</h1>
 
 <div id="controlbox">
@@ -375,12 +303,13 @@
 </div>
 <div id="routes">
     <table id="routesTable" class="gratable tablesorter">
-        <thead><tr><th class="sortable">Route</th><th class="sortable">Clinched</th><th class="sortable">Overall</th><th class="sortable">%</th></tr></thead>
+        <thead><tr><th class="sortable">Route</th><th class="sortable">System</th><th class="sortable">Clinched</th><th class="sortable">Overall</th><th class="sortable">%</th></tr></thead>
         <tbody>
         <?php
-        $sql_command = "SELECT r.region, r.root, r.route, banner, city, round(r.mileage, 2) AS total, round(COALESCE(cr.mileage, 0), 2) as clinched, COALESCE(cr.mileage, 0) / COALESCE(r.mileage, 0) * 100 as percentage FROM routes AS r LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '" .$_GET['u']. "' WHERE ";
+        $sql_command = "SELECT r.region, r.root, r.route, r.systemName, banner, city, round(r.mileage, 2) AS total, round(COALESCE(cr.mileage, 0), 2) as clinched, round(COALESCE(cr.mileage, 0) / COALESCE(r.mileage, 0) * 100,2) as percentage FROM routes AS r LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '" .$_GET['u']. "' WHERE ";
         if (array_key_exists('rte', $_GET)) {
             $sql_command .= "(r.route like '".$_GET['rte']."' or r.route regexp '".$_GET['rte']."[a-z]')";
+            $sql_command = str_replace("*", "%", $sql_command);
         } elseif (array_key_exists('rg', $_GET) && array_key_exists('sys', $_GET)) {
             $sql_command .= "r.region = '".$_GET['rg']."' AND r.systemName = '".$_GET['sys']."';";
         } elseif (array_key_exists('rg', $_GET)) {
@@ -404,7 +333,7 @@
             if (strlen($row['city']) > 0) {
                 echo " (" . $row['city'] . ")";
             }
-            echo "</td><td>".$row['clinched']."</td><td>".$row['total']."</td><td>".$row['percentage']."%</td></tr>\n";
+            echo "</td><td>".$row['systemName']."</td><td>".$row['clinched']."</td><td>".$row['total']."</td><td>".$row['percentage']."%</td></tr>\n";
         }
         ?>
         </tbody>

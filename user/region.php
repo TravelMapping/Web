@@ -9,17 +9,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
     <style type="text/css">
-        body, html {
-            margin: 0;
-            border: 0;
-            padding: 0;
-            height: 100%;
-            max-height: 100%;
-            overflow: hidden;
-            font-size: 9pt;
-            background-color: #EEEEFF;
-        }
 
         #mapholder {
             position: relative;
@@ -55,96 +46,17 @@
             cursor: crosshair;
         }
         
-        #overallTable {
+        #overallTable, #routesTable {
             margin: 5px auto 5px auto;
         }
 
         #body {
-            position: fixed;
             left: 0px;
             top: 80px;
             bottom: 0px;
             width: 100%;
             overflow: auto;
             padding: 20px;
-        }
-
-        table.nmptable {
-            font-size: 8pt;
-            border: 1px solid black;
-            border-spacing: 0px;
-            margin-left: auto;
-            margin-right: auto;
-            background-color: white;
-        }
-
-        table.nmptable td, th {
-            border: solid black;
-            border-width: 1px;
-        }
-
-        table.nmptable2 td, th {
-            border-width: 0px;
-        }
-
-        table.nmptable tr td {
-            text-align: right;
-        }
-
-        table.pthtable {
-            font-size: 10pt;
-            border: 1px solid black;
-            border-spacing: 0px;
-            margin-left: auto;
-            margin-right: auto;
-            background-color: white;
-        }
-
-        table.pthtable td, th {
-            border: solid black;
-            border-width: 1px;
-        }
-
-        table.pthtable tr td {
-            text-align: left;
-        }
-
-        table.gratable {
-            font-size: 10pt;
-            border: 1px solid black;
-            border-spacing: 0px;
-            margin-left: auto;
-            margin-right: auto;
-            background-color: white;
-        }
-
-        table.gratable td, th {
-            border: solid black;
-            border-width: 1px;
-        }
-
-        table.gratable tr td {
-            text-align: left;
-        }
-
-        table.gratable tr:hover td {
-            background-color: #CCCCCC;
-        }
-
-        table.tablesorter th.sortable:hover {
-            background-color: #CCCCFF;
-        }
-
-        table tr.status-active td {
-            background-color: #CCFFCC;
-        }
-
-        table tr.status-preview td {
-            background-color: #FFFFCC;
-        }
-
-        table tr.status-devel td {
-            background-color: #FFCCCC;
         }
     </style>
     <?php
@@ -155,7 +67,6 @@
     } else if (isset($_COOKIE['lastuser'])) {
         $user = $_COOKIE['lastuser'];
     }
-    echo $user;
 
     $dbname = "TravelMapping";
     if (isset($_COOKIE['currentdb'])) {
@@ -336,17 +247,21 @@
 <body onload="loadmap();">
 <script type="text/javascript">
     $(document).ready(function () {
-            $("#systemsTable").tablesorter({
+            $("table.tablesorter").tablesorter({
                 sortList: [[0, 0]],
                 headers: {0: {sorter: false},}
             });
         }
     );
+
+    function redirect($link) {
+        window.document.location=$link;
+    }
 </script>
 <div id="header">
-    <a href="/user?u=<?php echo $user ?>">Back</a>
-    <a href="/">Home</a>
-    <a href="/hbtest">Highway Browser</a>
+    <a href="/user?u=<?php echo $user ?>"><?php echo $user ?></a>-
+    <a href="/">Home</a>-
+    <a href="/hbtest">Highway Browser</a>-
 
     <form id="userselect" action="region.php">
         <label>User: </label>
@@ -379,6 +294,7 @@ SQL
             echo "<!--".$sql_command."-->";
             $res = mysql_query($sql_command);
             $row = mysql_fetch_array($res);
+            $link = "window.document.location='/hbtest/mapview.php?u=" . $user . "&rg=" . $region . "'";
             echo "<tr style=\"background-color:#EEEEFF\"><td>Overall</td><td colspan='2'>Miles Driven: ".$row['clinched']." mi (".$row['percentage']."%)</td><td>Total: ".$row['overall']." mi</td><td>Rank:</td></tr>";
 
             //Second, fetch routes clinched/driven
@@ -386,22 +302,18 @@ SQL
             echo "<!--".$sql_command."-->";
             $res = mysql_query($sql_command);
             $row = mysql_fetch_array($res);
-            echo "<tr><td>Routes</td><td>Driven: " . $row['driven'] . " (" . $row['drivenPct'] . "%)</td><td>Clinched: " . $row['clinched'] . " (" . $row['clinchedPct'] . "%)</td><td>Total: " . $row['total'] . "</td><td>Rank:</td></tr>\n";
-
-
+            echo "<tr onClick=\"" . $link . "\"><td>Routes</td><td>Driven: " . $row['driven'] . " (" . $row['drivenPct'] . "%)</td><td>Clinched: " . $row['clinched'] . " (" . $row['clinchedPct'] . "%)</td><td>Total: " . $row['total'] . "</td><td>Rank:</td></tr>\n";
             ?>
         </tbody>
     </table>
     <table class="gratable tablesorter" id="systemsTable">
         <thead>
         <tr>
-            <th colspan="7">Clinched Mileage by System</th>
+            <th colspan="5">Clinched Mileage by System</th>
         </tr>
         <tr>
             <th class="sortable">System Code</th>
             <th class="sortable">System Name</th>
-            <th class="sortable">Tier</th>
-            <th class="sortable">Status</th>
             <th class="sortable">Clinched Mileage</th>
             <th class="sortable">Total Mileage</th>
             <th class="sortable">Percent</th>
@@ -438,13 +350,38 @@ SQL;
             echo "<tr onClick=\"window.document.location='/user/system.php?u=" . $user . "&sys=" . $row['systemName'] . "&rg=" . $region . "'\" class=\"status-" . $row['status'] . "\">";
             echo "<td>" . $row['systemName'] . "</td>";
             echo "<td>" . $row['fullName'] . "</td>";
-            echo "<td>Tier " . $row['tier'] . "</td>";
-            echo "<td>" . $row['status'] . "</td>";
             echo "<td>" . $row['clinchedMileage'] . "</td>";
             echo "<td>" . $row['totalMileage'] . "</td>";
             echo "<td>" . $row['percentage'] . "%</td></tr>";
         }
         ?>
+        </tbody>
+    </table>
+    <table class="gratable tablesorter" id="routesTable">
+        <thead>
+            <tr><th colspan="4">Stats by Route: (<?php echo "<a href=\"/hbtest/mapview.php?u=".$user."&rg=".$region."\">" ?>Full Map)</a></th></tr>
+            <tr><th class="sortable">Route</th><th class="sortable">Clinched Mileage</th><th class="sortable">Total Mileage</th><th class="sortable">%</th></tr>
+        </thead>
+        <tbody>
+            <?php
+                $sql_command = "SELECT r.route, r.root, r.banner, r.city, ROUND((COALESCE(r.mileage, 0)),2) AS totalMileage, ROUND((COALESCE(cr.mileage, 0)),2) AS clinchedMileage, ROUND((COALESCE(cr.mileage,0)) / (COALESCE(r.mileage, 0)) * 100,2) AS percentage FROM routes AS r LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '".$user."' WHERE region = '" . $region . "'";
+                echo "<!--".$sql_command."-->";
+                $res = mysql_query($sql_command);
+                while ($row = mysql_fetch_array($res)) {
+                    echo "<tr onClick=\"redirect('/devel/hb.php?u=".$user."&r=".$row['root']."')\">";
+                    echo "<td>".$row['route'];
+                    if (strlen($row['banner']) > 0) {
+                        echo " ".$row['banner']." ";
+                    }
+                    if (strlen($row['city']) > 0) {
+                        echo " (".$row['city'].")";
+                    }
+                    echo "</td>";
+                    echo "<td>".$row['clinchedMileage']."</td>";
+                    echo "<td>".$row['totalMileage']."</td>";
+                    echo "<td>".$row['percentage']."</td></tr>";
+                }
+            ?>
         </tbody>
     </table>
 </div>

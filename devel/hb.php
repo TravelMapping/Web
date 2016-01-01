@@ -2,18 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
     <style type="text/css">
-        body, html {
-            margin: 0;
-            border: 0;
-            padding: 0;
-            height: 100%;
-            max-height: 100%;
-            overflow: hidden;
-            font-size: 9pt;
-            background-color: #EEEEFF;
-        }
-
         #headerbox {
             position: absolute;
             top: 0px;
@@ -68,80 +58,6 @@
 
         #map * {
             cursor: crosshair;
-        }
-
-        table.nmptable {
-            font-size: 8pt;
-            border: 1px solid black;
-            border-spacing: 0px;
-            margin-left: auto;
-            margin-right: auto;
-            background-color: white;
-        }
-
-        table.nmptable td, th {
-            border: solid black;
-            border-width: 1px;
-        }
-
-        table.nmptable2 td, th {
-            border-width: 0px;
-        }
-
-        table.nmptable tr td {
-            text-align: right;
-        }
-
-        table.pthtable {
-            font-size: 10pt;
-            border: 1px solid black;
-            border-spacing: 0px;
-            margin-left: auto;
-            margin-right: auto;
-            background-color: white;
-        }
-
-        table.pthtable td, th {
-            border: solid black;
-            border-width: 1px;
-        }
-
-        table.pthtable tr td {
-            text-align: left;
-        }
-
-        table.gratable {
-            font-size: 10pt;
-            border: 1px solid black;
-            border-spacing: 0px;
-            margin-left: auto;
-            margin-right: auto;
-            background-color: white;
-        }
-
-        table.gratable td, th {
-            border: solid black;
-            border-width: 1px;
-        }
-
-        table.gratable tr td {
-            text-align: left;
-        }
-
-        table.tablesorter th.sortable:hover {
-            background-color: #CCCCFF;
-        }
-
-        table tr.status-active td {
-            background-color: #CCFFCC;
-        }
-
-        table tr.status-preview td {
-            background-color: #FFFFCC;
-        }
-
-        table tr.status-devel td {
-            background-color: #FFCCCC;
         }
     </style>
     <script
@@ -252,6 +168,9 @@
 <?php
 if ($showingmap == 0) {
     echo "<body>\n";
+    if (array_key_exists("u", $_GET)) echo "<a href=\"/user?u=".$_GET['u']."\">".$_GET['u']."</a>-";
+    echo "<a href=\"/\">Home</a>-";
+    echo "<a href=\"/hbtest\">Highway Browser</a>";
     echo "<form id=\"selectHighways\" name=\"HighwaySearch\" action=\"hb.php\">";
     echo "<label for=\"sys\">Filter routes by...  System: </label>";
     echo "<input id=\"sys\" type=\"text\" placeholder=\"usaus\" name=\"sys\" value=\"" . $_GET["sys"] . "\"></input>";
@@ -261,6 +180,9 @@ if ($showingmap == 0) {
 
 } else {
     echo "<body onload=\"loadmap();\">\n";
+    if (array_key_exists("u", $_GET)) echo "<a href=\"/user?u=".$_GET['u']."\">".$_GET['u']."</a>-";
+    echo "<a href=\"/\">Home</a>-";
+    echo "<a href=\"/hbtest\">Highway Browser</a>";
 }
 ?>
 

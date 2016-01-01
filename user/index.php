@@ -8,20 +8,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
     <style type="text/css">
-        body, html {
-            margin: 0;
-            border: 0;
-            padding: 0;
-            height: 100%;
-            max-height: 100%;
-            overflow: hidden;
-            font-size: 9pt;
-            background-color: #EEEEFF;
-        }
-
         #body {
-            position: fixed;
             left: 0px;
             top: 80px;
             bottom: 0px;
@@ -34,85 +23,6 @@
             margin: auto;
             text-align: center;
             padding: 10px;
-        }
-
-        table.nmptable {
-            font-size: 8pt;
-            border: 1px solid black;
-            border-spacing: 0px;
-            margin-left: auto;
-            margin-right: auto;
-            background-color: white;
-        }
-
-        table.nmptable td, th {
-            border: solid black;
-            border-width: 1px;
-        }
-
-        table.nmptable2 td, th {
-            border-width: 0px;
-        }
-
-        table.nmptable tr td {
-            text-align: right;
-        }
-
-        table.pthtable {
-            font-size: 10pt;
-            border: 1px solid black;
-            border-spacing: 0px;
-            margin-left: auto;
-            margin-right: auto;
-            background-color: white;
-        }
-
-        table.pthtable td, th {
-            border: solid black;
-            border-width: 1px;
-        }
-
-        table.pthtable tr td {
-            text-align: left;
-        }
-
-        table.gratable {
-            font-size: 10pt;
-            border: 1px solid black;
-            border-spacing: 0px;
-            margin-left: auto;
-            margin-right: auto;
-            width: 50%;
-            background-color: white;
-        }
-
-        table.gratable td, th {
-            border: solid black;
-            border-width: 1px;
-        }
-
-        table.gratable tr td {
-            text-align: left;
-        }
-
-        table.gratable tr:hover td {
-            background-color: #CCCCCC;
-        }
-
-        table.tablesorter th.sortable:hover {
-            background-color: #CCCCFF;
-        }
-
-        table tr.status-active td {
-            background-color: #CCFFCC;
-        }
-
-        table tr.status-preview td {
-            background-color: #FFFFCC;
-        }
-
-        table tr.status-devel td {
-            background-color: #FFCCCC;
         }
     </style>
     <!-- jQuery -->
@@ -255,7 +165,7 @@
         $res = $db->query($sql_command);
         while ($row = $res->fetch_assoc()) {
             $percent = round($row['clinchedMileage'] / $row['totalMileage'] * 100.0, 3);
-            echo "<tr onClick=\"window.document.location='user/region.php?u=" . $user . "&rg=" . $row['code'] . "'\"><td>" . $row['country'] . "</td><td>" . $row['name'] . "</td><td>" . $row['clinchedMileage'] . "</td><td>" . $row['totalMileage'] . "</td><td>" . $percent . "%</td><td><a href=\"/hbtest/mapview.php?u=" . $user . "&rg=" . $row['region'] . "\">Map</a></td></tr>";
+            echo "<tr onClick=\"window.document.location='user/region.php?u=" . $user . "&rg=" . $row['code'] . "'\"><td>" . $row['country'] . "</td><td>" . $row['name'] . "</td><td>" . $row['clinchedMileage'] . "</td><td>" . $row['totalMileage'] . "</td><td>" . $percent . "%</td><td><a href=\"/hbtest/mapview.php?u=" . $user . "&rg=" . $row['code'] . "\">Map</a></td></tr>";
         }
         $res->free();
         ?>
