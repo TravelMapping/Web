@@ -359,6 +359,7 @@ SQL;
             </tbody>
         </table>
         <table class="gratable tablesorter" id="routeTable">
+            <caption>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</caption>
             <thead>
             <tr>
                 <th colspan="7">Statistics per Route</th>

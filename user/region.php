@@ -281,6 +281,7 @@
         <input type="submit">
     </form>
     <h1>Traveler Stats for <?php echo $user . " in " . $regionInfo['name'] ?>:</h1>
+
 </div>
 <div id="body">
     <div id="mapholder">
@@ -290,6 +291,7 @@
         </div>
         <div id="map"></div>
     </div>
+    <h6>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</h6>
     <table class="gratable" id="overallTable">
         <thead><tr><th colspan="5">Overall Region Stats</th></tr></thead>
         <tbody>
@@ -317,6 +319,7 @@ SQL
         </tbody>
     </table>
     <table class="gratable tablesorter" id="systemsTable">
+        <caption>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</caption>
         <thead>
         <tr>
             <th colspan="5">Clinched Mileage by System</th>

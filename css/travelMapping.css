@@ -96,3 +96,11 @@ table.gratable {
     margin-right: auto;
     background-color: white;
 }
+
+table.tablesorter th.headerSortUp {
+    background-color: #DDFFDD;
+}
+
+table.tablesorter th.headerSortDown {
+    background-color: #FFDDDD;
+}

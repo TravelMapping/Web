@@ -78,11 +78,11 @@
 <script type="text/javascript">
     $(document).ready(function () {
             $("#regionsTable").tablesorter({
-                sortList: [[0, 0]],
+                sortList: [[4,1], [3, 1]],
                 headers: {0: {sorter: false}, 6: {sorter: false}}
             });
             $("#systemsTable").tablesorter({
-                sortList: [[0, 0]],
+                sortList: [[7,1], [6, 1]],
                 headers: {0: {sorter: false}, 9: {sorter: false}}
             });
         }
@@ -140,6 +140,7 @@
     </div>
     <h2>Stats by Region</h2>
     <table class="gratable tablesorter" id="regionsTable">
+        <caption>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</caption>
         <thead>
         <tr>
             <th colspan="6">Clinched Mileage by Region:</th>
@@ -168,6 +169,7 @@
     </table>
     <h2>Stats by System</h2>
     <table class="gratable tablesorter" id="systemsTable">
+        <caption>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</caption>
         <thead>
         <tr>
             <th colspan="9">Clinched Mileage by System</th>
