@@ -1,4 +1,13 @@
 <?php
+    /*
+     * Generates an SVG shield given a root param.
+     * URL Params:
+     *  r = root to create shield for
+     *
+     * TODO: Add more shields for more systems
+     * TODO: Use server versions of Roadgeek fonts
+     * TODO: Add shield cache
+     */
 	header("Content-type: image/svg+xml");
 
 	$r = $_GET['r'];

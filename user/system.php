@@ -1,3 +1,34 @@
+<?php
+if (array_key_exists("u", $_GET)) {
+    $user = $_GET['u'];
+    setcookie("lastuser", $user, time() + (86400 * 30), "/");
+} else if (isset($_COOKIE['lastuser'])) {
+    $user = $_COOKIE['lastuser'];
+}
+
+$dbname = "TravelMapping";
+if (isset($_COOKIE['currentdb'])) {
+    $dbname = $_COOKIE['currentdb'];
+}
+
+if (array_key_exists("db", $_GET)) {
+    $dbname = $_GET['db'];
+    setcookie("currentdb", $dbname, time() + (86400 * 30), "/");
+}
+
+if (array_key_exists("rg", $_GET) && strlen($_GET["rg"]) > 0) {
+    $region = $_GET['rg'];
+}
+if (array_key_exists("sys", $_GET)) {
+    $system = $_GET['sys'];
+}
+
+if (is_null($user) || is_null($system)) {
+    header('HTTP/ 400 Missing user (u=) or system(sys=) params');
+    echo "<h1>ERROR: 400 Missing user (u=) or system (sys=) params</h1>";
+    exit();
+}
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!-- 
 	Shows a user's stats for a particular system, whether overall or limited to a single region.  
@@ -12,6 +43,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
     <style type="text/css">
+        table.gratable {
+            max-width: 50%;
+            width: 700px;
+            margin-bottom: 15px;
+            margin-top: 15px;
+        }
+
         #mapholder {
             position: relative;
             margin: auto;
@@ -43,39 +81,19 @@
         }
     </style>
     <?php
-    if (array_key_exists("u", $_GET)) {
-        $user = $_GET['u'];
-        setcookie("lastuser", $user, time() + (86400 * 30), "/");
-    } else if (isset($_COOKIE['lastuser'])) {
-        $user = $_COOKIE['lastuser'];
-    }
-
-    $dbname = "TravelMapping";
-    if (isset($_COOKIE['currentdb'])) {
-        $dbname = $_COOKIE['currentdb'];
-    }
-
-    if (array_key_exists("db", $_GET)) {
-        $dbname = $_GET['db'];
-        setcookie("currentdb", $dbname, time() + (86400 * 30), "/");
-    }
-
-    if (array_key_exists("rg", $_GET) && strlen($_GET["rg"]) > 0) {
-        $region = $_GET['rg'];
-    }
-    if (array_key_exists("sys", $_GET)) {
-        $system = $_GET['sys'];
-    }
-
-    if (is_null($user) || is_null($system)) {
-        header('HTTP/ 400 Missing user (u=) or system(sys=) params');
-        echo "<h1>ERROR: 400 Missing user (u=) or system (sys=) params</h1>";
-        exit();
-    }
-
     // establish connection to db: mysql_ interface is deprecated, should learn new options
     $db = mysql_connect("localhost", "travmap", "clinch") or die("Failed to connect to database");
     mysql_select_db($dbname, $db);
+
+    if (!is_null($region)) {
+        $sql_command = "SELECT * FROM regions where code = '".$region."'";
+        echo "<!--".$sql_command."-->";
+        $regionInfo = mysql_fetch_array(mysql_query($sql_command));
+    }
+
+    $sql_command = "SELECT * FROM systems where systemName = '".$system."'";
+    echo "<!--".$sql_command."-->";
+    $systemInfo = mysql_fetch_array(mysql_query($sql_command));
 
 
     # functions from http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php
@@ -98,9 +116,12 @@
 
     ?>
     <title><?php
-        echo "Traveler Stats for " . $user . " on " . $system;
+        echo "Traveler Stats for " . $user . " on ";
         if (!is_null($region)) {
+            echo $system;
             echo " in " . $region;
+        } else {
+            echo $systemInfo['fullName'];
         }
         ?></title>
     <script
@@ -258,9 +279,9 @@
         <input type="submit">
     </form>
     <h1><?php
-        echo "Traveler Stats for " . $user . " on System " . $system;
+        echo "Traveler Stats for " . $user . " on " . $systemInfo['fullName'];
         if (!is_null($region)) {
-            echo " in " . $region;
+            echo " in " . $regionInfo['name'];
         }
         ?>:</h1>
 </div>
@@ -269,6 +290,73 @@
         <input id="showMarkers" type="checkbox" name="Show Markers" onclick="showMarkersClicked()">&nbsp;Show Markers
         <div id="controlboxinfo"></div>
         <div id="map"></div>
+        <table class="gratable tablesorter" id="overallTable">
+            <thead><tr><th colspan="5">System Stats</th></tr></thead>
+            <tbody>
+            <?php
+            //First fetch overall mileage
+            if(is_null($region)) {
+                $sql_command = <<<SQL
+                SELECT
+                    round(sum(coalesce(cr.mileage, 0))) as overall,
+                    round(sum(coalesce(ccr.mileage, 0))) as clinched,
+                    round(sum(coalesce(ccr.mileage, 0))) / round(sum(coalesce(cr.mileage, 0)), 2) * 100 AS percentage
+                FROM connectedRoutes as cr
+                LEFT JOIN clinchedConnectedRoutes as ccr
+                ON cr.firstRoot = ccr.route AND ccr.traveler = '$user'
+                WHERE cr.systemName = '$system';
+SQL;
+            } else {
+                $sql_command = <<<SQL
+                SELECT
+                    round(sum(coalesce(r.mileage, 0))) as overall,
+                    round(sum(coalesce(cr.mileage, 0))) as clinched,
+                    round(sum(coalesce(cr.mileage, 0))) / round(sum(coalesce(r.mileage, 0)), 2) * 100 AS percentage
+                FROM routes as r
+                LEFT JOIN clinchedRoutes as cr
+                ON r.root = cr.route AND cr.traveler = '$user'
+                WHERE r.region = '$region' AND r.systemName = '$system';
+SQL;
+            }
+            echo "<!--".$sql_command."-->";
+            $res = mysql_query($sql_command);
+            $row = mysql_fetch_array($res);
+            $link = "window.document.location='/hbtest/mapview.php?u=" . $user . "&rg=" . $region . "'";
+            echo "<tr style=\"background-color:#EEEEFF\"><td>Overall</td><td colspan='2'>Miles Driven: ".$row['clinched']." mi (".$row['percentage']."%)</td><td>Total: ".$row['overall']." mi</td><td>Rank: TBD</td></tr>";
+
+            //Second, fetch routes clinched/driven
+            if (is_null($region)) {
+                $sql_command = <<<SQL
+                SELECT
+                    count(cr.route) as total,
+                    count(ccr.route) as driven,
+                    sum(ccr.clinched) as clinched
+                FROM connectedRoutes as cr
+                LEFT JOIN clinchedConnectedRoutes as ccr
+                ON cr.firstRoot = ccr.route AND ccr.traveler = '$user'
+                WHERE cr.systemName = '$system';
+SQL;
+            } else {
+                $sql_command = <<<SQL
+                SELECT
+                    count(cr.route) as total,
+                    count(ccr.route) as driven,
+                    sum(ccr.clinched) as clinched
+                FROM routes as cr
+                LEFT JOIN clinchedRoutes as ccr
+                ON cr.root = ccr.route AND ccr.traveler = '$user'
+                WHERE cr.region = '$region' AND cr.systemName = '$system'
+SQL;
+            }
+            echo "<!--".$sql_command."-->";
+            $res = mysql_query($sql_command);
+            $row = mysql_fetch_array($res);
+            echo "<tr onClick=\"" . $link . "\"><td>Routes</td><td>Driven: " . $row['driven'] . " (" . round($row['driven'] / $row['total'] * 100, 2) .
+                "%)</td><td>Clinched: " . $row['clinched'] . " (" . round($row['clinched'] / $row['total'] * 100, 2) . "%)</td><td>Total: " . $row['total'] .
+                "</td><td>Rank: TBD</td></tr>\n";
+            ?>
+            </tbody>
+        </table>
         <table class="gratable tablesorter" id="routeTable">
             <thead>
             <tr>

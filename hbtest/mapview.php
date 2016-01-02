@@ -1,3 +1,20 @@
+<?php
+    if (array_key_exists("u", $_GET)) {
+        setcookie("lastuser", $_GET['u'], time() + (86400 * 30), "/");
+    } else if (isset($_COOKIE['lastuser'])) {
+        $_GET['u'] = $_COOKIE['lastuser'];
+    }
+
+    $dbname = "TravelMapping";
+    if (isset($_COOKIE['currentdb'])) {
+        $dbname = $_COOKIE['currentdb'];
+    }
+
+    if (array_key_exists("db", $_GET)) {
+        $dbname = $_GET['db'];
+        setcookie("currentdb", $dbname, time() + (86400 * 30), "/");
+    }
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -69,23 +86,6 @@
     <script src="/lib/jquery.tablesorter.min.js"></script>
 
     <?php
-
-    if (array_key_exists("u", $_GET)) {
-        setcookie("lastuser", $_GET['u'], time() + (86400 * 30), "/");
-    } else if (isset($_COOKIE['lastuser'])) {
-        $_GET['u'] = $_COOKIE['lastuser'];
-    }
-
-    $dbname = "TravelMapping";
-    if (isset($_COOKIE['currentdb'])) {
-        $dbname = $_COOKIE['currentdb'];
-    }
-
-    if (array_key_exists("db", $_GET)) {
-        $dbname = $_GET['db'];
-        setcookie("currentdb", $dbname, time() + (86400 * 30), "/");
-    }
-
     // establish connection to db: mysql_ interface is deprecated, should learn new options
     $con = mysql_connect("localhost", "travmap", "clinch") or die("Failed to connect to database");
     mysql_select_db($dbname, $con);

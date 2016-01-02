@@ -1,3 +1,24 @@
+<?php
+    $user = "null";
+
+    if (array_key_exists("u", $_GET)) {
+        $user = $_GET['u'];
+        setcookie("lastuser", $user, time() + (86400 * 30), "/");
+    } else if (isset($_COOKIE['lastuser'])) {
+        header("Location: user?u=" . $_COOKIE['lastuser']); /* Redirect browser */
+        exit();
+    }
+
+    $dbname = "TravelMapping";
+    if (isset($_COOKIE['currentdb'])) {
+        $dbname = $_COOKIE['currentdb'];
+    }
+
+    if (array_key_exists("db", $_GET)) {
+        $dbname = $_GET['db'];
+        setcookie("currentdb", $dbname, time() + (86400 * 30), "/");
+    }
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!-- 
 	A basic user stats page. 
@@ -31,29 +52,7 @@
     <script src="/lib/jquery.tablesorter.min.js"></script>
     <title>
         <?php
-        $user = "null";
-        $rg_order = "region ascending";
-        $sys_order = "countryCode DESC";
-
-        if (array_key_exists("u", $_GET)) {
-            $user = $_GET['u'];
-            setcookie("lastuser", $user, time() + (86400 * 30), "/");
-        } else if (isset($_COOKIE['lastuser'])) {
-            header("Location: user?u=" . $_COOKIE['lastuser']); /* Redirect browser */
-            exit();
-        }
-
         echo "Traveler Stats for " . $user;
-
-        $dbname = "TravelMapping";
-        if (isset($_COOKIE['currentdb'])) {
-            $dbname = $_COOKIE['currentdb'];
-        }
-
-        if (array_key_exists("db", $_GET)) {
-            $dbname = $_GET['db'];
-            setcookie("currentdb", $dbname, time() + (86400 * 30), "/");
-        }
 
         // establish connection to db: mysql_ interface is deprecated, should learn new options
         $db = new mysqli("localhost", "travmap", "clinch", $dbname) or die("Failed to connect to database");
@@ -69,11 +68,6 @@
         {
             // search forward starting from end minus needle length characters
             return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== FALSE);
-        }
-
-        function colorScale($percent)
-        {
-
         }
 
         ?>
@@ -165,7 +159,7 @@
         $res = $db->query($sql_command);
         while ($row = $res->fetch_assoc()) {
             $percent = round($row['clinchedMileage'] / $row['totalMileage'] * 100.0, 3);
-            echo "<tr onClick=\"window.document.location='user/region.php?u=" . $user . "&rg=" . $row['code'] . "'\"><td>" . $row['country'] . "</td><td>" . $row['name'] . "</td><td>" . $row['clinchedMileage'] . "</td><td>" . $row['totalMileage'] . "</td><td>" . $percent . "%</td><td><a href=\"/hbtest/mapview.php?u=" . $user . "&rg=" . $row['code'] . "\">Map</a></td></tr>";
+            echo "<tr onClick=\"window.document.location='/user/region.php?u=" . $user . "&rg=" . $row['code'] . "'\"><td>" . $row['country'] . "</td><td>" . $row['name'] . "</td><td>" . $row['clinchedMileage'] . "</td><td>" . $row['totalMileage'] . "</td><td>" . $percent . "%</td><td><a href=\"/hbtest/mapview.php?u=" . $user . "&rg=" . $row['code'] . "\">Map</a></td></tr>";
         }
         $res->free();
         ?>
@@ -196,7 +190,7 @@
         echo "<!-- SQL: " . $sql_command . "-->";
         $res = $db->query($sql_command);
         while ($row = $res->fetch_assoc()) {
-            echo "<tr onClick=\"window.document.location='user/system.php?u=" . $user . "&sys=" . $row['systemName'] . "'\" class=\"status-" . $row['level'] . "\">";
+            echo "<tr onClick=\"window.document.location='/user/system.php?u=" . $user . "&sys=" . $row['systemName'] . "'\" class=\"status-" . $row['level'] . "\">";
             echo "<td>" . $row['countryCode'] . "</td>";
             echo "<td>" . $row['systemName'] . "</td>";
             echo "<td>" . $row['fullName'] . "</td>";
