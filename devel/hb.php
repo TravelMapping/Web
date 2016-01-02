@@ -16,6 +16,19 @@ if (array_key_exists("db", $_GET)) {
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+ ***
+ * Highway Browser Main Page. If a root is supplied, a map will show that root's path along with its waypoints.
+ * Otherwise, it will show a list of routes that the user can select from, with filters by region and system availible.
+ * URL Params:
+ *  r - root of route to view waypoints for. When set, the page will display a map with the route params. (required for displaying map)
+ *  u - user to display highlighting for on map (optional)
+ *  rg - region to filter for on the highway browser list (optional)
+ *  sys - system to filter for on the highway browser list (optional)
+ *  db - database to use (optional, defaults to TravelMapping
+ *  ([r [u]] [rg | sys], [db])
+ ***
+ -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>

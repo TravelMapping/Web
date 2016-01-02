@@ -16,6 +16,18 @@
     }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+ ***
+ * Map viewer page. Displays the routes selected using the url params on a map, as well as on a table to the side.
+ * URL Params:
+ *  u - user to display highlighting for on map (required)
+ *  rg - region to show routes for on the map (optional)
+ *  sys - system to show routes for on the map (optional)
+ *  rte - route name to show on the map. Supports pattern matching, with _ matching a single character, and % matching 0 or multiple characters.
+ *  db - database to use (optional, defaults to TravelMapping
+ * (u, [rg|sys][rte], [db])
+ ***
+ -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>

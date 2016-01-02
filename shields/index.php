@@ -2,7 +2,8 @@
     /*
      * Generates an SVG shield given a root param.
      * URL Params:
-     *  r = root to create shield for
+     *  r = root to create shield for.
+     * (r)
      *
      * TODO: Add more shields for more systems
      * TODO: Use server versions of Roadgeek fonts

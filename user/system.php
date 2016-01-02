@@ -34,9 +34,10 @@ if (is_null($user) || is_null($system)) {
 	Shows a user's stats for a particular system, whether overall or limited to a single region.  
 	URL Params:
 		u - the user.
-    sys - The system being viewed on this page
-    rg - The region to study this system
-		db - the database being used. Use 'TravelMappingDev' for in-development systems. 
+        sys - The system being viewed on this page
+        rg - The region to study this system
+		db - the database being used. Use 'TravelMappingDev' for in-development systems.
+		(u, sys, [rg], [db])
 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>

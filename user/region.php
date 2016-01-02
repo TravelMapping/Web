@@ -31,8 +31,9 @@
 	Shows a users' stats for a particular region. 
 	URL Params:
 		u - the user.
-    rg - the region viewing stats for.
-		db - the database being used. Use 'TravelMappingDev' for in-development systems. 
+        rg - the region viewing stats for.
+		db - the database being used. Use 'TravelMappingDev' for in-development systems.
+		(u, rg, [db])
 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>

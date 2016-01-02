@@ -24,7 +24,8 @@
 	A basic user stats page. 
 	URL Params:
 		u - the user.
-		db - the database being used. Use 'TravelMappingDev' for in-development systems. 
+		db - the database being used. Use 'TravelMappingDev' for in-development systems.
+		(u, [db])
 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
