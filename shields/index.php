@@ -40,6 +40,33 @@
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
 			break;
 
+        case 'usaky3':
+            $routeNum = str_replace("KY", "", $row['route']);
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
+        case 'usansf':
+            $region = explode(".", $r)[0];
+            $routeNum = str_replace(strtoupper($region), "", $row['route']);
+            if (strlen($routeNum) > 2) {
+                if (file_exists("template_usa".$region."_wide.svg")) {
+                    $svg = file_get_contents("template_usa".$region."_wide.svg");
+                } else {
+                    $svg = file_get_contents("generic_wide.svg");
+                }
+            } else {
+                if(file_exists("template_usa".$region.".svg")) {
+                    $svg = file_get_contents("template_usa" . $region . ".svg");
+                } else {
+                    $svg = file_get_contents("generic.svg");
+                }
+            }
+            $region = strtoupper($region);
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            $svg = str_replace("***SYS***", $region, $svg);
+            break;
+
+
 		default:
 			$region = strtoupper(explode(".", $r)[0]);
 			$routeNum = str_replace($region, "", $row['route']);

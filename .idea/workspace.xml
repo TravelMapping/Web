@@ -4,9 +4,8 @@
     <list default="true" id="6728ed8b-2769-4d08-95ee-02cc0e168ad2" name="Default" comment="Added STUFF v2">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shields/index.php" afterPath="$PROJECT_DIR$/shields/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/user/index.php" afterPath="$PROJECT_DIR$/user/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/user/region.php" afterPath="$PROJECT_DIR$/user/region.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/user/system.php" afterPath="$PROJECT_DIR$/user/system.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/travelMapping.css" afterPath="$PROJECT_DIR$/css/travelMapping.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shields/template_usact.svg" afterPath="$PROJECT_DIR$/shields/template_usact.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shields/template_usact_wide.svg" afterPath="$PROJECT_DIR$/shields/template_usact_wide.svg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="9e4dd3cd-a079-4c8a-8b64-b6f7e6ceecda" name="Rejected commit: Default" comment="Added STUFF" />
@@ -77,20 +76,30 @@
       <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/shields/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.78008914">
-              <caret line="53" column="59" selection-start-line="53" selection-start-column="59" selection-end-line="53" selection-end-column="59" />
+            <state vertical-scroll-proportion="0.3343239">
+              <caret line="42" column="22" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
               <folding>
-                <marker date="1451764744600" expanded="true" signature="459:501" placeholder="SELECT * FRO..routes..." />
+                <marker date="1451787649669" expanded="true" signature="459:501" placeholder="SELECT * FRO..routes..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="jquery.tablesorter.min.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/jquery.tablesorter.min.js">
+      <file leaf-file-name="template_usact.svg" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shields/template_usact.svg">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="template_usact_wide.svg" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shields/template_usact_wide.svg">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="17" column="45" selection-start-line="17" selection-start-column="45" selection-end-line="17" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -131,43 +140,6 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mapview.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hbtest/mapview.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.75">
-              <caret line="25" column="31" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
-              <folding>
-                <marker date="1451751576909" expanded="true" signature="6506:6823" placeholder="SELECT waypo..waypoints..." />
-                <marker date="1451751576909" expanded="true" signature="7107:7444" placeholder="SELECT waypo..waypoints..." />
-                <marker date="1451751576909" expanded="true" signature="7521:7858" placeholder="SELECT waypo..waypoints..." />
-                <marker date="1451751576909" expanded="true" signature="9242:9465" placeholder="SELECT segme..segments..." />
-                <marker date="1451751576909" expanded="true" signature="9529:9772" placeholder="SELECT segme..segments..." />
-                <marker date="1451751576909" expanded="true" signature="10233:10558" placeholder="SELECT segme..segments..." />
-                <marker date="1451751576909" expanded="true" signature="10622:10967" placeholder="SELECT segme..segments..." />
-                <marker date="1451751576909" expanded="true" signature="13256:13336" placeholder="SELECT regio..routes..." />
-                <marker date="1451751576909" expanded="true" signature="14215:14540" placeholder="SELECT r.reg..routes..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="hb.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/devel/hb.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.5">
-              <caret line="28" column="30" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
-              <folding>
-                <marker date="1451751576901" expanded="true" signature="4229:4311" placeholder="SELECT point..waypoints..." />
-                <marker date="1451751576901" expanded="true" signature="5269:5329" placeholder="SELECT segme..segments..." />
-                <marker date="1451751576901" expanded="true" signature="5708:5886" placeholder="SELECT segme..segments..." />
-                <marker date="1451751576901" expanded="true" signature="8089:8175" placeholder="SELECT point..waypoints..." />
-                <marker date="1451751576901" expanded="true" signature="9029:9109" placeholder="SELECT regio..routes..." />
-                <marker date="1451751576901" expanded="true" signature="9647:9727" placeholder="SELECT * FRO..routes..." />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -242,14 +214,24 @@
       <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/user/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.583333">
-              <caret line="84" column="36" selection-start-line="84" selection-start-column="36" selection-end-line="84" selection-end-column="36" />
+            <state vertical-scroll-proportion="-5.625">
+              <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
               <folding>
-                <marker date="1451763582636" expanded="true" signature="4505:4529" placeholder="..." />
-                <marker date="1451763582636" expanded="true" signature="4786:5142" placeholder="SELECT COUNT..connectedRoutes..." />
-                <marker date="1451763582636" expanded="true" signature="6290:6572" placeholder="SELECT rg.co..overallMileageByRegion..." />
-                <marker date="1451763582636" expanded="true" signature="8066:8521" placeholder="SELECT sys.c..systems..." />
+                <marker date="1451782537372" expanded="true" signature="4506:4530" placeholder="..." />
+                <marker date="1451782537372" expanded="true" signature="4787:5143" placeholder="SELECT COUNT..connectedRoutes..." />
+                <marker date="1451782537372" expanded="true" signature="6291:6573" placeholder="SELECT rg.co..overallMileageByRegion..." />
+                <marker date="1451782537372" expanded="true" signature="8067:8522" placeholder="SELECT sys.c..systems..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="template_usaco.svg" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shields/template_usaco.svg">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -281,8 +263,10 @@
         <option value="$PROJECT_DIR$/devel/hb.php" />
         <option value="$PROJECT_DIR$/user/region.php" />
         <option value="$PROJECT_DIR$/user/system.php" />
-        <option value="$PROJECT_DIR$/user/index.php" />
         <option value="$PROJECT_DIR$/css/travelMapping.css" />
+        <option value="$PROJECT_DIR$/user/index.php" />
+        <option value="$PROJECT_DIR$/shields/template_usact.svg" />
+        <option value="$PROJECT_DIR$/shields/template_usact_wide.svg" />
         <option value="$PROJECT_DIR$/shields/index.php" />
       </list>
     </option>
@@ -552,70 +536,20 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/user/region.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="68" column="5" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
-          <folding>
-            <marker date="1451763454832" expanded="true" signature="1385:2438" placeholder="..." />
-            <marker date="1451763454832" expanded="true" signature="1560:1656" placeholder="{...}" />
-            <marker date="1451763454832" expanded="true" signature="1671:1764" placeholder="{...}" />
-            <marker date="1451763454832" expanded="true" signature="1784:1906" placeholder="{...}" />
-            <marker date="1451763454832" expanded="true" signature="1930:1966" placeholder="{...}" />
-            <marker date="1451763454832" expanded="true" signature="2013:2093" placeholder="{...}" />
-            <marker date="1451763454832" expanded="true" signature="2039:2083" placeholder="{...}" />
-            <marker date="1451763454832" expanded="true" signature="2110:2152" placeholder="{...}" />
-            <marker date="1451763454832" expanded="true" signature="2198:2248" placeholder="{...}" />
-            <marker date="1451763454832" expanded="true" signature="2264:2426" placeholder="{...}" />
-            <marker date="1451763454832" expanded="true" signature="2696:2717" placeholder="SELECT * FRO..regions..." />
-            <marker date="1451763454832" expanded="true" signature="2696:2723" placeholder="SELECT * FRO..regions..." />
-            <marker date="1451763454832" expanded="true" signature="2696:2730" placeholder="SELECT * FRO..regions..." />
-            <marker date="1451763454832" expanded="true" signature="2696:2732" placeholder="SELECT * FRO..regions..." />
-            <marker date="1451763454832" expanded="true" signature="2696:2744" placeholder="SELECT * FRO..regions..." />
-            <marker date="1451763454832" expanded="true" signature="2696:2745" placeholder="SELECT * FRO..regions..." />
-            <marker date="1451763454832" expanded="true" signature="3608:3714" placeholder="..." />
-            <marker date="1451763454832" expanded="true" signature="4010:4149" placeholder="{...}" />
-            <marker date="1451763454832" expanded="true" signature="4112:4149" placeholder="{...}" />
-            <marker date="1451763454832" expanded="true" signature="6657:6994" placeholder="select waypo..waypoints..." />
-            <marker date="1451763454832" expanded="true" signature="8189:8431" placeholder="select segme..segments..." />
-            <marker date="1451763454832" expanded="true" signature="8831:9175" placeholder="select segme..segments..." />
-            <marker date="1451763454832" expanded="true" signature="10712:11261" placeholder="..." />
-            <marker date="1451763454832" expanded="true" signature="10896:11169" placeholder="..." />
-            <marker date="1451763454832" expanded="true" signature="11277:12092" placeholder="..." />
-            <marker date="1451763454832" expanded="true" signature="11302:11504" placeholder="..." />
-            <marker date="1451763454832" expanded="true" signature="11448:11464" placeholder="..." />
-            <marker date="1451763454832" expanded="true" signature="11650:12092" placeholder="..." />
-            <marker date="1451763454832" expanded="true" signature="11740:12092" placeholder="..." />
-            <marker date="1451763454832" expanded="true" signature="12423:12447" placeholder="..." />
-            <marker date="1451763454832" expanded="true" signature="12694:13037" placeholder="SELECT COUNT..routes..." />
-            <marker date="1451763454832" expanded="true" signature="14132:14836" placeholder="SELECT sys.s..systems..." />
-            <marker date="1451763454832" expanded="true" signature="16133:16490" placeholder="SELECT r.rou..routes..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hbtest/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hbtest/mapview.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="273" column="37" selection-start-line="273" selection-start-column="37" selection-end-line="273" selection-end-column="37" />
           <folding>
-            <marker date="1451751576909" expanded="true" signature="6506:6823" placeholder="SELECT waypo..waypoints..." />
-            <marker date="1451751576909" expanded="true" signature="7107:7444" placeholder="SELECT waypo..waypoints..." />
-            <marker date="1451751576909" expanded="true" signature="7521:7858" placeholder="SELECT waypo..waypoints..." />
-            <marker date="1451751576909" expanded="true" signature="9242:9465" placeholder="SELECT segme..segments..." />
-            <marker date="1451751576909" expanded="true" signature="9529:9772" placeholder="SELECT segme..segments..." />
-            <marker date="1451751576909" expanded="true" signature="10233:10558" placeholder="SELECT segme..segments..." />
-            <marker date="1451751576909" expanded="true" signature="10622:10967" placeholder="SELECT segme..segments..." />
-            <marker date="1451751576909" expanded="true" signature="13256:13336" placeholder="SELECT regio..routes..." />
-            <marker date="1451751576909" expanded="true" signature="14215:14540" placeholder="SELECT r.reg..routes..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT waypo..waypoints..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT waypo..waypoints..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT waypo..waypoints..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT segme..segments..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT segme..segments..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT segme..segments..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT segme..segments..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT regio..routes..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT r.reg..routes..." />
           </folding>
         </state>
       </provider>
@@ -625,7 +559,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="30" column="16" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
           <folding>
-            <marker date="1451764744600" expanded="true" signature="459:501" placeholder="SELECT * FRO..routes..." />
+            <marker date="1451787649669" expanded="true" signature="459:501" placeholder="SELECT * FRO..routes..." />
           </folding>
         </state>
       </provider>
@@ -651,12 +585,12 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="184" column="51" selection-start-line="184" selection-start-column="51" selection-end-line="184" selection-end-column="51" />
           <folding>
-            <marker date="1451751576901" expanded="true" signature="4229:4311" placeholder="SELECT point..waypoints..." />
-            <marker date="1451751576901" expanded="true" signature="5269:5329" placeholder="SELECT segme..segments..." />
-            <marker date="1451751576901" expanded="true" signature="5708:5886" placeholder="SELECT segme..segments..." />
-            <marker date="1451751576901" expanded="true" signature="8089:8175" placeholder="SELECT point..waypoints..." />
-            <marker date="1451751576901" expanded="true" signature="9029:9109" placeholder="SELECT regio..routes..." />
-            <marker date="1451751576901" expanded="true" signature="9647:9727" placeholder="SELECT * FRO..routes..." />
+            <marker date="1451751576901" expanded="true" signature="-1:-1" placeholder="SELECT point..waypoints..." />
+            <marker date="1451751576901" expanded="true" signature="-1:-1" placeholder="SELECT segme..segments..." />
+            <marker date="1451751576901" expanded="true" signature="-1:-1" placeholder="SELECT segme..segments..." />
+            <marker date="1451751576901" expanded="true" signature="-1:-1" placeholder="SELECT point..waypoints..." />
+            <marker date="1451751576901" expanded="true" signature="-1:-1" placeholder="SELECT regio..routes..." />
+            <marker date="1451751576901" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..routes..." />
           </folding>
         </state>
       </provider>
@@ -741,10 +675,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="157" column="24" selection-start-line="157" selection-start-column="24" selection-end-line="157" selection-end-column="24" />
           <folding>
-            <marker date="1451763582636" expanded="true" signature="4505:4529" placeholder="..." />
-            <marker date="1451763582636" expanded="true" signature="4786:5142" placeholder="SELECT COUNT..connectedRoutes..." />
-            <marker date="1451763582636" expanded="true" signature="6290:6572" placeholder="SELECT rg.co..overallMileageByRegion..." />
-            <marker date="1451763582636" expanded="true" signature="8066:8521" placeholder="SELECT sys.c..systems..." />
+            <marker date="1451782537372" expanded="true" signature="4506:4530" placeholder="..." />
+            <marker date="1451782537372" expanded="true" signature="4787:5143" placeholder="SELECT COUNT..connectedRoutes..." />
+            <marker date="1451782537372" expanded="true" signature="6291:6573" placeholder="SELECT rg.co..overallMileageByRegion..." />
+            <marker date="1451782537372" expanded="true" signature="8067:8522" placeholder="SELECT sys.c..systems..." />
           </folding>
         </state>
       </provider>
@@ -804,15 +738,15 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="273" column="37" selection-start-line="273" selection-start-column="37" selection-end-line="273" selection-end-column="37" />
           <folding>
-            <marker date="1451751576909" expanded="true" signature="6506:6823" placeholder="SELECT waypo..waypoints..." />
-            <marker date="1451751576909" expanded="true" signature="7107:7444" placeholder="SELECT waypo..waypoints..." />
-            <marker date="1451751576909" expanded="true" signature="7521:7858" placeholder="SELECT waypo..waypoints..." />
-            <marker date="1451751576909" expanded="true" signature="9242:9465" placeholder="SELECT segme..segments..." />
-            <marker date="1451751576909" expanded="true" signature="9529:9772" placeholder="SELECT segme..segments..." />
-            <marker date="1451751576909" expanded="true" signature="10233:10558" placeholder="SELECT segme..segments..." />
-            <marker date="1451751576909" expanded="true" signature="10622:10967" placeholder="SELECT segme..segments..." />
-            <marker date="1451751576909" expanded="true" signature="13256:13336" placeholder="SELECT regio..routes..." />
-            <marker date="1451751576909" expanded="true" signature="14215:14540" placeholder="SELECT r.reg..routes..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT waypo..waypoints..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT waypo..waypoints..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT waypo..waypoints..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT segme..segments..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT segme..segments..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT segme..segments..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT segme..segments..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT regio..routes..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT r.reg..routes..." />
           </folding>
         </state>
       </provider>
@@ -822,7 +756,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="30" column="16" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
           <folding>
-            <marker date="1451764744600" expanded="true" signature="459:501" placeholder="SELECT * FRO..routes..." />
+            <marker date="1451787649669" expanded="true" signature="459:501" placeholder="SELECT * FRO..routes..." />
           </folding>
         </state>
       </provider>
@@ -848,12 +782,12 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="184" column="51" selection-start-line="184" selection-start-column="51" selection-end-line="184" selection-end-column="51" />
           <folding>
-            <marker date="1451751576901" expanded="true" signature="4229:4311" placeholder="SELECT point..waypoints..." />
-            <marker date="1451751576901" expanded="true" signature="5269:5329" placeholder="SELECT segme..segments..." />
-            <marker date="1451751576901" expanded="true" signature="5708:5886" placeholder="SELECT segme..segments..." />
-            <marker date="1451751576901" expanded="true" signature="8089:8175" placeholder="SELECT point..waypoints..." />
-            <marker date="1451751576901" expanded="true" signature="9029:9109" placeholder="SELECT regio..routes..." />
-            <marker date="1451751576901" expanded="true" signature="9647:9727" placeholder="SELECT * FRO..routes..." />
+            <marker date="1451751576901" expanded="true" signature="-1:-1" placeholder="SELECT point..waypoints..." />
+            <marker date="1451751576901" expanded="true" signature="-1:-1" placeholder="SELECT segme..segments..." />
+            <marker date="1451751576901" expanded="true" signature="-1:-1" placeholder="SELECT segme..segments..." />
+            <marker date="1451751576901" expanded="true" signature="-1:-1" placeholder="SELECT point..waypoints..." />
+            <marker date="1451751576901" expanded="true" signature="-1:-1" placeholder="SELECT regio..routes..." />
+            <marker date="1451751576901" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..routes..." />
           </folding>
         </state>
       </provider>
@@ -938,10 +872,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="157" column="24" selection-start-line="157" selection-start-column="24" selection-end-line="157" selection-end-column="24" />
           <folding>
-            <marker date="1451763582636" expanded="true" signature="4505:4529" placeholder="..." />
-            <marker date="1451763582636" expanded="true" signature="4786:5142" placeholder="SELECT COUNT..connectedRoutes..." />
-            <marker date="1451763582636" expanded="true" signature="6290:6572" placeholder="SELECT rg.co..overallMileageByRegion..." />
-            <marker date="1451763582636" expanded="true" signature="8066:8521" placeholder="SELECT sys.c..systems..." />
+            <marker date="1451782537372" expanded="true" signature="4506:4530" placeholder="..." />
+            <marker date="1451782537372" expanded="true" signature="4787:5143" placeholder="SELECT COUNT..connectedRoutes..." />
+            <marker date="1451782537372" expanded="true" signature="6291:6573" placeholder="SELECT rg.co..overallMileageByRegion..." />
+            <marker date="1451782537372" expanded="true" signature="8067:8522" placeholder="SELECT sys.c..systems..." />
           </folding>
         </state>
       </provider>
@@ -993,15 +927,15 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="59" column="9" selection-start-line="59" selection-start-column="9" selection-end-line="59" selection-end-column="9" />
           <folding>
-            <marker date="1451751576909" expanded="true" signature="6506:6823" placeholder="SELECT waypo..waypoints..." />
-            <marker date="1451751576909" expanded="true" signature="7107:7444" placeholder="SELECT waypo..waypoints..." />
-            <marker date="1451751576909" expanded="true" signature="7521:7858" placeholder="SELECT waypo..waypoints..." />
-            <marker date="1451751576909" expanded="true" signature="9242:9465" placeholder="SELECT segme..segments..." />
-            <marker date="1451751576909" expanded="true" signature="9529:9772" placeholder="SELECT segme..segments..." />
-            <marker date="1451751576909" expanded="true" signature="10233:10558" placeholder="SELECT segme..segments..." />
-            <marker date="1451751576909" expanded="true" signature="10622:10967" placeholder="SELECT segme..segments..." />
-            <marker date="1451751576909" expanded="true" signature="13256:13336" placeholder="SELECT regio..routes..." />
-            <marker date="1451751576909" expanded="true" signature="14215:14540" placeholder="SELECT r.reg..routes..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT waypo..waypoints..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT waypo..waypoints..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT waypo..waypoints..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT segme..segments..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT segme..segments..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT segme..segments..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT segme..segments..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT regio..routes..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT r.reg..routes..." />
           </folding>
         </state>
       </provider>
@@ -1011,7 +945,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="30" column="16" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
           <folding>
-            <marker date="1451764744600" expanded="true" signature="459:501" placeholder="SELECT * FRO..routes..." />
+            <marker date="1451787649669" expanded="true" signature="459:501" placeholder="SELECT * FRO..routes..." />
           </folding>
         </state>
       </provider>
@@ -1037,12 +971,12 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="4" column="73" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="73" />
           <folding>
-            <marker date="1451751576901" expanded="true" signature="4229:4311" placeholder="SELECT point..waypoints..." />
-            <marker date="1451751576901" expanded="true" signature="5269:5329" placeholder="SELECT segme..segments..." />
-            <marker date="1451751576901" expanded="true" signature="5708:5886" placeholder="SELECT segme..segments..." />
-            <marker date="1451751576901" expanded="true" signature="8089:8175" placeholder="SELECT point..waypoints..." />
-            <marker date="1451751576901" expanded="true" signature="9029:9109" placeholder="SELECT regio..routes..." />
-            <marker date="1451751576901" expanded="true" signature="9647:9727" placeholder="SELECT * FRO..routes..." />
+            <marker date="1451751576901" expanded="true" signature="-1:-1" placeholder="SELECT point..waypoints..." />
+            <marker date="1451751576901" expanded="true" signature="-1:-1" placeholder="SELECT segme..segments..." />
+            <marker date="1451751576901" expanded="true" signature="-1:-1" placeholder="SELECT segme..segments..." />
+            <marker date="1451751576901" expanded="true" signature="-1:-1" placeholder="SELECT point..waypoints..." />
+            <marker date="1451751576901" expanded="true" signature="-1:-1" placeholder="SELECT regio..routes..." />
+            <marker date="1451751576901" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..routes..." />
           </folding>
         </state>
       </provider>
@@ -1127,10 +1061,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="27" column="12" selection-start-line="7" selection-start-column="0" selection-end-line="27" selection-end-column="12" />
           <folding>
-            <marker date="1451763582636" expanded="true" signature="4505:4529" placeholder="..." />
-            <marker date="1451763582636" expanded="true" signature="4786:5142" placeholder="SELECT COUNT..connectedRoutes..." />
-            <marker date="1451763582636" expanded="true" signature="6290:6572" placeholder="SELECT rg.co..overallMileageByRegion..." />
-            <marker date="1451763582636" expanded="true" signature="8066:8521" placeholder="SELECT sys.c..systems..." />
+            <marker date="1451782537372" expanded="true" signature="4506:4530" placeholder="..." />
+            <marker date="1451782537372" expanded="true" signature="4787:5143" placeholder="SELECT COUNT..connectedRoutes..." />
+            <marker date="1451782537372" expanded="true" signature="6291:6573" placeholder="SELECT rg.co..overallMileageByRegion..." />
+            <marker date="1451782537372" expanded="true" signature="8067:8522" placeholder="SELECT sys.c..systems..." />
           </folding>
         </state>
       </provider>
@@ -1229,15 +1163,15 @@
         <state vertical-scroll-proportion="-13.75">
           <caret line="25" column="31" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
           <folding>
-            <marker date="1451751576909" expanded="true" signature="6506:6823" placeholder="SELECT waypo..waypoints..." />
-            <marker date="1451751576909" expanded="true" signature="7107:7444" placeholder="SELECT waypo..waypoints..." />
-            <marker date="1451751576909" expanded="true" signature="7521:7858" placeholder="SELECT waypo..waypoints..." />
-            <marker date="1451751576909" expanded="true" signature="9242:9465" placeholder="SELECT segme..segments..." />
-            <marker date="1451751576909" expanded="true" signature="9529:9772" placeholder="SELECT segme..segments..." />
-            <marker date="1451751576909" expanded="true" signature="10233:10558" placeholder="SELECT segme..segments..." />
-            <marker date="1451751576909" expanded="true" signature="10622:10967" placeholder="SELECT segme..segments..." />
-            <marker date="1451751576909" expanded="true" signature="13256:13336" placeholder="SELECT regio..routes..." />
-            <marker date="1451751576909" expanded="true" signature="14215:14540" placeholder="SELECT r.reg..routes..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT waypo..waypoints..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT waypo..waypoints..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT waypo..waypoints..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT segme..segments..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT segme..segments..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT segme..segments..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT segme..segments..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT regio..routes..." />
+            <marker date="1451751576909" expanded="true" signature="-1:-1" placeholder="SELECT r.reg..routes..." />
           </folding>
         </state>
       </provider>
@@ -1247,12 +1181,12 @@
         <state vertical-scroll-proportion="-17.5">
           <caret line="28" column="30" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
           <folding>
-            <marker date="1451751576901" expanded="true" signature="4229:4311" placeholder="SELECT point..waypoints..." />
-            <marker date="1451751576901" expanded="true" signature="5269:5329" placeholder="SELECT segme..segments..." />
-            <marker date="1451751576901" expanded="true" signature="5708:5886" placeholder="SELECT segme..segments..." />
-            <marker date="1451751576901" expanded="true" signature="8089:8175" placeholder="SELECT point..waypoints..." />
-            <marker date="1451751576901" expanded="true" signature="9029:9109" placeholder="SELECT regio..routes..." />
-            <marker date="1451751576901" expanded="true" signature="9647:9727" placeholder="SELECT * FRO..routes..." />
+            <marker date="1451751576901" expanded="true" signature="-1:-1" placeholder="SELECT point..waypoints..." />
+            <marker date="1451751576901" expanded="true" signature="-1:-1" placeholder="SELECT segme..segments..." />
+            <marker date="1451751576901" expanded="true" signature="-1:-1" placeholder="SELECT segme..segments..." />
+            <marker date="1451751576901" expanded="true" signature="-1:-1" placeholder="SELECT point..waypoints..." />
+            <marker date="1451751576901" expanded="true" signature="-1:-1" placeholder="SELECT regio..routes..." />
+            <marker date="1451751576901" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..routes..." />
           </folding>
         </state>
       </provider>
@@ -1389,19 +1323,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/user/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.583333">
-          <caret line="84" column="36" selection-start-line="84" selection-start-column="36" selection-end-line="84" selection-end-column="36" />
-          <folding>
-            <marker date="1451763582636" expanded="true" signature="4505:4529" placeholder="..." />
-            <marker date="1451763582636" expanded="true" signature="4786:5142" placeholder="SELECT COUNT..connectedRoutes..." />
-            <marker date="1451763582636" expanded="true" signature="6290:6572" placeholder="SELECT rg.co..overallMileageByRegion..." />
-            <marker date="1451763582636" expanded="true" signature="8066:8521" placeholder="SELECT sys.c..systems..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/travelMapping.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1418,12 +1339,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/user/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.625">
+          <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+          <folding>
+            <marker date="1451782537372" expanded="true" signature="4506:4530" placeholder="..." />
+            <marker date="1451782537372" expanded="true" signature="4787:5143" placeholder="SELECT COUNT..connectedRoutes..." />
+            <marker date="1451782537372" expanded="true" signature="6291:6573" placeholder="SELECT rg.co..overallMileageByRegion..." />
+            <marker date="1451782537372" expanded="true" signature="8067:8522" placeholder="SELECT sys.c..systems..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shields/template_usact.svg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shields/template_usact_wide.svg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="45" selection-start-line="17" selection-start-column="45" selection-end-line="17" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shields/template_usaco.svg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/shields/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.78008914">
-          <caret line="53" column="59" selection-start-line="53" selection-start-column="59" selection-end-line="53" selection-end-column="59" />
+        <state vertical-scroll-proportion="0.3343239">
+          <caret line="42" column="22" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
           <folding>
-            <marker date="1451764744600" expanded="true" signature="459:501" placeholder="SELECT * FRO..routes..." />
+            <marker date="1451787649669" expanded="true" signature="459:501" placeholder="SELECT * FRO..routes..." />
           </folding>
         </state>
       </provider>

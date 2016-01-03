@@ -5,7 +5,7 @@
         $user = $_GET['u'];
         setcookie("lastuser", $user, time() + (86400 * 30), "/");
     } else if (isset($_COOKIE['lastuser'])) {
-        header("Location: user?u=" . $_COOKIE['lastuser']); /* Redirect browser */
+        header("Location: /user?u=" . $_COOKIE['lastuser']); /* Redirect browser */
         exit();
     }
 

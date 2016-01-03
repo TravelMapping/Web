@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="600"
+   height="600"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.91 r"
+   version="1.0"
+   sodipodi:docname="template_usanj.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="444.06896"
+     inkscape:cy="123.48492"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:window-width="1920"
+     inkscape:window-height="1020"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     showgrid="false"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style=""
+       d="M 0,50 C 0,22.38574 22.3853,0 50,0 L 550,0 C 577.6143,0 600,22.38574 600,50 L 600,550 C 600,577.6152 577.6143,600 550,600 L 50,600 C 22.3853,600 0,577.6152 0,550 L 0,50 L 0,50 z "
+       id="path5" />
+    <path
+       style=""
+       d=""
+       id="path7" />
+    <path
+       style="fill:#ffffff"
+       d="M 587.49999,299.99998 C 587.49999,458.69998 458.69999,587.50001 299.99999,587.50001 C 141.29999,587.50001 12.499987,458.69998 12.499987,299.99998 C 12.499987,141.29998 141.29999,12.499981 299.99999,12.499981 C 458.69999,12.499981 587.49999,141.29998 587.49999,299.99998 z "
+       id="circle11" />
+    <path
+       style="fill:#ffffff"
+       d=""
+       id="path1446" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.99826401;stroke-miterlimit:4;stroke-opacity:1"
+       d="M 587.00096,299.99995 C 587.00096,458.42445 458.42452,587.00086 300.00002,587.00086 C 141.57555,587.00086 12.999144,458.42445 12.999144,299.99995 C 12.999144,141.57545 141.57555,12.999044 300.00002,12.999044 C 458.42452,12.999044 587.00096,141.57545 587.00096,299.99995 z "
+       id="circle1313" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.99826401;stroke-miterlimit:4;stroke-opacity:1"
+       d=""
+       id="path1315" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:507.73693848px;line-height:125%;font-family:'Roadgeek 2014 Series D';-inkscape-font-specification:'Roadgeek 2014 Series D, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="300.18356"
+       y="445.06769"
+       id="text4140"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4142"
+         x="300.18362"
+         y="445.06769"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Roadgeek 2014 Series D';-inkscape-font-specification:'Roadgeek 2014 Series D';text-align:center;text-anchor:middle">***NUMBER***</tspan></text>
+  </g>
+</svg>
