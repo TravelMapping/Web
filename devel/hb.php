@@ -1,4 +1,6 @@
 <?php
+include $_SERVER['DOCUMENT_ROOT']."/shields/index.php";
+
 if (array_key_exists("u", $_GET)) {
     setcookie("lastuser", $_GET['u'], time() + (86400 * 30), "/");
 } else if (isset($_COOKIE['lastuser'])) {
@@ -238,7 +240,7 @@ if ($showingmap == 0) {
 <?php
 if ($showingmap == 1) {
     echo "<div id=\"pointbox\">\n";
-    echo "<img width='400' height='100' src='/shields?r=" . $_GET['r'] . "' alt='".$_GET['r']."'></img>";
+    echo "<span class='bigshield'>".generate($_GET['r'])."</span>";
     echo "<table class=\"gratable\"><thead><tr><th colspan=\"2\">Waypoints</th></tr><tr><th>Coordinates</th><th>Waypoint Name</th></tr></thead><tbody>\n";
     $sql_command = "SELECT pointName, latitude, longitude FROM waypoints WHERE root = '" . $_GET['r'] . "';";
     $res = $db->query($sql_command);

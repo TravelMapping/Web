@@ -108,3 +108,13 @@ table.tablesorter th.headerSortUp {
 table.tablesorter th.headerSortDown {
     background-color: #FFDDDD;
 }
+
+.shield svg {
+    width: 45px;
+    height: 36px;
+}
+
+.bigshield svg {
+    width: 400px;
+    height: 100px;
+}

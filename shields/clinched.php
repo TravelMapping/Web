@@ -1,4 +1,5 @@
 <?php
+include "index.php";
 $user = "null";
 
 if (array_key_exists("u", $_GET)) {
@@ -26,6 +27,7 @@ $sql = "SELECT * FROM connectedRoutes WHERE "
 <head>
     <title>Clinched Routes for <?php echo $user ?></title>
     <link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
+    <link rel="stylesheet" type="text/css" href="/fonts/roadgeek.css">
 </head>
 <body>
     <a href="/">Home</a> -
@@ -37,7 +39,7 @@ $sql = "SELECT * FROM connectedRoutes WHERE "
         <input type="text" name="u" form="userselect" value="<?php echo $user ?>">
         <input type="submit">
     </form>
-    <h1>Clinched Routes for <?php echo $user ?>: </h1>
+    <h1 style="font-family:'Roadgeek 2014 Series EEM', sans-serif">Clinched Routes for <?php echo $user ?>: </h1>
     <table>
     <?php
     $sql = <<<SQL
@@ -60,7 +62,7 @@ SQL;
         $rootList = explode(",", $row['clinchedRoutes']);
         $col = 0;
         foreach($rootList as $root) {
-            echo "<a href='/devel/hb.php?r={$root}'><img src='/shields?r={$root}' height='36' width='45'/></a>";
+            echo "<a href='/devel/hb.php?u=$user&r=$root'><span class='shield'>".generate($root)."</span></a>";
             $col++;
             if ($col > 8) {
                 echo "<br/>";
