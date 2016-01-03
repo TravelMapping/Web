@@ -23,7 +23,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -40,52 +40,13 @@
      inkscape:window-height="1020"
      id="namedview4268"
      showgrid="false"
-     inkscape:zoom="1.0484037"
-     inkscape:cx="291.29217"
-     inkscape:cy="360.86038"
+     inkscape:zoom="0.26210093"
+     inkscape:cx="1484.7335"
+     inkscape:cy="-109.85927"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg2" />
   <defs
      id="defs4" />
-  <path
-     d="m 37.50003,-4.8e-4 675.00054,0 c 20.77502,0 37.50003,16.725013 37.50003,37.50003 l 0,525.00042 C 750.0006,583.27499 733.27559,600 712.50057,600 L 37.50003,600 C 16.725013,600 0,583.27499 0,562.49997 L 0,37.49955 C 0,16.724533 16.725013,-4.8e-4 37.50003,-4.8e-4 Z"
-     style="fill:#000000;fill-opacity:1;stroke:none"
-     id="rect5533"
-     inkscape:connector-curvature="0" />
-  <g
-     id="g4920"
-     transform="translate(364.20893,444.60407)">
-    <text
-       sodipodi:linespacing="125%"
-       id="text4146"
-       y="61.401772"
-       x="10.959682"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:465.42553711px;line-height:125%;font-family:'Roadgeek 2014 Series D';-inkscape-font-specification:'Roadgeek 2014 Series D, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       xml:space="preserve"><tspan
-         y="61.401772"
-         x="10.959733"
-         id="tspan4148"
-         sodipodi:role="line">***NUMBER***</tspan></text>
-    <text
-       sodipodi:linespacing="125%"
-       id="text4871"
-       y="-281.36475"
-       x="-179.91397"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:126.93423462px;line-height:125%;font-family:'Roadgeek 2014 Series D';-inkscape-font-specification:'Roadgeek 2014 Series D, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       xml:space="preserve"><tspan
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Roadgeek 2014 Series C';-inkscape-font-specification:'Roadgeek 2014 Series C'"
-         y="-281.36475"
-         x="-179.91397"
-         id="tspan4873"
-         sodipodi:role="line">MONTANA</tspan></text>
-  </g>
-  <rect
-     style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:9;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-     id="rect4926"
-     width="685"
-     height="540"
-     x="40.000301"
-     y="29.99976" />
 </svg>

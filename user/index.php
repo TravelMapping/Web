@@ -124,14 +124,14 @@
             $res = $db->query($sql_command);
             $row = $res->fetch_assoc();
             $res->free();
-            echo "<b><tr style=\"background-color:#EEEEFF\"><td>Overall</td><td colspan=2>Miles Driven: " . $row['clinchedMileage'] . " mi (" . $row['percentage'] . "%)</td><td>Total: " . $row['totalMileage'] . " mi</td></tr></b>\n";
+            echo "<b><tr class='notclickable' style=\"background-color:#EEEEFF\"><td>Overall</td><td colspan=2>Miles Driven: " . $row['clinchedMileage'] . " mi (" . $row['percentage'] . "%)</td><td>Total: " . $row['totalMileage'] . " mi</td></tr></b>\n";
 
             //Second, fetch routes driven/clinched
             $sql_command = "SELECT COUNT(cr.route) AS total, COUNT(ccr.route) AS driven, SUM(ccr.clinched) AS clinched, ROUND(COUNT(ccr.route) / COUNT(cr.route) * 100,2) AS drivenPercent, ROUND(SUM(ccr.clinched) / COUNT(cr.route) * 100,2) AS clinchedPercent FROM connectedRoutes AS cr LEFT JOIN clinchedConnectedRoutes AS ccr ON cr.firstRoot = ccr.route AND traveler = '" . $user . "';";
             echo "<!-- SQL:" . $sql_command . "-->";
             $res = $db->query($sql_command);
             $row = $res->fetch_assoc();
-            echo "<tr><td>Routes</td><td>Driven: " . $row['driven'] . " (" . $row['drivenPercent'] . "%)</td><td>Clinched: " . $row['clinched'] . " (" . $row['clinchedPercent'] . "%)</td><td>Total: " . $row['total'] . "</td></tr>\n";
+            echo "<tr onClick=\"window.open('/shields/clinched.php?u={$user}')\"><td>Routes</td><td>Driven: " . $row['driven'] . " (" . $row['drivenPercent'] . "%)</td><td>Clinched: " . $row['clinched'] . " (" . $row['clinchedPercent'] . "%)</td><td>Total: " . $row['total'] . "</td></tr>\n";
             $res->free;
 
             ?>

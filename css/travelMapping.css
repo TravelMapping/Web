@@ -68,6 +68,10 @@ table.gratable tr:hover td {
     background-color: #CCCCCC;
 }
 
+table.gratable tr.notclickable:hover td {
+    background-color: inherit;
+}
+
 table.tablesorter th.nonsortable {
     background-color: #DDDDDD;
 }
