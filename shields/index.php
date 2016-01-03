@@ -45,6 +45,16 @@
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+        case 'usamt':
+            $routeNum = str_replace("MT", "", $row['route']);
+            if (strlen($routeNum) > 3) {
+                $svg = file_get_contents("template_usamt_wide4.svg");
+            } elseif (strlen($routeNum) > 2) {
+                $svg = file_get_contents("template_usamt_wide.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
         case 'usansf':
             $region = explode(".", $r)[0];
             $routeNum = str_replace(strtoupper($region), "", $row['route']);
