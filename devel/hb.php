@@ -14,6 +14,13 @@ if (array_key_exists("db", $_GET)) {
     $dbname = $_GET['db'];
     setcookie("currentdb", $dbname, time() + (86400 * 30), "/");
 }
+
+if (array_key_exists("rg", $_GET) and strlen($_GET['rg']) > 0) {
+    $region = $_GET['rg'];
+}
+if (array_key_exists("sys", $_GET) and strlen($_GET['sys']) > 0) {
+    $system = $_GET['sys'];
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
@@ -176,7 +183,20 @@ if (array_key_exists("db", $_GET)) {
             }
         );
     </script>
-    <title>Travel Mapping Highway Browser (Draft)</title>
+    <title><?php
+        if ($showingmap == 1) {
+            $sql_command = "SELECT * FROM routes WHERE root = '".$_GET['r']."'";
+            $routeInfo = $db->query($sql_command)->fetch_array();
+            echo $routeInfo['region'] . " " . $routeInfo['route'];
+            if (strlen($routeInfo['banner']) > 0) {
+                echo " " . $routeInfo['banner'];
+            }
+            if (strlen($routeInfo['city']) > 0) {
+                echo " (" . $routeInfo['city'] . ")";
+            }
+            echo " - ";
+        }
+        ?>Travel Mapping Highway Browser (Draft)</title>
 </head>
 
 <?php
@@ -201,6 +221,19 @@ if ($showingmap == 0) {
 ?>
 
 <h1>Travel Mapping Highway Browser (Draft)</h1>
+<script type="text/javascript">
+    $(document).ready(function () {
+            $("#routes").tablesorter({
+                sortList: [[0, 0]],
+                headers: {0: {sorter: false},}
+            });
+            $("#systemsTable").tablesorter({
+                sortList: [[0, 0], [4, 0], [3, 0]],
+                headers: {0: {sorter: false},}
+            });
+        }
+    );
+</script>
 
 <?php
 if ($showingmap == 1) {
@@ -247,7 +280,7 @@ ENDA;
 <div id="map">
 </div>
 ENDB;
-} else {  // we have no r=, so we will show a list of all
+} elseif (!is_null($region) or !is_null($system)) {  // we have no r=, so we will show a list of all
     $sql_command = "SELECT * FROM routes LEFT JOIN systems ON systems.systemName = routes.systemName";
     //check for query string parameter for system and region filters
     if (array_key_exists("sys", $_GET) && strlen($_GET["sys"]) > 0) {
@@ -262,7 +295,7 @@ ENDB;
     $sql_command .= ";";
     echo "<!-- SQL: " . $sql_command . " -->\n";
     echo "<div id=\"routebox\">\n";
-    echo "<table class=\"gratable tablesorter ws_data_table\" id=\"routes\"><thead><tr><th colspan=\"5\">Select Route to Display (click a header to sort by that column)</th></tr><tr><th class=\"sortable\">System</th><th class=\"sortable\">Region</th><th class=\"sortable\">Route Name</th><th>.list Name</th><th class=\"sortable\">Level</th><th>Root</th></tr></thead><tbody>\n";
+    echo "<table class=\"gratable tablesorter ws_data_table\" id=\"routes\"><thead><tr><th colspan=\"6\">Select Route to Display (click a header to sort by that column)</th></tr><tr><th class=\"sortable\">System</th><th class=\"sortable\">Region</th><th class=\"sortable\">Route Name</th><th>.list Name</th><th class=\"sortable\">Level</th><th>Root</th></tr></thead><tbody>\n";
     $res = $db->query($sql_command);
     while ($row = $res->fetch_assoc()) {
         echo "<tr class=\"status-" . $row['level'] . "\"><td>" . $row['systemName'] . "</td><td>" . $row['region'] . "</td><td>" . $row['route'] . $row['banner'];
@@ -273,6 +306,33 @@ ENDB;
     }
     $res->free();
     echo "</table></div>\n";
+} else {
+    //We have no filters at all, so display list of systems as a landing page.
+    echo <<<HTML
+    <table class="gratable tablesorter" id="systemsTable">
+        <caption>TIP: Click on a column header to sort. Hold SHIFT to sort by multiple columns.</caption>
+        <thead>
+            <tr><th colspan="5">List of Systems</th></tr>
+            <tr><th class="sortable">Country</th><th class="sortable">System</th><th class="sortable">Code</th><th class="sortable">Status</th><th class="sortable">Level</th></tr>
+        </thead>
+        <tbody>
+HTML;
+
+    $sql_command = "SELECT * FROM systems LEFT JOIN countries ON countryCode = countries.code";
+    $res = $db->query($sql_command);
+    while ($row = $res->fetch_assoc()) {
+        $linkJS = "window.open('hb.php?sys={$row['systemName']}')";
+        echo "<tr class='status-".$row['level']."' onClick=\"$linkJS\">";
+        if (strlen($row['name']) > 15) {
+            echo "<td>{$row['code']}</td>";
+        } else {
+            echo "<td>{$row['name']}</td>";
+        }
+
+        echo "<td>{$row['fullName']}</td><td>{$row['systemName']}</td><td>{$row['level']}</td><td>Tier {$row['tier']}</td></tr>\n";
+    }
+
+    echo "</tbody></table>";
 }
 $db->close();
 ?>
