@@ -336,7 +336,7 @@
         $res = mysql_query($sql_command);
         while($row = mysql_fetch_array($res)) {
             $link = "/devel/hb.php?u=".$_GET['u']."&r=".$row['root'];
-            echo "<tr onClick=\"window.document.location='".$link."'\"><td>";
+            echo "<tr onClick=\"window.open('".$link."')\"><td>";
             //REGION ROUTE BANNER (CITY)
             echo $row['region'] . " " . $row['route'];
             if (strlen($row['banner']) > 0) {

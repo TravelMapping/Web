@@ -117,13 +117,13 @@ if (is_null($user) || is_null($system)) {
 
     ?>
     <title><?php
-        echo "Traveler Stats for " . $user . " on ";
         if (!is_null($region)) {
             echo $system;
             echo " in " . $region;
         } else {
             echo $systemInfo['fullName'];
         }
+        echo " - ".$user;
         ?></title>
     <script
         src="http://maps.googleapis.com/maps/api/js?sensor=false"
@@ -267,9 +267,15 @@ if (is_null($user) || is_null($system)) {
     );
 </script>
 <div id="header">
-    <a href="/user?u=<?php echo $user ?>"><?php echo $user ?></a>-
-    <a href="/">Home</a>-
-    <a href="/hbtest">Highway Browser</a>-
+    <a href="/user?u=<?php echo $user ?>"><?php echo $user ?></a> -
+    <a href="/">Home</a> -
+    <a href="/hbtest">Highway Browser</a>
+    <?php
+        if(!is_null($region)) {
+            echo " - <a href='system.php?u=".$user."&sys=".$system."'> ".$system."</a>";
+            echo " - <a href='region.php?u=".$user."&rg=".$region."'> ".$region."</a>";
+        }
+    ?>
     <form id="userselect">
         <label>User: </label>
         <input type="text" name="u" form="userselect" value="<?php echo $user ?>" required>
@@ -322,7 +328,7 @@ SQL;
             echo "<!--".$sql_command."-->";
             $res = mysql_query($sql_command);
             $row = mysql_fetch_array($res);
-            $link = "window.document.location='/hbtest/mapview.php?u=" . $user . "&rg=" . $region . "'";
+            $link = "window.open('/hbtest/mapview.php?u=" . $user . "&rg=" . $region . "')";
             echo "<tr style=\"background-color:#EEEEFF\"><td>Overall</td><td colspan='2'>Miles Driven: ".$row['clinched']." mi (".$row['percentage']."%)</td><td>Total: ".$row['overall']." mi</td><td>Rank: TBD</td></tr>";
 
             //Second, fetch routes clinched/driven
@@ -390,9 +396,9 @@ SQL;
 
             while ($row = mysql_fetch_array($res)) {
                 if (is_null($region)) {
-                    $link = "window.document.location='/hbtest/mapview.php?u=" . $user . "&rte=" . $row['route'] . "'";
+                    $link = "window.open('/hbtest/mapview.php?u=" . $user . "&rte=" . $row['route'] . "')";
                 } else {
-                    $link = "window.document.location='/devel/hb.php?u=" . $user . "&r=" . $row['root'] . "'";
+                    $link = "window.open('/devel/hb.php?u=" . $user . "&r=" . $row['root'] . "')";
                 }
 
                 echo "<tr onClick=\"" . $link . "\">";

@@ -122,11 +122,12 @@
     }
 
     ?>
-    <title><?php echo "Traveler Stats for " . $user . " in " . $regionInfo['name']; ?></title>
+    <title><?php echo $regionInfo['name']." - ".$user; ?></title>
     <script
         src="http://maps.googleapis.com/maps/api/js?sensor=false"
         type="text/javascript"></script>
     <script src="chmviewerfunc3.js" type="text/javascript"></script>
+    <script src="/lib/tmjsfuncs.js" type="text/javascript"></script>
     <!-- jQuery -->
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <!-- TableSorter -->
@@ -269,9 +270,9 @@
     }
 </script>
 <div id="header">
-    <a href="/user?u=<?php echo $user ?>"><?php echo $user ?></a>-
-    <a href="/">Home</a>-
-    <a href="/hbtest">Highway Browser</a>-
+    <a href="/user?u=<?php echo $user ?>"><?php echo $user ?></a> -
+    <a href="/">Home</a> -
+    <a href="/hbtest">Highway Browser</a>
 
     <form id="userselect" action="region.php">
         <label>User: </label>
@@ -306,7 +307,7 @@ SQL
             echo "<!--".$sql_command."-->";
             $res = mysql_query($sql_command);
             $row = mysql_fetch_array($res);
-            $link = "window.document.location='/hbtest/mapview.php?u=" . $user . "&rg=" . $region . "'";
+            $link = "redirect('/hbtest/mapview.php?u=" . $user . "&rg=" . $region . "')";
             echo "<tr style=\"background-color:#EEEEFF\"><td>Overall</td><td colspan='2'>Miles Driven: ".$row['clinched']." mi (".$row['percentage']."%)</td><td>Total: ".$row['overall']." mi</td><td>Rank: TBD</td></tr>";
 
             //Second, fetch routes clinched/driven
@@ -360,7 +361,7 @@ SQL;
 
         $res = mysql_query($sql_command);
         while ($row = mysql_fetch_array($res)) {
-            echo "<tr onClick=\"window.document.location='/user/system.php?u=" . $user . "&sys=" . $row['systemName'] . "&rg=" . $region . "'\" class=\"status-" . $row['status'] . "\">";
+            echo "<tr onClick=\"window.open('/user/system.php?u=" . $user . "&sys=" . $row['systemName'] . "&rg=" . $region . "')\" class=\"status-" . $row['status'] . "\">";
             echo "<td>" . $row['systemName'] . "</td>";
             echo "<td>" . $row['fullName'] . "</td>";
             echo "<td>" . $row['clinchedMileage'] . "</td>";
@@ -381,7 +382,7 @@ SQL;
                 echo "<!--".$sql_command."-->";
                 $res = mysql_query($sql_command);
                 while ($row = mysql_fetch_array($res)) {
-                    echo "<tr onClick=\"redirect('/devel/hb.php?u=".$user."&r=".$row['root']."')\">";
+                    echo "<tr onClick=\"window.open('/devel/hb.php?u=".$user."&r=".$row['root']."')\">";
                     echo "<td>".$row['route'];
                     if (strlen($row['banner']) > 0) {
                         echo " ".$row['banner']." ";
