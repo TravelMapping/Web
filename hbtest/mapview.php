@@ -115,6 +115,19 @@
         return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== FALSE);
     }
 
+    function orClauseBuilder($param, $name, $tablename = 'r') {
+        $array = explode(",", $_GET[$param]);
+        $clause = "(";
+        $i = 0;
+        foreach($array as $item) {
+            $clause.="{$tablename}.{$name} = '{$item}'";
+            $i++;
+            if($i < sizeof($array)) $clause .= " or ";
+        }
+        $clause .= ")";
+        return $clause;
+    }
+
     ?>
     <script src="chmviewerfunc3.js" type="text/javascript"></script>
     <script>
@@ -172,18 +185,17 @@
                 $where_systems = $where_systems.")";
               }
 
-              // make sure we have selected some region or system
-              if (($num_systems == 0) && ($num_regions == 0)) {
-                if (array_key_exists("rte", $_GET)) {
-                  $rteClause = " where (routes.route like '".$_GET['rte']."' or route regexp '".$_GET['rte']."[a-z]')";
-                  $rteClause = str_replace("*", "%", $rteClause);
-                  $sql_command = "SELECT waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname FROM waypoints JOIN routes ON routes.root = waypoints.root JOIN systems ON routes.systemname = systems.systemname AND systems.active='1' ".$rteClause." ORDER BY root, waypoints.pointId;";
-                } else {
+            if (array_key_exists("rte", $_GET)) {
+              $rteClause = " where (routes.route like '".$_GET['rte']."' or route regexp '".$_GET['rte']."[a-z]')";
+              $rteClause = str_replace("*", "%", $rteClause);
+              if (array_key_exists('rg', $_GET)) $rteClause .= " AND ".orClauseBuilder('rg', 'region','routes');
+              if (array_key_exists('sys', $_GET)) $rteClause .= " AND ".orClauseBuilder('sys', 'systemName','routes');
+              $sql_command = "SELECT waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname FROM waypoints JOIN routes ON routes.root = waypoints.root JOIN systems ON routes.systemname = systems.systemname AND systems.active='1' ".$rteClause." ORDER BY root, waypoints.pointId;";
+            } elseif (($num_systems == 0) && ($num_regions == 0)) {
                  // for now, put in a default to usai, do something better later
                  $select_systems = " and (routes.systemName='usai')";
                  $where_systems = " where (routes.systemName='usai')";
                  $sql_command = "SELECT waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname FROM waypoints JOIN routes ON routes.root = waypoints.root".$select_regions.$select_systems." JOIN systems ON routes.systemname = systems.systemname AND systems.active='1' ORDER BY root, waypoints.pointId;";
-                }
               } else {
                 $sql_command = "SELECT waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname FROM waypoints JOIN routes ON routes.root = waypoints.root".$select_regions.$select_systems." JOIN systems ON routes.systemname = systems.systemname AND systems.active='1' ORDER BY root, waypoints.pointId;";
               }
@@ -322,13 +334,15 @@
         if (array_key_exists('rte', $_GET)) {
             $sql_command .= "(r.route like '".$_GET['rte']."' or r.route regexp '".$_GET['rte']."[a-z]')";
             $sql_command = str_replace("*", "%", $sql_command);
-        } elseif (array_key_exists('rg', $_GET) && array_key_exists('sys', $_GET)) {
-            $sql_command .= "r.region = '".$_GET['rg']."' AND r.systemName = '".$_GET['sys']."';";
+            if (array_key_exists('rg', $_GET) or array_key_exists('sys', $_GET)) $sql_command .= ' AND ';
+        }
+        if (array_key_exists('rg', $_GET) && array_key_exists('sys', $_GET)) {
+            $sql_command .= orClauseBuilder('rg', 'region')." AND ".orClauseBuilder('sys', 'systemName').";";
         } elseif (array_key_exists('rg', $_GET)) {
-            $sql_command .= "r.region = '".$_GET['rg']."';";
+            $sql_command .= orClauseBuilder('rg', 'region').";";
         } elseif (array_key_exists('sys', $_GET)) {
-            $sql_command .= "r.systemName = '".$_GET['sys']."';";
-        } else {
+            $sql_command .= orClauseBuilder('sys', 'systemName').";";
+        } elseif (!array_key_exists('rte', $_GET)) {
             //Don't show. Too many routes
             $sql_command .= "r.root IS NULL;";
         }
