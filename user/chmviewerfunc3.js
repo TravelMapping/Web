@@ -4,8 +4,6 @@
 // Load and view data files related to Clinched Highway Mapping (CHM)
 // related academic data sets.
 //
-// Renamed as tmjsfuncs.js as part of the Travel Mapping project
-//
 // Author: Jim Teresco, Siena College, The College of Saint Rose
 //
 // Code developed based on examples from 
@@ -27,7 +25,7 @@
 // 2015-06-10 JDT  Adapted for reading from database entries using PHP
 // 2015-06-14 JDT  Clinched segment support
 // 2015-06-17 JDT  All highways in region support
-// 2015-08-19 JDT  Fixed a few bugs with infowindows
+// 2015-11-14 JDT  Support for colors= QS parameter for custom map colors
 //
 // $Id: chmviewerfunc3.js 2535 2015-01-28 18:46:22Z terescoj $
 //
@@ -43,6 +41,8 @@ var newRouteIndices = new Array();
 var routeTier = new Array();
 // color code for each route included
 var routeColor = new Array();
+// system for each route included
+var routeSystem = new Array();
 // the markers at those waypoints
 var markers = new Array();
 // the info displayed when markers are clicked
@@ -72,6 +72,9 @@ colorCodes[3] = { name: "yellow", unclinched: "rgb(255,255,128)", clinched: "rgb
 colorCodes[4] = { name: "teal", unclinched: "rgb(100,200,200)", clinched: "rgb(0,200,200)" };
 colorCodes[5] = { name: "green", unclinched: "rgb(100,255,100)", clinched: "rgb(0,255,0)" };
 colorCodes[6] = { name: "magenta", unclinched: "rgb(255,100,255)", clinched: "rgb(255,0,255)" };
+
+// array of custom color codes to be pulled from query string parameter "colors="
+var customColorCodes = new Array();
 
 var infowindow = new google.maps.InfoWindow();
 
@@ -675,6 +678,17 @@ function updateMap()
 			clinchedColor = colorCodes[c].clinched;
 		    }
 		}
+		// override with tier or system colors given in query string if they match
+		for (var c = 0; c<customColorCodes.length; c++) {
+		    if (customColorCodes[c].name == ("tier"+routeTier[route])) {
+			unclinchedColor = customColorCodes[c].unclinched;
+			clinchedColor = customColorCodes[c].clinched;
+		    }
+		    if (customColorCodes[c].name == routeSystem[route]) {
+			unclinchedColor = customColorCodes[c].unclinched;
+			clinchedColor = customColorCodes[c].clinched;
+		    }
+		}
 		for (var i=start; i<end; i++) {
 		    var zIndex = 10 - routeTier[route];
 		    var edgePoints = new Array(2);
@@ -772,11 +786,10 @@ function AddMarker(marker, markerinfo, i) {
 
 function LabelClick(i, label, lat, lon, errors) {
 
-    //var info = MarkerInfo(i, new Waypoint(label, lat, lon, errors, ""));
+    var info = MarkerInfo(i, new Waypoint(label, lat, lon, errors, ""));
     map.panTo(new google.maps.LatLng(lat, lon)); 
-    //infowindow.setContent(info);
-    infowindow.setContent(markerinfo[i]);
-    infowindow.open(map, markers[i]);
+    infowindow.setContent(info);
+    infowindow.open(map. markers[i]);
 }
 
 function MarkerInfo(i, wpt) {
@@ -836,9 +849,7 @@ function showMarkersClicked() {
     var showThem = document.getElementById('showMarkers').checked;
     if (showThem) {
 	for (var i = 0; i < waypoints.length; i++) {
-	    if (waypoints[i].visible) {
-		AddMarker(markers[i], markerinfo[i], i);
-	    }
+	    AddMarker(markers[i], markerinfo[i], i);
 	}
     }
     else {
@@ -846,11 +857,6 @@ function showMarkersClicked() {
 	    markers[i].setMap(null);
 	}
     }
-}
-
-function redirect(url) {
-	var win = window.open(url);
-	win.focus();
 }
 
 // JS debug window by Mike Maddox from
