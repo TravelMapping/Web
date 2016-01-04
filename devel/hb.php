@@ -240,7 +240,7 @@ if ($showingmap == 0) {
 <?php
 if ($showingmap == 1) {
     echo "<div id=\"pointbox\">\n";
-    echo "<span class='bigshield'>".generate($_GET['r'])."</span>";
+    echo "<span class='bigshield'>".generate($_GET['r'], true)."</span>";
     echo "<table class=\"gratable\"><thead><tr><th colspan=\"2\">Waypoints</th></tr><tr><th>Coordinates</th><th>Waypoint Name</th></tr></thead><tbody>\n";
     $sql_command = "SELECT pointName, latitude, longitude FROM waypoints WHERE root = '" . $_GET['r'] . "';";
     $res = $db->query($sql_command);
