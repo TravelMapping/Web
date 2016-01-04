@@ -2,7 +2,7 @@
 function generate($r, $force_reload = false)
 {
     $dir = $_SERVER['DOCUMENT_ROOT']."/shields";
-    if(file_exists("{$dir}/cache/shield_{$r}.svg")) {
+    if(file_exists("{$dir}/cache/shield_{$r}.svg") && !$force_reload) {
         //load from cache
         return file_get_contents("{$dir}/cache/shield_{$r}.svg");
     }
@@ -12,7 +12,7 @@ function generate($r, $force_reload = false)
     $res = $db->query($sql_command);
     $row = $res->fetch_assoc();
 
-    if (file_exists("{$dir}/template_" . $row['systemName'] . ".svg") && !$force_reload) {
+    if (file_exists("{$dir}/template_" . $row['systemName'] . ".svg")) {
         $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . ".svg");
     } else {
         $svg = file_get_contents("{$dir}/generic.svg");
