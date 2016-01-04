@@ -305,9 +305,9 @@ if (is_null($user) || is_null($system)) {
             if(is_null($region)) {
                 $sql_command = <<<SQL
                 SELECT
-                    round(sum(coalesce(cr.mileage, 0))) as overall,
-                    round(sum(coalesce(ccr.mileage, 0))) as clinched,
-                    round(sum(coalesce(ccr.mileage, 0))) / round(sum(coalesce(cr.mileage, 0)), 2) * 100 AS percentage
+                    round(sum(coalesce(cr.mileage, 0)), 2) as overall,
+                    round(sum(coalesce(ccr.mileage, 0)), 2) as clinched,
+                    round(sum(coalesce(ccr.mileage, 0)), 2) / round(sum(coalesce(cr.mileage, 0)), 2) * 100 AS percentage
                 FROM connectedRoutes as cr
                 LEFT JOIN clinchedConnectedRoutes as ccr
                 ON cr.firstRoot = ccr.route AND ccr.traveler = '$user'
@@ -316,9 +316,9 @@ SQL;
             } else {
                 $sql_command = <<<SQL
                 SELECT
-                    round(sum(coalesce(r.mileage, 0))) as overall,
-                    round(sum(coalesce(cr.mileage, 0))) as clinched,
-                    round(sum(coalesce(cr.mileage, 0))) / round(sum(coalesce(r.mileage, 0)), 2) * 100 AS percentage
+                    round(sum(coalesce(r.mileage, 0)), 2) as overall,
+                    round(sum(coalesce(cr.mileage, 0)), 2) as clinched,
+                    round(sum(coalesce(cr.mileage, 0)), 2) / round(sum(coalesce(r.mileage, 0)), 2) * 100 AS percentage
                 FROM routes as r
                 LEFT JOIN clinchedRoutes as cr
                 ON r.root = cr.route AND cr.traveler = '$user'

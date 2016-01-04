@@ -112,9 +112,9 @@
             <?php
             //First fetch overall mileage
             $sql_command = "SELECT sys.tier, ";
-            $sql_command .= "ROUND(SUM(COALESCE(cr.mileage, 0)), 0) AS clinchedMileage, ";
-            $sql_command .= "ROUND(SUM(COALESCE(routes.mileage, 0)), 0) AS totalMileage, ";
-            $sql_command .= "ROUND(SUM(COALESCE(cr.mileage, 0)) / SUM(COALESCE(routes.mileage, 0)) * 100, 3) AS percentage ";
+            $sql_command .= "ROUND(SUM(COALESCE(cr.mileage, 0)), 2) AS clinchedMileage, ";
+            $sql_command .= "ROUND(SUM(COALESCE(routes.mileage, 0)), 2) AS totalMileage, ";
+            $sql_command .= "ROUND(SUM(COALESCE(cr.mileage, 0)) / SUM(COALESCE(routes.mileage, 0)) * 100, 2) AS percentage ";
             $sql_command .= "FROM routes ";
             $sql_command .= "LEFT JOIN clinchedRoutes AS cr ";
             $sql_command .= "ON routes.root = cr.route AND traveler = '" . $user . "' ";
@@ -188,7 +188,7 @@
         </thead>
         <tbody>
         <?php
-        $sql_command = "SELECT sys.countryCode, sys.systemName, sys.level, sys.tier, sys.fullName, r.root, COALESCE(ROUND(SUM(cr.mileage), 2),0) AS clinchedMileage, COALESCE(ROUND(SUM(r.mileage), 2), 0) AS totalMileage, COALESCE(ROUND(SUM(cr.mileage) / SUM(r.mileage) * 100, 3), 0) AS percentage FROM systems AS sys INNER JOIN routes AS r ON r.systemName = sys.systemName LEFT JOIN clinchedRoutes AS cr ON cr.route = r.root AND cr.traveler = '" . $user . "' GROUP BY r.systemName";
+        $sql_command = "SELECT sys.countryCode, sys.systemName, sys.level, sys.tier, sys.fullName, r.root, COALESCE(ROUND(SUM(cr.mileage), 2),0) AS clinchedMileage, COALESCE(ROUND(SUM(r.mileage), 2), 0) AS totalMileage, COALESCE(ROUND(SUM(cr.mileage) / SUM(r.mileage) * 100, 2), 0) AS percentage FROM systems AS sys INNER JOIN routes AS r ON r.systemName = sys.systemName LEFT JOIN clinchedRoutes AS cr ON cr.route = r.root AND cr.traveler = '" . $user . "' GROUP BY r.systemName";
         $sql_command .= ";";
         echo "<!-- SQL: " . $sql_command . "-->";
         $res = $db->query($sql_command);
