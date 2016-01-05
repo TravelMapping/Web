@@ -57,7 +57,7 @@
 
         #controlbox {
             position: fixed;
-            top: 50px;
+            top: 60px;
             bottom: 100px;
             height: 100%;
             left: 0px;
@@ -82,10 +82,15 @@
         #routes {
             position: absolute;
             right: 10px;
-            top: 110px;
+            top: 100px;
             bottom: 10px;
             overflow-y: scroll;
             max-width: 25%;
+        }
+
+        #showHideBtn {
+            position: absolute;
+            right: 10px;
         }
     </style>
     <script
@@ -321,7 +326,7 @@
     ?>
   </span>
     <span id="controlboxinfo"></span>
-    <button onclick="toggleTable()">Show/Hide Table</button>
+    <button id="showHideBtn" onclick="toggleTable()">Show/Hide Table</button>
 </div>
 <div id="map">
 </div>

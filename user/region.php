@@ -300,7 +300,7 @@
             <?php
             //First fetch overall mileage
             $sql_command = <<<SQL
-            SELECT o.mileage AS overall, c.mileage as clinched, round(c.mileage / o.mileage * 100) AS percentage
+            SELECT o.mileage AS overall, c.mileage as clinched, round(c.mileage / o.mileage * 100, 2) AS percentage
             FROM overallMileageByRegion AS o
             LEFT JOIN clinchedOverallMileageByRegion AS c ON c.region = o.region AND  c.traveler = '
 SQL
@@ -345,7 +345,7 @@ SQL
             r.root,
             COALESCE(ROUND(SUM(cr.mileage), 2), 0) AS clinchedMileage,
             COALESCE(ROUND(SUM(r.mileage), 2), 0) AS totalMileage,
-            COALESCE(ROUND(SUM(cr.mileage) / SUM(r.mileage) * 100, 3), 0) AS percentage
+            COALESCE(ROUND(SUM(cr.mileage) / SUM(r.mileage) * 100, 2), 0) AS percentage
           FROM systems as sys
           INNER JOIN routes AS r
             ON r.systemName = sys.systemName
@@ -379,7 +379,7 @@ SQL;
         </thead>
         <tbody>
             <?php
-                $sql_command = "SELECT r.route, r.root, r.banner, r.city, ROUND((COALESCE(r.mileage, 0)),2) AS totalMileage, ROUND((COALESCE(cr.mileage, 0)),2) AS clinchedMileage, ROUND((COALESCE(cr.mileage,0)) / (COALESCE(r.mileage, 0)) * 100,2) AS percentage FROM routes AS r LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '".$user."' WHERE region = '" . $region . "'";
+                $sql_command = "SELECT r.route, r.root, r.banner, r.city, ROUND((COALESCE(r.mileage, 0)),2) AS totalMileage, ROUND((COALESCE(cr.mileage, 0)),2) AS clinchedMileage, COALESCE(ROUND((COALESCE(cr.mileage,0)) / (COALESCE(r.mileage, 0)) * 100,2), 0) AS percentage FROM routes AS r LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '".$user."' WHERE region = '" . $region . "'";
                 echo "<!--".$sql_command."-->";
                 $res = mysql_query($sql_command);
                 while ($row = mysql_fetch_array($res)) {
@@ -394,7 +394,7 @@ SQL;
                     echo "</td>";
                     echo "<td>".$row['clinchedMileage']."</td>";
                     echo "<td>".$row['totalMileage']."</td>";
-                    echo "<td>".$row['percentage']."</td></tr>";
+                    echo "<td>".$row['percentage']."%</td></tr>";
                 }
             ?>
         </tbody>
