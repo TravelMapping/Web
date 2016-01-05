@@ -103,11 +103,6 @@
     <div id="overall">
         <h2>Overall Stats</h2>
         <table class="gratable" style="width: 30%" id="tierTable">
-            <thead>
-            <tr>
-                <th colspan="4">Overall Stats</th>
-            </tr>
-            </thead>
             <tbody>
             <?php
             //First fetch overall mileage
@@ -140,10 +135,9 @@
     </div>
     <h2>Stats by Region</h2>
     <table class="gratable tablesorter" id="regionsTable">
-        <caption>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</caption>
         <thead>
         <tr>
-            <th colspan="6">Clinched Mileage by Region:</th>
+            <th colspan="6">Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</th>
         </tr>
         <tr>
             <th class="sortable">Country</th>
@@ -169,10 +163,9 @@
     </table>
     <h2>Stats by System</h2>
     <table class="gratable tablesorter" id="systemsTable">
-        <caption>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</caption>
         <thead>
         <tr>
-            <th colspan="9">Clinched Mileage by System</th>
+            <th colspan="9">Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</th>
         </tr>
         <tr>
             <th class="sortable">Country</th>

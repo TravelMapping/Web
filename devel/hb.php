@@ -98,6 +98,11 @@ if (array_key_exists("sys", $_GET) and strlen($_GET['sys']) > 0) {
         #map * {
             cursor: crosshair;
         }
+
+        #waypoints:hover {
+            cursor: pointer;
+        }
+
     </style>
     <script
         src="http://maps.googleapis.com/maps/api/js?sensor=false"
@@ -241,14 +246,14 @@ if ($showingmap == 0) {
 if ($showingmap == 1) {
     echo "<div id=\"pointbox\">\n";
     echo "<span class='bigshield'>".generate($_GET['r'], true)."</span>";
-    echo "<table class=\"gratable\"><thead><tr><th colspan=\"2\">Waypoints</th></tr><tr><th>Coordinates</th><th>Waypoint Name</th></tr></thead><tbody>\n";
+    echo "<table id='waypoints' class=\"gratable\"><thead><tr><th colspan=\"2\">Waypoints</th></tr><tr><th>Coordinates</th><th>Waypoint Name</th></tr></thead><tbody>\n";
     $sql_command = "SELECT pointName, latitude, longitude FROM waypoints WHERE root = '" . $_GET['r'] . "';";
     $res = $db->query($sql_command);
     $waypointnum = 0;
     while ($row = $res->fetch_assoc()) {
         # only visible points should be in this table
         if (!startsWith($row['pointName'], "+")) {
-            echo "<tr><td>(" . $row['latitude'] . "," . $row['longitude'] . ")</td><td><a onclick='javascript:LabelClick(" . $waypointnum . ",\"" . $row['pointName'] . "\"," . $row['latitude'] . "," . $row['longitude'] . ",0);'>" . $row['pointName'] . "</a></td></tr>\n";
+            echo "<tr><td>(" . $row['latitude'] . "," . $row['longitude'] . ")</td><td class='link'><a onClick='javascript:LabelClick(" . $waypointnum . ",\"" . $row['pointName'] . "\"," . $row['latitude'] . "," . $row['longitude'] . ",0);'>" . $row['pointName'] . "</a></td></tr>\n";
         }
         $waypointnum = $waypointnum + 1;
     }

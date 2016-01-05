@@ -97,6 +97,7 @@
     </style>
     <?php
     // establish connection to db: mysql_ interface is deprecated, should learn new options
+    // TODO: Update to MySQLi or PDO
     $db = mysql_connect("localhost", "travmap", "clinch") or die("Failed to connect to database");
     mysql_select_db($dbname, $db);
     $sql_command = "SELECT * FROM regions where code = '".$region."'";
