@@ -261,7 +261,7 @@
     $(document).ready(function () {
             $("table.tablesorter").tablesorter({
                 sortList: [[0, 0]],
-                headers: {0: {sorter: false},}
+                headers: {0: {sorter: false}}
             });
         }
     );
@@ -324,7 +324,7 @@ SQL
         <caption>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</caption>
         <thead>
         <tr>
-            <th colspan="5">Clinched Mileage by System</th>
+            <th colspan="6">Clinched Mileage by System</th>
         </tr>
         <tr>
             <th class="sortable">System Code</th>
@@ -332,6 +332,7 @@ SQL
             <th class="sortable">Clinched Mileage</th>
             <th class="sortable">Total Mileage</th>
             <th class="sortable">Percent</th>
+            <th class="nonsortable">Map</th>
         </tr>
         </thead>
         <tbody>
@@ -367,15 +368,16 @@ SQL;
             echo "<td>" . $row['fullName'] . "</td>";
             echo "<td>" . $row['clinchedMileage'] . "</td>";
             echo "<td>" . $row['totalMileage'] . "</td>";
-            echo "<td>" . $row['percentage'] . "%</td></tr>";
+            echo "<td>" . $row['percentage'] . "%</td>";
+            echo "<td class='link'><a href='/devel/hb.php?rg={$region}'>HB</a></td></tr>";
         }
         ?>
         </tbody>
     </table>
     <table class="gratable tablesorter" id="routesTable">
         <thead>
-            <tr><th colspan="4">Stats by Route: (<?php echo "<a href=\"/hbtest/mapview.php?u=".$user."&rg=".$region."\">" ?>Full Map)</a></th></tr>
-            <tr><th class="sortable">Route</th><th class="sortable">Clinched Mileage</th><th class="sortable">Total Mileage</th><th class="sortable">%</th></tr>
+            <tr><th colspan="5">Stats by Route: (<?php echo "<a href=\"/hbtest/mapview.php?u=".$user."&rg=".$region."\">" ?>Full Map)</a></th></tr>
+            <tr><th class="sortable">Route</th><th class="sortable">Clinched Mileage</th><th class="sortable">Total Mileage</th><th class="sortable">%</th><th class="nonsortable">Map</th></tr>
         </thead>
         <tbody>
             <?php
@@ -394,7 +396,8 @@ SQL;
                     echo "</td>";
                     echo "<td>".$row['clinchedMileage']."</td>";
                     echo "<td>".$row['totalMileage']."</td>";
-                    echo "<td>".$row['percentage']."%</td></tr>";
+                    echo "<td>".$row['percentage']."%</td>";
+                    echo "<td class='link'><a href='/devel/hb.php?u={$user}&r={$row['root']}'>HB</a></td></tr>";
                 }
             ?>
         </tbody>

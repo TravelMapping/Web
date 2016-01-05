@@ -137,7 +137,7 @@
     <table class="gratable tablesorter" id="regionsTable">
         <thead>
         <tr>
-            <th colspan="6">Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</th>
+            <th colspan="7">Clinched Mileage by Region:</th>
         </tr>
         <tr>
             <th class="sortable">Country</th>
@@ -145,7 +145,7 @@
             <th class="sortable">Clinched Mileage</th>
             <th class="sortable">Overall Mileage</th>
             <th class="sortable">Percent Clinched</th>
-            <th>Map</th>
+            <th colspan="2">Map</th>
         </tr>
         </thead>
         <tbody>
@@ -155,7 +155,7 @@
         $res = $db->query($sql_command);
         while ($row = $res->fetch_assoc()) {
             $percent = round($row['clinchedMileage'] / $row['totalMileage'] * 100.0, 3);
-            echo "<tr onClick=\"window.document.location='/user/region.php?u=" . $user . "&rg=" . $row['code'] . "'\"><td>" . $row['country'] . "</td><td>" . $row['name'] . "</td><td>" . $row['clinchedMileage'] . "</td><td>" . $row['totalMileage'] . "</td><td>" . $percent . "%</td><td><a href=\"/hbtest/mapview.php?u=" . $user . "&rg=" . $row['code'] . "\">Map</a></td></tr>";
+            echo "<tr onClick=\"window.document.location='/user/region.php?u=" . $user . "&rg=" . $row['code'] . "'\"><td>" . $row['country'] . "</td><td>" . $row['name'] . "</td><td>" . $row['clinchedMileage'] . "</td><td>" . $row['totalMileage'] . "</td><td>" . $percent . "%</td><td class='link'><a href=\"/hbtest/mapview.php?u=" . $user . "&rg=" . $row['code'] . "\">Map</a></td><td class='link'><a href='/devel/hb.php?rg={$row['code']}'>HB</a></td></tr>";
         }
         $res->free();
         ?>
@@ -165,7 +165,7 @@
     <table class="gratable tablesorter" id="systemsTable">
         <thead>
         <tr>
-            <th colspan="9">Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</th>
+            <th colspan="10">Clinched Mileage by System</th>
         </tr>
         <tr>
             <th class="sortable">Country</th>
@@ -176,7 +176,7 @@
             <th class="sortable">Clinched Mileage</th>
             <th class="sortable">Total Mileage</th>
             <th class="sortable">Percent</th>
-            <th>Map</th>
+            <th colspan="2">Map</th>
         </tr>
         </thead>
         <tbody>
@@ -195,7 +195,8 @@
             echo "<td>" . $row['clinchedMileage'] . "</td>";
             echo "<td>" . $row['totalMileage'] . "</td>";
             echo "<td>" . $row['percentage'] . "%</td>";
-            echo "<td><a href=\"/hbtest/mapview.php?u=" . $user . "&sys=" . $row['systemName'] . "\">Map</a></td></tr>";
+            echo "<td class='link'><a href=\"/hbtest/mapview.php?u={$user}&sys={$row['systemName']}\">Map</a></td>";
+            echo "<td class='link'><a href='/devel/hb.php?sys={$row['systemName']}'>HB</a></td></tr>";
         }
         $res->free();
         ?>
