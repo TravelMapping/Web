@@ -374,7 +374,7 @@ SQL;
     <table class="gratable tablesorter" id="routesTable">
         <thead>
             <tr><th colspan="4">Stats by Route: (<?php echo "<a href=\"/hbtest/mapview.php?u=".$user."&rg=".$region."\">" ?>Full Map)</a></th></tr>
-            <tr><th class="sortable">Route</th><th class="sortable">Clinched Mileage</th><th class="sortable">Total Mileage</th><th class="sortable">%</th></tr>
+            <tr><th class="sortable">Route</th><th class="sortable">Clinched Mileage</th><th class="sortable">Total Mileage</th><th class="sortable">%</th><th class="nonsortable">Map</th></tr>
         </thead>
         <tbody>
             <?php
@@ -393,7 +393,8 @@ SQL;
                     echo "</td>";
                     echo "<td>".$row['clinchedMileage']."</td>";
                     echo "<td>".$row['totalMileage']."</td>";
-                    echo "<td>".$row['percentage']."</td></tr>";
+                    echo "<td>".$row['percentage']."%</td>";
+                    echo "<td><a href='/devel/hb.php?u={$user}&r={$row['root']}'>HB</a></td></tr>";
                 }
             ?>
         </tbody>

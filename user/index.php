@@ -202,7 +202,7 @@
             echo "<td>" . $row['clinchedMileage'] . "</td>";
             echo "<td>" . $row['totalMileage'] . "</td>";
             echo "<td>" . $row['percentage'] . "%</td>";
-            echo "<td><a href=\"/hbtest/mapview.php?u=" . $user . "&sys=" . $row['systemName'] . "\">Map</a></td></tr>";
+            echo "<td><a href=\"/hbtest/mapview.php?u={$user}&sys={$row['systemName']}\">Map</a> <a href='/devel/hb.php?sys={$row['systemName']}'>HB</a></td></tr>";
         }
         $res->free();
         ?>
