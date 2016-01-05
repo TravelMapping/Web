@@ -328,7 +328,7 @@ SQL;
             echo "<!--".$sql_command."-->";
             $res = mysql_query($sql_command);
             $row = mysql_fetch_array($res);
-            $link = "window.open('/hbtest/mapview.php?u=" . $user . "&rg=" . $region . "')";
+            $link = "window.open('/hbtest/mapview.php?u=" . $user . "&sys=" . $system . "')";
             echo "<tr style=\"background-color:#EEEEFF\"><td>Overall</td><td colspan='2'>Miles Driven: ".$row['clinched']." mi (".$row['percentage']."%)</td><td>Total: ".$row['overall']." mi</td><td>Rank: TBD</td></tr>";
 
             //Second, fetch routes clinched/driven

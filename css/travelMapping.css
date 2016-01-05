@@ -66,10 +66,12 @@ table.gratable tr td {
 
 table.gratable tr:hover td {
     background-color: #CCCCCC;
+    cursor: pointer;
 }
 
 table.gratable tr.notclickable:hover td {
     background-color: inherit;
+    cursor: auto;
 }
 
 table.tablesorter th.nonsortable {
@@ -78,6 +80,7 @@ table.tablesorter th.nonsortable {
 
 table.tablesorter th.sortable:hover {
     background-color: #CCCCFF;
+    cursor: auto;
 }
 
 table tr.status-active td {
@@ -109,6 +112,15 @@ table.tablesorter th.headerSortDown {
     background-color: #FFDDDD;
 }
 
+table.gratable td.link {
+    background-color: inherit;
+    text-align: center;
+}
+
+table.gratable td.link:hover {
+    background-color: #EEEEFF;
+}
+
 .shield svg {
     width: 45px;
     height: 36px;
@@ -117,4 +129,9 @@ table.tablesorter th.headerSortDown {
 .bigshield svg {
     width: 400px;
     height: 100px;
+}
+
+.map-loading * {
+    cursor: progress;
+    background-color: #999999;
 }

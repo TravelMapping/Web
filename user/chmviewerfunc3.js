@@ -142,6 +142,7 @@ var intersectionimage = {
 
 // loadmap constructs and sets up the initial map
 function loadmap() {
+	document.getElementById('mapholder').className = 'map-loading';
     var typeMQOpenMap = new google.maps.ImageMapType(MQOpenMapOptions);
     var typeMQOpenSat = new google.maps.ImageMapType(MQOpenSatOptions);
     var typeMapnik = new google.maps.ImageMapType(MapnikOptions);
@@ -184,6 +185,7 @@ function loadmap() {
     //}
     waypointsFromSQL();  // function inserted by PHP in the index.php file
     updateMap();
+	document.getElementById('mapholder').className = '';
 }
 
 // when a file is selected, this will be called
