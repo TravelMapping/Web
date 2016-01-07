@@ -130,7 +130,7 @@ function generate($r, $force_reload = false)
         <style type="text/css">@import url('/fonts/roadgeek.css');</style>
     </defs>
 SVGDEFS;
-    $svg = substr($svg, 0, $insert).$svgdefs.substr($svg, $insert);
+    //$svg = substr($svg, 0, $insert).$svgdefs.substr($svg, $insert);
     file_put_contents("{$dir}/cache/shield_{$r}.svg", $svg);
     return $svg;
 }
