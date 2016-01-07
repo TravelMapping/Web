@@ -21,7 +21,6 @@ if (array_key_exists("db", $_GET)) {
 }
 
 $db = new mysqli("localhost", "travmap", "clinch", $dbname) or die("Failed to connect to database");
-$sql = "SELECT * FROM connectedRoutes WHERE "
 ?>
 <html>
 <head>
@@ -35,15 +34,17 @@ $sql = "SELECT * FROM connectedRoutes WHERE "
     <?php echo "<a href='/user?u={$user}'>{$user}</a>" ?>
 
     <form id="userselect">
-        <label>User: </label>
-        <input type="text" name="u" form="userselect" value="<?php echo $user ?>">
+        <label for="user">User: </label>
+        <input type="text" name="u" id="user" form="userselect" value="<?php echo $user ?>">
+        <label for="reload">Disable Caching (slows loading)</label>
+        <input type="checkbox" name="reload" id="reload" value="true">
         <input type="submit">
     </form>
     <h1 style="font-family:'Roadgeek 2014 Series EEM', sans-serif">Clinched Routes for <?php echo $user ?>: </h1>
     <table>
     <?php
     $sql = <<<SQL
-      SELECT sys.fullName,
+      SELECT sys.fullName, sys.systemName,
         group_concat(ccr.route ORDER BY SUBSTRING(ccr.route, LOCATE('.', ccr.route))) AS clinchedRoutes,
         count(cr.route) as total,
         sum(ccr.clinched) as clinched
@@ -58,17 +59,16 @@ SQL;
     $db->query("SET SESSION  group_concat_max_len = 5555555;");
     $res = $db->query($sql);
     while($row = $res->fetch_assoc()) {
-        echo "<h4>{$row['fullName']} ({$row['clinched']} / {$row['total']})</h4>";
+        echo "<h4><a href='/user/system.php?sys={$row['systemName']}&u={$user}'>{$row['fullName']} ({$row['clinched']} / {$row['total']})</a></h4>";
         $rootList = explode(",", $row['clinchedRoutes']);
         $col = 0;
         foreach($rootList as $root) {
-            echo "<a href='/devel/hb.php?u=$user&r=$root'><span class='shield'>".generate($root)."</span></a>";
+            echo "<a href='/devel/hb.php?u=$user&r=$root'><span class='shield'>".generate($root, $_GET['reload'])."</span></a>";
             $col++;
             if ($col > 8) {
                 echo "<br/>";
                 $col = 0;
             }
-            echo "<!--{$root}-->\n";
         }
     }
     $res->free();

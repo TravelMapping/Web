@@ -80,7 +80,7 @@ function generate($r, $force_reload = false)
             $routeNum = str_replace("M", "", $row['route']);
             echo "<!--{$routeNum}-->";
             if (strlen($routeNum) > 2) {
-                $svg = file_get_contents("{$dir}/template_gbrm_wide.svg");
+                $svg = file_get_contents("{$dir}/template_gbnm_wide.svg");
             }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
@@ -89,7 +89,7 @@ function generate($r, $force_reload = false)
             $routeNum = str_replace("M", "", $row['route']);;
             $routeNum = str_replace("A", "", $routeNum);
             if (strlen($routeNum) > 2) {
-                $svg = file_get_contents("{$dir}/template_gbram_wide.svg");
+                $svg = file_get_contents("{$dir}/template_gbnam_wide.svg");
             }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
