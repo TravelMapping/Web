@@ -103,18 +103,13 @@
     <div id="overall">
         <h2>Overall Stats</h2>
         <table class="gratable" style="width: 30%" id="tierTable">
-            <thead>
-            <tr>
-                <th colspan="4">Overall Stats</th>
-            </tr>
-            </thead>
             <tbody>
             <?php
             //First fetch overall mileage
             $sql_command = "SELECT sys.tier, ";
-            $sql_command .= "ROUND(SUM(COALESCE(cr.mileage, 0)), 0) AS clinchedMileage, ";
-            $sql_command .= "ROUND(SUM(COALESCE(routes.mileage, 0)), 0) AS totalMileage, ";
-            $sql_command .= "ROUND(SUM(COALESCE(cr.mileage, 0)) / SUM(COALESCE(routes.mileage, 0)) * 100, 3) AS percentage ";
+            $sql_command .= "ROUND(SUM(COALESCE(cr.mileage, 0)), 2) AS clinchedMileage, ";
+            $sql_command .= "ROUND(SUM(COALESCE(routes.mileage, 0)), 2) AS totalMileage, ";
+            $sql_command .= "ROUND(SUM(COALESCE(cr.mileage, 0)) / SUM(COALESCE(routes.mileage, 0)) * 100, 2) AS percentage ";
             $sql_command .= "FROM routes ";
             $sql_command .= "LEFT JOIN clinchedRoutes AS cr ";
             $sql_command .= "ON routes.root = cr.route AND traveler = '" . $user . "' ";
@@ -140,10 +135,9 @@
     </div>
     <h2>Stats by Region</h2>
     <table class="gratable tablesorter" id="regionsTable">
-        <caption>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</caption>
         <thead>
         <tr>
-            <th colspan="6">Clinched Mileage by Region:</th>
+            <th colspan="7">Clinched Mileage by Region:</th>
         </tr>
         <tr>
             <th class="sortable">Country</th>
@@ -151,7 +145,7 @@
             <th class="sortable">Clinched Mileage</th>
             <th class="sortable">Overall Mileage</th>
             <th class="sortable">Percent Clinched</th>
-            <th>Map</th>
+            <th colspan="2">Map</th>
         </tr>
         </thead>
         <tbody>
@@ -161,7 +155,7 @@
         $res = $db->query($sql_command);
         while ($row = $res->fetch_assoc()) {
             $percent = round($row['clinchedMileage'] / $row['totalMileage'] * 100.0, 3);
-            echo "<tr onClick=\"window.document.location='/user/region.php?u=" . $user . "&rg=" . $row['code'] . "'\"><td>" . $row['country'] . "</td><td>" . $row['name'] . "</td><td>" . $row['clinchedMileage'] . "</td><td>" . $row['totalMileage'] . "</td><td>" . $percent . "%</td><td><a href=\"/hbtest/mapview.php?u=" . $user . "&rg=" . $row['code'] . "\">Map</a></td></tr>";
+            echo "<tr onClick=\"window.document.location='/user/region.php?u=" . $user . "&rg=" . $row['code'] . "'\"><td>" . $row['country'] . "</td><td>" . $row['name'] . "</td><td>" . $row['clinchedMileage'] . "</td><td>" . $row['totalMileage'] . "</td><td>" . $percent . "%</td><td class='link'><a href=\"/hbtest/mapview.php?u=" . $user . "&rg=" . $row['code'] . "\">Map</a></td><td class='link'><a href='/devel/hb.php?rg={$row['code']}'>HB</a></td></tr>";
         }
         $res->free();
         ?>
@@ -169,10 +163,9 @@
     </table>
     <h2>Stats by System</h2>
     <table class="gratable tablesorter" id="systemsTable">
-        <caption>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</caption>
         <thead>
         <tr>
-            <th colspan="9">Clinched Mileage by System</th>
+            <th colspan="10">Clinched Mileage by System</th>
         </tr>
         <tr>
             <th class="sortable">Country</th>
@@ -183,12 +176,12 @@
             <th class="sortable">Clinched Mileage</th>
             <th class="sortable">Total Mileage</th>
             <th class="sortable">Percent</th>
-            <th>Map</th>
+            <th colspan="2">Map</th>
         </tr>
         </thead>
         <tbody>
         <?php
-        $sql_command = "SELECT sys.countryCode, sys.systemName, sys.level, sys.tier, sys.fullName, r.root, COALESCE(ROUND(SUM(cr.mileage), 2),0) AS clinchedMileage, COALESCE(ROUND(SUM(r.mileage), 2), 0) AS totalMileage, COALESCE(ROUND(SUM(cr.mileage) / SUM(r.mileage) * 100, 3), 0) AS percentage FROM systems AS sys INNER JOIN routes AS r ON r.systemName = sys.systemName LEFT JOIN clinchedRoutes AS cr ON cr.route = r.root AND cr.traveler = '" . $user . "' GROUP BY r.systemName";
+        $sql_command = "SELECT sys.countryCode, sys.systemName, sys.level, sys.tier, sys.fullName, r.root, COALESCE(ROUND(SUM(cr.mileage), 2),0) AS clinchedMileage, COALESCE(ROUND(SUM(r.mileage), 2), 0) AS totalMileage, COALESCE(ROUND(SUM(cr.mileage) / SUM(r.mileage) * 100, 2), 0) AS percentage FROM systems AS sys INNER JOIN routes AS r ON r.systemName = sys.systemName LEFT JOIN clinchedRoutes AS cr ON cr.route = r.root AND cr.traveler = '" . $user . "' GROUP BY r.systemName";
         $sql_command .= ";";
         echo "<!-- SQL: " . $sql_command . "-->";
         $res = $db->query($sql_command);
@@ -202,7 +195,8 @@
             echo "<td>" . $row['clinchedMileage'] . "</td>";
             echo "<td>" . $row['totalMileage'] . "</td>";
             echo "<td>" . $row['percentage'] . "%</td>";
-            echo "<td><a href=\"/hbtest/mapview.php?u=" . $user . "&sys=" . $row['systemName'] . "\">Map</a></td></tr>";
+            echo "<td class='link'><a href=\"/hbtest/mapview.php?u={$user}&sys={$row['systemName']}\">Map</a></td>";
+            echo "<td class='link'><a href='/devel/hb.php?sys={$row['systemName']}'>HB</a></td></tr>";
         }
         $res->free();
         ?>

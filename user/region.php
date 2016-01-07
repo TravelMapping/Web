@@ -97,6 +97,7 @@
     </style>
     <?php
     // establish connection to db: mysql_ interface is deprecated, should learn new options
+    // TODO: Update to MySQLi or PDO
     $db = mysql_connect("localhost", "travmap", "clinch") or die("Failed to connect to database");
     mysql_select_db($dbname, $db);
     $sql_command = "SELECT * FROM regions where code = '".$region."'";
@@ -260,7 +261,7 @@
     $(document).ready(function () {
             $("table.tablesorter").tablesorter({
                 sortList: [[0, 0]],
-                headers: {0: {sorter: false},}
+                headers: {0: {sorter: false}}
             });
         }
     );
@@ -299,7 +300,7 @@
             <?php
             //First fetch overall mileage
             $sql_command = <<<SQL
-            SELECT o.mileage AS overall, c.mileage as clinched, round(c.mileage / o.mileage * 100) AS percentage
+            SELECT o.mileage AS overall, c.mileage as clinched, round(c.mileage / o.mileage * 100, 2) AS percentage
             FROM overallMileageByRegion AS o
             LEFT JOIN clinchedOverallMileageByRegion AS c ON c.region = o.region AND  c.traveler = '
 SQL
@@ -323,7 +324,7 @@ SQL
         <caption>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</caption>
         <thead>
         <tr>
-            <th colspan="5">Clinched Mileage by System</th>
+            <th colspan="6">Clinched Mileage by System</th>
         </tr>
         <tr>
             <th class="sortable">System Code</th>
@@ -331,6 +332,7 @@ SQL
             <th class="sortable">Clinched Mileage</th>
             <th class="sortable">Total Mileage</th>
             <th class="sortable">Percent</th>
+            <th class="nonsortable">Map</th>
         </tr>
         </thead>
         <tbody>
@@ -344,7 +346,7 @@ SQL
             r.root,
             COALESCE(ROUND(SUM(cr.mileage), 2), 0) AS clinchedMileage,
             COALESCE(ROUND(SUM(r.mileage), 2), 0) AS totalMileage,
-            COALESCE(ROUND(SUM(cr.mileage) / SUM(r.mileage) * 100, 3), 0) AS percentage
+            COALESCE(ROUND(SUM(cr.mileage) / SUM(r.mileage) * 100, 2), 0) AS percentage
           FROM systems as sys
           INNER JOIN routes AS r
             ON r.systemName = sys.systemName
@@ -366,19 +368,20 @@ SQL;
             echo "<td>" . $row['fullName'] . "</td>";
             echo "<td>" . $row['clinchedMileage'] . "</td>";
             echo "<td>" . $row['totalMileage'] . "</td>";
-            echo "<td>" . $row['percentage'] . "%</td></tr>";
+            echo "<td>" . $row['percentage'] . "%</td>";
+            echo "<td class='link'><a href='/devel/hb.php?rg={$region}'>HB</a></td></tr>";
         }
         ?>
         </tbody>
     </table>
     <table class="gratable tablesorter" id="routesTable">
         <thead>
-            <tr><th colspan="4">Stats by Route: (<?php echo "<a href=\"/hbtest/mapview.php?u=".$user."&rg=".$region."\">" ?>Full Map)</a></th></tr>
-            <tr><th class="sortable">Route</th><th class="sortable">Clinched Mileage</th><th class="sortable">Total Mileage</th><th class="sortable">%</th></tr>
+            <tr><th colspan="5">Stats by Route: (<?php echo "<a href=\"/hbtest/mapview.php?u=".$user."&rg=".$region."\">" ?>Full Map)</a></th></tr>
+            <tr><th class="sortable">Route</th><th class="sortable">Clinched Mileage</th><th class="sortable">Total Mileage</th><th class="sortable">%</th><th class="nonsortable">Map</th></tr>
         </thead>
         <tbody>
             <?php
-                $sql_command = "SELECT r.route, r.root, r.banner, r.city, ROUND((COALESCE(r.mileage, 0)),2) AS totalMileage, ROUND((COALESCE(cr.mileage, 0)),2) AS clinchedMileage, ROUND((COALESCE(cr.mileage,0)) / (COALESCE(r.mileage, 0)) * 100,2) AS percentage FROM routes AS r LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '".$user."' WHERE region = '" . $region . "'";
+                $sql_command = "SELECT r.route, r.root, r.banner, r.city, ROUND((COALESCE(r.mileage, 0)),2) AS totalMileage, ROUND((COALESCE(cr.mileage, 0)),2) AS clinchedMileage, COALESCE(ROUND((COALESCE(cr.mileage,0)) / (COALESCE(r.mileage, 0)) * 100,2), 0) AS percentage FROM routes AS r LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '".$user."' WHERE region = '" . $region . "'";
                 echo "<!--".$sql_command."-->";
                 $res = mysql_query($sql_command);
                 while ($row = mysql_fetch_array($res)) {
@@ -393,7 +396,8 @@ SQL;
                     echo "</td>";
                     echo "<td>".$row['clinchedMileage']."</td>";
                     echo "<td>".$row['totalMileage']."</td>";
-                    echo "<td>".$row['percentage']."</td></tr>";
+                    echo "<td>".$row['percentage']."%</td>";
+                    echo "<td class='link'><a href='/devel/hb.php?u={$user}&r={$row['root']}'>HB</a></td></tr>";
                 }
             ?>
         </tbody>

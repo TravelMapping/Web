@@ -1,7 +1,12 @@
 <?php
-function generate($r)
+function generate($r, $force_reload = false)
 {
     $dir = $_SERVER['DOCUMENT_ROOT']."/shields";
+    if(file_exists("{$dir}/cache/shield_{$r}.svg") && !$force_reload) {
+        //load from cache
+        return file_get_contents("{$dir}/cache/shield_{$r}.svg");
+    }
+
     $db = new mysqli("localhost", "travmap", "clinch", "TravelMapping") or die("Failed to connect to database");
     $sql_command = "SELECT * FROM routes WHERE root = '" . $r . "';";
     $res = $db->query($sql_command);
@@ -14,6 +19,9 @@ function generate($r)
     }
 
     switch ($row['systemName']) {
+        case 'cantch': //do nothing
+            break;
+
         case 'usai':
         case 'usaif':
             $routeNum = explode("-", $row['route'])[1];
@@ -68,6 +76,38 @@ function generate($r)
             $svg = str_replace("***SYS***", $region, $svg);
             break;
 
+        case 'gbnm':case 'nirm':
+            $routeNum = str_replace("M", "", $row['route']);
+            echo "<!--{$routeNum}-->";
+            if (strlen($routeNum) > 2) {
+                $svg = file_get_contents("{$dir}/template_gbnm_wide.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
+        case 'gbnam':case 'niram':
+            $routeNum = str_replace("M", "", $row['route']);;
+            $routeNum = str_replace("A", "", $routeNum);
+            if (strlen($routeNum) > 2) {
+                $svg = file_get_contents("{$dir}/template_gbnam_wide.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
+        case 'usasf':
+            $lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
+            $index = 0;
+            foreach($lines as $line) {
+                if(strlen($line) > 0) {
+                    $svg = str_replace("***NUMBER".($index + 1)."***", $line, $svg);
+                    $index++;
+                }
+            }
+            while($index < 3) {
+                $svg = str_replace("***NUMBER".($index + 1)."***", "", $svg);
+                $index++;
+            }
+            break;
 
         default:
             $region = strtoupper(explode(".", $r)[0]);
@@ -90,10 +130,12 @@ function generate($r)
         <style type="text/css">@import url('/fonts/roadgeek.css');</style>
     </defs>
 SVGDEFS;
-    return substr($svg, 0, $insert).$svgdefs.substr($svg, $insert);
+    //$svg = substr($svg, 0, $insert).$svgdefs.substr($svg, $insert);
+    file_put_contents("{$dir}/cache/shield_{$r}.svg", $svg);
+    return $svg;
 }
 
 if(array_key_exists('shield', $_GET)) {
-    echo generate($_GET['shield']);
+    echo generate($_GET['shield'], true);
 }
 ?>
