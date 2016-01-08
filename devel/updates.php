@@ -26,6 +26,25 @@
 <body onload="populate_dbarrays()">
 <h1>Travel Mapping Highway Data Updates</h1>
 
+<h3>Highway Data System Status Changes</h3>
+
+<div id="sysupdates">
+  <table border="1"><tr><th>Date</th><th>Country/Region</th><th>System Code</th><th>System Description</th><th>New Status</th></tr>
+  <?php
+      // select all updates in the DB
+      $sql_command = "select * from systemUpdates;";
+      $res = $db->query($sql_command);
+
+      while ($row = $res->fetch_assoc()) {
+        echo "<tr><td>".$row['date']."</td><td>".$row['region']."</td><td>".$row['systemName']."</td><td>".$row['description']."</td><td>".$row['statusChange']."</td></tr>\n";
+      }
+      $res->free();
+    ?>
+  </table>
+</div>
+
+<h3>Updates to Highway Data in Active Systems</h3>
+
 <div id="updates">
   <table border="1"><tr><th>Date</th><th>Region</th><th>Route</th><th>File Root</th><th>Description</th></tr>
   <?php
