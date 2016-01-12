@@ -2,6 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
+<!-- jQuery -->
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- TableSorter -->
+<script src="/lib/jquery.tablesorter.min.js"></script>
 <style type="text/css">
 </style>
 <?php
@@ -24,12 +29,26 @@
 </head>
 
 <body onload="populate_dbarrays()">
+<script type="application/javascript">
+    $(document).ready(function () {
+            $("#sysupdates").tablesorter({
+                headers: {1: {sorter: false}, 3: {sorter: false}}
+            });
+            $("#updates").tablesorter({
+                headers: {2: {sorter: false}, 4: {sorter: false}}
+            });
+            $('td').filter(function() {
+                return this.innerHTML.match(/^[0-9\s\.,%]+$/);
+            }).css('text-align','right');
+        }
+    );
+</script>
 <h1>Travel Mapping Highway Data Updates</h1>
 
 <h3>Highway Data System Status Changes</h3>
 
 <div id="sysupdates">
-  <table border="1"><tr><th>Date</th><th>Country/Region</th><th>System Code</th><th>System Description</th><th>New Status</th></tr>
+  <table class="tablesorter" border="1"><tr><th class="sortable">Date</th><th class="nonsortable">Country/Region</th><th class="sortable">System Code</th><th class="nonsortable">System Description</th><th class="sortable">New Status</th></tr>
   <?php
       // select all updates in the DB
       $sql_command = "select * from systemUpdates;";
@@ -46,7 +65,7 @@
 <h3>Updates to Highway Data in Active Systems</h3>
 
 <div id="updates">
-  <table border="1"><tr><th>Date</th><th>Region</th><th>Route</th><th>File Root</th><th>Description</th></tr>
+  <table class="tablesorter" border="1"><tr><th class="sortable">Date</th><th class="sortable">Region</th><th class="nonsortable">Route</th><th class="sortable">File Root</th><th class="nonsortable">Description</th></tr>
   <?php
       // select all updates in the DB
       $sql_command = "select * from updates;";
