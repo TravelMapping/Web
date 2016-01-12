@@ -369,7 +369,7 @@ SQL;
             echo "<td>" . $row['clinchedMileage'] . "</td>";
             echo "<td>" . $row['totalMileage'] . "</td>";
             echo "<td>" . $row['percentage'] . "%</td>";
-            echo "<td class='link'><a href='/devel/hb.php?rg={$region}'>HB</a></td></tr>";
+            echo "<td class='link'><a href='/devel/hb.php?rg={$region}&sys={$row['systemName']}'>HB</a></td></tr>";
         }
         ?>
         </tbody>
