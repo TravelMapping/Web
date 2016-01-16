@@ -64,14 +64,9 @@ table.gratable tr td {
     text-align: left;
 }
 
-table.gratable tr:hover td {
+table.gratable tr[onclick]:hover td, table.gratable tr.user-highlight td {
     background-color: #CCCCCC;
     cursor: pointer;
-}
-
-table.gratable tr.notclickable:hover td {
-    background-color: inherit;
-    cursor: auto;
 }
 
 table.tablesorter th.nonsortable {
@@ -80,7 +75,7 @@ table.tablesorter th.nonsortable {
 
 table.tablesorter th.sortable:hover {
     background-color: #CCCCFF;
-    cursor: auto;
+    cursor: pointer;
 }
 
 table tr.status-active td {
