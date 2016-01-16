@@ -1,138 +1,83 @@
+<?php
+include $_SERVER['DOCUMENT_ROOT']."/login.php";
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!-- 
-	A basic user stats page. 
+	A rankings page.
 	URL Params:
-		u - the user.
-		rg_order - the way to order records in the regions table.
-		sys_order - the way to order the records in the systems table.
+		u - the user, to show highlighting on page.
 		db - the database being used. Use 'TravelMappingDev' for in-development systems. 
 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<style type="text/css">
-body, html {
-  margin:0;
-  border:0;
-  padding:0;
-  height:100%;
-  max-height:100%;
-  overflow: hidden;
-  font-size:9pt;
-  background-color:#EEEEFF;
-}
-
-#body {
-position: fixed;
-left: 0px;
-top: 80px;
-bottom: 0px;
-width: 100%;
-overflow:auto;
-padding: 20px;
-}
-
-#body h2{
-	margin: auto;
-	text-align: center;
-	padding: 10px;
-}
-
-table.nmptable {
-font-size:8pt;
-border: 1px solid black;
-border-spacing: 0px;
-margin-left: auto;
-margin-right: auto;
-background-color:white;
-}
-
-table.nmptable  td, th {
-border: solid black;
-border-width: 1px;
-}
-
-table.nmptable2 td, th {
-border-width: 0px;
-}
-
-table.nmptable tr td {
-text-align:right;
-}
-
-table.pthtable {
-font-size:10pt;
-border: 1px solid black;
-border-spacing: 0px;
-margin-left: auto;
-margin-right: auto;
-background-color:white;
-}
-
-table.pthtable  td, th {
-border: solid black;
-border-width: 1px;
-}
-
-table.pthtable tr td {
-text-align:left;
-}
-
-table.gratable {
-font-size:10pt;
-border: 1px solid black;
-border-spacing: 0px;
-margin-left: auto;
-margin-right: auto;
-width: 50%;
-background-color:white;
-}
-
-table.gratable  td, th {
-border: solid black;
-border-width: 1px;
-}
-
-table.gratable tr td {
-text-align:left;
-}
-
-table.gratable tr:hover td {
-	background-color: #CCCCCC;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="/css/travelMapping.css"/>
+<!-- jQuery -->
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- TableSorter -->
+<script src="/lib/jquery.tablesorter.min.js"></script>
 <title>Traveler Statistics</title>
+    <style type="text/css">
+        #rankingstable {
+            width: 20%;
+            float: left;
+            margin: auto;
+        }
+    </style>
 </head>
 <body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".rankingstable").tablesorter({
+            sortList: [[0,0]],
+            headers: {0: {sorter: false}}
+        });
+        $('td').filter(function() {
+            return this.innerHTML.match(/^[0-9\s\.,%]+$/);
+        }).css('text-align','right');
+    });
+</script>
 	<h1>Traveler Statistics</h1>
 	<h2>Overall Traveler Rankings</h2>
-	<table class="gratable">
+	<table class="gratable tablesorter" id="rankingstable">
 		<thead>
-			<tr><td colspan="3">Overall Traveler Mileage</td></tr>
-			<tr><td>Rank</td><td>Username</td><td>Miles Traveled</td></tr>
+			<tr><th colspan="5">Overall Traveler Mileage</th></tr>
+			<tr><th class="sortable">Rank</th><th class="sortable">Username</th><th class="sortable">Miles Traveled</th><th class="sortable">%</th></tr>
 		</thead>
 		<tbody>
 			<?php
-				$dbname = "TravelMapping";
-				if (array_key_exists("db",$_GET)) {
-				  $dbname = $_GET['db'];
-				}
+            $dbname = "TravelMapping";
+            if (array_key_exists("db",$_GET)) {
+              $dbname = $_GET['db'];
+            }
+            $db = new mysqli("localhost","travmap","clinch",$dbname) or die("Failed to connect to database");
+            $sql = "SELECT sum(o.mileage) as totalMileage FROM overallMileageByRegion o";
+            $totalMileage = $db->query($sql)->fetch_assoc()['totalMileage'];
+            $sql = <<<SQL
+            SELECT
+              traveler,
+              ROUND(SUM(COALESCE(co.mileage, 0)), 2) AS clinchedMileage,
+              round(SUM(coalesce(co.mileage, 0)) / $totalMileage * 100, 2) AS percentage
+            FROM clinchedOverallMileageByRegion co
+            GROUP BY co.traveler ORDER BY clinchedMileage DESC;
+SQL;
+            $res = $db->query($sql);
+            $rank = 1;
+            while ($row = $res->fetch_assoc()) {
+                if($row['traveler'] == $user) {
+                    $highlight = 'user-highlight';
+                } else {
+                    $highlight = '';
+                }
+                echo <<<HTML
+                <tr class="$highlight" onClick="window.document.location='/user?u={$row['traveler']}';">
+                <td>{$rank}</td><td>{$row['traveler']}</td><td>{$row['clinchedMileage']}</td><td>{$row['percentage']}%</td>
+                </tr>
+HTML;
+                $rank++;
+            }
 
-				// Fetch mileage and # of highways clinched / driven. Using two queries (one for mileage, the other for highways clinched) because the join required to do it in one takes ~16s.
-				$db = new mysqli("localhost","travmap","clinch",$dbname) or die("Failed to connect to database"); 
-				$sql_command = "SELECT com.traveler, SUM(com.mileage) AS clinchedMileage, FROM clinchedOverallMileageByRegion AS com GROUP BY com.traveler ORDER BY clinchedMileage DESC;";
-				$res_mileage = $db->query($sql_command);
-				$sql_command = "SELECT traveler, COUNT(*) AS highwaysDriven, SUM(clinched) AS highwaysClinched FROM clinchedRoutes GROUP BY traveler ORDER BY highwaysClinched DESC;";
-				$res_highways = $db->query($sql_command);
-				$num = 1;
-
-				while ($row = array_merge($res_mileage->fetch_assoc(), $res_highways->fetch_assoc())) {
-					echo "<tr><td>".$num."</td>";
-					echo "<td>".$row['traveler']."</td>";
-					echo "<td>".$row['clinchedMileage']."</td>";
-					echo "<td>".$row['highwaysDriven']."</td>";
-					echo "<td>".$row['highwaysDriven']."</td></tr>";
-				}
 			?>
 		</tbody>
 	</table>

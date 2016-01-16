@@ -1,23 +1,5 @@
 <?php
-    $user = "null";
-
-    if (array_key_exists("u", $_GET)) {
-        $user = $_GET['u'];
-        setcookie("lastuser", $user, time() + (86400 * 30), "/");
-    } else if (isset($_COOKIE['lastuser'])) {
-        header("Location: /user?u=" . $_COOKIE['lastuser']); /* Redirect browser */
-        exit();
-    }
-
-    $dbname = "TravelMapping";
-    if (isset($_COOKIE['currentdb'])) {
-        $dbname = $_COOKIE['currentdb'];
-    }
-
-    if (array_key_exists("db", $_GET)) {
-        $dbname = $_GET['db'];
-        setcookie("currentdb", $dbname, time() + (86400 * 30), "/");
-    }
+include $_SERVER['DOCUMENT_ROOT']."/login.php";
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!-- 
@@ -109,15 +91,15 @@
             <tbody>
             <?php
             //First fetch overall mileage
-            $sql_command = "SELECT sys.tier, ";
-            $sql_command .= "ROUND(SUM(COALESCE(cr.mileage, 0)), 2) AS clinchedMileage, ";
-            $sql_command .= "ROUND(SUM(COALESCE(routes.mileage, 0)), 2) AS totalMileage, ";
-            $sql_command .= "ROUND(SUM(COALESCE(cr.mileage, 0)) / SUM(COALESCE(routes.mileage, 0)) * 100, 2) AS percentage ";
-            $sql_command .= "FROM routes ";
-            $sql_command .= "LEFT JOIN clinchedRoutes AS cr ";
-            $sql_command .= "ON routes.root = cr.route AND traveler = '" . $user . "' ";
-            $sql_command .= "INNER JOIN systems AS sys ";
-            $sql_command .= "ON routes.systemName = sys.systemName;";
+            $sql_command = <<<SQL
+SELECT
+round(sum(o.mileage), 2) as totalMileage,
+round(sum(coalesce(co.mileage, 0)), 2) as clinchedMileage,
+round(sum(coalesce(co.mileage, 0)) / sum(o.mileage) * 100, 2) AS percentage
+FROM overallMileageByRegion o
+LEFT JOIN clinchedOverallMileageByRegion co ON co.region = o.region AND traveler = '$user'
+SQL;
+
             echo "<!-- SQL:" . $sql_command . "-->";
             $res = $db->query($sql_command);
             $row = $res->fetch_assoc();
