@@ -74,7 +74,7 @@ table.tablesorter th.nonsortable {
 }
 
 table.tablesorter th.sortable:hover {
-    background-color: #CCCCFF;
+    background-color: #CCCCFF !important;
     cursor: pointer;
 }
 
@@ -101,11 +101,11 @@ table.gratable {
 
 
 table.tablesorter th.headerSortUp {
-    background-color: #DDFFDD;
+    background-color: #DDFFDD !important;
 }
 
 table.tablesorter th.headerSortDown {
-    background-color: #FFDDDD;
+    background-color: #FFDDDD !important;
 }
 
 table.gratable td.link {
