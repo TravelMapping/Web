@@ -94,7 +94,7 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
-        case 'usasf':
+        case 'usasf':case 'usanp':
             $lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
             $index = 0;
             foreach($lines as $line) {
@@ -123,14 +123,9 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***SYS***", $region, $svg);
             break;
     }
-
-    $insert = strpos($svg, ".svg\">") + strlen(".svg\">");
-    $svgdefs = <<<SVGDEFS
-    <defs>
-        <style type="text/css">@import url('/fonts/roadgeek.css');</style>
-    </defs>
-SVGDEFS;
-    //$svg = substr($svg, 0, $insert).$svgdefs.substr($svg, $insert);
+    if (!file_exists("{$dir}/cache/")) {
+        mkdir("{$dir}/cache/", 0777, true);
+    }
     file_put_contents("{$dir}/cache/shield_{$r}.svg", $svg);
     return $svg;
 }

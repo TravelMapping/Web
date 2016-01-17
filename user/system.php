@@ -263,6 +263,9 @@ if (is_null($user) || is_null($system)) {
                 sortList: [[0, 0]],
                 headers: {0: {sorter: false}, 1: {sorter: false}, 3: {sorter: false},}
             });
+            $('td').filter(function() {
+                return this.innerHTML.match(/^[0-9\s\.,%]+$/);
+            }).css('text-align','right');
         }
     );
 </script>

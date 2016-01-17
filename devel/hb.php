@@ -42,6 +42,7 @@ if (array_key_exists("sys", $_GET) and strlen($_GET['sys']) > 0) {
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
+    <link rel="stylesheet" type="text/css" href="/fonts/roadgeek.css">
     <style type="text/css">
         #headerbox {
             position: absolute;
@@ -246,6 +247,7 @@ if ($showingmap == 0) {
 if ($showingmap == 1) {
     echo "<div id=\"pointbox\">\n";
     echo "<span class='bigshield'>".generate($_GET['r'], true)."</span>";
+    echo "<div style='margin: auto; text-align: center'><a href='/hbtest/mapview.php?rte={$routeInfo['route']}'>View Associated Routes</a></div>";
     echo "<table id='waypoints' class=\"gratable\"><thead><tr><th colspan=\"2\">Waypoints</th></tr><tr><th>Coordinates</th><th>Waypoint Name</th></tr></thead><tbody>\n";
     $sql_command = "SELECT pointName, latitude, longitude FROM waypoints WHERE root = '" . $_GET['r'] . "';";
     $res = $db->query($sql_command);
