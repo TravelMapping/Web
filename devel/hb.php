@@ -104,6 +104,14 @@ if (array_key_exists("sys", $_GET) and strlen($_GET['sys']) > 0) {
             cursor: pointer;
         }
 
+        #pointbox span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 5px;
+        }
+
+
     </style>
     <script
         src="http://maps.googleapis.com/maps/api/js?sensor=false"
@@ -247,6 +255,7 @@ if ($showingmap == 0) {
 if ($showingmap == 1) {
     echo "<div id=\"pointbox\">\n";
     echo "<span class='bigshield'>".generate($_GET['r'], true)."</span>";
+    echo "<span><a href='/hbtest/mapview.php?u={$_GET['u']}&rte={$routeInfo['route']}'>View Associated Routes</a></span>";
     echo "<table id='waypoints' class=\"gratable\"><thead><tr><th colspan=\"2\">Waypoints</th></tr><tr><th>Coordinates</th><th>Waypoint Name</th></tr></thead><tbody>\n";
     $sql_command = "SELECT pointName, latitude, longitude FROM waypoints WHERE root = '" . $_GET['r'] . "';";
     $res = $db->query($sql_command);
