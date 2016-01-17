@@ -117,13 +117,21 @@
         return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== FALSE);
     }
 
-    function fetchWithRank($res)
+    function fetchWithRank($res, $rankBy)
     {
         global $user;
-        $rank = 0;
+        $nextRank = 1;
+        $rank = 1;
+        $score = 0;
         $row = array();
         while($row['traveler'] != $user && $row = mysql_fetch_array($res)) {
-            $rank++;
+            if ($score != $row[$rankBy]) {
+                $score = $row[$rankBy];
+                $rank = $nextRank;
+            }
+
+            $nextRank++;
+            error_log("($rank, {$row['traveler']}, {$row[$rankBy]})");
         }
         $row['rank'] = $rank;
         return $row;
@@ -317,12 +325,12 @@
             ORDER BY percentage DESC;
 SQL;
             $res = mysql_query($sql_command);
-            $row = fetchWithRank($res);
+            $row = fetchWithRank($res, 'percentage');
             $link = "redirect('/hbtest/mapview.php?u=" . $user . "&rg=" . $region . "')";
             echo "<tr style=\"background-color:#EEEEFF\"><td>Overall</td><td colspan='2'>Miles Driven: ".$row['clinched']." mi (".$row['percentage']."%)</td><td>Total: ".$row['overall']." mi</td><td>Rank: {$row['rank']}</td></tr>";
 
             //Second, fetch routes clinched/driven
-            $totalRoutes = mysql_fetch_array(mysql_query("SELECT COUNT(*) as t FROM routes LEFT JOIN systems on routes.systemName = systems.systemName WHERE region = '$region' AND systems.active = 1"))['t'] - 1;
+            $totalRoutes = mysql_fetch_array(mysql_query("SELECT COUNT(*) as t FROM routes LEFT JOIN systems on routes.systemName = systems.systemName WHERE region = '$region' AND systems.active = 1"))['t'];
             error_log("Total Routes: $totalRoutes");
             $sql_command = <<<SQL
             SELECT
@@ -341,7 +349,7 @@ SQL;
 
             echo "<!--".$sql_command."-->";
             $res = mysql_query($sql_command);
-            $row = fetchWithRank($res);
+            $row = fetchWithRank($res, 'clinchedPct');
             echo "<tr onClick=\"" . $link . "\"><td>Routes</td><td>Driven: " . $row['driven'] . " (" . $row['drivenPct'] . "%)</td><td>Clinched: " . $row['clinched'] . " (" . $row['clinchedPct'] . "%)</td><td>Total: " . $totalRoutes . "</td><td>Rank: {$row['rank']}</td></tr>\n";
             ?>
         </tbody>

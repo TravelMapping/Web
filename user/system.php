@@ -110,10 +110,26 @@ if (is_null($user) || is_null($system)) {
         return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== FALSE);
     }
 
-    function colorScale($percent)
+    function fetchWithRank($res, $rankBy)
     {
+        global $user;
+        $nextRank = 1;
+        $rank = 1;
+        $score = 0;
+        $row = array();
+        while($row['traveler'] != $user && $row = mysql_fetch_array($res)) {
+            if ($score != $row[$rankBy]) {
+                $score = $row[$rankBy];
+                $rank = $nextRank;
+            }
 
+            $nextRank++;
+            error_log("($rank, {$row['traveler']}, {$row[$rankBy]})");
+        }
+        $row['rank'] = $rank;
+        return $row;
     }
+
 
     ?>
     <title><?php
@@ -306,64 +322,77 @@ if (is_null($user) || is_null($system)) {
             <?php
             //First fetch overall mileage
             if(is_null($region)) {
+                //$mileage = mysql_fetch_array(mysql_query("SELECT SUM() as t FROM routes LEFT JOIN systems on routes.systemName = systems.systemName WHERE region = '$region' AND systems.active = 1"))['t'] - 1;
                 $sql_command = <<<SQL
                 SELECT
+                    ccr.traveler,
                     round(sum(coalesce(cr.mileage, 0)), 2) as overall,
                     round(sum(coalesce(ccr.mileage, 0)), 2) as clinched,
                     round(sum(coalesce(ccr.mileage, 0)), 2) / round(sum(coalesce(cr.mileage, 0)), 2) * 100 AS percentage
                 FROM connectedRoutes as cr
                 LEFT JOIN clinchedConnectedRoutes as ccr
-                ON cr.firstRoot = ccr.route AND ccr.traveler = '$user'
-                WHERE cr.systemName = '$system';
+                ON cr.firstRoot = ccr.route
+                WHERE cr.systemName = '$system'
+                GROUP BY ccr.traveler
+                ORDER BY percentage DESC ;
 SQL;
             } else {
                 $sql_command = <<<SQL
                 SELECT
+                    cr.traveler,
                     round(sum(coalesce(r.mileage, 0)), 2) as overall,
                     round(sum(coalesce(cr.mileage, 0)), 2) as clinched,
                     round(sum(coalesce(cr.mileage, 0)), 2) / round(sum(coalesce(r.mileage, 0)), 2) * 100 AS percentage
                 FROM routes as r
                 LEFT JOIN clinchedRoutes as cr
-                ON r.root = cr.route AND cr.traveler = '$user'
-                WHERE r.region = '$region' AND r.systemName = '$system';
+                ON r.root = cr.route
+                WHERE r.region = '$region' AND r.systemName = '$system'
+                GROUP BY cr.traveler
+                ORDER BY percentage DESC ;
 SQL;
             }
             echo "<!--".$sql_command."-->";
             $res = mysql_query($sql_command);
-            $row = mysql_fetch_array($res);
+            $row = fetchWithRank($res, 'percentage');
             $link = "window.open('/hbtest/mapview.php?u=" . $user . "&sys=" . $system . "')";
-            echo "<tr style=\"background-color:#EEEEFF\"><td>Overall</td><td colspan='2'>Miles Driven: ".$row['clinched']." mi (".$row['percentage']."%)</td><td>Total: ".$row['overall']." mi</td><td>Rank: TBD</td></tr>";
+            echo "<tr style=\"background-color:#EEEEFF\"><td>Overall</td><td colspan='2'>Miles Driven: ".$row['clinched']." mi (".$row['percentage']."%)</td><td>Total: ".$row['overall']." mi</td><td>Rank: {$row['rank']}</td></tr>";
 
             //Second, fetch routes clinched/driven
             if (is_null($region)) {
+                $totalRoutes = mysql_fetch_array(mysql_query("SELECT COUNT(*) as t FROM connectedRoutes WHERE systemName='$system'"))['t'];
                 $sql_command = <<<SQL
                 SELECT
-                    count(cr.route) as total,
+                    ccr.traveler,
                     count(ccr.route) as driven,
                     sum(ccr.clinched) as clinched
                 FROM connectedRoutes as cr
                 LEFT JOIN clinchedConnectedRoutes as ccr
-                ON cr.firstRoot = ccr.route AND ccr.traveler = '$user'
-                WHERE cr.systemName = '$system';
+                ON cr.firstRoot = ccr.route
+                WHERE cr.systemName = '$system'
+                GROUP BY traveler
+                ORDER BY clinched DESC;
 SQL;
             } else {
+                $totalRoutes = mysql_fetch_array(mysql_query("SELECT COUNT(*) as t FROM routes WHERE systemName='$system' AND region='$region' "))['t'];
                 $sql_command = <<<SQL
                 SELECT
-                    count(cr.route) as total,
+                    ccr.traveler,
                     count(ccr.route) as driven,
                     sum(ccr.clinched) as clinched
                 FROM routes as cr
                 LEFT JOIN clinchedRoutes as ccr
-                ON cr.root = ccr.route AND ccr.traveler = '$user'
+                ON cr.root = ccr.route
                 WHERE cr.region = '$region' AND cr.systemName = '$system'
+                GROUP BY ccr.traveler
+                ORDER BY clinched DESC
 SQL;
             }
             echo "<!--".$sql_command."-->";
             $res = mysql_query($sql_command);
-            $row = mysql_fetch_array($res);
-            echo "<tr onClick=\"" . $link . "\"><td>Routes</td><td>Driven: " . $row['driven'] . " (" . round($row['driven'] / $row['total'] * 100, 2) .
-                "%)</td><td>Clinched: " . $row['clinched'] . " (" . round($row['clinched'] / $row['total'] * 100, 2) . "%)</td><td>Total: " . $row['total'] .
-                "</td><td>Rank: TBD</td></tr>\n";
+            $row = fetchWithRank($res, 'clinched');
+            echo "<tr onClick=\"" . $link . "\"><td>Routes</td><td>Driven: " . $row['driven'] . " (" . round($row['driven'] / $totalRoutes * 100, 2) .
+                "%)</td><td>Clinched: " . $row['clinched'] . " (" . round($row['clinched'] / $totalRoutes * 100, 2) . "%)</td><td>Total: " . $totalRoutes .
+                "</td><td>Rank: {$row['rank']}</td></tr>\n";
             ?>
             </tbody>
         </table>
