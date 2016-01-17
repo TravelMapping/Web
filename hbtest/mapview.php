@@ -88,6 +88,17 @@
             max-width: 25%;
         }
 
+        #routesTable tr.float {
+            position: fixed;
+        }
+
+        #routesTable tr.float th {
+            position: absolute;
+            overflow: hidden;
+            background-color: white;
+            border-width: 2px;
+        }
+
         #showHideBtn {
             position: absolute;
             right: 10px;
@@ -291,13 +302,24 @@
     }
 
     $(document).ready(function () {
-            $("#routesTable").tablesorter({
+            $routesTable = $('#routesTable');
+            $routesTable.tablesorter({
                 sortList: [[0, 0]],
                 headers: {}
             });
             $('td').filter(function() {
                 return this.innerHTML.match(/^[0-9\s\.,%]+$/);
             }).css('text-align','right');
+            $routesTable.find('tr.float th').each(function(index) {
+                $row = $routesTable.find('tr td:nth-child('+(index+1)+')');
+                if($row.outerWidth() > $(this).width()) {
+                    $(this).width($row.width());
+                } else {
+                    $row.width($(this).width());
+                }
+                //$(this).width($row.outerWidth());
+                $(this).css({left: $row.position().left - 1})
+            })
         }
     );
 </script>
@@ -335,7 +357,10 @@
 </div>
 <div id="routes">
     <table id="routesTable" class="gratable tablesorter">
-        <thead><tr><th class="sortable">Route</th><th class="sortable">System</th><th class="sortable">Clinched</th><th class="sortable">Overall</th><th class="sortable">%</th></tr></thead>
+        <thead>
+            <tr class="float"><th class="sortable">Route</th><th class="sortable">System</th><th class="sortable">Clinched</th><th class="sortable">Overall</th><th class="sortable">%</th></tr>
+            <tr style="height: 22px"></tr>
+        </thead>
         <tbody>
         <?php
         $sql_command = "SELECT r.region, r.root, r.route, r.systemName, banner, city, round(r.mileage, 2) AS total, round(COALESCE(cr.mileage, 0), 2) as clinched, round(COALESCE(cr.mileage, 0) / COALESCE(r.mileage, 0) * 100,2) as percentage FROM routes AS r LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '" .$_GET['u']. "' WHERE ";

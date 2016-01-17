@@ -238,6 +238,10 @@ if ($showingmap == 0) {
 
 <h1>Travel Mapping Highway Browser (Draft)</h1>
 <script type="text/javascript">
+    function collapse_col($col) {
+
+    }
+
     $(document).ready(function () {
             $("#routes").tablesorter({
                 sortList: [[0, 0]],
