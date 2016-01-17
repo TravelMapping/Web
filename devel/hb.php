@@ -1,5 +1,5 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT']."/shields/index.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/shields/index.php";
 
 if (array_key_exists("u", $_GET)) {
     setcookie("lastuser", $_GET['u'], time() + (86400 * 30), "/");
@@ -201,7 +201,7 @@ if (array_key_exists("sys", $_GET) and strlen($_GET['sys']) > 0) {
     </script>
     <title><?php
         if ($showingmap == 1) {
-            $sql_command = "SELECT * FROM routes WHERE root = '".$_GET['r']."'";
+            $sql_command = "SELECT * FROM routes WHERE root = '" . $_GET['r'] . "'";
             $routeInfo = $db->query($sql_command)->fetch_array();
             echo $routeInfo['region'] . " " . $routeInfo['route'];
             if (strlen($routeInfo['banner']) > 0) {
@@ -218,7 +218,7 @@ if (array_key_exists("sys", $_GET) and strlen($_GET['sys']) > 0) {
 <?php
 if ($showingmap == 0) {
     echo "<body>\n";
-    if (array_key_exists("u", $_GET)) echo "<a href=\"/user?u=".$_GET['u']."\">".$_GET['u']."</a>-";
+    if (array_key_exists("u", $_GET)) echo "<a href=\"/user?u=" . $_GET['u'] . "\">" . $_GET['u'] . "</a>-";
     echo "<a href=\"/\">Home</a>-";
     echo "<a href=\"/hbtest\">Highway Browser</a>";
     echo "<form id=\"selectHighways\" name=\"HighwaySearch\" action=\"hb.php\">";
@@ -230,7 +230,7 @@ if ($showingmap == 0) {
 
 } else {
     echo "<body onload=\"loadmap();\">\n";
-    if (array_key_exists("u", $_GET)) echo "<a href=\"/user?u=".$_GET['u']."\">".$_GET['u']."</a>-";
+    if (array_key_exists("u", $_GET)) echo "<a href=\"/user?u=" . $_GET['u'] . "\">" . $_GET['u'] . "</a>-";
     echo "<a href=\"/\">Home</a>-";
     echo "<a href=\"/hbtest\">Highway Browser</a>";
 }
@@ -238,19 +238,47 @@ if ($showingmap == 0) {
 
 <h1>Travel Mapping Highway Browser (Draft)</h1>
 <script type="text/javascript">
-    function collapse_col($col) {
-
+    function initFloatingHeaders($table) {
+        var $col = $table.find('tr.float');
+        var $th = $col.find('th');
+        var tag = "<tr style='height: 22px'></tr>";
+        $(tag).insertAfter($col);
+        $th.each(function (index) {
+            var $row = $table.find('tr td:nth-child(' + (index + 1) + ')');
+            if ($row.outerWidth() > $(this).width()) {
+                $(this).width($row.width());
+            } else {
+                $row.width($(this).width());
+            }
+            var pos =  $row.position().left - $table.offset().left - 2;
+            console.log($table.offset().left);
+            $(this).css({left: pos})
+        });
     }
 
     $(document).ready(function () {
-            $("#routes").tablesorter({
-                sortList: [[0, 0]],
-                headers: {0: {sorter: false},}
-            });
-            $("#systemsTable").tablesorter({
-                sortList: [[0, 0], [4, 0], [3, 0]],
-                headers: {0: {sorter: false},}
-            });
+            <?php
+                if ($showingmap == 1) {
+
+                } elseif ((!is_null($region) or !is_null($system))) {
+                    echo <<<JS
+                    routes = $("#routes");
+                    routes.tablesorter({
+                        sortList: [[0, 0]],
+                        headers: {0: {sorter: false}}
+                    });
+                    initFloatingHeaders(routes);
+JS;
+                } else {
+                    echo <<<JS
+                    systems = $('#systemsTable');
+                    systems.tablesorter({
+                        sortList: [[0, 0], [4, 0], [3, 0]],
+                        headers: {0: {sorter: false}}
+                    });
+JS;
+                }
+            ?>
         }
     );
 </script>
@@ -258,7 +286,7 @@ if ($showingmap == 0) {
 <?php
 if ($showingmap == 1) {
     echo "<div id=\"pointbox\">\n";
-    echo "<span class='bigshield'>".generate($_GET['r'], true)."</span>";
+    echo "<span class='bigshield'>" . generate($_GET['r'], true) . "</span>";
     echo "<span><a href='/hbtest/mapview.php?u={$_GET['u']}&rte={$routeInfo['route']}'>View Associated Routes</a></span>";
     echo "<table id='waypoints' class=\"gratable\"><thead><tr><th colspan=\"2\">Waypoints</th></tr><tr><th>Coordinates</th><th>Waypoint Name</th></tr></thead><tbody>\n";
     $sql_command = "SELECT pointName, latitude, longitude FROM waypoints WHERE root = '" . $_GET['r'] . "';";
@@ -316,7 +344,7 @@ ENDB;
     $sql_command .= ";";
     echo "<!-- SQL: " . $sql_command . " -->\n";
     echo "<div id=\"routebox\">\n";
-    echo "<table class=\"gratable tablesorter ws_data_table\" id=\"routes\"><thead><tr><th colspan=\"6\">Select Route to Display (click a header to sort by that column)</th></tr><tr><th class=\"sortable\">System</th><th class=\"sortable\">Region</th><th class=\"sortable\">Route Name</th><th>.list Name</th><th class=\"sortable\">Level</th><th>Root</th></tr></thead><tbody>\n";
+    echo "<table class=\"gratable tablesorter ws_data_table\" id=\"routes\"><thead><tr><th colspan=\"6\">Select Route to Display (click a header to sort by that column)</th></tr><tr class='float'><th class=\"sortable\">System</th><th class=\"sortable\">Region</th><th class=\"sortable\">Route Name</th><th>.list Name</th><th class=\"sortable\">Level</th><th>Root</th></tr></thead><tbody>\n";
     $res = $db->query($sql_command);
     while ($row = $res->fetch_assoc()) {
         echo "<tr class=\"notclickable status-" . $row['level'] . "\"><td>" . $row['systemName'] . "</td><td>" . $row['region'] . "</td><td>" . $row['route'] . $row['banner'];
@@ -343,7 +371,7 @@ HTML;
     $res = $db->query($sql_command);
     while ($row = $res->fetch_assoc()) {
         $linkJS = "window.open('hb.php?sys={$row['systemName']}')";
-        echo "<tr class='status-".$row['level']."' onClick=\"$linkJS\">";
+        echo "<tr class='status-" . $row['level'] . "' onClick=\"$linkJS\">";
         if (strlen($row['name']) > 15) {
             echo "<td>{$row['code']}</td>";
         } else {

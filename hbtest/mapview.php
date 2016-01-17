@@ -83,20 +83,9 @@
             position: absolute;
             right: 10px;
             top: 100px;
-            bottom: 10px;
+            bottom: 20px;
             overflow-y: scroll;
             max-width: 25%;
-        }
-
-        #routesTable tr.float {
-            position: fixed;
-        }
-
-        #routesTable tr.float th {
-            position: absolute;
-            overflow: hidden;
-            background-color: white;
-            border-width: 2px;
         }
 
         #showHideBtn {
@@ -301,6 +290,24 @@
         document.getElementById("routes").style.visibility = visibility;
     }
 
+    function initFloatingHeaders($table) {
+        var $col = $table.find('tr.float');
+        var $th = $col.find('th');
+        var tag = "<tr style='height: 22px'></tr>";
+        $(tag).insertAfter($col);
+        $th.each(function (index) {
+            var $row = $table.find('tr td:nth-child(' + (index + 1) + ')');
+            if ($row.outerWidth() > $(this).width()) {
+                $(this).width($row.width());
+            } else {
+                $row.width($(this).width());
+            }
+            var pos =  $row.position().left - 2;
+            console.log($table.offset().left);
+            $(this).css({left: pos})
+        });
+    }
+
     $(document).ready(function () {
             $routesTable = $('#routesTable');
             $routesTable.tablesorter({
@@ -310,16 +317,7 @@
             $('td').filter(function() {
                 return this.innerHTML.match(/^[0-9\s\.,%]+$/);
             }).css('text-align','right');
-            $routesTable.find('tr.float th').each(function(index) {
-                $row = $routesTable.find('tr td:nth-child('+(index+1)+')');
-                if($row.outerWidth() > $(this).width()) {
-                    $(this).width($row.width());
-                } else {
-                    $row.width($(this).width());
-                }
-                //$(this).width($row.outerWidth());
-                $(this).css({left: $row.position().left - 1})
-            })
+            initFloatingHeaders($routesTable);
         }
     );
 </script>
@@ -359,7 +357,6 @@
     <table id="routesTable" class="gratable tablesorter">
         <thead>
             <tr class="float"><th class="sortable">Route</th><th class="sortable">System</th><th class="sortable">Clinched</th><th class="sortable">Overall</th><th class="sortable">%</th></tr>
-            <tr style="height: 22px"></tr>
         </thead>
         <tbody>
         <?php
