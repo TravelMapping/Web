@@ -117,6 +117,17 @@ table.gratable td.link:hover {
     background-color: #EEEEFF;
 }
 
+table.gratable tr.float {
+    position: fixed;
+}
+
+table.gratable tr.float th {
+    position: absolute;
+    overflow: hidden;
+    background-color: white;
+    border-width: 2px;
+}
+
 .shield svg {
     width: 45px;
     height: 36px;
