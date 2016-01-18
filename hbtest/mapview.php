@@ -83,7 +83,7 @@
             position: absolute;
             right: 10px;
             top: 100px;
-            bottom: 10px;
+            bottom: 20px;
             overflow-y: scroll;
             max-width: 25%;
         }
@@ -290,14 +290,34 @@
         document.getElementById("routes").style.visibility = visibility;
     }
 
+    function initFloatingHeaders($table) {
+        var $col = $table.find('tr.float');
+        var $th = $col.find('th');
+        var tag = "<tr style='height: 22px'></tr>";
+        $(tag).insertAfter($col);
+        $th.each(function (index) {
+            var $row = $table.find('tr td:nth-child(' + (index + 1) + ')');
+            if ($row.outerWidth() > $(this).width()) {
+                $(this).width($row.width());
+            } else {
+                $row.width($(this).width());
+            }
+            var pos =  $row.position().left - 2;
+            console.log($table.offset().left);
+            $(this).css({left: pos})
+        });
+    }
+
     $(document).ready(function () {
-            $("#routesTable").tablesorter({
+            $routesTable = $('#routesTable');
+            $routesTable.tablesorter({
                 sortList: [[0, 0]],
                 headers: {}
             });
             $('td').filter(function() {
                 return this.innerHTML.match(/^[0-9\s\.,%]+$/);
             }).css('text-align','right');
+            initFloatingHeaders($routesTable);
         }
     );
 </script>
@@ -335,10 +355,12 @@
 </div>
 <div id="routes">
     <table id="routesTable" class="gratable tablesorter">
-        <thead><tr><th class="sortable">Route</th><th class="sortable">System</th><th class="sortable">Clinched</th><th class="sortable">Overall</th><th class="sortable">%</th></tr></thead>
+        <thead>
+            <tr class="float"><th class="sortable">Route</th><th class="sortable">System</th><th class="sortable">Clinched</th><th class="sortable">Overall</th><th class="sortable">%</th></tr>
+        </thead>
         <tbody>
         <?php
-        $sql_command = "SELECT r.region, r.root, r.route, r.systemName, banner, city, round(r.mileage, 2) AS total, round(COALESCE(cr.mileage, 0), 2) as clinched, round(COALESCE(cr.mileage, 0) / COALESCE(r.mileage, 0),2) * 100 as percentage FROM routes AS r LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '" .$_GET['u']. "' WHERE ";
+        $sql_command = "SELECT r.region, r.root, r.route, r.systemName, banner, city, round(r.mileage, 2) AS total, round(COALESCE(cr.mileage, 0), 2) as clinched, round(COALESCE(cr.mileage, 0) / COALESCE(r.mileage, 0) * 100,2) as percentage FROM routes AS r LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '" .$_GET['u']. "' WHERE ";
         if (array_key_exists('rte', $_GET)) {
             $sql_command .= "(r.route like '".$_GET['rte']."' or r.route regexp '".$_GET['rte']."[a-z]')";
             $sql_command = str_replace("*", "%", $sql_command);
@@ -367,7 +389,7 @@
             if (strlen($row['city']) > 0) {
                 echo " (" . $row['city'] . ")";
             }
-            echo "</td><td class='link'><a href='/user/system.php?u={$_GET['u']}&sys={$row['systemName']}'>{$row['systemName']}</a></td><td>".$row['clinched']."</td><td>".$row['total']."</td><td>".($row['percentage'] * 100)."%</td></tr>\n";
+            echo "</td><td class='link'><a href='/user/system.php?u={$_GET['u']}&sys={$row['systemName']}'>{$row['systemName']}</a></td><td>".$row['clinched']."</td><td>".$row['total']."</td><td>".($row['percentage'])."%</td></tr>\n";
         }
         ?>
         </tbody>

@@ -122,9 +122,6 @@ SQL;
     <table class="gratable tablesorter" id="regionsTable">
         <thead>
         <tr>
-            <th colspan="7">Clinched Mileage by Region:</th>
-        </tr>
-        <tr>
             <th class="sortable">Country</th>
             <th class="sortable">Region</th>
             <th class="sortable">Clinched Mileage</th>
@@ -149,9 +146,6 @@ SQL;
     <h2>Stats by System</h2>
     <table class="gratable tablesorter" id="systemsTable">
         <thead>
-        <tr>
-            <th colspan="10">Clinched Mileage by System</th>
-        </tr>
         <tr>
             <th class="sortable">Country</th>
             <th class="sortable">System Code</th>
