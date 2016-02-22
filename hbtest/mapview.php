@@ -360,7 +360,7 @@
         </thead>
         <tbody>
         <?php
-        $sql_command = "SELECT r.region, r.root, r.route, r.systemName, banner, city, round(r.mileage, 2) AS total, round(COALESCE(cr.mileage, 0), 2) as clinched, round(COALESCE(cr.mileage, 0) / COALESCE(r.mileage, 0) * 100,2) as percentage FROM routes AS r LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '" .$_GET['u']. "' WHERE ";
+        $sql_command = "SELECT r.region, r.root, r.route, r.systemName, banner, city, round(r.mileage, 2) AS total, round(COALESCE(cr.mileage, 0), 2) as clinched FROM routes AS r LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '" .$_GET['u']. "' WHERE ";
         if (array_key_exists('rte', $_GET)) {
             $sql_command .= "(r.route like '".$_GET['rte']."' or r.route regexp '".$_GET['rte']."[a-z]')";
             $sql_command = str_replace("*", "%", $sql_command);
@@ -389,7 +389,7 @@
             if (strlen($row['city']) > 0) {
                 echo " (" . $row['city'] . ")";
             }
-            echo "</td><td class='link'><a href='/user/system.php?u={$_GET['u']}&sys={$row['systemName']}'>{$row['systemName']}</a></td><td>".$row['clinched']."</td><td>".$row['total']."</td><td>".($row['percentage'])."%</td></tr>\n";
+            echo "</td><td class='link'><a href='/user/system.php?u={$_GET['u']}&sys={$row['systemName']}'>{$row['systemName']}</a></td><td>".$row['clinched']."</td><td>".$row['total']."</td><td>".(round( $row['clinched'] / $row['total'] * 100, 2) )."%</td></tr>\n";
         }
         ?>
         </tbody>
