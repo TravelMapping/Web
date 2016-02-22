@@ -18,7 +18,6 @@ include $_SERVER['DOCUMENT_ROOT']."/login.php";
             left: 0px;
             top: 80px;
             bottom: 0px;
-            width: 100%;
             overflow: auto;
             padding: 20px;
         }
@@ -27,6 +26,10 @@ include $_SERVER['DOCUMENT_ROOT']."/login.php";
             margin: auto;
             text-align: center;
             padding: 10px;
+        }
+        #logLinks {
+        	text-align: center;
+    		font-size: 14px;
         }
     </style>
     <!-- jQuery -->
@@ -85,6 +88,9 @@ include $_SERVER['DOCUMENT_ROOT']."/login.php";
     <h1>Traveler Stats for <?php echo $user; ?>:</h1>
 </div>
 <div id="body">
+	<div id="logLinks">
+		<a href="/logs/<?php echo $user; ?>.log">Log File</a> | <a href="/devlogs/<?php echo $user; ?>.log">Log File (with preview systems)</a>
+	</div>
     <div id="overall">
         <h2>Overall Stats</h2>
         <table class="gratable" style="width: 30%" id="tierTable">
