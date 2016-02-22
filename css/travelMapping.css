@@ -1,0 +1,144 @@
+body, html {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    font-size: 9pt;
+    background-color: #EEEEFF;
+}
+
+table.nmptable {
+    font-size: 8pt;
+    border: 1px solid black;
+    border-spacing: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+}
+
+table.nmptable td, th {
+    border: solid black;
+    border-width: 1px;
+}
+
+table.nmptable2 td, th {
+    border-width: 0px;
+}
+
+table.nmptable tr td {
+    text-align: right;
+}
+
+table.pthtable {
+    font-size: 10pt;
+    border: 1px solid black;
+    border-spacing: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+}
+
+table.pthtable td, th {
+    border: solid black;
+    border-width: 1px;
+}
+
+table.pthtable tr td {
+    text-align: left;
+}
+
+table.gratable {
+    font-size: 10pt;
+    border: 1px solid black;
+    border-spacing: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+}
+
+table.gratable td, th {
+    border: solid black;
+    border-width: 1px;
+}
+
+table.gratable tr td {
+    text-align: left;
+}
+
+table.gratable tr[onclick]:hover td, table.gratable tr.user-highlight td {
+    background-color: #CCCCCC;
+    cursor: pointer;
+}
+
+table.tablesorter th.nonsortable {
+    background-color: #DDDDDD;
+}
+
+table.tablesorter th.sortable:hover {
+    background-color: #CCCCFF !important;
+    cursor: pointer;
+}
+
+table tr.status-active td {
+    background-color: #CCFFCC;
+}
+
+table tr.status-preview td {
+    background-color: #FFFFCC;
+}
+
+table tr.status-devel td {
+    background-color: #FFCCCC;
+}
+
+table.gratable {
+    font-size: 10pt;
+    border: 1px solid black;
+    border-spacing: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+}
+
+
+table.tablesorter th.headerSortUp {
+    background-color: #DDFFDD !important;
+}
+
+table.tablesorter th.headerSortDown {
+    background-color: #FFDDDD !important;
+}
+
+table.gratable td.link {
+    background-color: inherit;
+    text-align: center;
+}
+
+table.gratable td.link:hover {
+    background-color: #EEEEFF;
+}
+
+table.gratable tr.float {
+    position: fixed;
+}
+
+table.gratable tr.float th {
+    position: absolute;
+    overflow: hidden;
+    background-color: white;
+    border-width: 2px;
+}
+
+.shield svg {
+    width: 45px;
+    height: 36px;
+}
+
+.bigshield svg {
+    width: 400px;
+    height: 100px;
+}
+
+.map-loading * {
+    cursor: progress;
+    background-color: #999999;
+}

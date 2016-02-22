@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,16 +16,33 @@
 <div id="nav">
 <ul>
 <li><a href="/">Home</a></li>
-<li><a href="/">Traveler Stats</a></li>
-<li><a href="/">Highway Browser</a></li>
+<li><a href="/user">Traveler Stats</a></li>
+<li><a href="/hbtest">Highway Browser</a></li>
 <!--<li><a href="/">Login</a></li>-->
 </ul>
 </div>
 </div>
 </div>
 <div id="main">
-<div class="container">
-<!-- Add content here -->
+  <div class="container">
+    Welcome to the Travel Mapping project.
+<div id="hb">
+  <h3><a href="devel/hb.php">Draft Highway Browser</a></h3>
+</div>
+<div id="logs">
+  <h3><a href="logs/">User and System Logs, Statistical Summaries (click on an entry in the list that will appear)</a></h3>
+  <h3><a href="devlogs/">User and System Logs, Statistical Summaries (with preview systems included as if active)</a></h3>
+</div>
+<div id="tools">
+  <h3>Development Tools</h3>
+  <ul>
+    <li><a href="devel/updates.php">Highway Data Updates</a></li>
+    <li><a href="devel/datacheck.php">Datacheck Error Log</a></li>    
+  </ul>
+</div>
+<div id="forum">
+  <h3><a href="/forum">Project Forum</a></h3>
+</div>
 </div>
 </div>
 </body>
