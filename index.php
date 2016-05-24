@@ -18,6 +18,7 @@
 <li><a href="/">Home</a></li>
 <li><a href="/user">Traveler Stats</a></li>
 <li><a href="/hbtest">Highway Browser</a></li>
+<li><a href="/credits.php">Credits and Sources</a></li>
 <!--<li><a href="/">Login</a></li>-->
 </ul>
 </div>
