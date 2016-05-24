@@ -706,7 +706,7 @@ Some underlying code and the initial highway data are from CHM.</p>
   <li>Jeff Morrison (jeffm)<br>
         <a href="http://www.angelfire.com/ia/jdmorrison/ends/iaends.html">Iowa Highway Ends</a> </li>
   <li>Christopher Steig (Bickendan)</li>
-  <li>Jim Teresco (terescoj)<br>
+  <li>Jim Teresco (terescoj), Primary Back End Development, Developed highway data for New York, Massachusetts, and New Mexico<br>
       <a href="http://www.teresco.org/pics/signs/">Why Do You Have So Many Pictures of Road Signs?</a>  </li>
   <li>Oscar Voss (oscar)</li>
   </ul>
