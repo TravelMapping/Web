@@ -142,8 +142,7 @@
     <script
         src="http://maps.googleapis.com/maps/api/js?sensor=false"
         type="text/javascript"></script>
-    <script src="chmviewerfunc3.js" type="text/javascript"></script>
-    <script src="/lib/tmjsfuncs.js" type="text/javascript"></script>
+    <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
     <!-- jQuery -->
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <!-- TableSorter -->
