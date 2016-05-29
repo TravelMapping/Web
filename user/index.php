@@ -143,6 +143,7 @@ SQL;
         $res = $db->query($sql_command);
         while ($row = $res->fetch_assoc()) {
             $percent = round($row['clinchedMileage'] / $row['totalMileage'] * 100.0, 2);
+	    $percent = sprintf('%0.2f', $percent);
             echo "<tr onClick=\"window.document.location='/user/region.php?u=" . $user . "&rg=" . $row['code'] . "'\"><td>" . $row['country'] . "</td><td>" . $row['name'] . "</td><td>" . $row['clinchedMileage'] . "</td><td>" . $row['totalMileage'] . "</td><td>" . $percent . "%</td><td class='link'><a href=\"/hbtest/mapview.php?u=" . $user . "&rg=" . $row['code'] . "\">Map</a></td><td class='link'><a href='/devel/hb.php?rg={$row['code']}'>HB</a></td></tr>";
         }
         $res->free();
