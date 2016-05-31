@@ -103,10 +103,11 @@ Some underlying code and the initial highway data are from CHM.</p>
 	      <li><a href="http://www.geobase.ca/geobase/en/search.do?produit=nrn&amp;language=en">List of Available Datasets</a>. GIS shapefiles from GeoBase covering the Canadian provinces and territories.</li>
             </ul>
 	  </li>
-										<!--						 <li>Alberta, CAN
+																 <li>Alberta, CAN
 	    <ul>
+	      <li><a href="http://www.transportation.alberta.ca/608.htm">Government of Alberta Ministry of Transportation: Maps</a>.</li>
             </ul>
-	  </li> -->
+	  </li>
 																 <li>British Columbia, CAN
 	    <ul>
 	      <li><a href="http://www.gov.bc.ca/tran/">British Columbia Ministry of Transportation and Infrastructure</a>. Official government site covering transportation in British Columbia, Canada.</li>
@@ -139,6 +140,8 @@ Some underlying code and the initial highway data are from CHM.</p>
 	    <ul>
 	      <li><a href="http://the506.com/roads/NS/">Nova Scotia Roads</a>. Hobbyist site by J. P. Kirby covering the provincial highways of Nova Scotia.</li>
 <li><a href="http://www.gov.ns.ca/snsmr/publications/product.asp?numRecordPosition=7&amp;P_ID=3823">Traffic Volumes Primary Highway System</a>. Traffic statistics from the Nova Scotia Department of Transportation and Public Works.</li>
+<li><a href="http://www.novascotia.com/flipbook/offline/download.pdf">Nova Scotia 2015 Doers & Dreamers Travel Guide</a>. Tourism brochure featuring maps of scenic travelways.</li>
+<li><a href="http://www.novascotia-immobilien.de/media/blockhouse-country/pdf/scenic-travelways-map-nova-scotia.pdf">Scenic Travelways Locator Map</a>.</li>
             </ul>
 	  </li>
 																 <li>Ontario, CAN
@@ -540,7 +543,6 @@ Some underlying code and the initial highway data are from CHM.</p>
 	    <li><a href="http://www.nebraskatransportation.org/docs/logbook.pdf">Nebraska Highway Reference Log Book</a>. Highway inventory from the Nebraska Department of Roads.</li>
 <li><a href="http://www.nebraskatransportation.org/maps/">NDOR Map Library</a>. Official maps from the Nebraska Department of Roads.</li>
 	    <li><a href="http://nebraskaroads.com/">Nebraska Roads</a>. Hobbyist site by Jesse Whidden covering highways in Nebraska.</li>
-<li><a href="http://www.nebraskatransportation.org/docs/logbook.pdf">Nebraska Highway Reference Post Log</a>. Prepared by the Nebraska Department of Roads.</li>
 	    </ul>
 	  </li>
 	  <li>Nevada, USA
@@ -570,6 +572,7 @@ Some underlying code and the initial highway data are from CHM.</p>
 	    <ul>
 	    <li><a href="https://www.nysdot.gov/divisions/engineering/technical-services/highway-data-services/traffic-data">NYSDOT Traffic Data Reports</a>. Official traffic data from New York State Department of Transportation.</li>
 	    <li><a href="https://www.nysdot.gov/divisions/operating/oom/transportation-systems/repository/2009%20tour-bk.pdf">NYSDOT Touring Routes</a>. Official route listings from New York State Department of Transportation.</li>
+	    <li><a href="http://gis3.dot.ny.gov/html5viewer/?viewer=tdv">NYS Traffic Data Viewer</a>. Interactive map and viewer for New York State Department of Transportation's highway data.</li>
 	    </ul>
 	  </li>
 	  <li>North Carolina, USA
@@ -695,8 +698,7 @@ Some underlying code and the initial highway data are from CHM.</p>
 <div id="Contributors">
   <h1>Project Contributors</h1>
   <ul>
-  <li>Eric Bryant (yakra)<br>
-        <a href="http://yakra.dyn-o-saur.com/roads/">The Maine Drag</a> </li>
+  <li>Eric Bryant (yakra)<br> </li>
   <li>Dave Filpus (dfilpus)<br>
           <a href="http://roadgeek.filpus.org/">Filpus Roadgeek</a> </li>
   <li>Adam Froehlig (froggie)<br>
