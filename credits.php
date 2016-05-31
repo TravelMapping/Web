@@ -442,8 +442,8 @@ Some underlying code and the initial highway data are from CHM.</p>
 	  </li>
 	  <li>Georgia, USA
 	    <ul>
-<li><a href="http://www.dot.state.ga.us/maps/Pages/StateMaps.aspx">Georgia State Highway Map</a>. Official State map from the Georgia Department of Transportation.</li>
-<li><a href="http://www.dot.state.ga.us/maps/Pages/CountyMaps.aspx">Georgia County Highway Maps</a>. County maps from the Georgia Department of Transportation.</li>
+<li><a href="http://www.dot.ga.gov/DS/Maps">Georgia State Highway Maps</a>. Official statewide and county maps from the Georgia Department of Transportation.</li>
+<li><a href="http://www.dot.ga.gov/DS/Maps/GeoTraqs">GeoTRAQS Online Mapping</a>. Official online GIS data from the Georgia Department of Transportation.</li>
 	    </ul>
 	  </li>
 	  <li>Hawaii, USA
