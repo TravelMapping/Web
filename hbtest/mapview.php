@@ -134,7 +134,7 @@
     }
 
     ?>
-    <script src="chmviewerfunc3.js" type="text/javascript"></script>
+    <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
     <script>
         function waypointsFromSQL() {
             <?php
