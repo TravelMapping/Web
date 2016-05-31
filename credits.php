@@ -481,8 +481,9 @@ Some underlying code and the initial highway data are from CHM.</p>
 	  </li>
 	  <li>Kentucky, USA
 	    <ul>
-	<li><a href="http://www.planning.kytc.ky.gov/maps/SPRS/SPRS_maps.asp">Division of Planning - SPRS Maps</a>. State Primary Road System Maps from Kentucky Transportation Cabinet.</li>
-<li><a href="http://www.planning.kytc.ky.gov/maps/officialmap/ohm.asp">Kentucky State Highway Map</a>. Official State map from the Kentucky Transportation Cabinet.</li>
+	<li><a href="http://transportation.ky.gov/Planning/Pages/State-Primary-Road-System-Maps.aspx">Kentucky Transportation Cabinet SPRS Maps</a>. State Primary Road System Maps from Kentucky Transportation Cabinet.</li>
+        <li><a href="http://maps.kytc.ky.gov/photolog/?config=LocalRoads">Kentucky Transportation Cabinet Local Roads Spatial Application</a></li>
+        <li><a href="http://transportation.ky.gov/Planning/Pages/Official-Highway-Map.aspx">Kentucky State Highway Map</a>. Official State map from the Kentucky Transportation Cabinet.</li>
 	    </ul>
 	  </li>
 	  <li>Louisiana, USA
@@ -588,8 +589,8 @@ Some underlying code and the initial highway data are from CHM.</p>
 	  <li>Ohio, USA
 	    <ul>
 	    <li>Unofficial Ohio State Highways. John Simpson's directory in development of Ohio highways.</li>
-	    <li><a href="http://www.dot.state.oh.us/maps/Pages/20072009TransMap.aspx">2007-2009 Ohio Official Highway Map</a>. On-line Ohio state highway map.</li>
-	    <li><a href="http://www.odotonline.org/techservapps/SLD/default.htm">OHDO Straight Line Diagrams</a>. Comprehensive directory of straight line diagrams of Ohio highways.</li>
+	    <li><a href="https://www.dot.state.oh.us/maps/Pages/TransMap15.aspx">Ohio Official Highway Map</a>. On-line Ohio state highway map.</li>
+	    <li><a href="https://www.dot.state.oh.us/Divisions/Planning/TechServ/TIM/Pages/Straight-Line-Diagrams.aspx">OHDO Straight Line Diagrams</a>. Comprehensive directory of straight line diagrams of Ohio highways.</li>
 	    </ul>
 	  </li>
 	  <li>Oklahoma, USA
@@ -705,6 +706,7 @@ Some underlying code and the initial highway data are from CHM.</p>
         <a href="http://rickmastfan67.blogspot.com/">Rickmastfan67 Blog</a> </li>
   <li>Jeff Morrison (jeffm)<br>
         <a href="http://www.angelfire.com/ia/jdmorrison/ends/iaends.html">Iowa Highway Ends</a> </li>
+  <li>Dave S (mapcat), Maintains Kentucky and Ohio, developed some highway data for Kentucky</li>
   <li>Christopher Steig (Bickendan)</li>
   <li>Jim Teresco (terescoj), Primary Back End Development, Developed highway data for New York, Massachusetts, and New Mexico<br>
       <a href="http://www.teresco.org/pics/signs/">Why Do You Have So Many Pictures of Road Signs?</a>  </li>
