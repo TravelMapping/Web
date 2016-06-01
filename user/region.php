@@ -6,15 +6,7 @@
         $user = $_COOKIE['lastuser'];
     }
 
-    $dbname = "TravelMapping";
-    if (isset($_COOKIE['currentdb'])) {
-        $dbname = $_COOKIE['currentdb'];
-    }
-
-    if (array_key_exists("db", $_GET)) {
-        $dbname = $_GET['db'];
-        setcookie("currentdb", $dbname, time() + (86400 * 30), "/");
-    }
+    $dbname = "TravelMappingTest";
 
     if (array_key_exists("rg", $_GET)) {
         $region = $_GET['rg'];
@@ -25,6 +17,8 @@
         echo "</head><body><h1>ERROR: 400 Missing user (u=) or region (rg=) params</h1></body></html>";
         exit();
     }
+
+    $activeClause = "(systems.level='preview' OR systems.level='active')";
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!-- 
@@ -209,7 +203,7 @@
                  $where_systems = " where (routes.systemName='usai')";
               }
 
-              $sql_command = "select waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname from waypoints join routes on routes.root = waypoints.root".$select_regions.$select_systems." join systems on routes.systemname = systems.systemname and systems.active='1' order by root, waypoints.pointId;";
+              $sql_command = "select waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname from waypoints join routes on routes.root = waypoints.root".$select_regions.$select_systems." join systems on routes.systemname = systems.systemname and ".$activeClause."  order by root, waypoints.pointId;";
               echo "// SQL: ".$sql_command."\n";
               $res = mysql_query($sql_command);
 
@@ -233,7 +227,7 @@
               if (array_key_exists("u",$_GET)) {
                  echo "traveler = '".$_GET['u']."';\n";
                  // retrieve list of segments for this region or regions
-                 $sql_command = "select segments.segmentId, segments.root from segments join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1'".$where_regions.$where_systems." order by root, segments.segmentId;";
+                 $sql_command = "select segments.segmentId, segments.root from segments join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and ".$activeClause." ".$where_regions.$where_systems." order by root, segments.segmentId;";
                  echo "// SQL: ".$sql_command."\n";
                  $res = mysql_query($sql_command);
                  $segmentIndex = 0;
@@ -241,7 +235,7 @@
                    echo "segments[".$segmentIndex."] = ".$row[0]."; // route=".$row[1]."\n";
                    $segmentIndex = $segmentIndex + 1;
                  }
-                 $sql_command = "select segments.segmentId, segments.root from segments right join clinched on segments.segmentId = clinched.segmentId join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and systems.active='1'".$where_regions.$where_systems." and clinched.traveler='".$_GET['u']."' order by root, segments.segmentId;";
+                 $sql_command = "select segments.segmentId, segments.root from segments right join clinched on segments.segmentId = clinched.segmentId join routes on routes.root = segments.root join systems on routes.systemname = systems.systemname and ".$activeClause." ".$where_regions.$where_systems." and clinched.traveler='".$_GET['u']."' order by root, segments.segmentId;";
                  echo "// SQL: " .$sql_command."\n";
                  $res = mysql_query($sql_command);
                  $segmentIndex = 0;
@@ -329,7 +323,7 @@ SQL;
             echo "<tr style=\"background-color:#EEEEFF\"><td>Overall</td><td colspan='2'>Miles Driven: ".$row['clinched']." mi (".$row['percentage']."%)</td><td>Total: ".$row['overall']." mi</td><td>Rank: {$row['rank']}</td></tr>";
 
             //Second, fetch routes clinched/driven
-            $totalRoutes = mysql_fetch_array(mysql_query("SELECT COUNT(*) as t FROM routes LEFT JOIN systems on routes.systemName = systems.systemName WHERE region = '$region' AND systems.active = 1"))['t'];
+            $totalRoutes = mysql_fetch_array(mysql_query("SELECT COUNT(*) as t FROM routes LEFT JOIN systems on routes.systemName = systems.systemName WHERE region = '$region' AND ".$activeClause." "))['t'];
             error_log("Total Routes: $totalRoutes");
             $sql_command = <<<SQL
             SELECT
@@ -341,7 +335,10 @@ SQL;
             FROM routes AS r
               LEFT JOIN clinchedRoutes AS cr
                 ON cr.route = r.root
-            WHERE r.region = '$region'
+              LEFT JOIN systems
+                ON r.systemName = systems.systemName
+            WHERE (r.region = '$region' AND 
+                (systems.level='preview' OR systems.level='active'))
             GROUP BY traveler
             ORDER BY clinchedPct DESC;
 SQL;

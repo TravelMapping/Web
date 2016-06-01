@@ -47,10 +47,7 @@ include $_SERVER['DOCUMENT_ROOT']."/login.php";
 		</thead>
 		<tbody>
 			<?php
-            $dbname = "TravelMapping";
-            if (array_key_exists("db",$_GET)) {
-              $dbname = $_GET['db'];
-            }
+            $dbname = "TravelMappingTest";
             $db = new mysqli("localhost","travmap","clinch",$dbname) or die("Failed to connect to database");
             $sql = "SELECT sum(o.mileage) as totalMileage FROM overallMileageByRegion o";
             $totalMileage = $db->query($sql)->fetch_assoc()['totalMileage'];

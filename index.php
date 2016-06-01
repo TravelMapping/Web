@@ -33,8 +33,6 @@
 <div id="logs">
   <h3><a href="logs/">User and System Logs (click on an entry in the list that will appear)</a></h3>
   <h3><a href="stats/">Statistical Summaries (click on an entry in the list that will appear)</a></h3>
-  <h3><a href="devlogs/">User and System Logs (with preview systems included as if active)</a></h3>
-  <h3><a href="devstats/">Statistical Summaries (with preview systems included as if active)</a></h3>
 </div>
 <div id="tools">
   <h3>Development Tools</h3>

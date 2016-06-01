@@ -9,13 +9,5 @@ if (array_key_exists("u", $_GET)) {
     exit();
 }
 
-$dbname = "TravelMapping";
-if (isset($_COOKIE['currentdb'])) {
-    $dbname = $_COOKIE['currentdb'];
-}
-
-if (array_key_exists("db", $_GET)) {
-    $dbname = $_GET['db'];
-    setcookie("currentdb", $dbname, time() + (86400 * 30), "/");
-}
+$dbname = "TravelMappingTest";
 ?>
