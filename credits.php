@@ -643,7 +643,8 @@ Some underlying code and the initial highway data are from CHM.</p>
 	  </li>
 	  <li>South Dakota, USA
 	    <ul>
-<li><a href="http://www.sddot.com/pub.asp?mode=list&amp;Type=4">South Dakota State and County Maps</a>. Official state and county highway maps from the South Dakota Department of Transportation.</li>
+<li><a href="http://www.sddot.com/resources/maps/Default.aspx">South Dakota DOT Maps</a>. Official maps from the South Dakota Department of Transportation.</li>
+<li><a href="http://www.sddot.com/transportation/highways/planning/pavement/Default.aspx">South Dakota DOT Pavement Condition Monitoring</a>.</li>
 	    </ul>
 	  </li>
 	  <li>Tennessee, USA
