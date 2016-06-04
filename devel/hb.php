@@ -8,14 +8,14 @@ if (array_key_exists("u", $_GET)) {
 }
 
 $dbname = "TravelMapping";
-if (isset($_COOKIE['currentdb'])) {
-    $dbname = $_COOKIE['currentdb'];
-}
+//if (isset($_COOKIE['currentdb'])) {
+//    $dbname = $_COOKIE['currentdb'];
+//}
 
-if (array_key_exists("db", $_GET)) {
-    $dbname = $_GET['db'];
-    setcookie("currentdb", $dbname, time() + (86400 * 30), "/");
-}
+//if (array_key_exists("db", $_GET)) {
+//    $dbname = $_GET['db'];
+//    setcookie("currentdb", $dbname, time() + (86400 * 30), "/");
+//}
 
 if (array_key_exists("rg", $_GET) and strlen($_GET['rg']) > 0) {
     $region = $_GET['rg'];
@@ -34,8 +34,7 @@ if (array_key_exists("sys", $_GET) and strlen($_GET['sys']) > 0) {
  *  u - user to display highlighting for on map (optional)
  *  rg - region to filter for on the highway browser list (optional)
  *  sys - system to filter for on the highway browser list (optional)
- *  db - database to use (optional, defaults to TravelMapping
- *  ([r [u]] [rg | sys], [db])
+ *  ([r [u]] [rg | sys])
  ***
  -->
 <html xmlns="http://www.w3.org/1999/xhtml">
