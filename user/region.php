@@ -26,8 +26,7 @@
 	URL Params:
 		u - the user.
         rg - the region viewing stats for.
-		db - the database being used. Use 'TravelMappingDev' for in-development systems.
-		(u, rg, [db])
+		(u, rg)
 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -293,32 +292,96 @@
     </div>
     <h6>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</h6>
     <table class="gratable" id="overallTable">
-        <thead><tr><th colspan="5">Overall Region Stats</th></tr></thead>
+        <thead>
+            <tr><th colspan="3">Overall Region Stats</th></tr>
+	    <tr><td /><td>Active Systems</td><td>Active+Preview Systems</td></tr>
+        </thead>
         <tbody>
             <?php
-            //First fetch overall mileage
+            //First fetch overall mileage, active only
             $sql_command = <<<SQL
-            SELECT o.mileage AS overall, c.traveler, c.mileage as clinched, round(c.mileage / o.mileage * 100, 2) AS percentage
+            SELECT o.activeMileage AS totalActiveMileage, c.traveler, c.activeMileage as activeClinched, round(c.activeMileage / o.activeMileage * 100, 2) AS activePercentage
             FROM clinchedOverallMileageByRegion AS c
             LEFT JOIN overallMileageByRegion AS o ON c.region = o.region
             WHERE c.region = '$region'
-            ORDER BY percentage DESC;
+            ORDER BY activePercentage DESC;
 SQL;
             $res = mysql_query($sql_command);
-            $row = fetchWithRank($res, 'percentage');
+            $row = fetchWithRank($res, 'activePercentage');
             $link = "redirect('/hbtest/mapview.php?u=" . $user . "&rg=" . $region . "')";
-            echo "<tr style=\"background-color:#EEEEFF\"><td>Overall</td><td colspan='2'>Miles Driven: ".$row['clinched']." mi (".$row['percentage']."%)</td><td>Total: ".$row['overall']." mi</td><td>Rank: {$row['rank']}</td></tr>";
+	    $activeTotalMileage = $row['totalActiveMileage'];
+	    $activeClinchedMileage = $row['activeClinched'];
+	    $activeMileagePercentage = $row['activePercentage'];
+	    $activeMileageRank = $row['rank'];
 
-            //Second, fetch routes clinched/driven
-            $totalRoutes = mysql_fetch_array(mysql_query("SELECT COUNT(*) as t FROM routes LEFT JOIN systems on routes.systemName = systems.systemName WHERE region = '$region' AND ".$activeClause." "))['t'];
-            error_log("Total Routes: $totalRoutes");
+	    // and active+preview
+            $sql_command = <<<SQL
+            SELECT o.activePreviewMileage AS totalActivePreviewMileage, c.traveler, c.activePreviewMileage as activePreviewClinched, round(c.activePreviewMileage / o.activePreviewMileage * 100, 2) AS activePreviewPercentage
+            FROM clinchedOverallMileageByRegion AS c
+            LEFT JOIN overallMileageByRegion AS o ON c.region = o.region
+            WHERE c.region = '$region'
+            ORDER BY activePreviewPercentage DESC;
+SQL;
+            $res = mysql_query($sql_command);
+            $row = fetchWithRank($res, 'activePreviewPercentage');
+            $link = "redirect('/hbtest/mapview.php?u=" . $user . "&rg=" . $region . "')";
+	    $activePreviewTotalMileage = $row['totalActivePreviewMileage'];
+	    $activePreviewClinchedMileage = $row['activePreviewClinched'];
+	    $activePreviewMileagePercentage = $row['activePreviewPercentage'];
+	    $activePreviewMileageRank = $row['rank'];
+ 
+            echo "<tr class='notclickable' style=\"background-color:#EEEEFF\"><td>Miles Driven</td>";
+	    echo "<td>" . $activeClinchedMileage;
+	    echo "/" . $activeTotalMileage . " mi (";
+	    echo $activeMileagePercentage . "%) ";
+	    echo "Rank: " . $activeMileageRank . "</td>";
+	    echo "<td>" . $activePreviewClinchedMileage;
+	    echo "/" . $activePreviewTotalMileage . " mi (";
+	    echo $activePreviewMileagePercentage . "%) ";
+	    echo "Rank: " . $activePreviewMileageRank . "</td>";
+	    echo "</tr>";
+
+//            echo "<tr style=\"background-color:#EEEEFF\"><td>Overall</td><td colspan='2'>Miles Driven: ".$row['clinched']." mi (".$row['percentage']."%)</td><td>Total: ".$row['overall']." mi</td><td>Rank: {$row['rank']}</td></tr>";
+
+            // Second, fetch routes clinched/driven
+            $totalActiveRoutes = mysql_fetch_array(mysql_query("SELECT COUNT(*) as t FROM routes LEFT JOIN systems on routes.systemName = systems.systemName WHERE region = '$region' AND systems.level = 'active'"))['t'];
+            $totalActivePreviewRoutes = mysql_fetch_array(mysql_query("SELECT COUNT(*) as t FROM routes LEFT JOIN systems on routes.systemName = systems.systemName WHERE region = '$region' AND ".$activeClause." "))['t'];
+            //error_log("Total Routes: $totalRoutes");
             $sql_command = <<<SQL
             SELECT
               traveler,
               COUNT(cr.route) AS driven,
               SUM(cr.clinched) AS clinched,
-              ROUND(COUNT(cr.route) / $totalRoutes * 100, 2) as drivenPct,
-              ROUND(sum(cr.clinched) / $totalRoutes * 100, 2) as clinchedPct
+              ROUND(COUNT(cr.route) / $totalActiveRoutes * 100, 2) as drivenPct,
+              ROUND(sum(cr.clinched) / $totalActiveRoutes * 100, 2) as clinchedPct
+            FROM routes AS r
+              LEFT JOIN clinchedRoutes AS cr
+                ON cr.route = r.root
+              LEFT JOIN systems
+                ON r.systemName = systems.systemName
+            WHERE (r.region = '$region' AND 
+                systems.level = 'active')
+            GROUP BY traveler
+            ORDER BY clinchedPct DESC;
+SQL;
+
+            echo "<!--".$sql_command."-->";
+            $res = mysql_query($sql_command);
+            $row = fetchWithRank($res, 'clinchedPct');
+
+	    $drivenActiveRoutes = $row['driven'];
+	    $drivenActiveRoutesPct = $row['drivenPct'];
+	    $clinchedActiveRoutes = $row['clinched'];
+	    $clinchedActiveRoutesPct = $row['clinchedPct'];
+	    $clinchedActiveRoutesRank = $row['rank'];
+
+            $sql_command = <<<SQL
+            SELECT
+              traveler,
+              COUNT(cr.route) AS driven,
+              SUM(cr.clinched) AS clinched,
+              ROUND(COUNT(cr.route) / $totalActivePreviewRoutes * 100, 2) as drivenPct,
+              ROUND(sum(cr.clinched) / $totalActivePreviewRoutes * 100, 2) as clinchedPct
             FROM routes AS r
               LEFT JOIN clinchedRoutes AS cr
                 ON cr.route = r.root
@@ -333,7 +396,29 @@ SQL;
             echo "<!--".$sql_command."-->";
             $res = mysql_query($sql_command);
             $row = fetchWithRank($res, 'clinchedPct');
-            echo "<tr onClick=\"" . $link . "\"><td>Routes</td><td>Driven: " . $row['driven'] . " (" . $row['drivenPct'] . "%)</td><td>Clinched: " . $row['clinched'] . " (" . $row['clinchedPct'] . "%)</td><td>Total: " . $totalRoutes . "</td><td>Rank: {$row['rank']}</td></tr>\n";
+
+	    $drivenActivePreviewRoutes = $row['driven'];
+	    $drivenActivePreviewRoutesPct = $row['drivenPct'];
+	    $clinchedActivePreviewRoutes = $row['clinched'];
+	    $clinchedActivePreviewRoutesPct = $row['clinchedPct'];
+	    $clinchedActivePreviewRoutesRank = $row['rank'];
+
+
+
+            echo "<tr onClick=\"window.open('/shields/clinched.php?u={$user}')\">";
+	    echo "<td>Routes Driven</td>";
+	    echo "<td>".$drivenActiveRoutes." of " . $totalActiveRoutes . " (" . $drivenActiveRoutesPct . "%) Rank: TBD</td>";
+	    echo "<td>".$drivenActivePreviewRoutes." of " . $totalActivePreviewRoutes . " (" . $drivenActivePreviewRoutesPct . "%) Rank: TBD</td>";
+	    echo "</tr>";
+
+            echo "<tr onClick=\"window.open('/shields/clinched.php?u={$user}')\">";
+	    echo "<td>Routes Clinched</td>";
+	    echo "<td>".$clinchedActiveRoutes." of " . $totalActiveRoutes . " (" . $clinchedActiveRoutesPct . "%) Rank: ". $clinchedActiveRoutesRank."</td>";
+	    echo "<td>".$clinchedActivePreviewRoutes." of " . $totalActivePreviewRoutes . " (" . $clinchedActivePreviewRoutesPct . "%) Rank: ". $clinchedActivePreviewRoutesRank."</td>";
+	    echo "</tr>";
+
+
+//            echo "<tr onClick=\"" . $link . "\"><td>Routes</td><td>Driven: " . $row['driven'] . " (" . $row['drivenPct'] . "%)</td><td>Clinched: " . $row['clinched'] . " (" . $row['clinchedPct'] . "%)</td><td>Total: " . $totalRoutes . "</td><td>Rank: {$row['rank']}</td></tr>\n";
             ?>
         </tbody>
     </table>
