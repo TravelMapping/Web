@@ -162,17 +162,20 @@ SQL;
         </table>
     </div>
     <h2>Stats by Region</h2>
+    <!-- h3>Legend: A=active systems only, A+P=active and preview systems</h3> -->
     <table class="gratable tablesorter" id="regionsTable">
         <thead>
+	<tr><th colspan="2" /><th colspan="3">Active Systems Only</th>
+	    <th colspan="3">Active+Preview Systems</th><th colspan="2" /></tr>
         <tr>
             <th class="sortable">Country</th>
             <th class="sortable">Region</th>
-            <th class="sortable">Clinched Mileage</th>
-            <th class="sortable">Overall Mileage</th>
+            <th class="sortable">Clinched (mi)</th>
+            <th class="sortable">Overall (mi)</th>
             <th class="sortable">% Clinched</th>
-            <th class="sortable">Clinched Mileage (incl preview)</th>
-            <th class="sortable">Overall Mileage (incl preview)</th>
-            <th class="sortable">% Clinched (incl preview)</th>
+            <th class="sortable">Clinched (mi)</th>
+            <th class="sortable">Overall (mi)</th>
+            <th class="sortable">% Clinched</th>
             <th colspan="2">Map</th>
         </tr>
         </thead>

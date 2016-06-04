@@ -1,4 +1,5 @@
 <?php
+// replace this part with a common php like the login.php used elsewhere
 if (array_key_exists("u", $_GET)) {
     $user = $_GET['u'];
     setcookie("lastuser", $user, time() + (86400 * 30), "/");
@@ -15,6 +16,7 @@ if (array_key_exists("sys", $_GET)) {
     $system = $_GET['sys'];
 }
 
+// replace this with a page that allows selection of user and/or system
 if (is_null($user) || is_null($system)) {
     header('HTTP/ 400 Missing user (u=) or system(sys=) params');
     echo "<h1>ERROR: 400 Missing user (u=) or system (sys=) params</h1>";
@@ -28,8 +30,7 @@ if (is_null($user) || is_null($system)) {
 		u - the user.
         sys - The system being viewed on this page
         rg - The region to study this system
-		db - the database being used. Use 'TravelMappingDev' for in-development systems.
-		(u, sys, [rg], [db])
+		(u, sys, [rg])
 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -87,20 +88,6 @@ if (is_null($user) || is_null($system)) {
     $sql_command = "SELECT * FROM systems where systemName = '".$system."'";
     echo "<!--".$sql_command."-->";
     $systemInfo = mysql_fetch_array(mysql_query($sql_command));
-
-
-    # functions from http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php
-    function startsWith($haystack, $needle)
-    {
-        // search backwards starting from haystack length characters from the end
-        return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;
-    }
-
-    function endsWith($haystack, $needle)
-    {
-        // search forward starting from end minus needle length characters
-        return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== FALSE);
-    }
 
     function fetchWithRank($res, $rankBy)
     {
@@ -347,7 +334,7 @@ SQL;
             $res = mysql_query($sql_command);
             $row = fetchWithRank($res, 'percentage');
             $link = "window.open('/hbtest/mapview.php?u=" . $user . "&sys=" . $system . "')";
-            echo "<tr style=\"background-color:#EEEEFF\"><td>Overall</td><td colspan='2'>Miles Driven: ".$row['clinched']." mi (".$row['percentage']."%)</td><td>Total: ".$row['overall']." mi</td><td>Rank: {$row['rank']}</td></tr>";
+            echo "<tr style=\"background-color:#EEEEFF\"><td>Overall</td><td colspan='2'>Miles Driven: ".$row['clinched']." mi (".sprintf('%0.2f',$row['percentage'])."%)</td><td>Total: ".$row['overall']." mi</td><td>Rank (CHECK!): {$row['rank']}</td></tr>";
 
             //Second, fetch routes clinched/driven
             if (is_null($region)) {
@@ -384,7 +371,7 @@ SQL;
             $row = fetchWithRank($res, 'clinched');
             echo "<tr onClick=\"" . $link . "\"><td>Routes</td><td>Driven: " . $row['driven'] . " (" . round($row['driven'] / $totalRoutes * 100, 2) .
                 "%)</td><td>Clinched: " . $row['clinched'] . " (" . round($row['clinched'] / $totalRoutes * 100, 2) . "%)</td><td>Total: " . $totalRoutes .
-                "</td><td>Rank: {$row['rank']}</td></tr>\n";
+                "</td><td>Rank (CHECK!): {$row['rank']}</td></tr>\n";
             ?>
             </tbody>
         </table>
@@ -397,6 +384,8 @@ SQL;
             <tr>
                 <th class="nonsortable">Route</th>
                 <th class="sortable">#</th>
+                <th class="nonsortable">Banner</th>
+                <th class="nonsortable">Abbrev</th>
                 <th class="nonsortable">Section</th>
                 <th class="sortable">Clinched Mileage</th>
                 <th class="sortable">Total Mileage</th>
@@ -407,9 +396,9 @@ SQL;
             <?php
             $sql_command = "";
             if (!is_null($region)) {
-                $sql_command = "SELECT r.route, r.root, r.city, ROUND((COALESCE(r.mileage, 0)),2) AS totalMileage, ROUND((COALESCE(cr.mileage, 0)),2) AS clinchedMileage, ROUND((COALESCE(cr.mileage,0)) / (COALESCE(r.mileage, 0)) * 100,2) AS percentage, SUBSTRING(root, LOCATE('.', root)) AS routeNum FROM routes AS r LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = 'xxxxxxxxxxxxxxxxx' WHERE systemName = 'yyyyyyyyyyyyyyyyy' AND region = '" . $region . "' ORDER BY routeNum;";
+                $sql_command = "SELECT r.banner, r.abbrev, r.route, r.root, r.city, ROUND((COALESCE(r.mileage, 0)),2) AS totalMileage, ROUND((COALESCE(cr.mileage, 0)),2) AS clinchedMileage, ROUND((COALESCE(cr.mileage,0)) / (COALESCE(r.mileage, 0)) * 100,2) AS percentage, SUBSTRING(root, LOCATE('.', root)) AS routeNum FROM routes AS r LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = 'xxxxxxxxxxxxxxxxx' WHERE systemName = 'yyyyyyyyyyyyyyyyy' AND region = '" . $region . "' ORDER BY routeNum;";
             } else {
-                $sql_command = "SELECT r.route, r.groupName AS city, r.firstRoot AS root, ROUND((COALESCE(r.mileage, 0)),2) AS totalMileage, ROUND((COALESCE(cr.mileage, 0)),2) AS clinchedMileage, ROUND((COALESCE(cr.mileage,0)) / (COALESCE(r.mileage, 0)) * 100,2) AS percentage, SUBSTRING(firstRoot, LOCATE('.', firstRoot)) AS routeNum FROM connectedRoutes AS r LEFT JOIN clinchedConnectedRoutes AS cr ON r.firstRoot = cr.route AND traveler = 'xxxxxxxxxxxxxxxxx' WHERE systemName = 'yyyyyyyyyyyyyyyyy' " . $regionClause . " ORDER BY routeNum;";
+                $sql_command = "SELECT r.banner, r.route, r.groupName AS city, r.firstRoot AS root, ROUND((COALESCE(r.mileage, 0)),2) AS totalMileage, ROUND((COALESCE(cr.mileage, 0)),2) AS clinchedMileage, ROUND((COALESCE(cr.mileage,0)) / (COALESCE(r.mileage, 0)) * 100,2) AS percentage, SUBSTRING(firstRoot, LOCATE('.', firstRoot)) AS routeNum FROM connectedRoutes AS r LEFT JOIN clinchedConnectedRoutes AS cr ON r.firstRoot = cr.route AND traveler = 'xxxxxxxxxxxxxxxxx' WHERE systemName = 'yyyyyyyyyyyyyyyyy' " . $regionClause . " ORDER BY routeNum;";
             }
 
             $sql_command = str_replace("xxxxxxxxxxxxxxxxx", $user, $sql_command);
@@ -428,6 +417,8 @@ SQL;
                 echo "<tr onClick=\"" . $link . "\">";
                 echo "<td>" . $row['route'] . "</td>";
                 echo "<td width='0'>" . $row['routeNum'] . "</td>";
+                echo "<td>" . $row['banner'] . "</td>";
+                echo "<td>" . $row['abbrev'] . "</td>";
                 echo "<td>" . $row['city'] . "</td>";
                 echo "<td>" . $row['clinchedMileage'] . "</td>";
                 echo "<td>" . $row['totalMileage'] . "</td>";
