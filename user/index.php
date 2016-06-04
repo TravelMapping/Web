@@ -103,10 +103,10 @@ SQL;
             echo "<tr class='notclickable' style=\"background-color:#EEEEFF\"><td>Miles Driven</td>";
 	    echo "<td>" . $row['clinchedActiveMileage'];
 	    echo "/" . $row['totalActiveMileage'] . " mi (";
-	    echo $row['activePercentage'] . "%)</td>";
+	    echo $row['activePercentage'] . "%) Rank: TBD</td>";
 	    echo "<td>" . $row['clinchedActivePreviewMileage'];
 	    echo "/" . $row['totalActivePreviewMileage'] . " mi (";
-	    echo $row['activePreviewPercentage'] . "%)</td>";
+	    echo $row['activePreviewPercentage'] . "%) Rank: TBD</td>";
 	    echo "</tr>";
 
 
@@ -148,14 +148,14 @@ SQL;
 
             echo "<tr onClick=\"window.open('/shields/clinched.php?u={$user}')\">";
 	    echo "<td>Routes Driven</td>";
-	    echo "<td>".$activeDriven." of " . $activeRoutes . " (" . $activeDrivenPct . "%)</td>";
-	    echo "<td>".$activePreviewDriven." of " . $activePreviewRoutes . " (" . $activePreviewDrivenPct . "%)</td>";
+	    echo "<td>".$activeDriven." of " . $activeRoutes . " (" . $activeDrivenPct . "%) Rank: TBD</td>";
+	    echo "<td>".$activePreviewDriven." of " . $activePreviewRoutes . " (" . $activePreviewDrivenPct . "%) Rank: TBD</td>";
 	    echo "</tr>";
 
             echo "<tr onClick=\"window.open('/shields/clinched.php?u={$user}')\">";
 	    echo "<td>Routes Clinched</td>";
-	    echo "<td>".$activeClinched." of " . $activeRoutes . " (" . $activeClinchedPct . "%)</td>";
-	    echo "<td>".$activePreviewClinched." of " . $activePreviewRoutes . " (" . $activePreviewClinchedPct . "%)</td>";
+	    echo "<td>".$activeClinched." of " . $activeRoutes . " (" . $activeClinchedPct . "%) Rank: TBD</td>";
+	    echo "<td>".$activePreviewClinched." of " . $activePreviewRoutes . " (" . $activePreviewClinchedPct . "%) Rank: TBD</td>";
 	    echo "</tr>";
             ?>
             </tbody>
@@ -217,6 +217,7 @@ SQL;
         echo "<!-- SQL: " . $sql_command . "-->";
         $res = $db->query($sql_command);
         while ($row = $res->fetch_assoc()) {
+	    if ($row['clinchedMileage'] == 0) continue;
             echo "<tr onClick=\"window.document.location='/user/system.php?u=" . $user . "&sys=" . $row['systemName'] . "'\" class=\"status-" . $row['level'] . "\">";
             echo "<td>" . $row['countryCode'] . "</td>";
             echo "<td>" . $row['systemName'] . "</td>";
