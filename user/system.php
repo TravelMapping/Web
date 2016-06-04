@@ -47,7 +47,7 @@ if (is_null($user) || is_null($system)) {
         #mapholder {
             position: relative;
             margin: auto;
-            width: 800px;
+            width: 90%;
         }
 
         #map {

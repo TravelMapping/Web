@@ -44,7 +44,7 @@
         #mapholder {
             position: relative;
             margin: auto;
-            width: 1000px;
+            width: 90%;
         }
 
         #map {
