@@ -20,7 +20,7 @@ include $_SERVER['DOCUMENT_ROOT']."/login.php";
 <title>Traveler Statistics</title>
     <style type="text/css">
         #rankingstable {
-            width: 20%;
+            width: 33%;
             float: left;
             margin: auto;
         }
@@ -39,23 +39,24 @@ include $_SERVER['DOCUMENT_ROOT']."/login.php";
     });
 </script>
 	<h1>Traveler Statistics</h1>
-	<h2>Overall Traveler Rankings</h2>
+	<table style="margin: auto">
+        <tr><td>
 	<table class="gratable tablesorter" id="rankingstable">
 		<thead>
-			<tr><th colspan="5">Overall Traveler Mileage</th></tr>
+			<tr><th colspan="5">Traveler Mileage in Active Systems</th></tr>
 			<tr><th class="sortable">Rank</th><th class="sortable">Username</th><th class="sortable">Miles Traveled</th><th class="sortable">%</th></tr>
 		</thead>
 		<tbody>
 			<?php
             $dbname = "TravelMappingTest";
             $db = new mysqli("localhost","travmap","clinch",$dbname) or die("Failed to connect to database");
-            $sql = "SELECT sum(o.mileage) as totalMileage FROM overallMileageByRegion o";
+            $sql = "SELECT sum(o.activeMileage) as totalMileage FROM overallMileageByRegion o";
             $totalMileage = $db->query($sql)->fetch_assoc()['totalMileage'];
             $sql = <<<SQL
             SELECT
               traveler,
-              ROUND(SUM(COALESCE(co.mileage, 0)), 2) AS clinchedMileage,
-              round(SUM(coalesce(co.mileage, 0)) / $totalMileage * 100, 2) AS percentage
+              ROUND(SUM(COALESCE(co.activeMileage, 0)), 2) AS clinchedMileage,
+              round(SUM(coalesce(co.activeMileage, 0)) / $totalMileage * 100, 2) AS percentage
             FROM clinchedOverallMileageByRegion co
             GROUP BY co.traveler ORDER BY clinchedMileage DESC;
 SQL;
@@ -77,6 +78,49 @@ HTML;
 
 			?>
 		</tbody>
+	</table>
+	</td>
+	<td>
+	<table class="gratable tablesorter" id="rankingstable">
+		<thead>
+			<tr><th colspan="5">Traveler Mileage in Active and Preview Systems</th></tr>
+			<tr><th class="sortable">Rank</th><th class="sortable">Username</th><th class="sortable">Miles Traveled</th><th class="sortable">%</th></tr>
+		</thead>
+		<tbody>
+			<?php
+            $dbname = "TravelMappingTest";
+            $db = new mysqli("localhost","travmap","clinch",$dbname) or die("Failed to connect to database");
+            $sql = "SELECT sum(o.activePreviewMileage) as totalMileage FROM overallMileageByRegion o";
+            $totalMileage = $db->query($sql)->fetch_assoc()['totalMileage'];
+            $sql = <<<SQL
+            SELECT
+              traveler,
+              ROUND(SUM(COALESCE(co.activePreviewMileage, 0)), 2) AS clinchedMileage,
+              round(SUM(coalesce(co.activePreviewMileage, 0)) / $totalMileage * 100, 2) AS percentage
+            FROM clinchedOverallMileageByRegion co
+            GROUP BY co.traveler ORDER BY clinchedMileage DESC;
+SQL;
+            $res = $db->query($sql);
+            $rank = 1;
+            while ($row = $res->fetch_assoc()) {
+                if($row['traveler'] == $user) {
+                    $highlight = 'user-highlight';
+                } else {
+                    $highlight = '';
+                }
+                echo <<<HTML
+                <tr class="$highlight" onClick="window.document.location='/user?u={$row['traveler']}';">
+                <td>{$rank}</td><td>{$row['traveler']}</td><td>{$row['clinchedMileage']}</td><td>{$row['percentage']}%</td>
+                </tr>
+HTML;
+                $rank++;
+            }
+
+			?>
+		</tbody>
+	</table>
+        </td>
+	</tr>
 	</table>
 </body>
 </html>

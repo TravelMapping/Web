@@ -111,7 +111,7 @@
             }
 
             $nextRank++;
-            error_log("($rank, {$row['traveler']}, {$row[$rankBy]})");
+	    //error_log("($rank, {$row['traveler']}, {$row[$rankBy]})");
         }
         $row['rank'] = $rank;
         return $row;

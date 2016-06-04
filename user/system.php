@@ -103,7 +103,7 @@ if (is_null($user) || is_null($system)) {
             }
 
             $nextRank++;
-            error_log("($rank, $rankBy, {$row['traveler']}, {$row[$rankBy]})");
+	    //error_log("($rank, $rankBy, {$row['traveler']}, {$row[$rankBy]})");
         }
         $row['rank'] = $rank;
         return $row;
