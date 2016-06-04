@@ -103,7 +103,7 @@ if (is_null($user) || is_null($system)) {
             }
 
             $nextRank++;
-            error_log("($rank, {$row['traveler']}, {$row[$rankBy]})");
+            error_log("($rank, $rankBy, {$row['traveler']}, {$row[$rankBy]})");
         }
         $row['rank'] = $rank;
         return $row;
@@ -296,45 +296,63 @@ if (is_null($user) || is_null($system)) {
         <div id="controlboxinfo"></div>
         <div id="map"></div>
         <table class="gratable tablesorter" id="overallTable">
-            <thead><tr><th colspan="5">System Stats</th></tr></thead>
+            <thead><tr><th colspan="2">System Stats</th></tr></thead>
             <tbody>
             <?php
-            //First fetch overall mileage
-            if(is_null($region)) {
-                //$mileage = mysql_fetch_array(mysql_query("SELECT SUM() as t FROM routes LEFT JOIN systems on routes.systemName = systems.systemName WHERE region = '$region' AND systems.active = 1"))['t'] - 1;
-                $sql_command = <<<SQL
-                SELECT
-                    ccr.traveler,
-                    round(sum(coalesce(cr.mileage, 0)), 2) as overall,
-                    round(sum(coalesce(ccr.mileage, 0)), 2) as clinched,
-                    round(sum(coalesce(ccr.mileage, 0)), 2) / round(sum(coalesce(cr.mileage, 0)), 2) * 100 AS percentage
-                FROM connectedRoutes as cr
-                LEFT JOIN clinchedConnectedRoutes as ccr
-                ON cr.firstRoot = ccr.route
-                WHERE cr.systemName = '$system'
-                GROUP BY ccr.traveler
-                ORDER BY percentage DESC ;
+	    // get overall stats either for entire system or within
+	    // our selected region
+            if (is_null($region)) {
+	        // overall mileage across all systems
+	        $sql_command = <<<SQL
+		SELECT
+		    SUM(mileage) as t
+		FROM systemMileageByRegion
+		WHERE systemName = '$system'
 SQL;
-            } else {
+		$res = mysql_query($sql_command);
+		$row = mysql_fetch_array($res);
+		$systemMileage = $row['t'];
+
+		// clinched mileage across all systems
                 $sql_command = <<<SQL
                 SELECT
-                    cr.traveler,
-                    round(sum(coalesce(r.mileage, 0)), 2) as overall,
-                    round(sum(coalesce(cr.mileage, 0)), 2) as clinched,
-                    round(sum(coalesce(cr.mileage, 0)), 2) / round(sum(coalesce(r.mileage, 0)), 2) * 100 AS percentage
-                FROM routes as r
-                LEFT JOIN clinchedRoutes as cr
-                ON r.root = cr.route
-                WHERE r.region = '$region' AND r.systemName = '$system'
-                GROUP BY cr.traveler
-                ORDER BY percentage DESC ;
+                    traveler, SUM(mileage) as clinchedMileage
+                FROM clinchedSystemMileageByRegion
+                WHERE systemName = '$system'
+		GROUP BY traveler
+                ORDER BY clinchedMileage DESC;
+SQL;
+            } 
+	    else {
+	        // mileage for one system in one region
+	        $sql_command = <<<SQL
+		SELECT
+		    mileage as t
+		FROM systemMileageByRegion
+		WHERE systemName = '$system'
+		AND region = '$region'
+SQL;
+		$res = mysql_query($sql_command);
+		$row = mysql_fetch_array($res);
+		$systemMileage = $row['t'];
+
+		// clinched mileage across all systems
+                $sql_command = <<<SQL
+                SELECT
+                    traveler, mileage as clinchedMileage
+                FROM clinchedSystemMileageByRegion
+                WHERE systemName = '$system'
+		AND region = '$region'
+		GROUP BY traveler
+                ORDER BY clinchedMileage DESC;
 SQL;
             }
             echo "<!--".$sql_command."-->";
             $res = mysql_query($sql_command);
-            $row = fetchWithRank($res, 'percentage');
+            $row = fetchWithRank($res, 'clinchedMileage');
+	    $percentage = $row['clinchedMileage'] / $systemMileage * 100;
             $link = "window.open('/hbtest/mapview.php?u=" . $user . "&sys=" . $system . "')";
-            echo "<tr style=\"background-color:#EEEEFF\"><td>Overall</td><td colspan='2'>Miles Driven: ".$row['clinched']." mi (".sprintf('%0.2f',$row['percentage'])."%)</td><td>Total: ".$row['overall']." mi</td><td>Rank (CHECK!): {$row['rank']}</td></tr>";
+            echo "<tr style=\"background-color:#EEEEFF\"><td>Miles Driven</td><td>".sprintf('%0.2f', $row['clinchedMileage'])." of ".sprintf('%0.2f', $systemMileage)." mi (".sprintf('%0.2f',$percentage)."%) Rank: {$row['rank']}</td></tr>";
 
             //Second, fetch routes clinched/driven
             if (is_null($region)) {
@@ -369,9 +387,8 @@ SQL;
             echo "<!--".$sql_command."-->";
             $res = mysql_query($sql_command);
             $row = fetchWithRank($res, 'clinched');
-            echo "<tr onClick=\"" . $link . "\"><td>Routes</td><td>Driven: " . $row['driven'] . " (" . round($row['driven'] / $totalRoutes * 100, 2) .
-                "%)</td><td>Clinched: " . $row['clinched'] . " (" . round($row['clinched'] / $totalRoutes * 100, 2) . "%)</td><td>Total: " . $totalRoutes .
-                "</td><td>Rank (CHECK!): {$row['rank']}</td></tr>\n";
+            echo "<tr onClick=\"" . $link . "\"><td>Routes Driven</td><td>" . $row['driven'] . " of ".$totalRoutes." (" . round($row['driven'] / $totalRoutes * 100, 2) ."%)</td></tr>";
+	    echo "<tr onClick=\"" . $link . "\"><td>Ruutes Clinched</td><td>" . $row['clinched'] . " of " . $totalRoutes . " (" . round($row['clinched'] / $totalRoutes * 100, 2) . "%) Rank: {$row['rank']}</td></tr>\n";
             ?>
             </tbody>
         </table>
@@ -379,7 +396,7 @@ SQL;
             <caption>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</caption>
             <thead>
             <tr>
-                <th colspan="7">Statistics per Route</th>
+                <th colspan="8">Statistics per Route</th>
             </tr>
             <tr>
                 <th class="nonsortable">Route</th>
