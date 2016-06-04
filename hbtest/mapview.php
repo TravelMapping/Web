@@ -16,8 +16,7 @@
  *  rg - region to show routes for on the map (optional)
  *  sys - system to show routes for on the map (optional)
  *  rte - route name to show on the map. Supports pattern matching, with _ matching a single character, and % matching 0 or multiple characters.
- *  db - database to use (optional, defaults to TravelMapping
- * (u, [rg|sys][rte], [db])
+ * (u, [rg|sys][rte])
  ***
  -->
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -99,19 +98,6 @@
     $con = mysql_connect("localhost", "travmap", "clinch") or die("Failed to connect to database");
     mysql_select_db($dbname, $con);
 
-    # functions from http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php
-    function startsWith($haystack, $needle)
-    {
-        // search backwards starting from haystack length characters from the end
-        return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;
-    }
-
-    function endsWith($haystack, $needle)
-    {
-        // search forward starting from end minus needle length characters
-        return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== FALSE);
-    }
-
     function orClauseBuilder($param, $name, $tablename = 'r') {
         $array = explode(",", $_GET[$param]);
         $clause = "(";
@@ -131,6 +117,7 @@
         function waypointsFromSQL() {
             <?php
 	      // later get this from a QS parameter probably
+	      // idea: option to include devel routes as a debugging aid
 	      $activeClause = "(systems.level='preview' OR systems.level='active')";
               $regions = array();
               if (array_key_exists("rg",$_GET)) {
@@ -354,6 +341,7 @@
         </thead>
         <tbody>
         <?php
+	// TODO: a toggle to include/exclude devel routes?
         $sql_command = "SELECT r.region, r.root, r.route, r.systemName, banner, city, round(r.mileage, 2) AS total, round(COALESCE(cr.mileage, 0), 2) as clinched FROM routes AS r LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '" .$_GET['u']. "' WHERE ";
         if (array_key_exists('rte', $_GET)) {
             $sql_command .= "(r.route like '".$_GET['rte']."' or r.route regexp '".$_GET['rte']."[a-z]')";
@@ -383,7 +371,8 @@
             if (strlen($row['city']) > 0) {
                 echo " (" . $row['city'] . ")";
             }
-            echo "</td><td class='link'><a href='/user/system.php?u={$_GET['u']}&sys={$row['systemName']}'>{$row['systemName']}</a></td><td>".$row['clinched']."</td><td>".$row['total']."</td><td>".(round( $row['clinched'] / $row['total'] * 100, 2) )."%</td></tr>\n";
+	    $pct = sprintf("%0.2f",( $row['clinched'] / $row['total'] * 100) );
+            echo "</td><td class='link'><a href='/user/system.php?u={$_GET['u']}&sys={$row['systemName']}'>{$row['systemName']}</a></td><td>".$row['clinched']."</td><td>".$row['total']."</td><td>".$pct."%</td></tr>\n";
         }
         ?>
         </tbody>
