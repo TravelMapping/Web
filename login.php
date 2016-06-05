@@ -9,5 +9,5 @@ if (array_key_exists("u", $_GET)) {
     exit();
 }
 
-$dbname = "TravelMappingTest";
+$dbname = "TravelMapping";
 ?>

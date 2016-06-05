@@ -6,7 +6,7 @@
         $user = $_COOKIE['lastuser'];
     }
 
-    $dbname = "TravelMappingTest";
+    $dbname = "TravelMapping";
 
     if (array_key_exists("rg", $_GET)) {
         $region = $_GET['rg'];
