@@ -6,14 +6,6 @@
     }
 
     $dbname = "TravelMapping";
-    if (isset($_COOKIE['currentdb'])) {
-        $dbname = $_COOKIE['currentdb'];
-    }
-
-    if (array_key_exists("db", $_GET)) {
-        $dbname = $_GET['db'];
-        setcookie("currentdb", $dbname, time() + (86400 * 30), "/");
-    }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
@@ -24,8 +16,7 @@
  *  rg - region to show routes for on the map (optional)
  *  sys - system to show routes for on the map (optional)
  *  rte - route name to show on the map. Supports pattern matching, with _ matching a single character, and % matching 0 or multiple characters.
- *  db - database to use (optional, defaults to TravelMapping
- * (u, [rg|sys][rte], [db])
+ * (u, [rg|sys][rte])
  ***
  -->
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -107,19 +98,6 @@
     $con = mysql_connect("localhost", "travmap", "clinch") or die("Failed to connect to database");
     mysql_select_db($dbname, $con);
 
-    # functions from http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php
-    function startsWith($haystack, $needle)
-    {
-        // search backwards starting from haystack length characters from the end
-        return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;
-    }
-
-    function endsWith($haystack, $needle)
-    {
-        // search forward starting from end minus needle length characters
-        return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== FALSE);
-    }
-
     function orClauseBuilder($param, $name, $tablename = 'r') {
         $array = explode(",", $_GET[$param]);
         $clause = "(";
@@ -138,6 +116,9 @@
     <script>
         function waypointsFromSQL() {
             <?php
+	      // later get this from a QS parameter probably
+	      // idea: option to include devel routes as a debugging aid
+	      $activeClause = "(systems.level='preview' OR systems.level='active')";
               $regions = array();
               if (array_key_exists("rg",$_GET)) {
                 $regions = explode(',',$_GET['rg']);
@@ -195,14 +176,14 @@
               $rteClause = str_replace("*", "%", $rteClause);
               if (array_key_exists('rg', $_GET)) $rteClause .= " AND ".orClauseBuilder('rg', 'region','routes');
               if (array_key_exists('sys', $_GET)) $rteClause .= " AND ".orClauseBuilder('sys', 'systemName','routes');
-              $sql_command = "SELECT waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname FROM waypoints JOIN routes ON routes.root = waypoints.root JOIN systems ON routes.systemname = systems.systemname AND systems.active='1' ".$rteClause." ORDER BY root, waypoints.pointId;";
+              $sql_command = "SELECT waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname FROM waypoints JOIN routes ON routes.root = waypoints.root JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause."  ".$rteClause." ORDER BY root, waypoints.pointId;";
             } elseif (($num_systems == 0) && ($num_regions == 0)) {
                  // for now, put in a default to usai, do something better later
                  $select_systems = " and (routes.systemName='usai')";
                  $where_systems = " where (routes.systemName='usai')";
-                 $sql_command = "SELECT waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname FROM waypoints JOIN routes ON routes.root = waypoints.root".$select_regions.$select_systems." JOIN systems ON routes.systemname = systems.systemname AND systems.active='1' ORDER BY root, waypoints.pointId;";
+                 $sql_command = "SELECT waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname FROM waypoints JOIN routes ON routes.root = waypoints.root".$select_regions.$select_systems." JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause."  ORDER BY root, waypoints.pointId;";
               } else {
-                $sql_command = "SELECT waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname FROM waypoints JOIN routes ON routes.root = waypoints.root".$select_regions.$select_systems." JOIN systems ON routes.systemname = systems.systemname AND systems.active='1' ORDER BY root, waypoints.pointId;";
+                $sql_command = "SELECT waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname FROM waypoints JOIN routes ON routes.root = waypoints.root".$select_regions.$select_systems." JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause."  ORDER BY root, waypoints.pointId;";
               }
 
               echo "// SQL: ".$sql_command."\n";
@@ -231,9 +212,9 @@
                  echo "traveler = '".$_GET['u']."';\n";
                  // retrieve list of segments for this region or regions
                  if(isset($rteClause)) {
-                  $sql_command = "SELECT segments.segmentId, segments.root FROM segments JOIN routes ON routes.root = segments.root JOIN systems ON routes.systemname = systems.systemname AND systems.active='1'".$rteClause." ORDER BY root, segments.segmentId;";
+                  $sql_command = "SELECT segments.segmentId, segments.root FROM segments JOIN routes ON routes.root = segments.root JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause." ".$rteClause." ORDER BY root, segments.segmentId;";
                  } else {
-                  $sql_command = "SELECT segments.segmentId, segments.root FROM segments JOIN routes ON routes.root = segments.root JOIN systems ON routes.systemname = systems.systemname AND systems.active='1'".$where_regions.$select_systems." ORDER BY root, segments.segmentId;";
+                  $sql_command = "SELECT segments.segmentId, segments.root FROM segments JOIN routes ON routes.root = segments.root JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause." ".$where_regions.$select_systems." ORDER BY root, segments.segmentId;";
                  }
                  echo "// SQL: ".$sql_command."\n";
                  $res = mysql_query($sql_command);
@@ -243,9 +224,9 @@
                    $segmentIndex = $segmentIndex + 1;
                  }
                  if(isset($rteClause)) {
-                  $sql_command = "SELECT segments.segmentId, segments.root FROM segments RIGHT JOIN clinched ON segments.segmentId = clinched.segmentId JOIN routes ON routes.root = segments.root JOIN systems ON routes.systemname = systems.systemname AND systems.active='1'".$rteClause." AND clinched.traveler='".$_GET['u']."' ORDER BY root, segments.segmentId;";
+                  $sql_command = "SELECT segments.segmentId, segments.root FROM segments RIGHT JOIN clinched ON segments.segmentId = clinched.segmentId JOIN routes ON routes.root = segments.root JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause." ".$rteClause." AND clinched.traveler='".$_GET['u']."' ORDER BY root, segments.segmentId;";
                  } else {
-                  $sql_command = "SELECT segments.segmentId, segments.root FROM segments RIGHT JOIN clinched ON segments.segmentId = clinched.segmentId JOIN routes ON routes.root = segments.root JOIN systems ON routes.systemname = systems.systemname AND systems.active='1'".$where_regions.$select_systems." AND clinched.traveler='".$_GET['u']."' ORDER BY root, segments.segmentId;";
+                  $sql_command = "SELECT segments.segmentId, segments.root FROM segments RIGHT JOIN clinched ON segments.segmentId = clinched.segmentId JOIN routes ON routes.root = segments.root JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause." ".$where_regions.$select_systems." AND clinched.traveler='".$_GET['u']."' ORDER BY root, segments.segmentId;";
                  }
                  echo "// SQL: " .$sql_command."\n";
                  $res = mysql_query($sql_command);
@@ -360,6 +341,7 @@
         </thead>
         <tbody>
         <?php
+	// TODO: a toggle to include/exclude devel routes?
         $sql_command = "SELECT r.region, r.root, r.route, r.systemName, banner, city, round(r.mileage, 2) AS total, round(COALESCE(cr.mileage, 0), 2) as clinched FROM routes AS r LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '" .$_GET['u']. "' WHERE ";
         if (array_key_exists('rte', $_GET)) {
             $sql_command .= "(r.route like '".$_GET['rte']."' or r.route regexp '".$_GET['rte']."[a-z]')";
@@ -389,7 +371,8 @@
             if (strlen($row['city']) > 0) {
                 echo " (" . $row['city'] . ")";
             }
-            echo "</td><td class='link'><a href='/user/system.php?u={$_GET['u']}&sys={$row['systemName']}'>{$row['systemName']}</a></td><td>".$row['clinched']."</td><td>".$row['total']."</td><td>".(round( $row['clinched'] / $row['total'] * 100, 2) )."%</td></tr>\n";
+	    $pct = sprintf("%0.2f",( $row['clinched'] / $row['total'] * 100) );
+            echo "</td><td class='link'><a href='/user/system.php?u={$_GET['u']}&sys={$row['systemName']}'>{$row['systemName']}</a></td><td>".$row['clinched']."</td><td>".$row['total']."</td><td>".$pct."%</td></tr>\n";
         }
         ?>
         </tbody>
