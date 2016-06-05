@@ -307,7 +307,7 @@ if (is_null($user) || is_null($system)) {
 		SELECT
 		    SUM(mileage) as t
 		FROM systemMileageByRegion
-		WHERE systemName = '$system'
+		WHERE systemName = '$system';
 SQL;
 		$res = mysql_query($sql_command);
 		$row = mysql_fetch_array($res);
@@ -330,7 +330,7 @@ SQL;
 		    mileage as t
 		FROM systemMileageByRegion
 		WHERE systemName = '$system'
-		AND region = '$region'
+		AND region = '$region';
 SQL;
 		$res = mysql_query($sql_command);
 		$row = mysql_fetch_array($res);
