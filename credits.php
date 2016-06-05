@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
 <meta charset="utf-8">
@@ -53,6 +53,11 @@ following sources of highway information.</p>
 	  <li>Armenia
 	    <ul>
 <li><a href="http://www.mtc.am/arm_map.html">Armenia Map</a>. Interactive national highway map from the Ministry of Transport and Communication of the Republic of Armenia.</li>
+	    </ul>
+	  </li>
+	  <li>Asia
+	    <ul>
+<li><a href="http://www.unescap.org/our-work/transport">UNESCAP Transport</a>. UN site on transport in Asia and the Pacific. Includes Asian Highway list and maps.</li>
 	    </ul>
 	  </li>
 	  <li>Austria
@@ -188,6 +193,11 @@ following sources of highway information.</p>
 <li><a href="http://www.unece.org/trans/doc/2006/sc1/ECE-TRANS-SC1-2006-03e.pdf">UNECE map of E264</a>. Official map showing the route of E264 in Estonia and Latvia from the United Nations Economic Commission for Europe.</li>
 <li><a href="http://www.unece.org/trans/doc/2008/sc1/ECE-TRANS-SC1-2008-02e.pdf">UNECE map of E265</a>. Official map showing the route of E265 in Estonia from the United Nations Economic Commission for Europe.</li>
 <li><a href="https://www.riigiteataja.ee/akt/13266801 ">List of State Highways</a>.Official list of all highways in Estonia from the Office of Economic Affairs and Communications of Estonia.</li>
+	    </ul>
+	  </li>
+	  <li>Europe
+	    <ul>
+<li><a href="http://www.unece.org/trans/welcome.html">UNECE Transport</a>. UN site on transport in Europe. Includes E Road list and maps.</li>
 	    </ul>
 	  </li>
 	  <li>Finland
@@ -409,10 +419,11 @@ following sources of highway information.</p>
 	    <ul>
 	    </ul>
 	  </li> -->
-<!--	  <li>Colorado, USA
+	  <li>Colorado, USA
 	    <ul>
+<li><a href="http://corcohighways.org/">Corco Highways</a>. Hobbist site covering state highways.</li>
 	    </ul>
-	  </li> -->
+	  </li>
 	  <li>Connecticut, USA
 	    <ul>
 	    <li><a href="http://kurumi.com/roads/ct/">Connecticut Roads</a>. Hobbyist site by Scott Oglesby covering highways in Connecticut.</li>
@@ -523,10 +534,11 @@ following sources of highway information.</p>
 <li><a href="http://www.modot.mo.gov/newsandinfo/countymaps.htm">Missouri County Maps</a>. Official county maps from the Missouri Department of Transportation.</li>
 	    </ul>
 	  </li>
-<!--	  <li>Montana, USA
+	  <li>Montana, USA
 	    <ul>
+<li><a href="http://corcohighways.org/">Corco Highways</a>. Hobbist site covering state highways.</li>
 	    </ul>
-	  </li> -->
+	  </li>
 	  <li>Nebraska, USA
 	    <ul>
 	    <li><a href="http://www.nebraskatransportation.org/docs/logbook.pdf">Nebraska Highway Reference Log Book</a>. Highway inventory from the Nebraska Department of Roads.</li>
@@ -620,7 +632,8 @@ following sources of highway information.</p>
 	  </li>
 	  <li>South Dakota, USA
 	    <ul>
-<li><a href="http://www.sddot.com/pub.asp?mode=list&amp;Type=4">South Dakota State and County Maps</a>. Official state and county highway maps from the South Dakota Department of Transportation.</li>
+<li><a href="http://www.sddot.com/resources/maps/Default.aspx">South Dakota DOT Maps</a>. Official maps from the South Dakota Department of Transportation.</li>
+<li><a href="http://www.sddot.com/transportation/highways/planning/pavement/Default.aspx">South Dakota DOT Pavement Condition Monitoring</a>.</li>
 	    </ul>
 	  </li>
 	  <li>Tennessee, USA
@@ -667,10 +680,11 @@ following sources of highway information.</p>
 <li><a href="http://www.dot.wisconsin.gov/travel/maps/county.htm">Wisconsin County Maps</a>. Official county maps from the Wisconsin Department of Transportation.</li>
 	    </ul>
 	  </li>
-<!--	  <li>Wyoming, USA
+	  <li>Wyoming, USA
 	    <ul>
+<li><a href="http://corcohighways.org/">Corco Highways</a>. Hobbist site covering state highways.</li>
 	    </ul>
-	  </li> -->
+	  </li>
 	<li>General
 	    <ul>
 	      <li><a href="http://sites.google.com/site/roadnumberingsystems/home">Road Numbering Systems</a>. Hobbyist site about the various road numbering systems around the world.</li>
