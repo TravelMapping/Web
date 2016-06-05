@@ -264,10 +264,8 @@ if (is_null($user) || is_null($system)) {
         }
     );
 </script>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 <div id="header">
-    <a href="/user?u=<?php echo $user ?>"><?php echo $user ?></a> -
-    <a href="/">Home</a> -
-    <a href="/hbtest">Highway Browser</a>
     <?php
         if(!is_null($region)) {
             echo " - <a href='system.php?u=".$user."&sys=".$system."'> ".$system."</a>";
@@ -446,5 +444,6 @@ SQL;
         </table>
     </div>
 </div>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
 </body>
 </html>

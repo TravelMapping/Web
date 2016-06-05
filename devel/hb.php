@@ -1,5 +1,5 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . "/shields/index.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/shields/shieldgen.php";
 
 if (array_key_exists("u", $_GET)) {
     setcookie("lastuser", $_GET['u'], time() + (86400 * 30), "/");
@@ -58,7 +58,7 @@ if (array_key_exists("sys", $_GET) and strlen($_GET['sys']) > 0) {
         #routebox {
             position: fixed;
             left: 0px;
-            top: 80px;
+            top: 110px;
             bottom: 0px;
             width: 100%;
             overflow: auto;
@@ -217,9 +217,6 @@ if (array_key_exists("sys", $_GET) and strlen($_GET['sys']) > 0) {
 <?php
 if ($showingmap == 0) {
     echo "<body>\n";
-    if (array_key_exists("u", $_GET)) echo "<a href=\"/user?u=" . $_GET['u'] . "\">" . $_GET['u'] . "</a>-";
-    echo "<a href=\"/\">Home</a>-";
-    echo "<a href=\"/hbtest\">Highway Browser</a>";
     echo "<form id=\"selectHighways\" name=\"HighwaySearch\" action=\"hb.php\">";
     echo "<label for=\"sys\">Filter routes by...  System: </label>";
     echo "<input id=\"sys\" type=\"text\" placeholder=\"usaus\" name=\"sys\" value=\"" . $_GET["sys"] . "\"></input>";
@@ -229,12 +226,10 @@ if ($showingmap == 0) {
 
 } else {
     echo "<body onload=\"loadmap();\">\n";
-    if (array_key_exists("u", $_GET)) echo "<a href=\"/user?u=" . $_GET['u'] . "\">" . $_GET['u'] . "</a>-";
-    echo "<a href=\"/\">Home</a>-";
-    echo "<a href=\"/hbtest\">Highway Browser</a>";
 }
 ?>
-
+<?php $nobigheader = 1; ?>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 <h1>Travel Mapping Highway Browser (Draft)</h1>
 <script type="text/javascript">
     function initFloatingHeaders($table) {

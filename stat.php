@@ -7,7 +7,6 @@ include $_SERVER['DOCUMENT_ROOT']."/login.php";
 	A rankings page.
 	URL Params:
 		u - the user, to show highlighting on page.
-		db - the database being used. Use 'TravelMappingDev' for in-development systems. 
 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -38,6 +37,7 @@ include $_SERVER['DOCUMENT_ROOT']."/login.php";
         }).css('text-align','right');
     });
 </script>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 	<h1>Traveler Statistics</h1>
 	<table style="margin: auto">
         <tr><td>
@@ -123,4 +123,5 @@ HTML;
 	</tr>
 	</table>
 </body>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
 </html>

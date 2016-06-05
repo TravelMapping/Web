@@ -60,9 +60,8 @@ include $_SERVER['DOCUMENT_ROOT']."/login.php";
         }
     );
 </script>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 <div id="header">
-    <a href="/">Home</a>
-    <a href="/hbtest">Highway Browser</a>
 
     <form id="userselect">
         <label>User: </label>
@@ -79,7 +78,7 @@ include $_SERVER['DOCUMENT_ROOT']."/login.php";
         <h2>Overall Stats</h2>
         <table class="gratable" style="width: 60%" id="tierTable">
 	    <thead>
-	    <tr><td /><td>Active Systems</td><td>Active+Preview Systems</td></tr>
+	    <tr><th /><th>Active Systems</th><th>Active+Preview Systems</th></tr>
 	    </thead>
             <tbody>
             <?php
@@ -235,4 +234,6 @@ SQL;
         </tbody>
     </table>
 </div>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
 </body>
+</html>

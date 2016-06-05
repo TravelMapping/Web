@@ -267,11 +267,8 @@
         window.document.location=$link;
     }
 </script>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 <div id="header">
-    <a href="/user?u=<?php echo $user ?>"><?php echo $user ?></a> -
-    <a href="/">Home</a> -
-    <a href="/hbtest">Highway Browser</a>
-
     <form id="userselect" action="region.php">
         <label>User: </label>
         <input type="text" name="u" form="userselect" value="<?php echo $user ?>">
@@ -506,5 +503,6 @@ SQL;
     </table>
 </div>
 </div>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
 </body>
 </html>

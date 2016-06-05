@@ -302,9 +302,8 @@
         }
     );
 </script>
-<a href="/user?u=<?php echo $_GET['u'] ?>"><?php echo $_GET['u'] ?></a>-
-<a href="/">Home</a>-
-<a href="/hbtest">Highway Browser</a>
+<?php $nobigheader = 1; ?>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 <h1 style="text-align: center">Travel Mapping: Draft Map Overlay Viewer</h1>
 
 <div id="controlbox">
