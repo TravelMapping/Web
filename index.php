@@ -18,7 +18,7 @@ Travel Mapping is a collaborative project implemented and maintained
 by a <a href="credits.php#contributors">group</a> of travel
 enthusiasts who enjoy tracking their cumulative travels.  This site
 allows its <a href="/user">users</a> to submit lists of highway
-segments they've traveled on the <a href="devel/hb.php">highway
+segments they've traveled on the <a href="/hb">highway
 systems</a> that have been included in the project.  Those lists are
 then imported into the project's database, to be included along with
 other users' stats and maps.
