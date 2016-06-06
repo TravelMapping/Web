@@ -305,7 +305,7 @@
 SQL;
             $res = mysql_query($sql_command);
             $row = fetchWithRank($res, 'activePercentage');
-            $link = "redirect('/hbtest/mapview.php?u=" . $user . "&rg=" . $region . "')";
+            $link = "redirect('/user/mapview.php?u=" . $user . "&rg=" . $region . "')";
 	    $activeTotalMileage = $row['totalActiveMileage'];
 	    $activeClinchedMileage = $row['activeClinched'];
 	    $activeMileagePercentage = $row['activePercentage'];
@@ -321,7 +321,7 @@ SQL;
 SQL;
             $res = mysql_query($sql_command);
             $row = fetchWithRank($res, 'activePreviewPercentage');
-            $link = "redirect('/hbtest/mapview.php?u=" . $user . "&rg=" . $region . "')";
+            $link = "redirect('/user/mapview.php?u=" . $user . "&rg=" . $region . "')";
 	    $activePreviewTotalMileage = $row['totalActivePreviewMileage'];
 	    $activePreviewClinchedMileage = $row['activePreviewClinched'];
 	    $activePreviewMileagePercentage = $row['activePreviewPercentage'];
@@ -475,7 +475,7 @@ SQL;
     </table>
     <table class="gratable tablesorter" id="routesTable">
         <thead>
-            <tr><th colspan="5">Stats by Route: (<?php echo "<a href=\"/hbtest/mapview.php?u=".$user."&rg=".$region."\">" ?>Full Map)</a></th></tr>
+            <tr><th colspan="5">Stats by Route: (<?php echo "<a href=\"/user/mapview.php?u=".$user."&rg=".$region."\">" ?>Full Map)</a></th></tr>
             <tr><th class="sortable">Route</th><th class="sortable">Clinched Mileage</th><th class="sortable">Total Mileage</th><th class="sortable">%</th><th class="nonsortable">Map</th></tr>
         </thead>
         <tbody>

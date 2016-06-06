@@ -349,7 +349,7 @@ SQL;
             $res = mysql_query($sql_command);
             $row = fetchWithRank($res, 'clinchedMileage');
 	    $percentage = $row['clinchedMileage'] / $systemMileage * 100;
-            $link = "window.open('/hbtest/mapview.php?u=" . $user . "&sys=" . $system . "')";
+            $link = "window.open('/user/mapview.php?u=" . $user . "&sys=" . $system . "')";
             echo "<tr style=\"background-color:#EEEEFF\"><td>Miles Driven</td><td>".sprintf('%0.2f', $row['clinchedMileage'])." of ".sprintf('%0.2f', $systemMileage)." mi (".sprintf('%0.2f',$percentage)."%) Rank: {$row['rank']}</td></tr>";
 
             //Second, fetch routes clinched/driven
@@ -424,7 +424,7 @@ SQL;
 
             while ($row = mysql_fetch_array($res)) {
                 if (is_null($region)) {
-                    $link = "window.open('/hbtest/mapview.php?u=" . $user . "&rte=" . $row['route'] . "')";
+                    $link = "window.open('/user/mapview.php?u=" . $user . "&rte=" . $row['route'] . "')";
                 } else {
                     $link = "window.open('/hb?u=" . $user . "&r=" . $row['root'] . "')";
                 }
