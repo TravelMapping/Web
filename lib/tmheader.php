@@ -16,8 +16,8 @@ END;
 
 <p class="menubar">
 <a href="/">Home</a> &nbsp;&nbsp;&nbsp;
-<a href="/user">Traveler Stats</a> &nbsp;&nbsp;&nbsp;
-<a href="/devel/hb.php">Highway Browser</a> &nbsp;&nbsp;&nbsp;
+<a href="/stat.php">Traveler Stats</a> &nbsp;&nbsp;&nbsp;
+<a href="/hb">Highway Browser</a> &nbsp;&nbsp;&nbsp;
 <a href="/forum">Project Forum</a> &nbsp;&nbsp;&nbsp;
 <a href="/devel/updates.php">Updates</a>
 </p>

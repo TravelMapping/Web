@@ -468,7 +468,7 @@ SQL;
             echo "<td>" . $row['clinchedMileage'] . "</td>";
             echo "<td>" . $row['totalMileage'] . "</td>";
             echo "<td>" . $row['percentage'] . "%</td>";
-            echo "<td class='link'><a href='/devel/hb.php?rg={$region}&sys={$row['systemName']}'>HB</a></td></tr>";
+            echo "<td class='link'><a href='/hb?rg={$region}&sys={$row['systemName']}'>HB</a></td></tr>";
         }
         ?>
         </tbody>
@@ -484,7 +484,7 @@ SQL;
                 echo "<!--".$sql_command."-->";
                 $res = mysql_query($sql_command);
                 while ($row = mysql_fetch_array($res)) {
-                    echo "<tr onClick=\"window.open('/devel/hb.php?u=".$user."&r=".$row['root']."')\">";
+                    echo "<tr onClick=\"window.open('/hb?u=".$user."&r=".$row['root']."')\">";
                     echo "<td>".$row['route'];
                     if (strlen($row['banner']) > 0) {
                         echo " ".$row['banner']." ";
@@ -496,7 +496,7 @@ SQL;
                     echo "<td>".$row['clinchedMileage']."</td>";
                     echo "<td>".$row['totalMileage']."</td>";
                     echo "<td>".$row['percentage']."%</td>";
-                    echo "<td class='link'><a href='/devel/hb.php?u={$user}&r={$row['root']}'>HB</a></td></tr>";
+                    echo "<td class='link'><a href='/hb?u={$user}&r={$row['root']}'>HB</a></td></tr>";
                 }
             ?>
         </tbody>

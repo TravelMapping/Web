@@ -217,7 +217,7 @@ if (array_key_exists("sys", $_GET) and strlen($_GET['sys']) > 0) {
 <?php
 if ($showingmap == 0) {
     echo "<body>\n";
-    echo "<form id=\"selectHighways\" name=\"HighwaySearch\" action=\"hb.php\">";
+    echo "<form id=\"selectHighways\" name=\"HighwaySearch\" action=\"index.php\">";
     echo "<label for=\"sys\">Filter routes by...  System: </label>";
     echo "<input id=\"sys\" type=\"text\" placeholder=\"usaus\" name=\"sys\" value=\"" . $_GET["sys"] . "\"></input>";
     echo "<label for=\"rg\"> Region: </label>";
@@ -345,7 +345,7 @@ ENDB;
         if (strcmp($row['city'], "") != 0) {
             echo " (" . $row['city'] . ")";
         }
-        echo "</td><td>" . $row['region'] . " " . $row['route'] . $row['banner'] . $row['abbrev'] . "</td><td>" . $row['level'] . "</td><td><a href=\"hb.php?r=" . $row['root'] . "\">" . $row['root'] . "</a></td></tr>\n";
+        echo "</td><td>" . $row['region'] . " " . $row['route'] . $row['banner'] . $row['abbrev'] . "</td><td>" . $row['level'] . "</td><td><a href=\"index.php?r=" . $row['root'] . "\">" . $row['root'] . "</a></td></tr>\n";
     }
     $res->free();
     echo "</table></div>\n";
@@ -364,7 +364,7 @@ HTML;
     $sql_command = "SELECT * FROM systems LEFT JOIN countries ON countryCode = countries.code";
     $res = $db->query($sql_command);
     while ($row = $res->fetch_assoc()) {
-        $linkJS = "window.open('hb.php?sys={$row['systemName']}')";
+        $linkJS = "window.open('index.php?sys={$row['systemName']}')";
         echo "<tr class='status-" . $row['level'] . "' onClick=\"$linkJS\">";
         if (strlen($row['name']) > 15) {
             echo "<td>{$row['code']}</td>";

@@ -62,7 +62,7 @@ SQL;
         $rootList = explode(",", $row['clinchedRoutes']);
         $col = 0;
         foreach($rootList as $root) {
-            echo "<a href='/devel/hb.php?u=$user&r=$root'><span class='shield'>".generate($root, $_GET['reload'])."</span></a>";
+            echo "<a href='/hb/?u=$user&r=$root'><span class='shield'>".generate($root, $_GET['reload'])."</span></a>";
             $col++;
             if ($col > 8) {
                 echo "<br/>";

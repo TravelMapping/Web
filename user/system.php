@@ -426,7 +426,7 @@ SQL;
                 if (is_null($region)) {
                     $link = "window.open('/hbtest/mapview.php?u=" . $user . "&rte=" . $row['route'] . "')";
                 } else {
-                    $link = "window.open('/devel/hb.php?u=" . $user . "&r=" . $row['root'] . "')";
+                    $link = "window.open('/hb?u=" . $user . "&r=" . $row['root'] . "')";
                 }
 
                 echo "<tr onClick=\"" . $link . "\">";
