@@ -1,23 +1,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+<!-- /devel/datacheck.php main Datacheck page -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
+<link rel="stylesheet" type="text/css" href="/css/travelMapping.css" />
 <style type="text/css">
 </style>
 <?php
-  // establish connection to db
-  $db = new mysqli("localhost","travmap","clinch","TravelMapping") or die("Failed to connect to database");
 
   # function to generate a table with FP or not
   function writeTable($db, $fpVal, $joins) {
+      global $tmsqldebug;
+
       // select all errors in the DB with the given $fpVal
       $sql_command = "select datacheckErrors.* from datacheckErrors ".$joins." falsePositive=".$fpVal.";";
-      echo "<!-- SQL: ".$sql_command." -->\n";
+      if ($tmsqldebug) {
+          echo "<!-- SQL: ".$sql_command." -->\n";
+      }
       $res = $db->query($sql_command);
 
       while ($row = $res->fetch_assoc()) {
-        echo "<tr><td><a href=\"../hbtest/?r=".$row['route']."\">".$row['route']."</a></td><td>";
+        echo "<tr><td><a href=\"../hb?r=".$row['route']."\">".$row['route']."</a></td><td>";
         if (strcmp($row['label1'],"") != 0) {
           echo $row['label1'];
         }
@@ -36,8 +39,9 @@
       $res->free();
   }
 ?>
-<script>
-</script>
+
+<?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
+
 <title>Travel Mapping Highway Data Datacheck Errors</title>
 </head>
 
@@ -68,7 +72,7 @@ project.</p>
 
   <table border="1" style="background-color:#fcc"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry to Submit</th></tr>
     <?php
-      writeTable($db, "0", "join routes on datacheckErrors.route = routes.root join systems on routes.systemName = systems.systemName where systems.level=\"active\" and ");
+      writeTable($tmdb, "0", "join routes on datacheckErrors.route = routes.root join systems on routes.systemName = systems.systemName where systems.level=\"active\" and ");
     ?>
   </table>
 
@@ -84,7 +88,7 @@ project.</p>
 
   <table border="1" style="background-color:#ccf"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry to Submit</th></tr>
     <?php
-      writeTable($db, "0", "join routes on datacheckErrors.route = routes.root join systems on routes.systemName = systems.systemName where systems.level=\"preview\" and ");
+      writeTable($tmdb, "0", "join routes on datacheckErrors.route = routes.root join systems on routes.systemName = systems.systemName where systems.level=\"preview\" and ");
     ?>
   </table>
 
@@ -95,11 +99,13 @@ project.</p>
   the last column
   to <a href="https://github.com/TravelMapping/HighwayData/blob/master/datacheckfps.csv">the
   datacheck FP list</a> before the system is promoted from 'devel' to
-  'preview'.</p>
+  'preview'.  Note: less severe errors, such as distance and angle
+  errors can be left until final preparation for promotion to
+  'active'.</p>
 
   <table border="1" style="background-color:#cfc"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry to Submit</th></tr>
     <?php
-      writeTable($db, "0", "join routes on datacheckErrors.route = routes.root join systems on routes.systemName = systems.systemName where systems.level=\"devel\" and ");
+      writeTable($tmdb, "0", "join routes on datacheckErrors.route = routes.root join systems on routes.systemName = systems.systemName where systems.level=\"devel\" and ");
     ?>
   </table>
 
@@ -113,13 +119,13 @@ project.</p>
 
   <table border="1" style="background-color:#ccc;font-size:60%"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry Matched</th></tr>
     <?php
-      writeTable($db, "1", " where ");
+      writeTable($tmdb, "1", " where ");
     ?>
   </table>
 </div>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
 </body>
 <?php
-    $db->close();
+    $tmdb->close();
 ?>
 </html>
