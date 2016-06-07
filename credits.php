@@ -4,38 +4,26 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Travel Mapping Credit and Sources</title>
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
 <link rel="shortcut icon" type="image/png" href="favicon.png">
 </head>
 <body>
-<div id="header">
-<div class="container">
-<input type="checkbox" id="hamburger">
-<label for="hamburger"></label>
-<div id="logo"></div>
-<div id="nav">
-<ul>
-<li><a href="/">Home</a></li>
-<li><a href="/user">Traveler Stats</a></li>
-<li><a href="/hbtest">Highway Browser</a></li>
-<!--<li><a href="/">Login</a></li>-->
-</ul>
-</div>
-</div>
-</div>
-<div id="main">
-  <div class="container">
-    <h1>Credits and Sources</h1>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 
-<p>Travel Mapping is the successor project to the
+<p class="heading">Credits and Sources</p>
+
+<p class="text">Travel Mapping is the successor project to the
 dormant <a href="http://cmap.m-plex.com">Clinched Highway
 Mapping</a> (CHM) project, developed and operated by Timothy Reichard.
 Some underlying code and the initial highway data are from CHM.</p>
 
-<div id="Sources">
-  <h1>Highway Data Sources</h1>
-        <p>We would like to credit and thank the authors of the following sources of highway information.</p>
-	<h2>General Map References</h2>
+<p class="heading">Highway Data Sources</p>
+
+<p class="text">We would like to credit and thank the authors of the
+following sources of highway information.</p>
+
+<p class="subheading">General Map References</p>
+
 	<ul class="sources">
 	  <li>Path Coordinates
 	    <ul>
@@ -59,7 +47,8 @@ Some underlying code and the initial highway data are from CHM.</p>
 	    </ul>
 	  </li>
 	</ul>
-	<h2>Highway Departments and Hobbyist Sites</h2>
+
+<p class="subheading">Highway Departments and Hobbyist Sites</p>
 	<ul class="sources">
 	  <li>Armenia
 	    <ul>
@@ -707,10 +696,9 @@ Some underlying code and the initial highway data are from CHM.</p>
 	    </ul>
 	  </li>
 	</ul>	
-</div>
 
-<div id="Contributors">
-  <h1>Project Contributors</h1>
+<p class="heading"><a name="contributors">Project Contributors</a></p>
+
   <ul>
   <li>Eric Bryant (yakra)<br> </li>
   <li>Dave Filpus (dfilpus)<br>
@@ -729,12 +717,13 @@ Some underlying code and the initial highway data are from CHM.</p>
   <li>Oscar Voss (oscar)</li>
   </ul>
 
-<p>These contributors built on the work
+<p class="text">These contributors built on the work
 of <a href="http://cmap.m-plex.com/docs/collab.php">CHM's
 Collaborators</a>.</p>
 
 </div>
 </div>
 </div>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
 </body>
 </html>

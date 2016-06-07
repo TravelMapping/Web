@@ -4,47 +4,38 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Travel Mapping</title>
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
 <link rel="shortcut icon" type="image/png" href="favicon.png">
 </head>
 <body>
-<div id="header">
-<div class="container">
-<input type="checkbox" id="hamburger">
-<label for="hamburger"></label>
-<div id="logo"></div>
-<div id="nav">
-<ul>
-<li><a href="/">Home</a></li>
-<li><a href="/user">Traveler Stats</a></li>
-<li><a href="/hbtest">Highway Browser</a></li>
-<li><a href="/credits.php">Credits and Sources</a></li>
-<!--<li><a href="/">Login</a></li>-->
-</ul>
-</div>
-</div>
-</div>
-<div id="main">
-  <div class="container">
-    Welcome to the Travel Mapping project.
-<div id="hb">
-  <h3><a href="devel/hb.php">Draft Highway Browser</a></h3>
-</div>
-<div id="logs">
-  <h3><a href="logs/">User and System Logs (click on an entry in the list that will appear)</a></h3>
-  <h3><a href="stats/">Statistical Summaries (click on an entry in the list that will appear)</a></h3>
-</div>
-<div id="tools">
-  <h3>Development Tools</h3>
-  <ul>
-    <li><a href="devel/updates.php">Highway Data Updates</a></li>
-    <li><a href="devel/datacheck.php">Datacheck Error Log</a></li>    
-  </ul>
-</div>
-<div id="forum">
-  <h3><a href="/forum">Project Forum</a></h3>
-</div>
-</div>
-</div>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
+
+<p class="heading">Welcome to Travel Mapping</p>
+
+<p class="text">
+
+Travel Mapping is a collaborative project implemented and maintained
+by a <a href="credits.php#contributors">group</a> of travel
+enthusiasts who enjoy tracking their cumulative travels.  This site
+allows its <a href="/stat.php">users</a> to submit lists of highway
+segments they've traveled on the <a href="/hb">highway
+systems</a> that have been included in the project.  Those lists are
+then imported into the project's database, to be included along with
+other users' stats and maps.
+
+</p>
+
+<p class="heading">How to Participate</p>
+
+<p class="text">
+
+Anyone can submit their travels to be included in the site.  Please
+see the information in <a href="/forum">the project forum</a> for how
+to create and submit your data.
+
+</p>
+
+
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
 </body>
 </html>

@@ -60,9 +60,8 @@ include $_SERVER['DOCUMENT_ROOT']."/login.php";
         }
     );
 </script>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 <div id="header">
-    <a href="/">Home</a>
-    <a href="/hbtest">Highway Browser</a>
 
     <form id="userselect">
         <label>User: </label>
@@ -79,7 +78,7 @@ include $_SERVER['DOCUMENT_ROOT']."/login.php";
         <h2>Overall Stats</h2>
         <table class="gratable" style="width: 60%" id="tierTable">
 	    <thead>
-	    <tr><td /><td>Active Systems</td><td>Active+Preview Systems</td></tr>
+	    <tr><th /><th>Active Systems</th><th>Active+Preview Systems</th></tr>
 	    </thead>
             <tbody>
             <?php
@@ -189,7 +188,7 @@ SQL;
 	    $activePercent = sprintf('%0.2f', $activePercent);
             $activePreviewPercent = round($row['clinchedActivePreviewMileage'] / $row['totalActivePreviewMileage'] * 100.0, 2);
 	    $activePreviewPercent = sprintf('%0.2f', $activePreviewPercent);
-            echo "<tr onClick=\"window.document.location='/user/region.php?u=" . $user . "&rg=" . $row['code'] . "'\"><td>" . $row['country'] . "</td><td>" . $row['name'] . "</td><td>" . sprintf('%0.2f', $row['clinchedActiveMileage']) . "</td><td>" . sprintf('%0.2f', $row['totalActiveMileage']) . "</td><td>" . $activePercent . "%</td><td>" . sprintf('%0.2f', $row['clinchedActivePreviewMileage']) . "</td><td>" . sprintf('%0.2f', $row['totalActivePreviewMileage']) . "</td><td>" . $activePreviewPercent . "%</td><td class='link'><a href=\"/hbtest/mapview.php?u=" . $user . "&rg=" . $row['code'] . "\">Map</a></td><td class='link'><a href='/devel/hb.php?rg={$row['code']}'>HB</a></td></tr>";
+            echo "<tr onClick=\"window.document.location='/user/region.php?u=" . $user . "&rg=" . $row['code'] . "'\"><td>" . $row['country'] . "</td><td>" . $row['name'] . "</td><td>" . sprintf('%0.2f', $row['clinchedActiveMileage']) . "</td><td>" . sprintf('%0.2f', $row['totalActiveMileage']) . "</td><td>" . $activePercent . "%</td><td>" . sprintf('%0.2f', $row['clinchedActivePreviewMileage']) . "</td><td>" . sprintf('%0.2f', $row['totalActivePreviewMileage']) . "</td><td>" . $activePreviewPercent . "%</td><td class='link'><a href=\"/user/mapview.php?u=" . $user . "&rg=" . $row['code'] . "\">Map</a></td><td class='link'><a href='/hb?rg={$row['code']}'>HB</a></td></tr>";
         }
         $res->free();
         ?>
@@ -227,12 +226,14 @@ SQL;
             echo "<td>" . $row['clinchedMileage'] . "</td>";
             echo "<td>" . $row['totalMileage'] . "</td>";
             echo "<td>" . $row['percentage'] . "%</td>";
-            echo "<td class='link'><a href=\"/hbtest/mapview.php?u={$user}&sys={$row['systemName']}\">Map</a></td>";
-            echo "<td class='link'><a href='/devel/hb.php?sys={$row['systemName']}'>HB</a></td></tr>";
+            echo "<td class='link'><a href=\"/user/mapview.php?u={$user}&sys={$row['systemName']}\">Map</a></td>";
+            echo "<td class='link'><a href='/hb?sys={$row['systemName']}'>HB</a></td></tr>";
         }
         $res->free();
         ?>
         </tbody>
     </table>
 </div>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
 </body>
+</html>

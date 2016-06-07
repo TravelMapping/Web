@@ -267,11 +267,8 @@
         window.document.location=$link;
     }
 </script>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 <div id="header">
-    <a href="/user?u=<?php echo $user ?>"><?php echo $user ?></a> -
-    <a href="/">Home</a> -
-    <a href="/hbtest">Highway Browser</a>
-
     <form id="userselect" action="region.php">
         <label>User: </label>
         <input type="text" name="u" form="userselect" value="<?php echo $user ?>">
@@ -308,7 +305,7 @@
 SQL;
             $res = mysql_query($sql_command);
             $row = fetchWithRank($res, 'activePercentage');
-            $link = "redirect('/hbtest/mapview.php?u=" . $user . "&rg=" . $region . "')";
+            $link = "redirect('/user/mapview.php?u=" . $user . "&rg=" . $region . "')";
 	    $activeTotalMileage = $row['totalActiveMileage'];
 	    $activeClinchedMileage = $row['activeClinched'];
 	    $activeMileagePercentage = $row['activePercentage'];
@@ -324,7 +321,7 @@ SQL;
 SQL;
             $res = mysql_query($sql_command);
             $row = fetchWithRank($res, 'activePreviewPercentage');
-            $link = "redirect('/hbtest/mapview.php?u=" . $user . "&rg=" . $region . "')";
+            $link = "redirect('/user/mapview.php?u=" . $user . "&rg=" . $region . "')";
 	    $activePreviewTotalMileage = $row['totalActivePreviewMileage'];
 	    $activePreviewClinchedMileage = $row['activePreviewClinched'];
 	    $activePreviewMileagePercentage = $row['activePreviewPercentage'];
@@ -471,14 +468,14 @@ SQL;
             echo "<td>" . $row['clinchedMileage'] . "</td>";
             echo "<td>" . $row['totalMileage'] . "</td>";
             echo "<td>" . $row['percentage'] . "%</td>";
-            echo "<td class='link'><a href='/devel/hb.php?rg={$region}&sys={$row['systemName']}'>HB</a></td></tr>";
+            echo "<td class='link'><a href='/hb?rg={$region}&sys={$row['systemName']}'>HB</a></td></tr>";
         }
         ?>
         </tbody>
     </table>
     <table class="gratable tablesorter" id="routesTable">
         <thead>
-            <tr><th colspan="5">Stats by Route: (<?php echo "<a href=\"/hbtest/mapview.php?u=".$user."&rg=".$region."\">" ?>Full Map)</a></th></tr>
+            <tr><th colspan="5">Stats by Route: (<?php echo "<a href=\"/user/mapview.php?u=".$user."&rg=".$region."\">" ?>Full Map)</a></th></tr>
             <tr><th class="sortable">Route</th><th class="sortable">Clinched Mileage</th><th class="sortable">Total Mileage</th><th class="sortable">%</th><th class="nonsortable">Map</th></tr>
         </thead>
         <tbody>
@@ -487,7 +484,7 @@ SQL;
                 echo "<!--".$sql_command."-->";
                 $res = mysql_query($sql_command);
                 while ($row = mysql_fetch_array($res)) {
-                    echo "<tr onClick=\"window.open('/devel/hb.php?u=".$user."&r=".$row['root']."')\">";
+                    echo "<tr onClick=\"window.open('/hb?u=".$user."&r=".$row['root']."')\">";
                     echo "<td>".$row['route'];
                     if (strlen($row['banner']) > 0) {
                         echo " ".$row['banner']." ";
@@ -499,12 +496,13 @@ SQL;
                     echo "<td>".$row['clinchedMileage']."</td>";
                     echo "<td>".$row['totalMileage']."</td>";
                     echo "<td>".$row['percentage']."%</td>";
-                    echo "<td class='link'><a href='/devel/hb.php?u={$user}&r={$row['root']}'>HB</a></td></tr>";
+                    echo "<td class='link'><a href='/hb?u={$user}&r={$row['root']}'>HB</a></td></tr>";
                 }
             ?>
         </tbody>
     </table>
 </div>
 </div>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
 </body>
 </html>

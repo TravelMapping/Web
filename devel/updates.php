@@ -43,9 +43,14 @@
         }
     );
 </script>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 <h1>Travel Mapping Highway Data Updates</h1>
 
-<h3>Highway Data System Status Changes</h3>
+
+<p class="info">Quick links: <a href="#sysupdates">[Highway System Status Changes]</a><a href="#updates">[Updates to Highway Data in Active Systems]</a>.</p>
+
+
+<h3><a name="sysupdates">Highway System Status Changes</a></h3>
 
 <div id="sysupdates">
   <table class="tablesorter" border="1"><tr><th class="sortable">Date</th><th class="nonsortable">Country/Region</th><th class="sortable">System Code</th><th class="nonsortable">System Description</th><th class="sortable">New Status</th></tr>
@@ -62,7 +67,7 @@
   </table>
 </div>
 
-<h3>Updates to Highway Data in Active Systems</h3>
+<h3><a name="updates">Updates to Highway Data in Active Systems</a></h3>
 
 <div id="updates">
   <table class="tablesorter" border="1"><tr><th class="sortable">Date</th><th class="sortable">Region</th><th class="nonsortable">Route</th><th class="sortable">File Root</th><th class="nonsortable">Description</th></tr>
@@ -76,13 +81,14 @@
           echo "<tr><td>".$row['date']."</td><td>".$row['region']."</td><td>".$row['route']."</td><td>(NONE)</td><td>".$row['description']."</td></tr>\n";
         }
         else {
-          echo "<tr><td>".$row['date']."</td><td>".$row['region']."</td><td>".$row['route']."</td><td><a href=\"../hbtest/?r=".$row['root']."\">".$row['root']."</a></td><td>".$row['description']."</td></tr>\n";
+          echo "<tr><td>".$row['date']."</td><td>".$row['region']."</td><td>".$row['route']."</td><td><a href=\"/hb?r=".$row['root']."\">".$row['root']."</a></td><td>".$row['description']."</td></tr>\n";
         }
       }
       $res->free();
     ?>
   </table>
 </div>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
 </body>
 <?php
     $db->close();

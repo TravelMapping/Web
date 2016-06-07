@@ -1,5 +1,5 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . "/shields/index.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/shields/shieldgen.php";
 
 if (array_key_exists("u", $_GET)) {
     setcookie("lastuser", $_GET['u'], time() + (86400 * 30), "/");
@@ -58,7 +58,7 @@ if (array_key_exists("sys", $_GET) and strlen($_GET['sys']) > 0) {
         #routebox {
             position: fixed;
             left: 0px;
-            top: 80px;
+            top: 110px;
             bottom: 0px;
             width: 100%;
             overflow: auto;
@@ -217,10 +217,7 @@ if (array_key_exists("sys", $_GET) and strlen($_GET['sys']) > 0) {
 <?php
 if ($showingmap == 0) {
     echo "<body>\n";
-    if (array_key_exists("u", $_GET)) echo "<a href=\"/user?u=" . $_GET['u'] . "\">" . $_GET['u'] . "</a>-";
-    echo "<a href=\"/\">Home</a>-";
-    echo "<a href=\"/hbtest\">Highway Browser</a>";
-    echo "<form id=\"selectHighways\" name=\"HighwaySearch\" action=\"hb.php\">";
+    echo "<form id=\"selectHighways\" name=\"HighwaySearch\" action=\"index.php\">";
     echo "<label for=\"sys\">Filter routes by...  System: </label>";
     echo "<input id=\"sys\" type=\"text\" placeholder=\"usaus\" name=\"sys\" value=\"" . $_GET["sys"] . "\"></input>";
     echo "<label for=\"rg\"> Region: </label>";
@@ -229,12 +226,10 @@ if ($showingmap == 0) {
 
 } else {
     echo "<body onload=\"loadmap();\">\n";
-    if (array_key_exists("u", $_GET)) echo "<a href=\"/user?u=" . $_GET['u'] . "\">" . $_GET['u'] . "</a>-";
-    echo "<a href=\"/\">Home</a>-";
-    echo "<a href=\"/hbtest\">Highway Browser</a>";
 }
 ?>
-
+<?php $nobigheader = 1; ?>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 <h1>Travel Mapping Highway Browser (Draft)</h1>
 <script type="text/javascript">
     function initFloatingHeaders($table) {
@@ -286,7 +281,7 @@ JS;
 if ($showingmap == 1) {
     echo "<div id=\"pointbox\">\n";
     echo "<span class='bigshield'>" . generate($_GET['r'], true) . "</span>";
-    echo "<span><a href='/hbtest/mapview.php?u={$_GET['u']}&rte={$routeInfo['route']}'>View Associated Routes</a></span>";
+    echo "<span><a href='/user/mapview.php?u={$_GET['u']}&rte={$routeInfo['route']}'>View Associated Routes</a></span>";
     echo "<table id='waypoints' class=\"gratable\"><thead><tr><th colspan=\"2\">Waypoints</th></tr><tr><th>Coordinates</th><th>Waypoint Name</th></tr></thead><tbody>\n";
     $sql_command = "SELECT pointName, latitude, longitude FROM waypoints WHERE root = '" . $_GET['r'] . "';";
     $res = $db->query($sql_command);
@@ -343,14 +338,14 @@ ENDB;
     $sql_command .= ";";
     echo "<!-- SQL: " . $sql_command . " -->\n";
     echo "<div id=\"routebox\">\n";
-    echo "<table class=\"gratable tablesorter ws_data_table\" id=\"routes\"><thead><tr><th colspan=\"6\">Select Route to Display (click a header to sort by that column)</th></tr><tr class='float'><th class=\"sortable\">System</th><th class=\"sortable\">Region</th><th class=\"sortable\">Route Name</th><th>.list Name</th><th class=\"sortable\">Level</th><th>Root</th></tr></thead><tbody>\n";
+    echo "<table class=\"gratable tablesorter ws_data_table\" id=\"routes\"><thead><tr><th colspan=\"6\">Select Route to Display (click a header to sort by that column)</th></tr><tr class='float'><th class=\"sortable\">System</th><th class=\"sortable\">Region</th><th class=\"sortable\">Route&nbsp;Name</th><th>.list Name</th><th class=\"sortable\">Level</th><th>Root</th></tr></thead><tbody>\n";
     $res = $db->query($sql_command);
     while ($row = $res->fetch_assoc()) {
         echo "<tr class=\"notclickable status-" . $row['level'] . "\"><td>" . $row['systemName'] . "</td><td>" . $row['region'] . "</td><td>" . $row['route'] . $row['banner'];
         if (strcmp($row['city'], "") != 0) {
             echo " (" . $row['city'] . ")";
         }
-        echo "</td><td>" . $row['region'] . " " . $row['route'] . $row['banner'] . $row['abbrev'] . "</td><td>" . $row['level'] . "</td><td><a href=\"hb.php?r=" . $row['root'] . "\">" . $row['root'] . "</a></td></tr>\n";
+        echo "</td><td>" . $row['region'] . " " . $row['route'] . $row['banner'] . $row['abbrev'] . "</td><td>" . $row['level'] . "</td><td><a href=\"index.php?r=" . $row['root'] . "\">" . $row['root'] . "</a></td></tr>\n";
     }
     $res->free();
     echo "</table></div>\n";
@@ -369,7 +364,7 @@ HTML;
     $sql_command = "SELECT * FROM systems LEFT JOIN countries ON countryCode = countries.code";
     $res = $db->query($sql_command);
     while ($row = $res->fetch_assoc()) {
-        $linkJS = "window.open('hb.php?sys={$row['systemName']}')";
+        $linkJS = "window.open('index.php?sys={$row['systemName']}')";
         echo "<tr class='status-" . $row['level'] . "' onClick=\"$linkJS\">";
         if (strlen($row['name']) > 15) {
             echo "<td>{$row['code']}</td>";

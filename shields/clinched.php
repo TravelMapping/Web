@@ -1,5 +1,5 @@
 <?php
-include "index.php";
+include "shieldgen.php";
 $user = "null";
 
 if (array_key_exists("u", $_GET)) {
@@ -25,13 +25,12 @@ $db = new mysqli("localhost", "travmap", "clinch", $dbname) or die("Failed to co
 <html>
 <head>
     <title>Clinched Routes for <?php echo $user ?></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
     <link rel="stylesheet" type="text/css" href="/fonts/roadgeek.css">
 </head>
 <body>
-    <a href="/">Home</a> -
-    <a href="/hbtest">Highway Browser</a> -
-    <?php echo "<a href='/user?u={$user}'>{$user}</a>" ?>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 
     <form id="userselect">
         <label for="user">User: </label>
@@ -63,7 +62,7 @@ SQL;
         $rootList = explode(",", $row['clinchedRoutes']);
         $col = 0;
         foreach($rootList as $root) {
-            echo "<a href='/devel/hb.php?u=$user&r=$root'><span class='shield'>".generate($root, $_GET['reload'])."</span></a>";
+            echo "<a href='/hb/?u=$user&r=$root'><span class='shield'>".generate($root, $_GET['reload'])."</span></a>";
             $col++;
             if ($col > 8) {
                 echo "<br/>";
@@ -74,5 +73,6 @@ SQL;
     $res->free();
     ?>
     </table>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
 </body>
 </html>
