@@ -6,3 +6,5 @@
 <a href="/stats">Raw Stats</a> &nbsp;&nbsp;&nbsp;
 <a href="https://github.com/TravelMapping">TM on GitHub</a>
 </p>
+
+<!-- /lib/tmfooter.php: END -->
