@@ -51,6 +51,12 @@ if (array_key_exists("sqldebug", $_GET)) {
    $tmsqldebug = TRUE;
 }
 
+// get other common QS parameters
+
+// Note: u= is the user, stored in $tmuser variable, but this
+// is set instead by the tmphpuser.php file which needs
+// to be included before any other output is generated
+// to avoid warnings from setcookie
 
 // make the connection
 echo "<!-- mysqli connecting to database ".$tmdbname." on ".$tmdbhost." -->\n";
@@ -82,6 +88,29 @@ function tmdb_query($sql_command) {
 function tmdb_close() {
     global $tmdb;
     $tmdb->close();
+}
+
+// function to generate a user selection input form
+function tm_user_select_form() {
+    global $tmdb;
+    global $tmuser;
+    echo "<form id=\"userselect\" action=\".\"><p>\n";
+    echo "<label>Current User: </label>\n";
+    //echo "<input type=\"text\" name=\"u\" form=\"userselect\" value=\"".$tmuser."\">\n";
+    echo "<select name=\"u\">\n";
+    echo "<option value=\"null\">[None Selected]</option>\n";
+    $res = tmdb_query("SELECT DISTINCT traveler FROM clinchedOverallMileageByRegion ORDER by traveler ASC;");
+    while ($row = $res->fetch_assoc()) {
+        echo "<option value=\"".$row['traveler']."\"";
+        if ($row['traveler'] == $tmuser) {
+	    echo " selected=\"selected\"";
+        }
+	echo ">".$row['traveler']."</option>\n";
+    }
+    $res->free();
+    echo "</select>\n";
+    echo "<input type=\"submit\" value=\"Select User\" />\n";
+    echo "</p></form>\n";
 }
 
 ?>
