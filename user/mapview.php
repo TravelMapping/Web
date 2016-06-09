@@ -1,12 +1,4 @@
-<?php
-    if (array_key_exists("u", $_GET)) {
-        setcookie("lastuser", $_GET['u'], time() + (86400 * 30), "/");
-    } else if (isset($_COOKIE['lastuser'])) {
-        $_GET['u'] = $_COOKIE['lastuser'];
-    }
-
-    $dbname = "TravelMapping";
-?>
+<?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpuser.php" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
  ***
@@ -89,14 +81,11 @@
         type="text/javascript"></script>
 
     <!-- jQuery -->
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="application/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <!-- TableSorter -->
-    <script src="/lib/jquery.tablesorter.min.js"></script>
+    <script type="application/javascript" src="/lib/jquery.tablesorter.min.js"></script>
 
     <?php
-    // establish connection to db: mysql_ interface is deprecated, should learn new options
-    $con = mysql_connect("localhost", "travmap", "clinch") or die("Failed to connect to database");
-    mysql_select_db($dbname, $con);
 
     function orClauseBuilder($param, $name, $tablename = 'r') {
         $array = explode(",", $_GET[$param]);
@@ -113,6 +102,7 @@
 
     ?>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
+<?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
     <script>
         function waypointsFromSQL() {
             <?php
@@ -186,22 +176,21 @@
                 $sql_command = "SELECT waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname FROM waypoints JOIN routes ON routes.root = waypoints.root".$select_regions.$select_systems." JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause."  ORDER BY root, waypoints.pointId;";
               }
 
-              echo "// SQL: ".$sql_command."\n";
-              $res = mysql_query($sql_command);
+              $res = tmdb_query($sql_command);
 
               $routenum = 0;
               $pointnum = 0;
               $lastRoute = "";
-              while ($row = mysql_fetch_array($res)) {
-                if (!($row[3] == $lastRoute)) {
+              while ($row = $res->fetch_assoc()) {
+                if (!($row['root'] == $lastRoute)) {
                    echo "newRouteIndices[".$routenum."] = ".$pointnum.";\n";
-                   echo "routeTier[".$routenum."] = ".$row[4].";\n";
-                   echo "routeColor[".$routenum."] = '".$row[5]."';\n";
-                   echo "routeSystem[".$routenum."] = '".$row[6]."';\n";
-                   $lastRoute = $row[3];
+                   echo "routeTier[".$routenum."] = ".$row['tier'].";\n";
+                   echo "routeColor[".$routenum."] = '".$row['color']."';\n";
+                   echo "routeSystem[".$routenum."] = '".$row['systemname']."';\n";
+                   $lastRoute = $row['root'];
                    $routenum = $routenum + 1;
                 }
-                echo "waypoints[".$pointnum."] = new Waypoint(\"".$row[0]."\",".$row[1].",".$row[2]."); // Route = ".$row[3]." (".$row[5].")\n";
+                echo "waypoints[".$pointnum."] = new Waypoint(\"".$row['pointName']."\",".$row['latitude'].",".$row['longitude']."); // Route = ".$row['root']." (".$row['color'].")\n";
                 $pointnum = $pointnum + 1;
               }
 
@@ -216,11 +205,10 @@
                  } else {
                   $sql_command = "SELECT segments.segmentId, segments.root FROM segments JOIN routes ON routes.root = segments.root JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause." ".$where_regions.$select_systems." ORDER BY root, segments.segmentId;";
                  }
-                 echo "// SQL: ".$sql_command."\n";
-                 $res = mysql_query($sql_command);
+                 $res = tmdb_query($sql_command);
                  $segmentIndex = 0;
-                 while ($row = mysql_fetch_array($res)) {
-                   echo "segments[".$segmentIndex."] = ".$row[0]."; // route=".$row[1]."\n";
+                 while ($row = $res->fetch_assoc()) {
+                   echo "segments[".$segmentIndex."] = ".$row['segmentId']."; // route=".$row['root']."\n";
                    $segmentIndex = $segmentIndex + 1;
                  }
                  if(isset($rteClause)) {
@@ -228,11 +216,10 @@
                  } else {
                   $sql_command = "SELECT segments.segmentId, segments.root FROM segments RIGHT JOIN clinched ON segments.segmentId = clinched.segmentId JOIN routes ON routes.root = segments.root JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause." ".$where_regions.$select_systems." AND clinched.traveler='".$_GET['u']."' ORDER BY root, segments.segmentId;";
                  }
-                 echo "// SQL: " .$sql_command."\n";
-                 $res = mysql_query($sql_command);
+                 $res = tmdb_query($sql_command);
                  $segmentIndex = 0;
-                 while ($row = mysql_fetch_array($res)) {
-                   echo "clinched[".$segmentIndex."] = ".$row[0]."; // route=".$row[1]."\n";
+                 while ($row = $res->fetch_assoc()) {
+                   echo "clinched[".$segmentIndex."] = ".$row['segmentId']."; // route=".$row['root']."\n";
                    $segmentIndex = $segmentIndex + 1;
                  }
                echo "mapClinched = true;\n";
@@ -313,14 +300,14 @@
     <?php
     if (array_key_exists("r", $_GET)) {
         $sql_command = "SELECT region, route, banner, city FROM routes WHERE root = '" . $_GET['r'] . "';";
-        $res = mysql_query($sql_command);
-        $row = mysql_fetch_array($res);
-        echo $row[0] . " " . $row[1];
-        if (strlen($row[2]) > 0) {
-            echo " " . $row[2];
+        $res = tmdb_query($sql_command);
+        $row = $res->fetch_assoc();
+        echo $row['region'] . " " . $row['route'];
+        if (strlen($row['banner']) > 0) {
+            echo " " . $row['banner'];
         }
-        if (strlen($row[3]) > 0) {
-            echo " (" . $row[3] . ")";
+        if (strlen($row['city']) > 0) {
+            echo " (" . $row['city'] . ")";
         }
         echo ": ";
     } else if (array_key_exists("rg", $_GET)) {
@@ -357,9 +344,8 @@
             //Don't show. Too many routes
             $sql_command .= "r.root IS NULL;";
         }
-        echo "<!--".$sql_command."-->";
-        $res = mysql_query($sql_command);
-        while($row = mysql_fetch_array($res)) {
+        $res = tmdb_query($sql_command);
+        while($row = $res->fetch_assoc()) {
             $link = "/devel/hb.php?u=".$_GET['u']."&r=".$row['root'];
             echo "<tr onClick=\"window.open('".$link."')\"><td>";
             //REGION ROUTE BANNER (CITY)
@@ -378,4 +364,7 @@
     </table>
 </div>
 </body>
+<?php
+    $tmdb->close();
+?>
 </html>
