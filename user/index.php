@@ -236,4 +236,7 @@ SQL;
 </div>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
 </body>
+<?php
+    $tmdb->close();
+?>
 </html>
