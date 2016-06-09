@@ -113,5 +113,35 @@ function tm_user_select_form() {
     echo "</p></form>\n";
 }
 
+// function to get a count from a table of rows matching a "where" clause
+function tm_count_rows($table, $clause) {
+    global $tmdb;
+    $sql_command = "SELECT COUNT(*) AS c FROM ".$table." ".$clause.";";
+    global $tmsqldebug;
+    if ($tmsqldebug) {
+        echo "<!-- SQL: ".$sql_command." -->\n";
+    }
+    $res = tmdb_query($sql_command);
+    $row = $res->fetch_assoc();
+    $ans = $row['c'];
+    $res->free();
+    return $ans;
+}
+
+
+// function to get a sum of a column from a table
+function tm_sum_column($table, $column) {
+    global $tmdb;
+    $sql_command = "SELECT SUM(".$column.") AS s FROM ".$table.";";
+    global $tmsqldebug;
+    if ($tmsqldebug) {
+        echo "<!-- SQL: ".$sql_command." -->\n";
+    }
+    $res = tmdb_query($sql_command);
+    $row = $res->fetch_assoc();
+    $ans = $row['s'];
+    $res->free();
+    return $ans;
+}
 ?>
 <!-- /lib/tmphpfuncs.php END -->

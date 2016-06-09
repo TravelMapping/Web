@@ -1,8 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
-<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
 <title>Travel Mapping</title>
 <link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
 <link rel="shortcut icon" type="image/png" href="favicon.png">
@@ -25,6 +26,44 @@ other users' stats and maps.
 
 </p>
 
+<p class="heading">Travel Mapping Highway Data</p>
+
+<p class="text">
+
+Travel Mapping currently includes highway data for 
+<?php
+echo tm_count_rows("systems", "WHERE level='active'");
+?>
+ active systems. An additional 
+<?php
+echo tm_count_rows("systems", "WHERE level='preview'");
+?>
+ systems are in "preview" status, which means they are substantially
+complete, but still undergoing final revisions, and 
+<?php
+echo tm_count_rows("systems", "WHERE level='devel'");
+?>
+ more are in development but are not yet complete.  Active system
+encompass 
+<?php
+echo number_format(tm_count_rows("connectedRoutes", "LEFT JOIN systems ON connectedRoutes.systemName = systems.systemName WHERE systems.level = 'active'"));
+?>
+ routes for
+<?php
+echo number_format(tm_sum_column("overallMileageByRegion", "activeMileage"));
+?>
+ miles of "clinchable" highways in active systems, and that total is 
+<?php
+echo number_format(tm_count_rows("connectedRoutes", "LEFT JOIN systems ON connectedRoutes.systemName = systems.systemName WHERE systems.level = 'active' OR systems.level = 'preview'"));
+?>
+ routes for
+<?php
+echo number_format(tm_sum_column("overallMileageByRegion", "activePreviewMileage"));
+?>
+ miles when preview systems are included.
+
+</p>
+
 <p class="heading">How to Participate</p>
 
 <p class="text">
@@ -35,7 +74,41 @@ to create and submit your data.
 
 </p>
 
+<p class="text">
+
+Experienced users might also want to volunteer to help the project.
+Start by reporting problems with existing highway data.  Those who
+have learned the project's structure and highway data rules and
+guidelines can help greatly by providing review of new highway systems
+in development.  Most experienced users can learn how to plot new
+highway systems under the guidance of experienced contributors.
+Again, see <a href="/forum">the project forum</a> for more information.
+</p>
+
+<!-- idea: 5 or so newest highway data updates, system updates -->
+
+<p class="heading">What's New?</p>
+
+<p class="text">
+Highway data gets <a href="/devel/updates.php">updated</a> almost
+daily as corrections are made and progress is made on systems in
+development.  When a highway system is deemed correct and complete to
+the best of our knowledge, it becomes "active".  The newest systems to
+become active:
+<ul class="text">
+<?php
+$res = tmdb_query("select systemName, description from systemUpdates where statusChange='active'  limit 5");
+while ($row = $res->fetch_assoc()) {
+  echo "<li>".$row['description']." (".$row['systemName'].")</li>\n";
+}
+$res->free();
+?>
+</ul>
+</p>
 
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
 </body>
+<?php
+    $tmdb->close();
+?>
 </html>
