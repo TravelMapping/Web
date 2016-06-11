@@ -16,43 +16,20 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
     <style type="text/css">
-        #headerbox {
-            position: absolute;
-            top: 0px;
-            bottom: 50px;
-            width: 100%;
-            overflow: hidden;
-            text-align: center;
-            font-size: 30px;
-            font-family: "Times New Roman", serif;
-            font-style: bold;
-        }
-
-        #statsbox {
-            position: fixed;
-            left: 0px;
-            top: 50px;
-            right: 400px;
-            bottom: 0px;
-            width: 400px;
-            overflow: auto;
-        }
-
         #controlbox {
-            position: fixed;
-            top: 60px;
-            bottom: 100px;
-            height: 100%;
-            left: 0px;
-            right: 0px;
+            position: absolute;
+            top: 30px;
+            height: 30px;
+            right: 20px;
             overflow: auto;
             padding: 5px;
             font-size: 20px;
+	    width: 25%;
         }
 
         #map {
             position: absolute;
-            top: 100px;
+            top: 25px;
             bottom: 0px;
             width: 100%;
             overflow: hidden;
@@ -62,18 +39,34 @@
             cursor: crosshair;
         }
 
-        #routes {
+	#selected {
             position: absolute;
             right: 10px;
-            top: 100px;
+            top: 60px;
             bottom: 20px;
             overflow-y: scroll;
             max-width: 25%;
+	    opacity: .95;  /* also forces stacking order */
         }
 
-        #showHideBtn {
+        #routes {
+	    visibility: hidden;
+	    left: 0px;
+            width: 1px;
+	    height: 1px;
+        }
+
+        #options {
+	    visibility: hidden;
+	    left: 0px;
+            width: 1px;
+	    height: 1px;
+        }
+
+        #showHideMenu {
             position: absolute;
             right: 10px;
+	    opacity: .75;  /* also forces stacking order */
         }
     </style>
     <script
@@ -88,7 +81,15 @@
     <?php
 
     function orClauseBuilder($param, $name, $tablename = 'r') {
-        $array = explode(",", $_GET[$param]);
+        $array = array();
+        if (is_array($_GET[$param])) {
+          foreach ($_GET[$param] as $p) {
+            $array = array_merge($array, explode(',',$p));
+          }
+        }
+        else {
+          $array = explode(",", $_GET[$param]);
+        }
         $clause = "(";
         $i = 0;
         foreach($array as $item) {
@@ -109,10 +110,7 @@
 	      // later get this from a QS parameter probably
 	      // idea: option to include devel routes as a debugging aid
 	      $activeClause = "(systems.level='preview' OR systems.level='active')";
-              $regions = array();
-              if (array_key_exists("rg",$_GET)) {
-                $regions = explode(',',$_GET['rg']);
-              }
+              $regions = tm_qs_multi_or_comma_to_array("rg");
 
               // restrict to waypoints matching routes whose region is given in the "rg=" query string parameter
               // build strings needed for later queries
@@ -136,10 +134,7 @@
               }
 
               // select based on system?
-              $systems = array();
-              if (array_key_exists("sys",$_GET)) {
-                $systems = explode(',',$_GET['sys']);
-              }
+              $systems = tm_qs_multi_or_comma_to_array("sys");
 
               // restrict to waypoints matching routes whose system is given in the "sys=" query string parameter
               $select_systems = "";
@@ -245,17 +240,26 @@
     <title>Travel Mapping: Draft Map Overlay Viewer</title>
 </head>
 
-<body onload="loadmap();">
+<body onload="loadmap(); toggleTable();">
 <script type="application/javascript">
-    function toggleTable()
-    {
-        var visibility = document.getElementById("routes").style.visibility;
-        if (visibility == 'hidden') {
-            visibility = 'visible'
-        } else {
-            visibility = 'hidden';
+
+    function toggleTable() {
+        var menu = document.getElementById("showHideMenu");
+        var index = menu.selectedIndex;
+        var value = menu.options[index].value;
+        routes = document.getElementById("routes");
+        options = document.getElementById("options");
+        selected = document.getElementById("selected");
+        // show only table (or no table) based on value
+        if (value == "routetable") {
+            selected.innerHTML = routes.innerHTML;
         }
-        document.getElementById("routes").style.visibility = visibility;
+        else if (value == "options") {
+            selected.innerHTML = options.innerHTML;
+        }
+        else {
+            selected.innerHTML = ""; //"<table class=\"gratable\"><tbody><tr><td>Select Above for More</td></tr></tbody></table>";
+        }
     }
 
     function initFloatingHeaders($table) {
@@ -271,7 +275,7 @@
                 $row.width($(this).width());
             }
             var pos =  $row.position().left - 2;
-            console.log($table.offset().left);
+            //console.log($table.offset().left);
             $(this).css({left: pos})
         });
     }
@@ -291,34 +295,39 @@
 </script>
 <?php $nobigheader = 1; ?>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
-<h1 style="text-align: center">Travel Mapping: Draft Map Overlay Viewer</h1>
 
-<div id="controlbox">
-    <input id="showMarkers" type="checkbox" name="Show Markers" onclick="showMarkersClicked()">&nbsp;Show Markers
-      
-  <span id="controlboxroute">
-    <?php
-    if (array_key_exists("r", $_GET)) {
-        $sql_command = "SELECT region, route, banner, city FROM routes WHERE root = '" . $_GET['r'] . "';";
-        $res = tmdb_query($sql_command);
-        $row = $res->fetch_assoc();
-        echo $row['region'] . " " . $row['route'];
-        if (strlen($row['banner']) > 0) {
-            echo " " . $row['banner'];
-        }
-        if (strlen($row['city']) > 0) {
-            echo " (" . $row['city'] . ")";
-        }
-        echo ": ";
-    } else if (array_key_exists("rg", $_GET)) {
-        echo "Displaying region: " . $_GET['rg'] . ".";
-    }
-    ?>
-  </span>
-    <span id="controlboxinfo"></span>
-    <button id="showHideBtn" onclick="toggleTable()">Show/Hide Table</button>
-</div>
 <div id="map">
+</div>
+<div id="selected"></div>
+<div id="options">
+    <form id="optionsForm" action="mapview.php">
+    <table id="optionsTable" class="gratable">
+    <thead>
+    <tr><th>Select Map Options</th></tr>
+    </thead>
+    <tbody>
+    <tr><td>
+    <input id="showMarkers" type="checkbox" name="Show Markers" onclick="showMarkersClicked()">&nbsp;Show Markers
+    </td></tr>
+
+    <tr><td>User: 
+<?php tm_user_select(); ?>
+    </td></tr>
+    
+    <tr><td>Region(s): <br />
+<?php tm_region_select(TRUE); ?>
+    </td></tr>
+    
+    <tr><td>System(s): <br />
+<?php tm_system_select(TRUE); ?>
+    </td></tr>
+
+    <tr><td>
+    <input type="submit" value="Apply Changes" />	
+    </td></tr>
+    </tbody>
+    </table>
+    </form>
 </div>
 <div id="routes">
     <table id="routesTable" class="gratable tablesorter">
@@ -346,8 +355,8 @@
         }
         $res = tmdb_query($sql_command);
         while($row = $res->fetch_assoc()) {
-            $link = "/devel/hb.php?u=".$_GET['u']."&r=".$row['root'];
-            echo "<tr onClick=\"window.open('".$link."')\"><td>";
+            $link = "/hb?u=".$_GET['u']."&r=".$row['root'];
+            echo "<tr onclick=\"window.open('".$link."')\"><td>";
             //REGION ROUTE BANNER (CITY)
             echo $row['region'] . " " . $row['route'];
             if (strlen($row['banner']) > 0) {
@@ -362,6 +371,18 @@
         ?>
         </tbody>
     </table>
+</div>
+<div id="controlbox">
+    <!-- TODO: replace with a single drop-down to show one of these tables or neither -->
+    <select id="showHideMenu" onchange="toggleTable();">
+    <option value="maponly">Map Only</option>
+    <option value="options">Show Map Options</option>
+    <option value="routetable" selected="selected">Show Route Table</option>
+    </select>
+<!--
+    <button id="showHideRteBtn" onclick="toggleTable('routes');">Show/Hide Routes Table</button>
+    <button id="showHideOptBtn" onclick="toggleTable('options');">Show Options</button>
+-->
 </div>
 </body>
 <?php

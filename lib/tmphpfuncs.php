@@ -90,13 +90,59 @@ function tmdb_close() {
     $tmdb->close();
 }
 
-// function to generate a user selection input form
-function tm_user_select_form() {
+// function to generate a populated region "select" object, but only regions
+// where some route exists, 
+function tm_region_select($multiple) {
+    global $tmdb;
+
+    if ($multiple) {
+        echo "<select name=\"rg[]\" multiple=\"multiple\">\n";
+    }
+    else {
+        echo "<select name=\"rg\">\n";
+    }
+    $regions = tm_qs_multi_or_comma_to_array("rg");
+    echo "<option value=\"null\">[None Selected]</option>\n";
+    $res = tmdb_query("SELECT * FROM regions WHERE code IN (SELECT region FROM routes) ORDER BY country;");
+    while ($row = $res->fetch_assoc()) {
+        echo "<option value=\"".$row['code']."\"";
+        if (in_array($row['code'], $regions)) {
+            echo " selected=\"selected\"";
+        }
+	echo ">".$row['name']."</option>\n";
+    }
+    $res->free();
+    echo "</select>\n";
+}
+
+// function to generate a populated systems "select" object
+function tm_system_select($multiple) {
+    global $tmdb;
+
+    if ($multiple) {
+        echo "<select name=\"sys[]\" multiple=\"multiple\">\n";
+    }
+    else {
+        echo "<select name=\"sys\">\n";
+    }
+    $systems = tm_qs_multi_or_comma_to_array("sys");
+    echo "<option value=\"null\">[None Selected]</option>\n";
+    $res = tmdb_query("SELECT * FROM systems;");
+    while ($row = $res->fetch_assoc()) {
+        echo "<option value=\"".$row['systemName']."\"";
+        if (in_array($row['systemName'], $systems)) {
+            echo " selected=\"selected\"";
+        }
+	echo ">".$row['fullName']."</option>\n";
+    }
+    $res->free();
+    echo "</select>\n";
+}
+
+// function to generate a user selection "select" object
+function tm_user_select() {
     global $tmdb;
     global $tmuser;
-    echo "<form id=\"userselect\" action=\".\"><p>\n";
-    echo "<label>Current User: </label>\n";
-    //echo "<input type=\"text\" name=\"u\" form=\"userselect\" value=\"".$tmuser."\">\n";
     echo "<select name=\"u\">\n";
     echo "<option value=\"null\">[None Selected]</option>\n";
     $res = tmdb_query("SELECT DISTINCT traveler FROM clinchedOverallMileageByRegion ORDER by traveler ASC;");
@@ -109,6 +155,14 @@ function tm_user_select_form() {
     }
     $res->free();
     echo "</select>\n";
+}
+
+// function to generate a user selection input form
+function tm_user_select_form() {
+    // TODO: action should come as a parameter
+    echo "<form id=\"userselect\" action=\".\"><p>\n";
+    echo "<label>Current User: </label>\n";
+    tm_user_select();
     echo "<input type=\"submit\" value=\"Select User\" />\n";
     echo "</p></form>\n";
 }
@@ -143,5 +197,32 @@ function tm_sum_column($table, $column) {
     $res->free();
     return $ans;
 }
+
+// Function to get an array of either multiple or comma-separated
+// qs parameters.
+//
+// For example, either of the following:
+// rg[]=VT&rg[]=MA&rg[]=NY
+// rg=VT,MA,NY
+//
+// should get back an array containing VT, MA, and NY
+//
+// special functionality: ignore "null" entry/entries
+function tm_qs_multi_or_comma_to_array($param) {
+
+    $array = array();
+    if (array_key_exists($param, $_GET)) {
+        if (is_array($_GET[$param])) {
+          foreach ($_GET[$param] as $p) {
+            $array = array_merge($array, explode(',',$p));
+          }
+        }
+        else {
+          $array = explode(",", $_GET[$param]);
+        }
+    }
+    return array_diff($array, array("null"));
+}
+
 ?>
 <!-- /lib/tmphpfuncs.php END -->
