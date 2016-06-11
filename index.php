@@ -94,7 +94,7 @@ Highway data gets <a href="/devel/updates.php">updated</a> almost
 daily as corrections are made and progress is made on systems in
 development.  When a highway system is deemed correct and complete to
 the best of our knowledge, it becomes "active".  The newest systems to
-become active:
+become active:</p>
 <ul class="text">
 <?php
 $res = tmdb_query("select systemName, description from systemUpdates where statusChange='active'  limit 5");
@@ -104,6 +104,9 @@ while ($row = $res->fetch_assoc()) {
 $res->free();
 ?>
 </ul>
+
+<p class="text">
+The most recent site update completed at <?php echo tm_update_time(); ?>.
 </p>
 
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>

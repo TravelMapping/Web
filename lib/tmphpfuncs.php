@@ -224,5 +224,22 @@ function tm_qs_multi_or_comma_to_array($param) {
     return array_diff($array, array("null"));
 }
 
+// get the timestamp of most recent DB update
+function tm_update_time() {
+    global $tmdb;
+    global $tmdbname;
+    $sql_command = "SELECT create_time FROM information_schema.tables WHERE TABLE_SCHEMA = '".$tmdbname."' ORDER BY create_time DESC;";
+    global $tmsqldebug;
+    if ($tmsqldebug) {
+        echo "<!-- SQL: ".$sql_command." -->\n";
+    }
+    $res = tmdb_query($sql_command);
+    $row = $res->fetch_assoc();
+    $ans = $row['create_time'];
+    $res->free();
+    return $ans;
+}
+
+
 ?>
 <!-- /lib/tmphpfuncs.php END -->
