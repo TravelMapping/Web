@@ -14,7 +14,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
+    <link rel="stylesheet" type="text/css" href="/css/travelMapping.css" />
     <style type="text/css">
         #controlbox {
             position: absolute;
@@ -108,7 +108,7 @@
     ?>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
 <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
-    <script>
+    <script type="application/javascript">
         function waypointsFromSQL() {
             <?php
 	      // later get this from a QS parameter probably
@@ -262,7 +262,7 @@
             selected.innerHTML = options.innerHTML;
         }
         else {
-            selected.innerHTML = ""; //"<table class=\"gratable\"><tbody><tr><td>Select Above for More</td></tr></tbody></table>";
+            selected.innerHTML = "";
         }
     }
 
@@ -311,7 +311,7 @@
     </thead>
     <tbody>
     <tr><td>
-    <input id="showMarkers" type="checkbox" name="Show Markers" onclick="showMarkersClicked()">&nbsp;Show Markers
+    <input id="showMarkers" type="checkbox" name="Show Markers" onclick="showMarkersClicked()" />&nbsp;Show Markers
     </td></tr>
 
     <tr><td>User: 
@@ -359,7 +359,7 @@
         }
         $res = tmdb_query($sql_command);
         while($row = $res->fetch_assoc()) {
-            $link = "/hb?u=".$_GET['u']."&r=".$row['root'];
+            $link = "/hb?u=".$_GET['u']."&amp;r=".$row['root'];
             echo "<tr onclick=\"window.open('".$link."')\"><td>";
             //REGION ROUTE BANNER (CITY)
             echo $row['region'] . " " . $row['route'];
@@ -370,23 +370,18 @@
                 echo " (" . $row['city'] . ")";
             }
 	    $pct = sprintf("%0.2f",( $row['clinched'] / $row['total'] * 100) );
-            echo "</td><td class='link'><a href='/user/system.php?u={$_GET['u']}&sys={$row['systemName']}'>{$row['systemName']}</a></td><td>".$row['clinched']."</td><td>".$row['total']."</td><td>".$pct."%</td></tr>\n";
+            echo "</td><td class='link'><a href='/user/system.php?u={$_GET['u']}&amp;sys={$row['systemName']}'>{$row['systemName']}</a></td><td>".$row['clinched']."</td><td>".$row['total']."</td><td>".$pct."%</td></tr>\n";
         }
         ?>
         </tbody>
     </table>
 </div>
 <div id="controlbox">
-    <!-- TODO: replace with a single drop-down to show one of these tables or neither -->
     <select id="showHideMenu" onchange="toggleTable();">
     <option value="maponly">Map Only</option>
     <option value="options">Show Map Options</option>
     <option value="routetable" selected="selected">Show Route Table</option>
     </select>
-<!--
-    <button id="showHideRteBtn" onclick="toggleTable('routes');">Show/Hide Routes Table</button>
-    <button id="showHideOptBtn" onclick="toggleTable('options');">Show Options</button>
--->
 </div>
 </body>
 <?php
