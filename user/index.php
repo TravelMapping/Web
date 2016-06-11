@@ -44,7 +44,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
             $("#regionsTable").tablesorter({
-                sortList: [[4,1], [3, 1]],
+                sortList: [[5,1], [4, 1]],
                 headers: {0: {sorter: false}, 6: {sorter: false}}
             });
             $("#systemsTable").tablesorter({
