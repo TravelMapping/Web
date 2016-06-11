@@ -90,6 +90,7 @@
         else {
           $array = explode(",", $_GET[$param]);
         }
+        $array = array_diff($array, array("null"));
         $clause = "(";
         $i = 0;
         foreach($array as $item) {
@@ -98,6 +99,9 @@
             if($i < sizeof($array)) $clause .= " or ";
         }
         $clause .= ")";
+        if ($i == 0) {
+            return "TRUE";
+        }
         return $clause;
     }
 
