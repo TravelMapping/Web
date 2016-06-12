@@ -224,18 +224,8 @@
                echo "mapClinched = true;\n";
               }
 
-              // check for custom colors query string parameters
-              $customColors = array();
-              if (array_key_exists("colors",$_GET)) {
-                 $customColors = explode(';',$_GET['colors']);
-                 $colorNum = 0;
-                 foreach ($customColors as $customColor) {
-                    $colorEntry = array();
-                    $colorEntry = explode(':',$customColor);
-                    echo "customColorCodes[".$colorNum."] = { name: \"".$colorEntry[0]."\", unclinched: \"".$colorEntry[1]."\", clinched: \"".$colorEntry[2]."\" };\n";
-                    $colorNum = $colorNum + 1;
-                 }
-              }
+              // insert custom color code if needed
+              tm_generate_custom_colors_array();
 
             ?>
             genEdges = true;

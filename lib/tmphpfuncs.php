@@ -171,10 +171,6 @@ function tm_user_select_form() {
 function tm_count_rows($table, $clause) {
     global $tmdb;
     $sql_command = "SELECT COUNT(*) AS c FROM ".$table." ".$clause.";";
-    global $tmsqldebug;
-    if ($tmsqldebug) {
-        echo "<!-- SQL: ".$sql_command." -->\n";
-    }
     $res = tmdb_query($sql_command);
     $row = $res->fetch_assoc();
     $ans = $row['c'];
@@ -194,6 +190,16 @@ function tm_sum_column($table, $column) {
     $res = tmdb_query($sql_command);
     $row = $res->fetch_assoc();
     $ans = $row['s'];
+    $res->free();
+    return $ans;
+}
+
+// Function to retrieve the name of a region by code from the DB
+function tm_region_code_to_name($code) {
+    global $tmdb;
+    $res = tmdb_query("SELECT * FROM regions where code = '".$code."';");
+    $row = $res->fetch_assoc();
+    $ans = $row['name'];
     $res->free();
     return $ans;
 }
@@ -222,6 +228,24 @@ function tm_qs_multi_or_comma_to_array($param) {
         }
     }
     return array_diff($array, array("null"));
+}
+
+// Function to generate JS code to fill in customColorCodes array based
+// on colors QS parameter
+function tm_generate_custom_colors_array() {
+
+    // check for custom colors query string parameters
+    $customColors = array();
+    if (array_key_exists("colors",$_GET)) {
+        $customColors = explode(';',$_GET['colors']);
+        $colorNum = 0;
+        foreach ($customColors as $customColor) {
+            $colorEntry = array();
+            $colorEntry = explode(':',$customColor);
+            echo "customColorCodes[".$colorNum."] = { name: \"".$colorEntry[0]."\", unclinched: \"".$colorEntry[1]."\", clinched: \"".$colorEntry[2]."\" };\n";
+            $colorNum = $colorNum + 1;
+        }
+    }
 }
 
 // get the timestamp of most recent DB update
