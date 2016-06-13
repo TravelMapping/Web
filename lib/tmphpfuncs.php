@@ -194,12 +194,37 @@ function tm_sum_column($table, $column) {
     return $ans;
 }
 
+// function to get a sum of a column from a table with a "where"
+function tm_sum_column_where($table, $column, $where) {
+    global $tmdb;
+    $sql_command = "SELECT SUM(".$column.") AS s FROM ".$table." WHERE ".$where.";";
+    global $tmsqldebug;
+    if ($tmsqldebug) {
+        echo "<!-- SQL: ".$sql_command." -->\n";
+    }
+    $res = tmdb_query($sql_command);
+    $row = $res->fetch_assoc();
+    $ans = $row['s'];
+    $res->free();
+    return $ans;
+}
+
 // Function to retrieve the name of a region by code from the DB
 function tm_region_code_to_name($code) {
     global $tmdb;
     $res = tmdb_query("SELECT * FROM regions where code = '".$code."';");
     $row = $res->fetch_assoc();
     $ans = $row['name'];
+    $res->free();
+    return $ans;
+}
+
+// Function to retrieve the name of a system by code from the DB
+function tm_system_code_to_name($code) {
+    global $tmdb;
+    $res = tmdb_query("SELECT * FROM systems where systemName = '".$code."';");
+    $row = $res->fetch_assoc();
+    $ans = $row['fullName'];
     $res->free();
     return $ans;
 }
@@ -264,6 +289,26 @@ function tm_update_time() {
     return $ans;
 }
 
+// function to find the rank of a given traveler in a SQL result
+// ranked by a given field, rank is given in a returned row (an
+// associative array) as the value associated with a new key 'rank'.
+function tm_fetch_user_row_with_rank($res, $rankBy) {
+    global $tmuser;
+    $nextRank = 1;
+    $rank = 1;
+    $score = 0;
+    $row = array();
+    while($row['traveler'] != $tmuser && $row = $res->fetch_assoc()) {
+        if ($score != $row[$rankBy]) {
+            $score = $row[$rankBy];
+            $rank = $nextRank;
+        }
+        $nextRank++;
+        //error_log("($rank, {$row['traveler']}, {$row[$rankBy]})");
+    }
+    $row['rank'] = $rank;
+    return $row;
+}
 
 ?>
 <!-- /lib/tmphpfuncs.php END -->

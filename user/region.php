@@ -80,26 +80,6 @@
     }
     $activeClause = "(systems.level='preview' OR systems.level='active')";
 
-    function fetchWithRank($res, $rankBy)
-    {
-        global $tmuser;
-        $nextRank = 1;
-        $rank = 1;
-        $score = 0;
-        $row = array();
-        while($row['traveler'] != $tmuser && $row = $res->fetch_assoc()) {
-            if ($score != $row[$rankBy]) {
-                $score = $row[$rankBy];
-                $rank = $nextRank;
-            }
-
-            $nextRank++;
-	    //error_log("($rank, {$row['traveler']}, {$row[$rankBy]})");
-        }
-        $row['rank'] = $rank;
-        return $row;
-    }
-
     ?>
     <title><?php echo $regionName." - ".$tmuser; ?></title>
     <script
@@ -143,7 +123,7 @@
 
               // traveler clinched mapping of route
               echo "traveler = '".$tmuser."';\n";
-              // retrieve list of segments for this region or regions
+              // retrieve list of segments for this region
               $sql_command = "SELECT segments.segmentId, segments.root FROM segments JOIN routes ON routes.root = segments.root JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause." AND routes.region = '".$region."' ORDER BY root, segments.segmentId;";
               $res = tmdb_query($sql_command);
               $segmentIndex = 0;
@@ -241,7 +221,7 @@ if (( $tmuser == "null") || ( $region == "" )) {
             ORDER BY activePercentage DESC;
 SQL;
             $res = tmdb_query($sql_command);
-            $row = fetchWithRank($res, 'activePercentage');
+            $row = tm_fetch_user_row_with_rank($res, 'activePercentage');
             $res->free();
             $link = "redirect('/user/mapview.php?u=" . $tmuser . "&amp;rg=" . $region . "')";
 	    $activeTotalMileage = $row['totalActiveMileage'];
@@ -258,7 +238,7 @@ SQL;
             ORDER BY activePreviewPercentage DESC;
 SQL;
             $res = tmdb_query($sql_command);
-            $row = fetchWithRank($res, 'activePreviewPercentage');
+            $row = tm_fetch_user_row_with_rank($res, 'activePreviewPercentage');
             $res->free();
             $link = "redirect('/user/mapview.php?u=" . $tmuser . "&amp;rg=" . $region . "')";
 	    $activePreviewTotalMileage = $row['totalActivePreviewMileage'];
@@ -301,7 +281,7 @@ SQL;
 SQL;
 
             $res = tmdb_query($sql_command);
-            $row = fetchWithRank($res, 'clinchedPct');
+            $row = tm_fetch_user_row_with_rank($res, 'clinchedPct');
             $res->free();
 	    $drivenActiveRoutes = $row['driven'];
 	    $drivenActiveRoutesPct = $row['drivenPct'];
@@ -328,7 +308,7 @@ SQL;
 SQL;
 
             $res = tmdb_query($sql_command);
-            $row = fetchWithRank($res, 'clinchedPct');
+            $row = tm_fetch_user_row_with_rank($res, 'clinchedPct');
             $res->free();
 	    $drivenActivePreviewRoutes = $row['driven'];
 	    $drivenActivePreviewRoutesPct = $row['drivenPct'];
@@ -409,7 +389,7 @@ SQL;
     </table>
     <table class="gratable tablesorter" id="routesTable">
         <thead>
-            <tr><th colspan="5">Stats by Route: (<?php echo "<a href=\"/user/mapview.php?u=".$tmuser."&rg=".$region."\">" ?>Full Map)</a></th></tr>
+            <tr><th colspan="5">Stats by Route: (<?php echo "<a href=\"/user/mapview.php?u=".$tmuser."&amp;rg=".$region."\">" ?>Full Map)</a></th></tr>
             <tr><th class="sortable">Route</th><th class="sortable">Clinched Mileage</th><th class="sortable">Total Mileage</th><th class="sortable">%</th><th class="nonsortable">Map</th></tr>
         </thead>
         <tbody>
@@ -417,7 +397,7 @@ SQL;
                 $sql_command = "SELECT r.route, r.root, r.banner, r.city, ROUND((COALESCE(r.mileage, 0)),2) AS totalMileage, ROUND((COALESCE(cr.mileage, 0)),2) AS clinchedMileage, COALESCE(ROUND((COALESCE(cr.mileage,0)) / (COALESCE(r.mileage, 0)) * 100,2), 0) AS percentage FROM routes AS r LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '".$tmuser."' WHERE region = '" . $region . "'";
                 $res = tmdb_query($sql_command);
                 while ($row = $res->fetch_assoc()) {
-                    echo "<tr onClick=\"window.open('/hb?u=".$tmuser."&r=".$row['root']."')\">";
+                    echo "<tr onClick=\"window.open('/hb?u=".$tmuser."&amp;r=".$row['root']."')\">";
                     echo "<td>".$row['route'];
                     if (strlen($row['banner']) > 0) {
                         echo " ".$row['banner']." ";
