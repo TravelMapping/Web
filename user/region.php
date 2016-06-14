@@ -1,7 +1,7 @@
 <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpuser.php" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!-- 
-	Shows a users' stats for a particular region. 
+	Shows a user's stats for a particular region. 
 	URL Params:
 		u - the user.
         rg - the region viewing stats for.
@@ -419,4 +419,7 @@ SQL;
 </div>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
 </body>
+<?php
+    $tmdb->close();
+?>
 </html>
