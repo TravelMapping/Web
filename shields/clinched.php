@@ -77,7 +77,7 @@ SQL;
     $tmdb->query("SET SESSION  group_concat_max_len = 5555555;");
     $res = tmdb_query($sql);
     while($row = $res->fetch_assoc()) {
-        echo "<h4><a href='/user/system.php?sys={$row['systemName']}&amp;u={$tmuser}'>{$row['fullName']}";
+        echo "<h4><a href='/user/system.php?sys={$row['systemName']}&amp;u={$tmuser}'>{$row['fullName']}\n";
         if ($cort == "c") {
             echo " ({$row['clinched']} ";
         }
@@ -88,10 +88,10 @@ SQL;
         $rootList = explode(",", $row['clinchedRoutes']);
         $col = 0;
         foreach($rootList as $root) {
-            echo "<a href='/hb/?u=$tmuser&amp;r=$root'><span class='shield'>".generate($root, $_GET['reload'])."</span></a>";
+            echo "<a href='/hb/?u=$tmuser&amp;r=$root'><span class='shield'>".generate($root, $_GET['reload'])."</span></a>\n";
             $col++;
             if ($col > 20) {
-                echo "<br/>";
+                echo "<br/>\n";
                 $col = 0;
             }
         }

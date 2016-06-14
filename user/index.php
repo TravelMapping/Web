@@ -143,7 +143,7 @@ SQL;
 	    $activePreviewClinchedPct = $row['clinchedPercent'];
 	    $res->free();
 
-            echo "<tr onclick=\"window.open('/shields/clinched.php?u={$tmuser}')\">";
+            echo "<tr onclick=\"window.open('/shields/clinched.php?u={$tmuser}&amp;cort=traveled')\">";
 	    echo "<td>Routes Driven</td>";
 	    echo "<td>".$activeDriven." of " . $activeRoutes . " (" . $activeDrivenPct . "%) Rank: TBD</td>";
 	    echo "<td>".$activePreviewDriven." of " . $activePreviewRoutes . " (" . $activePreviewDrivenPct . "%) Rank: TBD</td>";

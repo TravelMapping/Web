@@ -1,16 +1,17 @@
 <?php
 function generate($r, $force_reload = false)
 {
+    global $tmdb;
     $dir = $_SERVER['DOCUMENT_ROOT']."/shields";
     if(file_exists("{$dir}/cache/shield_{$r}.svg") && !$force_reload) {
         //load from cache
         return file_get_contents("{$dir}/cache/shield_{$r}.svg");
     }
 
-    $db = new mysqli("localhost", "travmap", "clinch", "TravelMapping") or die("Failed to connect to database");
     $sql_command = "SELECT * FROM routes WHERE root = '" . $r . "';";
-    $res = $db->query($sql_command);
+    $res = tmdb_query($sql_command);
     $row = $res->fetch_assoc();
+    $res->free();
 
     if (file_exists("{$dir}/template_" . $row['systemName'] . ".svg")) {
         $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . ".svg");
@@ -78,7 +79,6 @@ function generate($r, $force_reload = false)
 
         case 'gbnm':case 'nirm':
             $routeNum = str_replace("M", "", $row['route']);
-            echo "<!--{$routeNum}-->";
             if (strlen($routeNum) > 2) {
                 $svg = file_get_contents("{$dir}/template_gbnm_wide.svg");
             }

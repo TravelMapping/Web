@@ -97,9 +97,9 @@ the best of our knowledge, it becomes "active".  The newest systems to
 become active:</p>
 <ul class="text">
 <?php
-$res = tmdb_query("select systemName, description from systemUpdates where statusChange='active'  limit 5");
+$res = tmdb_query("select systemName, description, date from systemUpdates where statusChange='active'  limit 5");
 while ($row = $res->fetch_assoc()) {
-  echo "<li>".$row['description']." (".$row['systemName'].")</li>\n";
+  echo "<li>".$row['description']." (".$row['systemName']."), ".$row['date']."</li>\n";
 }
 $res->free();
 ?>

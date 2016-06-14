@@ -310,5 +310,17 @@ function tm_fetch_user_row_with_rank($res, $rankBy) {
     return $row;
 }
 
+// functions from http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php
+
+function startsWith($haystack, $needle) {
+    // search backwards starting from haystack length characters from the end
+    return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;
+}
+
+function endsWith($haystack, $needle) {
+    // search forward starting from end minus needle length characters
+    return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== FALSE);
+}
+
 ?>
 <!-- /lib/tmphpfuncs.php END -->
