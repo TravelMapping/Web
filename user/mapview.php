@@ -1,12 +1,4 @@
-<?php
-    if (array_key_exists("u", $_GET)) {
-        setcookie("lastuser", $_GET['u'], time() + (86400 * 30), "/");
-    } else if (isset($_COOKIE['lastuser'])) {
-        $_GET['u'] = $_COOKIE['lastuser'];
-    }
-
-    $dbname = "TravelMapping";
-?>
+<?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpuser.php" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
  ***
@@ -22,45 +14,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
+    <link rel="stylesheet" type="text/css" href="/css/travelMapping.css" />
     <style type="text/css">
-        #headerbox {
-            position: absolute;
-            top: 0px;
-            bottom: 50px;
-            width: 100%;
-            overflow: hidden;
-            text-align: center;
-            font-size: 30px;
-            font-family: "Times New Roman", serif;
-            font-style: bold;
-        }
-
-        #statsbox {
-            position: fixed;
-            left: 0px;
-            top: 50px;
-            right: 400px;
-            bottom: 0px;
-            width: 400px;
-            overflow: auto;
-        }
-
         #controlbox {
-            position: fixed;
-            top: 60px;
-            bottom: 100px;
-            height: 100%;
-            left: 0px;
-            right: 0px;
+            position: absolute;
+            top: 30px;
+            height: 30px;
+            right: 20px;
             overflow: auto;
             padding: 5px;
             font-size: 20px;
+	    width: 25%;
         }
 
         #map {
             position: absolute;
-            top: 100px;
+            top: 25px;
             bottom: 0px;
             width: 100%;
             overflow: hidden;
@@ -70,18 +39,34 @@
             cursor: crosshair;
         }
 
-        #routes {
+	#selected {
             position: absolute;
             right: 10px;
-            top: 100px;
+            top: 60px;
             bottom: 20px;
             overflow-y: scroll;
             max-width: 25%;
+	    opacity: .95;  /* also forces stacking order */
         }
 
-        #showHideBtn {
+        #routes {
+	    visibility: hidden;
+	    left: 0px;
+            width: 1px;
+	    height: 1px;
+        }
+
+        #options {
+	    visibility: hidden;
+	    left: 0px;
+            width: 1px;
+	    height: 1px;
+        }
+
+        #showHideMenu {
             position: absolute;
             right: 10px;
+	    opacity: .75;  /* also forces stacking order */
         }
     </style>
     <script
@@ -89,17 +74,23 @@
         type="text/javascript"></script>
 
     <!-- jQuery -->
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="application/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <!-- TableSorter -->
-    <script src="/lib/jquery.tablesorter.min.js"></script>
+    <script type="application/javascript" src="/lib/jquery.tablesorter.min.js"></script>
 
     <?php
-    // establish connection to db: mysql_ interface is deprecated, should learn new options
-    $con = mysql_connect("localhost", "travmap", "clinch") or die("Failed to connect to database");
-    mysql_select_db($dbname, $con);
 
     function orClauseBuilder($param, $name, $tablename = 'r') {
-        $array = explode(",", $_GET[$param]);
+        $array = array();
+        if (is_array($_GET[$param])) {
+          foreach ($_GET[$param] as $p) {
+            $array = array_merge($array, explode(',',$p));
+          }
+        }
+        else {
+          $array = explode(",", $_GET[$param]);
+        }
+        $array = array_diff($array, array("null"));
         $clause = "(";
         $i = 0;
         foreach($array as $item) {
@@ -108,21 +99,22 @@
             if($i < sizeof($array)) $clause .= " or ";
         }
         $clause .= ")";
+        if ($i == 0) {
+            return "TRUE";
+        }
         return $clause;
     }
 
     ?>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
-    <script>
+<?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
+    <script type="application/javascript">
         function waypointsFromSQL() {
             <?php
 	      // later get this from a QS parameter probably
 	      // idea: option to include devel routes as a debugging aid
 	      $activeClause = "(systems.level='preview' OR systems.level='active')";
-              $regions = array();
-              if (array_key_exists("rg",$_GET)) {
-                $regions = explode(',',$_GET['rg']);
-              }
+              $regions = tm_qs_multi_or_comma_to_array("rg");
 
               // restrict to waypoints matching routes whose region is given in the "rg=" query string parameter
               // build strings needed for later queries
@@ -146,10 +138,7 @@
               }
 
               // select based on system?
-              $systems = array();
-              if (array_key_exists("sys",$_GET)) {
-                $systems = explode(',',$_GET['sys']);
-              }
+              $systems = tm_qs_multi_or_comma_to_array("sys");
 
               // restrict to waypoints matching routes whose system is given in the "sys=" query string parameter
               $select_systems = "";
@@ -186,22 +175,21 @@
                 $sql_command = "SELECT waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname FROM waypoints JOIN routes ON routes.root = waypoints.root".$select_regions.$select_systems." JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause."  ORDER BY root, waypoints.pointId;";
               }
 
-              echo "// SQL: ".$sql_command."\n";
-              $res = mysql_query($sql_command);
+              $res = tmdb_query($sql_command);
 
               $routenum = 0;
               $pointnum = 0;
               $lastRoute = "";
-              while ($row = mysql_fetch_array($res)) {
-                if (!($row[3] == $lastRoute)) {
+              while ($row = $res->fetch_assoc()) {
+                if (!($row['root'] == $lastRoute)) {
                    echo "newRouteIndices[".$routenum."] = ".$pointnum.";\n";
-                   echo "routeTier[".$routenum."] = ".$row[4].";\n";
-                   echo "routeColor[".$routenum."] = '".$row[5]."';\n";
-                   echo "routeSystem[".$routenum."] = '".$row[6]."';\n";
-                   $lastRoute = $row[3];
+                   echo "routeTier[".$routenum."] = ".$row['tier'].";\n";
+                   echo "routeColor[".$routenum."] = '".$row['color']."';\n";
+                   echo "routeSystem[".$routenum."] = '".$row['systemname']."';\n";
+                   $lastRoute = $row['root'];
                    $routenum = $routenum + 1;
                 }
-                echo "waypoints[".$pointnum."] = new Waypoint(\"".$row[0]."\",".$row[1].",".$row[2]."); // Route = ".$row[3]." (".$row[5].")\n";
+                echo "waypoints[".$pointnum."] = new Waypoint(\"".$row['pointName']."\",".$row['latitude'].",".$row['longitude']."); // Route = ".$row['root']." (".$row['color'].")\n";
                 $pointnum = $pointnum + 1;
               }
 
@@ -216,11 +204,10 @@
                  } else {
                   $sql_command = "SELECT segments.segmentId, segments.root FROM segments JOIN routes ON routes.root = segments.root JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause." ".$where_regions.$select_systems." ORDER BY root, segments.segmentId;";
                  }
-                 echo "// SQL: ".$sql_command."\n";
-                 $res = mysql_query($sql_command);
+                 $res = tmdb_query($sql_command);
                  $segmentIndex = 0;
-                 while ($row = mysql_fetch_array($res)) {
-                   echo "segments[".$segmentIndex."] = ".$row[0]."; // route=".$row[1]."\n";
+                 while ($row = $res->fetch_assoc()) {
+                   echo "segments[".$segmentIndex."] = ".$row['segmentId']."; // route=".$row['root']."\n";
                    $segmentIndex = $segmentIndex + 1;
                  }
                  if(isset($rteClause)) {
@@ -228,28 +215,17 @@
                  } else {
                   $sql_command = "SELECT segments.segmentId, segments.root FROM segments RIGHT JOIN clinched ON segments.segmentId = clinched.segmentId JOIN routes ON routes.root = segments.root JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause." ".$where_regions.$select_systems." AND clinched.traveler='".$_GET['u']."' ORDER BY root, segments.segmentId;";
                  }
-                 echo "// SQL: " .$sql_command."\n";
-                 $res = mysql_query($sql_command);
+                 $res = tmdb_query($sql_command);
                  $segmentIndex = 0;
-                 while ($row = mysql_fetch_array($res)) {
-                   echo "clinched[".$segmentIndex."] = ".$row[0]."; // route=".$row[1]."\n";
+                 while ($row = $res->fetch_assoc()) {
+                   echo "clinched[".$segmentIndex."] = ".$row['segmentId']."; // route=".$row['root']."\n";
                    $segmentIndex = $segmentIndex + 1;
                  }
                echo "mapClinched = true;\n";
               }
 
-              // check for custom colors query string parameters
-              $customColors = array();
-              if (array_key_exists("colors",$_GET)) {
-                 $customColors = explode(';',$_GET['colors']);
-                 $colorNum = 0;
-                 foreach ($customColors as $customColor) {
-                    $colorEntry = array();
-                    $colorEntry = explode(':',$customColor);
-                    echo "customColorCodes[".$colorNum."] = { name: \"".$colorEntry[0]."\", unclinched: \"".$colorEntry[1]."\", clinched: \"".$colorEntry[2]."\" };\n";
-                    $colorNum = $colorNum + 1;
-                 }
-              }
+              // insert custom color code if needed
+              tm_generate_custom_colors_array();
 
             ?>
             genEdges = true;
@@ -258,17 +234,26 @@
     <title>Travel Mapping: Draft Map Overlay Viewer</title>
 </head>
 
-<body onload="loadmap();">
+<body onload="loadmap(); toggleTable();">
 <script type="application/javascript">
-    function toggleTable()
-    {
-        var visibility = document.getElementById("routes").style.visibility;
-        if (visibility == 'hidden') {
-            visibility = 'visible'
-        } else {
-            visibility = 'hidden';
+
+    function toggleTable() {
+        var menu = document.getElementById("showHideMenu");
+        var index = menu.selectedIndex;
+        var value = menu.options[index].value;
+        routes = document.getElementById("routes");
+        options = document.getElementById("options");
+        selected = document.getElementById("selected");
+        // show only table (or no table) based on value
+        if (value == "routetable") {
+            selected.innerHTML = routes.innerHTML;
         }
-        document.getElementById("routes").style.visibility = visibility;
+        else if (value == "options") {
+            selected.innerHTML = options.innerHTML;
+        }
+        else {
+            selected.innerHTML = "";
+        }
     }
 
     function initFloatingHeaders($table) {
@@ -284,7 +269,7 @@
                 $row.width($(this).width());
             }
             var pos =  $row.position().left - 2;
-            console.log($table.offset().left);
+            //console.log($table.offset().left);
             $(this).css({left: pos})
         });
     }
@@ -304,34 +289,39 @@
 </script>
 <?php $nobigheader = 1; ?>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
-<h1 style="text-align: center">Travel Mapping: Draft Map Overlay Viewer</h1>
 
-<div id="controlbox">
-    <input id="showMarkers" type="checkbox" name="Show Markers" onclick="showMarkersClicked()">&nbsp;Show Markers
-      
-  <span id="controlboxroute">
-    <?php
-    if (array_key_exists("r", $_GET)) {
-        $sql_command = "SELECT region, route, banner, city FROM routes WHERE root = '" . $_GET['r'] . "';";
-        $res = mysql_query($sql_command);
-        $row = mysql_fetch_array($res);
-        echo $row[0] . " " . $row[1];
-        if (strlen($row[2]) > 0) {
-            echo " " . $row[2];
-        }
-        if (strlen($row[3]) > 0) {
-            echo " (" . $row[3] . ")";
-        }
-        echo ": ";
-    } else if (array_key_exists("rg", $_GET)) {
-        echo "Displaying region: " . $_GET['rg'] . ".";
-    }
-    ?>
-  </span>
-    <span id="controlboxinfo"></span>
-    <button id="showHideBtn" onclick="toggleTable()">Show/Hide Table</button>
-</div>
 <div id="map">
+</div>
+<div id="selected"></div>
+<div id="options">
+    <form id="optionsForm" action="mapview.php">
+    <table id="optionsTable" class="gratable">
+    <thead>
+    <tr><th>Select Map Options</th></tr>
+    </thead>
+    <tbody>
+    <tr><td>
+    <input id="showMarkers" type="checkbox" name="Show Markers" onclick="showMarkersClicked()" />&nbsp;Show Markers
+    </td></tr>
+
+    <tr><td>User: 
+<?php tm_user_select(); ?>
+    </td></tr>
+    
+    <tr><td>Region(s): <br />
+<?php tm_region_select(TRUE); ?>
+    </td></tr>
+    
+    <tr><td>System(s): <br />
+<?php tm_system_select(TRUE); ?>
+    </td></tr>
+
+    <tr><td>
+    <input type="submit" value="Apply Changes" />	
+    </td></tr>
+    </tbody>
+    </table>
+    </form>
 </div>
 <div id="routes">
     <table id="routesTable" class="gratable tablesorter">
@@ -357,11 +347,10 @@
             //Don't show. Too many routes
             $sql_command .= "r.root IS NULL;";
         }
-        echo "<!--".$sql_command."-->";
-        $res = mysql_query($sql_command);
-        while($row = mysql_fetch_array($res)) {
-            $link = "/devel/hb.php?u=".$_GET['u']."&r=".$row['root'];
-            echo "<tr onClick=\"window.open('".$link."')\"><td>";
+        $res = tmdb_query($sql_command);
+        while($row = $res->fetch_assoc()) {
+            $link = "/hb?u=".$_GET['u']."&amp;r=".$row['root'];
+            echo "<tr onclick=\"window.open('".$link."')\"><td>";
             //REGION ROUTE BANNER (CITY)
             echo $row['region'] . " " . $row['route'];
             if (strlen($row['banner']) > 0) {
@@ -371,11 +360,21 @@
                 echo " (" . $row['city'] . ")";
             }
 	    $pct = sprintf("%0.2f",( $row['clinched'] / $row['total'] * 100) );
-            echo "</td><td class='link'><a href='/user/system.php?u={$_GET['u']}&sys={$row['systemName']}'>{$row['systemName']}</a></td><td>".$row['clinched']."</td><td>".$row['total']."</td><td>".$pct."%</td></tr>\n";
+            echo "</td><td class='link'><a href='/user/system.php?u={$_GET['u']}&amp;sys={$row['systemName']}'>{$row['systemName']}</a></td><td>".$row['clinched']."</td><td>".$row['total']."</td><td>".$pct."%</td></tr>\n";
         }
         ?>
         </tbody>
     </table>
 </div>
+<div id="controlbox">
+    <select id="showHideMenu" onchange="toggleTable();">
+    <option value="maponly">Map Only</option>
+    <option value="options">Show Map Options</option>
+    <option value="routetable" selected="selected">Show Route Table</option>
+    </select>
+</div>
 </body>
+<?php
+    $tmdb->close();
+?>
 </html>

@@ -44,7 +44,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
             $("#regionsTable").tablesorter({
-                sortList: [[4,1], [3, 1]],
+                sortList: [[5,1], [4, 1]],
                 headers: {0: {sorter: false}, 6: {sorter: false}}
             });
             $("#systemsTable").tablesorter({
@@ -143,7 +143,7 @@ SQL;
 	    $activePreviewClinchedPct = $row['clinchedPercent'];
 	    $res->free();
 
-            echo "<tr onclick=\"window.open('/shields/clinched.php?u={$tmuser}')\">";
+            echo "<tr onclick=\"window.open('/shields/clinched.php?u={$tmuser}&amp;cort=traveled')\">";
 	    echo "<td>Routes Driven</td>";
 	    echo "<td>".$activeDriven." of " . $activeRoutes . " (" . $activeDrivenPct . "%) Rank: TBD</td>";
 	    echo "<td>".$activePreviewDriven." of " . $activePreviewRoutes . " (" . $activePreviewDrivenPct . "%) Rank: TBD</td>";
