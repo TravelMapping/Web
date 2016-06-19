@@ -30,7 +30,15 @@
         if (strcmp($row['label3'],"") != 0) {
           echo ",".$row['label3'];
         }
-        echo "</td><td>".$row['code']."</td><td>";
+	if ((strcmp($row['code'],"VISIBLE_DISTANCE") == 0) ||
+	  (strcmp($row['code'],"LONG_DISTANCE") == 0) ||
+	  (strcmp($row['code'],"SHARP_ANGLE") == 0)) {
+	  echo "</td><td>".$row['code']."</td><td>";
+	}
+        else {
+	  echo "</td><td style=\"color: red\">".$row['code']."</td><td>";
+
+	}
         if (strcmp($row['value'],"") != 0) {
           echo $row['value'];
         }
@@ -84,7 +92,9 @@ project.</p>
   to <a href="https://github.com/TravelMapping/HighwayData/blob/master/datacheckfps.csv">the
   datacheck FP list</a> during the final review process to promote a
   system from 'preview' to 'active'.  A system should have no entries
-  here before activation.</p>
+  here before activation.  Errors shown in <span style="color:
+  red">red</span> should be fixed as soon as possible, while others
+  can wait until final preparation for system activation.</p>
 
   <table border="1" style="background-color:#ccf"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry to Submit</th></tr>
     <?php
