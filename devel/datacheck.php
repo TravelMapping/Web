@@ -60,11 +60,13 @@
 
 <p class="info">Quick links: <a href="#active">[Errors in Active Systems]</a><a href="#preview">[Errors in Preview Systems]</a><a href="#indev">[Errors in In-Dev Systems]</a><a href="#marked">[Errors Marked as FPs]</a>.</p>
 
-<p class="info">See also the <a href="../logs/unmatchedfps.log">[Log of Unmatched
-FPs from datacheckfps.csv]</a> and
+<p class="info">See also the <a href="../logs/unmatchedfps.log">[Log
+of Unmatched FPs from datacheckfps.csv]</a> and
 the <a href="../logs/unprocessedwpts.log">[Log of Unprocessed WPTs in
 the Repository]</a>.  Cleaning these up are low priority tasks for the
-project.</p>
+project.  Some of these are likely fixable from the information in
+the <a href="../logs/nearmatchfps.log">[Log of Near-Match FPs from
+datacheckfps.csv]</a>.</p>
 
 <div id="errors">
 
