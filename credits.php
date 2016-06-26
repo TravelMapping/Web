@@ -125,9 +125,9 @@ following sources of highway information.</p>
 	  </li> -->
           <li>Northwest Territories, CAN
 	    <ul>
-<li><a href="http://www.dot.gov.nt.ca/_live/pages/wpPages/home.aspx">Ministry of Transportation</a>. Official website of territorial Ministry of Transportation</li>
-<li><a href="http://www.justice.gov.nt.ca/PDF/REGS/PUBLIC%20HIGHWAYS/Highway%20Designation%20and%20Classification.pdf">Highway Designation and Classification Regulations</a>. 2011 official list and definitions of territorial highways</li>
-<li><a href="http://www.dot.gov.nt.ca/_live/documents/content/Highway%20System%20Map.pdf">Northwest Territories Highway System</a>. Official highway map</li>
+<li><a href="http://www.dot.gov.nt.ca/">Ministry of Transportation</a>. Official website of territorial Ministry of Transportation</li>
+<li><a href="https://www.justice.gov.nt.ca/en/files/legislation/public-highways/public-highways.r1.pdf">Highway Designation and Classification Regulations</a>. 2011 official list and definitions of territorial highways</li>
+<li><a href="http://www.dot.gov.nt.ca/Highways/Highway_System">Northwest Territories Highway System</a>. Official highway map</li>
             </ul>
 	  </li>
 																 <li>Nova Scotia, CAN
