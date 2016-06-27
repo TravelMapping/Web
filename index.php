@@ -80,7 +80,7 @@ Experienced users might also want to volunteer to help the project.
 Start by reporting problems with existing highway data.  Those who
 have learned the project's structure and highway data rules and
 guidelines can help greatly by providing review of new highway systems
-in development.  Most experienced users can learn how to plot new
+in development.  Highly experienced users can learn how to plot new
 highway systems under the guidance of experienced contributors.
 Again, see <a href="/forum">the project forum</a> for more information.
 </p>
@@ -97,7 +97,7 @@ the best of our knowledge, it becomes "active".  The newest systems to
 become active:</p>
 <ul class="text">
 <?php
-$res = tmdb_query("select systemName, description, date from systemUpdates where statusChange='active'  limit 5");
+$res = tmdb_query("select systemName, description, date from systemUpdates where statusChange='active'  limit 8");
 while ($row = $res->fetch_assoc()) {
   echo "<li>".$row['description']." (".$row['systemName']."), ".$row['date']."</li>\n";
 }

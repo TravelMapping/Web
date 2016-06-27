@@ -28,6 +28,7 @@ following sources of highway information.</p>
 	  <li>Path Coordinates
 	    <ul>
 	      <li><a href="http://www.openstreetmap.org/">OpenStreetMap</a>. Crowd-sourced world highway map.  Map data &copy; OpenStreetMap contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>.</li>
+	      <li>Coordinates from handheld GPS receiver. contributed by Oscar Voss (used mainly in Alaska and northern and western Canada)</li>
 	    </ul>
 	  </li>
 	  <li>General Highway Maps and Imagery
@@ -125,9 +126,9 @@ following sources of highway information.</p>
 	  </li> -->
           <li>Northwest Territories, CAN
 	    <ul>
-<li><a href="http://www.dot.gov.nt.ca/_live/pages/wpPages/home.aspx">Ministry of Transportation</a>. Official website of territorial Ministry of Transportation</li>
-<li><a href="http://www.justice.gov.nt.ca/PDF/REGS/PUBLIC%20HIGHWAYS/Highway%20Designation%20and%20Classification.pdf">Highway Designation and Classification Regulations</a>. 2011 official list and definitions of territorial highways</li>
-<li><a href="http://www.dot.gov.nt.ca/_live/documents/content/Highway%20System%20Map.pdf">Northwest Territories Highway System</a>. Official highway map</li>
+<li><a href="http://www.dot.gov.nt.ca/">Ministry of Transportation</a>. Official website of territorial Ministry of Transportation</li>
+<li><a href="https://www.justice.gov.nt.ca/en/files/legislation/public-highways/public-highways.r1.pdf">Highway Designation and Classification Regulations</a>. 2011 official list and definitions of territorial highways</li>
+<li><a href="http://www.dot.gov.nt.ca/Highways/Highway_System">Northwest Territories Highway System</a>. Official highway map</li>
             </ul>
 	  </li>
 																 <li>Nova Scotia, CAN
@@ -166,7 +167,7 @@ following sources of highway information.</p>
 															 <li>Yukon Territory, CAN
 	    <ul>
 <li><a href="http://www.hpw.gov.yk.ca/">Department of Highways and Public Works</a>. Official website of territorial Department of Highways and Public Works</li>
-<li><a href="http://www.hpw.gov.yk.ca/pdf/YTHwyLogPublic1.pdf">Yukon Highways Log Book</a>. 2008 official list and definitions of territorial highways, with route details</li>
+<li><a href="http://www.hpw.gov.yk.ca/pdf/ReportHwyLogPublic2012withedits.pdf">Yukon Highways Log Book</a>. 2012 official list and definitions of territorial highways, with route details</li>
             </ul>
 	  </li>
 	  <li>Croatia

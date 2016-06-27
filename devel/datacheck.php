@@ -30,7 +30,15 @@
         if (strcmp($row['label3'],"") != 0) {
           echo ",".$row['label3'];
         }
-        echo "</td><td>".$row['code']."</td><td>";
+	if ((strcmp($row['code'],"VISIBLE_DISTANCE") == 0) ||
+	  (strcmp($row['code'],"LONG_DISTANCE") == 0) ||
+	  (strcmp($row['code'],"SHARP_ANGLE") == 0)) {
+	  echo "</td><td>".$row['code']."</td><td>";
+	}
+        else {
+	  echo "</td><td style=\"color: red\">".$row['code']."</td><td>";
+
+	}
         if (strcmp($row['value'],"") != 0) {
           echo $row['value'];
         }
@@ -52,11 +60,13 @@
 
 <p class="info">Quick links: <a href="#active">[Errors in Active Systems]</a><a href="#preview">[Errors in Preview Systems]</a><a href="#indev">[Errors in In-Dev Systems]</a><a href="#marked">[Errors Marked as FPs]</a>.</p>
 
-<p class="info">See also the <a href="../logs/unmatchedfps.log">[Log of Unmatched
-FPs from datacheckfps.csv]</a> and
+<p class="info">See also the <a href="../logs/unmatchedfps.log">[Log
+of Unmatched FPs from datacheckfps.csv]</a> and
 the <a href="../logs/unprocessedwpts.log">[Log of Unprocessed WPTs in
 the Repository]</a>.  Cleaning these up are low priority tasks for the
-project.</p>
+project.  Some of these are likely fixable from the information in
+the <a href="../logs/nearmatchfps.log">[Log of Near-Match FPs from
+datacheckfps.csv]</a>.</p>
 
 <div id="errors">
 
@@ -84,7 +94,9 @@ project.</p>
   to <a href="https://github.com/TravelMapping/HighwayData/blob/master/datacheckfps.csv">the
   datacheck FP list</a> during the final review process to promote a
   system from 'preview' to 'active'.  A system should have no entries
-  here before activation.</p>
+  here before activation.  Errors shown in <span style="color:
+  red">red</span> should be fixed as soon as possible, while others
+  can wait until final preparation for system activation.</p>
 
   <table border="1" style="background-color:#ccf"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry to Submit</th></tr>
     <?php
