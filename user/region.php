@@ -154,7 +154,7 @@
 <body 
 <?php
 if (( $tmuser != "null") || ( $region != "" )) {
-  echo "onload=\"loadmap();\"";
+  echo "onload=\"loadmap(); waypointsFromSQL(); updateMap();\"";
 }
 ?>
 >
