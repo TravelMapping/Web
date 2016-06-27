@@ -106,7 +106,7 @@ $res->free();
 </ul>
 
 <p class="text">
-The most recent site update completed at <?php echo tm_update_time(); ?>.
+The most recent site update completed at <?php echo tm_update_time(); ?> US/Eastern.
 </p>
 
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
