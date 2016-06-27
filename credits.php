@@ -28,6 +28,7 @@ following sources of highway information.</p>
 	  <li>Path Coordinates
 	    <ul>
 	      <li><a href="http://www.openstreetmap.org/">OpenStreetMap</a>. Crowd-sourced world highway map.  Map data &copy; OpenStreetMap contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>.</li>
+	      <li>Coordinates from handheld GPS receiver. contributed by Oscar Voss (used mainly in Alaska and northern and western Canada)</li>
 	    </ul>
 	  </li>
 	  <li>General Highway Maps and Imagery
@@ -166,7 +167,7 @@ following sources of highway information.</p>
 															 <li>Yukon Territory, CAN
 	    <ul>
 <li><a href="http://www.hpw.gov.yk.ca/">Department of Highways and Public Works</a>. Official website of territorial Department of Highways and Public Works</li>
-<li><a href="http://www.hpw.gov.yk.ca/pdf/YTHwyLogPublic1.pdf">Yukon Highways Log Book</a>. 2008 official list and definitions of territorial highways, with route details</li>
+<li><a href="http://www.hpw.gov.yk.ca/pdf/ReportHwyLogPublic2012withedits.pdf">Yukon Highways Log Book</a>. 2012 official list and definitions of territorial highways, with route details</li>
             </ul>
 	  </li>
 	  <li>Croatia
