@@ -152,7 +152,7 @@
 <body 
 <?php
 if (( $tmuser != "null") || ( $system != "" )) {
-  echo "onload=\"loadmap();\"";
+  echo "onload=\"loadmap(); waypointsFromSQL(); updateMap();\"";
 }
 ?>
 >

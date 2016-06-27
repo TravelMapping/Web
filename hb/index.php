@@ -220,7 +220,7 @@ if ($routeparam == "") {
 
 } 
 else {
-    echo "<body onload=\"loadmap();\">\n";
+    echo "<body onload=\"loadmap(); waypointsFromSQL(); updateMap();\">\n";
     require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
       
 }
