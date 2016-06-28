@@ -28,7 +28,7 @@ following sources of highway information.</p>
 	  <li>Path Coordinates
 	    <ul>
 	      <li><a href="http://www.openstreetmap.org/">OpenStreetMap</a>. Crowd-sourced world highway map.  Map data &copy; OpenStreetMap contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>.</li>
-	      <li>Coordinates from handheld GPS receiver. contributed by Oscar Voss (used mainly in Alaska and northern and western Canada)</li>
+	      <li>Coordinates from handheld GPS receiver, contributed by Oscar Voss (used to supplement OSM mapping where it is weak, mainly in parts of Alaska, and northern and western Canada)</li>
 	    </ul>
 	  </li>
 	  <li>General Highway Maps and Imagery
@@ -104,9 +104,10 @@ following sources of highway information.</p>
             </ul>
 	  </li>
 																 <li>British Columbia, CAN
-	    <ul>
+	    	    <ul>
 	      <li><a href="http://www.gov.bc.ca/tran/">British Columbia Ministry of Transportation and Infrastructure</a>. Official government site covering transportation in British Columbia, Canada.</li>
-	      <li><a href="http://www.th.gov.bc.ca/publications/planning/numbered_routes.htm#16">Official Numbered Routes in British Columbia</a>. List of numbered routes in British Columba from the Ministry of Transportation and Infrastructure.</li>
+	      <li><a href="http://www2.gov.bc.ca/gov/content/transportation/transportation-reports-and-reference/numbered-routes">Official Numbered Routes in British Columbia</a>. List of numbered routes in British Columbia from the Ministry of Transportation and Infrastructure.</li>
+              <li><a href="http://www2.gov.bc.ca/gov/content/transportation/transportation-infrastructure/engineering-standards-guidelines/landmark-kilometre-inventory">Landmark Kilomete Inventory</a>. Route logs for provincial highways, from the Ministry of Transportation and Infrastructure.</li>
             </ul>
 	  </li>
           <li>Manitoba, CAN
@@ -161,7 +162,7 @@ following sources of highway information.</p>
 											<li>Saskatchewan, CAN
 	    <ul>
 <li><a href="http://www.highways.gov.sk.ca/">Ministry of Transportation and Infrastructure</a>. Official website of provincial Ministry of Transportation and Infrastructure</li>
-<li><a href="http://www.sasktourism.com/travel-information/travel-guides-and-maps/printable-maps">Highway Maps</a>. Tourism Saskatchewan online provincial and regional highway maps</li>
+<li><a href="http://www.tourismsaskatchewan.com/~/media/files/map-face-100-dpi.pdf?la=en">Travel Map</a>. Tourism Saskatchewan online detailed provincial highway map (city insets only available in paper version)</li>
             </ul>
 	  </li>
 															 <li>Yukon Territory, CAN
