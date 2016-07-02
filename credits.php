@@ -392,6 +392,8 @@ following sources of highway information.</p>
 	      <li><a href="http://www.fhwa.dot.gov/reports/routefinder/">FHWA Route Log and Finder List</a>. Log of the US Interstate Highways from the Federal Highway Adminsitration.</li>
 	      <li><a href="http://www.kurumi.com/roads/3di/index.html">3 Digit Interstates at kurumi.com</a>. Comprehensive national directory of 3 digit interstates.</li>
 	      <li><a href="http://cms.transportation.org/?siteid=68&amp;pageid=1540">Committee Actions and Approvals</a>. Interstate and US Numbered Highways changes from the American Association of State Highway and Transportation Officials Special Committee on US Route Numbering.</li>
+	     <li><a href="http://www.interstate-guide.com/business-routes/">AARoads Interstate Business Route Guide</a>. Unofficial nationwide guide to Interstate business routes.</li>
+
 	    </ul>
 	  </li>
 	  <li>Alabama, USA
@@ -402,8 +404,10 @@ following sources of highway information.</p>
 	  </li>
 	  <li>Alaska, USA
 	    <ul>
-	      <li><a href="http://www.dot.state.ak.us/hdpapp/forms/Reports.html">Alaska Highway Data</a>. Route logs from the Alaska Department of Transportation and Public Facilities.</li>
-	    <li><a href="http://www.dot.alaska.gov/stwdplng/transdata/highway_lists_maps.shtml">Alaska's Highway Systems</a>. Route lists from the Alaska Department of Transportation and Public Facilities.</li>
+	    	    <li><a href="http://www.dot.state.ak.us/">Alaska DOT&PF website</a>. Official website of state Department of Transportation and Public Facilities.</li>
+	      <li>Route logs from the Alaska Department of Transportation and Public Facilities (not currently online).</li>
+	    <li><a href="http://www.dot.state.ak.us/stwddes/dcstraffic/assets/pdf/atm/current/part2_signs.pdf">2012  Alaska Traffic Manual Supplement to MUTCD, part 2</a>, and <a href="http://www.dot.state.ak.us/stwddes/dcstraffic/interimadenda.shtml">2015 Interim Addendum to Alaska Traffic Manual</a>.  Part of Alaska Traffic Manual supplement to Manual on Uniform Traffic Control Devices, with interim addendum; includes updated official list and definitions of numbered state highways.</li>
+
 	    </ul>
 	  </li>
 	  <li>Arkansas, USA
@@ -419,6 +423,16 @@ following sources of highway information.</p>
 	  </li>
 <!--	  <li>California, USA
 	    <ul>
+	    	    <li><a href="http://www.dot.ca.gov/">Caltrans website</a>. Official website of state Department of Transportation ("Caltrans").</li>
+	    <li><a href="http://www.leginfo.ca.gov/cgi-bin/displaycode?section=shc&group=00001-01000&file=300-635">California Streets and Highway Code sections 300-635</a>. Statutory definitions of state highway routes, including authorized relinquishments to local governments.</li>
+	<li>California State Highways Logs for districts 1-12 (paper only, 2002 version which is the latest available)</li>
+	<li><a href="http://www.dot.ca.gov/hq/structur/strmaint/brlog2.htm">Log of Bridges on State Highways</a>. 2015 Caltrans bridge log, including some information that had been in old paper route logs.</li>
+	<li><a href="http://www.dot.ca.gov/hq/traffops/engineering/calnexus/">Cal-NExUS (California Numbered Exit Uniform System)</a>. Caltrans freeway exit lists.</li>
+	<li><a href="http://www.aaroads.com/california/">AARoads California Roads and Highways guide</a>. Unofficial guide to state highway routes.</li>
+	<li><a href="http://www.dot.ca.gov/hq/tpp/corridor-mobility/index.html">Transportation Concept Reports</a>. Detailed descriptions by Caltrans districts of many of their state highway routes, including past and planned future route changes.</li>
+	<li><a href="http://www.aaroads.com/california/california_state_hwy_system_signing_log_1991.pdf">State Highway System Signing Log</a>. 1991 Caltrans summaries of signed routes, including what may be latest and only complete (though outdated) lists of Interstate, U.S., and state business routes.</li>
+	<li><a href="http://www.cahighways.org/">California Highways</a>. Hobbyist website by Daniel Faigin.</li>
+
 	    </ul>
 	  </li> -->
 	  <li>Colorado, USA
@@ -453,8 +467,10 @@ following sources of highway information.</p>
 	  </li>
 	  <li>Hawaii, USA
 	    <ul>
-	    <li><a href="http://hwypgis.dot.hawaii.gov/infostructure/index_files/Page532.htm">Hawaii DOT straight-line diagrams</a>. 2009 Hawaii DOT straight-line diagrams, for state routes in all four HDOT districts.</li>
-	    <li><a href="http://www.hawaiihighways.com/">Hawaii Highways website</a>. Unofficial website by Oscar Voss, with route lists updating some SLDs.</li>
+	    	    <li><a href="http://hidot.hawaii.gov/">Hawaii DOT website</a>. Official website of state Department of Transportation.</li>
+	    <li>2009 and 2012 Hawaii DOT straight-line diagrams, for state routes in all four HDOT districts (not currently available online).</li>
+	    <li><a href="http://www.hawaiihighways.com/">Hawaii Highways</a>. Hobbyist website by Oscar Voss, with route lists updating some SLDs.</li>
+
 	    </ul>
 	  </li>
 	  <li>Idaho, USA
@@ -566,10 +582,11 @@ following sources of highway information.</p>
 	  </li>
   <li>New Mexico, USA
 	    <ul>
-<li><a href="http://dot.state.nm.us/content/dam/nmdot/Data_Management/POSTED%20ROUTE-NM_Routes.pdf">NMDOT Posted Routes for New Mexico Routes</a>. Official New Mexico Department of Transportation posted route legal descriptions</li>
+<li><a href="http://dot.state.nm.us/">NMDOT website</a>. Official New Mexico Department of Transportation website.</li>
+<li><a href="http://dot.state.nm.us/content/dam/nmdot/Data_Management/POSTED%20ROUTE-NM_Routes.pdf">NMDOT Posted Routes for New Mexico Routes</a>. Official New Mexico Department of Transportation posted route legal descriptions.</li>
 <li><a href="http://dot.state.nm.us/content/dam/nmdot/Data_Management/NM_AADT_Listing.pdf">NMDOT AADT Listing</a>. Official New Mexico Department of Transportation TIMS road segments by posted route/point with AADT info.</li>
-<li><a href="http://www.steve-riner.com/nmhighways/NMHome.htm">The Unofficial New Mexico Highways Page</a>. Hobbyist site describing current and historical New Mexico state routes.</li>
-	    </ul>
+<li><a href="http://www.steve-riner.com/nmhighways/NMHome.htm">The Unofficial New Mexico Highways Page</a>. Hobbyist site by Steve Riner, describing current and historical New Mexico state routes.</li>
+
 	  </li> 
 	  <li>New York, USA
 	    <ul>
