@@ -43,7 +43,13 @@
       $res = tmdb_query($sql_command);
 
       while ($row = $res->fetch_assoc()) {
-        echo "<tr><td>".$row['date']."</td><td>".$row['region']."</td><td>".$row['systemName']."</td><td>".htmlspecialchars($row['description'])."</td><td>".$row['statusChange']."</td></tr>\n";
+        if (($row['statusChange'] == "active") || ($row['statusChange'] == "preview")) {
+            $syslink = "<a href=\"/hb?sys=".$row['systemName']."\">".$row['systemName']."</a>";
+        }
+        else {
+            $syslink = $row['systemName'];
+        }
+        echo "<tr><td>".$row['date']."</td><td>".$row['region']."</td><td>".$syslink."</td><td>".htmlspecialchars($row['description'])."</td><td>".$row['statusChange']."</td></tr>\n";
       }
       $res->free();
     ?>
