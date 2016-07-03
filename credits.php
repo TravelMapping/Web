@@ -421,7 +421,7 @@ following sources of highway information.</p>
 	    <li><a href="http://mpd.azdot.gov/mpd/gis/fclass/fcmaps.asp">Functional Classification Maps</a>. Official county, city, and native nations highway maps from the Arizona Department of Transportation.</li>
 	    </ul>
 	  </li>
-<!--	  <li>California, USA
+	  <li>California, USA
 	    <ul>
 	    	    <li><a href="http://www.dot.ca.gov/">Caltrans website</a>. Official website of state Department of Transportation ("Caltrans").</li>
 	    <li><a href="http://www.leginfo.ca.gov/cgi-bin/displaycode?section=shc&group=00001-01000&file=300-635">California Streets and Highway Code sections 300-635</a>. Statutory definitions of state highway routes, including authorized relinquishments to local governments.</li>
