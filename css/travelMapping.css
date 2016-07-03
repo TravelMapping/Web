@@ -158,20 +158,19 @@ table.gratable tr.float th {
 .title {
   font-size: 24pt;
   font-family: "Times New Roman", serif;
-  font-style: bold;
-  font-weight: 750;
+  font-weight: bold;
   text-align: center;
   position: relative;
-  margin-top: 5px;
+  margin-top: 0px;
   margin-bottom: 0px;
+  padding-top: 5px;
   padding-right: 8px;
-  width: 100%;
   height: auto;
   color: #eeeeee;
   background: #000040;
   border-left: 3px solid #000040;
   border-right: 3px solid #000040;
-  border-bottom: 0px solid #00040;
+  border-bottom: 0px solid #000040;
 }
 
 /* 2nd line of title text at top of page
@@ -184,7 +183,6 @@ table.gratable tr.float th {
   padding-right: 8px;
   margin-top: 0px;
   margin-bottom: 0px;
-  width: 100%;
   height: auto;
   color: #ffffff;
   background: #000040;
@@ -225,7 +223,6 @@ table.gratable tr.float th {
   padding-bottom: 2px;
   margin-top: 0px;
   margin-bottom: 8px;
-  width: 100%;
   height: auto;
   background: #101080;
   color: #ffffff;
@@ -286,8 +283,8 @@ margin-left: 10px;
   position: relative;
   margin-top: 20px;
   margin-left: 0px;
+  margin-right: 50px;
   margin-bottom: 0px;
-  width: 95%;
   height: auto;
   color: #000000;
   background: #eeeeff;
@@ -341,9 +338,9 @@ margin-left: 10px;
   text-align: left;
   position: relative;
   margin-left: 50px;
+  margin-right: 50px;
   margin-top: 10px;
   margin-bottom: 8px;
-  width: 95%;
   background: #eeeeff;
   color: #000000;
   padding: 2px;
