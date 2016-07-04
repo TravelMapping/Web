@@ -44,20 +44,20 @@
             right: 10px;
             top: 60px;
             bottom: 20px;
-            overflow-y: scroll;
-            max-width: 25%;
+            overflow-y: auto;
+            max-width: 320px;
 	    opacity: .95;  /* also forces stacking order */
         }
 
         #routes {
-	    visibility: hidden;
+	    display: none;
 	    left: 0px;
             width: 1px;
 	    height: 1px;
         }
 
         #options {
-	    visibility: hidden;
+	    display: none;
 	    left: 0px;
             width: 1px;
 	    height: 1px;
