@@ -70,6 +70,10 @@
     else {
         $system = "";
         $systemName = "No System Specified";
+        $redir_url = "/user/region.php?u={$tmuser}&rg={$_GET['rg']}";
+        echo "<script>window.location = '{$redir_url}';</script>";
+        echo "Please go to <a href='$redir_url'>{$redir_url}</a> if you are not automatically redirected.";
+        exit();
     }
 
     ?>
