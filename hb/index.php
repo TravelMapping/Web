@@ -124,7 +124,7 @@
 
     ?>
     <script
-        src="http://maps.googleapis.com/maps/api/js?sensor=false"
+        src="http://maps.googleapis.com/maps/api/js?key=<?php echo $gmaps_api_key ?>&sensor=false"
         type="text/javascript"></script>
     <!-- jQuery -->
     <script src="http://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript"></script>
@@ -365,7 +365,7 @@ HTML;
     $sql_command = "SELECT * FROM systems LEFT JOIN countries ON countryCode = countries.code";
     $res = tmdb_query($sql_command);
     while ($row = $res->fetch_assoc()) {
-        $linkJS = "window.open('index.php?sys={$row['systemName']}')";
+        $linkJS = "window.open('hb/index.php?sys={$row['systemName']}')";
         echo "<tr class='status-" . $row['level'] . "' onClick=\"$linkJS\">";
         if (strlen($row['name']) > 15) {
             echo "<td>{$row['code']}</td>";

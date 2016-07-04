@@ -81,7 +81,7 @@
         echo " - ".$tmuser;
         ?></title>
     <script
-        src="http://maps.googleapis.com/maps/api/js?sensor=false"
+        src="http://maps.googleapis.com/maps/api/js?key=<?php echo $gmaps_api_key ?>&sensor=false"
         type="text/javascript"></script>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
     <!-- jQuery -->

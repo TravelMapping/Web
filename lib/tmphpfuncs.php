@@ -28,6 +28,10 @@ $tmdbuser = "travmap";
 $tmdbpasswd = "clinch";
 $tmdbhost = "localhost";
 
+// Google Maps API Key
+// FIXME: Change to project-specific key (this is my (Thing342's) personal key)
+$gmaps_api_key = 'AIzaSyDAKyOlyGyVeWVEaMqRmWkYQh-5RkwhUY0';
+
 if (array_key_exists("dbname", $_GET)) {
     $tmdbname = $_GET['dbname'];
 }
