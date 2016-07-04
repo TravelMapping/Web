@@ -392,15 +392,15 @@ SQL;
         <tbody>
             <?php
                 $sql_command = <<<SQL
-SELECT r.route, r.root, r.banner, r.city, r.systemName, sys.tier,
-ROUND((COALESCE(r.mileage, 0)),2) AS totalMileage, 
-ROUND((COALESCE(cr.mileage, 0)),2) AS clinchedMileage, 
-COALESCE(ROUND((COALESCE(cr.mileage,0)) / (COALESCE(r.mileage, 0)) * 100,2), 0) AS percentage 
-FROM routes AS r 
-LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '{$tmuser}'
-LEFT JOIN systems AS sys ON r.systemName = sys.systemName 
-WHERE region = '{$region}'
-ORDER BY sys.tier, r.root
+                    SELECT r.route, r.root, r.banner, r.city, r.systemName, sys.tier,
+                      ROUND((COALESCE(r.mileage, 0)),2) AS totalMileage, 
+                      ROUND((COALESCE(cr.mileage, 0)),2) AS clinchedMileage, 
+                      COALESCE(ROUND((COALESCE(cr.mileage,0)) / (COALESCE(r.mileage, 0)) * 100,2), 0) AS percentage 
+                    FROM routes AS r 
+                    LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '{$tmuser}'
+                    LEFT JOIN systems AS sys ON r.systemName = sys.systemName 
+                    WHERE region = '{$region}'
+                    ORDER BY sys.tier, r.root
 SQL;
                 $res = tmdb_query($sql_command);
                 while ($row = $res->fetch_assoc()) {
