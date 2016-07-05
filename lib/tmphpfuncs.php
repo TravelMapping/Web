@@ -23,6 +23,14 @@
 // always attempt to establish a connection to the db, allow QS parameters
 // to override defaults, which come from the 5 lines of tm.conf (which
 // is not in source code control to protect the information there)
+//
+// IMPORTANT: this file should also not be accessible through the 
+// web server, using an entry like:
+//
+//<Files "tm.conf">
+//    Require all denied
+//</Files>
+
 
 $tmconffile = fopen($_SERVER['DOCUMENT_ROOT']."/lib/tm.conf", "r");
 $tmdbname = chop(fgets($tmconffile));
