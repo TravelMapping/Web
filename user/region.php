@@ -83,7 +83,7 @@
     ?>
     <title><?php echo $regionName." - ".$tmuser; ?></title>
     <script
-        src="http://maps.googleapis.com/maps/api/js?sensor=false"
+        src="http://maps.googleapis.com/maps/api/js?key=<?php echo $gmaps_api_key ?>&sensor=false"
         type="text/javascript"></script>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
     <!-- jQuery -->
@@ -161,7 +161,7 @@ if (( $tmuser != "null") || ( $region != "" )) {
 <script type="text/javascript">
     $(document).ready(function () {
             $("table.tablesorter").tablesorter({
-                sortList: [[0, 0]],
+                sortList: [[0,0],[2,0]],
                 headers: {0: {sorter: false}}
             });
             $('td').filter(function() {
@@ -364,14 +364,11 @@ SQL;
           INNER JOIN routes AS r
             ON r.systemName = sys.systemName
           LEFT JOIN clinchedRoutes AS cr
-            ON cr.route = r.root AND cr.traveler = 'xxxxxxxxxxxxxxxxx'
-          WHERE r.region = 'yyyyyyyyyyyyyyyyy'
+            ON cr.route = r.root AND cr.traveler = '{$tmuser}'
+          WHERE r.region = '{$region}'
           GROUP BY r.systemName
           ORDER BY sys.tier, sys.systemName;
 SQL;
-
-        $sql_command = str_replace("xxxxxxxxxxxxxxxxx", $tmuser, $sql_command);
-        $sql_command = str_replace("yyyyyyyyyyyyyyyyy", $region, $sql_command);
 
         $res = tmdb_query($sql_command);
         while ($row = $res->fetch_assoc()) {
@@ -389,15 +386,26 @@ SQL;
     </table>
     <table class="gratable tablesorter" id="routesTable">
         <thead>
-            <tr><th colspan="5">Stats by Route: (<?php echo "<a href=\"/user/mapview.php?u=".$tmuser."&amp;rg=".$region."\">" ?>Full Map)</a></th></tr>
-            <tr><th class="sortable">Route</th><th class="sortable">Clinched Mileage</th><th class="sortable">Total Mileage</th><th class="sortable">%</th><th class="nonsortable">Map</th></tr>
+            <tr><th colspan="7">Stats by Route: (<?php echo "<a href=\"/user/mapview.php?u=".$tmuser."&amp;rg=".$region."\">" ?>Full Map)</a></th></tr>
+            <tr><th class="sortable">Tier</th><th class="sortable">Route</th><th class="sortable">#</th><th class="sortable">Clinched Mileage</th><th class="sortable">Total Mileage</th><th class="sortable">%</th><th class="nonsortable">Map</th></tr>
         </thead>
         <tbody>
             <?php
-                $sql_command = "SELECT r.route, r.root, r.banner, r.city, ROUND((COALESCE(r.mileage, 0)),2) AS totalMileage, ROUND((COALESCE(cr.mileage, 0)),2) AS clinchedMileage, COALESCE(ROUND((COALESCE(cr.mileage,0)) / (COALESCE(r.mileage, 0)) * 100,2), 0) AS percentage FROM routes AS r LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '".$tmuser."' WHERE region = '" . $region . "'";
+                $sql_command = <<<SQL
+                    SELECT r.route, r.root, r.banner, r.city, r.systemName, sys.tier,
+                      ROUND((COALESCE(r.mileage, 0)),2) AS totalMileage, 
+                      ROUND((COALESCE(cr.mileage, 0)),2) AS clinchedMileage, 
+                      COALESCE(ROUND((COALESCE(cr.mileage,0)) / (COALESCE(r.mileage, 0)) * 100,2), 0) AS percentage 
+                    FROM routes AS r 
+                    LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '{$tmuser}'
+                    LEFT JOIN systems AS sys ON r.systemName = sys.systemName 
+                    WHERE region = '{$region}'
+                    ORDER BY sys.tier, r.root
+SQL;
                 $res = tmdb_query($sql_command);
                 while ($row = $res->fetch_assoc()) {
                     echo "<tr onClick=\"window.open('/hb?u=".$tmuser."&amp;r=".$row['root']."')\">";
+                    echo "<td>{$row['tier']}</td>";
                     echo "<td>".$row['route'];
                     if (strlen($row['banner']) > 0) {
                         echo " ".$row['banner']." ";
@@ -406,6 +414,7 @@ SQL;
                         echo " (".$row['city'].")";
                     }
                     echo "</td>";
+                    echo "<td>{$row['systemName']}.{$row['root']}</td>";
                     echo "<td>".$row['clinchedMileage']."</td>";
                     echo "<td>".$row['totalMileage']."</td>";
                     echo "<td>".$row['percentage']."%</td>";

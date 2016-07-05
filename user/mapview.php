@@ -1,4 +1,5 @@
 <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpuser.php" ?>
+<?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
  ***
@@ -70,7 +71,7 @@
         }
     </style>
     <script
-        src="http://maps.googleapis.com/maps/api/js?sensor=false"
+        src="http://maps.googleapis.com/maps/api/js?key=<?php echo $gmaps_api_key ?>&sensor=false"
         type="text/javascript"></script>
 
     <!-- jQuery -->
@@ -107,7 +108,7 @@
 
     ?>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
-<?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
+    
     <script type="application/javascript">
         function waypointsFromSQL() {
             <?php

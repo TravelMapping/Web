@@ -70,6 +70,10 @@
     else {
         $system = "";
         $systemName = "No System Specified";
+        $redir_url = "/user/region.php?u={$tmuser}&rg={$_GET['rg']}";
+        echo "<script>window.location = '{$redir_url}';</script>";
+        echo "Please go to <a href='$redir_url'>{$redir_url}</a> if you are not automatically redirected.";
+        exit();
     }
 
     ?>
@@ -81,7 +85,7 @@
         echo " - ".$tmuser;
         ?></title>
     <script
-        src="http://maps.googleapis.com/maps/api/js?sensor=false"
+        src="http://maps.googleapis.com/maps/api/js?key=<?php echo $gmaps_api_key ?>&sensor=false"
         type="text/javascript"></script>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
     <!-- jQuery -->

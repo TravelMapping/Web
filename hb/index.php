@@ -124,7 +124,7 @@
 
     ?>
     <script
-        src="http://maps.googleapis.com/maps/api/js?sensor=false"
+        src="http://maps.googleapis.com/maps/api/js?key=<?php echo $gmaps_api_key ?>&sensor=false"
         type="text/javascript"></script>
     <!-- jQuery -->
     <script src="http://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript"></script>
@@ -252,7 +252,7 @@ else {
                     echo <<<JS
                     routes = $("#routes");
                     routes.tablesorter({
-                        sortList: [[0, 0]],
+                        sortList: [[0, 0], [6, 0]],
                         headers: {0: {sorter: false}}
                     });
                     initFloatingHeaders(routes);
@@ -339,10 +339,10 @@ ENDB;
 
     $sql_command .= ";";
     echo "<div id=\"routebox\">\n";
-    echo "<table class=\"gratable tablesorter ws_data_table\" id=\"routes\"><thead><tr><th colspan=\"6\">Select Route to Display (click a header to sort by that column)</th></tr><tr class='float'><th class=\"sortable\">System</th><th class=\"sortable\">Region</th><th class=\"sortable\">Route&nbsp;Name</th><th>.list Name</th><th class=\"sortable\">Level</th><th>Root</th></tr></thead><tbody>\n";
+    echo "<table class=\"gratable tablesorter ws_data_table\" id=\"routes\"><thead><tr><th colspan=\"7\">Select Route to Display (click a header to sort by that column)</th></tr><tr class='float'><th class=\"sortable\">Tier</th><th class=\"sortable\">System</th><th class=\"sortable\">Region</th><th class=\"sortable\">Route&nbsp;Name</th><th>.list Name</th><th class=\"sortable\">Level</th><th>Root</th></tr></thead><tbody>\n";
     $res = tmdb_query($sql_command);
     while ($row = $res->fetch_assoc()) {
-        echo "<tr class=\"notclickable status-" . $row['level'] . "\"><td>" . $row['systemName'] . "</td><td>" . $row['region'] . "</td><td>" . $row['route'] . $row['banner'];
+        echo "<tr class=\"notclickable status-" . $row['level'] . "\"><td>{$row['tier']}</td><td>" . $row['systemName'] . "</td><td>" . $row['region'] . "</td><td>" . $row['route'] . $row['banner'];
         if (strcmp($row['city'], "") != 0) {
             echo " (" . $row['city'] . ")";
         }
@@ -365,7 +365,7 @@ HTML;
     $sql_command = "SELECT * FROM systems LEFT JOIN countries ON countryCode = countries.code";
     $res = tmdb_query($sql_command);
     while ($row = $res->fetch_assoc()) {
-        $linkJS = "window.open('index.php?sys={$row['systemName']}')";
+        $linkJS = "window.open('hb/index.php?sys={$row['systemName']}')";
         echo "<tr class='status-" . $row['level'] . "' onClick=\"$linkJS\">";
         if (strlen($row['name']) > 15) {
             echo "<td>{$row['code']}</td>";
