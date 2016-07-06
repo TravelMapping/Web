@@ -211,7 +211,7 @@ if ($routeparam == "") {
     echo "<body>\n";
     require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
     echo "<h1>Travel Mapping Highway Browser (Draft)</h1>";
-    echo "<form id=\"selectHighways\" name=\"HighwaySearch\" action=\"index.php\">";
+    echo "<form id=\"selectHighways\" name=\"HighwaySearch\" action=\"/hb/index.php\">";
     echo "<label for=\"sys\">Filter routes by...  System: </label>";
     tm_system_select(FALSE);
     echo "<label for=\"rg\"> Region: </label>";
@@ -311,7 +311,7 @@ ENDA;
         echo "</td><td>";
         echo "<input id=\"showMarkers\" type=\"checkbox\" name=\"Show Markers\" onclick=\"showMarkersClicked()\" checked=\"false\" />&nbsp;Show Markers&nbsp;";
         echo "</td><td>";
-        echo "<form id=\"userForm\" action=\"index.php\">";
+        echo "<form id=\"userForm\" action=\"/hb/index.php\">";
         echo "User: ";
         tm_user_select();
         echo "</td><td>";
@@ -346,7 +346,7 @@ ENDB;
         if (strcmp($row['city'], "") != 0) {
             echo " (" . $row['city'] . ")";
         }
-        echo "</td><td>" . $row['region'] . " " . $row['route'] . $row['banner'] . $row['abbrev'] . "</td><td>" . $row['level'] . "</td><td><a href=\"index.php?r=" . $row['root'] . "\">" . $row['root'] . "</a></td></tr>\n";
+        echo "</td><td>" . $row['region'] . " " . $row['route'] . $row['banner'] . $row['abbrev'] . "</td><td>" . $row['level'] . "</td><td><a href=\"/hb/index.php?r=" . $row['root'] . "\">" . $row['root'] . "</a></td></tr>\n";
     }
     $res->free();
     echo "</table></div>\n";
@@ -365,7 +365,7 @@ HTML;
     $sql_command = "SELECT * FROM systems LEFT JOIN countries ON countryCode = countries.code";
     $res = tmdb_query($sql_command);
     while ($row = $res->fetch_assoc()) {
-        $linkJS = "window.open('hb/index.php?sys={$row['systemName']}')";
+        $linkJS = "window.open('/hb/index.php?sys={$row['systemName']}')";
         echo "<tr class='status-" . $row['level'] . "' onClick=\"$linkJS\">";
         if (strlen($row['name']) > 15) {
             echo "<td>{$row['code']}</td>";
