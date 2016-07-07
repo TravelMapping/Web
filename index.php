@@ -17,13 +17,35 @@
 
 Travel Mapping is a collaborative project implemented and maintained
 by a <a href="credits.php#contributors">group</a> of travel
-enthusiasts who enjoy tracking their cumulative travels.  This site
-allows its <a href="/stat.php">users</a> to submit lists of highway
-segments they've traveled on the <a href="/hb">highway
+enthusiasts who enjoy tracking their cumulative highway travels.  This
+site allows its <a href="/stat.php">users</a> to submit lists of
+highway segments they've traveled on the <a href="/hb">highway
 systems</a> that have been included in the project.  Those lists are
 then imported into the project's database, to be included along with
 other users' stats and maps.
 
+</p>
+
+<p class="heading">Travel Mapping Status (motd)</p>
+
+<p class="text">
+<?php
+if (file_exists($_SERVER['DOCUMENT_ROOT']."/motd")) {
+  $tmmotdfile = fopen($_SERVER['DOCUMENT_ROOT']."/motd", "r");
+  if ($tmmotdfile) {
+    while (!feof($tmmotdfile)) {
+      echo fgets($tmmotdfile);
+    }
+    fclose($tmmotdfile);
+  }
+  else {
+    echo "No news is good news.";
+  }
+}
+else {
+  echo "No news is good news.";
+}
+?>
 </p>
 
 <p class="heading">Travel Mapping Highway Data</p>
@@ -34,12 +56,20 @@ Travel Mapping currently includes highway data for
 <?php
 echo tm_count_rows("systems", "WHERE level='active'");
 ?>
- active systems. An additional 
+
+active systems.  "Active" systems are those which we believe are
+accurate and complete, and for which will will note any changes that
+affect users in the <a href="/devel/updates.php?updates">highway data
+updates table</a>.  An additional
+
 <?php
 echo tm_count_rows("systems", "WHERE level='preview'");
 ?>
- systems are in "preview" status, which means they are substantially
-complete, but still undergoing final revisions, and 
+
+systems are in "preview" status, which means they are substantially
+complete, but still undergoing final revisions.  These may still
+undergo significant changes without notification.
+
 <?php
 echo tm_count_rows("systems", "WHERE level='devel'");
 ?>
@@ -76,25 +106,34 @@ to create and submit your data.
 
 <p class="text">
 
-Experienced users might also want to volunteer to help the project.
-Start by reporting problems with existing highway data.  Those who
-have learned the project's structure and highway data rules and
-guidelines can help greatly by providing review of new highway systems
-in development.  Highly experienced users can learn how to plot new
-highway systems under the guidance of experienced contributors.
-Again, see <a href="/forum">the project forum</a> for more information.
+Once your data is in the system, you will be listed on the
+main <a href="/stat.php">traveler stats page</a>, and you can see a
+summary of your travels on your <a href="/user">user page</a>.  Click
+around on the various links and table entries to find more ways to see
+your travels, both as tabular statistics and plotted on maps.
+
 </p>
 
-<!-- idea: 5 or so newest highway data updates, system updates -->
+<p class="text">
 
-<p class="heading">What's New?</p>
+Some experienced users volunteer to help the project.  If this
+interests you, start by reporting problems with existing highway data.
+Those who have learned the project's structure and highway data rules
+and guidelines can help greatly by providing review of new highway
+systems in development.  Highly experienced users can learn how to
+plot new highway systems under the guidance of experienced
+contributors.  Again, see <a href="/forum">the project forum</a> for
+more information.
+</p>
+
+<p class="heading">What's New with Highway Data?</p>
 
 <p class="text">
-Highway data gets <a href="/devel/updates.php">updated</a> almost
-daily as corrections are made and progress is made on systems in
+Highway data is <a href="/devel/updates.php">updated</a> almost daily
+as corrections are made and progress is made on systems in
 development.  When a highway system is deemed correct and complete to
-the best of our knowledge, it becomes "active".  The newest systems to
-become active:</p>
+the best of our knowledge, it becomes "active".  Here are the newest
+systems to become active, with their activation dates:</p>
 <ul class="text">
 <?php
 $res = tmdb_query("select systemName, description, date from systemUpdates where statusChange='active'  limit 8");
