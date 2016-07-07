@@ -22,4 +22,16 @@ END;
 <a href="/devel/updates.php">Updates</a>
 </p>
 
+<?php
+$tmupdating = file_exists($_SERVER['DOCUMENT_ROOT']."/dbupdating");
+if ($tmupdating) {
+  echo <<<END
+<p class="errorbar">
+Travel Mapping database update in progress.  Some functionality might
+not work.  Please try again in a few minutes if you notice problems.
+</p>
+END;
+}
+?>
+
 <!-- /lib/tmheader.php: END -->

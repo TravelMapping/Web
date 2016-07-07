@@ -30,6 +30,9 @@ other users' stats and maps.
 
 <p class="text">
 <?php
+if ($tmupdating) {
+  echo "Travel Mapping database update in progress.  If you see errors, try back in a few minutes. <br />";
+}
 if (file_exists($_SERVER['DOCUMENT_ROOT']."/motd")) {
   $tmmotdfile = fopen($_SERVER['DOCUMENT_ROOT']."/motd", "r");
   if ($tmmotdfile) {

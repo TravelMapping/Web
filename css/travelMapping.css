@@ -241,6 +241,23 @@ table.gratable tr.float th {
   text-decoration: underline;
 }
 
+/*  the errorbar when a DB update is in progress */
+.errorbar {
+  font-size: 14pt;
+  font-style: normal;
+  font-family: sans-serif;
+  text-align: center;
+  position: relative;
+  padding-right: 8px;
+  padding-bottom: 2px;
+  margin-top: 0px;
+  margin-bottom: 8px;
+  height: auto;
+  background: #FF0000;
+  color: #ffffff;
+  border: 3px solid #101080;
+}
+
 .main {
  width: 758px;
 }
