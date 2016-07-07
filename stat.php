@@ -1,7 +1,4 @@
-<?php
-include $_SERVER['DOCUMENT_ROOT']."/login.php";
-?>
-
+<?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpuser.php" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!-- 
 	A rankings page.
@@ -24,6 +21,7 @@ include $_SERVER['DOCUMENT_ROOT']."/login.php";
             margin: auto;
         }
     </style>
+    <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
 </head>
 <body>
 <script type="text/javascript">
@@ -47,11 +45,8 @@ include $_SERVER['DOCUMENT_ROOT']."/login.php";
 			<tr><th class="sortable">Rank</th><th class="sortable">Username</th><th class="sortable">Miles Traveled</th><th class="sortable">%</th></tr>
 		</thead>
 		<tbody>
-			<?php
-            $dbname = "TravelMapping";
-            $db = new mysqli("localhost","travmap","clinch",$dbname) or die("Failed to connect to database");
-            $sql = "SELECT sum(o.activeMileage) as totalMileage FROM overallMileageByRegion o";
-            $totalMileage = $db->query($sql)->fetch_assoc()['totalMileage'];
+	<?php
+            $totalMileage = tm_sum_column("overallMileageByRegion", "activeMileage");
             $sql = <<<SQL
             SELECT
               traveler,
@@ -60,10 +55,10 @@ include $_SERVER['DOCUMENT_ROOT']."/login.php";
             FROM clinchedOverallMileageByRegion co
             GROUP BY co.traveler ORDER BY clinchedMileage DESC;
 SQL;
-            $res = $db->query($sql);
+            $res = tmdb_query($sql);
             $rank = 1;
             while ($row = $res->fetch_assoc()) {
-                if($row['traveler'] == $user) {
+                if($row['traveler'] == $tmuser) {
                     $highlight = 'user-highlight';
                 } else {
                     $highlight = '';
@@ -75,6 +70,7 @@ SQL;
 HTML;
                 $rank++;
             }
+	    $res->free();
 
 			?>
 		</tbody>
@@ -87,11 +83,8 @@ HTML;
 			<tr><th class="sortable">Rank</th><th class="sortable">Username</th><th class="sortable">Miles Traveled</th><th class="sortable">%</th></tr>
 		</thead>
 		<tbody>
-			<?php
-            $dbname = "TravelMapping";
-            $db = new mysqli("localhost","travmap","clinch",$dbname) or die("Failed to connect to database");
-            $sql = "SELECT sum(o.activePreviewMileage) as totalMileage FROM overallMileageByRegion o";
-            $totalMileage = $db->query($sql)->fetch_assoc()['totalMileage'];
+	<?php
+            $totalMileage = tm_sum_column("overallMileageByRegion", "activePreviewMileage");
             $sql = <<<SQL
             SELECT
               traveler,
@@ -100,10 +93,10 @@ HTML;
             FROM clinchedOverallMileageByRegion co
             GROUP BY co.traveler ORDER BY clinchedMileage DESC;
 SQL;
-            $res = $db->query($sql);
+            $res = tmdb_query($sql);
             $rank = 1;
             while ($row = $res->fetch_assoc()) {
-                if($row['traveler'] == $user) {
+                if($row['traveler'] == $tmuser) {
                     $highlight = 'user-highlight';
                 } else {
                     $highlight = '';
@@ -115,9 +108,10 @@ SQL;
 HTML;
                 $rank++;
             }
+	    $res->free();
 
-			?>
-		</tbody>
+	?>
+	</tbody>
 	</table>
         </td>
 	</tr>
