@@ -356,7 +356,6 @@ SQL;
             sys.tier,
             sys.level AS status,
             sys.fullName,
-            r.root,
             COALESCE(ROUND(SUM(cr.mileage), 2), 0) AS clinchedMileage,
             COALESCE(ROUND(SUM(r.mileage), 2), 0) AS totalMileage,
             COALESCE(ROUND(SUM(cr.mileage) / SUM(r.mileage) * 100, 2), 0) AS percentage

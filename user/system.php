@@ -237,7 +237,6 @@ SQL;
                 FROM clinchedSystemMileageByRegion
                 WHERE systemName = '$system'
 		AND region = '$region'
-		GROUP BY traveler
                 ORDER BY clinchedMileage DESC;
 SQL;
             }
