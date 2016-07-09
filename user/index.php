@@ -66,6 +66,7 @@ tm_user_select_form();
 
 if ( $tmuser == "null") {
     echo "<h1>Select a User to Continue</h1>\n";
+    tm_user_select_form();
     echo "</div>\n";
     require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php";
     echo "</body>\n";

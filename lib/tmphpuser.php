@@ -11,7 +11,8 @@
 
 // u= is the user, stored in $tmuser variable, can also come from the
 // lastuser cookie, and will be stored in that cookie when specified
-$tmuser = "null";
+define("TM_NO_USER", "null");
+$tmuser = TM_NO_USER;
 
 if (array_key_exists("u", $_GET)) {
     $tmuser = $_GET['u'];

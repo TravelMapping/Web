@@ -50,7 +50,7 @@
     <?php
     $totalMileage = round(tm_sum_column("overallMileageByRegion", "activeMileage"));
     $totalPreviewMileage = round(tm_sum_column("overallMileageByRegion", "activePreviewMileage"));
-    if ($tmuser === null) {
+    if ($tmuser == TM_NO_USER) {
         echo "<form id=\"userselect\" action=\"\"><p>\n";
         echo "<label>Current User: </label>\n";
         tm_user_select();

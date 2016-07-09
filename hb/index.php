@@ -1,3 +1,4 @@
+<?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpuser.php" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
  ***
@@ -211,11 +212,12 @@ if ($routeparam == "") {
     echo "<body>\n";
     require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
     echo "<h1>Travel Mapping Highway Browser (Draft)</h1>";
-    echo "<form id=\"selectHighways\" name=\"HighwaySearch\" action=\"/hb/index.php\">";
+    echo "<form id=\"selectHighways\" name=\"HighwaySearch\" action=\"/hb/index.php?u={$tmuser}\">";
     echo "<label for=\"sys\">Filter routes by...  System: </label>";
     tm_system_select(FALSE);
     echo "<label for=\"rg\"> Region: </label>";
     tm_region_select(FALSE);
+    echo "<input type=\"hidden\" name=\"u\" value=\"{$tmuser}\" />";
     echo "<input type=\"submit\" value=\"Apply Filter\" /></form>";
 
 } 
@@ -346,7 +348,7 @@ ENDB;
         if (strcmp($row['city'], "") != 0) {
             echo " (" . $row['city'] . ")";
         }
-        echo "</td><td>" . $row['region'] . " " . $row['route'] . $row['banner'] . $row['abbrev'] . "</td><td>" . $row['level'] . "</td><td><a href=\"/hb/index.php?r=" . $row['root'] . "\">" . $row['root'] . "</a></td></tr>\n";
+        echo "</td><td>" . $row['region'] . " " . $row['route'] . $row['banner'] . $row['abbrev'] . "</td><td>" . $row['level'] . "</td><td><a href=\"/hb/index.php?u={$tmuser}&r=" . $row['root'] . "\">" . $row['root'] . "</a></td></tr>\n";
     }
     $res->free();
     echo "</table></div>\n";
@@ -365,7 +367,7 @@ HTML;
     $sql_command = "SELECT * FROM systems LEFT JOIN countries ON countryCode = countries.code";
     $res = tmdb_query($sql_command);
     while ($row = $res->fetch_assoc()) {
-        $linkJS = "window.open('/hb/index.php?sys={$row['systemName']}')";
+        $linkJS = "window.open('/hb/index.php?sys={$row['systemName']}&u={$tmuser}')";
         echo "<tr class='status-" . $row['level'] . "' onClick=\"$linkJS\">";
         if (strlen($row['name']) > 15) {
             echo "<td>{$row['code']}</td>";
