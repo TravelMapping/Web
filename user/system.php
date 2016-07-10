@@ -189,12 +189,19 @@ if (( $tmuser != "null") || ( $system != "" )) {
         <input type="submit" value="Update Map and Stats" />
     </form>
     <a href="/user/index.php">Back to User Page</a>
-    <h1><?php
+    <?php
+        echo " -- <a href='/user/mapview.php?u={$tmuser}&sys={$system}";
+        if ($region != "") {
+            echo "&rg={$region}";
+        }
+        echo "'>View Larger Map</a>";
+        echo "<h1>";
         echo "Traveler Stats for " . $tmuser . " on " . $systemName;
         if ($region != "") {
             echo " in " . $regionName;
         }
-        ?>:</h1>
+        echo "</h1>";
+    ?>
 </div>
 <?php
 if (( $tmuser == "null") || ( $system == "" )) {

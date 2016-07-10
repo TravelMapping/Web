@@ -49,7 +49,8 @@
         else {
             $syslink = $row['systemName'];
         }
-        echo "<tr><td>".$row['date']."</td><td>".$row['region']."</td><td>".$syslink."</td><td>".htmlspecialchars($row['description'])."</td><td>".$row['statusChange']."</td></tr>\n";
+        echo "<tr><td>".$row['date']."</td><td>".$row['region']."</td><td>".$syslink."</td><td>".htmlspecialchars($row['description']);
+          echo "</td><td class='status-{$row['statusChange']}'>".$row['statusChange']."</td></tr>\n";
       }
       $res->free();
     ?>

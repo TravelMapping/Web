@@ -185,8 +185,10 @@ if (( $tmuser != "null") || ( $region != "" )) {
         <input type="submit" value="Update Map and Stats" />
     </form>
     <a href="/user/index.php">Back to User Page</a>
-    <h1>Traveler Stats for <?php echo $tmuser . " in " . $regionName ?>:</h1>
-
+    <?php
+        echo " -- <a href='/user/mapview.php?u={$tmuser}&rg={$region}'>View Larger Map</a>";
+        echo "<h1>Traveler Stats for {$tmuser} in {$region}:</h1>";
+    ?>
 </div>
 <?php
 if (( $tmuser == "null") || ( $region == "" )) {
