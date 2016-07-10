@@ -188,13 +188,13 @@ if (( $tmuser != "null") || ( $system != "" )) {
 	<?php tm_region_select(FALSE); ?>
         <input type="submit" value="Update Map and Stats" />
     </form>
+    <a href="/user/index.php">Back to User Page</a>
     <h1><?php
         echo "Traveler Stats for " . $tmuser . " on " . $systemName;
         if ($region != "") {
             echo " in " . $regionName;
         }
         ?>:</h1>
-    <a href="/user/index.php">Back to User Page</a>
 </div>
 <?php
 if (( $tmuser == "null") || ( $system == "" )) {
