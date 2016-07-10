@@ -163,6 +163,9 @@ if (( $tmuser != "null") || ( $system != "" )) {
 
 <script type="text/javascript">
     $(document).ready(function () {
+            $("#regionsTable").tablesorter({
+                sortList: [[4, 1]]
+            });
             $("#routeTable").tablesorter({
                 sortList: [[0, 0]],
                 headers: {0: {sorter: false}, 1: {sorter: false}, 3: {sorter: false},}
@@ -191,6 +194,7 @@ if (( $tmuser != "null") || ( $system != "" )) {
             echo " in " . $regionName;
         }
         ?>:</h1>
+    <a href="/user/index.php">Back to User Page</a>
 </div>
 <?php
 if (( $tmuser == "null") || ( $system == "" )) {
@@ -285,9 +289,50 @@ SQL;
             ?>
             </tbody>
         </table>
-
+        <?php
+        if($region == "") {
+            echo <<<HTML
+                <table class="gratable tablesorter" id="regionsTable">
+                    <caption>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</caption>
+                    <thead>
+                    <tr><th colspan="4">Statistics Per Region</th></tr>
+                    <tr>
+                        <th class="sortable">Region</th>
+                        <th class="sortable">Total Mileage</th>
+                        <th class="sortable">Clinched Mileage</th>
+                        <th class="sortable">%</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+HTML;
+            $sql_command = <<<SQL
+            SELECT
+              miByRegion.region,
+              ROUND(IFNULL(clinchedByRegion.mileage, 0), 2) as clinchedMileage,
+              ROUND(miByRegion.mileage, 2) as totalMileage,
+              ROUND(IFNULL(clinchedByRegion.mileage, 0) / miByRegion.mileage * 100, 2) as percentage
+            FROM systemMileageByRegion as miByRegion
+            LEFT JOIN clinchedSystemMileageByRegion as clinchedByRegion 
+                ON clinchedByRegion.region = miByRegion.region AND clinchedByRegion.systemName = '{$system}' AND clinchedByRegion.traveler='$tmuser'
+            WHERE miByRegion.systemName = '{$system}'
+            ORDER BY percentage DESC ;
+SQL;
+            $res = tmdb_query($sql_command);
+            while ($row = $res->fetch_assoc()) {
+                echo <<<HTML
+                <tr onclick='window.open("/user/system.php?u={$tmuser}&sys={$system}&rg={$row['region']}")'>
+                    <td>{$row['region']}</td>
+                    <td>{$row['clinchedMileage']}</td>
+                    <td>{$row['totalMileage']}</td>
+                    <td>{$row['percentage']}</td>
+                </tr>
+HTML;
+            }
+            $res->free();
+            echo "</tbody></table>";
+        }
+        ?>
         <table class="gratable tablesorter" id="routeTable">
-            <caption>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</caption>
             <thead>
             <tr>
                 <th colspan="8">Statistics per Route</th>

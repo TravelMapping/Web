@@ -64,6 +64,11 @@ table.gratable tr td {
     text-align: left;
 }
 
+table.gratable tr td .important {
+    background-color: #CCCCCC;
+    text-script: bold;
+}
+
 table.gratable tr[onclick]:hover td, table.gratable tr.user-highlight td {
     background-color: #CCCCCC;
     cursor: pointer;
