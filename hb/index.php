@@ -312,10 +312,10 @@ SQL;
     echo <<<HTML
     <tr><td class="important">Total Mileage</td><td>{$row['totalMileage']} mi</td></tr>
     <tr><td>LIST Name</td><td>{$routeInfo['region']} {$routeInfo['route']}{$routeInfo['banner']}{$routeInfo['abbrev']}</td></tr> 
-    <tr><td>Average Mileage</td><td>{$row['avgMileage']} mi ({$row['mileagePct']} %)</td>
     <tr title="{$row['drivers']}"><td>Total Drivers</td><td>{$row['numDrivers']} ({$row['drivenPct']} %)</td>
     <tr class="link" title="{$row['clinchers']}"><td rowspan="2">Total Clinched</td><td>{$row['numClinched']} ({$row['clinchedPct']} %)</td>
     <tr class="link" title="{$row['clinchers']}"><td>{$row['drivenClinchedPct']} % of drivers</td>
+    s<tr><td>Average Mileage</td><td>{$row['avgMileage']} mi ({$row['mileagePct']} %)</td></tr>
     </tbody></table>
 HTML;
     echo "<table id='waypoints' class=\"gratable\"><thead><tr><th colspan=\"3\">Waypoints</th></tr><tr><th>Coordinates</th><th>Name</th><th title='Percent of people who have driven this route who have driven though this point.'>%</th></tr></thead><tbody>\n";

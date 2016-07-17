@@ -305,8 +305,8 @@ SQL;
                     <tr><th colspan="4">Statistics Per Region</th></tr>
                     <tr>
                         <th class="sortable">Region</th>
-                        <th class="sortable">Total Mileage</th>
                         <th class="sortable">Clinched Mileage</th>
+                        <th class="sortable">Total Mileage</th>
                         <th class="sortable">%</th>
                     </tr>
                     </thead>
