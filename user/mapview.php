@@ -28,6 +28,42 @@
 	    width: 25%;
         }
 
+        #routesTable .routeName {
+            width: 149px;
+        }
+
+        #routesTable .systemName {
+            min-width: 54px;
+        }
+
+        #routesTable .clinched {
+            min-width: 66px;
+        }
+
+        #routesTable .overall {
+            min-width: 57px;
+        }
+
+        #routesTable .percent {
+            min-width: 57px;
+        }
+
+        #routesTable tr.float th {
+            position: relative;!important;
+            top: -1px;!important;
+            left: -1px;!important;
+            border-left-width: 1px;
+            border-right-width: 1px;
+        }
+
+        #routesTable tr.float th:first-child {
+            border-left-width: 2px;
+        }
+
+        #routesTable tr.float th:last-child {
+            border-right-width: 2px;
+        }
+
         #map {
             position: absolute;
             top: 25px;
@@ -46,7 +82,7 @@
             top: 60px;
             bottom: 20px;
             overflow-y: auto;
-            max-width: 320px;
+            max-width: 420px;
 	    opacity: .95;  /* also forces stacking order */
         }
 
@@ -77,7 +113,7 @@
     <!-- jQuery -->
     <script type="application/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <!-- TableSorter -->
-    <script type="application/javascript" src="/lib/jquery.tablesorter.min.js"></script>
+    <script type="application/javascript" src="/lib/jquery.tablesorter.js"></script>
 
     <?php
 
@@ -269,17 +305,13 @@
             } else {
                 $row.width($(this).width());
             }
-            var pos =  $row.position().left - 2;
-            //console.log($table.offset().left);
-            $(this).css({left: pos})
         });
     }
 
     $(document).ready(function () {
             $routesTable = $('#routesTable');
             $routesTable.tablesorter({
-                sortList: [[0, 0]],
-                headers: {}
+                sortList: [[1, 0]]
             });
             $('td').filter(function() {
                 return this.innerHTML.match(/^[0-9\s\.,%]+$/);
@@ -327,31 +359,42 @@
 <div id="routes">
     <table id="routesTable" class="gratable tablesorter">
         <thead>
-            <tr class="float"><th class="sortable">Route</th><th class="sortable">System</th><th class="sortable">Clinched</th><th class="sortable">Overall</th><th class="sortable">%</th></tr>
+            <tr class="float" ><th class="sortable routeName">Route</th><th class="sortable systemName">System</th>
+                <th class="sortable clinched">Clinched</th><th class="sortable overall">Overall</th><th class="sortable percent">%</th></tr>
         </thead>
         <tbody>
         <?php
 	// TODO: a toggle to include/exclude devel routes?
-        $sql_command = "SELECT r.region, r.root, r.route, r.systemName, banner, city, round(r.mileage, 2) AS total, round(COALESCE(cr.mileage, 0), 2) as clinched FROM routes AS r LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '" .$_GET['u']. "' WHERE ";
+        $sql_command = <<<SQL
+SELECT r.region, r.root, r.route, r.systemName, banner, city, sys.tier, 
+  round(r.mileage, 2) AS total, 
+  round(COALESCE(cr.mileage, 0), 2) as clinched 
+FROM routes AS r 
+  LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '{$_GET['u']}' 
+  LEFT JOIN systems as sys on r.systemName = sys.systemName
+WHERE  
+SQL;
         if (array_key_exists('rte', $_GET)) {
             $sql_command .= "(r.route like '".$_GET['rte']."' or r.route regexp '".$_GET['rte']."[a-z]')";
             $sql_command = str_replace("*", "%", $sql_command);
             if (array_key_exists('rg', $_GET) or array_key_exists('sys', $_GET)) $sql_command .= ' AND ';
         }
         if (array_key_exists('rg', $_GET) && array_key_exists('sys', $_GET)) {
-            $sql_command .= orClauseBuilder('rg', 'region')." AND ".orClauseBuilder('sys', 'systemName').";";
+            $sql_command .= orClauseBuilder('rg', 'region')." AND ".orClauseBuilder('sys', 'systemName');
         } elseif (array_key_exists('rg', $_GET)) {
-            $sql_command .= orClauseBuilder('rg', 'region').";";
+            $sql_command .= orClauseBuilder('rg', 'region')
+            ;
         } elseif (array_key_exists('sys', $_GET)) {
-            $sql_command .= orClauseBuilder('sys', 'systemName').";";
+            $sql_command .= orClauseBuilder('sys', 'systemName');
         } elseif (!array_key_exists('rte', $_GET)) {
             //Don't show. Too many routes
-            $sql_command .= "r.root IS NULL;";
+            $sql_command .= "r.root IS NULL";
         }
+        $sql_command .= "ORDER BY sys.tier, r.route;";
         $res = tmdb_query($sql_command);
         while($row = $res->fetch_assoc()) {
             $link = "/hb?u=".$_GET['u']."&amp;r=".$row['root'];
-            echo "<tr onclick=\"window.open('".$link."')\"><td>";
+            echo "<tr onclick=\"window.open('".$link."')\"><td class='routeName'>";
             //REGION ROUTE BANNER (CITY)
             echo $row['region'] . " " . $row['route'];
             if (strlen($row['banner']) > 0) {
@@ -361,7 +404,12 @@
                 echo " (" . $row['city'] . ")";
             }
 	    $pct = sprintf("%0.2f",( $row['clinched'] / $row['total'] * 100) );
-            echo "</td><td class='link'><a href='/user/system.php?u={$_GET['u']}&amp;sys={$row['systemName']}'>{$row['systemName']}</a></td><td>".$row['clinched']."</td><td>".$row['total']."</td><td>".$pct."%</td></tr>\n";
+            echo <<<HTML
+                </td>
+                <td class='link systemName'>{$row['tier']}. <a href='/user/system.php?u={$_GET['u']}&amp;sys={$row['systemName']}'>{$row['systemName']}</a></td>
+                <td class="clinched">
+HTML
+.$row['clinched']."</td><td class='overall'>".$row['total']."</td><td class='percent'>".$pct."%</td></tr>\n";
         }
         ?>
         </tbody>

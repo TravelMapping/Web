@@ -61,10 +61,12 @@
 <div id="userbox">
 
 <?php
+
 tm_user_select_form();
 
 if ( $tmuser == "null") {
     echo "<h1>Select a User to Continue</h1>\n";
+    tm_user_select_form();
     echo "</div>\n";
     require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php";
     echo "</body>\n";
@@ -178,7 +180,19 @@ SQL;
         </thead>
         <tbody>
         <?php
-        $sql_command = "SELECT rg.country, rg.code, rg.name, co.activeMileage AS clinchedActiveMileage, o.activeMileage AS totalActiveMileage, co.activePreviewMileage AS clinchedActivePreviewMileage, o.activePreviewMileage AS totalActivePreviewMileage FROM overallMileageByRegion AS o INNER JOIN clinchedOverallMileageByRegion AS co ON co.region = o.region INNER JOIN regions AS rg ON rg.code = co.region WHERE co.traveler = '" . $tmuser . "';";
+        $sql_command = <<<SQL
+SELECT rg.country, 
+  rg.code, 
+  rg.name, 
+  co.activeMileage AS clinchedActiveMileage, 
+  o.activeMileage AS totalActiveMileage, 
+  co.activePreviewMileage AS clinchedActivePreviewMileage, 
+  o.activePreviewMileage AS totalActivePreviewMileage 
+FROM overallMileageByRegion AS o 
+  INNER JOIN clinchedOverallMileageByRegion AS co ON co.region = o.region 
+  INNER JOIN regions AS rg ON rg.code = co.region 
+WHERE co.traveler = '$tmuser';
+SQL;
         $res = tmdb_query($sql_command);
         while ($row = $res->fetch_assoc()) {
             if ( $row['totalActiveMileage'] == 0) {
@@ -213,7 +227,7 @@ SQL;
         </thead>
         <tbody>
         <?php
-        $sql_command = "SELECT sys.countryCode, sys.systemName, sys.level, sys.tier, sys.fullName, r.root, COALESCE(ROUND(SUM(cr.mileage), 2),0) AS clinchedMileage, COALESCE(ROUND(SUM(r.mileage), 2), 0) AS totalMileage, COALESCE(ROUND(SUM(cr.mileage) / SUM(r.mileage) * 100, 2), 0) AS percentage FROM systems AS sys INNER JOIN routes AS r ON r.systemName = sys.systemName LEFT JOIN clinchedRoutes AS cr ON cr.route = r.root AND cr.traveler = '" . $tmuser . "' WHERE (sys.level = 'active' OR sys.level = 'preview') GROUP BY r.systemName;";
+        $sql_command = "SELECT sys.countryCode, sys.systemName, sys.level, sys.tier, sys.fullName, COALESCE(ROUND(SUM(cr.mileage), 2),0) AS clinchedMileage, COALESCE(ROUND(SUM(r.mileage), 2), 0) AS totalMileage, COALESCE(ROUND(SUM(cr.mileage) / SUM(r.mileage) * 100, 2), 0) AS percentage FROM systems AS sys INNER JOIN routes AS r ON r.systemName = sys.systemName LEFT JOIN clinchedRoutes AS cr ON cr.route = r.root AND cr.traveler = '" . $tmuser . "' WHERE (sys.level = 'active' OR sys.level = 'preview') GROUP BY r.systemName;";
         $res = tmdb_query($sql_command);
         while ($row = $res->fetch_assoc()) {
 	    if ($row['clinchedMileage'] == 0) continue;
