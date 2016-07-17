@@ -64,6 +64,11 @@ table.gratable tr td {
     text-align: left;
 }
 
+table.gratable tr td .important {
+    background-color: #CCCCCC;
+    text-script: bold;
+}
+
 table.gratable tr[onclick]:hover td, table.gratable tr.user-highlight td {
     background-color: #CCCCCC;
     cursor: pointer;
@@ -78,15 +83,15 @@ table.tablesorter th.sortable:hover {
     cursor: pointer;
 }
 
-table tr.status-active td {
+table tr.status-active td, table tr td.status-active {
     background-color: #CCFFCC;
 }
 
-table tr.status-preview td {
+table tr.status-preview td, table tr td.status-preview {
     background-color: #FFFFCC;
 }
 
-table tr.status-devel td {
+table tr.status-devel td, table tr td.status-devel {
     background-color: #FFCCCC;
 }
 

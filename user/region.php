@@ -184,8 +184,11 @@ if (( $tmuser != "null") || ( $region != "" )) {
 	<?php tm_region_select(FALSE); ?>
         <input type="submit" value="Update Map and Stats" />
     </form>
-    <h1>Traveler Stats for <?php echo $tmuser . " in " . $regionName ?>:</h1>
-
+    <a href="/user/index.php">Back to User Page</a>
+    <?php
+        echo " -- <a href='/user/mapview.php?u={$tmuser}&rg={$region}'>View Larger Map</a>";
+        echo "<h1>Traveler Stats for {$tmuser} in {$region}:</h1>";
+    ?>
 </div>
 <?php
 if (( $tmuser == "null") || ( $region == "" )) {
@@ -356,7 +359,6 @@ SQL;
             sys.tier,
             sys.level AS status,
             sys.fullName,
-            r.root,
             COALESCE(ROUND(SUM(cr.mileage), 2), 0) AS clinchedMileage,
             COALESCE(ROUND(SUM(r.mileage), 2), 0) AS totalMileage,
             COALESCE(ROUND(SUM(cr.mileage) / SUM(r.mileage) * 100, 2), 0) AS percentage
