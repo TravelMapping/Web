@@ -62,7 +62,7 @@ echo tm_count_rows("systems", "WHERE level='active'");
 
 active systems.  "Active" systems are those which we believe are
 accurate and complete, and for which will will note any changes that
-affect users in the <a href="/devel/updates.php?updates">highway data
+affect users in the <a href="/devel/updates.php#updates">highway data
 updates table</a>.  An additional
 
 <?php

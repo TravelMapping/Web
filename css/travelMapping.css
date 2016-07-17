@@ -90,16 +90,6 @@ table tr.status-devel td {
     background-color: #FFCCCC;
 }
 
-table.gratable {
-    font-size: 10pt;
-    border: 1px solid black;
-    border-spacing: 0px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: white;
-}
-
-
 table.tablesorter th.headerSortUp {
     background-color: #DDFFDD !important;
 }
