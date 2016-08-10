@@ -107,7 +107,7 @@ following sources of highway information.</p>
 	    	    <ul>
 	      <li><a href="http://www.gov.bc.ca/tran/">British Columbia Ministry of Transportation and Infrastructure</a>. Official government site covering transportation in British Columbia, Canada.</li>
 	      <li><a href="http://www2.gov.bc.ca/gov/content/transportation/transportation-reports-and-reference/numbered-routes">Official Numbered Routes in British Columbia</a>. List of numbered routes in British Columbia from the Ministry of Transportation and Infrastructure.</li>
-              <li><a href="http://www2.gov.bc.ca/gov/content/transportation/transportation-infrastructure/engineering-standards-guidelines/landmark-kilometre-inventory">Landmark Kilomete Inventory</a>. Route logs for provincial highways, from the Ministry of Transportation and Infrastructure.</li>
+              <li><a href="http://www2.gov.bc.ca/gov/content/transportation/transportation-infrastructure/engineering-standards-guidelines/landmark-kilometre-inventory">Landmark Kilometre Inventory</a>. Route logs for provincial highways, from the Ministry of Transportation and Infrastructure.</li>
             </ul>
 	  </li>
           <li>Manitoba, CAN
@@ -155,14 +155,13 @@ following sources of highway information.</p>
 																 <li>Quebec, CAN
 	    <ul>
 	      <li><a href="http://www.quebec511.gouv.qc.ca/en/">Quebec 511</a>. Quebec highway maps from Transports Quebec.</li>
-	      <li><a href="http://www.mtq.gouv.qc.ca/portal/page/portal/grands_projets/trouver_grand_projet">Grands Projets</a>. Quebec autoroute construction projects from Transports Quebec.</li>	      
-	      <li><a href="http://www.mtq.gouv.qc.ca/portal/page/portal/grand_public/vehicules_promenade/reseau_routier/routes/repertoire_autoroutes">Repertoire des autoroutes du Quebec</a>. Quebec autoroute directory from Transports Quebec.</li>
+	      <li><a href="https://www.transports.gouv.qc.ca/fr/Pages/default.aspx">Transports Quebec offical website</a> (in French, English version limited to some traffic and trucking laws).</li>	      
             </ul>
 	  </li>
 											<li>Saskatchewan, CAN
 	    <ul>
 <li><a href="http://www.highways.gov.sk.ca/">Ministry of Transportation and Infrastructure</a>. Official website of provincial Ministry of Transportation and Infrastructure</li>
-<li><a href="http://www.tourismsaskatchewan.com/~/media/files/map-face-100-dpi.pdf?la=en">Travel Map</a>. Tourism Saskatchewan online detailed provincial highway map (city insets only available in paper version)</li>
+<li><a href="http://www.tourismsaskatchewan.com/~/media/files/map-face-100-dpi.pdf?la=en">Official Road Map</a>. Detailed provincial highway map, prepared by Ministry of Transportation and Infrastructure for Tourism Saskatchewan</li>
             </ul>
 	  </li>
 															 <li>Yukon Territory, CAN
