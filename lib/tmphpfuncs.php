@@ -21,12 +21,26 @@
 */
 
 // always attempt to establish a connection to the db, allow QS parameters
-// to override defaults
+// to override defaults, which come from the 5 lines of tm.conf (which
+// is not in source code control to protect the information there)
+//
+// IMPORTANT: this file should also not be accessible through the 
+// web server, using an entry like:
+//
+//<Files "tm.conf">
+//    Require all denied
+//</Files>
 
-$tmdbname = "TravelMapping";
-$tmdbuser = "travmap";
-$tmdbpasswd = "clinch";
-$tmdbhost = "localhost";
+
+$tmconffile = fopen($_SERVER['DOCUMENT_ROOT']."/lib/tm.conf", "r");
+$tmdbname = chop(fgets($tmconffile));
+$tmdbuser = chop(fgets($tmconffile));
+$tmdbpasswd = chop(fgets($tmconffile));
+$tmdbhost = chop(fgets($tmconffile));
+
+// Google Maps API Key
+$gmaps_api_key = chop(fgets($tmconffile));
+fclose($tmconffile);
 
 if (array_key_exists("dbname", $_GET)) {
     $tmdbname = $_GET['dbname'];

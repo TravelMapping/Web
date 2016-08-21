@@ -64,6 +64,11 @@ table.gratable tr td {
     text-align: left;
 }
 
+table.gratable tr td .important {
+    background-color: #CCCCCC;
+    text-script: bold;
+}
+
 table.gratable tr[onclick]:hover td, table.gratable tr.user-highlight td {
     background-color: #CCCCCC;
     cursor: pointer;
@@ -78,27 +83,17 @@ table.tablesorter th.sortable:hover {
     cursor: pointer;
 }
 
-table tr.status-active td {
+table tr.status-active td, table tr td.status-active {
     background-color: #CCFFCC;
 }
 
-table tr.status-preview td {
+table tr.status-preview td, table tr td.status-preview {
     background-color: #FFFFCC;
 }
 
-table tr.status-devel td {
+table tr.status-devel td, table tr td.status-devel {
     background-color: #FFCCCC;
 }
-
-table.gratable {
-    font-size: 10pt;
-    border: 1px solid black;
-    border-spacing: 0px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: white;
-}
-
 
 table.tablesorter th.headerSortUp {
     background-color: #DDFFDD !important;
@@ -239,6 +234,23 @@ table.gratable tr.float th {
 .menubar a:hover {
   color: #8080ff;
   text-decoration: underline;
+}
+
+/*  the errorbar when a DB update is in progress */
+.errorbar {
+  font-size: 14pt;
+  font-style: normal;
+  font-family: sans-serif;
+  text-align: center;
+  position: relative;
+  padding-right: 8px;
+  padding-bottom: 2px;
+  margin-top: 0px;
+  margin-bottom: 8px;
+  height: auto;
+  background: #FF0000;
+  color: #ffffff;
+  border: 3px solid #101080;
 }
 
 .main {
