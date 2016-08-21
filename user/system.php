@@ -45,7 +45,6 @@
             left: 0px;
             top: 80px;
             bottom: 0px;
-            width: 100%;
             overflow: auto;
             padding: 20px;
         }
