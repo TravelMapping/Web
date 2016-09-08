@@ -60,9 +60,9 @@ Travel Mapping currently includes highway data for
 echo tm_count_rows("systems", "WHERE level='active'");
 ?>
 
-active systems.  "Active" systems are those which we believe are
-accurate and complete, and for which will will note any changes that
-affect users in the <a href="/devel/updates.php#updates">highway data
+"active" systems.  Active systems are those which we believe are
+accurate and complete, and for which any changes that affect users
+will be noted in the <a href="/devel/updates.php#updates">highway data
 updates table</a>.  An additional
 
 <?php
