@@ -363,6 +363,13 @@
                 <th class="sortable clinched">Clinched</th><th class="sortable overall">Overall</th><th class="sortable percent">%</th></tr>
         </thead>
         <tbody>
+        <!-- TEMP FIX: dummy table line to account for the fact that the
+	styling places the table header row above on top of the first
+	row of data in the table -->
+        <tr><td class='routeName'>DUMMY</td>
+            <td class='link systemName'>1. syst</td>
+            <td class="clinched">0000</td><td class='overall'>0000</td><td class='percent'>0.00%</td>
+	</tr>
         <?php
 	// TODO: a toggle to include/exclude devel routes?
         $sql_command = <<<SQL
