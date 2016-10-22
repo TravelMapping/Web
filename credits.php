@@ -220,7 +220,7 @@ following sources of highway information.</p>
 	  <li>Germany
 	    <ul>
 	      <li><a href="http://www.autobahnatlas-online.de/index_e.html">Autobahn-Atlas</a>. Hobbyist site by Patrick Scholl covering the detailed routings and plans for German motorways.</li>
-	      <li><a href="http://www.bmvbs.de/DE/VerkehrUndMobilitaet/Verkehrstraeger/Strasse/strasse_node">Road Construction</a>. German motorway construction plans and maps from the Federal Minsitry of Transport, Building and Urban Development.</li>	    
+	      <li><a href="http://www.bmvi.de//DE/VerkehrUndMobilitaet/Verkehrstraeger/Strasse/strasse_node">Road Construction</a>. German motorway construction plans and maps from the Federal Minsitry of Transport, Building and Urban Development.</li>	    
 	    </ul>
 	  </li>
 	  <li>Greece
@@ -358,6 +358,11 @@ following sources of highway information.</p>
 	    <ul>
 	      <li><a href="http://www.pacopaco.es/">Maps of Spanish Infrastructure</a>. Map of current motorway/expressway system of Spain by Francisco Diaz Pardo.</li>
 	      <li><a href="http://cmati.xunta.es/portal/cidadan/lang/gl/pid/78">System of Autonomous Highways</a>. Road maps and video highway log from the Galicia Directorate of Intrastructure.</li>
+	  </ul>
+	  </li>
+	  <li>Sweden
+	    <ul>
+	      <li><a href="http://trafikinfo.trafikverket.se/LIT/#url=Vagtrafiken/Karta">Maps of Swedisch Infrastructure</a>. Map of current road system of Sweden.</li>
 	  </ul>
 	  </li>
 	  <li>Switzerland
