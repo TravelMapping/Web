@@ -733,7 +733,7 @@ following sources of highway information.</p>
         <a href="http://rickmastfan67.blogspot.com/">Rickmastfan67 Blog</a> </li>
   <li>Jeff Morrison (jeffm)<br>
         <a href="http://www.angelfire.com/ia/jdmorrison/ends/iaends.html">Iowa Highway Ends</a> </li>
-  <li>Dave S (mapcat), Maintains Kentucky and Ohio, developed some highway data for Kentucky</li>
+  <li>Dave S (mapcat)</li>
   <li>Christopher Steig (Bickendan)</li>
   <li>Jim Teresco (terescoj), Primary Back End Development, Developed highway data for New York, Massachusetts, and New Mexico<br>
       <a href="http://www.teresco.org/pics/signs/">Why Do You Have So Many Pictures of Road Signs?</a>  </li>
