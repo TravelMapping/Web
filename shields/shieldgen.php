@@ -1,16 +1,17 @@
 <?php
 function generate($r, $force_reload = false)
 {
+    global $tmdb;
     $dir = $_SERVER['DOCUMENT_ROOT']."/shields";
     if(file_exists("{$dir}/cache/shield_{$r}.svg") && !$force_reload) {
         //load from cache
         return file_get_contents("{$dir}/cache/shield_{$r}.svg");
     }
 
-    $db = new mysqli("localhost", "travmap", "clinch", "TravelMapping") or die("Failed to connect to database");
     $sql_command = "SELECT * FROM routes WHERE root = '" . $r . "';";
-    $res = $db->query($sql_command);
+    $res = tmdb_query($sql_command);
     $row = $res->fetch_assoc();
+    $res->free();
 
     if (file_exists("{$dir}/template_" . $row['systemName'] . ".svg")) {
         $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . ".svg");
@@ -31,8 +32,19 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+        case 'usaib':
+            //FIXME: route type text will not render small enough in clinched shield viewer
+            $routeNum = explode("-", $row['route'])[1];
+            if (strlen($routeNum) > 2) {
+                $svg = file_get_contents("{$dir}/template_usaib_wide.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            $type = "LOOP";
+            if ($row['banner'] == 'BS') $type = 'SPUR';
+            $svg = str_replace("***TYPE***", $type, $svg);
+            break;
+
         case 'usaus':
-        case 'usausb':
             $routeNum = str_replace("US", "", $row['route']);
             if (strlen($routeNum) > 2) {
                 $svg = file_get_contents("{$dir}/template_usaus_wide.svg");
@@ -40,7 +52,19 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
-        case 'usaky3':
+        case 'usausb':
+            $routeNum = str_replace("US", "", $row['route']);
+            $routeNum .= $row['banner'][0];
+            if (strlen($routeNum) == 3) {
+                $svg = file_get_contents("{$dir}/template_usausb_wide.svg");
+            }
+            if (strlen($routeNum) > 3) {
+                $svg = file_get_contents("{$dir}/template_usausb_wide4.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
+        case 'usaky3': case 'usaky4': case 'usaky5': case 'usaky6': case 'usaky7': case 'usaky8': case 'usaky9':
             $routeNum = str_replace("KY", "", $row['route']);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
@@ -78,7 +102,6 @@ function generate($r, $force_reload = false)
 
         case 'gbnm':case 'nirm':
             $routeNum = str_replace("M", "", $row['route']);
-            echo "<!--{$routeNum}-->";
             if (strlen($routeNum) > 2) {
                 $svg = file_get_contents("{$dir}/template_gbnm_wide.svg");
             }
@@ -94,7 +117,7 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
-        case 'usasf':case 'usanp':
+        case 'usasf': case 'usanp': case 'eursf': case 'usakyp': case 'gbrtr':
             $lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
             $index = 0;
             foreach($lines as $line) {

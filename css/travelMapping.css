@@ -3,7 +3,7 @@ body, html {
     border: 0;
     padding: 0;
     font-size: 9pt;
-    background-color: #EEEEFF;
+    background-color: #eeeeff;
 }
 
 table.nmptable {
@@ -64,6 +64,11 @@ table.gratable tr td {
     text-align: left;
 }
 
+table.gratable tr td .important {
+    background-color: #CCCCCC;
+    text-script: bold;
+}
+
 table.gratable tr[onclick]:hover td, table.gratable tr.user-highlight td {
     background-color: #CCCCCC;
     cursor: pointer;
@@ -78,27 +83,17 @@ table.tablesorter th.sortable:hover {
     cursor: pointer;
 }
 
-table tr.status-active td {
+table tr.status-active td, table tr td.status-active {
     background-color: #CCFFCC;
 }
 
-table tr.status-preview td {
+table tr.status-preview td, table tr td.status-preview {
     background-color: #FFFFCC;
 }
 
-table tr.status-devel td {
+table tr.status-devel td, table tr td.status-devel {
     background-color: #FFCCCC;
 }
-
-table.gratable {
-    font-size: 10pt;
-    border: 1px solid black;
-    border-spacing: 0px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: white;
-}
-
 
 table.tablesorter th.headerSortUp {
     background-color: #DDFFDD !important;
@@ -141,4 +136,262 @@ table.gratable tr.float th {
 .map-loading * {
     cursor: progress;
     background-color: #999999;
+}
+
+/* from jdtstyle.css: */
+/*body {
+  margin-top: 10px;
+  position: center;
+  background: #ffffff;
+  width: 750px;
+  color: #000000;
+  font-size: 12pt;
+}
+*/
+
+/* top line of title text at top of page */
+.title {
+  font-size: 24pt;
+  font-family: "Times New Roman", serif;
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 5px;
+  padding-right: 8px;
+  height: auto;
+  color: #eeeeee;
+  background: #000040;
+  border-left: 3px solid #000040;
+  border-right: 3px solid #000040;
+  border-bottom: 0px solid #000040;
+}
+
+/* 2nd line of title text at top of page
+   same basic style, but smaller text */
+.title2 {
+  font-size: 16pt;
+  font-family: "Times New Roman", serif;
+  text-align: center;
+  position: relative;
+  padding-right: 8px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  height: auto;
+  color: #ffffff;
+  background: #000040;
+  border-left: 3px solid #000040;
+  border-right: 3px solid #000040;
+}
+
+/* hyperlink in title */
+.title a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.title a:hover {
+  color: #808080;
+  text-decoration: none;
+}
+
+  /* hyperlink in title */
+.title2 a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.title2 a:hover {
+  color: #8080ff;
+  text-decoration: none;
+}
+
+  /*  the menubar at the top */
+.menubar {
+  font-size: 10pt;
+  font-style: normal;
+  font-family: sans-serif;
+  text-align: center;
+  position: relative;
+  padding-right: 8px;
+  padding-bottom: 2px;
+  margin-top: 0px;
+  margin-bottom: 8px;
+  height: auto;
+  background: #101080;
+  color: #ffffff;
+  border: 3px solid #101080;
+}
+
+  /*  hyperlink in menubar */
+.menubar a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+  /*  hyperlink with mouse over it in menubar */
+.menubar a:hover {
+  color: #8080ff;
+  text-decoration: underline;
+}
+
+/*  the errorbar when a DB update is in progress */
+.errorbar {
+  font-size: 14pt;
+  font-style: normal;
+  font-family: sans-serif;
+  text-align: center;
+  position: relative;
+  padding-right: 8px;
+  padding-bottom: 2px;
+  margin-top: 0px;
+  margin-bottom: 8px;
+  height: auto;
+  background: #FF0000;
+  color: #ffffff;
+  border: 3px solid #101080;
+}
+
+.main {
+ width: 758px;
+}
+
+.rfloaty {
+float: right;
+margin-left: 10px;
+}
+
+.lfloaty {
+float: right;
+margin-left: 10px;
+}
+
+/* mini bar under menu bar */
+.minibar {
+  text-align: right;
+  width: 750px;
+}
+
+
+  /*  the bottom bar across all pages */
+.bottom {
+  position: relative;
+  margin-top: 0px;
+  margin-bottom: -10px;
+  width: 750px;
+  background: #ffffff;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-bottom: 4px solid #000040;
+}
+
+
+  /*  title of section with dark blue bar underneath it */
+.heading, h1, h2 {
+  font-size: 18pt;
+  text-align: left;
+  font-family: "Lucida Grande", Geneva, Arial, Verdana, sans-serif;
+  position: relative;
+  margin-top: 20px;
+  margin-left: 0px;
+  margin-right: 50px;
+  margin-bottom: 0px;
+  height: auto;
+  color: #000000;
+  background: #eeeeff;
+  padding-left: 4px;
+  padding-right: 6px;
+  border-bottom: 3px solid #000040;
+}
+
+  /*  same style heading, but with larger text */
+.headingLarge {
+  font-size: 28px;
+  font-style: bold;
+  text-align: left;
+  position: relative;
+  margin-top: 20px;
+  margin-left: 00px;
+  margin-bottom: 0px;
+  width: 100%;
+  height: 36px;
+  color: #000000;
+  padding-bottom: 10px;
+  padding-left: 6px;
+  padding-right: 6px;
+  background: #eeeeff;
+  border-bottom: 5px solid #000040;
+}
+
+/*  title of subsection with dark bar below it */
+.subheading {
+  font-size: 15pt;
+  text-align: left;
+  font-family: "Lucida Grande", Geneva, Arial, Verdana, sans-serif;
+  position: relative;
+  margin-top: 16px;
+  margin-left: 0px;
+  margin-bottom: 0px;
+  width: 75%;
+  height: auto;
+  color: #000000;
+  background: #eeeeff;
+  padding-left: 4px;
+  padding-right: 6px;
+  border-bottom: 2px solid #008000;
+}
+
+
+  /*  a box for text, with a white background and border */
+.text {
+  font-size: 12pt;
+  font-family: "Lucida Grande", Geneva, Arial, Verdana, sans-serif;
+  text-align: left;
+  position: relative;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 10px;
+  margin-bottom: 8px;
+  background: #eeeeff;
+  color: #000000;
+  padding: 2px;
+  border: 2px solid #eeeeff;
+}
+
+/*  a box for text, with a gray background and dark border
+    info/text should always have same style text, etc-
+    just different coloring */
+.info {
+  font-size: 12pt;
+  font-family: "Lucida Grande", Geneva, Arial, Verdana, sans-serif;
+  text-align: left;
+  position: relative;
+  margin-left: 50px;
+  margin-top: 3px;
+  margin-bottom: 20px;
+  width: 700px;
+  background: #eeeeee;
+  color: #000000;
+  padding: 4px;
+  padding-left: 8px;
+  border: 2px solid #808080;
+}
+
+/*  heading font inside an info box */
+.info h3 {
+  font-size: 16pt;
+  text-align: left;
+}
+
+/*  heading font inside an info box */
+.info h4 {
+  font-size: 12pt;
+  font-style: bold;
+  text-align: left;
+}
+
+.right {
+	width: 750px;
+	text-align: right;
 }
