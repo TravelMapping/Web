@@ -488,7 +488,7 @@ following sources of highway information.</p>
 	  </li>
 	  <li>Indiana, USA
 	    <ul>
-	    <li><a href="http://www.in.gov/indot/2377.htm">Indiana highway maps</a>. Online roads maps from the Indiana Department of Transportation.</li>	      
+	    <li><a href="http://www.in.gov/indot/2350.htm">Indiana highway maps</a>. Online roads maps from the Indiana Department of Transportation.</li>	      
 	    </ul>
 	  </li>
 	  <li>Iowa, USA
@@ -537,6 +537,7 @@ following sources of highway information.</p>
 	    <ul>
 	    <li><a href="http://www.michiganhighways.org/">Michigan Highways</a>. Comprehensive directory of Michigan highways</li>
 	    <li><a href="http://www.michigan.gov/mdot/0,1607,7-151-9622_11033_11151---,00.html">Michigan State Highway Map</a>. On-line Michigan state highway map.</li>
+	    <li><a href="https://mdotnetpublic.state.mi.us/drive/">Mi Drive</a>. A traffic and construction information resource center for driving Michigan roads.</li>
 	    </ul>
 	  </li>
 	  <li>Minnesota, USA
@@ -733,7 +734,7 @@ following sources of highway information.</p>
         <a href="http://rickmastfan67.blogspot.com/">Rickmastfan67 Blog</a> </li>
   <li>Jeff Morrison (jeffm)<br>
         <a href="http://www.angelfire.com/ia/jdmorrison/ends/iaends.html">Iowa Highway Ends</a> </li>
-  <li>Dave S (mapcat), Maintains Kentucky and Ohio, developed some highway data for Kentucky</li>
+  <li>Dave S (mapcat)</li>
   <li>Christopher Steig (Bickendan)</li>
   <li>Jim Teresco (terescoj), Primary Back End Development, Developed highway data for New York, Massachusetts, and New Mexico<br>
       <a href="http://www.teresco.org/pics/signs/">Why Do You Have So Many Pictures of Road Signs?</a>  </li>
