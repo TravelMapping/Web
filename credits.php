@@ -176,10 +176,10 @@ following sources of highway information.</p>
 	      <li><a href="http://www.hrvatske-ceste.hr/Ceste.htm">Croatian Roads</a>. State highway list from Croatian Roads d. o. o.</li>
 	    </ul>
 	  </li>
-	  <li>Czech Republic
+	  <li>Czechia
 	    <ul>
-	      <li><a href="http://www.ceskedalnice.cz/">Ceske Dalnice</a>. Hobbyist site covering the motorway/expressway network in the Czech Republic.</li>
-	      <li><a href="http://www.rsd.cz/">Road and Motorway Directorate of the Czech Republic</a>. Official site of the motorway/expressway network in the Czech Republic.</li>
+	      <li><a href="http://www.ceskedalnice.cz/">Ceske Dalnice</a>. Hobbyist site covering the motorway/expressway network in Czechia.</li>
+	      <li><a href="http://www.rsd.cz/">Road and Motorway Directorate of Czechia</a>. Official site of the motorway/expressway network in Czechia.</li>
 	    </ul>
 	  </li>
 	  <li>Denmark
