@@ -330,7 +330,7 @@ SQL;
                     <td>{$row['region']}</td>
                     <td>{$row['clinchedMileage']}</td>
                     <td>{$row['totalMileage']}</td>
-                    <td>{$row['percentage']}</td>
+                    <td>{$row['percentage']}%</td>
                 </tr>
 HTML;
             }
