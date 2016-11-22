@@ -345,7 +345,7 @@ SQL;
         if (!startsWith($row['pointName'], "+")) {
             $colorFactor = $row['driverPercent'] / 100;
             $colors = [255, 255 - round($colorFactor * 128), 255 - round($colorFactor * 128)];
-            echo "<tr><td>(" . $row['latitude'] . "," . $row['longitude'] . ")</td><td class='link'><a onClick='javascript:LabelClick(" . $waypointnum . ",\"" . $row['pointName'] . "\"," . $row['latitude'] . "," . $row['longitude'] . ",0);'>" . $row['pointName'] . "</a></td><td style='background-color: rgb({$colors[0]},{$colors[1]},{$colors[2]})'>{$row['driverPercent']}</td></tr>\n";
+            echo "<tr onClick='javascript:LabelClick(" . $waypointnum . ",\"" . $row['pointName'] . "\"," . $row['latitude'] . "," . $row['longitude'] . ",0);'><td>(" . $row['latitude'] . "," . $row['longitude'] . ")</td><td class='link'>" . $row['pointName'] . "</td><td style='background-color: rgb({$colors[0]},{$colors[1]},{$colors[2]})'>{$row['driverPercent']}</td></tr>\n";
         }
         $waypointnum = $waypointnum + 1;
     }
