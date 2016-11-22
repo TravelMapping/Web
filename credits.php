@@ -176,10 +176,10 @@ following sources of highway information.</p>
 	      <li><a href="http://www.hrvatske-ceste.hr/Ceste.htm">Croatian Roads</a>. State highway list from Croatian Roads d. o. o.</li>
 	    </ul>
 	  </li>
-	  <li>Czech Republic
+	  <li>Czechia
 	    <ul>
-	      <li><a href="http://www.ceskedalnice.cz/">Ceske Dalnice</a>. Hobbyist site covering the motorway/expressway network in the Czech Republic.</li>
-	      <li><a href="http://www.rsd.cz/">Road and Motorway Directorate of the Czech Republic</a>. Official site of the motorway/expressway network in the Czech Republic.</li>
+	      <li><a href="http://www.ceskedalnice.cz/">Ceske Dalnice</a>. Hobbyist site covering the motorway/expressway network in Czechia.</li>
+	      <li><a href="http://www.rsd.cz/">Road and Motorway Directorate of Czechia</a>. Official site of the motorway/expressway network in Czechia.</li>
 	    </ul>
 	  </li>
 	  <li>Denmark
@@ -220,7 +220,7 @@ following sources of highway information.</p>
 	  <li>Germany
 	    <ul>
 	      <li><a href="http://www.autobahnatlas-online.de/index_e.html">Autobahn-Atlas</a>. Hobbyist site by Patrick Scholl covering the detailed routings and plans for German motorways.</li>
-	      <li><a href="http://www.bmvbs.de/DE/VerkehrUndMobilitaet/Verkehrstraeger/Strasse/strasse_node">Road Construction</a>. German motorway construction plans and maps from the Federal Minsitry of Transport, Building and Urban Development.</li>	    
+	      <li><a href="http://www.bmvi.de//DE/VerkehrUndMobilitaet/Verkehrstraeger/Strasse/strasse_node">Road Construction</a>. German motorway construction plans and maps from the Federal Minsitry of Transport, Building and Urban Development.</li>	    
 	    </ul>
 	  </li>
 	  <li>Greece
@@ -360,6 +360,11 @@ following sources of highway information.</p>
 	      <li><a href="http://cmati.xunta.es/portal/cidadan/lang/gl/pid/78">System of Autonomous Highways</a>. Road maps and video highway log from the Galicia Directorate of Intrastructure.</li>
 	  </ul>
 	  </li>
+	  <li>Sweden
+	    <ul>
+	      <li><a href="http://trafikinfo.trafikverket.se/LIT/#url=Vagtrafiken/Karta">Maps of Swedisch Infrastructure</a>. Map of current road system of Sweden.</li>
+	  </ul>
+	  </li>
 	  <li>Switzerland
 	    <ul>
 	      <li><a href="http://www.admin.ch/ch/d/sr/741_272/app1.html">List of Motorways and Expressways</a>. Legislative highway definitions for the national highway network of Switzerland.</li>
@@ -483,7 +488,7 @@ following sources of highway information.</p>
 	  </li>
 	  <li>Indiana, USA
 	    <ul>
-	    <li><a href="http://www.in.gov/indot/2377.htm">Indiana highway maps</a>. Online roads maps from the Indiana Department of Transportation.</li>	      
+	    <li><a href="http://www.in.gov/indot/2350.htm">Indiana highway maps</a>. Online roads maps from the Indiana Department of Transportation.</li>	      
 	    </ul>
 	  </li>
 	  <li>Iowa, USA
@@ -532,6 +537,7 @@ following sources of highway information.</p>
 	    <ul>
 	    <li><a href="http://www.michiganhighways.org/">Michigan Highways</a>. Comprehensive directory of Michigan highways</li>
 	    <li><a href="http://www.michigan.gov/mdot/0,1607,7-151-9622_11033_11151---,00.html">Michigan State Highway Map</a>. On-line Michigan state highway map.</li>
+	    <li><a href="https://mdotnetpublic.state.mi.us/drive/">Mi Drive</a>. A traffic and construction information resource center for driving Michigan roads.</li>
 	    </ul>
 	  </li>
 	  <li>Minnesota, USA
@@ -728,7 +734,7 @@ following sources of highway information.</p>
         <a href="http://rickmastfan67.blogspot.com/">Rickmastfan67 Blog</a> </li>
   <li>Jeff Morrison (jeffm)<br>
         <a href="http://www.angelfire.com/ia/jdmorrison/ends/iaends.html">Iowa Highway Ends</a> </li>
-  <li>Dave S (mapcat), Maintains Kentucky and Ohio, developed some highway data for Kentucky</li>
+  <li>Dave S (mapcat)</li>
   <li>Christopher Steig (Bickendan)</li>
   <li>Jim Teresco (terescoj), Primary Back End Development, Developed highway data for New York, Massachusetts, and New Mexico<br>
       <a href="http://www.teresco.org/pics/signs/">Why Do You Have So Many Pictures of Road Signs?</a>  </li>
