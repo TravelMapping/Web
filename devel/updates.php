@@ -132,11 +132,11 @@ Entries]
   <?php
       if ($updatecount == 0) {
         // select all updates in the DB
-        $sql_command = "select * from updates order by date desc;";
+        $sql_command = "select * from updates order by date desc, region;";
       }
       else {
         // select limited number of updates in the DB
-        $sql_command = "select * from updates order by date desc limit ".$updatecount.";";
+        $sql_command = "select * from updates order by date desc, region limit ".$updatecount.";";
       }
       $res = tmdb_query($sql_command);
 
