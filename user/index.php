@@ -244,7 +244,9 @@ FROM systems as sys
 INNER JOIN systemMileageByRegion AS sm 
   ON sm.systemName = sys.systemName
 LEFT JOIN clinchedSystemMileageByRegion AS csm 
-  ON csm.systemName = sys.systemName AND csm.traveler = '$tmuser'
+  ON sm.region = csm.region AND 
+     csm.systemName = sys.systemName AND
+     csm.traveler = '$tmuser'
 WHERE (sys.level = 'active' OR sys.level = 'preview')
 GROUP BY sm.systemName;
 SQL;
