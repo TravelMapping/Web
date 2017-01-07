@@ -73,6 +73,11 @@ function generate($r, $force_reload = false)
             }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
+
+        case 'usaky3': case 'usaky4': case 'usaky5': case 'usaky6': case 'usaky7': case 'usaky8': case 'usaky9':
+            $routeNum = str_replace("KY", "", $row['route']);
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
             
         case 'usama':
             $routeNum = str_replace("MA", "", $row['route']);
@@ -87,11 +92,6 @@ function generate($r, $force_reload = false)
             if (strlen($routeNum) > 2) {
                 $svg = file_get_contents("{$dir}/template_usame_wide.svg");
             }
-            $svg = str_replace("***NUMBER***", $routeNum, $svg);
-            break;
-
-        case 'usaky3': case 'usaky4': case 'usaky5': case 'usaky6': case 'usaky7': case 'usaky8': case 'usaky9':
-            $routeNum = str_replace("KY", "", $row['route']);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
