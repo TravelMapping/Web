@@ -4,6 +4,6 @@
 <rect rx="22.2" ry="22.2" height="120" width="200" y="0" x="-100" fill="#F0CA00"/>
 <rect rx="18" ry="18" height="112" width="192" y="4.25" x="-95.8"/>
 <rect rx="11" ry="11" height="97.5" width="178" y="11.2" x="-88.8" fill="#F0CA00"/>
-<text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="425px" line-height="125%" y="492.5" x="299.90381" font-family="&apos;Roadgeek 2014 Series D&apos;" fill="#ffffff"><tspan y="492.5" x="299.90381">***NUMBER***</tspan></text>
+<text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="425px" line-height="125%" y="492.5" x="299.90381" font-family="&apos;Roadgeek 2014 Series D&apos;" fill="#000000"><tspan y="492.5" x="299.90381">***NUMBER***</tspan></text>
 </g>
 </svg>
