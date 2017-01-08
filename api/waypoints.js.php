@@ -34,12 +34,12 @@
         $num_regions = 0;
         foreach ($regions as $region) {
             if ($num_regions == 0) {
-                $select_regions = " and (routes.region='".$region."'";
-                $where_regions = " where (region='".$region."'";
+                $select_regions = " and (routes.region='$region'";
+                $where_regions = " where (region='$region'";
             }
             else {
-                $select_regions = $select_regions." or routes.region='".$region."'";
-                $where_regions = $where_regions." or region='".$region."'";
+                $select_regions = $select_regions." or routes.region='$region'";
+                $where_regions = $where_regions." or region='$region'";
             }
             $num_regions = $num_regions + 1;
         }
@@ -57,12 +57,12 @@
         $num_systems = 0;
         foreach ($systems as $system) {
             if ($num_systems == 0) {
-                $select_systems = " and (routes.systemName='".$system."'";
-                $where_systems = " where (routes.systemName='".$system."'";
+                $select_systems = " and (routes.systemName='$system'";
+                $where_systems = " where (routes.systemName='$system'";
             }
             else {
-                $select_systems = $select_systems." or routes.systemName='".$system."'";
-                $where_systems = $where_systems." or routes.systemName='".$system."'";
+                $select_systems = $select_systems." or routes.systemName='$system'";
+                $where_systems = $where_systems." or routes.systemName='$system'";
             }
             $num_systems = $num_systems + 1;
         }
@@ -76,14 +76,39 @@
             $rteClause = str_replace("*", "%", $rteClause);
             if (array_key_exists('rg', $_GET)) $rteClause .= " AND ".orClauseBuilder('rg', 'region','routes');
             if (array_key_exists('sys', $_GET)) $rteClause .= " AND ".orClauseBuilder('sys', 'systemName','routes');
-            $sql_command = "SELECT waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname FROM waypoints JOIN routes ON routes.root = waypoints.root JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause."  ".$rteClause." ORDER BY root, waypoints.pointId;";
+            $sql_command = <<<SQL
+SELECT 
+  waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, 
+  systems.tier, systems.color, systems.systemname 
+FROM waypoints 
+  JOIN routes ON routes.root = waypoints.root 
+  JOIN systems ON routes.systemname = systems.systemname AND $activeClause $rteClause
+  ORDER BY root, waypoints.pointId;
+SQL;
         } elseif (($num_systems == 0) && ($num_regions == 0)) {
             // for now, put in a default to usai, do something better later
             $select_systems = " and (routes.systemName='usai')";
             $where_systems = " where (routes.systemName='usai')";
-            $sql_command = "SELECT waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname FROM waypoints JOIN routes ON routes.root = waypoints.root".$select_regions.$select_systems." JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause."  ORDER BY root, waypoints.pointId;";
+            $sql_command = <<<SQL
+SELECT 
+  waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, 
+  systems.tier, systems.color, systems.systemname 
+FROM waypoints 
+  JOIN routes ON routes.root = waypoints.root
+  {$select_regions}{$select_systems}
+  JOIN systems ON routes.systemname = systems.systemname AND $activeClause 
+ORDER BY root, waypoints.pointId;
+SQL;
         } else {
-            $sql_command = "SELECT waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname FROM waypoints JOIN routes ON routes.root = waypoints.root".$select_regions.$select_systems." JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause."  ORDER BY root, waypoints.pointId;";
+            $sql_command = <<<SQL
+SELECT 
+  waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, 
+  systems.tier, systems.color, systems.systemname 
+FROM waypoints 
+  JOIN routes ON routes.root = waypoints.root $select_regions $select_systems
+  JOIN systems ON routes.systemname = systems.systemname AND $activeClause
+ORDER BY root, waypoints.pointId;
+SQL;
         }
 
         $res = tmdb_query($sql_command);
@@ -93,43 +118,76 @@
         $lastRoute = "";
         while ($row = $res->fetch_assoc()) {
             if (!($row['root'] == $lastRoute)) {
-                echo "newRouteIndices[".$routenum."] = ".$pointnum.";\n";
-                echo "routeTier[".$routenum."] = ".$row['tier'].";\n";
-                echo "routeColor[".$routenum."] = '".$row['color']."';\n";
-                echo "routeSystem[".$routenum."] = '".$row['systemname']."';\n";
+                echo <<<JS
+newRouteIndices[$routenum] = $pointnum;
+routeTier[$routenum] = {$row['tier']};
+routeColor[$routenum] = '{$row['color']}';
+routeSystem[$routenum] = '{$row['systemname']}';\n
+JS;
                 $lastRoute = $row['root'];
                 $routenum = $routenum + 1;
             }
-            echo "waypoints[".$pointnum."] = new Waypoint(\"".$row['pointName']."\",".$row['latitude'].",".$row['longitude']."); // Route = ".$row['root']." (".$row['color'].")\n";
+            //echo "waypoints[".$pointnum."] = new Waypoint(\"".$row['pointName']."\",".$row['latitude'].",".$row['longitude']."); // Route = ".$row['root']." (".$row['color'].")\n";
+            echo "waypoints[$pointnum] = new Waypoint(\"{$row['pointName']}\",{$row['latitude']},{$row['longitude']})\n";
             $pointnum = $pointnum + 1;
         }
 
         // check for query string parameter for traveler clinched mapping of route
         if (array_key_exists("u",$_GET)) {
-            echo "// select_systems: ".$select_systems."\n";
-            echo "// where_systems: ".$where_systems."\n";
+            //echo "// select_systems: ".$select_systems."\n";
+            //echo "// where_systems: ".$where_systems."\n";
             echo "traveler = '".$_GET['u']."';\n";
             // retrieve list of segments for this region or regions
             if(isset($rteClause)) {
-                $sql_command = "SELECT segments.segmentId, segments.root FROM segments JOIN routes ON routes.root = segments.root JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause." ".$rteClause." ORDER BY root, segments.segmentId;";
+                $sql_command = <<<SQL
+SELECT 
+  segments.segmentId, segments.root 
+FROM segments 
+  JOIN routes ON routes.root = segments.root 
+  JOIN systems ON routes.systemname = systems.systemname AND $activeClause $rteClause
+ORDER BY root, segments.segmentId;
+SQL;
             } else {
-                $sql_command = "SELECT segments.segmentId, segments.root FROM segments JOIN routes ON routes.root = segments.root JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause." ".$where_regions.$select_systems." ORDER BY root, segments.segmentId;";
+                $sql_command = <<<SQL
+SELECT 
+  segments.segmentId, segments.root 
+FROM segments 
+  JOIN routes ON routes.root = segments.root 
+  JOIN systems ON routes.systemname = systems.systemname AND $activeClause $where_regions $select_systems
+ORDER BY root, segments.segmentId;
+SQL;
             }
             $res = tmdb_query($sql_command);
             $segmentIndex = 0;
             while ($row = $res->fetch_assoc()) {
-                echo "segments[".$segmentIndex."] = ".$row['segmentId']."; // route=".$row['root']."\n";
+                echo "segments[$segmentIndex] = {$row['segmentId']}; // route={$row['root']}\n";
                 $segmentIndex = $segmentIndex + 1;
             }
             if(isset($rteClause)) {
-                $sql_command = "SELECT segments.segmentId, segments.root FROM segments RIGHT JOIN clinched ON segments.segmentId = clinched.segmentId JOIN routes ON routes.root = segments.root JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause." ".$rteClause." AND clinched.traveler='".$_GET['u']."' ORDER BY root, segments.segmentId;";
+                $sql_command = <<<SQL
+SELECT 
+  segments.segmentId, segments.root 
+FROM segments 
+  RIGHT JOIN clinched ON segments.segmentId = clinched.segmentId 
+  JOIN routes ON routes.root = segments.root 
+  JOIN systems ON routes.systemname = systems.systemname AND $activeClause $rteClause AND clinched.traveler='{$_GET['u']}'
+  ORDER BY root, segments.segmentId;
+SQL;
             } else {
-                $sql_command = "SELECT segments.segmentId, segments.root FROM segments RIGHT JOIN clinched ON segments.segmentId = clinched.segmentId JOIN routes ON routes.root = segments.root JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause." ".$where_regions.$select_systems." AND clinched.traveler='".$_GET['u']."' ORDER BY root, segments.segmentId;";
+                $sql_command = <<<SQL
+SELECT 
+  segments.segmentId, segments.root 
+FROM segments 
+  RIGHT JOIN clinched ON segments.segmentId = clinched.segmentId 
+  JOIN routes ON routes.root = segments.root 
+  JOIN systems ON routes.systemname = systems.systemname AND $activeClause $where_regions $select_systems AND clinched.traveler='{$_GET['u']}'
+  ORDER BY root, segments.segmentId;
+SQL;
             }
             $res = tmdb_query($sql_command);
             $segmentIndex = 0;
             while ($row = $res->fetch_assoc()) {
-                echo "clinched[".$segmentIndex."] = ".$row['segmentId']."; // route=".$row['root']."\n";
+                echo "clinched[$segmentIndex] = {$row['segmentId']}; // route={$row['root']}\n";
                 $segmentIndex = $segmentIndex + 1;
             }
             echo "mapClinched = true;\n";
@@ -155,7 +213,7 @@
             $res = tmdb_query($sql_command);
             $pointnum = 0;
             while ($row = $res->fetch_assoc()) {
-                echo "waypoints[" . $pointnum . "] = new Waypoint(\"" . $row['pointName'] . "\"," . $row['latitude'] . "," . $row['longitude'] . ");\n";
+                echo "waypoints[$pointnum] = new Waypoint(\"{$row['pointName']}\",{$row['latitude']},{$row['longitude']});\n";
                 $pointnum = $pointnum + 1;
             }
             $res->free();
@@ -165,23 +223,29 @@
         }
         // check for query string parameter for traveler clinched mapping of route
         if ($tmuser != "") {
-            echo "traveler = '" . $tmuser . "';\n";
+            echo "traveler = '$tmuser';\n";
             if ($routeparam != "") {
                 // retrieve list of segments for this route
                 echo "// SQL: select segmentId from segments where root = '" . $routeparam . "';\n";
-                $sql_command = "SELECT segmentId FROM segments WHERE root = '" . $routeparam . "';";
+                $sql_command = "SELECT segmentId FROM segments WHERE root = '$routeparam';";
                 $res = tmdb_query($sql_command);
                 $segmentIndex = 0;
                 while ($row = $res->fetch_assoc()) {
-                    echo "segments[" . $segmentIndex . "] = " . $row['segmentId'] . ";\n";
+                    echo "segments[$segmentIndex] = {$row['segmentId']};\n";
                     $segmentIndex = $segmentIndex + 1;
                 }
                 $res->free();
-                $sql_command = "SELECT segments.segmentId FROM segments RIGHT JOIN clinched ON segments.segmentId = clinched.segmentId WHERE segments.root='" . $routeparam . "' AND clinched.traveler='" . $tmuser . "';";
+                $sql_command = <<<SQL
+SELECT 
+  segments.segmentId 
+FROM segments 
+  RIGHT JOIN clinched ON segments.segmentId = clinched.segmentId 
+WHERE segments.root='$routeparam' AND clinched.traveler = '$tmuser';
+SQL;
                 $res = tmdb_query($sql_command);
                 $segmentIndex = 0;
                 while ($row = $res->fetch_assoc()) {
-                    echo "clinched[" . $segmentIndex . "] = " . $row['segmentId'] . ";\n";
+                    echo "clinched[$segmentIndex] = {$row['segmentId']};\n";
                     $segmentIndex = $segmentIndex + 1;
                 }
                 $res->free();
