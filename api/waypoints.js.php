@@ -1,5 +1,25 @@
 <?php
+/**
+ * Returns the WaypointsFromSQL() JS function used to define waypoints for map drawing.
+ * URL params:
+ *  u - Traveler Name
+ *
+ *  For a singular route:
+ *  r - root of desired route, if singular
+ *
+ *  For many routes:
+ *  rg - code of region to search in
+ *  sys - code of system to search in
+ *
+ */
     require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php";
+
+    if(!array_key_exists('r', $_GET) && !array_key_exists('sys', $_GET) && !array_key_exists('rg', $_GET) && !array_key_exists('rte', $_GET))
+    {
+        echo "Missing parameter: one of r, rg, sys, or rte MUST be set.";
+        http_response_code(400);
+        exit();
+    }
     
     function select_route_set () {
         // later get this from a QS parameter probably
