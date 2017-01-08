@@ -89,7 +89,6 @@
     <script src="http://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript"></script>
     <!-- TableSorter -->
     <script src="/lib/jquery.tablesorter.min.js" type="text/javascript"></script>
-    <script type="application/javascript" src="../api/waypoints.js.php?<?php echo $_SERVER['QUERY_STRING']?>"></script>
 </head>
 <body 
 <?php
@@ -373,4 +372,5 @@ SQL;
 <?php
     $tmdb->close();
 ?>
+<script type="application/javascript" src="../api/waypoints.js.php?<?php echo $_SERVER['QUERY_STRING']?>"></script>
 </html>

@@ -142,7 +142,6 @@
     <script src="/lib/jquery.tablesorter.min.js" type="text/javascript"></script>
 
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
-    <script type="application/javascript" src="../api/waypoints.js.php?<?php echo "r=$routeparam&u=$tmuser";?>"></script>
     <script type="application/javascript">
         $(document).ready(function () {
                 $("#routes").tablesorter({
@@ -397,4 +396,5 @@ HTML;
 $tmdb->close();
 ?>
 </body>
+<script type="application/javascript" src="../api/waypoints.js.php?<?php echo "r=$routeparam&u=$tmuser";?>"></script>
 </html>

@@ -198,5 +198,3 @@ function waypointsFromSQL() {
     ?>
     genEdges = true;
 }
-
-<?php if ($_GET['update']) echo "waypointsFromSQL(); updateMap()"; ?>
