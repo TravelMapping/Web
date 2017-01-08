@@ -114,9 +114,8 @@
     <script type="application/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <!-- TableSorter -->
     <script type="application/javascript" src="/lib/jquery.tablesorter.js"></script>
-    
+
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
-    <script type="application/javascript" src="../api/waypoints.js.php?<?php echo $_SERVER['QUERY_STRING']?>"></script>
     <title>Travel Mapping: Draft Map Overlay Viewer</title>
 </head>
 
@@ -282,4 +281,6 @@ HTML
 <?php
     $tmdb->close();
 ?>
+
+<script type="application/javascript" src="../api/waypoints.js.php?<?php echo $_SERVER['QUERY_STRING']?>"></script>
 </html>
