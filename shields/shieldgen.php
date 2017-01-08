@@ -63,6 +63,16 @@ function generate($r, $force_reload = false)
             }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
+        
+        case 'usafl':
+            $routeNum = str_replace("FL", "", $row['route']);
+            if (strlen($routeNum) > 3) {
+                $svg = file_get_contents("{$dir}/template_usafl_wide4.svg");
+            } elseif (strlen($routeNum) > 2) {
+                $svg = file_get_contents("{$dir}/template_usafl_wide.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
 
         case 'usaky3': case 'usaky4': case 'usaky5': case 'usaky6': case 'usaky7': case 'usaky8': case 'usaky9':
             $routeNum = str_replace("KY", "", $row['route']);
@@ -98,6 +108,16 @@ function generate($r, $force_reload = false)
             $region = strtoupper($region);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             $svg = str_replace("***SYS***", $region, $svg);
+            break;
+            
+        case 'usany':
+            $routeNum = str_replace("NY", "", $row['route']);
+            if (strlen($routeNum) > 3) {
+                $svg = file_get_contents("{$dir}/template_usany_wide4.svg");
+            } elseif (strlen($routeNum) > 2) {
+                $svg = file_get_contents("{$dir}/template_usany_wide.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
         case 'gbnm':case 'nirm':

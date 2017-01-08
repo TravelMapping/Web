@@ -254,7 +254,7 @@ SQL;
             $row = tm_fetch_user_row_with_rank($res, 'clinchedMileage');
             $res->free();
 	    $percentage = $row['clinchedMileage'] / $system_mileage * 100;
-            $link = "window.open('/user/mapview.php?u=" . $user . "&amp;sys=" . $system . "')";
+            $link = "window.open('/shields/clinched.php?u=" . $tmuser . "&amp;sys=" . $system . "')";
             echo "<tr style=\"background-color:#EEEEFF\"><td>Miles Driven</td><td>".sprintf('%0.2f', $row['clinchedMileage'])." of ".sprintf('%0.2f', $system_mileage)." mi (".sprintf('%0.2f',$percentage)."%) Rank: {$row['rank']}</td></tr>";
 
             //Second, fetch routes clinched/driven

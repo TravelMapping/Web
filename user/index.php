@@ -227,7 +227,29 @@ SQL;
         </thead>
         <tbody>
         <?php
-        $sql_command = "SELECT sys.countryCode, sys.systemName, sys.level, sys.tier, sys.fullName, COALESCE(ROUND(SUM(cr.mileage), 2),0) AS clinchedMileage, COALESCE(ROUND(SUM(r.mileage), 2), 0) AS totalMileage, COALESCE(ROUND(SUM(cr.mileage) / SUM(r.mileage) * 100, 2), 0) AS percentage FROM systems AS sys INNER JOIN routes AS r ON r.systemName = sys.systemName LEFT JOIN clinchedRoutes AS cr ON cr.route = r.root AND cr.traveler = '" . $tmuser . "' WHERE (sys.level = 'active' OR sys.level = 'preview') GROUP BY r.systemName;";
+        // need to build system mileages from systemMileageByRegion
+        // and clinchedSystemMileageByRegion tables since they already
+        // take concurrencies into account properly
+        $sql_command = <<<SQL
+SELECT
+sys.countryCode,
+sys.systemName,
+sys.level,
+sys.tier,
+sys.fullName,
+COALESCE(ROUND(SUM(csm.mileage), 2), 0) AS clinchedMileage,
+COALESCE(ROUND(SUM(sm.mileage), 2), 0) AS totalMileage,
+COALESCE(ROUND(SUM(csm.mileage)/ SUM(sm.mileage) * 100, 2), 0) AS percentage
+FROM systems as sys
+INNER JOIN systemMileageByRegion AS sm 
+  ON sm.systemName = sys.systemName
+LEFT JOIN clinchedSystemMileageByRegion AS csm 
+  ON sm.region = csm.region AND 
+     csm.systemName = sys.systemName AND
+     csm.traveler = '$tmuser'
+WHERE (sys.level = 'active' OR sys.level = 'preview')
+GROUP BY sm.systemName;
+SQL;
         $res = tmdb_query($sql_command);
         while ($row = $res->fetch_assoc()) {
 	    if ($row['clinchedMileage'] == 0) continue;
