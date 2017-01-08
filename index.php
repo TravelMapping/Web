@@ -17,10 +17,10 @@
 
 Travel Mapping is a collaborative project implemented and maintained
 by a <a href="credits.php#contributors">group</a> of travel
-enthusiasts who enjoy tracking their cumulative highway travels. This
+enthusiasts who enjoy tracking their cumulative highway travels.  This
 site allows its <a href="/stat.php">users</a> to submit lists of
 highway segments they've traveled on the <a href="/hb">highway
-systems</a> that have been included in the project. Those lists are
+systems</a> that have been included in the project.  Those lists are
 then imported into the project's database, to be included along with
 other users' stats and maps.
 
@@ -60,35 +60,24 @@ Travel Mapping currently includes highway data for
 echo tm_count_rows("systems", "WHERE level='active'");
 ?>
 
-"active" systems. Active systems are those which we believe are
+"active" systems.  Active systems are those which we believe are
 accurate and complete, and for which any changes that affect users
 will be noted in the <a href="/devel/updates.php#updates">highway data
-updates table</a>.
-
-</p>
-
-<p class="text">An additional
+updates table</a>.  An additional
 
 <?php
 echo tm_count_rows("systems", "WHERE level='preview'");
 ?>
 
 systems are in "preview" status, which means they are substantially
-complete, but still undergoing final revisions. These may still
+complete, but still undergoing final revisions.  These may still
 undergo significant changes without notification.
-
-</p>
-
-<p class="text">
 
 <?php
 echo tm_count_rows("systems", "WHERE level='devel'");
 ?>
- more are in development but are not yet complete.
-
-</p>
-
-<p class="text">Active system encompass 
+ more are in development but are not yet complete.  Active system
+encompass 
 <?php
 echo number_format(tm_count_rows("connectedRoutes", "LEFT JOIN systems ON connectedRoutes.systemName = systems.systemName WHERE systems.level = 'active'"));
 ?>
@@ -112,7 +101,7 @@ echo number_format(tm_sum_column("overallMileageByRegion", "activePreviewMileage
 
 <p class="text">
 
-Anyone can submit their travels to be included in the site. Please
+Anyone can submit their travels to be included in the site.  Please
 see the information in <a href="/forum">the project forum</a> for how
 to create and submit your data.
 
@@ -122,7 +111,7 @@ to create and submit your data.
 
 Once your data is in the system, you will be listed on the
 main <a href="/stat.php">traveler stats page</a>, and you can see a
-summary of your travels on your <a href="/user">user page</a>. Click
+summary of your travels on your <a href="/user">user page</a>.  Click
 around on the various links and table entries to find more ways to see
 your travels, both as tabular statistics and plotted on maps.
 
@@ -130,13 +119,13 @@ your travels, both as tabular statistics and plotted on maps.
 
 <p class="text">
 
-Some experienced users volunteer to help the project. If this
+Some experienced users volunteer to help the project.  If this
 interests you, start by reporting problems with existing highway data.
 Those who have learned the project's structure and highway data rules
 and guidelines can help greatly by providing review of new highway
-systems in development. Highly experienced users can learn how to
+systems in development.  Highly experienced users can learn how to
 plot new highway systems under the guidance of experienced
-contributors. Again, see <a href="/forum">the project forum</a> for
+contributors.  Again, see <a href="/forum">the project forum</a> for
 more information.
 </p>
 
@@ -145,8 +134,8 @@ more information.
 <p class="text">
 Highway data is <a href="/devel/updates.php">updated</a> almost daily
 as corrections are made and progress is made on systems in
-development. When a highway system is deemed correct and complete to
-the best of our knowledge, it becomes "active". Here are the newest
+development.  When a highway system is deemed correct and complete to
+the best of our knowledge, it becomes "active".  Here are the newest
 systems to become active, with their activation dates:</p>
 <ul class="text">
 <?php
