@@ -97,6 +97,14 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+        case 'autb':
+            $routeNum = str_replace("B", "", $routeNum);
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            if (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_autb_wide.svg");
+            }
+            break;
+
         case 'gbnm':case 'nirm':
             $routeNum = str_replace("M", "", $row['route']);
             if (strlen($routeNum) > 2) {
