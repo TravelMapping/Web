@@ -90,9 +90,10 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***SYS***", $region, $svg);
             break;
 
-        case 'deua': case 'deub':
+        case 'deua': case 'deub': case 'ltuk'
             $routeNum = str_replace("A", "", $row['route']);;
             $routeNum = str_replace("B", "", $routeNum);
+            $routeNum = str_replace("K", "", $routeNum);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
