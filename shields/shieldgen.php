@@ -90,19 +90,29 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***SYS***", $region, $svg);
             break;
 
-        case 'chea': case 'cheh': case 'deua': case 'deub': case 'ltuk':
+        case 'chea': case 'deua': case 'deub': case 'ltuk':
+            // remove prefix
             $routeNum = str_replace("A", "", $row['route']);;
             $routeNum = str_replace("B", "", $routeNum);
-            $routeNum = str_replace("H", "", $routeNum);
             $routeNum = str_replace("K", "", $routeNum);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
-        case 'autb':
+        case 'autb': case 'cheh':
+            // remove prefix, use wide svg file
             $routeNum = str_replace("B", "", $routeNum);
+            $routeNum = str_replace("H", "", $routeNum);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             if (strlen($routeNum) > 2) {
-                    $svg = file_get_contents("{$dir}/template_autb_wide.svg");
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+            }
+            break;
+
+        case 'eure':
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            // use wide svg file
+            if (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
             }
             break;
 
