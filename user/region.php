@@ -89,66 +89,6 @@
     <script src="http://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript"></script>
     <!-- TableSorter -->
     <script src="/lib/jquery.tablesorter.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        function waypointsFromSQL() {
-            <?php
-              
-              // we restrict to waypoints matching routes whose region is
-              // given in the "rg=" query string parameter
-
-              // note that this will genenerate some junk code if $region
-              // is not set, but that's OK since we'll never call this
-              // JS function in that case
-
-              $sql_command = "SELECT waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname FROM waypoints JOIN routes ON routes.root = waypoints.root AND routes.region = '".$region."' JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause."  ORDER BY root, waypoints.pointId;";
-              $res = tmdb_query($sql_command);
-
-              $routenum = 0;
-              $pointnum = 0;
-              $lastRoute = "";
-              while ($row = $res->fetch_assoc()) {
-                if (!($row['root'] == $lastRoute)) {
-                   echo "newRouteIndices[".$routenum."] = ".$pointnum.";\n";
-                   echo "routeTier[".$routenum."] = ".$row['tier'].";\n";
-                   echo "routeColor[".$routenum."] = '".$row['color']."';\n";
-                   echo "routeSystem[".$routenum."] = '".$row['systemname']."';\n";
-                   $lastRoute = $row['root'];
-                   $routenum = $routenum + 1;
-                }
-                echo "waypoints[".$pointnum."] = new Waypoint(\"".$row['pointName']."\",".$row['latitude'].",".$row['longitude']."); // Route = ".$row['root']." (".$row['color'].")\n";
-                $pointnum = $pointnum + 1;
-              }
-              $res->free();
-
-              // traveler clinched mapping of route
-              echo "traveler = '".$tmuser."';\n";
-              // retrieve list of segments for this region
-              $sql_command = "SELECT segments.segmentId, segments.root FROM segments JOIN routes ON routes.root = segments.root JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause." AND routes.region = '".$region."' ORDER BY root, segments.segmentId;";
-              $res = tmdb_query($sql_command);
-              $segmentIndex = 0;
-              while ($row = $res->fetch_assoc()) {
-                 echo "segments[".$segmentIndex."] = ".$row['segmentId']."; // route=".$row['root']."\n";
-                 $segmentIndex = $segmentIndex + 1;
-              }
-              $res->free();
-
-              $sql_command = "SELECT segments.segmentId, segments.root FROM segments RIGHT JOIN clinched ON segments.segmentId = clinched.segmentId JOIN routes ON routes.root = segments.root JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause." AND routes.region = '".$region."' AND clinched.traveler='".$tmuser."' ORDER BY root, segments.segmentId;";
-              $res = tmdb_query($sql_command);
-              $segmentIndex = 0;
-              while ($row = $res->fetch_assoc()) {
-                echo "clinched[".$segmentIndex."] = ".$row['segmentId']."; // route=".$row['root']."\n";
-                $segmentIndex = $segmentIndex + 1;
-              }
-              $res->free();
-
-              echo "mapClinched = true;\n";
-
-              // insert custom color code if needed
-              tm_generate_custom_colors_array();
-            ?>
-            genEdges = true;
-        }
-    </script>
 </head>
 <body 
 <?php
@@ -432,4 +372,5 @@ SQL;
 <?php
     $tmdb->close();
 ?>
+<script type="application/javascript" src="../api/waypoints.js.php?<?php echo $_SERVER['QUERY_STRING']?>"></script>
 </html>
