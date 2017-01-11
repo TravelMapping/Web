@@ -96,6 +96,31 @@ function tmdb_query($sql_command) {
     die("<h1 style=\"color: red\">Query failed: ".$sql_command."</h1>");
 }
 
+function orClauseBuilder($param, $name, $tablename = 'r') {
+    $array = array();
+    if (is_array($_GET[$param])) {
+        foreach ($_GET[$param] as $p) {
+            $array = array_merge($array, explode(',',$p));
+        }
+    }
+    else {
+        $array = explode(",", $_GET[$param]);
+    }
+    $array = array_diff($array, array("null"));
+    $clause = "(";
+    $i = 0;
+    foreach($array as $item) {
+        $clause.="{$tablename}.{$name} = '{$item}'";
+        $i++;
+        if($i < sizeof($array)) $clause .= " or ";
+    }
+    $clause .= ")";
+    if ($i == 0) {
+        return "TRUE";
+    }
+    return $clause;
+}
+
 // function to call to free the DB instance (or just put this code
 // at the bottom of a page
 
