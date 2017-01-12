@@ -107,6 +107,7 @@ function generate($r, $force_reload = false)
             // remove prefix, use wide svg file
             $routeNum = str_replace("B", "", $routeNum);
             $routeNum = str_replace("H", "", $routeNum);
+            $routeNum = str_replace("L", "", $routeNum);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             if (strlen($routeNum) > 2) {
                     $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
