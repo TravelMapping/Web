@@ -154,6 +154,16 @@ function generate($r, $force_reload = false)
             }
             break;
 
+        case 'usanh':
+            $matches = [];
+            $routeNum = str_replace('NH', "", $row['route']);
+            if (preg_match('/(?<number>[0-9]+)(?<letter>[A-Za-z]+)/', $routeNum, $matches)) {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
+                $svg = str_replace("***NUMBER***", $matches['number'], $svg);
+                $svg = str_replace("***LETTER***", $matches['letter'], $svg);
+                break;
+            }
+
         default:
             $region = strtoupper(explode(".", $r)[0]);
             $routeNum = str_replace($region, "", $row['route']);
