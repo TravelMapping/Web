@@ -68,6 +68,11 @@ function generate($r, $force_reload = false)
             $routeNum = str_replace("KY", "", $row['route']);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
+            
+        case 'usamts':
+            $routeNum = str_replace("SR", "", $row['route']);
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
 
         case 'usansf':
             $region = explode(".", $r)[0];
