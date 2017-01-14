@@ -1,0 +1,11 @@
+<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" version="1.0" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="0 0 480 385">
+<g transform="translate(-253.2 -405.6)">
+<path fill="#fff" d="m253.6 430.1c0-13.2 10.8-24 24-24h432.4c13.2 0 24 10.8 24 24v336c0 13.3-10.8 24-24 24h-432.4c-13.2 0-24-10.7-24-24v-336z"/>
+<path stroke-linejoin="round" d="m253.6 430.1c0-13.2 10.8-24 24-24h432.5c13.2 0 24 10.8 24 24v336c0 13.3-10.8 24-24 24h-432.5c-13.2 0-24-10.7-24-24v-336 0z" stroke="#000" stroke-linecap="round" stroke-miterlimit="3.864" fill="none"/>
+<path d="m257.6 430.1c0-11 9-20 20-20h431.8c11 0 20 9 20 20v336c0 11.1-9 20-20 20h-431.8c-11 0-20-8.9-20-20v-336z"/>
+<path fill="#fff" d="m263.6 430.1c0-7.7 6.3-14 14-14h432.5c7.7 0 14 6.3 14 14v336c0 7.8-6.3 14-14 14h-432.5c-7.7 0-14-6.2-14-14v-336z"/>
+<polygon transform="matrix(1.249 0 0 1.159 -2868 -4815)" stroke="#000" points="2692 4699 2688 4689 2683 4692 2672 4689 2668 4686 2664 4691 2648 4681 2646 4675 2646 4577 2528 4577 2528 4550 2838 4550 2838 4571 2856 4633 2856 4720 2828 4710 2811 4715 2801 4721 2779 4710 2764 4718 2748 4708 2739 4712 2731 4707 2721 4712" stroke-miterlimit="3.864" clip-rule="evenodd" stroke-width="8" fill="none"/>
+<text style="word-spacing:0px;letter-spacing:0px;text-anchor:middle;text-align:center" font-family="&apos;Roadgeek 2014 Series B&apos;" line-height="125%" font-size="321.6px" stroke="#ffffff" y="735.92371" x="515.36707" stroke-width="15" xml:space="preserve" fill="#ffffff"><tspan y="735.92371" x="515.36707">***NUMBER***</tspan></text>
+<text style="word-spacing:0px;letter-spacing:0px;text-anchor:middle;text-align:center" xml:space="preserve" font-size="321.6px" line-height="125%" y="735.92371" x="515.36707" font-family="&apos;Roadgeek 2014 Series B&apos;" fill="#000000"><tspan x="515.36707" y="735.92371">***NUMBER***</tspan></text>
+</g>
+</svg>
