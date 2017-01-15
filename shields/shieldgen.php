@@ -138,6 +138,11 @@ function generate($r, $force_reload = false)
             }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
+            
+        case 'islth': //uses same shield, no wide
+            $routeNum = str_replace("TH", "", $row['route']);
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
 
         case 'usasf': case 'usanp': case 'eursf': case 'usakyp': case 'gbrtr':
             $lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
