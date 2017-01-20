@@ -1,3 +1,5 @@
 shields/unoptimized
 devel/test.php
 .idea/
+lib/tm.conf
+local.sh

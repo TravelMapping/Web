@@ -1,45 +1,34 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Travel Mapping Credit and Sources</title>
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
 <link rel="shortcut icon" type="image/png" href="favicon.png">
 </head>
 <body>
-<div id="header">
-<div class="container">
-<input type="checkbox" id="hamburger">
-<label for="hamburger"></label>
-<div id="logo"></div>
-<div id="nav">
-<ul>
-<li><a href="/">Home</a></li>
-<li><a href="/user">Traveler Stats</a></li>
-<li><a href="/hbtest">Highway Browser</a></li>
-<!--<li><a href="/">Login</a></li>-->
-</ul>
-</div>
-</div>
-</div>
-<div id="main">
-  <div class="container">
-    <h1>Credits and Sources</h1>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 
-<p>Travel Mapping is the successor project to the
+<p class="heading">Credits and Sources</p>
+
+<p class="text">Travel Mapping is the successor project to the
 dormant <a href="http://cmap.m-plex.com">Clinched Highway
 Mapping</a> (CHM) project, developed and operated by Timothy Reichard.
 Some underlying code and the initial highway data are from CHM.</p>
 
-<div id="Sources">
-  <h1>Highway Data Sources</h1>
-        <p>We would like to credit and thank the authors of the following sources of highway information.</p>
-	<h2>General Map References</h2>
+<p class="heading">Highway Data Sources</p>
+
+<p class="text">We would like to credit and thank the authors of the
+following sources of highway information.</p>
+
+<p class="subheading">General Map References</p>
+
 	<ul class="sources">
 	  <li>Path Coordinates
 	    <ul>
 	      <li><a href="http://www.openstreetmap.org/">OpenStreetMap</a>. Crowd-sourced world highway map.  Map data &copy; OpenStreetMap contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>.</li>
+	      <li>Coordinates from handheld GPS receiver, contributed by Oscar Voss (used to supplement OSM mapping where it is weak, mainly in parts of Alaska, and northern and western Canada)</li>
 	    </ul>
 	  </li>
 	  <li>General Highway Maps and Imagery
@@ -59,11 +48,17 @@ Some underlying code and the initial highway data are from CHM.</p>
 	    </ul>
 	  </li>
 	</ul>
-	<h2>Highway Departments and Hobbyist Sites</h2>
+
+<p class="subheading">Highway Departments and Hobbyist Sites</p>
 	<ul class="sources">
 	  <li>Armenia
 	    <ul>
 <li><a href="http://www.mtc.am/arm_map.html">Armenia Map</a>. Interactive national highway map from the Ministry of Transport and Communication of the Republic of Armenia.</li>
+	    </ul>
+	  </li>
+	  <li>Asia
+	    <ul>
+<li><a href="http://www.unescap.org/our-work/transport">UNESCAP Transport</a>. UN site on transport in Asia and the Pacific. Includes Asian Highway list and maps.</li>
 	    </ul>
 	  </li>
 	  <li>Austria
@@ -109,9 +104,10 @@ Some underlying code and the initial highway data are from CHM.</p>
             </ul>
 	  </li>
 																 <li>British Columbia, CAN
-	    <ul>
+	    	    <ul>
 	      <li><a href="http://www.gov.bc.ca/tran/">British Columbia Ministry of Transportation and Infrastructure</a>. Official government site covering transportation in British Columbia, Canada.</li>
-	      <li><a href="http://www.th.gov.bc.ca/publications/planning/numbered_routes.htm#16">Official Numbered Routes in British Columbia</a>. List of numbered routes in British Columba from the Ministry of Transportation and Infrastructure.</li>
+	      <li><a href="http://www2.gov.bc.ca/gov/content/transportation/transportation-reports-and-reference/numbered-routes">Official Numbered Routes in British Columbia</a>. List of numbered routes in British Columbia from the Ministry of Transportation and Infrastructure.</li>
+              <li><a href="http://www2.gov.bc.ca/gov/content/transportation/transportation-infrastructure/engineering-standards-guidelines/landmark-kilometre-inventory">Landmark Kilometre Inventory</a>. Route logs for provincial highways, from the Ministry of Transportation and Infrastructure.</li>
             </ul>
 	  </li>
           <li>Manitoba, CAN
@@ -131,9 +127,9 @@ Some underlying code and the initial highway data are from CHM.</p>
 	  </li> -->
           <li>Northwest Territories, CAN
 	    <ul>
-<li><a href="http://www.dot.gov.nt.ca/_live/pages/wpPages/home.aspx">Ministry of Transportation</a>. Official website of territorial Ministry of Transportation</li>
-<li><a href="http://www.justice.gov.nt.ca/PDF/REGS/PUBLIC%20HIGHWAYS/Highway%20Designation%20and%20Classification.pdf">Highway Designation and Classification Regulations</a>. 2011 official list and definitions of territorial highways</li>
-<li><a href="http://www.dot.gov.nt.ca/_live/documents/content/Highway%20System%20Map.pdf">Northwest Territories Highway System</a>. Official highway map</li>
+<li><a href="http://www.dot.gov.nt.ca/">Ministry of Transportation</a>. Official website of territorial Ministry of Transportation</li>
+<li><a href="https://www.justice.gov.nt.ca/en/files/legislation/public-highways/public-highways.r1.pdf">Highway Designation and Classification Regulations</a>. 2011 official list and definitions of territorial highways</li>
+<li><a href="http://www.dot.gov.nt.ca/Highways/Highway_System">Northwest Territories Highway System</a>. Official highway map</li>
             </ul>
 	  </li>
 																 <li>Nova Scotia, CAN
@@ -159,20 +155,19 @@ Some underlying code and the initial highway data are from CHM.</p>
 																 <li>Quebec, CAN
 	    <ul>
 	      <li><a href="http://www.quebec511.gouv.qc.ca/en/">Quebec 511</a>. Quebec highway maps from Transports Quebec.</li>
-	      <li><a href="http://www.mtq.gouv.qc.ca/portal/page/portal/grands_projets/trouver_grand_projet">Grands Projets</a>. Quebec autoroute construction projects from Transports Quebec.</li>	      
-	      <li><a href="http://www.mtq.gouv.qc.ca/portal/page/portal/grand_public/vehicules_promenade/reseau_routier/routes/repertoire_autoroutes">Repertoire des autoroutes du Quebec</a>. Quebec autoroute directory from Transports Quebec.</li>
+	      <li><a href="https://www.transports.gouv.qc.ca/fr/Pages/default.aspx">Transports Quebec offical website</a> (in French, English version limited to some traffic and trucking laws).</li>	      
             </ul>
 	  </li>
 											<li>Saskatchewan, CAN
 	    <ul>
 <li><a href="http://www.highways.gov.sk.ca/">Ministry of Transportation and Infrastructure</a>. Official website of provincial Ministry of Transportation and Infrastructure</li>
-<li><a href="http://www.sasktourism.com/travel-information/travel-guides-and-maps/printable-maps">Highway Maps</a>. Tourism Saskatchewan online provincial and regional highway maps</li>
+<li><a href="http://www.tourismsaskatchewan.com/~/media/files/map-face-100-dpi.pdf?la=en">Official Road Map</a>. Detailed provincial highway map, prepared by Ministry of Transportation and Infrastructure for Tourism Saskatchewan</li>
             </ul>
 	  </li>
 															 <li>Yukon Territory, CAN
 	    <ul>
 <li><a href="http://www.hpw.gov.yk.ca/">Department of Highways and Public Works</a>. Official website of territorial Department of Highways and Public Works</li>
-<li><a href="http://www.hpw.gov.yk.ca/pdf/YTHwyLogPublic1.pdf">Yukon Highways Log Book</a>. 2008 official list and definitions of territorial highways, with route details</li>
+<li><a href="http://www.hpw.gov.yk.ca/pdf/ReportHwyLogPublic2012withedits.pdf">Yukon Highways Log Book</a>. 2012 official list and definitions of territorial highways, with route details</li>
             </ul>
 	  </li>
 	  <li>Croatia
@@ -181,10 +176,10 @@ Some underlying code and the initial highway data are from CHM.</p>
 	      <li><a href="http://www.hrvatske-ceste.hr/Ceste.htm">Croatian Roads</a>. State highway list from Croatian Roads d. o. o.</li>
 	    </ul>
 	  </li>
-	  <li>Czech Republic
+	  <li>Czechia
 	    <ul>
-	      <li><a href="http://www.ceskedalnice.cz/">Ceske Dalnice</a>. Hobbyist site covering the motorway/expressway network in the Czech Republic.</li>
-	      <li><a href="http://www.rsd.cz/">Road and Motorway Directorate of the Czech Republic</a>. Official site of the motorway/expressway network in the Czech Republic.</li>
+	      <li><a href="http://www.ceskedalnice.cz/">Ceske Dalnice</a>. Hobbyist site covering the motorway/expressway network in Czechia.</li>
+	      <li><a href="http://www.rsd.cz/">Road and Motorway Directorate of Czechia</a>. Official site of the motorway/expressway network in Czechia.</li>
 	    </ul>
 	  </li>
 	  <li>Denmark
@@ -199,6 +194,11 @@ Some underlying code and the initial highway data are from CHM.</p>
 <li><a href="http://www.unece.org/trans/doc/2006/sc1/ECE-TRANS-SC1-2006-03e.pdf">UNECE map of E264</a>. Official map showing the route of E264 in Estonia and Latvia from the United Nations Economic Commission for Europe.</li>
 <li><a href="http://www.unece.org/trans/doc/2008/sc1/ECE-TRANS-SC1-2008-02e.pdf">UNECE map of E265</a>. Official map showing the route of E265 in Estonia from the United Nations Economic Commission for Europe.</li>
 <li><a href="https://www.riigiteataja.ee/akt/13266801 ">List of State Highways</a>.Official list of all highways in Estonia from the Office of Economic Affairs and Communications of Estonia.</li>
+	    </ul>
+	  </li>
+	  <li>Europe
+	    <ul>
+<li><a href="http://www.unece.org/trans/welcome.html">UNECE Transport</a>. UN site on transport in Europe. Includes E Road list and maps.</li>
 	    </ul>
 	  </li>
 	  <li>Finland
@@ -220,7 +220,7 @@ Some underlying code and the initial highway data are from CHM.</p>
 	  <li>Germany
 	    <ul>
 	      <li><a href="http://www.autobahnatlas-online.de/index_e.html">Autobahn-Atlas</a>. Hobbyist site by Patrick Scholl covering the detailed routings and plans for German motorways.</li>
-	      <li><a href="http://www.bmvbs.de/DE/VerkehrUndMobilitaet/Verkehrstraeger/Strasse/strasse_node">Road Construction</a>. German motorway construction plans and maps from the Federal Minsitry of Transport, Building and Urban Development.</li>	    
+	      <li><a href="http://www.bmvi.de//DE/VerkehrUndMobilitaet/Verkehrstraeger/Strasse/strasse_node">Road Construction</a>. German motorway construction plans and maps from the Federal Minsitry of Transport, Building and Urban Development.</li>	    
 	    </ul>
 	  </li>
 	  <li>Greece
@@ -360,6 +360,11 @@ Some underlying code and the initial highway data are from CHM.</p>
 	      <li><a href="http://cmati.xunta.es/portal/cidadan/lang/gl/pid/78">System of Autonomous Highways</a>. Road maps and video highway log from the Galicia Directorate of Intrastructure.</li>
 	  </ul>
 	  </li>
+	  <li>Sweden
+	    <ul>
+	      <li><a href="http://trafikinfo.trafikverket.se/LIT/#url=Vagtrafiken/Karta">Maps of Swedisch Infrastructure</a>. Map of current road system of Sweden.</li>
+	  </ul>
+	  </li>
 	  <li>Switzerland
 	    <ul>
 	      <li><a href="http://www.admin.ch/ch/d/sr/741_272/app1.html">List of Motorways and Expressways</a>. Legislative highway definitions for the national highway network of Switzerland.</li>
@@ -391,6 +396,8 @@ Some underlying code and the initial highway data are from CHM.</p>
 	      <li><a href="http://www.fhwa.dot.gov/reports/routefinder/">FHWA Route Log and Finder List</a>. Log of the US Interstate Highways from the Federal Highway Adminsitration.</li>
 	      <li><a href="http://www.kurumi.com/roads/3di/index.html">3 Digit Interstates at kurumi.com</a>. Comprehensive national directory of 3 digit interstates.</li>
 	      <li><a href="http://cms.transportation.org/?siteid=68&amp;pageid=1540">Committee Actions and Approvals</a>. Interstate and US Numbered Highways changes from the American Association of State Highway and Transportation Officials Special Committee on US Route Numbering.</li>
+	     <li><a href="http://www.interstate-guide.com/business-routes/">AARoads Interstate Business Route Guide</a>. Unofficial nationwide guide to Interstate business routes.</li>
+
 	    </ul>
 	  </li>
 	  <li>Alabama, USA
@@ -401,8 +408,10 @@ Some underlying code and the initial highway data are from CHM.</p>
 	  </li>
 	  <li>Alaska, USA
 	    <ul>
-	      <li><a href="http://www.dot.state.ak.us/hdpapp/forms/Reports.html">Alaska Highway Data</a>. Route logs from the Alaska Department of Transportation and Public Facilities.</li>
-	    <li><a href="http://www.dot.alaska.gov/stwdplng/transdata/highway_lists_maps.shtml">Alaska's Highway Systems</a>. Route lists from the Alaska Department of Transportation and Public Facilities.</li>
+	    	    <li><a href="http://www.dot.state.ak.us/">Alaska DOT&PF website</a>. Official website of state Department of Transportation and Public Facilities.</li>
+	      <li>Route logs from the Alaska Department of Transportation and Public Facilities (not currently online).</li>
+	    <li><a href="http://www.dot.state.ak.us/stwddes/dcstraffic/assets/pdf/atm/current/part2_signs.pdf">2012  Alaska Traffic Manual Supplement to MUTCD, part 2</a>, and <a href="http://www.dot.state.ak.us/stwddes/dcstraffic/interimadenda.shtml">2015 Interim Addendum to Alaska Traffic Manual</a>.  Part of Alaska Traffic Manual supplement to Manual on Uniform Traffic Control Devices, with interim addendum; includes updated official list and definitions of numbered state highways.</li>
+
 	    </ul>
 	  </li>
 	  <li>Arkansas, USA
@@ -416,14 +425,25 @@ Some underlying code and the initial highway data are from CHM.</p>
 	    <li><a href="http://mpd.azdot.gov/mpd/gis/fclass/fcmaps.asp">Functional Classification Maps</a>. Official county, city, and native nations highway maps from the Arizona Department of Transportation.</li>
 	    </ul>
 	  </li>
-<!--	  <li>California, USA
+	  <li>California, USA
 	    <ul>
+	    	    <li><a href="http://www.dot.ca.gov/">Caltrans website</a>. Official website of state Department of Transportation ("Caltrans").</li>
+	    <li><a href="http://www.leginfo.ca.gov/cgi-bin/displaycode?section=shc&group=00001-01000&file=300-635">California Streets and Highway Code sections 300-635</a>. Statutory definitions of state highway routes, including authorized relinquishments to local governments.</li>
+	<li>California State Highways Logs for districts 1-12 (paper only, 2002 version which is the latest available)</li>
+	<li><a href="http://www.dot.ca.gov/hq/structur/strmaint/brlog2.htm">Log of Bridges on State Highways</a>. 2015 Caltrans bridge log, including some information that had been in old paper route logs.</li>
+	<li><a href="http://www.dot.ca.gov/hq/traffops/engineering/calnexus/">Cal-NExUS (California Numbered Exit Uniform System)</a>. Caltrans freeway exit lists.</li>
+	<li><a href="http://www.aaroads.com/california/">AARoads California Roads and Highways guide</a>. Unofficial guide to state highway routes.</li>
+	<li><a href="http://www.dot.ca.gov/hq/tpp/corridor-mobility/index.html">Transportation Concept Reports</a>. Detailed descriptions by Caltrans districts of many of their state highway routes, including past and planned future route changes.</li>
+	<li><a href="http://www.aaroads.com/california/california_state_hwy_system_signing_log_1991.pdf">State Highway System Signing Log</a>. 1991 Caltrans summaries of signed routes, including what may be latest and only complete (though outdated) lists of Interstate, U.S., and state business routes.</li>
+	<li><a href="http://www.cahighways.org/">California Highways</a>. Hobbyist website by Daniel Faigin.</li>
+
 	    </ul>
-	  </li> -->
-<!--	  <li>Colorado, USA
+	  </li>
+	  <li>Colorado, USA
 	    <ul>
+<li><a href="http://corcohighways.org/">Corco Highways</a>. Hobbist site covering state highways.</li>
 	    </ul>
-	  </li> -->
+	  </li>
 	  <li>Connecticut, USA
 	    <ul>
 	    <li><a href="http://kurumi.com/roads/ct/">Connecticut Roads</a>. Hobbyist site by Scott Oglesby covering highways in Connecticut.</li>
@@ -451,8 +471,10 @@ Some underlying code and the initial highway data are from CHM.</p>
 	  </li>
 	  <li>Hawaii, USA
 	    <ul>
-	    <li><a href="http://hwypgis.dot.hawaii.gov/infostructure/index_files/Page532.htm">Hawaii DOT straight-line diagrams</a>. 2009 Hawaii DOT straight-line diagrams, for state routes in all four HDOT districts.</li>
-	    <li><a href="http://www.hawaiihighways.com/">Hawaii Highways website</a>. Unofficial website by Oscar Voss, with route lists updating some SLDs.</li>
+	    	    <li><a href="http://hidot.hawaii.gov/">Hawaii DOT website</a>. Official website of state Department of Transportation.</li>
+	    <li>2009 and 2012 Hawaii DOT straight-line diagrams, for state routes in all four HDOT districts (not currently available online).</li>
+	    <li><a href="http://www.hawaiihighways.com/">Hawaii Highways</a>. Hobbyist website by Oscar Voss, with route lists updating some SLDs.</li>
+
 	    </ul>
 	  </li>
 	  <li>Idaho, USA
@@ -466,7 +488,7 @@ Some underlying code and the initial highway data are from CHM.</p>
 	  </li>
 	  <li>Indiana, USA
 	    <ul>
-	    <li><a href="http://www.in.gov/indot/2377.htm">Indiana highway maps</a>. Online roads maps from the Indiana Department of Transportation.</li>	      
+	    <li><a href="http://www.in.gov/indot/2350.htm">Indiana highway maps</a>. Online roads maps from the Indiana Department of Transportation.</li>	      
 	    </ul>
 	  </li>
 	  <li>Iowa, USA
@@ -515,6 +537,7 @@ Some underlying code and the initial highway data are from CHM.</p>
 	    <ul>
 	    <li><a href="http://www.michiganhighways.org/">Michigan Highways</a>. Comprehensive directory of Michigan highways</li>
 	    <li><a href="http://www.michigan.gov/mdot/0,1607,7-151-9622_11033_11151---,00.html">Michigan State Highway Map</a>. On-line Michigan state highway map.</li>
+	    <li><a href="https://mdotnetpublic.state.mi.us/drive/">Mi Drive</a>. A traffic and construction information resource center for driving Michigan roads.</li>
 	    </ul>
 	  </li>
 	  <li>Minnesota, USA
@@ -534,10 +557,11 @@ Some underlying code and the initial highway data are from CHM.</p>
 <li><a href="http://www.modot.mo.gov/newsandinfo/countymaps.htm">Missouri County Maps</a>. Official county maps from the Missouri Department of Transportation.</li>
 	    </ul>
 	  </li>
-<!--	  <li>Montana, USA
+	  <li>Montana, USA
 	    <ul>
+<li><a href="http://corcohighways.org/">Corco Highways</a>. Hobbist site covering state highways.</li>
 	    </ul>
-	  </li> -->
+	  </li>
 	  <li>Nebraska, USA
 	    <ul>
 	    <li><a href="http://www.nebraskatransportation.org/docs/logbook.pdf">Nebraska Highway Reference Log Book</a>. Highway inventory from the Nebraska Department of Roads.</li>
@@ -563,10 +587,11 @@ Some underlying code and the initial highway data are from CHM.</p>
 	  </li>
   <li>New Mexico, USA
 	    <ul>
-<li><a href="http://dot.state.nm.us/content/dam/nmdot/Data_Management/POSTED%20ROUTE-NM_Routes.pdf">NMDOT Posted Routes for New Mexico Routes</a>. Official New Mexico Department of Transportation posted route legal descriptions</li>
+<li><a href="http://dot.state.nm.us/">NMDOT website</a>. Official New Mexico Department of Transportation website.</li>
+<li><a href="http://dot.state.nm.us/content/dam/nmdot/Data_Management/POSTED%20ROUTE-NM_Routes.pdf">NMDOT Posted Routes for New Mexico Routes</a>. Official New Mexico Department of Transportation posted route legal descriptions.</li>
 <li><a href="http://dot.state.nm.us/content/dam/nmdot/Data_Management/NM_AADT_Listing.pdf">NMDOT AADT Listing</a>. Official New Mexico Department of Transportation TIMS road segments by posted route/point with AADT info.</li>
-<li><a href="http://www.steve-riner.com/nmhighways/NMHome.htm">The Unofficial New Mexico Highways Page</a>. Hobbyist site describing current and historical New Mexico state routes.</li>
-	    </ul>
+<li><a href="http://www.steve-riner.com/nmhighways/NMHome.htm">The Unofficial New Mexico Highways Page</a>. Hobbyist site by Steve Riner, describing current and historical New Mexico state routes.</li>
+</ul>
 	  </li> 
 	  <li>New York, USA
 	    <ul>
@@ -631,7 +656,8 @@ Some underlying code and the initial highway data are from CHM.</p>
 	  </li>
 	  <li>South Dakota, USA
 	    <ul>
-<li><a href="http://www.sddot.com/pub.asp?mode=list&amp;Type=4">South Dakota State and County Maps</a>. Official state and county highway maps from the South Dakota Department of Transportation.</li>
+<li><a href="http://www.sddot.com/resources/maps/Default.aspx">South Dakota DOT Maps</a>. Official maps from the South Dakota Department of Transportation.</li>
+<li><a href="http://www.sddot.com/transportation/highways/planning/pavement/Default.aspx">South Dakota DOT Pavement Condition Monitoring</a>.</li>
 	    </ul>
 	  </li>
 	  <li>Tennessee, USA
@@ -678,10 +704,11 @@ Some underlying code and the initial highway data are from CHM.</p>
 <li><a href="http://www.dot.wisconsin.gov/travel/maps/county.htm">Wisconsin County Maps</a>. Official county maps from the Wisconsin Department of Transportation.</li>
 	    </ul>
 	  </li>
-<!--	  <li>Wyoming, USA
+	  <li>Wyoming, USA
 	    <ul>
+<li><a href="http://corcohighways.org/">Corco Highways</a>. Hobbist site covering state highways.</li>
 	    </ul>
-	  </li> -->
+	  </li>
 	<li>General
 	    <ul>
 	      <li><a href="http://sites.google.com/site/roadnumberingsystems/home">Road Numbering Systems</a>. Hobbyist site about the various road numbering systems around the world.</li>
@@ -693,10 +720,9 @@ Some underlying code and the initial highway data are from CHM.</p>
 	    </ul>
 	  </li>
 	</ul>	
-</div>
 
-<div id="Contributors">
-  <h1>Project Contributors</h1>
+<p class="heading"><a name="contributors">Project Contributors</a></p>
+
   <ul>
   <li>Eric Bryant (yakra)<br> </li>
   <li>Dave Filpus (dfilpus)<br>
@@ -708,19 +734,20 @@ Some underlying code and the initial highway data are from CHM.</p>
         <a href="http://rickmastfan67.blogspot.com/">Rickmastfan67 Blog</a> </li>
   <li>Jeff Morrison (jeffm)<br>
         <a href="http://www.angelfire.com/ia/jdmorrison/ends/iaends.html">Iowa Highway Ends</a> </li>
-  <li>Dave S (mapcat), Maintains Kentucky and Ohio, developed some highway data for Kentucky</li>
+  <li>Dave S (mapcat)</li>
   <li>Christopher Steig (Bickendan)</li>
   <li>Jim Teresco (terescoj), Primary Back End Development, Developed highway data for New York, Massachusetts, and New Mexico<br>
       <a href="http://www.teresco.org/pics/signs/">Why Do You Have So Many Pictures of Road Signs?</a>  </li>
   <li>Oscar Voss (oscar)</li>
   </ul>
 
-<p>These contributors built on the work
+<p class="text">These contributors built on the work
 of <a href="http://cmap.m-plex.com/docs/collab.php">CHM's
 Collaborators</a>.</p>
 
 </div>
 </div>
 </div>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
 </body>
 </html>
