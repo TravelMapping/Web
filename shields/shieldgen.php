@@ -68,6 +68,11 @@ function generate($r, $force_reload = false)
             $routeNum = str_replace("KY", "", $row['route']);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
+            
+        case 'usamts':
+            $routeNum = str_replace("SR", "", $row['route']);
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
 
         case 'usansf':
             $region = explode(".", $r)[0];
@@ -90,10 +95,31 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***SYS***", $region, $svg);
             break;
 
-        case 'deua': case 'deub':
+        case 'chea': case 'deua': case 'deub': case 'ltuk':
+            // remove prefix
             $routeNum = str_replace("A", "", $row['route']);;
             $routeNum = str_replace("B", "", $routeNum);
+            $routeNum = str_replace("K", "", $routeNum);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
+        case 'autb': case 'cheh':
+            // remove prefix, use wide svg file
+            $routeNum = str_replace("B", "", $routeNum);
+            $routeNum = str_replace("H", "", $routeNum);
+            $routeNum = str_replace("L", "", $routeNum);
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            if (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+            }
+            break;
+
+        case 'eure':
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            // use wide svg file
+            if (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+            }
             break;
 
         case 'gbnm':case 'nirm':
@@ -112,6 +138,11 @@ function generate($r, $force_reload = false)
             }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
+            
+        case 'islth': //uses same shield, no wide
+            $routeNum = str_replace("TH", "", $row['route']);
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
 
         case 'usasf': case 'usanp': case 'eursf': case 'usakyp': case 'gbrtr':
             $lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
@@ -127,6 +158,53 @@ function generate($r, $force_reload = false)
                 $index++;
             }
             break;
+
+        case 'usatx': case 'usatxl': case 'usatxs':
+            if ($row['root'] == 'tx.nasa1' or $row['systemName'] != 'usatx' or $row['banner'] != "") {
+                $system = "";
+                $num = "";
+                $svg_path = "{$dir}/template_usatx_aux.svg";
+
+                $sys_map['Lp'] = "LOOP";
+                $sys_map['Spr'] = "SPUR";
+                $sys_map['Bus'] = "BUS";
+                $sys_map['Trk'] = "TRUCK";
+
+                if ($row['root'] == 'tx.nasa1') {
+                    $system = "NASA";
+                    $num = "1";
+                } elseif ($row['root'] == 'tx.lp008') {
+                    $system = "BELTWAY";
+                    $num = "8";
+                } else {
+                    $matches = [];
+                    preg_match('/(TX|)(?<system>[A-Za-z]+)(?<number>[0-9]+)/', $row['route'], $matches);
+                    
+                    if(array_key_exists($matches['system'], $sys_map)) $system = $sys_map[$matches['system']];
+                    else $system = $sys_map[$row['banner']];
+
+                    $num = $matches['number'];
+
+                    if (strlen($num) >= 3) {
+                        $svg_path = "{$dir}/template_usatx_aux_wide.svg";
+                    }
+                }
+
+                $svg = file_get_contents($svg_path);
+                $svg = str_replace("***NUMBER***", $num, $svg);
+                $svg = str_replace("***SYS***", $system, $svg);
+                break;
+            }
+
+        case 'usanh':
+            $matches = [];
+            $routeNum = str_replace('NH', "", $row['route']);
+            if (preg_match('/(?<number>[0-9]+)(?<letter>[A-Za-z]+)/', $routeNum, $matches)) {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
+                $svg = str_replace("***NUMBER***", $matches['number'], $svg);
+                $svg = str_replace("***LETTER***", $matches['letter'], $svg);
+                break;
+            }
 
         default:
             $region = strtoupper(explode(".", $r)[0]);

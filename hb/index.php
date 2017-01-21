@@ -142,53 +142,7 @@
     <script src="/lib/jquery.tablesorter.min.js" type="text/javascript"></script>
 
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
-    <script>
-        function waypointsFromSQL() {
-            <?php
-              if ($routeparam != "") {
-                // select all waypoints matching the root given in the "r=" query string parameter
-                $sql_command = "SELECT pointName, latitude, longitude FROM waypoints WHERE root = '".$routeparam."';";
-                $res = tmdb_query($sql_command);
-                $pointnum = 0;
-                while ($row = $res->fetch_assoc()) {
-                  echo "waypoints[".$pointnum."] = new Waypoint(\"".$row['pointName']."\",".$row['latitude'].",".$row['longitude'].");\n";
-                  $pointnum = $pointnum + 1;
-                }
-                $res->free();
-              }
-              else {
-                // nothing to select waypoints, we're done
-                echo "return;\n";
-              }
-              // check for query string parameter for traveler clinched mapping of route
-              if ($tmuser != "") {
-                 echo "traveler = '".$tmuser."';\n";
-                 if ($routeparam != "") {
-                   // retrieve list of segments for this route
-                   echo "// SQL: select segmentId from segments where root = '".$routeparam."';\n";
-                   $sql_command = "SELECT segmentId FROM segments WHERE root = '".$routeparam."';";
-                   $res = tmdb_query($sql_command);
-                   $segmentIndex = 0;
-                   while ($row = $res->fetch_assoc()) {
-                     echo "segments[".$segmentIndex."] = ".$row['segmentId'].";\n";
-                     $segmentIndex = $segmentIndex + 1;
-                   }
-                   $res->free();
-                   $sql_command = "SELECT segments.segmentId FROM segments RIGHT JOIN clinched ON segments.segmentId = clinched.segmentId WHERE segments.root='".$routeparam."' AND clinched.traveler='".$tmuser."';";
-                   $res = tmdb_query($sql_command);
-                   $segmentIndex = 0;
-                   while ($row = $res->fetch_assoc()) {
-                     echo "clinched[".$segmentIndex."] = ".$row['segmentId'].";\n";
-                     $segmentIndex = $segmentIndex + 1;
-                   }
-                   $res->free();
-                 }
-                 echo "mapClinched = true;\n";
-              }
-            ?>
-            genEdges = true;
-        }
-
+    <script type="application/javascript">
         $(document).ready(function () {
                 $("#routes").tablesorter({
                     sortList: [[0, 0]],
@@ -442,4 +396,5 @@ HTML;
 $tmdb->close();
 ?>
 </body>
+<script type="application/javascript" src="../api/waypoints.js.php?<?php echo "r=$routeparam&u=$tmuser";?>"></script>
 </html>
