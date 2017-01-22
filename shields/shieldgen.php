@@ -108,10 +108,10 @@ function generate($r, $force_reload = false)
             $routeNum = str_replace("B", "", $row['route']);
             $routeNum = str_replace("H", "", $routeNum);
             $routeNum = str_replace("L", "", $routeNum);
-            $svg = str_replace("***NUMBER***", $routeNum, $svg);
             if (strlen($routeNum) > 2) {
                     $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
             }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
         case 'eure':
