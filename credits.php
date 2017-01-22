@@ -595,9 +595,10 @@ following sources of highway information.</p>
 	  </li> 
 	  <li>New York, USA
 	    <ul>
-	    <li><a href="https://www.nysdot.gov/divisions/engineering/technical-services/highway-data-services/traffic-data">NYSDOT Traffic Data Reports</a>. Official traffic data from New York State Department of Transportation.</li>
+	    <li><a href="https://www.dot.ny.gov/divisions/engineering/technical-services/highway-data-services/traffic-data">NYSDOT Traffic Data Reports</a>. Official traffic data from New York State Department of Transportation.</li>
 	    <li><a href="https://www.nysdot.gov/divisions/operating/oom/transportation-systems/repository/2009%20tour-bk.pdf">NYSDOT Touring Routes</a>. Official route listings from New York State Department of Transportation.</li>
 	    <li><a href="http://gis3.dot.ny.gov/html5viewer/?viewer=tdv">NYS Traffic Data Viewer</a>. Interactive map and viewer for New York State Department of Transportation's highway data.</li>
+	    <li><a href="https://gis.ny.gov/gisdata/inventories/member.cfm?organizationID=539">NYS GIS Clearinghouse</a>. NYS Dept. of Transportation (DOT) Data Sets.</li>
 	    </ul>
 	  </li>
 	  <li>North Carolina, USA
