@@ -13,6 +13,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="/css/travelMapping.css" />
     <link rel="stylesheet" type="text/css" href="/fonts/roadgeek.css" />
+    <link rel="shortcut icon" type="image/png" href="/favicon.png">
 </head>
 <body>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>

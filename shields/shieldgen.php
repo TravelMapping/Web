@@ -105,7 +105,7 @@ function generate($r, $force_reload = false)
 
         case 'autb': case 'cheh':
             // remove prefix, use wide svg file
-            $routeNum = str_replace("B", "", $routeNum);
+            $routeNum = str_replace("B", "", $row['route']);
             $routeNum = str_replace("H", "", $routeNum);
             $routeNum = str_replace("L", "", $routeNum);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
@@ -115,7 +115,7 @@ function generate($r, $force_reload = false)
             break;
 
         case 'eure':
-            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            $svg = str_replace("***NUMBER***", $row['route'], $svg);
             // use wide svg file
             if (strlen($routeNum) > 2) {
                     $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
