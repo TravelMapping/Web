@@ -97,7 +97,7 @@ function generate($r, $force_reload = false)
 
         case 'chea': case 'deua': case 'deub': case 'ltuk':
             // remove prefix
-            $routeNum = str_replace("A", "", $row['route']);;
+            $routeNum = str_replace("A", "", $row['route']);
             $routeNum = str_replace("B", "", $routeNum);
             $routeNum = str_replace("K", "", $routeNum);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
@@ -131,7 +131,7 @@ function generate($r, $force_reload = false)
             break;
 
         case 'gbnam':case 'niram':
-            $routeNum = str_replace("M", "", $row['route']);;
+            $routeNum = str_replace("M", "", $row['route']);
             $routeNum = str_replace("A", "", $routeNum);
             if (strlen($routeNum) > 2) {
                 $svg = file_get_contents("{$dir}/template_gbnam_wide.svg");
