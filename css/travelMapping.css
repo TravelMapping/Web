@@ -138,6 +138,10 @@ table.gratable tr.float th {
     background-color: #999999;
 }
 
+div.gm-style {
+    user-select: auto !important;
+}
+
 /* from jdtstyle.css: */
 /*body {
   margin-top: 10px;
