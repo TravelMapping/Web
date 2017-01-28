@@ -104,6 +104,12 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+        case 'nlds':
+            // remove prefix and suffix
+            $routeNum = substr($row['route'], 1, 3);
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
         case 'autb': case 'cheh':
             // remove prefix, use wide svg file
             $routeNum = str_replace("B", "", $row['route']);
