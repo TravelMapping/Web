@@ -20,7 +20,7 @@ function generate($r, $force_reload = false)
     }
 
     switch ($row['systemName']) {
-        case 'cantch': case 'nldp': case 'nldr': //do nothing
+        case 'cantch': //do nothing
             break;
 
         case 'usai':
@@ -94,6 +94,10 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             $svg = str_replace("***SYS***", $region, $svg);
             break;
+
+        case 'belb': case 'nldp': case 'nldr':
+            //replace placeholder
+            $svg = str_replace("***NUMBER***", $row['route'], $svg);
 
         case 'chea': case 'deua': case 'deub': case 'islth': case 'ltuk':
             // remove prefix

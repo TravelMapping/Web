@@ -7,6 +7,6 @@
     <path style="block-progression:tb;text-indent:0;color:#000000;text-transform:none" d="m-2.24e3 -635c-11.3 0-21.1 7.77-21.1 18.2v128c0 10.5 9.83 18.3 21.1 18.3h358c11.3 0 21.1-7.8 21.1-18.3v-128c0-10.5-9.83-18.2-21.1-18.2z" stroke="#505050" fill="none"/>
   </g></g></g>
   <text letter-spacing="10px" text-anchor="middle" word-spacing="10px" text-align="center" font-size="140px" line-height="100%" y="0" x="0" font-family="&apos;Roadgeek 2005 Transport Heavy&apos;" fill="#fff">
-     <tspan y="130" x="67">***NUMBER***</tspan>
+     <tspan y="130" x="200">***NUMBER***</tspan>
   </text>
 </svg>
