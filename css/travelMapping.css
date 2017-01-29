@@ -138,7 +138,7 @@ table.gratable tr.float th {
     background-color: #999999;
 }
 
-div.gm-style {
+div.gm-style div {
     user-select: auto !important;
 }
 
