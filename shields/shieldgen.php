@@ -20,7 +20,7 @@ function generate($r, $force_reload = false)
     }
 
     switch ($row['systemName']) {
-        case 'cantch': //do nothing
+        case 'cantch': case 'nldp': case 'nldr': //do nothing
             break;
 
         case 'usai':
@@ -143,13 +143,13 @@ function generate($r, $force_reload = false)
 
         case 'nlda':
             // use 2 wider svg files
-            if (strlen($routeNum) > 2) {
+            if (strlen($row['route']) > 2) {
                     $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
             }
-            if (strlen($routeNum) > 3) {
+            if (strlen($row['route']) > 3) {
                     $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
             }
-            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;
 
         case 'gbnm':case 'nirm':
