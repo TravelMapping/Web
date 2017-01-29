@@ -95,11 +95,18 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***SYS***", $region, $svg);
             break;
 
-        case 'chea': case 'deua': case 'deub': case 'ltuk':
+        case 'chea': case 'deua': case 'deub': case 'islth': case 'ltuk':
             // remove prefix
             $routeNum = str_replace("A", "", $row['route']);
             $routeNum = str_replace("B", "", $routeNum);
             $routeNum = str_replace("K", "", $routeNum);
+            $routeNum = str_replace("TH", "", $routeNum);
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
+        case 'nlds':
+            // remove prefix and suffix
+            $routeNum = substr($row['route'], 1, 3);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
@@ -114,12 +121,35 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
-        case 'eure':
+        case 'beln':
+            // remove prefix, use 2 wider svg files
+            $routeNum = str_replace("N", "", $row['route']);
+            if (strlen($routeNum) > 1) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+            }
+            if (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide3.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
+        case 'bela': case 'belr': case 'eure':
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
             // use wide svg file
             if (strlen($routeNum) > 2) {
                     $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
             }
+            break;
+
+        case 'nlda':
+            // use 2 wider svg files
+            if (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+            }
+            if (strlen($routeNum) > 3) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
         case 'gbnm':case 'nirm':
@@ -136,11 +166,6 @@ function generate($r, $force_reload = false)
             if (strlen($routeNum) > 2) {
                 $svg = file_get_contents("{$dir}/template_gbnam_wide.svg");
             }
-            $svg = str_replace("***NUMBER***", $routeNum, $svg);
-            break;
-            
-        case 'islth': //uses same shield, no wide
-            $routeNum = str_replace("TH", "", $row['route']);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
