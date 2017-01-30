@@ -95,19 +95,24 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***SYS***", $region, $svg);
             break;
 
-        case 'belb': case 'nldp': case 'nldr':
+        case 'belb': case 'lvaa': case 'lvap': case 'nldp': case 'nldr': case 'pola': case 'pols': case 'svkd': case 'svkr':
             // replace placeholder
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
 
-        case 'alakt': case 'alavt': case 'chea': case 'deua': case 'dnksr': case 'deub': case 'finkt': case 'islth': case 'ltuk': case 'swel':
+        case 'alakt': case 'alavt': case 'chea': case 'czed': case 'czei': case 'czeii': case 'deua': case 'dnksr': case 'deub': case 'estp': case 'estt': case 'finkt': case 'islth': case 'ltuk': case 'poldk': case 'poldw': case 'svki': case 'swel':
             // replace placeholder, remove prefix
             $routeNum = str_replace("A", "", $row['route']);
             $routeNum = str_replace("B", "", $routeNum);
+            $routeNum = str_replace("DK", "", $routeNum);
+            $routeNum = str_replace("DW", "", $routeNum);
+            $routeNum = str_replace("D", "", $routeNum);
+            $routeNum = str_replace("I", "", $routeNum);
             $routeNum = str_replace("Kt", "", $routeNum);
             $routeNum = str_replace("K", "", $routeNum);
             $routeNum = str_replace("L", "", $routeNum);
             $routeNum = str_replace("SR", "", $routeNum);
             $routeNum = str_replace("TH", "", $routeNum);
+            $routeNum = str_replace("T", "", $routeNum);
             $routeNum = str_replace("Vt", "", $routeNum);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
