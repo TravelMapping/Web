@@ -126,7 +126,6 @@ function generate($r, $force_reload = false)
         case 'autb':
             // replace placeholder, remove prefix, use wide svg file for 3-digit numbers
             $routeNum = str_replace("B", "", $row['route']);
-            $routeNum = str_replace("H", "", $routeNum);
             $routeNum = str_replace("L", "", $routeNum);
             if (strlen($routeNum) > 2) {
                     $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
@@ -137,6 +136,7 @@ function generate($r, $force_reload = false)
         case 'beln': case 'cheh': case 'dnkpr': case 'finvt': case 'norfv': case 'norrv': case 'swer':
             // replace placeholder, remove prefix, use wide svg files for 2-/3-digit numbers
             $routeNum = str_replace("Fv", "", $row['route']);
+            $routeNum = str_replace("H", "", $routeNum);
             $routeNum = str_replace("N", "", $routeNum);
             $routeNum = str_replace("PR", "", $routeNum);
             $routeNum = str_replace("Rv", "", $routeNum);
