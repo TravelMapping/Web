@@ -5,7 +5,7 @@
     <rect rx="10" ry="10" height="184" width="232" y="2" x="2" fill="#ffffff"/>
     <rect rx="10" ry="10" height="172" width="220" y="8" x="8" fill="#ef2b2f"/>
     <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="160px" line-height="100%" y="60" x="100" font-family="&apos;Roadgeek 2005 Mittelschrift&apos;" fill="#ffffff">
-      <tspan y="150" x="160">***NUMBER***</tspan>
+      <tspan y="150" x="118">***NUMBER***</tspan>
     </text>
   </g>
 </svg>
