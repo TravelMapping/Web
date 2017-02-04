@@ -151,6 +151,12 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+        case 'deubwl': case 'deubyst': case 'deubbl': case 'deuhel': case 'deumvl': case 'deunil': case 'deunwl': case 'deurpl': case 'deusll': case 'deusns': case 'deustl': case 'deushl': case 'deuthl':
+            // replace placeholder, use wide svg files
+            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($row['route']) . ".svg");
+            $svg = str_replace("***NUMBER***", $row['route'], $svg);
+            break;
+
         case 'bela': case 'belr': case 'eure':
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
             // replace placeholder, use wide svg file for 3-digit numbers

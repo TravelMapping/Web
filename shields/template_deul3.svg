@@ -2,9 +2,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" height="120px" width="200px" version="1.1" viewBox="0 0 200 120">
   <g fill-rule="evenodd">
     <rect rx="0" ry="0" height="120" width="200" y="0" x="0" fill="#000"/>
-    <rect rx="0" ry="0" height="112" width="192" y="4.25" x="4.25" fill="#f8e415"/>
+    <rect rx="0" ry="0" height="112" width="192" y="4.25" x="4.25" fill="#fff"/>
     <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="120px" line-height="100%" y="60" x="100" font-family="&apos;Roadgeek 2005 Mittelschrift&apos;" fill="#000">
-      <tspan y="100" x="100">***NUMBER***</tspan>
+       <tspan y="100" x="100">***NUMBER***</tspan>
     </text>
   </g>
 </svg>
