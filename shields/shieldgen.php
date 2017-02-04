@@ -151,6 +151,15 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+        case 'roudn':
+            // replace placeholder, remove prefix, use wide svg file for 4-digit numbers
+            $routeNum = str_replace("DN", "", $row['route']);
+            if (strlen($routeNum) > 3) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+            }
+            $svg = str_replace("***NUMBER***", $row['route'], $svg);
+            break;
+
         case 'bela': case 'belr': case 'eure': case 'roua':
             // replace placeholder, use wide svg file for 3-digit numbers
             if (strlen($routeNum) > 2) {
@@ -166,17 +175,6 @@ function generate($r, $force_reload = false)
             }
             if (strlen($row['route']) > 3) {
                     $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
-            }
-            $svg = str_replace("***NUMBER***", $row['route'], $svg);
-            break;
-
-        case 'roudn':
-            // replace placeholder, use wide svg file for 4-/6-digit numbers
-            if (strlen($row['route']) > 3) {
-                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
-            }
-            if (strlen($row['route']) > 5) {
-                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide6.svg");
             }
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;
