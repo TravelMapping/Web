@@ -20,6 +20,27 @@ function generate($r, $force_reload = false)
     }
 
     switch ($row['systemName']) {
+    	case 'cansph':
+            $region = explode(".", $r)[0];
+            $routeNum = str_replace(strtoupper($region), "", $row['route']);
+            if (strlen($routeNum) > 2) {
+                if (file_exists("{$dir}/template_can" . $region . "_wide.svg")) {
+                    $svg = file_get_contents("{$dir}/template_can" . $region . "_wide.svg");
+                } else {
+                    $svg = file_get_contents("{$dir}/generic_wide.svg");
+                }
+            } else {
+                if (file_exists("template_can" . $region . ".svg")) {
+                    $svg = file_get_contents("{$dir}/template_can" . $region . ".svg");
+                } else {
+                    $svg = file_get_contents("{$dir}/generic.svg");
+                }
+            }
+            $region = strtoupper($region);
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            $svg = str_replace("***SYS***", $region, $svg);
+            break;
+            
         case 'cantch': //do nothing
             break;
 
@@ -99,7 +120,7 @@ function generate($r, $force_reload = false)
             // replace placeholder
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
 
-        case 'alakt': case 'alavt': case 'chea': case 'czed': case 'czei': case 'czeii': case 'deua': case 'dnksr': case 'deub': case 'estp': case 'estt': case 'finkt': case 'islth': case 'ltuk': case 'poldk': case 'poldw': case 'svki': case 'swel':
+        case 'alakt': case 'alavt': case 'canmbw': case 'chea': case 'czed': case 'czei': case 'czeii': case 'deua': case 'dnksr': case 'deub': case 'estp': case 'estt': case 'finkt': case 'islth': case 'ltuk': case 'poldk': case 'poldw': case 'svki': case 'swel':
             // replace placeholder, remove prefix
             $routeNum = str_replace("A", "", $row['route']);
             $routeNum = str_replace("B", "", $routeNum);
@@ -110,6 +131,7 @@ function generate($r, $force_reload = false)
             $routeNum = str_replace("Kt", "", $routeNum);
             $routeNum = str_replace("K", "", $routeNum);
             $routeNum = str_replace("L", "", $routeNum);
+            $routeNum = str_replace("Rte", "", $routeNum);
             $routeNum = str_replace("SR", "", $routeNum);
             $routeNum = str_replace("TH", "", $routeNum);
             $routeNum = str_replace("T", "", $routeNum);
