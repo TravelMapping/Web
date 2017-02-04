@@ -138,6 +138,13 @@ table.gratable tr.float th {
     background-color: #999999;
 }
 
+div.gm-style, div.gm-style div {
+    -ms-user-select: text !important;
+    -moz-user-select: text !important;
+    -webkit-user-select: text !important;
+    user-select: auto !important;
+}
+
 /* from jdtstyle.css: */
 /*body {
   margin-top: 10px;
@@ -395,3 +402,4 @@ margin-left: 10px;
 	width: 750px;
 	text-align: right;
 }
+
