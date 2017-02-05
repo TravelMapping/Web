@@ -186,7 +186,7 @@ function generate($r, $force_reload = false)
 
         case 'bela': case 'belr': case 'eure': case 'luxa': case 'luxb': case 'roua':
             // replace placeholder, use wide svg file for 3-digit numbers
-            if (strlen($routeNum) > 2) {
+            if (strlen($row['route']) > 2) {
                     $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
             }
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
