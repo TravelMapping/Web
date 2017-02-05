@@ -30,7 +30,7 @@ function generate($r, $force_reload = false)
                     $svg = file_get_contents("{$dir}/generic_wide.svg");
                 }
             } else {
-                if (file_exists("template_can" . $region . ".svg")) {
+                if (file_exists("{$dir}/template_can" . $region . ".svg")) {
                     $svg = file_get_contents("{$dir}/template_can" . $region . ".svg");
                 } else {
                     $svg = file_get_contents("{$dir}/generic.svg");
@@ -105,7 +105,7 @@ function generate($r, $force_reload = false)
                     $svg = file_get_contents("{$dir}/generic_wide.svg");
                 }
             } else {
-                if (file_exists("template_usa" . $region . ".svg")) {
+                if (file_exists("{$dir}/template_usa" . $region . ".svg")) {
                     $svg = file_get_contents("{$dir}/template_usa" . $region . ".svg");
                 } else {
                     $svg = file_get_contents("{$dir}/generic.svg");
