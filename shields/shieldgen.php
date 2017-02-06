@@ -43,6 +43,16 @@ function generate($r, $force_reload = false)
             
         case 'cantch': //do nothing
             break;
+            
+        case 'canyt':
+            $routeNum = str_replace("YT", "", $row['route']); //gets rid of the extra YT on BC ones
+            if (file_exists("{$dir}/template_canyt" . $routeNum . ".svg")) {
+                $svg = file_get_contents("{$dir}/template_canyt" . $routeNum . ".svg");
+            } 
+            else {
+                $svg = file_get_contents("{$dir}/generic_wide.svg");
+            }
+            break;
 
         case 'usai':
         case 'usaif':

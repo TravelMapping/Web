@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg id="svg3607" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 601 601" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+ <g id="g3778">
+  <rect id="rect3617" rx="37.5" ry="37.5" height="600" width="600" stroke="#000" y="0.5" x="0.5" fill="#fff"/>
+  <rect id="rect4130" rx="28.125" ry="28.125" height="581.25" width="581.25" y="10.375" x="9.375" fill="#a6293b"/>
+  <rect id="rect3776" style="color:#000000" rx="12.5" ry="12.5" height="550" width="550" y="26" x="25" fill="#fff"/>
+  <path id="path3771" d="m244.82 413c24.99-70.997 43.921-118.64 78.579-196.74 4.09-9.23 1.77-13.26-3.58-13.26h-60c-7.1801 0-10.054 2.5804-15 10-10 15-25 21.171-25 0v-30c0-13.269 6.9561-20 25-20h110c20 0 30.253 10.087 25 25-30.708 87.173-62.251 180.1-75 230-2.7674 10.832-5.5149 20-18 20h-32c-10.792 0-16.297-7.1102-10-25z" fill="#a6293b"/>
+ </g>
+ <text id="text4140" style="text-anchor:middle;text-align:center" font-family="Roadgeek 2005 Series D" xml:space="preserve" font-size="12px" line-height="100%" stroke="#000000" y="93" x="299" stroke-width="1px" fill="none"><tspan id="tspan4142" y="93" x="299"/></text>
+</svg>
