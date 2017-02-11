@@ -194,6 +194,15 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+        case 'fraa': case 'fran': case 'frht':
+            // replace placeholder, replace prefix, use wide svg files
+            $routeNum = str_replace("A", "A ", $row['route']);
+            $routeNum = str_replace("N", "N ", $routeNum);
+            //$routeNum = str_replace("T", "T", $routeNum); //no blank required!
+            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" strlen($routeNum) . ".svg");
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
         case 'bela': case 'belr': case 'eure': case 'luxa': case 'luxb': case 'roua':
             // replace placeholder, use wide svg file for 3-digit numbers
             if (strlen($row['route']) > 2) {
@@ -214,8 +223,8 @@ function generate($r, $force_reload = false)
             break;
 
         case 'deubwl': case 'deubyst': case 'deubbl': case 'deuhel': case 'deumvl': case 'deunil': case 'deunwl': case 'deurpl': case 'deusll': case 'deusns': case 'deustl': case 'deushl': case 'deuthl':
-            // replace placeholder, use wide svg files
-            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($row['route']) . ".svg");
+            // replace placeholder, use wide svg files (German Landesstrassen)
+            $svg = file_get_contents("{$dir}/template_deul" . strlen($row['route']) . ".svg");
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;
 
