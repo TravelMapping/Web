@@ -199,7 +199,7 @@ function generate($r, $force_reload = false)
             $routeNum = str_replace("A", "A ", $row['route']);
             $routeNum = str_replace("N", "N ", $routeNum);
             //$routeNum = str_replace("T", "T", $routeNum); //no blank required!
-            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" strlen($routeNum) . ".svg");
+            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
