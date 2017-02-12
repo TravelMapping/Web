@@ -126,9 +126,16 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***SYS***", $region, $svg);
             break;
 
-        case 'andcg': case 'belb': case 'hunm': case 'lvaa': case 'lvap': case 'nldp': case 'nldr': case 'pola': case 'pols': case 'svkd': case 'svkr':
+        case 'belb': case 'hunm': case 'lvaa': case 'lvap': case 'nldp': case 'nldr': case 'pola': case 'pols': case 'svkd': case 'svkr':
             // replace placeholder
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
+
+        case 'andcg':
+            // replace placeholder, use wide svg file for 4-digit numbers
+            if (strlen($routeNum) > 3) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+            }
+            break;
 
         case 'itaa':
             // replace placeholder, use wide svg file for 5-/7-digit numbers
