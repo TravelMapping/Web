@@ -126,9 +126,27 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***SYS***", $region, $svg);
             break;
 
-        case 'andcg': case 'belb': case 'hunm': case 'itaa': case 'lvaa': case 'lvap': case 'nldp': case 'nldr': case 'pola': case 'pols': case 'svkd': case 'svkr':
+        case 'belb': case 'hunm': case 'lvaa': case 'lvap': case 'nldp': case 'nldr': case 'pola': case 'pols': case 'svkd': case 'svkr':
             // replace placeholder
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
+
+        case 'andcg':
+            // replace placeholder, use wide svg file for 4-digit numbers
+            if (strlen($routeNum) > 3) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+            }
+            break;
+
+        case 'itaa':
+            // replace placeholder, use wide svg file for 5-/7-digit numbers
+            if (strlen($routeNum) > 4) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide5.svg");
+            }
+            if (strlen($routeNum) > 6) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide7.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
 
         case 'alakt': case 'alavt': case 'canmbw': case 'chea': case 'czed': case 'czei': case 'czeii': case 'deua': case 'dnksr': case 'deub': case 'estp': case 'estt': case 'finkt': case 'hunf': case 'islth': case 'ltuk': case 'poldk': case 'poldw': case 'svki': case 'swel':
             // replace placeholder, remove prefix
@@ -167,10 +185,7 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
-        case 'beln0': case 'beln1': case 'beln2': case 'beln3': case 'beln4': case 'beln5': case 'beln6': case 'beln7': case 'beln8': case 'beln9': case 'beln':
-        case 'cheh': case 'dnkpr': case 'finvt':
-        case 'norfv0': case 'norfv1': case 'norfv2': case 'norfv3': case 'norfv4': case 'norfv5': case 'norfv6': case 'norfv7': case 'norfv8': case 'norfv9': case 'norfv':
-        case 'norrv': case 'swer':
+        case 'cheh': case 'dnkpr': case 'finvt': case 'norrv': case 'swer':
             // replace placeholder, remove prefix, use wide svg files for 2-/3-digit numbers
             $routeNum = str_replace("Fv", "", $row['route']);
             $routeNum = str_replace("H", "", $routeNum);
@@ -184,6 +199,33 @@ function generate($r, $force_reload = false)
             }
             if (strlen($routeNum) > 2) {
                     $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide3.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
+        case 'beln0': case 'beln1': case 'beln2': case 'beln3': case 'beln4': case 'beln5': case 'beln6': case 'beln7': case 'beln8': case 'beln9': case 'beln':
+            // replace placeholder, remove prefix, use wide svg files for 2-/3-digit numbers (Belgian workaround till beln is merged again)
+            $routeNum = str_replace("N", "", $row['route']);
+            $svg = file_get_contents("{$dir}/template_beln.svg");
+            if (strlen($routeNum) > 1) {
+                    $svg = file_get_contents("{$dir}/template_beln_wide.svg");
+            }
+            if (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_beln_wide3.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
+        case 'norfv0': case 'norfv1': case 'norfv2': case 'norfv3': case 'norfv4': case 'norfv5': case 'norfv6': case 'norfv7': case 'norfv8': case 'norfv9': case 'norfv':
+            // replace placeholder, remove prefix, use wide svg files for 2-/3-digit numbers (Norwegian workaround till beln is merged again)
+            $routeNum = str_replace("Fv", "", $row['route']);
+            $routeNum = str_replace("N", "", $row['route']);
+            $svg = file_get_contents("{$dir}/template_norfv.svg");
+            if (strlen($routeNum) > 1) {
+                    $svg = file_get_contents("{$dir}/template_norfv_wide.svg");
+            }
+            if (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_norfv_wide3.svg");
             }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
