@@ -126,7 +126,7 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***SYS***", $region, $svg);
             break;
 
-        case 'belb': case 'hunm': case 'lvaa': case 'lvap': case 'nldp': case 'nldr': case 'pola': case 'pols': case 'svkd': case 'svkr':
+        case 'andcg': case 'belb': case 'hunm': case 'itaa': case 'lvaa': case 'lvap': case 'nldp': case 'nldr': case 'pola': case 'pols': case 'svkd': case 'svkr':
             // replace placeholder
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
 
@@ -167,7 +167,10 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
-        case 'beln': case 'cheh': case 'dnkpr': case 'finvt': case 'norfv': case 'norrv': case 'swer':
+        case 'beln0': case 'beln1': case 'beln2': case 'beln3': case 'beln4': case 'beln5': case 'beln6': case 'beln7': case 'beln8': case 'beln9': case 'beln':
+        case 'cheh': case 'dnkpr': case 'finvt':
+        case 'norfv0': case 'norfv1': case 'norfv2': case 'norfv3': case 'norfv4': case 'norfv5': case 'norfv6': case 'norfv7': case 'norfv8': case 'norfv9': case 'norfv':
+        case 'norrv': case 'swer':
             // replace placeholder, remove prefix, use wide svg files for 2-/3-digit numbers
             $routeNum = str_replace("Fv", "", $row['route']);
             $routeNum = str_replace("H", "", $routeNum);
@@ -218,6 +221,20 @@ function generate($r, $force_reload = false)
             }
             if (strlen($row['route']) > 3) {
                     $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
+            }
+            $svg = str_replace("***NUMBER***", $row['route'], $svg);
+            break;
+
+        case 'espa':
+            // replace placeholder, use wide svg files for 3-/4-/5-digit numbers (Spain is simplified: national (blue) motorway signs are generally used for national and regional motorways, numbering w/o "-" (e.g. A1 instead of A-1))
+            if (strlen($row['route']) > 2) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide3.svg");
+            }
+            if (strlen($row['route']) > 3) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
+            }
+            if (strlen($row['route']) > 4) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide5.svg");
             }
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;
