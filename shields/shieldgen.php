@@ -129,23 +129,25 @@ function generate($r, $force_reload = false)
         case 'belb': case 'hunm': case 'lvaa': case 'lvap': case 'nldp': case 'nldr': case 'pola': case 'pols': case 'svkd': case 'svkr':
             // replace placeholder
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
+            break;
 
         case 'andcg':
             // replace placeholder, use wide svg file for 4-digit numbers
-            if (strlen($routeNum) > 3) {
+            if (strlen($row['route']) > 3) {
                     $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
             }
+            $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;
 
         case 'itaa':
             // replace placeholder, use wide svg file for 5-/7-digit numbers
-            if (strlen($routeNum) > 4) {
+            if (strlen($row['route']) > 4) {
                     $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide5.svg");
             }
-            if (strlen($routeNum) > 6) {
+            if (strlen($row['route']) > 6) {
                     $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide7.svg");
             }
-            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;
 
         case 'alakt': case 'alavt': case 'canmbw': case 'chea': case 'czed': case 'czei': case 'czeii': case 'deua': case 'dnksr': case 'deub': case 'estp': case 'estt': case 'finkt': case 'hunf': case 'islth': case 'ltuk': case 'poldk': case 'poldw': case 'svki': case 'swel':
