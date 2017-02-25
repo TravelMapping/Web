@@ -219,9 +219,8 @@ function generate($r, $force_reload = false)
             break;
 
         case 'norfv0': case 'norfv1': case 'norfv2': case 'norfv3': case 'norfv4': case 'norfv5': case 'norfv6': case 'norfv7': case 'norfv8': case 'norfv9': case 'norfv':
-            // replace placeholder, remove prefix, use wide svg files for 2-/3-digit numbers (Norwegian workaround till beln is merged again)
+            // replace placeholder, remove prefix, use wide svg files for 2-/3-digit numbers (Norwegian workaround till norfv is merged again)
             $routeNum = str_replace("Fv", "", $row['route']);
-            $routeNum = str_replace("N", "", $row['route']);
             $svg = file_get_contents("{$dir}/template_norfv.svg");
             if (strlen($routeNum) > 1) {
                     $svg = file_get_contents("{$dir}/template_norfv_wide.svg");
