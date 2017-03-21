@@ -241,10 +241,17 @@ function generate($r, $force_reload = false)
             break;
 
         case 'fraa': case 'fran': case 'frht': case 'spmn': case 'mtqa': case 'glpn': case 'gufn': case 'reun': case 'mara': case 'tuna':
-            // replace placeholder, replace prefix, use wide svg files
+            // replace placeholder, add blank after prefix, use wide svg files
             $routeNum = str_replace("A", "A ", $row['route']);
             $routeNum = str_replace("N", "N ", $routeNum);
             //$routeNum = str_replace("T", "T", $routeNum); //no blank required!
+            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
+        case 'espn':
+            // replace placeholder, add hyphen after prefix, use wide svg files
+            $routeNum = str_replace("N", "N-", $row['route']);
             $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
