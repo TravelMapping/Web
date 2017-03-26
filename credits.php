@@ -730,7 +730,8 @@ following sources of highway information.</p>
           <a href="http://roadgeek.filpus.org/">Filpus Roadgeek</a> </li>
   <li>Adam Froehlig (froggie)<br>
       <a href="http://www.ajfroggie.com/">Froggie's Place</a> </li>
-  <li>Si Hollett (si404) </li>
+  <li>Si Hollett (si404)</li>
+  <li>Michael H (michih)</li>
   <li>James Mast (rickmastfan67)<br>
         <a href="http://rickmastfan67.blogspot.com/">Rickmastfan67 Blog</a> </li>
   <li>Jeff Morrison (jeffm)<br>
