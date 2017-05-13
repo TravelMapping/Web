@@ -240,6 +240,14 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+        case 'prta': case 'prtip': case 'prtic':
+            // replace placeholder, add blank after prefix
+            $routeNum = str_replace("A", "A ", $row['route']);
+            $routeNum = str_replace("IC", "IC ", $routeNum);
+            $routeNum = str_replace("IP", "IP ", $routeNum);
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
         case 'fraa': case 'fran': case 'frht': case 'spmn': case 'mtqa': case 'glpn': case 'gufn': case 'reun': case 'mara': case 'tuna':
             // replace placeholder, add blank after prefix, use wide svg files
             $routeNum = str_replace("A", "A ", $row['route']);
