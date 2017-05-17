@@ -63,7 +63,7 @@
                 <table class="gratable" id="usertable">
                     <thead>
                     <tr><th colspan="5">Current User</th></tr>
-                    <tr><th>User</th><th>Active Mileage</th><th>Rank</th><th>Active + Preview Mileage</th><th>Rank</th></tr>
+                    <tr><th>User</th><th>Active Distance</th><th>Rank</th><th>Active + Preview Distance</th><th>Rank</th></tr>
                     </thead><tbody>
 HTML;
         echo "<tr onClick=\"window.document.location='/user?u={$tmuser}';\">";
@@ -78,7 +78,9 @@ SQL;
         $res = tmdb_query($sql);
         $row = tm_fetch_user_row_with_rank($res, 'clinchedMileage');
         echo "<td>{$row['traveler']}</td>";
-        echo "<td>{$row['clinchedMileage']} / {$totalMileage} ({$row['percentage']}%)</td>";
+        echo "<td>".tm_miles_or_km($row['clinchedMileage'])."/".tm_miles_or_km($totalMileage)." ";
+	tm_echo_miles_or_km();
+	echo " ({$row['percentage']}%)</td>";
         echo "<td>{$row['rank']}</td>";
 
         $sql = <<<SQL
@@ -91,7 +93,9 @@ SQL;
 SQL;
         $res = tmdb_query($sql);
         $row = tm_fetch_user_row_with_rank($res, 'clinchedMileage');
-        echo "<td>{$row['clinchedMileage']} / {$totalPreviewMileage} ({$row['percentage']}%)</td>";
+        echo "<td>".tm_miles_or_km($row['clinchedMileage'])."/".tm_miles_or_km($totalPreviewMileage)." ";
+	tm_echo_miles_or_km();
+	echo " ({$row['percentage']}%)</td>";
         echo "<td>{$row['rank']}</td>";
         echo <<<HTML
                     </tr>
@@ -105,12 +109,12 @@ HTML;
             <table class="gratable tablesorter rankingstable">
                 <thead>
                 <tr>
-                    <th colspan="5">Traveler Mileage in Active Systems</th>
+                    <th colspan="5">Travels in Active Systems (<?php tm_echo_miles_or_km(); ?>)</th>
                 </tr>
                 <tr>
                     <th class="sortable">Rank</th>
                     <th class="sortable">Username</th>
-                    <th class="sortable">Miles Traveled</th>
+                    <th class="sortable">Distance Traveled</th>
                     <th class="sortable">%</th>
                 </tr>
                 </thead>
@@ -132,9 +136,10 @@ SQL;
                     } else {
                         $highlight = '';
                     }
+		    $print_distance = tm_miles_or_km($row['clinchedMileage']);
                     echo <<<HTML
                 <tr class="$highlight" onClick="window.document.location='/user?u={$row['traveler']}';">
-                <td>{$rank}</td><td>{$row['traveler']}</td><td>{$row['clinchedMileage']}</td><td>{$row['percentage']}%</td>
+                <td>{$rank}</td><td>{$row['traveler']}</td><td>{$print_distance}</td><td>{$row['percentage']}%</td>
                 </tr>
 HTML;
                     $rank++;
@@ -149,12 +154,12 @@ HTML;
             <table class="gratable tablesorter rankingstable">
                 <thead>
                 <tr>
-                    <th colspan="5">Traveler Mileage in Active and Preview Systems</th>
+                    <th colspan="5">Travels in Active and Preview Systems (<?php tm_echo_miles_or_km(); ?>)</th>
                 </tr>
                 <tr>
                     <th class="sortable">Rank</th>
                     <th class="sortable">Username</th>
-                    <th class="sortable">Miles Traveled</th>
+                    <th class="sortable">Distance Traveled</th>
                     <th class="sortable">%</th>
                 </tr>
                 </thead>
@@ -176,9 +181,10 @@ SQL;
                     } else {
                         $highlight = '';
                     }
+		    $print_distance = tm_miles_or_km($row['clinchedMileage']);
                     echo <<<HTML
                 <tr class="$highlight" onClick="window.document.location='/user?u={$row['traveler']}';">
-                <td>{$rank}</td><td>{$row['traveler']}</td><td>{$row['clinchedMileage']}</td><td>{$row['percentage']}%</td>
+                <td>{$rank}</td><td>{$row['traveler']}</td><td>{$print_distance}</td><td>{$row['percentage']}%</td>
                 </tr>
 HTML;
                     $rank++;

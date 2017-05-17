@@ -349,6 +349,29 @@ function tm_fetch_user_row_with_rank($res, $rankBy) {
     return $row;
 }
 
+// metric/non-metric support functions
+function tm_echo_miles_or_km() {
+    global $tmmetric;
+    global $tmuser;
+    if ($tmmetric) {
+        echo "<a href=\"".strtok($_SERVER['REQUEST_URI'],'?')."?u=".$tmuser."&metric=false\">km</a>";
+    }
+    else {
+        echo "<a href=\"".strtok($_SERVER['REQUEST_URI'].'?')."?u=".$tmuser."&metric=true\">miles</a>";
+    }
+}
+
+function tm_miles_or_km($mileage) {
+
+    global $tmmetric;
+    if ($tmmetric) {
+        return number_format($mileage * 1.609344, 2);
+    }
+    else {
+        return number_format($mileage, 2);
+    }
+}
+
 // functions from http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php
 
 function startsWith($haystack, $needle) {
