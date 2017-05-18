@@ -1,3 +1,4 @@
+<?php require $_SERVER['DOCUMENT_ROOT'] . "/lib/tmphpuser.php" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
@@ -83,17 +84,19 @@ echo number_format(tm_count_rows("connectedRoutes", "LEFT JOIN systems ON connec
 ?>
  routes for
 <?php
-echo number_format(tm_sum_column("overallMileageByRegion", "activeMileage"));
+echo tm_convert_distance(tm_sum_column("overallMileageByRegion", "activeMileage"))." ";
+tm_echo_units();
 ?>
- miles of "clinchable" highways, and that expands to
+ of "clinchable" highways, and that expands to
 <?php
 echo number_format(tm_count_rows("connectedRoutes", "LEFT JOIN systems ON connectedRoutes.systemName = systems.systemName WHERE systems.level = 'active' OR systems.level = 'preview'"));
 ?>
  routes for
 <?php
-echo number_format(tm_sum_column("overallMileageByRegion", "activePreviewMileage"));
+echo tm_convert_distance(tm_sum_column("overallMileageByRegion", "activePreviewMileage"))." ";
+tm_echo_units();
 ?>
- miles when preview systems are included.
+ when preview systems are included.
 
 </p>
 

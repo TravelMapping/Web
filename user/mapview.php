@@ -209,7 +209,7 @@
     <table id="routesTable" class="gratable tablesorter">
         <thead>
             <tr class="float" ><th class="sortable routeName">Route</th><th class="sortable systemName">System</th>
-                <th class="sortable clinched">Clinched</th><th class="sortable overall">Overall</th><th class="sortable percent">%</th></tr>
+                <th class="sortable clinched">Clinched (<?php tm_echo_units(); ?>)</th><th class="sortable overall">Overall (<?php tm_echo_units(); ?>)</th><th class="sortable percent">%</th></tr>
         </thead>
         <tbody>
         <!-- TEMP FIX: dummy table line to account for the fact that the
@@ -265,7 +265,7 @@ SQL;
                 <td class='link systemName'>{$row['tier']}. <a href='/user/system.php?u={$_GET['u']}&amp;sys={$row['systemName']}'>{$row['systemName']}</a></td>
                 <td class="clinched">
 HTML
-.$row['clinched']."</td><td class='overall'>".$row['total']."</td><td class='percent'>".$pct."%</td></tr>\n";
+.tm_convert_distance($row['clinched'])."</td><td class='overall'>".tm_convert_distance($row['total'])."</td><td class='percent'>".$pct."%</td></tr>\n";
         }
         ?>
         </tbody>

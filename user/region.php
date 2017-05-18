@@ -122,12 +122,14 @@ if (( $tmuser != "null") || ( $region != "" )) {
         <?php tm_user_select(); ?>
         <label>Region: </label>
 	<?php tm_region_select(FALSE); ?>
+	<label>Units: </label>
+	<?php tm_units_select(); ?>
         <input type="submit" value="Update Map and Stats" />
     </form>
     <a href="/user/index.php">Back to User Page</a>
     <?php
         echo " -- <a href='/user/mapview.php?u={$tmuser}&rg={$region}'>View Larger Map</a>";
-        echo "<h1>Traveler Stats for {$tmuser} in {$region}:</h1>";
+        echo "<h1>Traveler Statistics for {$tmuser} in {$region}:</h1>";
     ?>
 </div>
 <?php
@@ -150,8 +152,8 @@ if (( $tmuser == "null") || ( $region == "" )) {
     <h6>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</h6>
     <table class="gratable" id="overallTable">
         <thead>
-            <tr><th colspan="3">Overall Region Stats</th></tr>
-	    <tr><td /><td>Active Systems</td><td>Active+Preview Systems</td></tr>
+            <tr><th colspan="3">Overall <?php echo "$region"; ?> Region Statistics</th></tr>
+	    <tr><th /><th>Active Systems</th><th>Active+Preview Systems</th></tr>
         </thead>
         <tbody>
             <?php
@@ -189,13 +191,13 @@ SQL;
 	    $activePreviewMileagePercentage = $row['activePreviewPercentage'];
 	    $activePreviewMileageRank = $row['rank'];
  
-            echo "<tr class='notclickable' style=\"background-color:#EEEEFF\"><td>Miles Driven</td>";
-	    echo "<td>" . $activeClinchedMileage;
-	    echo "/" . $activeTotalMileage . " mi (";
+            echo "<tr class='notclickable' style=\"background-color:#EEEEFF\"><td>Distance Traveled</td>";
+	    echo "<td>" . tm_convert_distance($activeClinchedMileage);
+	    echo " of " . tm_convert_distance($activeTotalMileage) . " " . $tmunits . " (";
 	    echo $activeMileagePercentage . "%) ";
 	    echo "Rank: " . $activeMileageRank . "</td>";
-	    echo "<td>" . $activePreviewClinchedMileage;
-	    echo "/" . $activePreviewTotalMileage . " mi (";
+	    echo "<td>" . tm_convert_distance($activePreviewClinchedMileage);
+	    echo " of " . tm_convert_distance($activePreviewTotalMileage) . " " .$tmunits . " (";
 	    echo $activePreviewMileagePercentage . "%) ";
 	    echo "Rank: " . $activePreviewMileageRank . "</td>";
 	    echo "</tr>";
@@ -280,14 +282,14 @@ SQL;
         <caption>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</caption>
         <thead>
         <tr>
-            <th colspan="6">Clinched Mileage by System</th>
+            <th colspan="6">Statistics by System</th>
         </tr>
         <tr>
             <th class="sortable">System Code</th>
             <th class="sortable">System Name</th>
-            <th class="sortable">Clinched Mileage</th>
-            <th class="sortable">Total Mileage</th>
-            <th class="sortable">Percent</th>
+            <th class="sortable">Clinched (<?php tm_echo_units(); ?>)</th>
+            <th class="sortable">Total (<?php tm_echo_units(); ?>)</th>
+            <th class="sortable">%</th>
             <th class="nonsortable">Map</th>
         </tr>
         </thead>
@@ -317,8 +319,8 @@ SQL;
             echo "<tr onClick=\"window.open('/user/system.php?u=" . $tmuser . "&sys=" . $row['systemName'] . "&amp;rg=" . $region . "')\" class=\"status-" . $row['status'] . "\">";
             echo "<td>" . $row['systemName'] . "</td>";
             echo "<td>" . $row['fullName'] . "</td>";
-            echo "<td>" . $row['clinchedMileage'] . "</td>";
-            echo "<td>" . $row['totalMileage'] . "</td>";
+            echo "<td>" . tm_convert_distance($row['clinchedMileage']) . "</td>";
+            echo "<td>" . tm_convert_distance($row['totalMileage']) . "</td>";
             echo "<td>" . $row['percentage'] . "%</td>";
             echo "<td class='link'><a href='/hb?rg={$region}&amp;sys={$row['systemName']}'>HB</a></td></tr>";
         }
@@ -328,8 +330,8 @@ SQL;
     </table>
     <table class="gratable tablesorter" id="routesTable">
         <thead>
-            <tr><th colspan="7">Stats by Route: (<?php echo "<a href=\"/user/mapview.php?u=".$tmuser."&amp;rg=".$region."\">" ?>Full Map)</a></th></tr>
-            <tr><th class="sortable">Tier</th><th class="sortable">Route</th><th class="sortable">#</th><th class="sortable">Clinched Mileage</th><th class="sortable">Total Mileage</th><th class="sortable">%</th><th class="nonsortable">Map</th></tr>
+            <tr><th colspan="7">Statistics by Route: (<?php echo "<a href=\"/user/mapview.php?u=".$tmuser."&amp;rg=".$region."\">" ?>Full Map)</a></th></tr>
+            <tr><th class="sortable">Tier</th><th class="sortable">Route</th><th class="sortable">#</th><th class="sortable">Clinched (<?php tm_echo_units(); ?>)</th><th class="sortable">Total (<?php tm_echo_units(); ?>)</th><th class="sortable">%</th><th class="nonsortable">Map</th></tr>
         </thead>
         <tbody>
             <?php
@@ -357,8 +359,8 @@ SQL;
                     }
                     echo "</td>";
                     echo "<td>{$row['systemName']}.{$row['root']}</td>";
-                    echo "<td>".$row['clinchedMileage']."</td>";
-                    echo "<td>".$row['totalMileage']."</td>";
+                    echo "<td>".tm_convert_distance($row['clinchedMileage'])."</td>";
+                    echo "<td>".tm_convert_distance($row['totalMileage'])."</td>";
                     echo "<td>".$row['percentage']."%</td>";
                     echo "<td class='link'><a href='/hb?u={$tmuser}&amp;r={$row['root']}'>HB</a></td></tr>";
                 }
