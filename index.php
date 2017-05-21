@@ -64,7 +64,13 @@ echo tm_count_rows("systems", "WHERE level='active'");
 "active" systems.  Active systems are those which we believe are
 accurate and complete, and for which any changes that affect users
 will be noted in the <a href="/devel/updates.php#updates">highway data
-updates table</a>.  An additional
+updates table</a>.
+
+</p>
+
+<p class="text">
+
+An additional
 
 <?php
 echo tm_count_rows("systems", "WHERE level='preview'");
@@ -74,11 +80,20 @@ systems are in "preview" status, which means they are substantially
 complete, but still undergoing final revisions.  These may still
 undergo significant changes without notification.
 
+</p>
+
+<p class="text">
+
 <?php
 echo tm_count_rows("systems", "WHERE level='devel'");
 ?>
- more are in development but are not yet complete.  Active systems
-encompass 
+ more are in development but are not yet complete.
+
+</p>
+
+<p class="text">
+
+Active systems encompass 
 <?php
 echo number_format(tm_count_rows("connectedRoutes", "LEFT JOIN systems ON connectedRoutes.systemName = systems.systemName WHERE systems.level = 'active'"));
 ?>
@@ -100,6 +115,13 @@ tm_echo_units();
 
 </p>
 
+<p class="text">
+
+Highway data is <a href="/devel/updates.php">updated</a> almost daily
+as corrections are made and progress is made on systems in development.
+
+</p>
+
 <p class="heading">How to Participate</p>
 
 <p class="text">
@@ -116,7 +138,8 @@ Once your data is in the system, you will be listed on the
 main <a href="/stat.php">traveler stats page</a>, and you can see a
 summary of your travels on your <a href="/user">user page</a>.  Click
 around on the various links and table entries to find more ways to see
-your travels, both as tabular statistics and plotted on maps.
+your travels, both as tabular statistics and plotted on maps, or your
+user rankings on every <a href="/user/region.php">region page</a>.
 
 </p>
 
@@ -130,25 +153,8 @@ systems in development.  Highly experienced users can learn how to
 plot new highway systems under the guidance of experienced
 contributors.  Again, see <a href="/forum">the project forum</a> for
 more information.
+
 </p>
-
-<p class="heading">What's New with Highway Data?</p>
-
-<p class="text">
-Highway data is <a href="/devel/updates.php">updated</a> almost daily
-as corrections are made and progress is made on systems in
-development.  When a highway system is deemed correct and complete to
-the best of our knowledge, it becomes "active".  Here are the newest
-systems to become active, with their activation dates:</p>
-<ul class="text">
-<?php
-$res = tmdb_query("select systemName, description, date from systemUpdates where statusChange='active'  limit 8");
-while ($row = $res->fetch_assoc()) {
-  echo "<li>".$row['description']." (".$row['systemName']."), ".$row['date']."</li>\n";
-}
-$res->free();
-?>
-</ul>
 
 <p class="text">
 The most recent site update completed at <?php echo tm_update_time(); ?> US/Eastern.
