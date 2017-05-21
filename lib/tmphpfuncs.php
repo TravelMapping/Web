@@ -196,13 +196,31 @@ function tm_user_select() {
     echo "</select>\n";
 }
 
+
+
+// function to generate a units selection "select" object
+function tm_units_select() {
+    global $tmunits;
+    global $tm_supported_units;
+    echo "<select name=\"units\">\n";
+    foreach ($tm_supported_units as $unit => $conv) {
+        echo "<option value=\"".$unit."\"";
+        if ($unit == $tmunits) {
+	    echo " selected=\"selected\"";
+        }
+	echo ">".$unit."</option>\n";
+    }
+    echo "</select>\n";
+}
+
 // function to generate a user selection input form
-function tm_user_select_form() {
-    // TODO: action should come as a parameter
-    echo "<form id=\"userselect\" action=\".\"><p>\n";
+function tm_user_select_form($action = "\".\"") {
+    echo "<form id=\"userselect\" action=".$action."><p>\n";
     echo "<label>Current User: </label>\n";
     tm_user_select();
-    echo "<input type=\"submit\" value=\"Select User\" />\n";
+    echo "<label>Units: </label>\n";
+    tm_units_select();
+    echo "<input type=\"submit\" value=\"Apply\" />\n";
     echo "</p></form>\n";
 }
 
@@ -347,6 +365,22 @@ function tm_fetch_user_row_with_rank($res, $rankBy) {
     }
     $row['rank'] = $rank;
     return $row;
+}
+
+// additional metric/non-metric units support functions
+
+// simply return the string representation
+function tm_echo_units() {
+    global $tmunits;
+    echo $tmunits;
+}
+
+// convert to the currently-selected units
+function tm_convert_distance($mileage) {
+
+    global $tmunits;
+    global $tm_supported_units;
+    return number_format($mileage * $tm_supported_units[$tmunits], 2);
 }
 
 // functions from http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php

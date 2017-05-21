@@ -214,6 +214,21 @@ SQL;
             $pointnum = 0;
             while ($row = $res->fetch_assoc()) {
                 echo "waypoints[$pointnum] = new Waypoint(\"{$row['pointName']}\",{$row['latitude']},{$row['longitude']});\n";
+		if ($row['pointName'][0] === '+') {
+                    $pointnum = $pointnum + 1;
+		    continue;
+		}
+		$sql_command = "SELECT w.root, r.route, r.region, r.banner, r.abbrev, r.city FROM waypoints AS w LEFT JOIN routes AS r ON w.root = r.root WHERE w.latitude='".$row['latitude']."' AND w.longitude='".$row['longitude']."';";
+		$res2 = tmdb_query($sql_command);
+		if ($res2->num_rows > 1) {
+		   echo "waypoints[$pointnum].intersecting = new Array();\n";
+	           while ($match_row = $res2->fetch_assoc()) {
+		       if ($match_row['root'] != $routeparam) {	 
+	   	           echo "waypoints[$pointnum].intersecting.push(new Route(\"".$match_row['root']."\",\"".$match_row['route']."\",\"".$match_row['region']."\",\"".$match_row['banner']."\",\"".$match_row['abbrev']."\",\"".$match_row['city']."\"));\n";
+		       }
+		   }
+                }
+		$res2->free();
                 $pointnum = $pointnum + 1;
             }
             $res->free();
