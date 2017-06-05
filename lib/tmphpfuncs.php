@@ -380,7 +380,7 @@ function tm_convert_distance($mileage) {
 
     global $tmunits;
     global $tm_supported_units;
-    return number_format($mileage * $tm_supported_units[$tmunits], 2);
+    return number_format($mileage * $tm_supported_units[$tmunits], 2, '.', '');
 }
 
 // functions from http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php
