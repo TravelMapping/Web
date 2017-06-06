@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
 <meta charset="utf-8">
@@ -38,7 +38,9 @@ following sources of highway information.</p>
 	      <li><a href="http://maps.nokia.com/services/">Nokia/Ovi Map</a>. Online tile map from NAVTEQ that covers the world.</li>
 	      <li><a href="http://www.mapquest.com/">Mapquest</a>. Online tile map from MapQuest that covers the world.</li>
 	      <li><a href="http://maps.yahoo.com/">Yahoo Maps</a>. Online tile map from Yahoo that covers the world.</li>
-              <li><a href="http://maps.yandex.ru">Yandex Maps</a>. Tile maps of eastern Europe, with street view of major cities.</li>
+          <li><a href="http://maps.yandex.ru">Yandex Maps</a>. Tile maps of eastern Europe, with street view of major cities.</li>
+		  <li><a href="http://www.esri.com/">Esri Maps</a>. Online tile map from Esri that covers the world.</li>
+		  <li><a href="https://here.com/en">HERE maps</a>. Online tile map from HERE, which provides world wide mapping data.</li>
 	    </ul>
 	  </li>
 	  <li>Gazetteers
