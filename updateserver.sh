@@ -8,7 +8,7 @@ server=blizzard.teresco.org
 basedir=/home/www/
 rootdir=tmtest
 shieldsdir=
-otherdirs="user lib devel hb css api"
+otherdirs="user lib devel hb css api graphs"
 while (( "$#" )); do
 
     if [ "$1" == "--prod" ]; then
