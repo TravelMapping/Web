@@ -6,6 +6,14 @@
 <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
 <title>Travel Mapping Graph Data</title>
 <link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+<style>
+table.dataTable tbody td{
+padding:0px;
+}
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js" type="text/javascript"></script>
 </head>
 <body>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
@@ -58,7 +66,8 @@ academic use.  Other use prohibited.
 
 </div>
 <p class="subheading">All Graphs</p>
-			<p />
+<p />
+<div style="text-align:center;">
 			<p>Filter by number of vertices (collapsed)</p>
 			from
 			<input type="number" min="1" value="1" id="regMin" style="width:6rem;" onchange="tableFilter(event)">
@@ -68,15 +77,8 @@ academic use.  Other use prohibited.
 			<p>Filter by graph type</p>
 			<select id="regFil" onchange="selFilter(event)">
 				<option value="all">All</option>
-				<option value="region">Region</option>
-				<option value="area">Area</option>
-				<option value="continent">Continent</option>
-				<option value="multiregio">Multi Region</option>
-				<option value="multisyste">Multi System</option>
-				<option value="system">System</option>
-				<option value="master">Master</option>
-				<option value="country">Country</option>
 			</select>
+			</div>
 			<table class="gratable" id="regTable" border="1">
 			<thead>
 			<tr><th rowspan="2">Graph Description</th><th colspan="3">Collapsed Format Graph</th><th colspan="3">Simple Format Graph</th></tr>
@@ -103,8 +105,8 @@ catch ( Exception $e ) {
 $result = $tmdb->query("SELECT * FROM graphs");
 $counter = 0;
 $prevRow;
-while ($row = $result->fetch_array()) {
 
+while ($row = $result->fetch_array()) {	
 	//keep track of simple info so we can put it after collapsed
 	if ($counter%2 == 0){		
 		$prevRow = $row;
@@ -125,6 +127,13 @@ while ($row = $result->fetch_array()) {
 	}
 	$counter++;
 }
+$values = array();
+$descr = array();
+$result = $tmdb->query("SELECT * FROM graphTypes");
+while ($row = $result->fetch_array()) {	
+	array_push($values, $row[0]);
+	array_push($descr, $row[1]);
+}
 ?>
 </tbody>
 </table>
@@ -135,6 +144,15 @@ $("#regTable").DataTable(
 	info: false
 });
 
+var vals = <?php echo '["' . implode('", "', $values) . '"]' ?>;
+var inner = <?php echo '["' . implode('", "', $descr) . '"]' ?>;
+for (var i=0; i<vals.length; i++){
+	var op = document.createElement("option");
+	op.value = vals[i];
+	op.innerHTML = vals[i] + ": " + inner[i];
+	document.getElementById("regFil").appendChild(op);
+}
+
 function tableFilter(event){
 	if (event.target.value > 0){
 		var str = event.target.id.substring(0,3)+"Body";
@@ -142,15 +160,15 @@ function tableFilter(event){
 		for (var i=1; i<tbody.childNodes.length; i++){
 			if(event.target.id.substring(3) == "Max"){
 				if(parseInt(tbody.childNodes[i].childNodes[5].className.substring(1)) > event.target.value)
-					tbody.childNodes[i].classList.add("hideNum");
+					tbody.childNodes[i].classList.add("hideNumL");
 				else
-					tbody.childNodes[i].classList.remove("hideNum");
+					tbody.childNodes[i].classList.remove("hideNumL");
 			}
 			else{
 				if(parseInt(tbody.childNodes[i].childNodes[5].className.substring(1)) < event.target.value)
-					tbody.childNodes[i].classList.add("hideNum");
+					tbody.childNodes[i].classList.add("hideNumS");
 				else
-					tbody.childNodes[i].classList.remove("hideNum");
+					tbody.childNodes[i].classList.remove("hideNumS");
 			}
 			hideRow(tbody.childNodes[i]);			
 		}
@@ -168,7 +186,7 @@ function selFilter(event){
 		}
 }
 function hideRow(elem){
-	if(elem.classList.contains("hideType") || elem.classList.contains("hideNum"))
+	if(elem.classList.contains("hideType") || elem.classList.contains("hideNumL") || elem.classList.contains("hideNumS"))
 		elem.style.display = "none";
 	else
 		elem.style.display = "";
