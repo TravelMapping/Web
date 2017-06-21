@@ -57,72 +57,123 @@ Mapping Project</a> contributors.  Graphs may be downloaded freely for
 academic use.  Other use prohibited.
 
 </div>
-<p class="subheading">Graphs of All TM Data</p>
-
-<p />
-<table class="gratable" border="1">
-<thead>
-<tr><th rowspan="2">Graph Description</th><th colspan="2">Collapsed Format Graph</th><th colspan="2">Simple Format Graph</th></tr>
-<tr><th>Download Link</th><th>(|V|,|E|)</th><th>Download Link</th><th>(|V|,|E|)</th></tr></thead>
+<p class="subheading">All Graphs</p>
+			<p />
+			<p>Filter by number of vertices (collapsed)</p>
+			from
+			<input type="number" min="1" value="1" id="regMin" style="width:6rem;" onchange="tableFilter(event)">
+			to
+			<input type="number" min="1" value="30000" id="regMax" style="width:6rem;" onchange="tableFilter(event)">
+			vertices
+			<p>Filter by graph type</p>
+			<select id="regFil" onchange="selFilter(event)">
+				<option value="all">All</option>
+				<option value="region">Region</option>
+				<option value="area">Area</option>
+				<option value="continent">Continent</option>
+				<option value="multiregio">Multi Region</option>
+				<option value="multisyste">Multi System</option>
+				<option value="system">System</option>
+				<option value="master">Master</option>
+				<option value="country">Country</option>
+			</select>
+			<table class="gratable" id="regTable" border="1">
+			<thead>
+			<tr><th rowspan="2">Graph Description</th><th colspan="3">Collapsed Format Graph</th><th colspan="3">Simple Format Graph</th></tr>
+			<tr><th>Download Link</th><th>Vertices</th><th>Edges</th><th>Download Link</th><th>Vertices</th><th>Edges</th></tr></thead>
+			<tbody id="regBody">
 <?
+$tmconffile = fopen($_SERVER['DOCUMENT_ROOT']."/lib/tm.conf", "r");
+$tmdbname = chop(fgets($tmconffile));
+$tmdbuser = chop(fgets($tmconffile));
+$tmdbpasswd = chop(fgets($tmconffile));
+$tmdbhost = chop(fgets($tmconffile));
+
+
+// make the connection
+//echo "<!-- mysqli connecting to database ".$tmdbname." on ".$tmdbhost." -->\n";
+mysqli_report(MYSQLI_REPORT_STRICT);
+try {
+    $tmdb = new mysqli($tmdbhost, $tmdbuser, $tmdbpasswd, $tmdbname);
+}
+catch ( Exception $e ) {
+   //echoecho "<h1 style='color: red'>Failed to connect to database ".$tmdbname." on ".$tmdbhost." Please try again later.</h1>";
+   exit;
+}
 $result = $tmdb->query("SELECT * FROM graphs");
 $counter = 0;
 $prevRow;
-$firstSys = true;
 while ($row = $result->fetch_array()) {
-	//check for first additional interesting graph
-	if ($row[0] == "usa-national.tmg"){
-		echo '</table>
-			<p class="subheading">Additional Interesting Graphs</p>
 
-			<p />
-			<table class="gratable" border="1">
-			<thead>
-			<tr><th rowspan="2">Graph Description</th><th colspan="2">Collapsed Format Graph</th><th colspan="2">Simple Format Graph</th></tr>
-			<tr><th>Download Link</th><th>(|V|,|E|)</th><th>Download Link</th><th>(|V|,|E|)</th></tr></thead>';
-				}
 	//keep track of simple info so we can put it after collapsed
 	if ($counter%2 == 0){		
 		$prevRow = $row;
 	}
 	//produce table row in correct order
 	else {
-		echo "<tr>
+		echo "<tr class = ".$row[5].">
 		<td>".$row[1]."</td>
 		<td><a href=".$row[0].">".$row[0]."</a></td>
-		<td>(".$row[2].", ".$row[3].")</td>";
+		<td class = c".$row[2].">".$row[2]."</td>
+		<td>".$row[3]."</td>";
 		
 		echo "
 		<td><a href=".$prevRow[0].">".$prevRow[0]."</a></td>
-		<td>(".$prevRow[2].", ".$prevRow[3].")</td>
+		<td>".$prevRow[2]."</td>
+		<td>".$prevRow[3]."</td>
 		</tr>";
-	}
-	//check for first graph by region
-	if ($counter == 1){
-		echo '</table>
-			<p class="subheading">Graphs Restricted by Region</p>
-			<p />
-			<table class="gratable" border="1">
-			<thead>
-			<tr><th rowspan="2">Graph Description</th><th colspan="2">Collapsed Format Graph</th><th colspan="2">Simple Format Graph</th></tr>
-			<tr><th>Download Link</th><th>(|V|,|E|)</th><th>Download Link</th><th>(|V|,|E|)</th></tr></thead>';
-	}
-	//check for first graph by system
-	if ($counter > 1 && !ctype_upper(substr($row[0], 0, 1)) && $firstSys){
-		echo '</table>
-			<p class="subheading">Graphs Restricted by Highway System</p>
-			<p />
-			<table class="gratable" border="1">
-			<thead>
-			<tr><th rowspan="2">Graph Description</th><th colspan="2">Collapsed Format Graph</th><th colspan="2">Simple Format Graph</th></tr>
-			<tr><th>Download Link</th><th>(|V|,|E|)</th><th>Download Link</th><th>(|V|,|E|)</th></tr></thead>';
-		$firstSys = false;
 	}
 	$counter++;
 }
-
 ?>
+</tbody>
 </table>
+
+<script>
+$("#regTable").DataTable(
+	{paging: false,
+	info: false
+});
+
+function tableFilter(event){
+	if (event.target.value > 0){
+		var str = event.target.id.substring(0,3)+"Body";
+		var tbody = document.getElementById(str);
+		for (var i=1; i<tbody.childNodes.length; i++){
+			if(event.target.id.substring(3) == "Max"){
+				if(parseInt(tbody.childNodes[i].childNodes[5].className.substring(1)) > event.target.value)
+					tbody.childNodes[i].classList.add("hideNum");
+				else
+					tbody.childNodes[i].classList.remove("hideNum");
+			}
+			else{
+				if(parseInt(tbody.childNodes[i].childNodes[5].className.substring(1)) < event.target.value)
+					tbody.childNodes[i].classList.add("hideNum");
+				else
+					tbody.childNodes[i].classList.remove("hideNum");
+			}
+			hideRow(tbody.childNodes[i]);			
+		}
+	}
+}
+function selFilter(event){	
+	var str = event.target.id.substring(0,3)+"Body";
+		var tbody = document.getElementById(str);
+		for (var i=1; i<tbody.childNodes.length; i++){	
+			if(document.getElementById("regFil").value != "all" && tbody.childNodes[i].className.indexOf(document.getElementById("regFil").value) == -1)
+				tbody.childNodes[i].classList.add("hideType");
+			else
+				tbody.childNodes[i].classList.remove("hideType");
+			hideRow(tbody.childNodes[i]);	
+		}
+}
+function hideRow(elem){
+	if(elem.classList.contains("hideType") || elem.classList.contains("hideNum"))
+		elem.style.display = "none";
+	else
+		elem.style.display = "";
+}
+</script>
 <p class="text">
 The most recent site update including graph generation completed at <?php echo tm_update_time(); ?> US/Eastern.
 </p>
