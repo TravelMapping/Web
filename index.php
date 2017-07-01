@@ -77,8 +77,9 @@ undergo significant changes without notification.
 <?php
 echo tm_count_rows("systems", "WHERE level='devel'");
 ?>
- more are in development but are not yet complete.  Active systems
-encompass 
+ more are in development but are not yet complete.  These "devel"
+ systems are not yet included in stats or plotted on user maps.
+ Active systems encompass 
 <?php
 echo number_format(tm_count_rows("connectedRoutes", "LEFT JOIN systems ON connectedRoutes.systemName = systems.systemName WHERE systems.level = 'active'"));
 ?>
