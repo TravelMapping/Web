@@ -3,3 +3,4 @@ devel/test.php
 .idea/
 lib/tm.conf
 local.sh
+.DS_Store
