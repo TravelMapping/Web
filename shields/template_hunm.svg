@@ -6,7 +6,7 @@
       <path d="m52 2h-50v49.8c0 6.01 4.12 11.2 9.97 12.6l40 9.6 40-9.61c5.9-1.4 10-6.6 10-12.6v-49.8h-50z" fill="#fff"/>
       <path d="m52 7h-45v44.8c-0.158 3.38 1.83 6.5 4.97 7.78l40 9.3 38.9-9.33c3.6-0.9 6.1-4.2 6.1-7.8v-44.8h-45z" fill="#00008B"/>
       <text letter-spacing="10px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="60px" line-height="100%" y="0" x="0" font-family="&apos;Roadgeek 2005 Engschrift&apos;" fill="#fff">
-        <tspan y="55" x="88">***NUMBER***</tspan>
+        <tspan y="55" x="92">***NUMBER***</tspan>
       </text>
     </g>
   </g>

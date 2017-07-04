@@ -62,6 +62,9 @@ $activedc = tm_count_rows("datacheckErrors", "join routes on datacheckErrors.rou
   <li><a href="../logs/pointsinuse.log">Waypoint labels in use by current TM users</a>
     <br />
     To be considered if wpt files of active systems are modified to avoid breaking user files, can be loaded to CHM's WPT file Editor.</li>
+  <li><a href="../logs/unusedaltlabels.log">Alternate (i.e., hidden) waypoint labels not in use by current TM users</a>
+    <br />
+    These alternate labels can safely be removed from wpt files.</li>
 </ul>
 </div>
 
