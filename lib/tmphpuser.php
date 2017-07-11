@@ -14,7 +14,7 @@
 
 // u= is the user, stored in $tmuser variable, can also come from the
 // lastuser cookie, and will be stored in that cookie when specified
-// note: must be alphanumeric or is ignored
+// note: must be alphanumeric (plus underscores) or is ignored
 define("TM_NO_USER", "null");
 $tmuser = TM_NO_USER;
 
