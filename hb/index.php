@@ -122,7 +122,7 @@
 
     // if a specific route is specified, that's what we'll view
     if (array_key_exists("r", $_GET)) {
-        $routeparam = $_GET['r'];
+        $routeparam = tm_validate_root($_GET['r']);
     } else {
         $routeparam = "";
     }
@@ -148,7 +148,7 @@
     </script>
     <title><?php
         if ($routeparam != "") {
-            $sql_command = "SELECT * FROM routes WHERE root = '" . $_GET['r'] . "'";
+            $sql_command = "SELECT * FROM routes WHERE root = '" . $routeparam . "'";
             $res = tmdb_query($sql_command);
             $routeInfo = $res->fetch_array();
             $res->free();
@@ -236,7 +236,7 @@ JS;
 if ($routeparam != "") {
     require $_SERVER['DOCUMENT_ROOT'] . "/shields/shieldgen.php";
     echo "<div id=\"pointbox\">\n";
-    echo "<span class='bigshield'>" . generate($_GET['r'], true) . "</span>";
+    echo "<span class='bigshield'>" . generate($routeparam, true) . "</span>";
     echo "<span><a href='/user/mapview.php?rte={$routeInfo['route']}'>View Associated Routes</a></span>";
 
     echo "<span>";
