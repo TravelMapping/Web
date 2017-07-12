@@ -399,5 +399,5 @@ HTML;
 $tmdb->close();
 ?>
 </body>
-<script type="application/javascript" src="../api/waypoints.js.php?<?php echo "r=$routeparam&u=$tmuser";?>"></script>
+<script type="application/javascript" src="../lib/waypoints.js.php?<?php echo "r=$routeparam&u=$tmuser";?>"></script>
 </html>
