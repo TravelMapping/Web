@@ -8,7 +8,7 @@ server=blizzard.teresco.org
 basedir=/home/www/
 rootdir=tmtest
 shieldsdir=
-otherdirs="user lib devel hb css api graphs"
+otherdirs="user lib devel hb css graphs"
 while (( "$#" )); do
 
     if [ "$1" == "--prod" ]; then
@@ -25,5 +25,5 @@ done
 echo "Updating to $server:$basedir$rootdir, directories $otherdirs $shieldsdir"
 scp *.php $server:$basedir$rootdir
 for dir in $otherdirs $shieldsdir; do
-    scp $dir/*.{php,js,svg,css} $server:$basedir$rootdir/$dir
+    scp $dir/*.{php,js,svg,css,png} $server:$basedir$rootdir/$dir
 done
