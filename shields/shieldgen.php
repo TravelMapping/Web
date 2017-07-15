@@ -129,6 +129,26 @@ function generate($r, $force_reload = false)
         case 'belb': case 'hunm': case 'lvaa': case 'lvap': case 'nldp': case 'nldr': case 'pola': case 'pols': case 'svkd': case 'svkr':
             // replace placeholder
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
+            break;
+
+        case 'andcg':
+            // replace placeholder, use wide svg file for 4-digit numbers
+            if (strlen($row['route']) > 3) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+            }
+            $svg = str_replace("***NUMBER***", $row['route'], $svg);
+            break;
+
+        case 'itaa':
+            // replace placeholder, use wide svg file for 5-/7-digit numbers
+            if (strlen($row['route']) > 4) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide5.svg");
+            }
+            if (strlen($row['route']) > 6) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide7.svg");
+            }
+            $svg = str_replace("***NUMBER***", $row['route'], $svg);
+            break;
 
         case 'alakt': case 'alavt': case 'canmbw': case 'chea': case 'czed': case 'czei': case 'czeii': case 'deua': case 'dnksr': case 'deub': case 'estp': case 'estt': case 'finkt': case 'hunf': case 'islth': case 'ltuk': case 'poldk': case 'poldw': case 'svki': case 'swel':
             // replace placeholder, remove prefix
@@ -167,7 +187,7 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
-        case 'beln': case 'cheh': case 'dnkpr': case 'finvt': case 'norfv': case 'norrv': case 'swer':
+        case 'cheh': case 'dnkpr': case 'finvt': case 'norrv': case 'swer':
             // replace placeholder, remove prefix, use wide svg files for 2-/3-digit numbers
             $routeNum = str_replace("Fv", "", $row['route']);
             $routeNum = str_replace("H", "", $routeNum);
@@ -185,6 +205,32 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+        case 'beln0': case 'beln1': case 'beln2': case 'beln3': case 'beln4': case 'beln5': case 'beln6': case 'beln7': case 'beln8': case 'beln9': case 'beln':
+            // replace placeholder, remove prefix, use wide svg files for 2-/3-digit numbers (Belgian workaround till beln is merged again)
+            $routeNum = str_replace("N", "", $row['route']);
+            $svg = file_get_contents("{$dir}/template_beln.svg");
+            if (strlen($routeNum) > 1) {
+                    $svg = file_get_contents("{$dir}/template_beln_wide.svg");
+            }
+            if (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_beln_wide3.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
+        case 'norfv0': case 'norfv1': case 'norfv2': case 'norfv3': case 'norfv4': case 'norfv5': case 'norfv6': case 'norfv7': case 'norfv8': case 'norfv9': case 'norfv':
+            // replace placeholder, remove prefix, use wide svg files for 2-/3-digit numbers (Norwegian workaround till norfv is merged again)
+            $routeNum = str_replace("Fv", "", $row['route']);
+            $svg = file_get_contents("{$dir}/template_norfv.svg");
+            if (strlen($routeNum) > 1) {
+                    $svg = file_get_contents("{$dir}/template_norfv_wide.svg");
+            }
+            if (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_norfv_wide3.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
         case 'roudn':
             // replace placeholder, remove prefix, use wide svg file for 4-digit numbers
             $routeNum = str_replace("DN", "", $row['route']);
@@ -194,11 +240,26 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+        case 'prta': case 'prtip': case 'prtic':
+            // replace placeholder, add blank after prefix
+            $routeNum = str_replace("A", "A ", $row['route']);
+            $routeNum = str_replace("IC", "IC ", $routeNum);
+            $routeNum = str_replace("IP", "IP ", $routeNum);
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
         case 'fraa': case 'fran': case 'frht': case 'spmn': case 'mtqa': case 'glpn': case 'gufn': case 'reun': case 'mara': case 'tuna':
-            // replace placeholder, replace prefix, use wide svg files
+            // replace placeholder, add blank after prefix, use wide svg files
             $routeNum = str_replace("A", "A ", $row['route']);
             $routeNum = str_replace("N", "N ", $routeNum);
             //$routeNum = str_replace("T", "T", $routeNum); //no blank required!
+            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
+        case 'espn':
+            // replace placeholder, add hyphen after prefix, use wide svg files
+            $routeNum = str_replace("N", "N-", $row['route']);
             $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
@@ -218,6 +279,20 @@ function generate($r, $force_reload = false)
             }
             if (strlen($row['route']) > 3) {
                     $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
+            }
+            $svg = str_replace("***NUMBER***", $row['route'], $svg);
+            break;
+
+        case 'espa':
+            // replace placeholder, use wide svg files for 3-/4-/5-digit numbers (Spain is simplified: national (blue) motorway signs are generally used for national and regional motorways, numbering w/o "-" (e.g. A1 instead of A-1))
+            if (strlen($row['route']) > 2) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide3.svg");
+            }
+            if (strlen($row['route']) > 3) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
+            }
+            if (strlen($row['route']) > 4) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide5.svg");
             }
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;

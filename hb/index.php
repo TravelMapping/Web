@@ -99,12 +99,6 @@
     </style>
     <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
     <?php
-    $tmuser = "";
-
-    if (array_key_exists("u", $_GET)) {
-        $tmuser = $_GET['u'];
-    }   
-
     // check for region and/or system parameters
     $regions = tm_qs_multi_or_comma_to_array("rg");
     if (count($regions) > 0) {
@@ -181,7 +175,8 @@ if ($routeparam == "") {
     tm_system_select(FALSE);
     echo "<label for=\"rg\"> Region: </label>";
     tm_region_select(FALSE);
-    echo "<input type=\"hidden\" name=\"u\" value=\"{$tmuser}\" />";
+    // should be taken care of by the cookie:
+    //echo "<input type=\"hidden\" name=\"u\" value=\"{$tmuser}\" />";
     echo "<input type=\"submit\" value=\"Apply Filter\" /></form>";
 
 } 
@@ -242,7 +237,22 @@ if ($routeparam != "") {
     require $_SERVER['DOCUMENT_ROOT'] . "/shields/shieldgen.php";
     echo "<div id=\"pointbox\">\n";
     echo "<span class='bigshield'>" . generate($_GET['r'], true) . "</span>";
-    echo "<span><a href='/user/mapview.php?u={$_GET['u']}&amp;rte={$routeInfo['route']}'>View Associated Routes</a></span>";
+    echo "<span><a href='/user/mapview.php?rte={$routeInfo['route']}'>View Associated Routes</a></span>";
+
+    echo "<span>";
+    $sql_command = "SELECT region, route, banner, city FROM routes WHERE root = '" .$routeparam. "';";
+    $res = tmdb_query($sql_command);
+    $row = $res->fetch_assoc();
+    echo $row['region'] . " " . $row['route'];
+    if (strlen($row['banner']) > 0) {
+        echo " " . $row['banner'];
+    }
+    if (strlen($row['city']) > 0) {
+        echo " (" . $row['city'] . ")";
+    }
+    $res->free();
+    echo "</span>";
+
     echo "<table id='routeInfo' class=\"gratable\"><thead><tr><th colspan='2'>Route Stats</th></tr></thead><tbody>";
     $sql_command = <<<SQL
       SELECT
@@ -264,13 +274,15 @@ if ($routeparam != "") {
         WHERE cr.route = '$routeparam'
 SQL;
     $row = tmdb_query($sql_command) -> fetch_assoc();
+    $totalLength = tm_convert_distance($row['totalMileage']) . " " . $tmunits;
+    $averageTraveled = tm_convert_distance($row['avgMileage']). " " . $tmunits;
     echo <<<HTML
-    <tr><td class="important">Total Mileage</td><td>{$row['totalMileage']} mi</td></tr>
+    <tr><td class="important">Total Length</td><td>{$totalLength}</td></tr>
     <tr><td>LIST Name</td><td>{$routeInfo['region']} {$routeInfo['route']}{$routeInfo['banner']}{$routeInfo['abbrev']}</td></tr> 
     <tr title="{$row['drivers']}"><td>Total Drivers</td><td>{$row['numDrivers']} ({$row['drivenPct']} %)</td>
     <tr class="link" title="{$row['clinchers']}"><td rowspan="2">Total Clinched</td><td>{$row['numClinched']} ({$row['clinchedPct']} %)</td>
     <tr class="link" title="{$row['clinchers']}"><td>{$row['drivenClinchedPct']} % of drivers</td>
-    s<tr><td>Average Mileage</td><td>{$row['avgMileage']} mi ({$row['mileagePct']} %)</td></tr>
+    s<tr><td>Average Traveled</td><td>{$averageTraveled} ({$row['mileagePct']} %)</td></tr>
     </tbody></table>
 HTML;
     echo "<table id='waypoints' class=\"gratable\"><thead><tr><th colspan=\"3\">Waypoints</th></tr><tr><th>Coordinates</th><th>Name</th><th title='Percent of people who have driven this route who have driven though this point.'>%</th></tr></thead><tbody>\n";
@@ -313,26 +325,16 @@ SQL;
 ENDA;
     if ($routeparam != "") {
         echo "<table><tbody><tr><td>";
-        $sql_command = "SELECT region, route, banner, city FROM routes WHERE root = '" .$routeparam. "';";
-        $res = tmdb_query($sql_command);
-        $row = $res->fetch_assoc();
-        echo $row['region'] . " " . $row['route'];
-        if (strlen($row['banner']) > 0) {
-            echo " " . $row['banner'];
-        }
-        if (strlen($row['city']) > 0) {
-            echo " (" . $row['city'] . ")";
-        }
-        $res->free();
-        echo "</td><td>";
         echo "<input id=\"showMarkers\" type=\"checkbox\" name=\"Show Markers\" onclick=\"showMarkersClicked()\" checked=\"false\" />&nbsp;Show Markers&nbsp;";
         echo "</td><td>";
         echo "<form id=\"userForm\" action=\"/hb/index.php\">";
         echo "User: ";
         tm_user_select();
+	echo "<label>Units: </label>\n";
+        tm_units_select();
         echo "</td><td>";
         echo "<input type=\"hidden\" name=\"r\" value=\"".$routeparam."\" />";
-        echo "<input type=\"submit\" value=\"Select User\" />";
+        echo "<input type=\"submit\" value=\"Apply\" />";
         echo "</td></tr></tbody></table>\n";
     }
     echo <<<ENDB
