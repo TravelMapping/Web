@@ -53,6 +53,15 @@ function generate($r, $force_reload = false)
                 $svg = file_get_contents("{$dir}/generic_wide.svg");
             }
             break;
+            
+        case 'mexd':
+            $routeNum = str_replace("MEX", "", $row['route']);
+            $routeNum = str_replace("D", "", $routeNum); //handled by template
+            if (strlen($routeNum) > 2) {
+                $svg = file_get_contents("{$dir}/template_mexd_wide.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
 
         case 'usai':
         case 'usaif':
