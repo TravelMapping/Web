@@ -20,6 +20,16 @@ function generate($r, $force_reload = false)
     }
 
     switch ($row['systemName']) {
+        case 'canab': //uses different shields for 1, 2, 3 digits
+            $routeNum = $row['route'];
+            if (strlen($routeNum) > 1) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+            }
+            if (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide3.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
         case 'cansph':
             $region = explode(".", $r)[0];
             $routeNum = str_replace(strtoupper($region), "", $row['route']);
