@@ -338,6 +338,12 @@ function generate($r, $force_reload = false)
             }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
+            
+        case 'twnf':
+            $routeNum = str_replace("F", "", $row['route']);
+            $routeNum = str_replace("A", "甲", $routeNum); //suffix - hope there's no unicode issues
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
 
         case 'usasf': case 'usanp': case 'cannf': case 'eursf': case 'usakyp': case 'gbrtr':
             $lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
