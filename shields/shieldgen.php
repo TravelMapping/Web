@@ -20,6 +20,16 @@ function generate($r, $force_reload = false)
     }
 
     switch ($row['systemName']) {
+        case 'canab': //uses different shields for 1, 2, 3 digits
+            $routeNum = $row['route'];
+            if (strlen($routeNum) > 1) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+            }
+            if (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide3.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
         case 'cansph':
             $region = explode(".", $r)[0];
             $routeNum = str_replace(strtoupper($region), "", $row['route']);
@@ -52,6 +62,15 @@ function generate($r, $force_reload = false)
             else {
                 $svg = file_get_contents("{$dir}/generic_wide.svg");
             }
+            break;
+            
+        case 'mexd':
+            $routeNum = str_replace("MEX", "", $row['route']);
+            $routeNum = str_replace("D", "", $routeNum); //handled by template
+            if (strlen($routeNum) > 2) {
+                $svg = file_get_contents("{$dir}/template_mexd_wide.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
         case 'usai':
@@ -319,8 +338,14 @@ function generate($r, $force_reload = false)
             }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
+            
+        case 'twnf':
+            $routeNum = str_replace("F", "", $row['route']);
+            $routeNum = str_replace("A", "甲", $routeNum); //suffix - hope there's no unicode issues
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
 
-        case 'usasf': case 'usanp': case 'eursf': case 'usakyp': case 'gbrtr':
+        case 'usasf': case 'usanp': case 'cannf': case 'eursf': case 'usakyp': case 'gbrtr':
             $lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
             $index = 0;
             foreach($lines as $line) {
