@@ -327,7 +327,7 @@ HTML;
                 echo "<td>" . $row['city'] . "</td>";
                 echo "<td>" . tm_convert_distance($row['clinchedMileage']) . "</td>";
                 echo "<td>" . tm_convert_distance($row['totalMileage']) . "</td>";
-                echo "<td>" . $row['percentage'] . "%</td></tr>";
+                echo "<td>" . $row['percentage'] . "%</td></tr>\n";
             }
             $res->free();
             ?>
