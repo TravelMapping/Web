@@ -53,6 +53,7 @@ table.gratable {
     margin-left: auto;
     margin-right: auto;
     background-color: white;
+    color: black;
 }
 
 table.gratable td, th {
