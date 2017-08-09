@@ -218,7 +218,7 @@ SQL;
                     $pointnum = $pointnum + 1;
 		    continue;
 		}
-		$sql_command = "SELECT w.root, r.route, r.region, r.banner, r.abbrev, r.city FROM waypoints AS w LEFT JOIN routes AS r ON w.root = r.root WHERE w.latitude='".$row['latitude']."' AND w.longitude='".$row['longitude']."';";
+		$sql_command = "SELECT DISTINCT w.root, r.route, r.region, r.banner, r.abbrev, r.city FROM waypoints AS w LEFT JOIN routes AS r ON w.root = r.root WHERE w.latitude='".$row['latitude']."' AND w.longitude='".$row['longitude']."';";
 		$res2 = tmdb_query($sql_command);
 		if ($res2->num_rows > 1) {
 		   echo "waypoints[$pointnum].intersecting = new Array();\n";
