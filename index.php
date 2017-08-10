@@ -133,6 +133,12 @@ contributors.  Again, see <a href="/forum">the project forum</a> for
 more information.
 </p>
 
+<p class="text">
+Project news is also posted on the <a
+href="https://twitter.com/TravelMapping">Travel Mapping Twitter feed</a>.
+Follow us!
+</p>
+
 <p class="heading">What's New with Highway Data?</p>
 
 <p class="text">
