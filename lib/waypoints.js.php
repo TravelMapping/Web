@@ -199,7 +199,7 @@ SQL;
     
     function select_single_route ()
     {
-        $routeparam = $_GET['r'];
+        $routeparam = strtolower($_GET['r']);
 
         if (array_key_exists('u', $_GET)) {
             $tmuser = $_GET['u'];
