@@ -268,7 +268,7 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
-        case 'fraa': case 'fran': case 'frht': case 'spmn': case 'mtqa': case 'glpn': case 'gufn': case 'reun': case 'mara': case 'tuna':
+        case 'fraa': case 'fran': case 'frht': case 'spmn': case 'mtqa': case 'glpn': case 'gufn': case 'reun': case 'mara': case 'tuna': case 'mtqn':
             // replace placeholder, add blank after prefix, use wide svg files
             $routeNum = str_replace("A", "A ", $row['route']);
             $routeNum = str_replace("N", "N ", $routeNum);
@@ -405,6 +405,20 @@ function generate($r, $force_reload = false)
                 $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
                 $svg = str_replace("***NUMBER***", $matches['number'], $svg);
                 $svg = str_replace("***LETTER***", $matches['letter'], $svg);
+                break;
+            }
+            
+        case 'usaar':
+            $matches = [];
+            $routeNum = str_replace('AR', "", $row['route']);
+            if (preg_match('/(?<number>[0-9]+)(?<letter>[A-Za-z]+)/', $routeNum, $matches)) {
+                $svg = str_replace("***NUMBER***", $matches['number'], $svg);
+                $svg = str_replace("***LETTER***", $matches['letter'], $svg);
+                break;
+            }
+            else {
+                $svg = str_replace("***NUMBER***", $routeNum, $svg);
+                $svg = str_replace("***LETTER***", '', $svg);
                 break;
             }
 
