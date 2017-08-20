@@ -418,7 +418,7 @@ function generate($r, $force_reload = false)
             }
             else {
                 $svg = str_replace("***NUMBER***", $routeNum, $svg);
-                $svg = str_replace("***LETTER***", '', $svg);
+                $svg = str_replace("***LETTER***", "", $svg);
                 break;
             }
 
