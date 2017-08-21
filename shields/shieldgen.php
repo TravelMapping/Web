@@ -144,6 +144,7 @@ function generate($r, $force_reload = false)
             $region = strtoupper($region);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             $svg = str_replace("***SYS***", $region, $svg);
+            $svg = str_replace("***LETTER***", "", $svg); //hack to kill off the suffix for usaar
             break;
 
         case 'belb': case 'hunm': case 'lvaa': case 'lvap': case 'nldp': case 'nldr': case 'pola': case 'pols': case 'svkd': case 'svkr':
