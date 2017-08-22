@@ -20,9 +20,10 @@ function generate($r, $force_reload = false)
     }
 
     switch ($row['systemName']) {
-        case 'canab': //uses different shields for 1, 2, 3 digits
+        case 'canab': case 'canqca': //uses different shields for 1, 2, 3 digits
             $routeNum = $row['route'];
             $routeNum = str_replace("AB", "", $routeNum);
+            $routeNum = str_replace("A-", "", $routeNum);
             if (strlen($routeNum) > 1) {
                     $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
             }
