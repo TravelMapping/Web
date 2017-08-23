@@ -362,6 +362,23 @@ function generate($r, $force_reload = false)
                 $index++;
             }
             break;
+            
+        case 'usaar':
+            $matches = [];
+            $routeNum = str_replace('AR', "", $row['route']);
+            if (preg_match('/(?<number>[0-9]+)(?<letter>[A-Za-z]+)/', $routeNum, $matches)) {
+                $svg = str_replace("***NUMBER***", $matches['number'], $svg);
+                $svg = str_replace("***LETTER***", $matches['letter'], $svg);
+                break;
+            }
+            else {
+                $svg = str_replace("***NUMBER***", $routeNum, $svg);
+                $svg = str_replace("***LETTER***", "", $svg);
+                break;
+            }
+            
+        //the following cases are meant to fall through to the default
+        //TODO: fix this
 
         case 'usatx': case 'usatxl': case 'usatxs':
             if ($row['root'] == 'tx.nasa1' or $row['systemName'] != 'usatx' or $row['banner'] != "") {
@@ -410,20 +427,6 @@ function generate($r, $force_reload = false)
                 break;
             }
             
-        case 'usaar':
-            $matches = [];
-            $routeNum = str_replace('AR', "", $row['route']);
-            if (preg_match('/(?<number>[0-9]+)(?<letter>[A-Za-z]+)/', $routeNum, $matches)) {
-                $svg = str_replace("***NUMBER***", $matches['number'], $svg);
-                $svg = str_replace("***LETTER***", $matches['letter'], $svg);
-                break;
-            }
-            else {
-                $svg = str_replace("***NUMBER***", $routeNum, $svg);
-                $svg = str_replace("***LETTER***", "", $svg);
-                break;
-            }
-
         default:
             $region = strtoupper(explode(".", $r)[0]);
             $routeNum = str_replace($region, "", $row['route']);
