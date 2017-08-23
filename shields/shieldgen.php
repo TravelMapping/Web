@@ -409,7 +409,7 @@ function generate($r, $force_reload = false)
                 $svg = str_replace("***LETTER***", $matches['letter'], $svg);
                 break;
             }
-            $svg = str_replace("***NUMBER***", $matches['number'], $svg);
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
             
         case 'usaar':
