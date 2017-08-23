@@ -409,6 +409,7 @@ function generate($r, $force_reload = false)
                 $svg = str_replace("***LETTER***", $matches['letter'], $svg);
                 break;
             }
+            break;
             
         case 'usaar':
             $matches = [];
