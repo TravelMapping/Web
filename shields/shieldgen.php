@@ -387,16 +387,11 @@ function generate($r, $force_reload = false)
                 break;
             }
             elseif (strlen($routeNum) > 2) {
-                if (file_exists("{$dir}/template_" . $row['systemName'] . "_wide.svg")) {
-                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
-                } else {
-                    $svg = file_get_contents("{$dir}/generic_wide.svg");
-                }
-                $svg = str_replace("***NUMBER***", $routeNum, $svg);
-                $svg = str_replace("***SYS***", $region, $svg);
-                
-                break;
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");  
             }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+                
+            break;
             
         //the following cases are meant to fall through to the default
         //TODO: fix this
