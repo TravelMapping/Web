@@ -376,6 +376,27 @@ function generate($r, $force_reload = false)
                 $svg = str_replace("***LETTER***", "", $svg);
                 break;
             }
+
+        case 'usanh':
+            $matches = [];
+            $routeNum = str_replace('NH', "", $row['route']);
+            if (preg_match('/(?<number>[0-9]+)(?<letter>[A-Za-z]+)/', $routeNum, $matches)) {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
+                $svg = str_replace("***NUMBER***", $matches['number'], $svg);
+                $svg = str_replace("***LETTER***", $matches['letter'], $svg);
+                break;
+            }
+            elseif (strlen($routeNum) > 2) {
+                if (file_exists("{$dir}/template_" . $row['systemName'] . "_wide.svg")) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+                } else {
+                    $svg = file_get_contents("{$dir}/generic_wide.svg");
+                }
+                $svg = str_replace("***NUMBER***", $routeNum, $svg);
+                $svg = str_replace("***SYS***", $region, $svg);
+                
+                break;
+            }
             
         //the following cases are meant to fall through to the default
         //TODO: fix this
@@ -417,16 +438,6 @@ function generate($r, $force_reload = false)
                 break;
             }
 
-        case 'usanh':
-            $matches = [];
-            $routeNum = str_replace('NH', "", $row['route']);
-            if (preg_match('/(?<number>[0-9]+)(?<letter>[A-Za-z]+)/', $routeNum, $matches)) {
-                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
-                $svg = str_replace("***NUMBER***", $matches['number'], $svg);
-                $svg = str_replace("***LETTER***", $matches['letter'], $svg);
-                break;
-            }
-            
         default:
             $region = strtoupper(explode(".", $r)[0]);
             $routeNum = str_replace($region, "", $row['route']);
