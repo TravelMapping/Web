@@ -26,7 +26,7 @@
             width: 100%;
             overflow: hidden;
             text-align: center;
-            font-size: 30px;
+            font-size: 20px;
             font-family: "Times New Roman", serif;
             font-style: bold;
         }
@@ -48,6 +48,7 @@
             bottom: 0px;
             width: 275px;
             overflow: auto;
+            font-size: 18px;
         }
 
         #controlbox {
@@ -59,7 +60,7 @@
             right: 0px;
             overflow: auto;
             padding: 5px;
-            font-size: 20px;
+            font-size: 18px;
         }
 
         #map {
@@ -242,7 +243,7 @@ if ($routeparam != "") {
         echo " (" . $routeInfo['city'] . ")";
     }
     echo "</span>\n";
-    echo "<span>LIST name: " . $routeInfo['region'] . " " . $routeInfo['route'] . $routeInfo['banner'] . $routeInfo['abbrev'] . "</span>\n";
+    echo "<span>.list name: <span style='font-family:courier'>" . $routeInfo['region'] . " " . $routeInfo['route'] . $routeInfo['banner'] . $routeInfo['abbrev'] . "</span></span>\n";
 
     echo "<table id='routeInfo' class=\"gratable\"><thead><tr><th colspan='2'>Route Stats</th></tr></thead><tbody>";
     $sql_command = <<<SQL
@@ -272,7 +273,7 @@ SQL;
     <tr title="{$row['drivers']}"><td>Total Drivers</td><td>{$row['numDrivers']} ({$row['drivenPct']} %)</td>
     <tr class="link" title="{$row['clinchers']}"><td rowspan="2">Total Clinched</td><td>{$row['numClinched']} ({$row['clinchedPct']} %)</td>
     <tr class="link" title="{$row['clinchers']}"><td>{$row['drivenClinchedPct']} % of drivers</td>
-    s<tr><td>Average Traveled</td><td>{$averageTraveled} ({$row['mileagePct']} %)</td></tr>
+    <tr><td>Average Traveled</td><td>{$averageTraveled} ({$row['mileagePct']} %)</td></tr>
     </tbody></table>
 HTML;
     echo "<table id='waypoints' class=\"gratable\"><thead><tr><th colspan=\"2\">Waypoints</th></tr><tr><th>Name</th><th title='Percent of people who have driven this route who have driven though this point.'>%</th></tr></thead><tbody>\n";
