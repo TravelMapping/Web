@@ -278,6 +278,13 @@ function generate($r, $force_reload = false)
             $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
+            
+        case 'nclt':
+            // replace placeholder, add blank after prefix, use wide svg files
+            $routeNum = str_replace("T", "RT ", $row['route']);
+            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
 
         case 'espn':
             // replace placeholder, add hyphen after prefix, use wide svg files
