@@ -278,6 +278,13 @@ function generate($r, $force_reload = false)
             $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
+            
+        case 'nclt':
+            // replace placeholder, add blank after prefix, use wide svg files
+            $routeNum = str_replace("T", "RT ", $row['route']);
+            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
 
         case 'espn':
             // replace placeholder, add hyphen after prefix, use wide svg files
@@ -376,6 +383,22 @@ function generate($r, $force_reload = false)
                 $svg = str_replace("***LETTER***", "", $svg);
                 break;
             }
+
+        case 'usanh':
+            $matches = [];
+            $routeNum = str_replace('NH', "", $row['route']);
+            if (preg_match('/(?<number>[0-9]+)(?<letter>[A-Za-z]+)/', $routeNum, $matches)) {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
+                $svg = str_replace("***NUMBER***", $matches['number'], $svg);
+                $svg = str_replace("***LETTER***", $matches['letter'], $svg);
+                break;
+            }
+            elseif (strlen($routeNum) > 2) {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");  
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+                
+            break;
             
         //the following cases are meant to fall through to the default
         //TODO: fix this
@@ -417,16 +440,6 @@ function generate($r, $force_reload = false)
                 break;
             }
 
-        case 'usanh':
-            $matches = [];
-            $routeNum = str_replace('NH', "", $row['route']);
-            if (preg_match('/(?<number>[0-9]+)(?<letter>[A-Za-z]+)/', $routeNum, $matches)) {
-                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
-                $svg = str_replace("***NUMBER***", $matches['number'], $svg);
-                $svg = str_replace("***LETTER***", $matches['letter'], $svg);
-                break;
-            }
-            
         default:
             $region = strtoupper(explode(".", $r)[0]);
             $routeNum = str_replace($region, "", $row['route']);
