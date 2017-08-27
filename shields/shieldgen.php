@@ -400,6 +400,25 @@ function generate($r, $force_reload = false)
                 
             break;
             
+        case 'usanes':
+            $matches = [];
+            $routeNum = str_replace('NE', "", $row['route']);
+            if ($routeNum[0] == 'L') {
+                $svg_path = "{$dir}/template_usanes_link.svg";
+            	$svg = file_get_contents($svg_path);
+            	$routeNum = str_replace('L', "", $routeNum);
+            	preg_match('/(?<number>[0-9]+)(?<letter>[A-Za-z]+)/', $routeNum, $matches);
+            }
+            else { //S
+                $svg_path = "{$dir}/template_usanes_spur.svg";
+                $svg = file_get_contents($svg_path);
+            	$routeNum = str_replace('S', "", $routeNum);
+            	preg_match('/(?<number>[0-9]+)(?<letter>[A-Za-z]+)/', $routeNum, $matches);
+            }
+            $svg = str_replace("***NUMBER***", $matches['number'], $svg);
+            $svg = str_replace("***LETTER***", $matches['letter'], $svg);
+        break;
+            
         //the following cases are meant to fall through to the default
         //TODO: fix this
 
