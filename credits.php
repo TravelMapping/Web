@@ -222,7 +222,85 @@ following sources of highway information.</p>
 	  <li>Germany
 	    <ul>
 	      <li><a href="http://www.autobahnatlas-online.de/index_e.html">Autobahn-Atlas</a>. Hobbyist site by Patrick Scholl covering the detailed routings and plans for German motorways.</li>
-	      <li><a href="http://www.bmvi.de//DE/VerkehrUndMobilitaet/Verkehrstraeger/Strasse/strasse_node">Road Construction</a>. German motorway construction plans and maps from the Federal Minsitry of Transport, Building and Urban Development.</li>	    
+	      <li><a href="http://www.bmvi.de/DE/Themen/Mobilitaet/Infrastrukturplanung-Investitionen/Bundesverkehrswegeplan-2030/bundesverkehrswegeplan-2030.html">Road Construction</a>. German motorway construction plans and maps from the Federal Minsitry of Transport, Building and Urban Development.</li>	    
+	      <li><a href="http://bast.opus.hbz-nrw.de/volltexte/2016/1755/pdf/V273_AVERZ_Internet_PDF.pdf">Autobahn directory</a>. List of German federal motorways (2016 version)</li>
+	      <li><a href="http://www.mauttabelle.de/">Mauttabelle</a>. List of tolled roads (frequently updated motorway list)</li>
+	      <li><a href="http://www.bast.de/DE/Verkehrstechnik/Fachthemen/v1-beverz/v1-berverz.html">Bundesstraßen directory</a>. List of German federal non-motorway roads (2009 version)</li>
+	      <li>Baden-Württemberg
+	        <ul>
+	          <li><a href="http://www.svz-bw.de/verkehrszaehlung.html">Traffic monitoring</a>. Road map.</li>
+	        </ul>
+	      </li>
+	      <li>Bavaria
+	        <ul>
+	          <li><a href="https://www.baysis.bayern.de/webgis/synserver?project=webgis">BAYSIS road map</a>. Road information system.</li>
+	        </ul>
+	      </li>
+	      <li>Berlin
+	        <ul>
+	          <li><a href="http://fbinter.stadt-berlin.de/fb/index.jsp?loginkey=showMap&mapId=k_vms_detailnetz_wms_spatial@senstadt">Detail net</a>. Road map.</li>
+	        </ul>
+	      </li>
+	      <li>Brandenburg
+	        <ul>
+	          <li><a href="http://isk.geobasis-bb.de/strassennetz/basiskarte.html">Brandenburg viewer</a>. Road map.</li>
+	        </ul>
+	      </li>
+	      <li>Hamburg
+	        <ul>
+	          <li><a href="http://www.hamburg.de/bwvi/start-hauptverkehrsstrassennetz/">HVS</a>. Road map.</li>
+	        </ul>
+	      </li>
+	      <li>Hesse
+	        <ul>
+	          <li><a href="https://mobil.hessen.de/%C3%BCber-uns/downloads-formulare/netzknotenkarten-hessen">Net node maps</a>. </li>
+	        </ul>
+	      </li>
+	      <li>Lower Saxony
+	        <ul>
+	          <li><a href="http://www.nwsib-niedersachsen.de/">Road map</a>. Road information database.</li>
+	        </ul>
+	      </li>
+	      <li>Mecklenburg-Western Pomerania
+	        <ul>
+	          <li><a href="https://www.gaia-mv.de/gaia/gaia.php">GAIA-MV</a>. Road map.</li>
+	        </ul>
+	      </li>
+	      <li>North Rhine-Westphalia
+	        <ul>
+	          <li><a href="http://www.nwsib-online.nrw.de/">Road map</a>. Road information database.</li>
+	        </ul>
+	      </li>
+	      <li>Rhineland-Palatinate
+	        <ul>
+	          <li><a href="https://lbm.rlp.de/de/service/informationsmaterial/strassenkarte-rheinland-pfalz/">Road map</a>. </li>
+	        </ul>
+	      </li>
+	      <li>Saarland
+	        <ul>
+	          <li><a href="http://geoportal.saarland.de/mapbender/geoportal/mod_index.php">Geo portal</a>.  Road map.</li>
+	        </ul>
+	      </li>
+	      <li>Saxony
+	        <ul>
+	          <li><a href="http://geoportal.sachsen.de/cps/karte.html?showmap=true">Geo portal "Sachsenatlas"</a>.  Road map.</li>
+	        </ul>
+	      </li>
+	      <li>Saxony-Anhalt
+	        <ul>
+	          <li><a href="http://www.lvermgeo.sachsen-anhalt.de/de/geoservice/viewer/main2.htm">Sachsen-Anhalt viewer</a>.  Road map.</li>
+	        </ul>
+	      </li>
+	      <li>Schleswig-Holstein
+	        <ul>
+	          <li><a href="http://danord.gdi-sh.de/viewer/resources/apps/Anonym/index.html">Digital Atlas</a>.  Road map.</li>
+	        </ul>
+	      </li>
+	      <li>Thuringia
+	        <ul>
+	          <li><a href="http://www.thueringen.de/th9/tlbv/service/strassenkarte/">Road map</a>. </li>
+	        </ul>
+	      </li>
 	    </ul>
 	  </li>
 	  <li>Greece
