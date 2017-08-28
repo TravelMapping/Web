@@ -9,6 +9,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="/css/travelMapping.css"/>
+    <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <!-- jQuery -->
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <!-- TableSorter -->
@@ -46,23 +47,24 @@
 </script>
 <?php require $_SERVER['DOCUMENT_ROOT'] . "/lib/tmheader.php"; ?>
 <h1>Traveler Statistics</h1>
+<?php tm_user_select_form("\"\""); ?>
 <table style="margin: auto">
     <?php
-    $totalMileage = round(tm_sum_column("overallMileageByRegion", "activeMileage"));
-    $totalPreviewMileage = round(tm_sum_column("overallMileageByRegion", "activePreviewMileage"));
-    if ($tmuser == TM_NO_USER) {
-        echo "<form id=\"userselect\" action=\"\"><p>\n";
-        echo "<label>Current User: </label>\n";
-        tm_user_select();
-        echo "<input type=\"submit\" value=\"Select User\" />\n";
-        echo "</p></form>\n";
-    }else{
+    $totalMileage = round(tm_sum_column("overallMileageByRegion", "activeMileage"), 2);
+    $totalPreviewMileage = round(tm_sum_column("overallMileageByRegion", "activePreviewMileage"), 2);
+//    if ($tmuser == TM_NO_USER) {
+//        echo "<form id=\"userselect\" action=\"\"><p>\n";
+//        echo "<label>Current User: </label>\n";
+//        tm_user_select();
+//        echo "<input type=\"submit\" value=\"Select User\" />\n";
+//        echo "</p></form>\n";
+//    }else{
         echo <<<HTML
             <tr><td colspan="2">
                 <table class="gratable" id="usertable">
                     <thead>
                     <tr><th colspan="5">Current User</th></tr>
-                    <tr><th>User</th><th>Active Mileage</th><th>Rank</th><th>Active + Preview Mileage</th><th>Rank</th></tr>
+                    <tr><th>User</th><th>Active Distance Traveled</th><th>Rank</th><th>Active + Preview Distance Traveled</th><th>Rank</th></tr>
                     </thead><tbody>
 HTML;
         echo "<tr onClick=\"window.document.location='/user?u={$tmuser}';\">";
@@ -77,7 +79,9 @@ SQL;
         $res = tmdb_query($sql);
         $row = tm_fetch_user_row_with_rank($res, 'clinchedMileage');
         echo "<td>{$row['traveler']}</td>";
-        echo "<td>{$row['clinchedMileage']} / {$totalMileage} ({$row['percentage']}%)</td>";
+        echo "<td>".tm_convert_distance($row['clinchedMileage'])." of ".tm_convert_distance($totalMileage)." ";
+	tm_echo_units();
+	echo " ({$row['percentage']}%)</td>";
         echo "<td>{$row['rank']}</td>";
 
         $sql = <<<SQL
@@ -90,26 +94,28 @@ SQL;
 SQL;
         $res = tmdb_query($sql);
         $row = tm_fetch_user_row_with_rank($res, 'clinchedMileage');
-        echo "<td>{$row['clinchedMileage']} / {$totalPreviewMileage} ({$row['percentage']}%)</td>";
+        echo "<td>".tm_convert_distance($row['clinchedMileage'])." of ".tm_convert_distance($totalPreviewMileage)." ";
+	tm_echo_units();
+	echo " ({$row['percentage']}%)</td>";
         echo "<td>{$row['rank']}</td>";
         echo <<<HTML
                     </tr>
                     </tbody></table>
             </td></tr>
 HTML;
-    }
+//    }
     ?>
     <tr>
         <td>
             <table class="gratable tablesorter rankingstable">
                 <thead>
                 <tr>
-                    <th colspan="5">Traveler Mileage in Active Systems</th>
+                    <th colspan="5">Travels in Active Systems</th>
                 </tr>
                 <tr>
                     <th class="sortable">Rank</th>
                     <th class="sortable">Username</th>
-                    <th class="sortable">Miles Traveled</th>
+                    <th class="sortable">Distance Traveled (<?php tm_echo_units(); ?>)</th>
                     <th class="sortable">%</th>
                 </tr>
                 </thead>
@@ -131,9 +137,10 @@ SQL;
                     } else {
                         $highlight = '';
                     }
+		    $print_distance = tm_convert_distance($row['clinchedMileage']);
                     echo <<<HTML
                 <tr class="$highlight" onClick="window.document.location='/user?u={$row['traveler']}';">
-                <td>{$rank}</td><td>{$row['traveler']}</td><td>{$row['clinchedMileage']}</td><td>{$row['percentage']}%</td>
+                <td>{$rank}</td><td>{$row['traveler']}</td><td>{$print_distance}</td><td>{$row['percentage']}%</td>
                 </tr>
 HTML;
                     $rank++;
@@ -148,12 +155,12 @@ HTML;
             <table class="gratable tablesorter rankingstable">
                 <thead>
                 <tr>
-                    <th colspan="5">Traveler Mileage in Active and Preview Systems</th>
+                    <th colspan="5">Travels in Active and Preview Systems</th>
                 </tr>
                 <tr>
                     <th class="sortable">Rank</th>
                     <th class="sortable">Username</th>
-                    <th class="sortable">Miles Traveled</th>
+                    <th class="sortable">Distance Traveled (<?php tm_echo_units(); ?>)</th>
                     <th class="sortable">%</th>
                 </tr>
                 </thead>
@@ -175,9 +182,10 @@ SQL;
                     } else {
                         $highlight = '';
                     }
+		    $print_distance = tm_convert_distance($row['clinchedMileage']);
                     echo <<<HTML
                 <tr class="$highlight" onClick="window.document.location='/user?u={$row['traveler']}';">
-                <td>{$rank}</td><td>{$row['traveler']}</td><td>{$row['clinchedMileage']}</td><td>{$row['percentage']}%</td>
+                <td>{$rank}</td><td>{$row['traveler']}</td><td>{$print_distance}</td><td>{$row['percentage']}%</td>
                 </tr>
 HTML;
                     $rank++;

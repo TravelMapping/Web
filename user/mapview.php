@@ -16,6 +16,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="/css/travelMapping.css" />
+    <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <style type="text/css">
         #controlbox {
             position: absolute;
@@ -208,14 +209,18 @@
     <table id="routesTable" class="gratable tablesorter">
         <thead>
             <tr class="float" ><th class="sortable routeName">Route</th><th class="sortable systemName">System</th>
-                <th class="sortable clinched">Clinched</th><th class="sortable overall">Overall</th><th class="sortable percent">%</th></tr>
+                <th class="sortable clinched">Clinched (<?php tm_echo_units(); ?>)</th><th class="sortable overall">Overall (<?php tm_echo_units(); ?>)</th><th class="sortable percent">%</th></tr>
         </thead>
         <tbody>
-        <!-- TEMP FIX: dummy table line to account for the fact that the
+        <!-- TEMP FIX: 1 dummy table lines to account for the fact that the
 	styling places the table header row above on top of the first
-	row of data in the table -->
+	two rows of data in the table -->
         <tr><td class='routeName'>DUMMY</td>
             <td class='link systemName'>1. syst</td>
+            <td class="clinched">0000</td><td class='overall'>0000</td><td class='percent'>0.00%</td>
+	</tr>
+        <tr><td class='routeName'>DUMMY</td>
+            <td class='link systemName'>2. syst</td>
             <td class="clinched">0000</td><td class='overall'>0000</td><td class='percent'>0.00%</td>
 	</tr>
         <?php
@@ -264,7 +269,7 @@ SQL;
                 <td class='link systemName'>{$row['tier']}. <a href='/user/system.php?u={$_GET['u']}&amp;sys={$row['systemName']}'>{$row['systemName']}</a></td>
                 <td class="clinched">
 HTML
-.$row['clinched']."</td><td class='overall'>".$row['total']."</td><td class='percent'>".$pct."%</td></tr>\n";
+.tm_convert_distance($row['clinched'])."</td><td class='overall'>".tm_convert_distance($row['total'])."</td><td class='percent'>".$pct."%</td></tr>\n";
         }
         ?>
         </tbody>
@@ -282,5 +287,5 @@ HTML
     $tmdb->close();
 ?>
 
-<script type="application/javascript" src="../api/waypoints.js.php?<?php echo $_SERVER['QUERY_STRING']?>"></script>
+<script type="application/javascript" src="../lib/waypoints.js.php?<?php echo $_SERVER['QUERY_STRING']?>"></script>
 </html>

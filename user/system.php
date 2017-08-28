@@ -12,6 +12,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="/css/travelMapping.css" />
+    <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <style type="text/css">
         table.gratable {
             max-width: 50%;
@@ -125,6 +126,8 @@ if (( $tmuser != "null") || ( $system != "" )) {
 	<?php tm_system_select(FALSE); ?>
         <label>Region: </label>
 	<?php tm_region_select(FALSE); ?>
+	<label>Units: </label>
+	<?php tm_units_select(); ?>
         <input type="submit" value="Update Map and Stats" />
     </form>
     <a href="/user/index.php">Back to User Page</a>
@@ -135,7 +138,7 @@ if (( $tmuser != "null") || ( $system != "" )) {
         }
         echo "'>View Larger Map</a>";
         echo "<h1>";
-        echo "Traveler Stats for " . $tmuser . " on " . $systemName;
+        echo "Traveler Statistics for " . $tmuser . " on " . $systemName;
         if ($region != "") {
             echo " in " . $regionName;
         }
@@ -157,7 +160,7 @@ if (( $tmuser == "null") || ( $system == "" )) {
         <div id="controlboxinfo"></div>
         <div id="map"></div>
         <table class="gratable tablesorter" id="overallTable">
-            <thead><tr><th colspan="2">System Stats</th></tr></thead>
+            <thead><tr><th colspan="2">System Statistics for <?php echo "$systemName"; ?></th></tr></thead>
             <tbody>
             <?php
 	    // get overall stats either for entire system or within
@@ -195,7 +198,7 @@ SQL;
             $res->free();
 	    $percentage = $row['clinchedMileage'] / $system_mileage * 100;
             $link = "window.open('/shields/clinched.php?u=" . $tmuser . "&amp;sys=" . $system . "')";
-            echo "<tr style=\"background-color:#EEEEFF\"><td>Miles Driven</td><td>".sprintf('%0.2f', $row['clinchedMileage'])." of ".sprintf('%0.2f', $system_mileage)." mi (".sprintf('%0.2f',$percentage)."%) Rank: {$row['rank']}</td></tr>";
+            echo "<tr style=\"background-color:#EEEEFF\"><td>Distance Traveled</td><td>".tm_convert_distance($row['clinchedMileage'])." of ".tm_convert_distance($system_mileage)." ".$tmunits." (".sprintf('%0.2f',$percentage)."%) Rank: {$row['rank']}</td></tr>";
 
             //Second, fetch routes clinched/driven
             if ($region == "") {
@@ -230,7 +233,7 @@ SQL;
             $res = tmdb_query($sql_command);
             $row = tm_fetch_user_row_with_rank($res, 'clinched');
             $res->free();
-            echo "<tr onClick=\"" . $link . "\"><td>Routes Driven</td><td>" . $row['driven'] . " of ".$totalRoutes." (" . round($row['driven'] / $totalRoutes * 100, 2) ."%)</td></tr>";
+            echo "<tr onClick=\"" . $link . "\"><td>Routes Traveled</td><td>" . $row['driven'] . " of ".$totalRoutes." (" . round($row['driven'] / $totalRoutes * 100, 2) ."%)</td></tr>";
 	    echo "<tr onClick=\"" . $link . "\"><td>Routes Clinched</td><td>" . $row['clinched'] . " of " . $totalRoutes . " (" . round($row['clinched'] / $totalRoutes * 100, 2) . "%) Rank: {$row['rank']}</td></tr>\n";
             ?>
             </tbody>
@@ -241,11 +244,11 @@ SQL;
                 <table class="gratable tablesorter" id="regionsTable">
                     <caption>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</caption>
                     <thead>
-                    <tr><th colspan="4">Statistics Per Region</th></tr>
+                    <tr><th colspan="4">Statistics by Region</th></tr>
                     <tr>
                         <th class="sortable">Region</th>
-                        <th class="sortable">Clinched Mileage</th>
-                        <th class="sortable">Total Mileage</th>
+                        <th class="sortable">Clinched ({$tmunits})</th>
+                        <th class="sortable">Total ({$tmunits})</th>
                         <th class="sortable">%</th>
                     </tr>
                     </thead>
@@ -265,11 +268,13 @@ HTML;
 SQL;
             $res = tmdb_query($sql_command);
             while ($row = $res->fetch_assoc()) {
+		$clinched = tm_convert_distance($row['clinchedMileage']);
+		$total = tm_convert_distance($row['totalMileage']);
                 echo <<<HTML
                 <tr onclick='window.open("/user/system.php?u={$tmuser}&sys={$system}&rg={$row['region']}")'>
                     <td>{$row['region']}</td>
-                    <td>{$row['clinchedMileage']}</td>
-                    <td>{$row['totalMileage']}</td>
+                    <td>{$clinched}</td>
+                    <td>{$total}</td>
                     <td>{$row['percentage']}%</td>
                 </tr>
 HTML;
@@ -281,7 +286,7 @@ HTML;
         <table class="gratable tablesorter" id="routeTable">
             <thead>
             <tr>
-                <th colspan="8">Statistics per Route</th>
+                <th colspan="8">Statistics by Route</th>
             </tr>
             <tr>
                 <th class="nonsortable">Route</th>
@@ -289,9 +294,9 @@ HTML;
                 <th class="nonsortable">Banner</th>
                 <th class="nonsortable">Abbrev</th>
                 <th class="nonsortable">Section</th>
-                <th class="sortable">Clinched Mileage</th>
-                <th class="sortable">Total Mileage</th>
-                <th class="sortable">Percentage</th>
+                <th class="sortable">Clinched (<?php tm_echo_units(); ?>)</th>
+                <th class="sortable">Total (<?php tm_echo_units(); ?>)</th>
+                <th class="sortable">%</th>
             </tr>
             </thead>
             <tbody>
@@ -320,9 +325,9 @@ HTML;
                 echo "<td>" . $row['banner'] . "</td>";
                 echo "<td>" . $row['abbrev'] . "</td>";
                 echo "<td>" . $row['city'] . "</td>";
-                echo "<td>" . $row['clinchedMileage'] . "</td>";
-                echo "<td>" . $row['totalMileage'] . "</td>";
-                echo "<td>" . $row['percentage'] . "%</td></tr>";
+                echo "<td>" . tm_convert_distance($row['clinchedMileage']) . "</td>";
+                echo "<td>" . tm_convert_distance($row['totalMileage']) . "</td>";
+                echo "<td>" . $row['percentage'] . "%</td></tr>\n";
             }
             $res->free();
             ?>
@@ -335,5 +340,5 @@ HTML;
 <?php
     $tmdb->close();
 ?>
-<script type="application/javascript" src="../api/waypoints.js.php?<?php echo $_SERVER['QUERY_STRING']?>"></script>
+<script type="application/javascript" src="../lib/waypoints.js.php?<?php echo $_SERVER['QUERY_STRING']?>"></script>
 </html>

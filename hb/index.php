@@ -17,6 +17,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="/css/travelMapping.css" />
     <link rel="stylesheet" type="text/css" href="/fonts/roadgeek.css" />
+    <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <style type="text/css">
         #headerbox {
             position: absolute;
@@ -25,7 +26,7 @@
             width: 100%;
             overflow: hidden;
             text-align: center;
-            font-size: 30px;
+            font-size: 20px;
             font-family: "Times New Roman", serif;
             font-style: bold;
         }
@@ -42,30 +43,31 @@
         #pointbox {
             position: fixed;
             left: 0px;
-            top: 70px;
-            right: 400px;
+            top: 30px;
+            right: 275px;
             bottom: 0px;
-            width: 400px;
+            width: 275px;
             overflow: auto;
+            font-size: 18px;
         }
 
         #controlbox {
             position: fixed;
-            top: 65px;
-            bottom: 100px;
+            top: 30px;
+            bottom: 60px;
             height: 100%;
-            left: 400px;
+            left: 300px;
             right: 0px;
             overflow: auto;
             padding: 5px;
-            font-size: 20px;
+            font-size: 18px;
         }
 
         #map {
             position: absolute;
-            top: 100px;
+            top: 70px;
             bottom: 0px;
-            left: 400px;
+            left: 275px;
             right: 0px;
             overflow: hidden;
         }
@@ -86,7 +88,7 @@
         }
 
         #pointbox table {
-            width: 75%;
+            width: 95%;
             margin-bottom: 15px;
         }
 
@@ -98,12 +100,6 @@
     </style>
     <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
     <?php
-    $tmuser = "";
-
-    if (array_key_exists("u", $_GET)) {
-        $tmuser = $_GET['u'];
-    }   
-
     // check for region and/or system parameters
     $regions = tm_qs_multi_or_comma_to_array("rg");
     if (count($regions) > 0) {
@@ -127,7 +123,7 @@
 
     // if a specific route is specified, that's what we'll view
     if (array_key_exists("r", $_GET)) {
-        $routeparam = $_GET['r'];
+        $routeparam = tm_validate_root($_GET['r']);
     } else {
         $routeparam = "";
     }
@@ -153,7 +149,7 @@
     </script>
     <title><?php
         if ($routeparam != "") {
-            $sql_command = "SELECT * FROM routes WHERE root = '" . $_GET['r'] . "'";
+            $sql_command = "SELECT * FROM routes WHERE root = '" . $routeparam . "'";
             $res = tmdb_query($sql_command);
             $routeInfo = $res->fetch_array();
             $res->free();
@@ -180,7 +176,8 @@ if ($routeparam == "") {
     tm_system_select(FALSE);
     echo "<label for=\"rg\"> Region: </label>";
     tm_region_select(FALSE);
-    echo "<input type=\"hidden\" name=\"u\" value=\"{$tmuser}\" />";
+    // should be taken care of by the cookie:
+    //echo "<input type=\"hidden\" name=\"u\" value=\"{$tmuser}\" />";
     echo "<input type=\"submit\" value=\"Apply Filter\" /></form>";
 
 } 
@@ -240,8 +237,14 @@ JS;
 if ($routeparam != "") {
     require $_SERVER['DOCUMENT_ROOT'] . "/shields/shieldgen.php";
     echo "<div id=\"pointbox\">\n";
-    echo "<span class='bigshield'>" . generate($_GET['r'], true) . "</span>";
-    echo "<span><a href='/user/mapview.php?u={$_GET['u']}&amp;rte={$routeInfo['route']}'>View Associated Routes</a></span>";
+    echo "<span class='bigshield'>" . generate($routeparam, true) . "</span>\n";
+    echo "<span>" . $routeInfo['banner'];
+    if (strlen($routeInfo['city']) > 0) {
+        echo " (" . $routeInfo['city'] . ")";
+    }
+    echo "</span>\n";
+    echo "<span>.list name: <span style='font-family:courier'>" . $routeInfo['region'] . " " . $routeInfo['route'] . $routeInfo['banner'] . $routeInfo['abbrev'] . "</span></span>\n";
+
     echo "<table id='routeInfo' class=\"gratable\"><thead><tr><th colspan='2'>Route Stats</th></tr></thead><tbody>";
     $sql_command = <<<SQL
       SELECT
@@ -263,16 +266,17 @@ if ($routeparam != "") {
         WHERE cr.route = '$routeparam'
 SQL;
     $row = tmdb_query($sql_command) -> fetch_assoc();
+    $totalLength = tm_convert_distance($row['totalMileage']) . " " . $tmunits;
+    $averageTraveled = tm_convert_distance($row['avgMileage']). " " . $tmunits;
     echo <<<HTML
-    <tr><td class="important">Total Mileage</td><td>{$row['totalMileage']} mi</td></tr>
-    <tr><td>LIST Name</td><td>{$routeInfo['region']} {$routeInfo['route']}{$routeInfo['banner']}{$routeInfo['abbrev']}</td></tr> 
+    <tr><td class="important">Total Length</td><td>{$totalLength}</td></tr>
     <tr title="{$row['drivers']}"><td>Total Drivers</td><td>{$row['numDrivers']} ({$row['drivenPct']} %)</td>
     <tr class="link" title="{$row['clinchers']}"><td rowspan="2">Total Clinched</td><td>{$row['numClinched']} ({$row['clinchedPct']} %)</td>
     <tr class="link" title="{$row['clinchers']}"><td>{$row['drivenClinchedPct']} % of drivers</td>
-    s<tr><td>Average Mileage</td><td>{$row['avgMileage']} mi ({$row['mileagePct']} %)</td></tr>
+    <tr><td>Average Traveled</td><td>{$averageTraveled} ({$row['mileagePct']} %)</td></tr>
     </tbody></table>
 HTML;
-    echo "<table id='waypoints' class=\"gratable\"><thead><tr><th colspan=\"3\">Waypoints</th></tr><tr><th>Coordinates</th><th>Name</th><th title='Percent of people who have driven this route who have driven though this point.'>%</th></tr></thead><tbody>\n";
+    echo "<table id='waypoints' class=\"gratable\"><thead><tr><th colspan=\"2\">Waypoints</th></tr><tr><th>Name</th><th title='Percent of people who have driven this route who have driven though this point.'>%</th></tr></thead><tbody>\n";
     $sql_command = <<<SQL
         SELECT pointName, latitude, longitude, driverPercent
         FROM waypoints
@@ -299,7 +303,7 @@ SQL;
         if (!startsWith($row['pointName'], "+")) {
             $colorFactor = $row['driverPercent'] / 100;
             $colors = [255, 255 - round($colorFactor * 128), 255 - round($colorFactor * 128)];
-            echo "<tr onClick='javascript:LabelClick(" . $waypointnum . ",\"" . $row['pointName'] . "\"," . $row['latitude'] . "," . $row['longitude'] . ",0);'><td>(" . $row['latitude'] . "," . $row['longitude'] . ")</td><td class='link'>" . $row['pointName'] . "</td><td style='background-color: rgb({$colors[0]},{$colors[1]},{$colors[2]})'>{$row['driverPercent']}</td></tr>\n";
+            echo "<tr onClick='javascript:labelClick(" . $waypointnum . ",\"" . $row['pointName'] . "\"," . $row['latitude'] . "," . $row['longitude'] . ",0);'><td class='link'>" . $row['pointName'] . "</td><td style='background-color: rgb({$colors[0]},{$colors[1]},{$colors[2]})'>{$row['driverPercent']}</td></tr>\n";
         }
         $waypointnum = $waypointnum + 1;
     }
@@ -312,26 +316,18 @@ SQL;
 ENDA;
     if ($routeparam != "") {
         echo "<table><tbody><tr><td>";
-        $sql_command = "SELECT region, route, banner, city FROM routes WHERE root = '" .$routeparam. "';";
-        $res = tmdb_query($sql_command);
-        $row = $res->fetch_assoc();
-        echo $row['region'] . " " . $row['route'];
-        if (strlen($row['banner']) > 0) {
-            echo " " . $row['banner'];
-        }
-        if (strlen($row['city']) > 0) {
-            echo " (" . $row['city'] . ")";
-        }
-        $res->free();
+    	echo "<a href='/user/mapview.php?rte={$routeInfo['route']}'>View Associated Routes</a>";
         echo "</td><td>";
         echo "<input id=\"showMarkers\" type=\"checkbox\" name=\"Show Markers\" onclick=\"showMarkersClicked()\" checked=\"false\" />&nbsp;Show Markers&nbsp;";
         echo "</td><td>";
         echo "<form id=\"userForm\" action=\"/hb/index.php\">";
         echo "User: ";
         tm_user_select();
+	echo "<label>Units: </label>\n";
+        tm_units_select();
         echo "</td><td>";
         echo "<input type=\"hidden\" name=\"r\" value=\"".$routeparam."\" />";
-        echo "<input type=\"submit\" value=\"Select User\" />";
+        echo "<input type=\"submit\" value=\"Apply\" />";
         echo "</td></tr></tbody></table>\n";
     }
     echo <<<ENDB
@@ -396,5 +392,5 @@ HTML;
 $tmdb->close();
 ?>
 </body>
-<script type="application/javascript" src="../api/waypoints.js.php?<?php echo "r=$routeparam&u=$tmuser";?>"></script>
+<script type="application/javascript" src="../lib/waypoints.js.php?<?php echo "r=$routeparam&u=$tmuser";?>"></script>
 </html>
