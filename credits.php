@@ -15,7 +15,7 @@
 <p class="text">Travel Mapping is the successor project to the
 dormant <a href="http://cmap.m-plex.com">Clinched Highway
 Mapping</a> (CHM) project, developed and operated by Timothy Reichard.
-Some underlying code and the initial highway data are from CHM.</p>
+Some underlying code and the initial highway data are based on CHM.</p>
 
 <p class="heading">Highway Data Sources</p>
 
