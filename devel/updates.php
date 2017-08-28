@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css" href="/css/travelMapping.css" />
+<link rel="shortcut icon" type="image/png" href="/favicon.png">
 <!-- jQuery -->
 <script type="application/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <!-- TableSorter -->
@@ -32,14 +33,56 @@
 
 <p class="info">Quick links: <a href="#sysupdates">[Highway System Status Changes]</a><a href="#updates">[Updates to Highway Data in Active Systems]</a>.</p>
 
+<?php
+$syscount = 10;
+if (array_key_exists("syscount", $_GET)) {
+  $syscount = $_GET["syscount"];
+  if ($syscount == "all") {
+    $syscount = 0;
+  }
+}
+$updatecount = 20;
+if (array_key_exists("updatecount", $_GET)) {
+  $updatecount = $_GET["updatecount"];
+  if ($updatecount == "all") {
+    $updatecount = 0;
+  }
+}
+?>
+<h3><a name="sysupdates">Highway System Status Changes</a>
 
-<h3><a name="sysupdates">Highway System Status Changes</a></h3>
-
+[Show <select onchange="javascript: document.location.href = 'updates.php?syscount=' + document.getElementById('syscount').value + '&updatecount=' + document.getElementById('updatecount').value;" name="syscount" id="syscount">
+<?php
+  $totalSysUpdates = tm_count_rows("systemUpdates", "");
+  $nextEntry = 10;
+  while ($nextEntry <= $totalSysUpdates) {
+    echo "<option value=\"".$nextEntry."\"";
+    if ($syscount == $nextEntry) {
+      echo " selected";
+    }
+    echo ">".$nextEntry." Newest</option>";
+    $nextEntry = $nextEntry * 2;
+  }
+  echo "<option value=\"all\"";
+  if ($syscount == 0) {
+    echo " selected";
+  }
+  echo ">All ".$totalSysUpdates."</option>";
+?>
+</select>
+Entries]
+</h3>
 <div id="sysupdates">
-  <table class="tablesorter" border="1"><tr><th class="sortable">Date</th><th class="nonsortable">Country/Region</th><th class="sortable">System Code</th><th class="nonsortable">System Description</th><th class="sortable">New Status</th></tr>
+  <table class="tablesorter" border="1"><tr><th class="sortable">Date</th><th class="sortable">Country/Region</th><th class="sortable">System Code</th><th class="nonsortable">System Description</th><th class="sortable">New Status</th></tr>
   <?php
-      // select all updates in the DB
-      $sql_command = "select * from systemUpdates;";
+      if ($syscount == 0) {
+        // select all updates in the DB
+        $sql_command = "select * from systemUpdates order by date desc;";
+      }
+      else {
+        // select limited number of updates in the DB
+        $sql_command = "select * from systemUpdates order by date desc limit ".$syscount.";";
+      }
       $res = tmdb_query($sql_command);
 
       while ($row = $res->fetch_assoc()) {
@@ -60,13 +103,42 @@
   </table>
 </div>
 
-<h3><a name="updates">Updates to Highway Data in Active Systems</a></h3>
+<h3><a name="updates">Updates to Highway Data in Active Systems</a>
+
+
+[Show <select onchange="javascript: document.location.href = 'updates.php?syscount=' + document.getElementById('syscount').value + '&updatecount=' + document.getElementById('updatecount').value;" name="updatecount" id="updatecount">
+<?php
+  $totalUpdates = tm_count_rows("updates", "");
+  $nextEntry = 10;
+  while ($nextEntry <= $totalUpdates) {
+    echo "<option value=\"".$nextEntry."\"";
+    if ($updatecount == $nextEntry) {
+      echo " selected";
+    }
+    echo ">".$nextEntry." Newest</option>";
+    $nextEntry = $nextEntry * 2;
+  }
+  echo "<option value=\"all\"";
+  if ($updatecount == 0) {
+    echo " selected";
+  }
+  echo ">All ".$totalUpdates."</option>";
+?>
+</select>
+Entries]
+</h3>
 
 <div id="updates">
   <table class="tablesorter" border="1"><tr><th class="sortable">Date</th><th class="sortable">Region</th><th class="nonsortable">Route</th><th class="sortable">File Root</th><th class="nonsortable">Description</th></tr>
   <?php
-      // select all updates in the DB
-      $sql_command = "select * from updates;";
+      if ($updatecount == 0) {
+        // select all updates in the DB
+        $sql_command = "select * from updates order by date desc, region, route;";
+      }
+      else {
+        // select limited number of updates in the DB
+        $sql_command = "select * from updates order by date desc, region, route limit ".$updatecount.";";
+      }
       $res = tmdb_query($sql_command);
 
       while ($row = $res->fetch_assoc()) {

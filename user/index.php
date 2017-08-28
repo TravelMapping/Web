@@ -10,6 +10,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="/css/travelMapping.css" />
+    <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <style type="text/css">
         #body {
             left: 0px;
@@ -103,13 +104,15 @@ SQL;
             $res = tmdb_query($sql_command);
             $row = $res->fetch_assoc();
             $res->free();
-            echo "<tr class='notclickable' style=\"background-color:#EEEEFF\"><td>Miles Driven</td>";
-	    echo "<td>" . $row['clinchedActiveMileage'];
-	    echo "/" . $row['totalActiveMileage'] . " mi (";
-	    echo $row['activePercentage'] . "%) Rank: TBD</td>";
-	    echo "<td>" . $row['clinchedActivePreviewMileage'];
-	    echo "/" . $row['totalActivePreviewMileage'] . " mi (";
-	    echo $row['activePreviewPercentage'] . "%) Rank: TBD</td>";
+            echo "<tr class='notclickable' style=\"background-color:#EEEEFF\"><td>Distance Traveled</td>";
+	    echo "<td>" . tm_convert_distance($row['clinchedActiveMileage']);
+	    echo "/" . tm_convert_distance($row['totalActiveMileage']) . " ";
+	    tm_echo_units();
+	    echo " (" . $row['activePercentage'] . "%) Rank: TBD</td>";
+	    echo "<td>" . tm_convert_distance($row['clinchedActivePreviewMileage']);
+	    echo "/" . tm_convert_distance($row['totalActivePreviewMileage']) . " ";
+	    tm_echo_units();
+	    echo " (" . $row['activePreviewPercentage'] . "%) Rank: TBD</td>";
 	    echo "</tr>";
 
 
@@ -136,7 +139,7 @@ SQL;
 	    $activePreviewRoutes = $row['total'];
 	    $res->free();
 
-            $sql_command = "SELECT COUNT(ccr.route) AS driven, SUM(ccr.clinched) AS clinched, ROUND(COUNT(ccr.route) / ".$activeRoutes." * 100,2) AS drivenPercent, ROUND(SUM(ccr.clinched) / ".$activeRoutes." * 100,2) AS clinchedPercent FROM connectedRoutes AS cr LEFT JOIN clinchedConnectedRoutes AS ccr ON cr.firstRoot = ccr.route AND traveler = '" . $tmuser . "' LEFT JOIN routes ON ccr.route = routes.root LEFT JOIN systems ON routes.systemName = systems.systemName WHERE (systems.level = 'active' OR systems.level = 'preview');";
+            $sql_command = "SELECT COUNT(ccr.route) AS driven, SUM(ccr.clinched) AS clinched, ROUND(COUNT(ccr.route) / ".$activePreviewRoutes." * 100,2) AS drivenPercent, ROUND(SUM(ccr.clinched) / ".$activePreviewRoutes." * 100,2) AS clinchedPercent FROM connectedRoutes AS cr LEFT JOIN clinchedConnectedRoutes AS ccr ON cr.firstRoot = ccr.route AND traveler = '" . $tmuser . "' LEFT JOIN routes ON ccr.route = routes.root LEFT JOIN systems ON routes.systemName = systems.systemName WHERE (systems.level = 'active' OR systems.level = 'preview');";
             $res = tmdb_query($sql_command);
             $row = $res->fetch_assoc();
 	    $activePreviewDriven = $row['driven'];
@@ -146,7 +149,7 @@ SQL;
 	    $res->free();
 
             echo "<tr onclick=\"window.open('/shields/clinched.php?u={$tmuser}&amp;cort=traveled')\">";
-	    echo "<td>Routes Driven</td>";
+	    echo "<td>Routes Traveled</td>";
 	    echo "<td>".$activeDriven." of " . $activeRoutes . " (" . $activeDrivenPct . "%) Rank: TBD</td>";
 	    echo "<td>".$activePreviewDriven." of " . $activePreviewRoutes . " (" . $activePreviewDrivenPct . "%) Rank: TBD</td>";
 	    echo "</tr>";
@@ -169,12 +172,12 @@ SQL;
         <tr>
             <th class="sortable">Country</th>
             <th class="sortable">Region</th>
-            <th class="sortable">Clinched (mi)</th>
-            <th class="sortable">Overall (mi)</th>
-            <th class="sortable">% Clinched</th>
-            <th class="sortable">Clinched (mi)</th>
-            <th class="sortable">Overall (mi)</th>
-            <th class="sortable">% Clinched</th>
+            <th class="sortable">Clinched (<?php tm_echo_units(); ?>)</th>
+            <th class="sortable">Overall (<?php tm_echo_units(); ?>)</th>
+            <th class="sortable">%</th>
+            <th class="sortable">Clinched (<?php tm_echo_units(); ?>)</th>
+            <th class="sortable">Overall (<?php tm_echo_units(); ?>)</th>
+            <th class="sortable">%</th>
             <th colspan="2">Map</th>
         </tr>
         </thead>
@@ -204,7 +207,7 @@ SQL;
             }
             $activePreviewPercent = round($row['clinchedActivePreviewMileage'] / $row['totalActivePreviewMileage'] * 100.0, 2);
 	    $activePreviewPercent = sprintf('%0.2f', $activePreviewPercent);
-            echo "<tr onclick=\"window.document.location='/user/region.php?u=" . $tmuser . "&amp;rg=" . $row['code'] . "'\"><td>" . $row['country'] . "</td><td>" . $row['name'] . "</td><td>" . sprintf('%0.2f', $row['clinchedActiveMileage']) . "</td><td>" . sprintf('%0.2f', $row['totalActiveMileage']) . "</td><td>" . $activePercent . "%</td><td>" . sprintf('%0.2f', $row['clinchedActivePreviewMileage']) . "</td><td>" . sprintf('%0.2f', $row['totalActivePreviewMileage']) . "</td><td>" . $activePreviewPercent . "%</td><td class='link'><a href=\"/user/mapview.php?u=" . $tmuser . "&amp;rg=" . $row['code'] . "\">Map</a></td><td class='link'><a href='/hb?rg={$row['code']}'>HB</a></td></tr>";
+            echo "<tr onclick=\"window.document.location='/user/region.php?u=" . $tmuser . "&amp;rg=" . $row['code'] . "'\"><td>" . $row['country'] . "</td><td>" . $row['name'] . "</td><td>" . tm_convert_distance($row['clinchedActiveMileage']) . "</td><td>" . tm_convert_distance($row['totalActiveMileage']) . "</td><td>" . $activePercent . "%</td><td>" . tm_convert_distance($row['clinchedActivePreviewMileage']) . "</td><td>" . tm_convert_distance($row['totalActivePreviewMileage']) . "</td><td>" . $activePreviewPercent . "%</td><td class='link'><a href=\"/user/mapview.php?u=" . $tmuser . "&amp;rg=" . $row['code'] . "\">Map</a></td><td class='link'><a href='/hb?rg={$row['code']}'>HB</a></td></tr>";
         }
         $res->free();
         ?>
@@ -219,15 +222,37 @@ SQL;
             <th class="sortable">System Name</th>
             <th class="sortable">Tier</th>
             <th class="sortable">Status</th>
-            <th class="sortable">Clinched Mileage</th>
-            <th class="sortable">Total Mileage</th>
-            <th class="sortable">Percent</th>
+            <th class="sortable">Clinched (<?php tm_echo_units(); ?>)</th>
+            <th class="sortable">Total (<?php tm_echo_units(); ?>)</th>
+            <th class="sortable">% Clinched</th>
             <th colspan="2">Map</th>
         </tr>
         </thead>
         <tbody>
         <?php
-        $sql_command = "SELECT sys.countryCode, sys.systemName, sys.level, sys.tier, sys.fullName, COALESCE(ROUND(SUM(cr.mileage), 2),0) AS clinchedMileage, COALESCE(ROUND(SUM(r.mileage), 2), 0) AS totalMileage, COALESCE(ROUND(SUM(cr.mileage) / SUM(r.mileage) * 100, 2), 0) AS percentage FROM systems AS sys INNER JOIN routes AS r ON r.systemName = sys.systemName LEFT JOIN clinchedRoutes AS cr ON cr.route = r.root AND cr.traveler = '" . $tmuser . "' WHERE (sys.level = 'active' OR sys.level = 'preview') GROUP BY r.systemName;";
+        // need to build system mileages from systemMileageByRegion
+        // and clinchedSystemMileageByRegion tables since they already
+        // take concurrencies into account properly
+        $sql_command = <<<SQL
+SELECT
+sys.countryCode,
+sys.systemName,
+sys.level,
+sys.tier,
+sys.fullName,
+COALESCE(ROUND(SUM(csm.mileage), 2), 0) AS clinchedMileage,
+COALESCE(ROUND(SUM(sm.mileage), 2), 0) AS totalMileage,
+COALESCE(ROUND(SUM(csm.mileage)/ SUM(sm.mileage) * 100, 2), 0) AS percentage
+FROM systems as sys
+INNER JOIN systemMileageByRegion AS sm 
+  ON sm.systemName = sys.systemName
+LEFT JOIN clinchedSystemMileageByRegion AS csm 
+  ON sm.region = csm.region AND 
+     csm.systemName = sys.systemName AND
+     csm.traveler = '$tmuser'
+WHERE (sys.level = 'active' OR sys.level = 'preview')
+GROUP BY sm.systemName;
+SQL;
         $res = tmdb_query($sql_command);
         while ($row = $res->fetch_assoc()) {
 	    if ($row['clinchedMileage'] == 0) continue;
@@ -237,8 +262,8 @@ SQL;
             echo "<td>" . $row['fullName'] . "</td>";
             echo "<td>Tier " . $row['tier'] . "</td>";
             echo "<td>" . $row['level'] . "</td>";
-            echo "<td>" . $row['clinchedMileage'] . "</td>";
-            echo "<td>" . $row['totalMileage'] . "</td>";
+            echo "<td>" . tm_convert_distance($row['clinchedMileage']) . "</td>";
+            echo "<td>" . tm_convert_distance($row['totalMileage']) . "</td>";
             echo "<td>" . $row['percentage'] . "%</td>";
             echo "<td class='link'><a href=\"/user/mapview.php?u={$tmuser}&amp;sys={$row['systemName']}\">Map</a></td>";
             echo "<td class='link'><a href='/hb?sys={$row['systemName']}'>HB</a></td></tr>";

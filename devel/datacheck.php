@@ -4,6 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css" href="/css/travelMapping.css" />
+<link rel="shortcut icon" type="image/png" href="/favicon.png">
 <style type="text/css">
 </style>
 <?php
@@ -56,9 +57,25 @@
 <body onload="populate_dbarrays()">
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 
+<?php
+$showmarked = false;
+if (array_key_exists("showmarked", $_GET)) {
+  $showmarked = true;
+}
+?>
+
 <p class="heading">Travel Mapping Highway Data Datacheck Errors</p>
 
-<p class="info">Quick links: <a href="#active">[Errors in Active Systems]</a><a href="#preview">[Errors in Preview Systems]</a><a href="#indev">[Errors in In-Dev Systems]</a><a href="#marked">[Errors Marked as FPs]</a>.</p>
+<p class="info">Quick links: <a href="#active">[Errors in Active Systems]</a><a href="#preview">[Errors in Preview Systems]</a><a href="#indev">[Errors in In-Dev Systems]</a>
+<?php
+if ($showmarked) {
+  echo '<a href="#marked">[Errors Marked as FPs]</a>.';
+}
+else {
+  echo '<a href="?showmarked">[Reload with Marked FPs Included]</a>.';
+}
+?>
+</p>
 
 <p class="info">See also the <a href="../logs/unmatchedfps.log">[Log
 of Unmatched FPs from datacheckfps.csv]</a> and
@@ -121,6 +138,9 @@ datacheckfps.csv]</a>.</p>
     ?>
   </table>
 
+<?php
+if ($showmarked) {
+?>
   <p class="subheading">Errors Marked as FPs ("Crossed Off")</p>
 
   <p class="text"><a name="marked"></a>These have been marked as FPs
@@ -134,6 +154,9 @@ datacheckfps.csv]</a>.</p>
       writeTable($tmdb, "1", " where ");
     ?>
   </table>
+<?php
+}
+?>
 </div>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
 </body>

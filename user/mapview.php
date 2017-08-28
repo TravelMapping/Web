@@ -16,6 +16,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="/css/travelMapping.css" />
+    <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <style type="text/css">
         #controlbox {
             position: absolute;
@@ -115,159 +116,7 @@
     <!-- TableSorter -->
     <script type="application/javascript" src="/lib/jquery.tablesorter.js"></script>
 
-    <?php
-
-    function orClauseBuilder($param, $name, $tablename = 'r') {
-        $array = array();
-        if (is_array($_GET[$param])) {
-          foreach ($_GET[$param] as $p) {
-            $array = array_merge($array, explode(',',$p));
-          }
-        }
-        else {
-          $array = explode(",", $_GET[$param]);
-        }
-        $array = array_diff($array, array("null"));
-        $clause = "(";
-        $i = 0;
-        foreach($array as $item) {
-            $clause.="{$tablename}.{$name} = '{$item}'";
-            $i++;
-            if($i < sizeof($array)) $clause .= " or ";
-        }
-        $clause .= ")";
-        if ($i == 0) {
-            return "TRUE";
-        }
-        return $clause;
-    }
-
-    ?>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
-    
-    <script type="application/javascript">
-        function waypointsFromSQL() {
-            <?php
-	      // later get this from a QS parameter probably
-	      // idea: option to include devel routes as a debugging aid
-	      $activeClause = "(systems.level='preview' OR systems.level='active')";
-              $regions = tm_qs_multi_or_comma_to_array("rg");
-
-              // restrict to waypoints matching routes whose region is given in the "rg=" query string parameter
-              // build strings needed for later queries
-              $select_regions = "";
-              $where_regions = "";
-              $num_regions = 0;
-              foreach ($regions as $region) {
-                if ($num_regions == 0) {
-                  $select_regions = " and (routes.region='".$region."'";
-                  $where_regions = " where (region='".$region."'";
-                }
-                else {
-                  $select_regions = $select_regions." or routes.region='".$region."'";
-                  $where_regions = $where_regions." or region='".$region."'";
-                }
-                $num_regions = $num_regions + 1;
-              }
-              if ($num_regions > 0) {
-                $select_regions = $select_regions.")";
-                $where_regions = $where_regions.")";
-              }
-
-              // select based on system?
-              $systems = tm_qs_multi_or_comma_to_array("sys");
-
-              // restrict to waypoints matching routes whose system is given in the "sys=" query string parameter
-              $select_systems = "";
-              $where_systems = "";
-              $num_systems = 0;
-              foreach ($systems as $system) {
-                if ($num_systems == 0) {
-                  $select_systems = " and (routes.systemName='".$system."'";
-                  $where_systems = " where (routes.systemName='".$system."'";
-                }
-                else {
-                  $select_systems = $select_systems." or routes.systemName='".$system."'";
-                  $where_systems = $where_systems." or routes.systemName='".$system."'";
-                }
-                $num_systems = $num_systems + 1;
-              }
-              if ($num_systems > 0) {
-                $select_systems = $select_systems.")";
-                $where_systems = $where_systems.")";
-              }
-
-            if (array_key_exists("rte", $_GET)) {
-              $rteClause = " where (routes.route like '".$_GET['rte']."' or route regexp '".$_GET['rte']."[a-z]')";
-              $rteClause = str_replace("*", "%", $rteClause);
-              if (array_key_exists('rg', $_GET)) $rteClause .= " AND ".orClauseBuilder('rg', 'region','routes');
-              if (array_key_exists('sys', $_GET)) $rteClause .= " AND ".orClauseBuilder('sys', 'systemName','routes');
-              $sql_command = "SELECT waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname FROM waypoints JOIN routes ON routes.root = waypoints.root JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause."  ".$rteClause." ORDER BY root, waypoints.pointId;";
-            } elseif (($num_systems == 0) && ($num_regions == 0)) {
-                 // for now, put in a default to usai, do something better later
-                 $select_systems = " and (routes.systemName='usai')";
-                 $where_systems = " where (routes.systemName='usai')";
-                 $sql_command = "SELECT waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname FROM waypoints JOIN routes ON routes.root = waypoints.root".$select_regions.$select_systems." JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause."  ORDER BY root, waypoints.pointId;";
-              } else {
-                $sql_command = "SELECT waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname FROM waypoints JOIN routes ON routes.root = waypoints.root".$select_regions.$select_systems." JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause."  ORDER BY root, waypoints.pointId;";
-              }
-
-              $res = tmdb_query($sql_command);
-
-              $routenum = 0;
-              $pointnum = 0;
-              $lastRoute = "";
-              while ($row = $res->fetch_assoc()) {
-                if (!($row['root'] == $lastRoute)) {
-                   echo "newRouteIndices[".$routenum."] = ".$pointnum.";\n";
-                   echo "routeTier[".$routenum."] = ".$row['tier'].";\n";
-                   echo "routeColor[".$routenum."] = '".$row['color']."';\n";
-                   echo "routeSystem[".$routenum."] = '".$row['systemname']."';\n";
-                   $lastRoute = $row['root'];
-                   $routenum = $routenum + 1;
-                }
-                echo "waypoints[".$pointnum."] = new Waypoint(\"".$row['pointName']."\",".$row['latitude'].",".$row['longitude']."); // Route = ".$row['root']." (".$row['color'].")\n";
-                $pointnum = $pointnum + 1;
-              }
-
-              // check for query string parameter for traveler clinched mapping of route
-              if (array_key_exists("u",$_GET)) {
-                 echo "// select_systems: ".$select_systems."\n";
-                 echo "// where_systems: ".$where_systems."\n";
-                 echo "traveler = '".$_GET['u']."';\n";
-                 // retrieve list of segments for this region or regions
-                 if(isset($rteClause)) {
-                  $sql_command = "SELECT segments.segmentId, segments.root FROM segments JOIN routes ON routes.root = segments.root JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause." ".$rteClause." ORDER BY root, segments.segmentId;";
-                 } else {
-                  $sql_command = "SELECT segments.segmentId, segments.root FROM segments JOIN routes ON routes.root = segments.root JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause." ".$where_regions.$select_systems." ORDER BY root, segments.segmentId;";
-                 }
-                 $res = tmdb_query($sql_command);
-                 $segmentIndex = 0;
-                 while ($row = $res->fetch_assoc()) {
-                   echo "segments[".$segmentIndex."] = ".$row['segmentId']."; // route=".$row['root']."\n";
-                   $segmentIndex = $segmentIndex + 1;
-                 }
-                 if(isset($rteClause)) {
-                  $sql_command = "SELECT segments.segmentId, segments.root FROM segments RIGHT JOIN clinched ON segments.segmentId = clinched.segmentId JOIN routes ON routes.root = segments.root JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause." ".$rteClause." AND clinched.traveler='".$_GET['u']."' ORDER BY root, segments.segmentId;";
-                 } else {
-                  $sql_command = "SELECT segments.segmentId, segments.root FROM segments RIGHT JOIN clinched ON segments.segmentId = clinched.segmentId JOIN routes ON routes.root = segments.root JOIN systems ON routes.systemname = systems.systemname AND ".$activeClause." ".$where_regions.$select_systems." AND clinched.traveler='".$_GET['u']."' ORDER BY root, segments.segmentId;";
-                 }
-                 $res = tmdb_query($sql_command);
-                 $segmentIndex = 0;
-                 while ($row = $res->fetch_assoc()) {
-                   echo "clinched[".$segmentIndex."] = ".$row['segmentId']."; // route=".$row['root']."\n";
-                   $segmentIndex = $segmentIndex + 1;
-                 }
-               echo "mapClinched = true;\n";
-              }
-
-              // insert custom color code if needed
-              tm_generate_custom_colors_array();
-
-            ?>
-            genEdges = true;
-        }
-    </script>
     <title>Travel Mapping: Draft Map Overlay Viewer</title>
 </head>
 
@@ -360,14 +209,18 @@
     <table id="routesTable" class="gratable tablesorter">
         <thead>
             <tr class="float" ><th class="sortable routeName">Route</th><th class="sortable systemName">System</th>
-                <th class="sortable clinched">Clinched</th><th class="sortable overall">Overall</th><th class="sortable percent">%</th></tr>
+                <th class="sortable clinched">Clinched (<?php tm_echo_units(); ?>)</th><th class="sortable overall">Overall (<?php tm_echo_units(); ?>)</th><th class="sortable percent">%</th></tr>
         </thead>
         <tbody>
-        <!-- TEMP FIX: dummy table line to account for the fact that the
+        <!-- TEMP FIX: 1 dummy table lines to account for the fact that the
 	styling places the table header row above on top of the first
-	row of data in the table -->
+	two rows of data in the table -->
         <tr><td class='routeName'>DUMMY</td>
             <td class='link systemName'>1. syst</td>
+            <td class="clinched">0000</td><td class='overall'>0000</td><td class='percent'>0.00%</td>
+	</tr>
+        <tr><td class='routeName'>DUMMY</td>
+            <td class='link systemName'>2. syst</td>
             <td class="clinched">0000</td><td class='overall'>0000</td><td class='percent'>0.00%</td>
 	</tr>
         <?php
@@ -416,7 +269,7 @@ SQL;
                 <td class='link systemName'>{$row['tier']}. <a href='/user/system.php?u={$_GET['u']}&amp;sys={$row['systemName']}'>{$row['systemName']}</a></td>
                 <td class="clinched">
 HTML
-.$row['clinched']."</td><td class='overall'>".$row['total']."</td><td class='percent'>".$pct."%</td></tr>\n";
+.tm_convert_distance($row['clinched'])."</td><td class='overall'>".tm_convert_distance($row['total'])."</td><td class='percent'>".$pct."%</td></tr>\n";
         }
         ?>
         </tbody>
@@ -433,4 +286,6 @@ HTML
 <?php
     $tmdb->close();
 ?>
+
+<script type="application/javascript" src="../lib/waypoints.js.php?<?php echo $_SERVER['QUERY_STRING']?>"></script>
 </html>
