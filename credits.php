@@ -481,7 +481,7 @@ following sources of highway information.</p>
 	  </li>
 	  <li>Idaho, USA
 	    <ul>
-	    <li><a href="http://itd.idaho.gov/planning/milepointlog/mplog/index.html">Idaho Milepoint Log</a>. Official route log from the Idaho Transportation Department.</li>
+	    <li><a href="http://itd.idaho.gov/milepointlog/">Idaho Milepoint Log</a>. Official route log from the Idaho Transportation Department.</li>
 	    </ul>
 	  </li>
 	  <li>Illinois, USA
@@ -768,6 +768,7 @@ following sources of highway information.</p>
 
   <ul>
   <li>Eric Bryant (yakra)<br> </li>
+  <li>Evin Fairchild (compdude) </li>
   <li>Dave Filpus (dfilpus)<br>
           <a href="http://roadgeek.filpus.org/">Filpus Roadgeek</a> </li>
   <li>Adam Froehlig (froggie)<br>
