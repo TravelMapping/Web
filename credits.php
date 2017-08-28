@@ -621,7 +621,7 @@ following sources of highway information.</p>
 	    <ul>
 	    <li>Unofficial Ohio State Highways. John Simpson's directory in development of Ohio highways.</li>
 	    <li><a href="https://www.dot.state.oh.us/maps/Pages/TransMap15.aspx">Ohio Official Highway Map</a>. On-line Ohio state highway map.</li>
-	    <li><a href="https://www.dot.state.oh.us/Divisions/Planning/TechServ/TIM/Pages/Straight-Line-Diagrams.aspx">OHDO Straight Line Diagrams</a>. Comprehensive directory of straight line diagrams of Ohio highways.</li>
+	    <li><a href="https://www.dot.state.oh.us/Divisions/Planning/TechServ/TIM/Pages/Straight-Line-Diagrams.aspx">ODOT Straight Line Diagrams</a>. Comprehensive directory of straight line diagrams of Ohio highways.</li>
 	    </ul>
 	  </li>
 	  <li>Oklahoma, USA
@@ -665,7 +665,7 @@ following sources of highway information.</p>
 	  </li>
 	  <li>Tennessee, USA
 	    <ul>
-<li><a href="http://www.tdot.state.tn.us/Maps/county/default.htm">http://www.tdot.state.tn.us/Maps/county/default.htm</a>. Tennessee County Maps.</li>
+<li><a href="http://www.tn.gov/tdot/section/maps">TDOT Maps. Official Tennessee State and County Maps.</li>
 	    </ul>
 	  </li>
 	  <li>Texas, USA
