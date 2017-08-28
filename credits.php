@@ -654,7 +654,9 @@ following sources of highway information.</p>
 	  </li>
 	  <li>South Carolina, USA
 	    <ul>
-<li><a href="http://dbw.scdot.org/GISMapping/default.aspx">GIS/Mapping SCDOT</a>. Official GIS data from the South Carolina Department of Transportation.</li>
+	      <li><a href="http://dbw.scdot.org/GISMapping/default.aspx">GIS/Mapping SCDOT</a>. Official GIS data from the South Carolina Department of Transportation.</li>
+	      <li><a href="http://info.scdot.org/sites/GIS/SitePages/default.aspx">SC Maps</a>.  Official maps from the South Carolina Department of Transportation.</li>
+	      <li><a href="http://www.vahighways.com/scannex/route-log/index.htm">South Carolina Highway Annex</a>.</li>
 	    </ul>
 	  </li>
 	  <li>South Dakota, USA
@@ -665,7 +667,7 @@ following sources of highway information.</p>
 	  </li>
 	  <li>Tennessee, USA
 	    <ul>
-<li><a href="http://www.tn.gov/tdot/section/maps">TDOT Maps. Official Tennessee State and County Maps.</li>
+<li><a href="http://www.tn.gov/tdot/section/maps">TDOT Maps. Official Tennessee State and County Maps.</a></li>
 	    </ul>
 	  </li>
 	  <li>Texas, USA
@@ -688,7 +690,9 @@ following sources of highway information.</p>
 	  </li>
 	  <li>Virginia, USA
 	    <ul>
-<li><a href="http://www.virginiadot.org/info/ct-TrafficCounts.asp">Virginia Traffic Data</a>. Official traffic and highway data from the Virginia Department of Transportation.</li>
+	      <li><a href="http://www.virginiadot.org/info/ct-TrafficCounts.asp">Virginia Traffic Data</a>. Official traffic and highway data from the Virginia Department of Transportation.</li>
+	      <li><a href="http://www.virginiadot.org/travel/maps-default.asp">Virginia DOT Maps</a>.  Official highway maps from the Virginia Department of Transportation</li>
+	      <li><a href="http://www.vahighways.com">Virginia Highways Page</a>.</li>
 	    </ul>
 	  </li>
 	  <li>Washington, USA
@@ -779,6 +783,7 @@ following sources of highway information.</p>
         <a href="http://rickmastfan67.blogspot.com/">Rickmastfan67 Blog</a> </li>
   <li>Jeff Morrison (jeffm)<br>
         <a href="http://www.angelfire.com/ia/jdmorrison/ends/iaends.html">Iowa Highway Ends</a> </li>
+  <li>Mike Roberson (mapmikey)</li>
   <li>Dave S (mapcat)</li>
   <li>Christopher Steig (Bickendan)</li>
   <li>Jim Teresco (terescoj), Primary Back End Development, Developed highway data for New York, Massachusetts, and New Mexico<br>
