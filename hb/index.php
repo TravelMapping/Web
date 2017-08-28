@@ -65,7 +65,7 @@
 
         #map {
             position: absolute;
-            top: 60px;
+            top: 70px;
             bottom: 0px;
             left: 275px;
             right: 0px;
