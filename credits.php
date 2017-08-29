@@ -452,6 +452,7 @@ following sources of highway information.</p>
 	  <li>Connecticut, USA
 	    <ul>
 	    <li><a href="http://kurumi.com/roads/ct/">Connecticut Roads</a>. Hobbyist site by Scott Oglesby covering highways in Connecticut.</li>
+	    <li><a href="http://www.ct.gov/dot/maps">ConnDOT: Maps</a>. Transportation Related Mapping from the Connecticut Department of Transportation.</li>
 	    </ul>
 	  </li>
 	  <li>Delaware, USA
