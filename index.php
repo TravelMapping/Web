@@ -85,7 +85,7 @@ echo number_format(tm_count_rows("connectedRoutes", "LEFT JOIN systems ON connec
 ?>
  routes for
 <?php
-echo tm_convert_distance(tm_sum_column("overallMileageByRegion", "activeMileage"))." ";
+echo tm_convert_distance_wholenum(tm_sum_column("overallMileageByRegion", "activeMileage"))." ";
 tm_echo_units();
 ?>
  of "clinchable" highways, and that expands to
@@ -94,7 +94,7 @@ echo number_format(tm_count_rows("connectedRoutes", "LEFT JOIN systems ON connec
 ?>
  routes for
 <?php
-echo tm_convert_distance(tm_sum_column("overallMileageByRegion", "activePreviewMileage"))." ";
+echo tm_convert_distance_wholenum(tm_sum_column("overallMileageByRegion", "activePreviewMileage"))." ";
 tm_echo_units();
 ?>
  when preview systems are included.
