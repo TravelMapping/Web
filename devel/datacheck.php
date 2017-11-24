@@ -101,6 +101,12 @@ if (array_key_exists("showmarked", $_GET)) {
     tm_system_select(FALSE);
     echo "<label for=\"rg\"> Region: </label>";
     tm_region_select(FALSE);
+    echo "<input type=\"checkbox\" name=\"showmarked\"";
+    if ($showmarked) {
+       echo " checked";
+    }
+    echo " />";
+    echo "<label for=\"showmarked\"> Show Marked FPs </label>";
     echo "<input type=\"submit\" value=\"Apply Filter\" /></form>";
 ?>
 <p class="info">Quick links: <a href="#active">[Errors in Active Systems]</a><a href="#preview">[Errors in Preview Systems]</a><a href="#indev">[Errors in In-Dev Systems]</a>
@@ -108,9 +114,9 @@ if (array_key_exists("showmarked", $_GET)) {
 if ($showmarked) {
   echo '<a href="#marked">[Errors Marked as FPs]</a>.';
 }
-else {
-  echo '<a href="?showmarked">[Reload with Marked FPs Included]</a>.';
-}
+//else {
+//  echo '<a href="?showmarked">[Reload with Marked FPs Included]</a>.';
+//}
 ?>
 </p>
 
@@ -188,7 +194,7 @@ if ($showmarked) {
 
   <table border="1" style="background-color:#ccc;font-size:60%"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry Matched</th></tr>
     <?php
-      writeTable($tmdb, "1", " where ", $region, $system);
+      writeTable($tmdb, "1", "join routes on datacheckErrors.route = routes.root join systems on routes.systemName = systems.systemName where ", $region, $system);
     ?>
   </table>
 <?php
