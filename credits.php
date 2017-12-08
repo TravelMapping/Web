@@ -672,8 +672,9 @@ following sources of highway information.</p>
 	  <li>New Jersey, USA
 	    <ul>
 <li><a href="http://www.state.nj.us/transportation/gis/map.shtm">State and County Maps</a>. Official highway maps from the New Jersey Department of Transportation.</li>
-<li><a href="http://www.nj.gov/transportation/gis/data.shtm">NJDOT Geographic Information Systems Maps</a>. NJ Roadway Network shapefiles.</li>
 <li><a href="http://www.state.nj.us/transportation/refdata/sldiag/">Straight Line Diagrams</a>. Official highway log from the New Jersey Department of Transportation.</li>
+<li><a href="http://www.nj.gov/transportation/gis/data.shtm">NJDOT Geographic Information Systems Maps</a>. NJ Roadway Network shapefiles.</li>
+<li><a href="http://njogis-newjersey.opendata.arcgis.com/datasets/new-jersey-road-centerlines">New Jersey Road Centerlines.</a>. Shapefiles from New Jersey Office of GIS.</li>
 	    </ul>
 	  </li>
   <li>New Mexico, USA
