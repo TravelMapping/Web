@@ -89,6 +89,7 @@ Entries]
         if (($row['statusChange'] == "active") || 
             ($row['statusChange'] == "preview")|| 
             ($row['statusChange'] == "extended") || 
+            ($row['statusChange'] == "re-entered") || 
             ($row['statusChange'] == "split")) {
             $syslink = "<a href=\"/hb?sys=".$row['systemName']."\">".$row['systemName']."</a>";
         }

@@ -338,7 +338,7 @@ ENDA;
 ENDB;
 } elseif (($region != "") or ($system != "")) {  // we have no r=, so we will show a list of all
     $sql_command = "SELECT * FROM routes LEFT JOIN systems ON systems.systemName = routes.systemName";
-    //check for query string parameter for system and region filters
+    // check for query string parameter for system and region filters
     if ($system != "") {
         $sql_command .= " WHERE routes.systemName = '" .$system. "'";
         if ($region != "") {
