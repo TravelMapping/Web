@@ -763,9 +763,10 @@ following sources of highway information.</p>
 	  </li>
 	  <li>Texas, USA
 	    <ul>
-<li><a href="http://www.dot.state.tx.us/tpp/search/query.htm">Texas Highway Designation Files</a>. From the TXDOT Transportation Planning and Programming Division.</li>
+<li><a href="http://www.dot.state.tx.us/tpp/search/query.htm">Texas Highway Designation Files</a>. From the TxDOT Transportation Planning and Programming Division.</li>
 <li><a href="http://www.txdot.gov/travel/county_grid_search.htm">County Grid Map Search</a>. Grid maps from the Texas Department of Transportation, organized by county.</li>
 <li><a href="http://www.txdot.gov/travel/planning_map.htm">Statewide Planning Map</a>. From the Texas Department of Transportation.</li>
+<li><a href="https://tnris.org/data-catalog/entry/txdot-roadways/">TxDOT Roadways</a>. Shapefiles maintained by TxDOT Transportation Planning and Programming Division.</li>
 	    </ul>
 	  </li> 
 <!--	  <li>Utah, USA
