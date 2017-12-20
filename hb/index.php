@@ -280,7 +280,7 @@ HTML;
       $sql_command = "SELECT mileage FROM clinchedRoutes where traveler='" . $tmuser . "' AND route='" . $routeparam . "'";
       $row = tmdb_query($sql_command) -> fetch_assoc();
       $userTraveled = tm_convert_distance($row['mileage']) . " " . $tmunits;
-      $userMileagePct = round(100 * $row['mileage'] / $totalMileage, 2);
+      $userMileagePct = round(100 * round($row['mileage'],2) / $totalMileage, 2);
     echo <<<HTML
        <tr><td>{$tmuser} Traveled</td><td>{$userTraveled} ({$userMileagePct} %)</td></tr>
 HTML;
