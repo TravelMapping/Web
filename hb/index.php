@@ -266,6 +266,7 @@ if ($routeparam != "") {
         WHERE cr.route = '$routeparam'
 SQL;
     $row = tmdb_query($sql_command) -> fetch_assoc();
+    $totalMileage = $row['totalMileage'];
     $totalLength = tm_convert_distance($row['totalMileage']) . " " . $tmunits;
     $averageTraveled = tm_convert_distance($row['avgMileage']). " " . $tmunits;
     echo <<<HTML
@@ -274,8 +275,17 @@ SQL;
     <tr class="link" title="{$row['clinchers']}"><td rowspan="2">Total Clinched</td><td>{$row['numClinched']} ({$row['clinchedPct']} %)</td>
     <tr class="link" title="{$row['clinchers']}"><td>{$row['drivenClinchedPct']} % of drivers</td>
     <tr><td>Average Traveled</td><td>{$averageTraveled} ({$row['mileagePct']} %)</td></tr>
-    </tbody></table>
 HTML;
+    if ($tmuser != "null") {
+      $sql_command = "SELECT mileage FROM clinchedRoutes where traveler='" . $tmuser . "' AND route='" . $routeparam . "'";
+      $row = tmdb_query($sql_command) -> fetch_assoc();
+      $userTraveled = tm_convert_distance($row['mileage']) . " " . $tmunits;
+      $userMileagePct = round(100 * $row['mileage'] / $totalMileage, 2);
+    echo <<<HTML
+       <tr><td>{$tmuser} Traveled</td><td>{$userTraveled} ({$userMileagePct} %)</td></tr>
+HTML;
+    }
+    echo"</tbody></table>\n";
     echo "<table id='waypoints' class=\"gratable\"><thead><tr><th colspan=\"2\">Waypoints</th></tr><tr><th>Name</th><th title='Percent of people who have driven this route who have driven though this point.'>%</th></tr></thead><tbody>\n";
     $sql_command = <<<SQL
         SELECT pointName, latitude, longitude, driverPercent
