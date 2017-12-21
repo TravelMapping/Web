@@ -286,9 +286,9 @@ HTML;
 HTML;
     }
     echo"</tbody></table>\n";
-    echo "<table id='waypoints' class=\"gratable\"><thead><tr><th colspan=\"2\">Waypoints</th></tr><tr><th>Name</th><th title='Percent of people who have driven this route who have driven though this point.'>%</th></tr></thead><tbody>\n";
+    echo "<table id='waypoints' class=\"gratable\"><thead><tr><th colspan=\"2\">Waypoints</th></tr><tr><th>Name</th><th title='Percent of people who have driven this route who have driven the segment starting at this point.'>%</th></tr></thead><tbody>\n";
     $sql_command = <<<SQL
-        SELECT pointName, latitude, longitude, driverPercent
+        SELECT pointName, latitude, longitude, driverPercent, segmentId
         FROM waypoints
         LEFT JOIN (
             SELECT
@@ -297,7 +297,8 @@ HTML;
                 SELECT COUNT(DISTINCT traveler) FROM clinchedRoutes WHERE clinchedRoutes.route = '$routeparam'
               ) as numDrivers,
               count(*),
-              ROUND(count(*) / @num_drivers * 100, 2) as driverPercent
+              ROUND(count(*) / @num_drivers * 100, 2) as driverPercent,
+              clinched.segmentId
             FROM segments
             LEFT JOIN clinched ON segments.segmentId = clinched.segmentId
             LEFT JOIN waypoints ON segments.waypoint1 = waypoints.pointId
@@ -311,9 +312,15 @@ SQL;
     while ($row = $res->fetch_assoc()) {
         # only visible points should be in this table
         if (!startsWith($row['pointName'], "+")) {
+	    if (tm_count_rows("clinched", "WHERE traveler='" .$tmuser."' AND segmentId='".$row['segmentId']."'") > 0) {
+		$color1 = "rgb(255,128,128)";
+	    }
+	    else {	      
+		$color1 = "rgb(255,255,255)";
+	    }
             $colorFactor = $row['driverPercent'] / 100;
             $colors = [255, 255 - round($colorFactor * 128), 255 - round($colorFactor * 128)];
-            echo "<tr onClick='javascript:labelClick(" . $waypointnum . ",\"" . $row['pointName'] . "\"," . $row['latitude'] . "," . $row['longitude'] . ",0);'><td class='link'>" . $row['pointName'] . "</td><td style='background-color: rgb({$colors[0]},{$colors[1]},{$colors[2]})'>{$row['driverPercent']}</td></tr>\n";
+            echo "<tr onClick='javascript:labelClick(" . $waypointnum . ",\"" . $row['pointName'] . "\"," . $row['latitude'] . "," . $row['longitude'] . ",0);'><td class='link' style='background-color: ".$color1."'>" . $row['pointName'] . "</td><td style='background-color: rgb({$colors[0]},{$colors[1]},{$colors[2]})'>{$row['driverPercent']}</td></tr>\n";
         }
         $waypointnum = $waypointnum + 1;
     }
