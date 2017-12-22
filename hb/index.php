@@ -313,7 +313,7 @@ SQL;
         # only visible points should be in this table
         if (!startsWith($row['pointName'], "+")) {
 	    if (tm_count_rows("clinched", "WHERE traveler='" .$tmuser."' AND segmentId='".$row['segmentId']."'") > 0) {
-		$color1 = "rgb(255,128,128)";
+		$color1 = "rgb(255,167,167)";
 	    }
 	    else {	      
 		$color1 = "rgb(255,255,255)";
