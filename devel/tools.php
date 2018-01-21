@@ -29,7 +29,7 @@ Most of the files below are regenerated during each site update.
 <ul>
 <li><a href="http://cmap.m-plex.com/tools/manual.php">CHM's Instruction Manual</a> (TM generally follows these rules, but we do need to develop our own manual)</li>
 <li><a href="http://cmap.m-plex.com/tools/wpteditv3/wptedit.html">CHM's WPT file Editor</a> (Goal: develop our own)</li>
-<li><a href="http://courses.teresco.org/metal/hdx/">Highway Data Explorer</a> (HDX) to view graph and near-miss data</li>
+<li><a href="http://courses.teresco.org/metal/hdx/">Highway Data Examiner</a> (HDX) to view graph and near-miss data</li>
 </ul>
 </div>
 
