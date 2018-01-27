@@ -15,7 +15,7 @@
 <p class="text">Travel Mapping is the successor project to the
 dormant <a href="http://cmap.m-plex.com">Clinched Highway
 Mapping</a> (CHM) project, developed and operated by Timothy Reichard.
-Some underlying code and the initial highway data are from CHM.</p>
+Some underlying code and the initial highway data are based on CHM.</p>
 
 <p class="heading">Highway Data Sources</p>
 
@@ -119,8 +119,9 @@ following sources of highway information.</p>
 	  </li>
 																 <li>New Brunswick, CAN
 	    <ul>
-	      <li><a href="http://the506.com/roads/NB/">New Brunswick Roads</a>. Hobbyist site by J. P. Kirby covering the provincial highways of New Brunswick.</li>
+	      <li><a href="http://web.archive.org/web/20120211051752/http://the506.com:80/roads/NB/">New Brunswick Roads</a>. Hobbyist site by J. P. Kirby covering the provincial highways of New Brunswick.</li>
 <li><a href="http://www.gnb.ca/0113/maps/Mapbooks/2011-Mapbooks-e.asp">2011 Highway Maps (Map Books)</a>. From New Brunswick Transportation and Infrastructure.</li>
+<li><a href="http://www.gnb.ca/0113/maps/Mapbooks/2016-Mapbooks-e.asp">2016 Highway Maps (Map Books)</a>. From New Brunswick Transportation and Infrastructure.</li>
             </ul>
 	  </li>
 										<!--						 <li>Newfoundland and Labrador, CAN
@@ -136,9 +137,10 @@ following sources of highway information.</p>
 	  </li>
 																 <li>Nova Scotia, CAN
 	    <ul>
-	      <li><a href="http://the506.com/roads/NS/">Nova Scotia Roads</a>. Hobbyist site by J. P. Kirby covering the provincial highways of Nova Scotia.</li>
-<li><a href="http://www.gov.ns.ca/snsmr/publications/product.asp?numRecordPosition=7&amp;P_ID=3823">Traffic Volumes Primary Highway System</a>. Traffic statistics from the Nova Scotia Department of Transportation and Public Works.</li>
-<li><a href="http://www.novascotia.com/flipbook/offline/download.pdf">Nova Scotia 2015 Doers & Dreamers Travel Guide</a>. Tourism brochure featuring maps of scenic travelways.</li>
+	      <li><a href="http://web.archive.org/web/20120211012351/http://the506.com:80/roads/NS/">Nova Scotia Roads</a>. Hobbyist site by J. P. Kirby covering the provincial highways of Nova Scotia.</li>
+<li><a href="http://novascotia.ca/tran/publications/PRIMARY%20TRAFFIC%20VOLUME%20BOOK%202003-2012.pdf">Traffic Volumes Primary Highway System 2003-2012</a>. Traffic statistics from the Nova Scotia Department of Transportation and Infrastructure Renewal.</li>
+<li><a href="http://www.novascotia.ca/tran/publications/primary%20traffic%20volume%20book%202005-2014.pdf">Traffic Volumes Primary Highway System 2005-2014</a>. Traffic statistics from the Nova Scotia Department of Transportation and Infrastructure Renewal.</li>
+<li><a href="http://www.novascotia.com/flipbook/offline/download.pdf">Nova Scotia 2015 Doers & Dreamers Travel Guide</a> (Dead link). Tourism brochure featuring maps of scenic travelways.</li>
 <li><a href="http://www.novascotia-immobilien.de/media/blockhouse-country/pdf/scenic-travelways-map-nova-scotia.pdf">Scenic Travelways Locator Map</a>.</li>
             </ul>
 	  </li>
@@ -151,7 +153,7 @@ following sources of highway information.</p>
 																 <li>Prince Edward Island, CAN
 	    <ul>
 <li>Prince Edward Island Highway Map.  From the Prince Edward Island Department of Tourism.</li>
-	      <li><a href="http://www.gov.pe.ca/gis/index.php3?number=1013656">Prince Edward Island Road Atlas</a>. GIS data layers from the Government of Prince Edward Island.</li>
+	      <li><a href="http://www.gov.pe.ca/gis/index.php3?number=1013656">Prince Edward Island Road Atlas</a> (Dead link). GIS data layers from the Government of Prince Edward Island.</li>
             </ul>
 	  </li>
 																 <li>Quebec, CAN
@@ -222,7 +224,85 @@ following sources of highway information.</p>
 	  <li>Germany
 	    <ul>
 	      <li><a href="http://www.autobahnatlas-online.de/index_e.html">Autobahn-Atlas</a>. Hobbyist site by Patrick Scholl covering the detailed routings and plans for German motorways.</li>
-	      <li><a href="http://www.bmvi.de//DE/VerkehrUndMobilitaet/Verkehrstraeger/Strasse/strasse_node">Road Construction</a>. German motorway construction plans and maps from the Federal Minsitry of Transport, Building and Urban Development.</li>	    
+	      <li><a href="http://www.bmvi.de/DE/Themen/Mobilitaet/Infrastrukturplanung-Investitionen/Bundesverkehrswegeplan-2030/bundesverkehrswegeplan-2030.html">Road Construction</a>. German motorway construction plans and maps from the Federal Minsitry of Transport, Building and Urban Development.</li>	    
+	      <li><a href="http://bast.opus.hbz-nrw.de/volltexte/2016/1755/pdf/V273_AVERZ_Internet_PDF.pdf">Autobahn directory</a>. List of German federal motorways (2016 version)</li>
+	      <li><a href="http://www.mauttabelle.de/">Mauttabelle</a>. List of tolled roads (frequently updated motorway list)</li>
+	      <li><a href="http://www.bast.de/DE/Verkehrstechnik/Fachthemen/v1-beverz/v1-berverz.html">Bundesstraßen directory</a>. List of German federal non-motorway roads (2009 version)</li>
+	      <li>Baden-Württemberg
+	        <ul>
+	          <li><a href="http://www.svz-bw.de/verkehrszaehlung.html">Traffic monitoring</a>. Road map.</li>
+	        </ul>
+	      </li>
+	      <li>Bavaria
+	        <ul>
+	          <li><a href="https://www.baysis.bayern.de/webgis/synserver?project=webgis">BAYSIS road map</a>. Road information system.</li>
+	        </ul>
+	      </li>
+	      <li>Berlin
+	        <ul>
+	          <li><a href="http://fbinter.stadt-berlin.de/fb/index.jsp?loginkey=showMap&mapId=k_vms_detailnetz_wms_spatial@senstadt">Detail net</a>. Road map.</li>
+	        </ul>
+	      </li>
+	      <li>Brandenburg
+	        <ul>
+	          <li><a href="http://isk.geobasis-bb.de/strassennetz/basiskarte.html">Brandenburg viewer</a>. Road map.</li>
+	        </ul>
+	      </li>
+	      <li>Hamburg
+	        <ul>
+	          <li><a href="http://www.hamburg.de/bwvi/start-hauptverkehrsstrassennetz/">HVS</a>. Road map.</li>
+	        </ul>
+	      </li>
+	      <li>Hesse
+	        <ul>
+	          <li><a href="https://mobil.hessen.de/%C3%BCber-uns/downloads-formulare/netzknotenkarten-hessen">Net node maps</a>. </li>
+	        </ul>
+	      </li>
+	      <li>Lower Saxony
+	        <ul>
+	          <li><a href="http://www.nwsib-niedersachsen.de/">Road map</a>. Road information database.</li>
+	        </ul>
+	      </li>
+	      <li>Mecklenburg-Western Pomerania
+	        <ul>
+	          <li><a href="https://www.gaia-mv.de/gaia/gaia.php">GAIA-MV</a>. Road map.</li>
+	        </ul>
+	      </li>
+	      <li>North Rhine-Westphalia
+	        <ul>
+	          <li><a href="http://www.nwsib-online.nrw.de/">Road map</a>. Road information database.</li>
+	        </ul>
+	      </li>
+	      <li>Rhineland-Palatinate
+	        <ul>
+	          <li><a href="https://lbm.rlp.de/de/service/informationsmaterial/strassenkarte-rheinland-pfalz/">Road map</a>. </li>
+	        </ul>
+	      </li>
+	      <li>Saarland
+	        <ul>
+	          <li><a href="http://geoportal.saarland.de/mapbender/geoportal/mod_index.php">Geo portal</a>.  Road map.</li>
+	        </ul>
+	      </li>
+	      <li>Saxony
+	        <ul>
+	          <li><a href="http://geoportal.sachsen.de/cps/karte.html?showmap=true">Geo portal "Sachsenatlas"</a>.  Road map.</li>
+	        </ul>
+	      </li>
+	      <li>Saxony-Anhalt
+	        <ul>
+	          <li><a href="http://www.lvermgeo.sachsen-anhalt.de/de/geoservice/viewer/main2.htm">Sachsen-Anhalt viewer</a>.  Road map.</li>
+	        </ul>
+	      </li>
+	      <li>Schleswig-Holstein
+	        <ul>
+	          <li><a href="http://danord.gdi-sh.de/viewer/resources/apps/Anonym/index.html">Digital Atlas</a>.  Road map.</li>
+	        </ul>
+	      </li>
+	      <li>Thuringia
+	        <ul>
+	          <li><a href="http://www.thueringen.de/th9/tlbv/service/strassenkarte/">Road map</a>. </li>
+	        </ul>
+	      </li>
 	    </ul>
 	  </li>
 	  <li>Greece
@@ -237,6 +317,11 @@ following sources of highway information.</p>
 	    <ul>
 	      <li><a href="http://www.nif.hu/">National Infrastructure Development Corporation</a>. Official site of the motorway/expressway network in Hungary, with information about construction works.</li>
 	      <li><a href="http://www.motorway.hu/autopalyak">Road Network</a>. Traffic conditions and maps of Hungary's motorways from the State Motorway Management Company.</li>
+	    </ul>
+	  </li>
+	  <li>Iceland
+	    <ul>
+	      <li><a href="http://vegasja.vegagerdin.is/eng/#">Vegagerdin Map</a>. Official map from Vegagerdin, Iceland's national department of transportation. </li>
 	    </ul>
 	  </li>
 	  <li>Ireland
@@ -419,6 +504,7 @@ following sources of highway information.</p>
 	  <li>Arkansas, USA
 	    <ul>
 	    <li><a href="http://www.arkansashighways.com/maps.aspx">Arkansas highway maps</a>. Online road maps from the Arkansas State Highway and Transportation Department.</li>
+	    <li><a href="https://gis.arkansas.gov/data/">Arkansas GIS  Office Data</a>. Various shapefiles covering transportation infrastructure and county and civil boundaries.</li>
 	    </ul>
 	  </li>
 	  <li>Arizona, USA
@@ -449,11 +535,13 @@ following sources of highway information.</p>
 	  <li>Connecticut, USA
 	    <ul>
 	    <li><a href="http://kurumi.com/roads/ct/">Connecticut Roads</a>. Hobbyist site by Scott Oglesby covering highways in Connecticut.</li>
+	    <li><a href="http://www.ct.gov/dot/maps">ConnDOT: Maps</a>. Transportation Related Mapping from the Connecticut Department of Transportation.</li>
 	    </ul>
 	  </li>
 	  <li>Delaware, USA
 	    <ul>
               <li>Official Transportation Map. Road map from the Delaware Department of Transportation.</li>
+	      <li><a href="https://www.deldot.gov/Publications/reports/gis/index.shtml">Road Network Files</a>. Shapefiles from the Delaware Department of Transportation.</li>
  	    </ul>
 	  </li>
 <!--	  <li>District of Columbia, USA
@@ -481,7 +569,7 @@ following sources of highway information.</p>
 	  </li>
 	  <li>Idaho, USA
 	    <ul>
-	    <li><a href="http://itd.idaho.gov/planning/milepointlog/mplog/index.html">Idaho Milepoint Log</a>. Official route log from the Idaho Transportation Department.</li>
+	    <li><a href="http://itd.idaho.gov/milepointlog/">Idaho Milepoint Log</a>. Official route log from the Idaho Transportation Department.</li>
 	    </ul>
 	  </li>
 	  <li>Illinois, USA
@@ -531,8 +619,9 @@ following sources of highway information.</p>
 	  </li>
 	  <li>Massachussetts, USA
 	    <ul>
-	    <li><a href="http://www.massdot.state.ma.us/highway/onlinemap.aspx">Official Massachusetts Transporation Map</a>. Official Massachusetts Transportation Map.</li>
-	    <li><a href="http://www.eot.state.ma.us/default.asp?pgid=content/plan02&amp;sid=about">MassDOT Road Inventory Shapefiles</a>. Official Massachusetts Department of Transportation GIS data for highway routings.</li>
+	    <li><a href="http://www.massdot.state.ma.us/highway/onlinemap.aspx">Official Massachusetts Transporation Map</a> (Dead link). Official Massachusetts Transportation Map.</li>
+	    <li><a href="http://www.eot.state.ma.us/default.asp?pgid=content/plan02&amp;sid=about">MassDOT Road Inventory Shapefiles</a> (Dead link). Official Massachusetts Department of Transportation GIS data for highway routings.</li>
+	    <li><a href="http://www.mass.gov/anf/research-and-tech/it-serv-and-support/application-serv/office-of-geographic-information-massgis/datalayers/eotroads.html">MassGIS Data - MassDOT Roads </a>. Official state-maintained shapefiles, representing all public and many private roadways in Massachusetts.</li>
 	    </ul>
 	  </li>
 	  <li>Michigan, USA
@@ -566,8 +655,8 @@ following sources of highway information.</p>
 	  </li>
 	  <li>Nebraska, USA
 	    <ul>
-	    <li><a href="http://www.nebraskatransportation.org/docs/logbook.pdf">Nebraska Highway Reference Log Book</a>. Highway inventory from the Nebraska Department of Roads.</li>
-<li><a href="http://www.nebraskatransportation.org/maps/">NDOR Map Library</a>. Official maps from the Nebraska Department of Roads.</li>
+	    <li><a href="http://www.nebraskatransportation.org/docs/logbook.pdf">Nebraska Highway Reference Log Book</a> (Dead link). Highway inventory from the Nebraska Department of Roads.</li>
+<li><a href="http://dot.nebraska.gov/travel/map-library/">NDOR Map Library</a>. Official maps from the Nebraska Department of Transportation.</li>
 	    <li><a href="http://nebraskaroads.com/">Nebraska Roads</a>. Hobbyist site by Jesse Whidden covering highways in Nebraska.</li>
 	    </ul>
 	  </li>
@@ -585,6 +674,8 @@ following sources of highway information.</p>
 	    <ul>
 <li><a href="http://www.state.nj.us/transportation/gis/map.shtm">State and County Maps</a>. Official highway maps from the New Jersey Department of Transportation.</li>
 <li><a href="http://www.state.nj.us/transportation/refdata/sldiag/">Straight Line Diagrams</a>. Official highway log from the New Jersey Department of Transportation.</li>
+<li><a href="http://www.nj.gov/transportation/gis/data.shtm">NJDOT Geographic Information Systems Maps</a>. NJ Roadway Network shapefiles.</li>
+<li><a href="http://njogis-newjersey.opendata.arcgis.com/datasets/new-jersey-road-centerlines">New Jersey Road Centerlines</a>. Shapefiles from New Jersey Office of GIS.</li>
 	    </ul>
 	  </li>
   <li>New Mexico, USA
@@ -598,7 +689,8 @@ following sources of highway information.</p>
 	  <li>New York, USA
 	    <ul>
 	    <li><a href="https://www.dot.ny.gov/divisions/engineering/technical-services/highway-data-services/traffic-data">NYSDOT Traffic Data Reports</a>. Official traffic data from New York State Department of Transportation.</li>
-	    <li><a href="https://www.nysdot.gov/divisions/operating/oom/transportation-systems/repository/2009%20tour-bk.pdf">NYSDOT Touring Routes</a>. Official route listings from New York State Department of Transportation.</li>
+	    <li><a href="https://www.nysdot.gov/divisions/operating/oom/transportation-systems/repository/2009%20tour-bk.pdf">NYSDOT Touring Routes (2009 edition)</a>. Official route listings from New York State Department of Transportation.</li>
+	    <li><a href="https://www.dot.ny.gov/divisions/operating/oom/transportation-systems/repository/2017%20tour-bk.pdf">NYSDOT Touring Routes (2017 edition)</a>. Official route listings from New York State Department of Transportation.</li>
 	    <li><a href="http://gis3.dot.ny.gov/html5viewer/?viewer=tdv">NYS Traffic Data Viewer</a>. Interactive map and viewer for New York State Department of Transportation's highway data.</li>
 	    <li><a href="https://gis.ny.gov/gisdata/inventories/member.cfm?organizationID=539">NYS GIS Clearinghouse</a>. NYS Dept. of Transportation (DOT) Data Sets.</li>
 	    </ul>
@@ -621,14 +713,14 @@ following sources of highway information.</p>
 	    <ul>
 	    <li>Unofficial Ohio State Highways. John Simpson's directory in development of Ohio highways.</li>
 	    <li><a href="https://www.dot.state.oh.us/maps/Pages/TransMap15.aspx">Ohio Official Highway Map</a>. On-line Ohio state highway map.</li>
-	    <li><a href="https://www.dot.state.oh.us/Divisions/Planning/TechServ/TIM/Pages/Straight-Line-Diagrams.aspx">OHDO Straight Line Diagrams</a>. Comprehensive directory of straight line diagrams of Ohio highways.</li>
+	    <li><a href="https://www.dot.state.oh.us/Divisions/Planning/TechServ/TIM/Pages/Straight-Line-Diagrams.aspx">ODOT Straight Line Diagrams</a>. Comprehensive directory of straight line diagrams of Ohio highways.</li>
 	    </ul>
 	  </li>
 	  <li>Oklahoma, USA
 	    <ul>
 	    <li><a href="http://www.okladot.state.ok.us/hqdiv/p-r-div/maps/control-maps/index.htm">Current Control Section Maps</a>. County maps from the Oklahoma Department of Transportation.</li>
 <li><a href="http://www.okladot.state.ok.us/maps/">Oklahoma Maps Online</a>. From the Oklahoma Department of Transportation.</li>
-	    <li><a href="http://192.149.244.31/griplite/index.htm">GripLite</a>. Online maps from the Oklahoma Department of Transportation.</li>
+	    <li><a href="http://192.149.244.31/griplite/index.htm">GripLite</a> (Dead link). Online maps from the Oklahoma Department of Transportation.</li>
 	    <li><a href="http://www.okladot.state.ok.us/hqdiv/p-r-div/maps/statemap/index.htm">Oklahoma State Highway Map</a>. Official map from the Oklahoma Department of Transportation.</li>
 	    </ul>
 	  </li>
@@ -638,7 +730,7 @@ following sources of highway information.</p>
 	  </li> -->
 	  <li>Pennsylvania, USA
 	    <ul>
-	    <li><a href="http://www.dot.state.pa.us/internet/Bureaus/pdPlanRes.nsf/infoBPRCartoCountyType10">PennDOT County Maps</a>. Official county highway maps of Pennsylvania, United States.</li>
+	    <li><a href="http://www.penndot.gov/ProjectAndPrograms/Planning/Maps/Pages/default.aspx">PennDOT Maps</a>. Official highway maps of Pennsylvania, United States.</li>
 	    </ul>
 	  </li>
 <!--	  <li>Puerto Rico, USA
@@ -647,14 +739,16 @@ following sources of highway information.</p>
 	  </li> -->
 	  <li>Rhode Island, USA
 	    <ul>
-	    <li><a href="http://www.dot.state.ri.us/engineering/gis/maps.asp">GIS Maps</a>. PDF maps from the Rhode Island Department of Transportation.</li>
-	    <li><a href="http://www.usroute1.net/">USRoute1.Net</a>. Hobbyist site by Shawn De Cesari covering highways in Rhode Island.</li>
+	    <li><a href="http://www.dot.ri.gov/about/maproom/index.php">RIDOT Map Room</a>. PDF maps from the Rhode Island Department of Transportation.</li>
+	    <li><a href="http://www.usroute1.net/">USRoute1.Net</a> (Dead link). Hobbyist site by Shawn De Cesari covering highways in Rhode Island.</li>
 <li><a href="http://www.edc.uri.edu/rigis/data/data.aspx?ISO=transportation">Transportation Networks</a>. GIS shapefiles from Rhode Island Geographic Information System.</li>
 	    </ul>
 	  </li>
 	  <li>South Carolina, USA
 	    <ul>
-<li><a href="http://dbw.scdot.org/GISMapping/default.aspx">GIS/Mapping SCDOT</a>. Official GIS data from the South Carolina Department of Transportation.</li>
+	      <li><a href="http://dbw.scdot.org/GISMapping/default.aspx">GIS/Mapping SCDOT</a>. Official GIS data from the South Carolina Department of Transportation.</li>
+	      <li><a href="http://info.scdot.org/sites/GIS/SitePages/default.aspx">SC Maps</a>.  Official maps from the South Carolina Department of Transportation.</li>
+	      <li><a href="http://www.vahighways.com/scannex/route-log/index.htm">South Carolina Highway Annex</a>.</li>
 	    </ul>
 	  </li>
 	  <li>South Dakota, USA
@@ -665,14 +759,15 @@ following sources of highway information.</p>
 	  </li>
 	  <li>Tennessee, USA
 	    <ul>
-<li><a href="http://www.tdot.state.tn.us/Maps/county/default.htm">http://www.tdot.state.tn.us/Maps/county/default.htm</a>. Tennessee County Maps.</li>
+<li><a href="http://www.tn.gov/tdot/section/maps">TDOT Maps. Official Tennessee State and County Maps.</a></li>
 	    </ul>
 	  </li>
 	  <li>Texas, USA
 	    <ul>
-<li><a href="http://www.dot.state.tx.us/tpp/search/query.htm">Texas Highway Designation Files</a>. From the TXDOT Transportation Planning and Programming Division.</li>
+<li><a href="http://www.dot.state.tx.us/tpp/search/query.htm">Texas Highway Designation Files</a>. From the TxDOT Transportation Planning and Programming Division.</li>
 <li><a href="http://www.txdot.gov/travel/county_grid_search.htm">County Grid Map Search</a>. Grid maps from the Texas Department of Transportation, organized by county.</li>
 <li><a href="http://www.txdot.gov/travel/planning_map.htm">Statewide Planning Map</a>. From the Texas Department of Transportation.</li>
+<li><a href="https://tnris.org/data-catalog/entry/txdot-roadways/">TxDOT Roadways</a>. Shapefiles maintained by TxDOT Transportation Planning and Programming Division.</li>
 	    </ul>
 	  </li> 
 <!--	  <li>Utah, USA
@@ -688,7 +783,9 @@ following sources of highway information.</p>
 	  </li>
 	  <li>Virginia, USA
 	    <ul>
-<li><a href="http://www.virginiadot.org/info/ct-TrafficCounts.asp">Virginia Traffic Data</a>. Official traffic and highway data from the Virginia Department of Transportation.</li>
+	      <li><a href="http://www.virginiadot.org/info/ct-TrafficCounts.asp">Virginia Traffic Data</a>. Official traffic and highway data from the Virginia Department of Transportation.</li>
+	      <li><a href="http://www.virginiadot.org/travel/maps-default.asp">Virginia DOT Maps</a>.  Official highway maps from the Virginia Department of Transportation</li>
+	      <li><a href="http://www.vahighways.com">Virginia Highways Page</a>.</li>
 	    </ul>
 	  </li>
 	  <li>Washington, USA
@@ -768,6 +865,8 @@ following sources of highway information.</p>
 
   <ul>
   <li>Eric Bryant (yakra)<br> </li>
+  <li>Anthony Costanzo (duke87)<br> </li>
+  <li>Evin Fairchild (compdude) </li>
   <li>Dave Filpus (dfilpus)<br>
           <a href="http://roadgeek.filpus.org/">Filpus Roadgeek</a> </li>
   <li>Adam Froehlig (froggie)<br>
@@ -778,6 +877,7 @@ following sources of highway information.</p>
         <a href="http://rickmastfan67.blogspot.com/">Rickmastfan67 Blog</a> </li>
   <li>Jeff Morrison (jeffm)<br>
         <a href="http://www.angelfire.com/ia/jdmorrison/ends/iaends.html">Iowa Highway Ends</a> </li>
+  <li>Mike Roberson (mapmikey)</li>
   <li>Dave S (mapcat)</li>
   <li>Christopher Steig (Bickendan)</li>
   <li>Jim Teresco (terescoj), Primary Back End Development, Developed highway data for New York, Massachusetts, and New Mexico<br>

@@ -196,7 +196,10 @@ SQL;
             $res = tmdb_query($sql_command);
             $row = tm_fetch_user_row_with_rank($res, 'clinchedMileage');
             $res->free();
-	    $percentage = $row['clinchedMileage'] / $system_mileage * 100;
+	    $percentage = 0;
+	    if ($system_mileage != 0) {
+  	        $percentage = $row['clinchedMileage'] / $system_mileage * 100;
+	    }
             $link = "window.open('/shields/clinched.php?u=" . $tmuser . "&amp;sys=" . $system . "')";
             echo "<tr style=\"background-color:#EEEEFF\"><td>Distance Traveled</td><td>".tm_convert_distance($row['clinchedMileage'])." of ".tm_convert_distance($system_mileage)." ".$tmunits." (".sprintf('%0.2f',$percentage)."%) Rank: {$row['rank']}</td></tr>";
 
@@ -327,7 +330,7 @@ HTML;
                 echo "<td>" . $row['city'] . "</td>";
                 echo "<td>" . tm_convert_distance($row['clinchedMileage']) . "</td>";
                 echo "<td>" . tm_convert_distance($row['totalMileage']) . "</td>";
-                echo "<td>" . $row['percentage'] . "%</td></tr>";
+                echo "<td>" . $row['percentage'] . "%</td></tr>\n";
             }
             $res->free();
             ?>
@@ -340,5 +343,5 @@ HTML;
 <?php
     $tmdb->close();
 ?>
-<script type="application/javascript" src="../api/waypoints.js.php?<?php echo $_SERVER['QUERY_STRING']?>"></script>
+<script type="application/javascript" src="../lib/waypoints.js.php?<?php echo $_SERVER['QUERY_STRING']?>"></script>
 </html>

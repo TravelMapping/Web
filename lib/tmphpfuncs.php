@@ -42,7 +42,7 @@ $tmdbhost = chop(fgets($tmconffile));
 $gmaps_api_key = chop(fgets($tmconffile));
 fclose($tmconffile);
 
-if (array_key_exists("dbname", $_GET)) {
+if (array_key_exists("dbname", $_GET) && ctype_alpha($_GET['dbname'])) {
     $tmdbname = $_GET['dbname'];
 }
 
@@ -381,6 +381,36 @@ function tm_convert_distance($mileage) {
     global $tmunits;
     global $tm_supported_units;
     return number_format($mileage * $tm_supported_units[$tmunits], 2, '.', '');
+}
+
+// convert to the currently-selected units, always using commas, no
+// fractional part
+function tm_convert_distance_wholenum($mileage) {
+
+    global $tmunits;
+    global $tm_supported_units;
+    return number_format($mileage * $tm_supported_units[$tmunits], 0, '.', ',');
+}
+
+// validate a string as a possible "root": must be letters, followed by
+// a period, followed by some number of letters and numbers.  No other
+// characters allowed, and no longer than 32 total characters in length.
+function tm_validate_root($root) {
+
+    if (strlen($root) > 32) {
+        return "toolong.root";
+    }
+    $array = explode('.', $root);
+    if (count($array) != 2) {
+       return "noregion.root";
+    }
+    if (!ctype_alpha($array[0])) {
+       return "badregion.root";
+    }
+    if (!ctype_alnum($array[1])) {
+       return "badroute.root";
+    }
+    return $root;
 }
 
 // functions from http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php

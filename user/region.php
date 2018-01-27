@@ -346,22 +346,19 @@ SQL;
         <tbody>
         <?php
         $sql_command = <<<SQL
-          SELECT
-            sys.systemName,
-            sys.tier,
-            sys.level AS status,
-            sys.fullName,
-            COALESCE(ROUND(SUM(cr.mileage), 2), 0) AS clinchedMileage,
-            COALESCE(ROUND(SUM(r.mileage), 2), 0) AS totalMileage,
-            COALESCE(ROUND(SUM(cr.mileage) / SUM(r.mileage) * 100, 2), 0) AS percentage
-          FROM systems as sys
-          INNER JOIN routes AS r
-            ON r.systemName = sys.systemName
-          LEFT JOIN clinchedRoutes AS cr
-            ON cr.route = r.root AND cr.traveler = '{$tmuser}'
-          WHERE r.region = '{$region}'
-          GROUP BY r.systemName
-          ORDER BY sys.tier, sys.systemName;
+	SELECT
+	  systems.fullName,
+	  miByRegion.systemName,
+          ROUND(IFNULL(clinchedByRegion.mileage, 0), 2) as clinchedMileage,
+          ROUND(miByRegion.mileage, 2) as totalMileage,
+          ROUND(IFNULL(clinchedByRegion.mileage, 0) / miByRegion.mileage * 100, 2) as percentage
+        FROM systemMileageByRegion as miByRegion
+        LEFT JOIN clinchedSystemMileageByRegion as clinchedByRegion                         ON clinchedByRegion.systemName = miByRegion.systemName AND
+	       clinchedByRegion.region = '{$region}' AND
+	       clinchedByRegion.traveler='{$tmuser}'
+	       LEFT JOIN systems ON miByRegion.systemName = systems.systemName
+	       WHERE miByRegion.region = '{$region}'
+         ORDER BY percentage DESC;
 SQL;
 
         $res = tmdb_query($sql_command);
@@ -484,5 +481,5 @@ SQL;
     $activePreviewDrivenRes->free();
     $tmdb->close();
 ?>
-<script type="application/javascript" src="../api/waypoints.js.php?<?php echo $_SERVER['QUERY_STRING']?>"></script>
+<script type="application/javascript" src="../lib/waypoints.js.php?<?php echo $_SERVER['QUERY_STRING']?>"></script>
 </html>

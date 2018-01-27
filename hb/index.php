@@ -26,7 +26,7 @@
             width: 100%;
             overflow: hidden;
             text-align: center;
-            font-size: 30px;
+            font-size: 20px;
             font-family: "Times New Roman", serif;
             font-style: bold;
         }
@@ -43,30 +43,31 @@
         #pointbox {
             position: fixed;
             left: 0px;
-            top: 70px;
-            right: 400px;
+            top: 30px;
+            right: 275px;
             bottom: 0px;
-            width: 400px;
+            width: 275px;
             overflow: auto;
+            font-size: 18px;
         }
 
         #controlbox {
             position: fixed;
-            top: 65px;
-            bottom: 100px;
+            top: 30px;
+            bottom: 60px;
             height: 100%;
-            left: 400px;
+            left: 300px;
             right: 0px;
             overflow: auto;
             padding: 5px;
-            font-size: 20px;
+            font-size: 18px;
         }
 
         #map {
             position: absolute;
-            top: 100px;
+            top: 70px;
             bottom: 0px;
-            left: 400px;
+            left: 275px;
             right: 0px;
             overflow: hidden;
         }
@@ -87,7 +88,7 @@
         }
 
         #pointbox table {
-            width: 75%;
+            width: 95%;
             margin-bottom: 15px;
         }
 
@@ -122,7 +123,7 @@
 
     // if a specific route is specified, that's what we'll view
     if (array_key_exists("r", $_GET)) {
-        $routeparam = $_GET['r'];
+        $routeparam = tm_validate_root($_GET['r']);
     } else {
         $routeparam = "";
     }
@@ -148,7 +149,7 @@
     </script>
     <title><?php
         if ($routeparam != "") {
-            $sql_command = "SELECT * FROM routes WHERE root = '" . $_GET['r'] . "'";
+            $sql_command = "SELECT * FROM routes WHERE root = '" . $routeparam . "'";
             $res = tmdb_query($sql_command);
             $routeInfo = $res->fetch_array();
             $res->free();
@@ -236,22 +237,13 @@ JS;
 if ($routeparam != "") {
     require $_SERVER['DOCUMENT_ROOT'] . "/shields/shieldgen.php";
     echo "<div id=\"pointbox\">\n";
-    echo "<span class='bigshield'>" . generate($_GET['r'], true) . "</span>";
-    echo "<span><a href='/user/mapview.php?rte={$routeInfo['route']}'>View Associated Routes</a></span>";
-
-    echo "<span>";
-    $sql_command = "SELECT region, route, banner, city FROM routes WHERE root = '" .$routeparam. "';";
-    $res = tmdb_query($sql_command);
-    $row = $res->fetch_assoc();
-    echo $row['region'] . " " . $row['route'];
-    if (strlen($row['banner']) > 0) {
-        echo " " . $row['banner'];
+    echo "<span class='bigshield'>" . generate($routeparam, true) . "</span>\n";
+    echo "<span>" . $routeInfo['banner'];
+    if (strlen($routeInfo['city']) > 0) {
+        echo " (" . $routeInfo['city'] . ")";
     }
-    if (strlen($row['city']) > 0) {
-        echo " (" . $row['city'] . ")";
-    }
-    $res->free();
-    echo "</span>";
+    echo "</span>\n";
+    echo "<span>.list name: <span style='font-family:courier'>" . $routeInfo['region'] . " " . $routeInfo['route'] . $routeInfo['banner'] . $routeInfo['abbrev'] . "</span></span>\n";
 
     echo "<table id='routeInfo' class=\"gratable\"><thead><tr><th colspan='2'>Route Stats</th></tr></thead><tbody>";
     $sql_command = <<<SQL
@@ -274,20 +266,29 @@ if ($routeparam != "") {
         WHERE cr.route = '$routeparam'
 SQL;
     $row = tmdb_query($sql_command) -> fetch_assoc();
+    $totalMileage = $row['totalMileage'];
     $totalLength = tm_convert_distance($row['totalMileage']) . " " . $tmunits;
     $averageTraveled = tm_convert_distance($row['avgMileage']). " " . $tmunits;
     echo <<<HTML
     <tr><td class="important">Total Length</td><td>{$totalLength}</td></tr>
-    <tr><td>LIST Name</td><td>{$routeInfo['region']} {$routeInfo['route']}{$routeInfo['banner']}{$routeInfo['abbrev']}</td></tr> 
     <tr title="{$row['drivers']}"><td>Total Drivers</td><td>{$row['numDrivers']} ({$row['drivenPct']} %)</td>
     <tr class="link" title="{$row['clinchers']}"><td rowspan="2">Total Clinched</td><td>{$row['numClinched']} ({$row['clinchedPct']} %)</td>
     <tr class="link" title="{$row['clinchers']}"><td>{$row['drivenClinchedPct']} % of drivers</td>
-    s<tr><td>Average Traveled</td><td>{$averageTraveled} ({$row['mileagePct']} %)</td></tr>
-    </tbody></table>
+    <tr><td>Average Traveled</td><td>{$averageTraveled} ({$row['mileagePct']} %)</td></tr>
 HTML;
-    echo "<table id='waypoints' class=\"gratable\"><thead><tr><th colspan=\"3\">Waypoints</th></tr><tr><th>Coordinates</th><th>Name</th><th title='Percent of people who have driven this route who have driven though this point.'>%</th></tr></thead><tbody>\n";
+    if ($tmuser != "null") {
+      $sql_command = "SELECT mileage FROM clinchedRoutes where traveler='" . $tmuser . "' AND route='" . $routeparam . "'";
+      $row = tmdb_query($sql_command) -> fetch_assoc();
+      $userTraveled = tm_convert_distance($row['mileage']) . " " . $tmunits;
+      $userMileagePct = round(100 * round($row['mileage'],2) / $totalMileage, 2);
+    echo <<<HTML
+       <tr><td>{$tmuser} Traveled</td><td>{$userTraveled} ({$userMileagePct} %)</td></tr>
+HTML;
+    }
+    echo"</tbody></table>\n";
+    echo "<table id='waypoints' class=\"gratable\"><thead><tr><th colspan=\"2\">Waypoints</th></tr><tr><th>Name</th><th title='Percent of people who have driven this route who have driven the segment starting at this point.'>%</th></tr></thead><tbody>\n";
     $sql_command = <<<SQL
-        SELECT pointName, latitude, longitude, driverPercent
+        SELECT pointName, latitude, longitude, driverPercent, segmentId
         FROM waypoints
         LEFT JOIN (
             SELECT
@@ -296,7 +297,8 @@ HTML;
                 SELECT COUNT(DISTINCT traveler) FROM clinchedRoutes WHERE clinchedRoutes.route = '$routeparam'
               ) as numDrivers,
               count(*),
-              ROUND(count(*) / @num_drivers * 100, 2) as driverPercent
+              ROUND(count(*) / @num_drivers * 100, 2) as driverPercent,
+              clinched.segmentId
             FROM segments
             LEFT JOIN clinched ON segments.segmentId = clinched.segmentId
             LEFT JOIN waypoints ON segments.waypoint1 = waypoints.pointId
@@ -310,9 +312,15 @@ SQL;
     while ($row = $res->fetch_assoc()) {
         # only visible points should be in this table
         if (!startsWith($row['pointName'], "+")) {
+	    if (tm_count_rows("clinched", "WHERE traveler='" .$tmuser."' AND segmentId='".$row['segmentId']."'") > 0) {
+		$color1 = "rgb(255,167,167)";
+	    }
+	    else {	      
+		$color1 = "rgb(255,255,255)";
+	    }
             $colorFactor = $row['driverPercent'] / 100;
             $colors = [255, 255 - round($colorFactor * 128), 255 - round($colorFactor * 128)];
-            echo "<tr onClick='javascript:LabelClick(" . $waypointnum . ",\"" . $row['pointName'] . "\"," . $row['latitude'] . "," . $row['longitude'] . ",0);'><td>(" . $row['latitude'] . "," . $row['longitude'] . ")</td><td class='link'>" . $row['pointName'] . "</td><td style='background-color: rgb({$colors[0]},{$colors[1]},{$colors[2]})'>{$row['driverPercent']}</td></tr>\n";
+            echo "<tr onClick='javascript:labelClick(" . $waypointnum . ",\"" . $row['pointName'] . "\"," . $row['latitude'] . "," . $row['longitude'] . ",0);'><td class='link' style='background-color: ".$color1."'>" . $row['pointName'] . "</td><td style='background-color: rgb({$colors[0]},{$colors[1]},{$colors[2]})'>{$row['driverPercent']}</td></tr>\n";
         }
         $waypointnum = $waypointnum + 1;
     }
@@ -325,6 +333,8 @@ SQL;
 ENDA;
     if ($routeparam != "") {
         echo "<table><tbody><tr><td>";
+    	echo "<a href='/user/mapview.php?rte={$routeInfo['route']}'>View Associated Routes</a>";
+        echo "</td><td>";
         echo "<input id=\"showMarkers\" type=\"checkbox\" name=\"Show Markers\" onclick=\"showMarkersClicked()\" checked=\"false\" />&nbsp;Show Markers&nbsp;";
         echo "</td><td>";
         echo "<form id=\"userForm\" action=\"/hb/index.php\">";
@@ -345,7 +355,7 @@ ENDA;
 ENDB;
 } elseif (($region != "") or ($system != "")) {  // we have no r=, so we will show a list of all
     $sql_command = "SELECT * FROM routes LEFT JOIN systems ON systems.systemName = routes.systemName";
-    //check for query string parameter for system and region filters
+    // check for query string parameter for system and region filters
     if ($system != "") {
         $sql_command .= " WHERE routes.systemName = '" .$system. "'";
         if ($region != "") {
@@ -399,5 +409,5 @@ HTML;
 $tmdb->close();
 ?>
 </body>
-<script type="application/javascript" src="../api/waypoints.js.php?<?php echo "r=$routeparam&u=$tmuser";?>"></script>
+<script type="application/javascript" src="../lib/waypoints.js.php?<?php echo "r=$routeparam&u=$tmuser";?>"></script>
 </html>

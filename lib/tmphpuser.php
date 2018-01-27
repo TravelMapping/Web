@@ -14,12 +14,16 @@
 
 // u= is the user, stored in $tmuser variable, can also come from the
 // lastuser cookie, and will be stored in that cookie when specified
+// note: must be alphanumeric (plus underscores) or is ignored
 define("TM_NO_USER", "null");
 $tmuser = TM_NO_USER;
 
 if (array_key_exists("u", $_GET)) {
-    $tmuser = $_GET['u'];
-    setcookie("lastuser", $tmuser, time() + (86400 * 30), "/");
+    $tmusertemp = str_replace("_", "", $_GET['u']);
+    if (ctype_alnum($tmusertemp)) {
+        $tmuser = $_GET['u'];
+        setcookie("lastuser", $tmuser, time() + (86400 * 30), "/");
+    }
 } else if (isset($_COOKIE['lastuser'])) {
     header("Location: ?u=" . $_COOKIE['lastuser'] . "&" . parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY)); /* Redirect browser */
     exit;
