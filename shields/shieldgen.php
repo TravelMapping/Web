@@ -76,6 +76,7 @@ function generate($r, $force_reload = false)
             break;
             
         case 'mexed':
+            $region = explode(".", $r)[0];
             //$region = strtoupper($region);
             //$region = str_replace("MEX","", $region);
             $routeNum = str_replace($region, "", $row['route']);
@@ -83,7 +84,7 @@ function generate($r, $force_reload = false)
             if (strlen($routeNum) > 2) {
                 $svg = file_get_contents("{$dir}/template_mexed_wide.svg");
             }
-            $svg = str_replace("**REGION***", $region, $svg);
+            $svg = str_replace("***REGION***", $region, $svg);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
