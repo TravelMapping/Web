@@ -78,7 +78,10 @@ function generate($r, $force_reload = false)
         case 'mexed':
             $region = explode(".", $r)[0];
             $region = strtoupper($region);
-            $region = str_replace("MEX","", $region);
+            if ($region == "MEXEMEX")
+                 $region = "EMEX";
+            else
+                 $region = str_replace("MEX","", $region);
             $routeNum = str_replace($region, "", $row['route']);
             $routeNum = str_replace("D", "", $routeNum); //handled by template
             if (strlen($routeNum) > 2) {
