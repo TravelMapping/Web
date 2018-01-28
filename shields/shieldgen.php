@@ -83,6 +83,7 @@ function generate($r, $force_reload = false)
             if (strlen($routeNum) > 2) {
                 $svg = file_get_contents("{$dir}/template_mexed_wide.svg");
             }
+            $svg = str_replace("**REGION***", $region, $svg);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
