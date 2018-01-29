@@ -44,7 +44,6 @@ $activedc = tm_count_rows("datacheckErrors", "join routes on datacheckErrors.rou
 <ul>
   <li><a href="datacheck.php">Datacheck</a> (Currently <?php echo $activedc; ?> errors in active systems)<br />
     These errors should be corrected, or reported as false positives by adding the entry from the last column to the datacheck FP list.</li>
-<li><a href="../logs/datacheck.log">Full datacheck log file</a></li>
   <li><a href="../logs/unmatchedfps.log">Datacheck false positive entries that did not correspond to any detected datacheck error</a>
     <br />
   Cleaning these are low priority tasks for the project.</li>
