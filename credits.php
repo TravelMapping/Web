@@ -133,8 +133,7 @@ following sources of highway information.</p>
 <li><a href="http://www.dot.gov.nt.ca/">Ministry of Transportation</a>. Official website of territorial Ministry of Transportation</li>
 <li><a href="https://www.justice.gov.nt.ca/en/files/legislation/public-highways/public-highways.r1.pdf">Highway Designation and Classification Regulations</a>. Official list and definitions of territorial highways</li>
 <li><a href="http://www.dot.gov.nt.ca/Highways/Highway_System">Northwest Territories Highway System</a>. Official highway map</li>
-{li><a href="http://www.dot.gov.nt.ca/Highways/Highway-Conditions">Northwest Territories Road Conditions</a>. Ministry of Transportation road conditions map, showing current route designations.</li>		    
-            </ul>
+ </ul>
 	  </li>
 																 <li>Nova Scotia, CAN
 	    <ul>
@@ -168,7 +167,7 @@ following sources of highway information.</p>
 <li><a href="http://www.highways.gov.sk.ca/">Ministry of Transportation and Infrastructure</a>. Official website of provincial Ministry of Transportation and Infrastructure</li>
 <li><a href="http://www.tourismsaskatchewan.com/~/media/files/map-face-100-dpi.pdf?la=en">Official Road Map</a>. Detailed provincial highway map, prepared by Ministry of Transportation and Infrastructure for Tourism Saskatchewan.</li>
 <li><a href="https://hotline.gov.sk.ca/map.html">Highway Hotline</a>. Ministry of Transportation and Infrastructure map, showing major routes and their current road conditions.</li>
-<li>Canada Back Roads Atlas. Paper 2008 road atlas, covering Saskatchewan and other provinces, showing detailed route information including names of intersecting roads not available online.</li>		    
+<li>Canada Back Road Atlas. Paper 2008 road atlas by MapArt, covering Saskatchewan and other provinces, showing detailed route information including names of intersecting roads not available online.</li>		    
 												</ul>
 	  </li>
 															 <li>Yukon Territory, CAN
@@ -521,7 +520,7 @@ following sources of highway information.</p>
 	    	    <li><a href="http://www.dot.ca.gov/">Caltrans website</a>. Official website of state Department of Transportation ("Caltrans").</li>
 	    <li><a href="https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=SHC&division=1.&title=&part=&chapter=2.&article=3.">California Streets and Highway Code sections 300-635</a>. Statutory definitions of state highway routes, including authorized relinquishments to local governments.</li>
 	<li>California State Highways Logs for districts 1-12 (paper only, 2002 version which is the latest available)</li>
-	<li><a href="http://www.dot.ca.gov/hq/structur/strmaint/brlog2.htm">Log of Bridges on State Highways</a>. 2015 Caltrans bridge log, including some information that had been in old paper route logs.</li>
+	<li><a href="http://www.dot.ca.gov/hq/structur/strmaint/brlog2.htm">Log of Bridges on State Highways</a>. Current Caltrans bridge log, including some information that had been in old paper route logs.</li>
 	<li><a href="http://www.dot.ca.gov/hq/traffops/engineering/calnexus/">Cal-NExUS (California Numbered Exit Uniform System)</a>. Caltrans freeway exit lists.</li>
 	<li><a href="http://www.aaroads.com/california/">AARoads California Roads and Highways guide</a>. Unofficial guide to state highway routes.</li>
 	<li><a href="http://www.dot.ca.gov/hq/tpp/corridor-mobility/index.html">Transportation Concept Reports</a>. Detailed descriptions by Caltrans districts of many of their state highway routes, including past and planned future route changes.</li>
