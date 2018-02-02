@@ -57,7 +57,7 @@ function generate($r, $force_reload = false)
             break;
             
         case 'cannst':
-            $routeNum = $row['route'];
+            $routeNum = str_replace("NS", "", $row['route']);
             if (strlen($routeNum) > 1) { //2-digit uses wide shield
                 $svg = file_get_contents("{$dir}/template_cannst_wide.svg");
             }
