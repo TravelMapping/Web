@@ -120,7 +120,6 @@ function generate($r, $force_reload = false)
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
             
-        /*
         case 'usaush':
             $routeNum = str_replace("US", "", $row['route']);
             if (strlen($routeNum) > 2) {
@@ -128,7 +127,6 @@ function generate($r, $force_reload = false)
             }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
-        */
 
         case 'usausb':
             $routeNum = str_replace("US", "", $row['route']);
