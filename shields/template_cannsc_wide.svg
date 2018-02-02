@@ -13,6 +13,6 @@
  <g transform="translate(-71.562 -375.69)">
   <rect x="72.047" y="376.18" width="600" height="300" rx="37.5" ry="37.5" fill="#fff" stroke="#000"/>
   <rect x="84.547" y="388.68" width="575" height="275" rx="25" ry="25" fill="#603311"/>
-  <text x="372.15552" y="626.1875" fill="#ffffff" font-family="&apos;Roadgeek 2014 Series C&apos;" font-size="297.62px" letter-spacing="0px" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:125%" xml:space="preserve"><tspan x="380.49609" y="626.1875" letter-spacing="16.681">***ROUTE***</tspan></text>
+  <text x="372.15552" y="626.1875" fill="#ffffff" font-family="&apos;Roadgeek 2014 Series C&apos;" font-size="297.62px" letter-spacing="0px" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:125%" xml:space="preserve"><tspan x="380.49609" y="626.1875" letter-spacing="16.681">***NUMBER***</tspan></text>
  </g>
 </svg>

@@ -56,6 +56,14 @@ function generate($r, $force_reload = false)
         case 'cantch': //do nothing
             break;
             
+        case 'cannst':
+            $routeNum = $row['route'];
+            if (strlen($routeNum) > 1) { //2-digit uses wide shield
+                $svg = file_get_contents("{$dir}/template_cannst_wide.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+            
         case 'canyt':
             $routeNum = str_replace("YT", "", $row['route']); //gets rid of the extra YT on BC ones
             if (file_exists("{$dir}/template_canyt" . $routeNum . ".svg")) {
