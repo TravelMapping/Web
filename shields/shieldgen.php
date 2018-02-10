@@ -74,6 +74,22 @@ function generate($r, $force_reload = false)
             }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
+            
+        case 'mexed':
+            $region = explode(".", $r)[0];
+            $region = strtoupper($region);
+            if ($region == "MEXEMEX")
+                 $region = "EMEX";
+            else
+                 $region = str_replace("MEX","", $region);
+            $routeNum = str_replace($region, "", $row['route']);
+            $routeNum = str_replace("D", "", $routeNum); //handled by template
+            if (strlen($routeNum) > 2) {
+                $svg = file_get_contents("{$dir}/template_mexed_wide.svg");
+            }
+            $svg = str_replace("***REGION***", $region, $svg);
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
 
         case 'usai':
         case 'usaif':
@@ -100,6 +116,14 @@ function generate($r, $force_reload = false)
             $routeNum = str_replace("US", "", $row['route']);
             if (strlen($routeNum) > 2) {
                 $svg = file_get_contents("{$dir}/template_usaus_wide.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+            
+        case 'usaush':
+            $routeNum = str_replace("US", "", $row['route']);
+            if (strlen($routeNum) > 2) {
+                $svg = file_get_contents("{$dir}/template_usaush_wide.svg");
             }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;

@@ -29,7 +29,7 @@ Most of the files below are regenerated during each site update.
 <ul>
 <li><a href="http://cmap.m-plex.com/tools/manual.php">CHM's Instruction Manual</a> (TM generally follows these rules, but we do need to develop our own manual)</li>
 <li><a href="http://cmap.m-plex.com/tools/wpteditv3/wptedit.html">CHM's WPT file Editor</a> (Goal: develop our own)</li>
-<li><a href="http://courses.teresco.org/metal/hdx/">Highway Data Explorer</a> (HDX) to view graph and near-miss data</li>
+<li><a href="http://courses.teresco.org/metal/hdx/">Highway Data Examiner</a> (HDX) to view graph and near-miss data</li>
 </ul>
 </div>
 
@@ -44,7 +44,6 @@ $activedc = tm_count_rows("datacheckErrors", "join routes on datacheckErrors.rou
 <ul>
   <li><a href="datacheck.php">Datacheck</a> (Currently <?php echo $activedc; ?> errors in active systems)<br />
     These errors should be corrected, or reported as false positives by adding the entry from the last column to the datacheck FP list.</li>
-<li><a href="../logs/datacheck.log">Full datacheck log file</a></li>
   <li><a href="../logs/unmatchedfps.log">Datacheck false positive entries that did not correspond to any detected datacheck error</a>
     <br />
   Cleaning these are low priority tasks for the project.</li>

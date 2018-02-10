@@ -266,6 +266,7 @@ if ($routeparam != "") {
         WHERE cr.route = '$routeparam'
 SQL;
     $row = tmdb_query($sql_command) -> fetch_assoc();
+    $totalMileage = $row['totalMileage'];
     $totalLength = tm_convert_distance($row['totalMileage']) . " " . $tmunits;
     $averageTraveled = tm_convert_distance($row['avgMileage']). " " . $tmunits;
     echo <<<HTML
@@ -274,11 +275,20 @@ SQL;
     <tr class="link" title="{$row['clinchers']}"><td rowspan="2">Total Clinched</td><td>{$row['numClinched']} ({$row['clinchedPct']} %)</td>
     <tr class="link" title="{$row['clinchers']}"><td>{$row['drivenClinchedPct']} % of drivers</td>
     <tr><td>Average Traveled</td><td>{$averageTraveled} ({$row['mileagePct']} %)</td></tr>
-    </tbody></table>
 HTML;
-    echo "<table id='waypoints' class=\"gratable\"><thead><tr><th colspan=\"2\">Waypoints</th></tr><tr><th>Name</th><th title='Percent of people who have driven this route who have driven though this point.'>%</th></tr></thead><tbody>\n";
+    if ($tmuser != "null") {
+      $sql_command = "SELECT mileage FROM clinchedRoutes where traveler='" . $tmuser . "' AND route='" . $routeparam . "'";
+      $row = tmdb_query($sql_command) -> fetch_assoc();
+      $userTraveled = tm_convert_distance($row['mileage']) . " " . $tmunits;
+      $userMileagePct = round(100 * round($row['mileage'],2) / $totalMileage, 2);
+    echo <<<HTML
+       <tr><td>{$tmuser} Traveled</td><td>{$userTraveled} ({$userMileagePct} %)</td></tr>
+HTML;
+    }
+    echo"</tbody></table>\n";
+    echo "<table id='waypoints' class=\"gratable\"><thead><tr><th colspan=\"2\">Waypoints</th></tr><tr><th>Name</th><th title='Percent of people who have driven this route who have driven the segment starting at this point.'>%</th></tr></thead><tbody>\n";
     $sql_command = <<<SQL
-        SELECT pointName, latitude, longitude, driverPercent
+        SELECT pointName, latitude, longitude, driverPercent, segmentId
         FROM waypoints
         LEFT JOIN (
             SELECT
@@ -287,7 +297,8 @@ HTML;
                 SELECT COUNT(DISTINCT traveler) FROM clinchedRoutes WHERE clinchedRoutes.route = '$routeparam'
               ) as numDrivers,
               count(*),
-              ROUND(count(*) / @num_drivers * 100, 2) as driverPercent
+              ROUND(count(*) / @num_drivers * 100, 2) as driverPercent,
+              clinched.segmentId
             FROM segments
             LEFT JOIN clinched ON segments.segmentId = clinched.segmentId
             LEFT JOIN waypoints ON segments.waypoint1 = waypoints.pointId
@@ -301,9 +312,15 @@ SQL;
     while ($row = $res->fetch_assoc()) {
         # only visible points should be in this table
         if (!startsWith($row['pointName'], "+")) {
+	    if (tm_count_rows("clinched", "WHERE traveler='" .$tmuser."' AND segmentId='".$row['segmentId']."'") > 0) {
+		$color1 = "rgb(255,167,167)";
+	    }
+	    else {	      
+		$color1 = "rgb(255,255,255)";
+	    }
             $colorFactor = $row['driverPercent'] / 100;
             $colors = [255, 255 - round($colorFactor * 128), 255 - round($colorFactor * 128)];
-            echo "<tr onClick='javascript:labelClick(" . $waypointnum . ",\"" . $row['pointName'] . "\"," . $row['latitude'] . "," . $row['longitude'] . ",0);'><td class='link'>" . $row['pointName'] . "</td><td style='background-color: rgb({$colors[0]},{$colors[1]},{$colors[2]})'>{$row['driverPercent']}</td></tr>\n";
+            echo "<tr onClick='javascript:labelClick(" . $waypointnum . ",\"" . $row['pointName'] . "\"," . $row['latitude'] . "," . $row['longitude'] . ",0);'><td class='link' style='background-color: ".$color1."'>" . $row['pointName'] . "</td><td style='background-color: rgb({$colors[0]},{$colors[1]},{$colors[2]})'>{$row['driverPercent']}</td></tr>\n";
         }
         $waypointnum = $waypointnum + 1;
     }
