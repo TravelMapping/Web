@@ -115,6 +115,7 @@ following sources of highway information.</p>
           <li>Manitoba, CAN
 	    <ul>
 <li><a href="http://www.gov.mb.ca/mit/map/">Highway Map</a>. From Manitoba Infrastructure and Transportation.</li>
+<li><a href="http://mli2.gov.mb.ca/roads_hwys/index.html">Provincial Highways, PR's, PTH's and Municipal Roads</a>. GIS shapefiles from Manitoba Land Initiative.</li>
             </ul>
 	  </li>
 																 <li>New Brunswick, CAN
@@ -725,6 +726,7 @@ following sources of highway information.</p>
 <li><a href="http://www.okladot.state.ok.us/maps/">Oklahoma Maps Online</a>. From the Oklahoma Department of Transportation.</li>
 	    <li><a href="http://192.149.244.31/griplite/index.htm">GripLite</a> (Dead link). Online maps from the Oklahoma Department of Transportation.</li>
 	    <li><a href="http://www.okladot.state.ok.us/hqdiv/p-r-div/maps/statemap/index.htm">Oklahoma State Highway Map</a>. Official map from the Oklahoma Department of Transportation.</li>
+	    <li><a href="http://gis-okdot.opendata.arcgis.com/datasets/ebf1f8c648ea49a2a95b90aebdaf624a_0?geometry=-97.004%2C35.356%2C-96.787%2C35.405">Control Sections</a>. GIS shapefiles from the Oklahoma Department of Transportation.</li>
 	    </ul>
 	  </li>
 <!--	  <li>Oregon, USA
