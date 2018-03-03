@@ -168,6 +168,7 @@ following sources of highway information.</p>
 <li><a href="http://www.highways.gov.sk.ca/">Ministry of Transportation and Infrastructure</a>. Official website of provincial Ministry of Transportation and Infrastructure</li>
 <li><a href="http://www.tourismsaskatchewan.com/~/media/files/map-face-100-dpi.pdf?la=en">Official Road Map</a>. Detailed provincial highway map, prepared by Ministry of Transportation and Infrastructure for Tourism Saskatchewan.</li>
 <li><a href="https://hotline.gov.sk.ca/map.html">Highway Hotline</a>. Ministry of Transportation and Infrastructure map, showing major routes and their current road conditions.</li>
+<li><a href="http://publications.gov.sk.ca/documents/18/104925-Travel%20on%20Saskatchewan%20Highways%202016%20(2).pdf">Travel on Saskatchewan Highways 2016</a>. Ministry of Transportation and Infrastructure traffic count report, including detailed list of province-maintained highways.</li>
 <li>Canada Back Road Atlas. Paper 2008 road atlas by MapArt, covering Saskatchewan and other provinces, showing detailed route information including names of intersecting roads not available online.</li>		    
 												</ul>
 	  </li>
