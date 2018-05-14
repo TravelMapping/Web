@@ -12,4 +12,12 @@ CREATE USER 'travmapadmin'@'localhost' IDENTIFIED WITH mysql_native_password BY 
 CREATE USER 'travmap'@'localhost' IDENTIFIED WITH mysql_native_password BY 'YOURPASSWORDFORTHISUSER';
 ```
 
+Next, we create the database and give these users needed permissions.
+
+```
+CREATE DATABASE TravelMapping;
+GRANT SELECT ON `TravelMapping`.* TO 'travmap'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX ON `TravelMapping`.* TO 'travmapadmin'@'localhost'
+```
+
 The files in this Web repository should be placed in a directory served by the web server.
