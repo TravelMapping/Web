@@ -41,7 +41,7 @@ Normally, the above will be run as part of the site update process but it is don
 
 ### Web server files
 
-The files in this Web repository should be placed in a directory served by the web server.  We assume /home/www/tm and a vhosts entry that Apache uses to direct a URL to use files from this location.  The updateserver.sh can help populate and later update this directory.
+The files in this Web repository should be placed in a directory served by the web server.  We assume /home/www/tm and a vhosts entry that Apache uses to direct a URL to use files from this location.  The updateserver.sh can help populate and later update this directory.  Note that the fonts directory is not updated by this script, and those files will need to be transferred separately.
 
 In addition to the files in the repository, the file lib/tm.conf needs to be created.  This file contains five lines:
 
