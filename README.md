@@ -55,4 +55,6 @@ This file needs to be readable by the web server but should not be served by the
 
 Also create a file motd in the root of the directory server.  This is the "message of the day" for TM.
 
+Finally, create a directory named cache in the shields directory.  This needs to be writable by the web server.
+
 Now test it out.  Hopefully everything will work!
