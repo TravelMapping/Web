@@ -53,3 +53,6 @@ Line 5: Google Maps API key
 
 This file needs to be readable by the web server but should not be served by the web server.  Configure Apache to ensure this.
 
+Also create a file motd in the root of the directory server.  This is the "message of the day" for TM.
+
+Now test it out.  Hopefully everything will work!
