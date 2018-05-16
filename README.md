@@ -45,11 +45,13 @@ The files in this Web repository should be placed in a directory served by the w
 
 In addition to the files in the repository, the file lib/tm.conf needs to be created.  This file contains five lines:
 
+<pre>
 Line 1: DB name (likely TravelMapping)
 Line 2: DB read-only user (likely travmap)
 Line 3: DB read-only user password
 Line 4: DB hostname (likely localhost)
 Line 5: Google Maps API key
+</pre>
 
 This file needs to be readable by the web server but should not be served by the web server.  Configure Apache to ensure this.
 
