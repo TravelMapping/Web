@@ -107,15 +107,7 @@
 	    opacity: .75;  /* also forces stacking order */
         }
     </style>
-    <script
-        src="http://maps.googleapis.com/maps/api/js?key=<?php echo $gmaps_api_key ?>&sensor=false"
-        type="text/javascript"></script>
-
-    <!-- jQuery -->
-    <script type="application/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <!-- TableSorter -->
-    <script type="application/javascript" src="/lib/jquery.tablesorter.js"></script>
-
+    <?php tm_common_js(); ?>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
     <title>Travel Mapping: Draft Map Overlay Viewer</title>
 </head>

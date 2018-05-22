@@ -37,9 +37,6 @@ $tmdbname = chop(fgets($tmconffile));
 $tmdbuser = chop(fgets($tmconffile));
 $tmdbpasswd = chop(fgets($tmconffile));
 $tmdbhost = chop(fgets($tmconffile));
-
-// Google Maps API Key
-$gmaps_api_key = chop(fgets($tmconffile));
 fclose($tmconffile);
 
 if (array_key_exists("dbname", $_GET) && ctype_alpha($_GET['dbname'])) {
@@ -411,6 +408,21 @@ function tm_validate_root($root) {
        return "badroute.root";
     }
     return $root;
+}
+
+// function to generate code to import all needed JS for Leaflet, jQuery,
+// TableSorter, etc.
+function tm_common_js() {
+
+echo <<<END
+  <link rel="stylesheet" href="/leaflet/leaflet.css" />
+  <script src="/leaflet/leaflet.js"></script>
+  <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+  <!-- jQuery -->
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript"></script>
+  <!-- TableSorter -->
+  <script src="/lib/jquery.tablesorter.min.js" type="text/javascript"></script>
+END;
 }
 
 // functions from http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php

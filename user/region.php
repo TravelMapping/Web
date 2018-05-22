@@ -98,14 +98,8 @@
 
     ?>
     <title><?php echo $regionName." - ".$tmuser; ?></title>
-    <script
-        src="http://maps.googleapis.com/maps/api/js?key=<?php echo $gmaps_api_key ?>&sensor=false"
-        type="text/javascript"></script>
+    <?php tm_common_js(); ?>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
-    <!-- jQuery -->
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript"></script>
-    <!-- TableSorter -->
-    <script src="/lib/jquery.tablesorter.min.js" type="text/javascript"></script>
 </head>
 <body 
 <?php
