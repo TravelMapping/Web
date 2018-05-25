@@ -883,7 +883,9 @@ following sources of highway information.</p>
   the <a href="https://github.com/marslan390/BeautifyMarker">extension</a>
   and map tiles from various sources as indicated on the online maps</li>
   <li>Other JavaScript libraries in use
-  include <a href="https://jquery.com/">jQuery</a>.
+    include <a href="https://jquery.com/">jQuery</a>.</li>
+  <li>The shield generator
+  uses <a href="https://github.com/sammdot/roadgeek-fonts/releases">Roadgeek Fonts</a>.</li>
 </ul>
 
 <p class="heading"><a name="contributors">Project Contributors</a></p>
