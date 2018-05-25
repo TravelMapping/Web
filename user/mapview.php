@@ -163,11 +163,11 @@
 </script>
 <?php $nobigheader = 1; ?>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
-
-<div id="map">
+<div id="map" style="position: absolute; z-index: 50;">
 </div>
+
 <div id="selected"></div>
-<div id="options">
+<div id="options" style="position: absolute; z-index: 99999;">
     <form id="optionsForm" action="mapview.php">
     <table id="optionsTable" class="gratable">
     <thead>
@@ -197,8 +197,8 @@
     </table>
     </form>
 </div>
-<div id="routes">
-    <table id="routesTable" class="gratable tablesorter">
+<div id="routes" style="position: absolute; z-index: 9999; opacity: .9">
+    <table id="routesTable" class="gratable tablesorter" style="position: absolute; z-index: 9999; opacity: .9">
         <thead>
             <tr class="float" ><th class="sortable routeName">Route</th><th class="sortable systemName">System</th>
                 <th class="sortable clinched">Clinched (<?php tm_echo_units(); ?>)</th><th class="sortable overall">Overall (<?php tm_echo_units(); ?>)</th><th class="sortable percent">%</th></tr>
@@ -267,7 +267,7 @@ HTML
         </tbody>
     </table>
 </div>
-<div id="controlbox">
+<div id="controlbox" style="position: absolute; z-index: 2000;">
     <select id="showHideMenu" onchange="toggleTable();">
     <option value="maponly">Map Only</option>
     <option value="options">Show Map Options</option>

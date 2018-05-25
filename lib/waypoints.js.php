@@ -83,7 +83,7 @@ SELECT
 FROM waypoints 
   JOIN routes ON routes.root = waypoints.root 
   JOIN systems ON routes.systemname = systems.systemname AND $activeClause $rteClause
-  ORDER BY root, waypoints.pointId;
+  ORDER BY systems.tier DESC, root, waypoints.pointId;
 SQL;
         } elseif (($num_systems == 0) && ($num_regions == 0)) {
             // for now, put in a default to usai, do something better later
@@ -97,7 +97,7 @@ FROM waypoints
   JOIN routes ON routes.root = waypoints.root
   {$select_regions}{$select_systems}
   JOIN systems ON routes.systemname = systems.systemname AND $activeClause 
-ORDER BY root, waypoints.pointId;
+ORDER BY systems.tier DESC, root, waypoints.pointId;
 SQL;
         } else {
             $sql_command = <<<SQL
@@ -107,7 +107,7 @@ SELECT
 FROM waypoints 
   JOIN routes ON routes.root = waypoints.root $select_regions $select_systems
   JOIN systems ON routes.systemname = systems.systemname AND $activeClause
-ORDER BY root, waypoints.pointId;
+ORDER BY systems.tier DESC, root, waypoints.pointId;
 SQL;
         }
 
@@ -128,7 +128,7 @@ JS;
                 $routenum = $routenum + 1;
             }
             //echo "waypoints[".$pointnum."] = new Waypoint(\"".$row['pointName']."\",".$row['latitude'].",".$row['longitude']."); // Route = ".$row['root']." (".$row['color'].")\n";
-            echo "waypoints[$pointnum] = new Waypoint(\"{$row['pointName']}\",{$row['latitude']},{$row['longitude']})\n";
+            echo "waypoints[$pointnum] = new Waypoint(\"{$row['pointName']}\",{$row['latitude']},{$row['longitude']});\n";
             $pointnum = $pointnum + 1;
         }
 
@@ -145,7 +145,7 @@ SELECT
 FROM segments 
   JOIN routes ON routes.root = segments.root 
   JOIN systems ON routes.systemname = systems.systemname AND $activeClause $rteClause
-ORDER BY root, segments.segmentId;
+ORDER BY systems.tier DESC, root, segments.segmentId;
 SQL;
             } else {
                 $sql_command = <<<SQL
@@ -154,7 +154,7 @@ SELECT
 FROM segments 
   JOIN routes ON routes.root = segments.root 
   JOIN systems ON routes.systemname = systems.systemname AND $activeClause $where_regions $select_systems
-ORDER BY root, segments.segmentId;
+ORDER BY systems.tier DESC, root, segments.segmentId;
 SQL;
             }
             $res = tmdb_query($sql_command);
@@ -171,7 +171,7 @@ FROM segments
   RIGHT JOIN clinched ON segments.segmentId = clinched.segmentId 
   JOIN routes ON routes.root = segments.root 
   JOIN systems ON routes.systemname = systems.systemname AND $activeClause $rteClause AND clinched.traveler='{$_GET['u']}'
-  ORDER BY root, segments.segmentId;
+  ORDER BY systems.tier DESC, root, segments.segmentId;
 SQL;
             } else {
                 $sql_command = <<<SQL
@@ -181,7 +181,7 @@ FROM segments
   RIGHT JOIN clinched ON segments.segmentId = clinched.segmentId 
   JOIN routes ON routes.root = segments.root 
   JOIN systems ON routes.systemname = systems.systemname AND $activeClause $where_regions $select_systems AND clinched.traveler='{$_GET['u']}'
-  ORDER BY root, segments.segmentId;
+  ORDER BY systems.tier DESC, root, segments.segmentId;
 SQL;
             }
             $res = tmdb_query($sql_command);
