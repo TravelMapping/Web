@@ -867,6 +867,25 @@ following sources of highway information.</p>
 	  </li>
 	</ul>	
 
+<p class="heading"><a name="tools">Web/Software Tools</a></p>
+
+<ul>
+  <li>The project's free, public repositories are hosted on <a href="https://github.com">GitHub</a></li>
+  <li>Site update code uses <a href="https://www.python.org/">Python</a></li>
+  <li>The web server is hosted
+  at <a href="https://www.siena.edu">Siena College</a>, and is
+  a <a href="http://freebsd.org">FreeBSD server</a>
+  running <a href="https://httpd.apache.org/">Apache</a>
+  with <a href="http://php.net/">PHP</a>
+    and <a href="https://www.mysql.com/">MySQL</a>.</li>
+  <li>Mapping capabilities are provided
+  by <a href="https://leafletjs.com/">Leaflet</a> with
+  the <a href="https://github.com/marslan390/BeautifyMarker">extension</a>
+  and map tiles from various sources as indicated on the online maps</li>
+  <li>Other JavaScript libraries in use
+  include <a href="https://jquery.com/">jQuery</a>.
+</ul>
+
 <p class="heading"><a name="contributors">Project Contributors</a></p>
 
   <ul>
@@ -886,7 +905,7 @@ following sources of highway information.</p>
   <li>Mike Roberson (mapmikey)</li>
   <li>Dave S (mapcat)</li>
   <li>Christopher Steig (Bickendan)</li>
-  <li>Jim Teresco (terescoj), Primary Back End Development, Developed highway data for New York, Massachusetts, and New Mexico<br>
+  <li>Jim Teresco (terescoj), Primary Site Development<br>
       <a href="http://www.teresco.org/pics/signs/">Why Do You Have So Many Pictures of Road Signs?</a>  </li>
   <li>Oscar Voss (oscar)</li>
   </ul>
