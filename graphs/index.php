@@ -42,7 +42,7 @@ description, number of vertices and edges in both the collapsed and
 simple <a
 href="http://courses.teresco.org/metal/graph-formats.shtml">formats</a>,
 and links to download the graph files.  <b>Note:</b> larger graphs
-greatly tax the Highway Data Examiner and the Google Maps API.  They
+greatly tax the Highway Data Examiner and the Leaflet maps.  They
 should all work, but large graphs require a lot of memory for your
 browser and some patience.
 
