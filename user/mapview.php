@@ -20,13 +20,14 @@
     <style type="text/css">
         #controlbox {
             position: absolute;
-            top: 30px;
+            top: 60px;
             height: 30px;
-            right: 20px;
+            right: 50px;
             overflow: auto;
             padding: 5px;
             font-size: 20px;
 	    width: 25%;
+	    z-index: 850; /* above all Leaflet layers except controls */
         }
 
         #routesTable .routeName {
@@ -79,12 +80,13 @@
 
 	#selected {
             position: absolute;
+	    z-index: 850; /* above all Leaflet layers except controls */
             right: 10px;
-            top: 60px;
+            top: 90px;
             bottom: 20px;
             overflow-y: auto;
-            max-width: 420px;
-	    opacity: .95;  /* also forces stacking order */
+            max-width: 40%;
+	    opacity: .75;
         }
 
         #routes {
@@ -92,9 +94,11 @@
 	    left: 0px;
             width: 1px;
 	    height: 1px;
+	    position: absolute;
         }
 
         #options {
+	    position: absolute;
 	    display: none;
 	    left: 0px;
             width: 1px;
@@ -163,11 +167,11 @@
 </script>
 <?php $nobigheader = 1; ?>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
-<div id="map" style="position: absolute; z-index: 50;">
+<div id="map">
 </div>
 
 <div id="selected"></div>
-<div id="options" style="position: absolute; z-index: 99999;">
+<div id="options">
     <form id="optionsForm" action="mapview.php">
     <table id="optionsTable" class="gratable">
     <thead>
@@ -197,23 +201,19 @@
     </table>
     </form>
 </div>
-<div id="routes" style="position: absolute; z-index: 9999; opacity: .9">
-    <table id="routesTable" class="gratable tablesorter" style="position: absolute; z-index: 9999; opacity: .9">
+<div id="routes">
+    <table id="routesTable" class="gratable tablesorter">
         <thead>
             <tr class="float" ><th class="sortable routeName">Route</th><th class="sortable systemName">System</th>
                 <th class="sortable clinched">Clinched (<?php tm_echo_units(); ?>)</th><th class="sortable overall">Overall (<?php tm_echo_units(); ?>)</th><th class="sortable percent">%</th></tr>
         </thead>
         <tbody>
-        <!-- TEMP FIX: 1 dummy table lines to account for the fact that the
+        <!-- TEMP FIX: 1 dummy table line to account for the fact that the
 	styling places the table header row above on top of the first
-	two rows of data in the table -->
-        <tr><td class='routeName'>DUMMY</td>
-            <td class='link systemName'>1. syst</td>
-            <td class="clinched">0000</td><td class='overall'>0000</td><td class='percent'>0.00%</td>
-	</tr>
-        <tr><td class='routeName'>DUMMY</td>
-            <td class='link systemName'>2. syst</td>
-            <td class="clinched">0000</td><td class='overall'>0000</td><td class='percent'>0.00%</td>
+	row of data in the table -->
+        <tr><td class='routeName'>&nbsp;</td>
+            <td class='link systemName'>&nbsp;</td>
+            <td class="clinched">&nbsp;</td><td class='overall'>&nbsp;</td><td class='percent'>&nbsp;</td>
 	</tr>
         <?php
 	// TODO: a toggle to include/exclude devel routes?
@@ -267,7 +267,7 @@ HTML
         </tbody>
     </table>
 </div>
-<div id="controlbox" style="position: absolute; z-index: 2000;">
+<div id="controlbox">
     <select id="showHideMenu" onchange="toggleTable();">
     <option value="maponly">Map Only</option>
     <option value="options">Show Map Options</option>
