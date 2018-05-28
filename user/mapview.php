@@ -242,7 +242,7 @@ SQL;
             //Don't show. Too many routes
             $sql_command .= "r.root IS NULL";
         }
-        $sql_command .= "ORDER BY sys.tier, r.route;";
+        $sql_command .= "ORDER BY sys.tier, r.route, r.root;";
         $res = tmdb_query($sql_command);
         while($row = $res->fetch_assoc()) {
             $link = "/hb?u=".$_GET['u']."&amp;r=".$row['root'];
