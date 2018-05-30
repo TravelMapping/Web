@@ -115,12 +115,12 @@ while ($row = $result->fetch_array()) {
 	else {
 		echo "<tr class = ".$row[5].">
 		<td>".$row[1]."</td>
-		<td><a href=".$row[0].">".$row[0]."</a></td>
+		<td><a href=../graphdata/".$row[0].">".$row[0]."</a></td>
 		<td class = c".$row[2].">".$row[2]."</td>
 		<td>".$row[3]."</td>";
 		
 		echo "
-		<td><a href=".$prevRow[0].">".$prevRow[0]."</a></td>
+		<td><a href=../graphdata/".$prevRow[0].">".$prevRow[0]."</a></td>
 		<td>".$prevRow[2]."</td>
 		<td>".$prevRow[3]."</td>
 		</tr>";
