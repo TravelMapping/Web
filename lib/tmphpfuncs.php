@@ -417,6 +417,7 @@ function tm_common_js() {
 echo <<<END
   <link rel="stylesheet" href="/leaflet/leaflet.css" />
   <script src="/leaflet/leaflet.js"></script>
+  <script src="/leaflet/leaflet-providers.js"></script>
   <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
   <!-- jQuery -->
   <script src="http://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript"></script>
