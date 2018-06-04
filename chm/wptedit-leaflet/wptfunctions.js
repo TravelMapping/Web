@@ -1,3 +1,6 @@
+// CHM Waypoint Editor code by Timothy Reichard adapted for
+// Leaflet maps on the Travel Mapping project by Jim Teresco
+
 var n_layouts = 2;
 var layout = 0;
 var wpts = new Array();
@@ -366,7 +369,6 @@ function WptTable(wpts)
 	html += wpts[i].label;
 	if(isinuse)
 	    html += '</span>';
-//	html += '</a>';
 
 	if(wpts[i].altlabelsstring != "")
 	{
@@ -411,7 +413,6 @@ function WptTable(wpts)
 
 function LabelClick(i, n, label, lat, lon, errors, altlabelsstring)
 {
-//    AlertWaypoint(new Waypoint(label, lat, lon, errors, altlabelsstring));
     var info = MarkerInfo(i, n, new Waypoint(label, lat, lon, errors, altlabelsstring));
     map.panTo([lat, lon]);
     L.popup().setLatLng([lat, lon]).setContent(info).openOn(map);
@@ -531,7 +532,6 @@ function AddWaypoint()
 
   thawindex = bestpos;
 
-  //wpts[wpts.length] = centerwpt;
   UpdateText();
   LoadText(false);
 
@@ -573,7 +573,6 @@ function DuplicateHiddenWaypoint(i)
   var newlabel = prompt('Enter label for this hidden-duplicate waypoint:', dupwpt.label);
   if(newlabel == '' || newlabel == null)
     return;
-  //    newlabel = dupwpt.label;
 
   thawindex = -1;
   dupwpt.label = newlabel;
@@ -646,7 +645,6 @@ function RelabelWaypoint(i)
   var newlabel = prompt('Enter new primary label for this waypoint:', wpts[i].label);
   if(newlabel == null || newlabel == '')
     return;
-  //    newlabel = oldlabel;
   
   wpts[i].label = newlabel;
 
@@ -665,7 +663,6 @@ function DemotePrimaryLabel(i)
   var newlabel = prompt('Enter new primary label for this waypoint:', wpts[i].label);
   if(newlabel == null || newlabel == '')
     return;
-  //    newlabel = oldlabel;
   
   SaveWaypoints();
 
@@ -697,7 +694,6 @@ function ChangeAltlabelWaypoint(i, j)
   var newlabel = prompt(warning + 'Enter new alt. label for this waypoint:', altlabels[j]);
   if(newlabel == null || newlabel == '')
     return;
-  //    newlabel = oldlabel;
   
     SaveWaypoints();
 
@@ -719,7 +715,6 @@ function AddAltlabelWaypoint(i, j)
   var newlabel = prompt('Enter new alt. label for this waypoint:', 'NewAltLabel');
   if(newlabel == null || newlabel == '')
     return;
-  //    newlabel = oldlabel;
   
   SaveWaypoints();
 
@@ -909,8 +904,6 @@ function SegMileage(wpt1, wpt2)
 
 function MarkerInfo(i, n, wpt)
 {
-   // AlertWaypoint(wpt);
-
   var isinuse = IsLabelInUse(wpt.label);
   var prespan = '<span style="color:' + FC_inuse + ';">';
   var postspan = '</span>';
@@ -933,8 +926,6 @@ function MarkerInfo(i, n, wpt)
   if(i == thawindex)
     info += '<p style="color:#990000;font-weight:bold;">This waypoint can be repositioned.</p>';
 
-//  info += '<p style="line-height:160%;"><b>Actions:</b><a onclick="RelabelWaypoint(' + i + ')" class="button">Relabel</\a><br><a onclick="ThawWaypoint(' + i + ')" class="button">Thaw location</\a><br><a onclick="DuplicateHiddenWaypoint(' + i + ')" class="button">Make a hidden duplicate</\a><br><a onclick="ShiftWaypoint(' + i + ',-1)" class="button">Shift toward the beginning</\a><br><a onclick="ShiftWaypoint(' + i + ',1)" class="button">Shift toward the end</\a><br><a onclick="RemoveWaypoint(' + i + ')" class="button">Remove Waypoint<\/a><\/p>';
-  
     info += '<p style="line-height:160%;"><b>Actions:</b><br><a onclick="ThawWaypoint(' + i + ')" class="button">Thaw location</\a><br><a onclick="ShiftWaypoint(' + i + ',-1)" class="button">Shift toward the beginning</\a><br><a onclick="ShiftWaypoint(' + i + ',1)" class="button">Shift toward the end</\a><br><a onclick="RemoveWaypoint(' + i + ')" class="button">Remove<\/a><\/p>';
     info += '</p>';
     return info;
@@ -1394,10 +1385,6 @@ function AlertWaypoint(wpt)
 function BindInfoWindow(marker, markerinfo)
 {
     marker.bindPopup(markerinfo);
-    //marker.on('click', function () {
-//	infowindow.setContent(markerinfo); 
-//	infowindow.openOn(map);
-  //  });
 }
 
 function BindReposition(marker, i)
@@ -1495,7 +1482,6 @@ function ClearInUseLabels()
 
 function IsLabelInUse(label)
 {
-//    alert('label=:' + label + ': + inuselabels=' + JSON.stringify(inuselabels));
     var isinuse = false;
     
     if(inuselabels == null)
@@ -1510,8 +1496,6 @@ function IsLabelInUse(label)
     var i = 0;
     while(isinuse == false && i < n_inuselabels)
     {
-//	alert('reducedlabel=:'+reducedlabel+': inuselabel=:'+ReduceLabel(inuselabels[i])+':');
-	
 	
 	if(reducedlabel == ReduceLabel(inuselabels[i]))
 	    isinuse = true;
