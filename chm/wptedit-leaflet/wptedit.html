@@ -148,6 +148,12 @@ function GoogleUrl(lat, lon) {return "http://maps.google.com/maps?ll=" + lat.toF
 function BingUrl(lat, lon) {return "http://www.bing.com/maps/?v=2&amp;cp=" + lat.toFixed(6) + "~" + lon.toFixed(6) + "&amp;lvl=15";};
 function GMSVUrl(lat, lon) {return "http://maps.google.com/?ll=" + lat.toFixed(6) + "," + lon.toFixed(6) + "&amp;cbp=12,0,,0,5&amp;cbll=" + lat.toFixed(6) + "," + lon.toFixed(6) + "&amp;layer=c";};
 
+function recenter(ev) {
+
+  console.log("dblclick event");
+  console.log(ev);
+  map.panTo(ev.latlng);
+}
 
 function loadmap() {
   
@@ -195,8 +201,8 @@ function loadmap() {
   hitrace = L.polyline([]);
   
   map.on("moveend", UpdateCoords);
-//  map.on("click", function () { infowindow.close()});
-  map.on("dblclick", function (theevent) {map.panTo(theevent.latLng);});
+  map.off("dblclick");
+  map.on("dblclick", recenter);
   
   window.onbeforeunload = WptClose;
 }
