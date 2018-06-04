@@ -17,7 +17,10 @@ var thawindex = -1;
 var thickness = 1;
 
 var visibleicon = {};
-var hiddeniconurl = 'http://cmap.m-plex.com/images/down.png';
+var intersectionimage = L.icon({
+    iconUrl: '/lib/Intersection.png',
+    // This marker is 16x16
+    iconSize: [16, 16]});
 
 var mi2km = 1.609344;
 
@@ -129,7 +132,7 @@ function ConvertMercXYToLL(pt)
     lon = 360. * (pt.x - 0.5);
     lat = 360./Math.PI * (Math.PI/4 - Math.atan(Math.exp(2*Math.PI*(pt.y - 0.5))));
     
-    return new google.maps.LatLng(lat, lon);
+    return [lat, lon];
 }
 
 function Waypoint(label, lat, lon, errors, altlabelsstring)
@@ -410,26 +413,15 @@ function LabelClick(i, n, label, lat, lon, errors, altlabelsstring)
 {
 //    AlertWaypoint(new Waypoint(label, lat, lon, errors, altlabelsstring));
     var info = MarkerInfo(i, n, new Waypoint(label, lat, lon, errors, altlabelsstring));
-    map.panTo(new google.maps.LatLng(lat, lon)); 
-    infowindow.setContent(info);
-    infowindow.open(map, markers[i]);
-}
-
-//AdjustHitrace is obsolete.
-function AdjustHitrace()
-{
-  //map.removeOverlay(hitrace);
-  hitrace = new google.maps.Polyline(polypoints, "#FF0000", 10*Math.pow(2, map.getZoom()-10)*thickness, 0.2);
-  //map.addOverlay(hitrace);
-  //GEvent.addListener(map, "zoomend", function() {AdjustHitrace();});
-
+    map.panTo([lat, lon]);
+    L.popup().setLatLng([lat, lon]).setContent(info).openOn(map);
 }
 
 function UpdateMap(pan)
 {
-    trace.setMap(null);
-    hitrace.setMap(null);
-    lotrace.setMap(null);
+    trace.remove();
+    hitrace.remove();
+    lotrace.remove();
     polypoints = new Array();
 
     var minlat = 999;
@@ -439,8 +431,8 @@ function UpdateMap(pan)
     
     for(var i = 0; i < markers.length; i++)
     {
-	google.maps.event.clearInstanceListeners(markers[i]);
-	markers[i].setMap(null);
+	markers[i].off();
+	markers[i].remove();
     }
 
     markers = new Array();
@@ -452,20 +444,18 @@ function UpdateMap(pan)
 	minlon = Math.min(minlon, wpts[i].lon);
 	maxlon = Math.max(maxlon, wpts[i].lon);
 	
-	polypoints[i] = new google.maps.LatLng(wpts[i].lat, wpts[i].lon);
+	polypoints[i] = [wpts[i].lat, wpts[i].lon];
 	
 	markerinfo[i] = MarkerInfo(i, wpts.length, wpts[i]);
 
-	markers[i] = new google.maps.Marker({
-	    position: new google.maps.LatLng(wpts[i].lat, wpts[i].lon), 
-	    draggable: (i == thawindex),
-	    clickable: true
+	markers[i] = L.marker(polypoints[i], {
+	    draggable: (i == thawindex)
 	});
 
 	if(!IsVisible(wpts[i].label))
-	    markers[i].setIcon(hiddeniconurl);
+	    markers[i].options.icon = intersectionimage;
 	
-	markers[i].setMap(map);
+	markers[i].addTo(map);
 
 	if(i == thawindex)
 	{
@@ -487,51 +477,31 @@ function UpdateMap(pan)
     zoom = Math.min(zoom, 17);
     if(pan)
     {
-	map.panTo(new google.maps.LatLng(midlat, midlon));
+	map.panTo([midlat, midlon]);
     }
     
     var traceopt = new Object({
-	path: polypoints,
-	strokeColor: '#0000FF',
-	strokeWeight: 10,
-	strokeOpacity: 0.2,
-	map: map
+	color: '#0000FF',
+	weight: 10,
+	ppacity: 0.2
     });
-    trace = new google.maps.Polyline(traceopt);
+    trace = L.polyline(polypoints, traceopt).addTo(map);
     
     var boundtracepoints = CalcHighlightLines(wpts, 20);
 
     var hitraceopt = new Object({
-	path: boundtracepoints.hi,
-	strokeColor: '#FF0000',
-	strokeWeight: 2,
-	strokeOpacity: 0.7,
-	map: map
+	color: '#FF0000',
+	weight: 2,
+	opacity: 0.7
     });
     var lotraceopt = new Object({
-	path: boundtracepoints.lo,
-	strokeColor: '#FF0000',
-	strokeWeight: 2,
-	strokeOpacity: 0.7,
-	map: map
+	color: '#FF0000',
+	weight: 2,
+	opacity: 0.7
     });
-    hitrace = new google.maps.Polyline(hitraceopt);
-    lotrace = new google.maps.Polyline(lotraceopt);
-
-    //alert('UpdateMap end');
+    hitrace = L.polyline(boundtracepoints.hi, hitraceopt).addTo(map);
+    lotrace = L.polyline(boundtracepoints.lo, lotraceopt).addTo(map);
   
-}
-
-//AddMarker is obsolete.
-function AddMarker(marker, markerinfo, i)
-{
-//    alert('AddMarker: i='+i+' begin');
-  if(i == thawindex)
-    {
-      google.maps.event.addListener(marker, "dragend", function() {RepositionWaypoint(i);});
-    }
-
-    google.maps.event.addListener(marker, 'click', function() {infowindow.setContent(markerinfo); infowindow.open(map, marker)});
 }
 
 function AddWaypoint()
@@ -539,7 +509,7 @@ function AddWaypoint()
   SaveWaypoints();
   var center = map.getCenter();
   var centerlabel = prompt('Enter primary label for new waypoint:', '+X' + Math.floor(100000+Math.random()*900000));
-    var centerwpt = new Waypoint(centerlabel, center.lat(), center.lng(), 0, "");
+  var centerwpt = new Waypoint(centerlabel, center.lat, center.lng, 0, "");
   var bestlength = 1e10;
   var bestpos = -1;
 
@@ -579,7 +549,7 @@ function ReverseWaypoints()
     }
     
     wpts = newwpts;
-    infowindow.close();
+    map.closePopup();
     UpdateText();
     LoadText(false);
     
@@ -611,7 +581,7 @@ function DuplicateHiddenWaypoint(i)
   newwpts.push(dupwpt);
   newwpts = newwpts.concat(wpts.slice(pos));
   wpts = newwpts;
-    infowindow.close();
+  map.closePopup();
 
   UpdateText();
   LoadText(false);
@@ -650,7 +620,7 @@ function RemoveWaypoint(i)
 
   var lostwpt = wpts[i];
   wpts.splice(i,1);
-    infowindow.close();
+  map.closePopup();
   thawindex = -1;
 
   UpdateText();
@@ -682,9 +652,9 @@ function RelabelWaypoint(i)
 
   UpdateText();
   LoadText(false);
-    infowindow.close();
+  map.closePopup();
   
-    UpdateMessage("Changed primary label of waypoint #" + (i+1) + " from " + oldlabel + ' to ' + newlabel + " at (" + wpts[i].lat + ", " + wpts[i].lon + "). Click Undo to revert the label.");
+  UpdateMessage("Changed primary label of waypoint #" + (i+1) + " from " + oldlabel + ' to ' + newlabel + " at (" + wpts[i].lat + ", " + wpts[i].lon + "). Click Undo to revert the label.");
 }
 
 
@@ -699,34 +669,32 @@ function DemotePrimaryLabel(i)
   
   SaveWaypoints();
 
-    var altlabels = wpts[i].altlabelsstring.split(' ');
-    altlabels.push('+' + FrontTrimLabel(oldlabel));
-    wpts[i].altlabelsstring = altlabels.join(' ');
+  var altlabels = wpts[i].altlabelsstring.split(' ');
+  altlabels.push('+' + FrontTrimLabel(oldlabel));
+  wpts[i].altlabelsstring = altlabels.join(' ');
 
 
   wpts[i].label = newlabel;
 
   UpdateText();
   LoadText(false);
-    infowindow.close();
+  map.closePopup();
   
-    UpdateMessage("Demoted primary label " + oldlabel + " and added new primary label " + newlabel + " of waypoint #" + (i+1) + " at (" + wpts[i].lat + ", " + wpts[i].lon + "). Click Undo to revert the labels.");
+  UpdateMessage("Demoted primary label " + oldlabel + " and added new primary label " + newlabel + " of waypoint #" + (i+1) + " at (" + wpts[i].lat + ", " + wpts[i].lon + "). Click Undo to revert the labels.");
 }
-
-
 
 function ChangeAltlabelWaypoint(i, j)
 {
-    var warning = '';
+  var warning = '';
     
-    var altlabels = wpts[i].altlabelsstring.split(' ');
+  var altlabels = wpts[i].altlabelsstring.split(' ');
 
-    var isinuse = IsLabelInUse(altlabels[j]);
-    if(isinuse)
-	warning = 'WARNING!!! This label is in use!!!\n\nYou should not change this label!\n\n';
+  var isinuse = IsLabelInUse(altlabels[j]);
+  if(isinuse)
+      warning = 'WARNING!!! This label is in use!!!\n\nYou should not change this label!\n\n';
 
   var oldlabel = altlabels[j];
-    var newlabel = prompt(warning + 'Enter new alt. label for this waypoint:', altlabels[j]);
+  var newlabel = prompt(warning + 'Enter new alt. label for this waypoint:', altlabels[j]);
   if(newlabel == null || newlabel == '')
     return;
   //    newlabel = oldlabel;
@@ -739,31 +707,31 @@ function ChangeAltlabelWaypoint(i, j)
 
   UpdateText();
   LoadText(false);
-    infowindow.close();
+  map.closePopup();
   
-    UpdateMessage("Changed alt. label #" + (j + 1) + " of waypoint #" + (i+1) + " from " + oldlabel + ' to ' + newlabel + " at (" + wpts[i].lat + ", " + wpts[i].lon + "). Click Undo to revert the label.");
+  UpdateMessage("Changed alt. label #" + (j + 1) + " of waypoint #" + (i+1) + " from " + oldlabel + ' to ' + newlabel + " at (" + wpts[i].lat + ", " + wpts[i].lon + "). Click Undo to revert the label.");
 }
 
 function AddAltlabelWaypoint(i, j)
 {
     
-    var altlabels = wpts[i].altlabelsstring.split(' ');
-    var newlabel = prompt('Enter new alt. label for this waypoint:', 'NewAltLabel');
+  var altlabels = wpts[i].altlabelsstring.split(' ');
+  var newlabel = prompt('Enter new alt. label for this waypoint:', 'NewAltLabel');
   if(newlabel == null || newlabel == '')
     return;
   //    newlabel = oldlabel;
   
-    SaveWaypoints();
+  SaveWaypoints();
 
-    altlabels.push(newlabel);
+  altlabels.push(newlabel);
     
-    wpts[i].altlabelsstring = altlabels.join(' ');
+  wpts[i].altlabelsstring = altlabels.join(' ');
 
   UpdateText();
   LoadText(false);
-    infowindow.close();
+  map.closePopup();
   
-    UpdateMessage("Added alt. label " + newlabel + " to waypoint #" + (i+1) + " at (" + wpts[i].lat + ", " + wpts[i].lon + "). Click Undo to revert the label.");
+  UpdateMessage("Added alt. label " + newlabel + " to waypoint #" + (i+1) + " at (" + wpts[i].lat + ", " + wpts[i].lon + "). Click Undo to revert the label.");
 }
 
 
@@ -788,9 +756,9 @@ function RemoveAltlabelWaypoint(i, j)
     
     wpts[i].altlabelsstring = altlabels.join(' ');
 
-  UpdateText();
-  LoadText(false);
-    infowindow.close();
+    UpdateText();
+    LoadText(false);
+    map.closePopup();
   
     UpdateMessage("Removed alt. label #" + (j + 1) + " " + delaltlabel + " of waypoint #" + (i+1) + " at (" + wpts[i].lat + ", " + wpts[i].lon + "). Click Undo to revert the label.");
 }
@@ -806,7 +774,7 @@ function ShiftWaypoint(i,di)
   if(i < 0 || i > wpts.length-1)
     return;
 
-    infowindow.close();
+  map.closePopup();
 
   wpt1 = CopyWaypoint(wpts[i]);
   wpt2 = CopyWaypoint(wpts[j]);
@@ -825,7 +793,7 @@ function ShiftWaypoint(i,di)
 function ThawWaypoint(i)
 {
   thawindex = i;
-    infowindow.close();
+  map.closePopup();
 
   UpdateText();
   LoadText(false);
@@ -836,19 +804,19 @@ function ThawWaypoint(i)
  
 function RepositionWaypoint(i)
 {
-    SaveWaypoints();
-    infowindow.close();
+  SaveWaypoints();
+  map.closePopup();
     
-    oldwpt = CopyWaypoint(wpts[i]);
+  oldwpt = CopyWaypoint(wpts[i]);
     
-    var coords = markers[i].getPosition();
-    wpts[i].lat = coords.lat().toFixed(6);
-    wpts[i].lon = coords.lng().toFixed(6);
+  var coords = markers[i].getLatLng();
+  wpts[i].lat = coords.lat.toFixed(6);
+  wpts[i].lon = coords.lng.toFixed(6);
     
-    UpdateText();
-    LoadText(false);
+  UpdateText();
+  LoadText(false);
     
-    UpdateMessage("Repositioned waypoint #" + (i+1) + " " + wpts[i].label + " to (" + wpts[i].lat + ", " + wpts[i].lon + ").  Click Undo to revert the position.");
+  UpdateMessage("Repositioned waypoint #" + (i+1) + " " + wpts[i].label + " to (" + wpts[i].lat + ", " + wpts[i].lon + ").  Click Undo to revert the position.");
 }
 
 
@@ -943,24 +911,24 @@ function MarkerInfo(i, n, wpt)
 {
    // AlertWaypoint(wpt);
 
-    var isinuse = IsLabelInUse(wpt.label);
-    var prespan = '<span style="color:' + FC_inuse + ';">';
-    var postspan = '</span>';
+  var isinuse = IsLabelInUse(wpt.label);
+  var prespan = '<span style="color:' + FC_inuse + ';">';
+  var postspan = '</span>';
 
-    var info =  '<p style="line-height:160%;"><span style="font-size:20pt;">' + (isinuse ? prespan : '') + wpt.label + (isinuse ? postspan : '') + '</span>&nbsp;<a onclick="RelabelWaypoint(' + i + ')" class="button">Relabel</\a>&nbsp;<a onclick="DemotePrimaryLabel(' + i + ')" class="button">Demote</\a><br>';
+  var info =  '<p style="line-height:160%;"><span style="font-size:20pt;">' + (isinuse ? prespan : '') + wpt.label + (isinuse ? postspan : '') + '</span>&nbsp;<a onclick="RelabelWaypoint(' + i + ')" class="button">Relabel</\a>&nbsp;<a onclick="DemotePrimaryLabel(' + i + ')" class="button">Demote</\a><br>';
     
-    var altlabels = wpt.altlabelsstring.split(' ');
-    for(j = 0; j < altlabels.length; j++)
-    {
+  var altlabels = wpt.altlabelsstring.split(' ');
+  for(j = 0; j < altlabels.length; j++)
+  {
 	if(altlabels[j] == "")
 	    continue;
 	
 	isinuse = IsLabelInUse(altlabels[j]);
 	info += (isinuse ? prespan : '') + altlabels[j] + (isinuse ? postspan : '') + '&nbsp;<a onclick="ChangeAltlabelWaypoint(' + i + ',' + j + ')" class="button">Change</\a>&nbsp;<a onclick="RemoveAltlabelWaypoint(' + i + ',' + j + ')" class="button">Remove</\a><br>';
 
-    }
-    info += '<a onclick="AddAltlabelWaypoint(' + i + ')" class="button">Add Alt. Label</\a><br>';
-    info += '<br><b>Waypoint ' + (i+1) + ' of ' + n + '<\/b><br><b>Coords.:<\/b> ' + wpt.lat + '&deg;, ' + wpt.lon + '&deg;<\/p>';
+  }
+  info += '<a onclick="AddAltlabelWaypoint(' + i + ')" class="button">Add Alt. Label</\a><br>';
+  info += '<br><b>Waypoint ' + (i+1) + ' of ' + n + '<\/b><br><b>Coords.:<\/b> ' + wpt.lat + '&deg;, ' + wpt.lon + '&deg;<\/p>';
 
   if(i == thawindex)
     info += '<p style="color:#990000;font-weight:bold;">This waypoint can be repositioned.</p>';
@@ -968,7 +936,7 @@ function MarkerInfo(i, n, wpt)
 //  info += '<p style="line-height:160%;"><b>Actions:</b><a onclick="RelabelWaypoint(' + i + ')" class="button">Relabel</\a><br><a onclick="ThawWaypoint(' + i + ')" class="button">Thaw location</\a><br><a onclick="DuplicateHiddenWaypoint(' + i + ')" class="button">Make a hidden duplicate</\a><br><a onclick="ShiftWaypoint(' + i + ',-1)" class="button">Shift toward the beginning</\a><br><a onclick="ShiftWaypoint(' + i + ',1)" class="button">Shift toward the end</\a><br><a onclick="RemoveWaypoint(' + i + ')" class="button">Remove Waypoint<\/a><\/p>';
   
     info += '<p style="line-height:160%;"><b>Actions:</b><br><a onclick="ThawWaypoint(' + i + ')" class="button">Thaw location</\a><br><a onclick="ShiftWaypoint(' + i + ',-1)" class="button">Shift toward the beginning</\a><br><a onclick="ShiftWaypoint(' + i + ',1)" class="button">Shift toward the end</\a><br><a onclick="RemoveWaypoint(' + i + ')" class="button">Remove<\/a><\/p>';
-  info += '</p>';
+    info += '</p>';
     return info;
 }
 
@@ -1377,7 +1345,7 @@ function GMSVUrl(lat, lon) {return "http://maps.google.com/?ll=" + lat.toFixed(6
 function UpdateCoords() 
 {     
   var center = map.getCenter();    
-  document.getElementById("coordbar").innerHTML = '<a onclick="javascript:AddWaypoint();" class="button">Add waypoint</a> ' + OSMUrl(center.lat(), center.lng()) + "<br>Open location in <a href='" + GMSVUrl(center.lat(), center.lng()) + "' target='sv' class='button'>Street View</a> <a href='" + OSMUrl(center.lat(), center.lng()) + "&amp;zoom=15' target='o' class='button'>OSM</a> <a href='" + GoogleUrl(center.lat(), center.lng()) + "' target='g' class='button'>Google</a> <a href='" + YahooUrl(center.lat(), center.lng()) + "' target='y' class='button'>Yahoo</a> <a href='" + BingUrl(center.lat(), center.lng()) + "' target='b' class='button'>Bing</a>";    
+    document.getElementById("coordbar").innerHTML = '<a onclick="javascript:AddWaypoint();" class="button">Add waypoint</a> ' + OSMUrl(center.lat, center.lng) + "<br>Open location in <a href='" + GMSVUrl(center.lat, center.lng) + "' target='sv' class='button'>Street View</a> <a href='" + OSMUrl(center.lat, center.lng) + "&amp;zoom=15' target='o' class='button'>OSM</a> <a href='" + GoogleUrl(center.lat, center.lng) + "' target='g' class='button'>Google</a> <a href='" + YahooUrl(center.lat, center.lng) + "' target='y' class='button'>Yahoo</a> <a href='" + BingUrl(center.lat, center.lng) + "' target='b' class='button'>Bing</a>";    
 }
 
 function ChangeLineThickness(t)
@@ -1425,15 +1393,16 @@ function AlertWaypoint(wpt)
 
 function BindInfoWindow(marker, markerinfo)
 {
-    google.maps.event.addListener(marker, 'click', function () {
-    infowindow.setContent(markerinfo); 
-    infowindow.open(map, marker);
-    });
+    marker.bindPopup(markerinfo);
+    //marker.on('click', function () {
+//	infowindow.setContent(markerinfo); 
+//	infowindow.openOn(map);
+  //  });
 }
 
 function BindReposition(marker, i)
 {
-    google.maps.event.addListener(marker, 'dragend', function() {RepositionWaypoint(i);});
+    marker.on('dragend', function() {RepositionWaypoint(i);});
 
 }
 
