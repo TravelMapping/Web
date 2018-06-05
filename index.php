@@ -106,7 +106,7 @@ tm_echo_units();
 <p class="text">
 
 Anyone can submit their travels to be included in the site.  Please
-see the information in <a href="/forum">the project forum</a> for how
+see the information in <a href="http://forum.travelmapping.net">the project forum</a> for how
 to create and submit your data.
 
 </p>
@@ -129,7 +129,7 @@ Those who have learned the project's structure and highway data rules
 and guidelines can help greatly by providing review of new highway
 systems in development.  Highly experienced users can learn how to
 plot new highway systems under the guidance of experienced
-contributors.  Again, see <a href="/forum">the project forum</a> for
+contributors.  Again, see <a href="http://forum.travelmapping.net">the project forum</a> for
 more information.
 </p>
 
