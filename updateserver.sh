@@ -4,7 +4,7 @@
 #
 set -e
 shopt -s nullglob
-server=blizzard.teresco.org
+server=noreaster.teresco.org
 basedir=/home/www/
 rootdir=tmtest
 shieldsdir=
@@ -25,5 +25,6 @@ done
 echo "Updating to $server:$basedir$rootdir, directories $otherdirs $shieldsdir"
 scp *.php $server:$basedir$rootdir
 for dir in $otherdirs $shieldsdir; do
+    ssh $server mkdir -p $basedir$rootdir/$dir
     scp $dir/*.{php,js,svg,css,png} $server:$basedir$rootdir/$dir
 done
