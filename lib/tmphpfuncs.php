@@ -1,4 +1,4 @@
-<!-- /lib/tmphbfuncs.php: common PHP functionality for Travel Mapping -->
+<!-- /lib/tmphpfuncs.php: common PHP functionality for Travel Mapping -->
 <?php
 /*
      PHP to include in any Travel Mapping page that needs to access the DB.
@@ -21,7 +21,7 @@
 */
 
 // always attempt to establish a connection to the db, allow QS parameters
-// to override defaults, which come from the 5 lines of tm.conf (which
+// to override defaults, which come from the 6 lines of tm.conf (which
 // is not in source code control to protect the information there)
 //
 // IMPORTANT: this file should also not be accessible through the 
@@ -37,6 +37,9 @@ $tmdbname = chop(fgets($tmconffile));
 $tmdbuser = chop(fgets($tmconffile));
 $tmdbpasswd = chop(fgets($tmconffile));
 $tmdbhost = chop(fgets($tmconffile));
+// HERE maps API id and code
+$tmhereid = chop(fgets($tmconffile));
+$tmherecode = chop(fgets($tmconffile));
 fclose($tmconffile);
 
 if (array_key_exists("dbname", $_GET) && ctype_alpha($_GET['dbname'])) {
@@ -414,6 +417,16 @@ function tm_validate_root($root) {
 // TableSorter, etc.
 function tm_common_js() {
 
+  global $tmhereid;
+  global $tmherecode;
+
+  echo "<!-- tm_common_js from tmphpfuncs.php START -->\n";
+  echo "<!-- Map API functionality -->\n";
+  echo "<script type=\"text/javascript\">\n";
+  echo "var here_map_id = \"".$tmhereid."\";\n";
+  echo "var here_map_code = \"".$tmherecode."\";\n";
+  echo "</script>\n";
+
 echo <<<END
   <link rel="stylesheet" href="/leaflet/leaflet.css" />
   <script src="/leaflet/leaflet.js"></script>
@@ -424,7 +437,9 @@ echo <<<END
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <!-- TableSorter -->
   <script src="/lib/jquery.tablesorter.min.js" type="text/javascript"></script>
+
 END;
+  echo "<!-- tm_common_js from tmphpfuncs.php END -->\n";
 }
 
 // functions from http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php
