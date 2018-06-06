@@ -40,6 +40,8 @@ $tmdbhost = chop(fgets($tmconffile));
 // HERE maps API id and code
 $tmhereid = chop(fgets($tmconffile));
 $tmherecode = chop(fgets($tmconffile));
+// Thunderforest Maps API key
+$tmtfkey = chop(fgets($tmconffile));
 fclose($tmconffile);
 
 if (array_key_exists("dbname", $_GET) && ctype_alpha($_GET['dbname'])) {
@@ -419,12 +421,14 @@ function tm_common_js() {
 
   global $tmhereid;
   global $tmherecode;
-
+  global $tmtfkey;
+  
   echo "<!-- tm_common_js from tmphpfuncs.php START -->\n";
   echo "<!-- Map API functionality -->\n";
   echo "<script type=\"text/javascript\">\n";
   echo "var here_map_id = \"".$tmhereid."\";\n";
   echo "var here_map_code = \"".$tmherecode."\";\n";
+  echo "var tf_map_key = \"".$tmtfkey."\";\n";
   echo "</script>\n";
 
 echo <<<END
