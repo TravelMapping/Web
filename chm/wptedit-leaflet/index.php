@@ -132,11 +132,11 @@ color:white;
 
 </style>
 
-
-<link rel="stylesheet" href="/leaflet/leaflet.css" />
-<script src="/leaflet/leaflet.js"></script>
-<script src="/leaflet/leaflet-providers.js"></script>
-<script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+<?php
+  require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php";
+  tm_common_js();  
+  ?>
+<script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 var map;
@@ -156,47 +156,13 @@ function recenter(ev) {
   map.panTo(ev.latlng);
 }
 
-function loadmap() {
-  
-//  infowindow = L.popup();
-  
-  // Leaflet map object
-  map = L.map('map', {
-  renderer: L.canvas()});
-  
-  // set with initial coordinates at Roger Bacon 321 at Siena
-  // College
-  map.setView([42.719450, -73.752063], 16);
+function loadwptmap() {
 
-  // set up map tiles based on
-  // https://github.com/leaflet-extras/leaflet-providers/blob/master/index.html
-  var defaultLayer = L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
-  var baseLayers = {
-	'OpenStreetMap Default': defaultLayer,
-	'OpenStreetMap German Style': L.tileLayer.provider('OpenStreetMap.DE'),
-	'OpenStreetMap Black and White': L.tileLayer.provider('OpenStreetMap.BlackAndWhite'),
-	'OpenStreetMap H.O.T.': L.tileLayer.provider('OpenStreetMap.HOT'),
-	'Thunderforest OpenCycleMap': L.tileLayer.provider('Thunderforest.OpenCycleMap'),
-	'Thunderforest Transport': L.tileLayer.provider('Thunderforest.Transport'),
-	'Thunderforest Landscape': L.tileLayer.provider('Thunderforest.Landscape'),
-	'Hydda Full': L.tileLayer.provider('Hydda.Full'),
-	'Stamen Toner': L.tileLayer.provider('Stamen.Toner'),
-	'Stamen Terrain': L.tileLayer.provider('Stamen.Terrain'),
-	'Stamen Watercolor': L.tileLayer.provider('Stamen.Watercolor'),
-	'Esri WorldStreetMap': L.tileLayer.provider('Esri.WorldStreetMap'),
-	'Esri DeLorme': L.tileLayer.provider('Esri.DeLorme'),
-	'Esri WorldTopoMap': L.tileLayer.provider('Esri.WorldTopoMap'),
-	'Esri WorldImagery': L.tileLayer.provider('Esri.WorldImagery'),
-	'Esri WorldTerrain': L.tileLayer.provider('Esri.WorldTerrain'),
-	'Esri WorldShadedRelief': L.tileLayer.provider('Esri.WorldShadedRelief'),
-	'Esri WorldPhysical': L.tileLayer.provider('Esri.WorldPhysical'),
-	'Esri OceanBasemap': L.tileLayer.provider('Esri.OceanBasemap'),
-	'Esri NatGeoWorldMap': L.tileLayer.provider('Esri.NatGeoWorldMap'),
-	'Esri WorldGrayCanvas': L.tileLayer.provider('Esri.WorldGrayCanvas')
-  };
-  var overlays = { };
-  L.control.layers(baseLayers, overlays).addTo(map);
-  
+  // common TM map creation to get all map tiles, etc 
+  loadmap();
+
+// wptedit-specific
+
   trace = L.polyline([]);
   lotrace = L.polyline([]);
   hitrace = L.polyline([]);
@@ -212,7 +178,7 @@ function loadmap() {
 <script src="wptfunctions.js" type="text/javascript"></script>
 </head>
 
-<body onload="javascript: ChangeLayout(); loadmap();">
+<body onload="javascript: ChangeLayout(); loadwptmap();">
 
 <div id="waypoints">
   <p id="output"></p>
