@@ -26,5 +26,5 @@ echo "Updating to $server:$basedir$rootdir, directories $otherdirs $shieldsdir"
 scp *.php $server:$basedir$rootdir
 for dir in $otherdirs $shieldsdir; do
     ssh $server mkdir -p $basedir$rootdir/$dir
-    scp $dir/*.{php,js,svg,css,png} $server:$basedir$rootdir/$dir
+    scp $dir/*.{php,js,svg,css,png,gif} $server:$basedir$rootdir/$dir
 done
