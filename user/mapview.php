@@ -7,9 +7,10 @@
  * URL Params:
  *  u - user to display highlighting for on map (required)
  *  rg - region to show routes for on the map (optional)
+ *  country - country to show routes for on the map (optional)
  *  sys - system to show routes for on the map (optional)
  *  rte - route name to show on the map. Supports pattern matching, with _ matching a single character, and % matching 0 or multiple characters.
- * (u, [rg|sys][rte])
+ * (u, [rg|sys|country][rte])
  ***
  -->
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -216,6 +217,7 @@
             <td class="clinched">&nbsp;</td><td class='overall'>&nbsp;</td><td class='percent'>&nbsp;</td>
 	</tr>
         <?php
+	$add_regions = "";
 	// TODO: a toggle to include/exclude devel routes?
         $sql_command = <<<SQL
 SELECT r.region, r.root, r.route, r.systemName, banner, city, sys.tier, 
@@ -234,10 +236,20 @@ SQL;
         if (array_key_exists('rg', $_GET) && array_key_exists('sys', $_GET)) {
             $sql_command .= orClauseBuilder('rg', 'region')." AND ".orClauseBuilder('sys', 'systemName');
         } elseif (array_key_exists('rg', $_GET)) {
-            $sql_command .= orClauseBuilder('rg', 'region')
-            ;
+            $sql_command .= orClauseBuilder('rg', 'region');
         } elseif (array_key_exists('sys', $_GET)) {
             $sql_command .= orClauseBuilder('sys', 'systemName');
+	} elseif (array_key_exists('country', $_GET)) {
+	    $sql_command2 = "SELECT code FROM regions WHERE country='".$_GET['country']."';";
+	    $res2 = tmdb_query($sql_command2);
+	    $add_regions = "&rg=";
+            $sql_command .= "(";
+	    while ($row = $res2->fetch_assoc()) {
+	    	  $add_regions .= $row['code'].",";
+		  $sql_command .= "r.region = '".$row['code']."' OR ";
+	    }
+	    $add_regions .= "null";
+	    $sql_command .= "r.region = 'null')";
         } elseif (!array_key_exists('rte', $_GET)) {
             //Don't show. Too many routes
             $sql_command .= "r.root IS NULL";
@@ -279,5 +291,5 @@ HTML
     $tmdb->close();
 ?>
 
-<script type="application/javascript" src="../lib/waypoints.js.php?<?php echo $_SERVER['QUERY_STRING']?>"></script>
+<script type="application/javascript" src="../lib/waypoints.js.php?<?php echo $_SERVER['QUERY_STRING'].$add_regions?>"></script>
 </html>
