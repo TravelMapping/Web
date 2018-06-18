@@ -50,7 +50,10 @@ Line 1: DB name (likely TravelMapping)
 Line 2: DB read-only user (likely travmap)
 Line 3: DB read-only user password
 Line 4: DB hostname (likely localhost)
-Line 5: Google Maps API key
+Line 5: HERE map id
+Line 6: HERE map code
+Line 7: ThunderForest map key
+Line 8: MapBox token
 </pre>
 
 This file needs to be readable by the web server but should not be served by the web server.  Configure Apache to ensure this.
