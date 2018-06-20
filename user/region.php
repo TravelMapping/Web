@@ -385,7 +385,7 @@ SQL;
                     LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '{$tmuser}'
                     LEFT JOIN systems AS sys ON r.systemName = sys.systemName 
                     WHERE region = '{$region}'
-                    ORDER BY sys.tier, r.root
+                    ORDER BY sys.tier, r.csvOrder
 SQL;
                 $res = tmdb_query($sql_command);
                 while ($row = $res->fetch_assoc()) {
