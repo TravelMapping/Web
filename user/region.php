@@ -369,10 +369,10 @@ SQL;
         ?>
         </tbody>
     </table>
-    <table class="gratable tablesorter" id="routesTable">
+    <table class="gratable" id="routesTable">
         <thead>
             <tr><th colspan="7">Statistics by Route: (<?php echo "<a href=\"/user/mapview.php?u=".$tmuser."&amp;rg=".$region."\">" ?>Full Map)</a></th></tr>
-            <tr><th class="sortable">Tier</th><th class="sortable">Route</th><th class="sortable">#</th><th class="sortable">Clinched (<?php tm_echo_units(); ?>)</th><th class="sortable">Total (<?php tm_echo_units(); ?>)</th><th class="sortable">%</th><th class="nonsortable">Map</th></tr>
+            <tr><th class="sortable">Tier</th><th class="nonsortable">Route</th><th class="sortable">#</th><th class="sortable">Clinched (<?php tm_echo_units(); ?>)</th><th class="sortable">Total (<?php tm_echo_units(); ?>)</th><th class="sortable">%</th><th class="nonsortable">Map</th></tr>
         </thead>
         <tbody>
             <?php
@@ -403,7 +403,7 @@ SQL;
                     echo "<td>".tm_convert_distance($row['clinchedMileage'])."</td>";
                     echo "<td>".tm_convert_distance($row['totalMileage'])."</td>";
                     echo "<td>".$row['percentage']."%</td>";
-                    echo "<td class='link'><a href='/hb?u={$tmuser}&amp;r={$row['root']}'>HB</a></td></tr>";
+                    echo "<td class='link'><a href='/hb?u={$tmuser}&amp;r={$row['root']}'>HB</a></td></tr>\n";
                 }
                 $res->free();
             ?>
