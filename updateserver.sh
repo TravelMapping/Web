@@ -16,6 +16,10 @@ while (( "$#" )); do
 	rootdir=tm
     fi
 
+    if [ "$1" == "--test2" ]; then
+	rootdir=tmtest2
+    fi
+
     if [ "$1" == "--shields" ]; then
 	shieldsdir=shields
     fi
