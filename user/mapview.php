@@ -220,12 +220,14 @@
 	$add_regions = "";
 	// TODO: a toggle to include/exclude devel routes?
         $sql_command = <<<SQL
-SELECT r.region, r.root, r.route, r.systemName, banner, city, sys.tier, 
+SELECT r.region, r.root, r.route, r.systemName, r.banner, r.city, sys.tier, 
   round(r.mileage, 2) AS total, 
   round(COALESCE(cr.mileage, 0), 2) as clinched 
 FROM routes AS r 
   LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '{$_GET['u']}' 
   LEFT JOIN systems as sys on r.systemName = sys.systemName
+  LEFT JOIN connectedRouteRoots AS crr ON r.root = crr.root
+  LEFT JOIN connectedRoutes as conr on crr.firstRoot = conr.firstRoot OR conr.firstRoot = r.root
 WHERE  
 SQL;
         if (array_key_exists('rte', $_GET)) {
@@ -254,7 +256,7 @@ SQL;
             //Don't show. Too many routes
             $sql_command .= "r.root IS NULL";
         }
-        $sql_command .= "ORDER BY sys.tier, r.rootOrder, r.csvOrder;";
+        $sql_command .= "ORDER BY sys.tier, conr.csvOrder, r.rootOrder;";
         $res = tmdb_query($sql_command);
         while($row = $res->fetch_assoc()) {
             $link = "/hb?u=".$_GET['u']."&amp;r=".$row['root'];
