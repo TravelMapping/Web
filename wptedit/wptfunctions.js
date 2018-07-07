@@ -484,7 +484,7 @@ function UpdateMap(pan)
     var traceopt = new Object({
 	color: '#0000FF',
 	weight: 10,
-	ppacity: 0.2
+	opacity: 0.2
     });
     trace = L.polyline(polypoints, traceopt).addTo(map);
     
