@@ -146,13 +146,33 @@ function tm_region_select($multiple) {
     }
     $regions = tm_qs_multi_or_comma_to_array("rg");
     echo "<option value=\"null\">[None Selected]</option>\n";
-    $res = tmdb_query("SELECT * FROM regions WHERE code IN (SELECT region FROM routes) ORDER BY country;");
+    $lastCountry = "None Yet";
+    $inOptgroup = FALSE;
+    //$res = tmdb_query("SELECT * FROM regions WHERE code IN (SELECT region FROM routes) ORDER BY country;");
+    $res = tmdb_query("select regions.code as rcode, regions.name as rname, regions.country as ccode, c.name as cname, counts.rcount from regions join (select  regions.country, count(regions.country) as rcount from regions left join countries as c on regions.country = c.code where regions.code in (select region from routes)  group by regions.country) as counts left join countries as c on regions.country = c.code where regions.code in (select region from routes) and regions.country = counts.country order by c.name, regions.name;");
     while ($row = $res->fetch_assoc()) {
-        echo "<option value=\"".$row['code']."\"";
-        if (in_array($row['code'], $regions)) {
+        // see if we're in a new country group
+	if ($lastCountry != $row['ccode']) {
+	   // close old optgroup if in one
+	   if ($inOptGroup) {
+	      echo "</optgroup>";
+	      $inOptGroup = FALSE;
+	   }
+	   // open new optgroup if a multi-region country
+	   if ($row['rcount'] > 1) {
+	      echo "<optgroup label=\"".$row['cname']."\">";
+	      $inOptGroup = TRUE;
+	   }
+	}
+	$lastCountry = $row['ccode'];
+        echo "<option value=\"".$row['rcode']."\"";
+        if (in_array($row['rcode'], $regions)) {
             echo " selected=\"selected\"";
         }
-	echo ">".$row['name']."</option>\n";
+	echo ">".$row['rname']."</option>\n";
+    }
+    if ($inOptGroup) {
+        echo "</optgroup>";
     }
     $res->free();
     echo "</select>\n";
