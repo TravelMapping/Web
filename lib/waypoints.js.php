@@ -291,11 +291,9 @@ SQL;
 ?>
 
 function waypointsFromSQL() {
-    var startTime = new Date();
     <?php
         if (array_key_exists('r', $_GET)) { select_single_route(); }
         else { select_route_set(); }
     ?>
     genEdges = true;
-    console.log("waypointsFromSQL: " + ((new Date()) - startTime) + " ms");
 }
