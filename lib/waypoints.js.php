@@ -116,6 +116,8 @@ SQL;
         $routenum = 0;
         $pointnum = 0;
         $lastRoute = "";
+	$waypoints_array = "waypoints = [";
+	$comma_after_first = "";
         while ($row = $res->fetch_assoc()) {
             if (!($row['root'] == $lastRoute)) {
                 echo <<<JS
@@ -127,11 +129,13 @@ JS;
                 $lastRoute = $row['root'];
                 $routenum = $routenum + 1;
             }
-            //echo "waypoints[".$pointnum."] = new Waypoint(\"".$row['pointName']."\",".$row['latitude'].",".$row['longitude']."); // Route = ".$row['root']." (".$row['color'].")\n";
-            echo "waypoints[$pointnum] = new Waypoint(\"{$row['pointName']}\",{$row['latitude']},{$row['longitude']});\n";
+	    $waypoints_array .= $comma_after_first."\nnew Waypoint(\"{$row['pointName']}\",{$row['latitude']},{$row['longitude']})";
+	    $comma_after_first = ",";
             $pointnum = $pointnum + 1;
         }
 
+	echo $waypoints_array."\n];\n";
+	
         // check for query string parameter for traveler clinched mapping of route
         if (array_key_exists("u",$_GET)) {
             //echo "// select_systems: ".$select_systems."\n";
@@ -159,10 +163,14 @@ SQL;
             }
             $res = tmdb_query($sql_command);
             $segmentIndex = 0;
+	    $comma_after_first = "";
+	    echo "segments = [";
             while ($row = $res->fetch_assoc()) {
-                echo "segments[$segmentIndex] = {$row['segmentId']}; // route={$row['root']}\n";
+                echo $comma_after_first."\n".$row['segmentId'];
+		$comma_after_first = ",";
                 $segmentIndex = $segmentIndex + 1;
             }
+	    echo "\n];\n";
             if(isset($rteClause)) {
                 $sql_command = <<<SQL
 SELECT 
@@ -186,10 +194,14 @@ SQL;
             }
             $res = tmdb_query($sql_command);
             $segmentIndex = 0;
+	    $comma_after_first = "";
+	    echo "clinched = [";
             while ($row = $res->fetch_assoc()) {
-                echo "clinched[$segmentIndex] = {$row['segmentId']}; // route={$row['root']}\n";
+                echo $comma_after_first."\n".$row['segmentId'];
+		$comma_after_first = ",";
                 $segmentIndex = $segmentIndex + 1;
             }
+	    echo "\n];\n";
             echo "mapClinched = true;\n";
         }
 
@@ -213,7 +225,7 @@ SQL;
             $res = tmdb_query($sql_command);
             $pointnum = 0;
             while ($row = $res->fetch_assoc()) {
-                echo "waypoints[$pointnum] = new Waypoint(\"{$row['pointName']}\",{$row['latitude']},{$row['longitude']});\n";
+                echo "waypoints[$pointnum] = new Waypoint(\"{$row['pointName']}\",{$row['latitude']},{$row['longitude']}); // line 216\n";
 		if ($row['pointName'][0] === '+') {
                     $pointnum = $pointnum + 1;
 		    continue;
@@ -245,11 +257,15 @@ SQL;
                 $sql_command = "SELECT segmentId FROM segments WHERE root = '$routeparam';";
                 $res = tmdb_query($sql_command);
                 $segmentIndex = 0;
+		echo "segments = [";
+		$comma_after_first = "";
                 while ($row = $res->fetch_assoc()) {
-                    echo "segments[$segmentIndex] = {$row['segmentId']};\n";
+                    echo $comma_after_first."\n".$row['segmentId'];
+		    $comma_after_first = ",";
                     $segmentIndex = $segmentIndex + 1;
                 }
                 $res->free();
+		echo "\n];\n";
                 $sql_command = <<<SQL
 SELECT 
   segments.segmentId 
@@ -259,11 +275,15 @@ WHERE segments.root='$routeparam' AND clinched.traveler = '$tmuser';
 SQL;
                 $res = tmdb_query($sql_command);
                 $segmentIndex = 0;
+		$comma_after_first = "";
+		echo "clinched = [";
                 while ($row = $res->fetch_assoc()) {
-                    echo "clinched[$segmentIndex] = {$row['segmentId']};\n";
+                    echo $comma_after_first."\n".$row['segmentId'];
+		    $comma_after_first = ",";
                     $segmentIndex = $segmentIndex + 1;
                 }
                 $res->free();
+		echo "\n];\n";
             }
             echo "mapClinched = true;\n";
         }
@@ -271,9 +291,11 @@ SQL;
 ?>
 
 function waypointsFromSQL() {
+    var startTime = new Date();
     <?php
         if (array_key_exists('r', $_GET)) { select_single_route(); }
         else { select_route_set(); }
     ?>
     genEdges = true;
+    console.log("waypointsFromSQL: " + ((new Date()) - startTime) + " ms");
 }
