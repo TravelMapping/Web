@@ -737,6 +737,8 @@ following sources of highway information.</p>
 	  <li>Pennsylvania, USA
 	    <ul>
 	    <li><a href="http://www.penndot.gov/ProjectAndPrograms/Planning/Maps/Pages/default.aspx">PennDOT Maps</a>. Official highway maps of Pennsylvania, United States.</li>
+	    <li><a href="https://www.penndot.gov/ProjectAndPrograms/ResearchandTesting/RoadwayManagementandTesting/Pages/RMS-Annual-SLDs-By-County.aspx">RMS Annual SLDs By County</a>. RMS Annual Straight Line Diagrams from the Pennsylvania Department of Transportation</li>
+	    <li><a href="http://www.dot7.state.pa.us/videolog/"></a>. Pennsylvania Department of Transportation (PennDOT) VideoLog that shows roadway information and images.</li>
 	    </ul>
 	  </li>
 <!--	  <li>Puerto Rico, USA
