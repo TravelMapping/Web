@@ -10,13 +10,6 @@
 <body>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 
-<p class="heading">Credits and Sources</p>
-
-<p class="text">Travel Mapping is the successor project to the
-dormant <a href="http://cmap.m-plex.com">Clinched Highway
-Mapping</a> (CHM) project, developed and operated by Timothy Reichard.
-Some underlying code and the initial highway data are based on CHM.</p>
-
 <p class="heading">Highway Data Sources</p>
 
 <p class="text">We would like to credit and thank the authors of the
@@ -916,7 +909,13 @@ following sources of highway information.</p>
   <li>Oscar Voss (oscar)</li>
   </ul>
 
-<p class="text">These contributors built on the work
+<p class="heading"><a name="contributors">Predecessor Project</a></p>
+  
+<p class="text">Travel Mapping is the successor project to the
+dormant <a href="http://cmap.m-plex.com">Clinched Highway Mapping</a>
+(CHM) project, developed and operated by Timothy Reichard.  Some
+underlying code and the initial highway data are based on CHM.  The
+contributors listed above built on the work
 of <a href="http://cmap.m-plex.com/docs/collab.php">CHM's
 Collaborators</a>.</p>
 
