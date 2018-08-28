@@ -737,6 +737,9 @@ following sources of highway information.</p>
 	  <li>Pennsylvania, USA
 	    <ul>
 	    <li><a href="http://www.penndot.gov/ProjectAndPrograms/Planning/Maps/Pages/default.aspx">PennDOT Maps</a>. Official highway maps of Pennsylvania, United States.</li>
+	    <li><a href="https://www.penndot.gov/ProjectAndPrograms/ResearchandTesting/RoadwayManagementandTesting/Pages/RMS-Annual-SLDs-By-County.aspx">RMS Annual SLDs By County</a>. RMS Annual Straight Line Diagrams from the Pennsylvania Department of Transportation</li>
+	    <li><a href="http://www.dot7.state.pa.us/videolog/"></a>. Pennsylvania Department of Transportation (PennDOT) VideoLog that shows roadway information and images.</li>
+            <li><a href="https://www.penndot.gov/ProjectAndPrograms/Planning/Maps/Pages/Traffic-Volume.aspx/"></a>. Pennsylvania Department of Transportation (PennDOT) Traffic Volume Maps.</li>
 	    </ul>
 	  </li>
 <!--	  <li>Puerto Rico, USA
@@ -904,6 +907,7 @@ following sources of highway information.</p>
         <a href="http://rickmastfan67.blogspot.com/">Rickmastfan67 Blog</a> </li>
   <li>Jeff Morrison (jeffm)<br>
         <a href="http://www.angelfire.com/ia/jdmorrison/ends/iaends.html">Iowa Highway Ends</a> </li>
+  <li>Mark Moore (Markkos1992)</li>
   <li>Mike Roberson (mapmikey)</li>
   <li>Dave S (mapcat)</li>
   <li>Christopher Steig (Bickendan)</li>
