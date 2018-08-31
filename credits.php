@@ -772,10 +772,11 @@ following sources of highway information.</p>
 <li><a href="https://tnris.org/data-catalog/entry/txdot-roadways/">TxDOT Roadways</a>. Shapefiles maintained by TxDOT Transportation Planning and Programming Division.</li>
 	    </ul>
 	  </li> 
-<!--	  <li>Utah, USA
+	  <li>Utah, USA
 	    <ul>
+<li><a href="https://maps.udot.utah.gov/uplan_data/documents/HRO/">Highway Reference Online</a>. Online route inventory from the Utah Department of Transportation.</li>
 	    </ul>
-	  </li> -->
+	  </li>
 	  <li>Vermont, USA
 	    <ul>
 	    <li><a href="http://www.aot.state.vt.us/planning/MapGIS/Town_Maps1.htm">Town Highway Maps</a>. From the Vermont Agency of Transportation.</li>
