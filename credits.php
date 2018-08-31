@@ -888,7 +888,8 @@ following sources of highway information.</p>
 <p class="heading"><a name="contributors">Project Contributors</a></p>
 
   <ul>
-  <li>Eric Bryant (yakra)<br> </li>
+  <li>Joseph Barnes (the_spui_ninja)<br> </li>
+  <li>Eric Bryant (yakra)<br> </li> 
   <li>Anthony Costanzo (duke87)<br> </li>
   <li>Evin Fairchild (compdude) </li>
   <li>Dave Filpus (dfilpus)<br>
