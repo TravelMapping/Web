@@ -51,7 +51,7 @@ browser and some patience.
 <div class="text">
 
 If you would like a local copy of all of the latest graphs, you can
-download <a href="../graphs.zip">a zip archive of all of them</a>.
+download <a href="../graphdata/graphs.zip">a zip archive of all of them</a>.
 Beware that this is a large file!
 
 </div>
@@ -60,7 +60,7 @@ Beware that this is a large file!
 
 Graphs are copyright &copy; <a href="http://j.teresco.org/">James
 D. Teresco</a>, generated from highway data gathered and maintained by
-<a href="http://tm.teresco.org/credits.php#contributors">Travel
+<a href="http://travelmapping.net/credits.php#contributors">Travel
 Mapping Project</a> contributors.  Graphs may be downloaded freely for
 academic use.  Other use prohibited.
 

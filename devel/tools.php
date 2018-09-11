@@ -55,6 +55,8 @@ $activedc = tm_count_rows("datacheckErrors", "join routes on datacheckErrors.rou
   <li><a href="../logs/tm-master.nmp">Master Near-Miss Point (NMP) file</a>
     <br />
     NMP file can be loaded into HDX to find very nearby points that might be appropriate to combine.</li>
+  <li><a href="../logs/nmpbyregion/">NMP files filtered by region (individual files)</a></li>
+  <li><a href="../logs/nmpbyregion/nmpbyregion.zip">NMP files filtered by region (zip archive)</a></li>
   <li><a href="../logs/nmpfpsunmatched.log">Log of FP entries from nmpfps.log that did not match any entry in nearmisspoints.log</a></li>
   <li><a href="../logs/unprocessedwpts.log">List of unprocessed wpt files</a>
     <br />
