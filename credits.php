@@ -228,6 +228,7 @@ following sources of highway information.</p>
 	      <li>Baden-Württemberg
 	        <ul>
 	          <li><a href="http://www.svz-bw.de/verkehrszaehlung.html">Traffic monitoring</a>. Road map.</li>
+	          <li><a href="https://www.geoportal-bw.de/">Geo portal BW</a>. Road map.</li>
 	        </ul>
 	      </li>
 	      <li>Bavaria
@@ -242,7 +243,8 @@ following sources of highway information.</p>
 	      </li>
 	      <li>Brandenburg
 	        <ul>
-	          <li><a href="http://isk.geobasis-bb.de/strassennetz/basiskarte.html">Brandenburg viewer</a>. Road map.</li>
+	          <li><a href="http://bb-viewer.geobasis-bb.de/strassennetz/">Brandenburg viewer</a>. Road map viewer.</li>
+		  <li><a href="http://www.ls.brandenburg.de/cms/detail.php/bb1.c.260097.de">Brandenburg viewer</a>. Net node maps.</li>
 	        </ul>
 	      </li>
 	      <li>Hamburg
@@ -252,7 +254,7 @@ following sources of highway information.</p>
 	      </li>
 	      <li>Hesse
 	        <ul>
-	          <li><a href="https://mobil.hessen.de/%C3%BCber-uns/downloads-formulare/netzknotenkarten-hessen">Net node maps</a>. </li>
+	          <li><a href="https://mobil.hessen.de/%C3%BCber-uns/downloads-formulare/netzknotenkarten-hessen">Net node maps.</a> </li>
 	        </ul>
 	      </li>
 	      <li>Lower Saxony
@@ -272,7 +274,8 @@ following sources of highway information.</p>
 	      </li>
 	      <li>Rhineland-Palatinate
 	        <ul>
-	          <li><a href="https://lbm.rlp.de/de/service/informationsmaterial/strassenkarte-rheinland-pfalz/">Road map</a>. </li>
+	          <li><a href="https://lbm.rlp.de/de/service/informationsmaterial/strassenkarte-rheinland-pfalz/">Road map</a>.</li>
+	          <li><a href="http://www.geoportal.rlp.de/portal/karten.html">Geo portal RLP</a>.</li>
 	        </ul>
 	      </li>
 	      <li>Saarland
