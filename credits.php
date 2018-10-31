@@ -244,7 +244,7 @@ following sources of highway information.</p>
 	      <li>Brandenburg
 	        <ul>
 	          <li><a href="http://bb-viewer.geobasis-bb.de/strassennetz/">Brandenburg viewer</a>. Road map viewer.</li>
-		  <li><a href="http://www.ls.brandenburg.de/cms/detail.php/bb1.c.260097.de">Brandenburg viewer</a>. Net node maps.</li>
+		  <li><a href="http://www.ls.brandenburg.de/cms/detail.php/bb1.c.260097.de">Net node maps</a>.</li>
 	        </ul>
 	      </li>
 	      <li>Hamburg
@@ -456,6 +456,7 @@ following sources of highway information.</p>
 	    <ul>
 	      <li><a href="http://www.admin.ch/ch/d/sr/741_272/app1.html">List of Motorways and Expressways</a>. Legislative highway definitions for the national highway network of Switzerland.</li>
 	      <li><a href="http://www.autobahnen.ch/">The Swiss Motorways</a>. Hobbyist site covering the motorway network of Switzerland.</li>
+	      <li><a href="https://www.dreamango.com/de/tour/touristische-strassen/grand-tour-of-switzerland/18634381/#dm=1&dmdtab=oax-tab1">Grand Tour of Switzerland</a>.</li>
 	    </ul>
 	  </li>
 	  <li>Turkey
