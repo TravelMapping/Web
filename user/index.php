@@ -79,7 +79,7 @@ echo "<h1>Traveler Stats for ".$tmuser."</h1>";
 </div>
 <div id="body">
 	<div id="logLinks">
-		<a href="/logs/<?php echo $tmuser; ?>.log">Log File</a>
+		<a href="/logs/users/<?php echo $tmuser; ?>.log">Log File</a>
 	</div>
     <div id="overall">
         <h2>Overall Stats</h2>

@@ -1,4 +1,4 @@
-<!-- /lib/tmphbfuncs.php: common PHP functionality for Travel Mapping -->
+<!-- /lib/tmphpfuncs.php: common PHP functionality for Travel Mapping -->
 <?php
 /*
      PHP to include in any Travel Mapping page that needs to access the DB.
@@ -21,7 +21,7 @@
 */
 
 // always attempt to establish a connection to the db, allow QS parameters
-// to override defaults, which come from the 5 lines of tm.conf (which
+// to override defaults, which come from the 6 lines of tm.conf (which
 // is not in source code control to protect the information there)
 //
 // IMPORTANT: this file should also not be accessible through the 
@@ -37,9 +37,13 @@ $tmdbname = chop(fgets($tmconffile));
 $tmdbuser = chop(fgets($tmconffile));
 $tmdbpasswd = chop(fgets($tmconffile));
 $tmdbhost = chop(fgets($tmconffile));
-
-// Google Maps API Key
-$gmaps_api_key = chop(fgets($tmconffile));
+// HERE maps API id and code
+$tmhereid = chop(fgets($tmconffile));
+$tmherecode = chop(fgets($tmconffile));
+// Thunderforest Maps API key
+$tmtfkey = chop(fgets($tmconffile));
+// Mapbox access token
+$tmmbtoken = chop(fgets($tmconffile));
 fclose($tmconffile);
 
 if (array_key_exists("dbname", $_GET) && ctype_alpha($_GET['dbname'])) {
@@ -142,13 +146,33 @@ function tm_region_select($multiple) {
     }
     $regions = tm_qs_multi_or_comma_to_array("rg");
     echo "<option value=\"null\">[None Selected]</option>\n";
-    $res = tmdb_query("SELECT * FROM regions WHERE code IN (SELECT region FROM routes) ORDER BY country;");
+    $lastCountry = "None Yet";
+    $inOptgroup = FALSE;
+    //$res = tmdb_query("SELECT * FROM regions WHERE code IN (SELECT region FROM routes) ORDER BY country;");
+    $res = tmdb_query("select regions.code as rcode, regions.name as rname, regions.country as ccode, c.name as cname, counts.rcount from regions join (select  regions.country, count(regions.country) as rcount from regions left join countries as c on regions.country = c.code where regions.code in (select region from routes)  group by regions.country) as counts left join countries as c on regions.country = c.code where regions.code in (select region from routes) and regions.country = counts.country order by c.name, regions.name;");
     while ($row = $res->fetch_assoc()) {
-        echo "<option value=\"".$row['code']."\"";
-        if (in_array($row['code'], $regions)) {
+        // see if we're in a new country group
+	if ($lastCountry != $row['ccode']) {
+	   // close old optgroup if in one
+	   if ($inOptGroup) {
+	      echo "</optgroup>";
+	      $inOptGroup = FALSE;
+	   }
+	   // open new optgroup if a multi-region country
+	   if ($row['rcount'] > 1) {
+	      echo "<optgroup label=\"".$row['cname']."\">";
+	      $inOptGroup = TRUE;
+	   }
+	}
+	$lastCountry = $row['ccode'];
+        echo "<option value=\"".$row['rcode']."\"";
+        if (in_array($row['rcode'], $regions)) {
             echo " selected=\"selected\"";
         }
-	echo ">".$row['name']."</option>\n";
+	echo ">".$row['rname']."</option>\n";
+    }
+    if ($inOptGroup) {
+        echo "</optgroup>";
     }
     $res->free();
     echo "</select>\n";
@@ -411,6 +435,39 @@ function tm_validate_root($root) {
        return "badroute.root";
     }
     return $root;
+}
+
+// function to generate code to import all needed JS for Leaflet, jQuery,
+// TableSorter, etc.
+function tm_common_js() {
+
+  global $tmhereid;
+  global $tmherecode;
+  global $tmtfkey;
+  global $tmmbtoken;
+  
+  echo "<!-- tm_common_js from tmphpfuncs.php START -->\n";
+  echo "<!-- Map API functionality -->\n";
+  echo "<script type=\"text/javascript\">\n";
+  echo "var here_map_id = \"".$tmhereid."\";\n";
+  echo "var here_map_code = \"".$tmherecode."\";\n";
+  echo "var tf_map_key = \"".$tmtfkey."\";\n";
+  echo "var mapbox_token = \"".$tmmbtoken."\";\n";
+  echo "</script>\n";
+
+echo <<<END
+  <link rel="stylesheet" href="/leaflet/leaflet.css" />
+  <script src="/leaflet/leaflet.js"></script>
+  <script src="/leaflet/leaflet-providers.js"></script>
+  <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+  <!-- jQuery -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <!-- TableSorter -->
+  <script src="/lib/jquery.tablesorter.min.js" type="text/javascript"></script>
+
+END;
+  echo "<!-- tm_common_js from tmphpfuncs.php END -->\n";
 }
 
 // functions from http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php

@@ -7,9 +7,10 @@
  * URL Params:
  *  u - user to display highlighting for on map (required)
  *  rg - region to show routes for on the map (optional)
+ *  country - country to show routes for on the map (optional)
  *  sys - system to show routes for on the map (optional)
  *  rte - route name to show on the map. Supports pattern matching, with _ matching a single character, and % matching 0 or multiple characters.
- * (u, [rg|sys][rte])
+ * (u, [rg|sys|country][rte])
  ***
  -->
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -20,13 +21,14 @@
     <style type="text/css">
         #controlbox {
             position: absolute;
-            top: 30px;
+            top: 60px;
             height: 30px;
-            right: 20px;
+            right: 50px;
             overflow: auto;
             padding: 5px;
             font-size: 20px;
 	    width: 25%;
+	    z-index: 850; /* above all Leaflet layers except controls */
         }
 
         #routesTable .routeName {
@@ -79,12 +81,13 @@
 
 	#selected {
             position: absolute;
+	    z-index: 850; /* above all Leaflet layers except controls */
             right: 10px;
-            top: 60px;
+            top: 90px;
             bottom: 20px;
             overflow-y: auto;
-            max-width: 420px;
-	    opacity: .95;  /* also forces stacking order */
+            max-width: 40%;
+	    opacity: .75;
         }
 
         #routes {
@@ -92,9 +95,11 @@
 	    left: 0px;
             width: 1px;
 	    height: 1px;
+	    position: absolute;
         }
 
         #options {
+	    position: absolute;
 	    display: none;
 	    left: 0px;
             width: 1px;
@@ -107,15 +112,7 @@
 	    opacity: .75;  /* also forces stacking order */
         }
     </style>
-    <script
-        src="http://maps.googleapis.com/maps/api/js?key=<?php echo $gmaps_api_key ?>&sensor=false"
-        type="text/javascript"></script>
-
-    <!-- jQuery -->
-    <script type="application/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <!-- TableSorter -->
-    <script type="application/javascript" src="/lib/jquery.tablesorter.js"></script>
-
+    <?php tm_common_js(); ?>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
     <title>Travel Mapping: Draft Map Overlay Viewer</title>
 </head>
@@ -171,9 +168,9 @@
 </script>
 <?php $nobigheader = 1; ?>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
-
 <div id="map">
 </div>
+
 <div id="selected"></div>
 <div id="options">
     <form id="optionsForm" action="mapview.php">
@@ -212,26 +209,25 @@
                 <th class="sortable clinched">Clinched (<?php tm_echo_units(); ?>)</th><th class="sortable overall">Overall (<?php tm_echo_units(); ?>)</th><th class="sortable percent">%</th></tr>
         </thead>
         <tbody>
-        <!-- TEMP FIX: 1 dummy table lines to account for the fact that the
+        <!-- TEMP FIX: 1 dummy table line to account for the fact that the
 	styling places the table header row above on top of the first
-	two rows of data in the table -->
-        <tr><td class='routeName'>DUMMY</td>
-            <td class='link systemName'>1. syst</td>
-            <td class="clinched">0000</td><td class='overall'>0000</td><td class='percent'>0.00%</td>
-	</tr>
-        <tr><td class='routeName'>DUMMY</td>
-            <td class='link systemName'>2. syst</td>
-            <td class="clinched">0000</td><td class='overall'>0000</td><td class='percent'>0.00%</td>
+	row of data in the table -->
+        <tr><td class='routeName'>&nbsp;</td>
+            <td class='link systemName'>&nbsp;</td>
+            <td class="clinched">&nbsp;</td><td class='overall'>&nbsp;</td><td class='percent'>&nbsp;</td>
 	</tr>
         <?php
+	$add_regions = "";
 	// TODO: a toggle to include/exclude devel routes?
         $sql_command = <<<SQL
-SELECT r.region, r.root, r.route, r.systemName, banner, city, sys.tier, 
+SELECT r.region, r.root, r.route, r.systemName, r.banner, r.city, sys.tier, 
   round(r.mileage, 2) AS total, 
   round(COALESCE(cr.mileage, 0), 2) as clinched 
 FROM routes AS r 
   LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '{$_GET['u']}' 
   LEFT JOIN systems as sys on r.systemName = sys.systemName
+  LEFT JOIN connectedRouteRoots AS crr ON r.root = crr.root
+  LEFT JOIN connectedRoutes as conr on crr.firstRoot = conr.firstRoot OR conr.firstRoot = r.root
 WHERE  
 SQL;
         if (array_key_exists('rte', $_GET)) {
@@ -242,15 +238,25 @@ SQL;
         if (array_key_exists('rg', $_GET) && array_key_exists('sys', $_GET)) {
             $sql_command .= orClauseBuilder('rg', 'region')." AND ".orClauseBuilder('sys', 'systemName');
         } elseif (array_key_exists('rg', $_GET)) {
-            $sql_command .= orClauseBuilder('rg', 'region')
-            ;
+            $sql_command .= orClauseBuilder('rg', 'region');
         } elseif (array_key_exists('sys', $_GET)) {
             $sql_command .= orClauseBuilder('sys', 'systemName');
+	} elseif (array_key_exists('country', $_GET)) {
+	    $sql_command2 = "SELECT code FROM regions WHERE country='".$_GET['country']."';";
+	    $res2 = tmdb_query($sql_command2);
+	    $add_regions = "&rg=";
+            $sql_command .= "(";
+	    while ($row = $res2->fetch_assoc()) {
+	    	  $add_regions .= $row['code'].",";
+		  $sql_command .= "r.region = '".$row['code']."' OR ";
+	    }
+	    $add_regions .= "null";
+	    $sql_command .= "r.region = 'null')";
         } elseif (!array_key_exists('rte', $_GET)) {
             //Don't show. Too many routes
             $sql_command .= "r.root IS NULL";
         }
-        $sql_command .= "ORDER BY sys.tier, r.route;";
+        $sql_command .= "ORDER BY sys.tier, conr.csvOrder, r.rootOrder;";
         $res = tmdb_query($sql_command);
         while($row = $res->fetch_assoc()) {
             $link = "/hb?u=".$_GET['u']."&amp;r=".$row['root'];
@@ -287,5 +293,5 @@ HTML
     $tmdb->close();
 ?>
 
-<script type="application/javascript" src="../lib/waypoints.js.php?<?php echo $_SERVER['QUERY_STRING']?>"></script>
+<script type="application/javascript" src="../lib/waypoints.js.php?<?php echo $_SERVER['QUERY_STRING'].$add_regions?>"></script>
 </html>

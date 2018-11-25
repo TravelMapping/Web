@@ -98,14 +98,8 @@
 
     ?>
     <title><?php echo $regionName." - ".$tmuser; ?></title>
-    <script
-        src="http://maps.googleapis.com/maps/api/js?key=<?php echo $gmaps_api_key ?>&sensor=false"
-        type="text/javascript"></script>
+    <?php tm_common_js(); ?>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
-    <!-- jQuery -->
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript"></script>
-    <!-- TableSorter -->
-    <script src="/lib/jquery.tablesorter.min.js" type="text/javascript"></script>
 </head>
 <body 
 <?php
@@ -375,10 +369,10 @@ SQL;
         ?>
         </tbody>
     </table>
-    <table class="gratable tablesorter" id="routesTable">
+    <table class="gratable" id="routesTable">
         <thead>
             <tr><th colspan="7">Statistics by Route: (<?php echo "<a href=\"/user/mapview.php?u=".$tmuser."&amp;rg=".$region."\">" ?>Full Map)</a></th></tr>
-            <tr><th class="sortable">Tier</th><th class="sortable">Route</th><th class="sortable">#</th><th class="sortable">Clinched (<?php tm_echo_units(); ?>)</th><th class="sortable">Total (<?php tm_echo_units(); ?>)</th><th class="sortable">%</th><th class="nonsortable">Map</th></tr>
+            <tr><th class="sortable">Tier</th><th class="nonsortable">Route</th><th class="sortable">#</th><th class="sortable">Clinched (<?php tm_echo_units(); ?>)</th><th class="sortable">Total (<?php tm_echo_units(); ?>)</th><th class="sortable">%</th><th class="nonsortable">Map</th></tr>
         </thead>
         <tbody>
             <?php
@@ -390,8 +384,10 @@ SQL;
                     FROM routes AS r 
                     LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '{$tmuser}'
                     LEFT JOIN systems AS sys ON r.systemName = sys.systemName 
+		    LEFT JOIN connectedRouteRoots AS crr ON r.root = crr.root
+  		    LEFT JOIN connectedRoutes as conr on crr.firstRoot = conr.firstRoot OR conr.firstRoot = r.root
                     WHERE region = '{$region}'
-                    ORDER BY sys.tier, r.root
+                    ORDER BY sys.tier, conr.csvOrder, r.rootOrder
 SQL;
                 $res = tmdb_query($sql_command);
                 while ($row = $res->fetch_assoc()) {
@@ -409,7 +405,7 @@ SQL;
                     echo "<td>".tm_convert_distance($row['clinchedMileage'])."</td>";
                     echo "<td>".tm_convert_distance($row['totalMileage'])."</td>";
                     echo "<td>".$row['percentage']."%</td>";
-                    echo "<td class='link'><a href='/hb?u={$tmuser}&amp;r={$row['root']}'>HB</a></td></tr>";
+                    echo "<td class='link'><a href='/hb?u={$tmuser}&amp;r={$row['root']}'>HB</a></td></tr>\n";
                 }
                 $res->free();
             ?>

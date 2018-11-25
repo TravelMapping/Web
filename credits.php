@@ -10,13 +10,6 @@
 <body>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 
-<p class="heading">Credits and Sources</p>
-
-<p class="text">Travel Mapping is the successor project to the
-dormant <a href="http://cmap.m-plex.com">Clinched Highway
-Mapping</a> (CHM) project, developed and operated by Timothy Reichard.
-Some underlying code and the initial highway data are based on CHM.</p>
-
 <p class="heading">Highway Data Sources</p>
 
 <p class="text">We would like to credit and thank the authors of the
@@ -166,8 +159,9 @@ following sources of highway information.</p>
 											<li>Saskatchewan, CAN
 	    <ul>
 <li><a href="http://www.highways.gov.sk.ca/">Ministry of Transportation and Infrastructure</a>. Official website of provincial Ministry of Transportation and Infrastructure</li>
-<li><a href="http://www.tourismsaskatchewan.com/~/media/files/map-face-100-dpi.pdf?la=en">Official Road Map</a>. Detailed provincial highway map, prepared by Ministry of Transportation and Infrastructure for Tourism Saskatchewan.</li>
+<li><a href="http://www.tourismsaskatchewan.com/~/media/about-saskatchewan/road-map-face-100-dpi-2017.pdf?la=en">Official Road Map</a>. Detailed provincial highway map, prepared by Ministry of Transportation and Infrastructure for Tourism Saskatchewan.</li>
 <li><a href="https://hotline.gov.sk.ca/map.html">Highway Hotline</a>. Ministry of Transportation and Infrastructure map, showing major routes and their current road conditions.</li>
+<li><a href="http://publications.gov.sk.ca/documents/18/104925-Travel%20on%20Saskatchewan%20Highways%202016%20(2).pdf">Travel on Saskatchewan Highways 2016</a>. Ministry of Transportation and Infrastructure traffic count report, including detailed list of province-maintained highways.</li>
 <li>Canada Back Road Atlas. Paper 2008 road atlas by MapArt, covering Saskatchewan and other provinces, showing detailed route information including names of intersecting roads not available online.</li>		    
 												</ul>
 	  </li>
@@ -234,6 +228,7 @@ following sources of highway information.</p>
 	      <li>Baden-Württemberg
 	        <ul>
 	          <li><a href="http://www.svz-bw.de/verkehrszaehlung.html">Traffic monitoring</a>. Road map.</li>
+	          <li><a href="https://www.geoportal-bw.de/">Geo portal BW</a>. Road map.</li>
 	        </ul>
 	      </li>
 	      <li>Bavaria
@@ -248,7 +243,8 @@ following sources of highway information.</p>
 	      </li>
 	      <li>Brandenburg
 	        <ul>
-	          <li><a href="http://isk.geobasis-bb.de/strassennetz/basiskarte.html">Brandenburg viewer</a>. Road map.</li>
+	          <li><a href="http://bb-viewer.geobasis-bb.de/strassennetz/">Brandenburg viewer</a>. Road map viewer.</li>
+		  <li><a href="http://www.ls.brandenburg.de/cms/detail.php/bb1.c.260097.de">Net node maps</a>.</li>
 	        </ul>
 	      </li>
 	      <li>Hamburg
@@ -258,7 +254,7 @@ following sources of highway information.</p>
 	      </li>
 	      <li>Hesse
 	        <ul>
-	          <li><a href="https://mobil.hessen.de/%C3%BCber-uns/downloads-formulare/netzknotenkarten-hessen">Net node maps</a>. </li>
+	          <li><a href="https://mobil.hessen.de/%C3%BCber-uns/downloads-formulare/netzknotenkarten-hessen">Net node maps.</a> </li>
 	        </ul>
 	      </li>
 	      <li>Lower Saxony
@@ -278,7 +274,8 @@ following sources of highway information.</p>
 	      </li>
 	      <li>Rhineland-Palatinate
 	        <ul>
-	          <li><a href="https://lbm.rlp.de/de/service/informationsmaterial/strassenkarte-rheinland-pfalz/">Road map</a>. </li>
+	          <li><a href="https://lbm.rlp.de/de/service/informationsmaterial/strassenkarte-rheinland-pfalz/">Road map</a>.</li>
+	          <li><a href="http://www.geoportal.rlp.de/portal/karten.html">Geo portal RLP</a>.</li>
 	        </ul>
 	      </li>
 	      <li>Saarland
@@ -459,6 +456,7 @@ following sources of highway information.</p>
 	    <ul>
 	      <li><a href="http://www.admin.ch/ch/d/sr/741_272/app1.html">List of Motorways and Expressways</a>. Legislative highway definitions for the national highway network of Switzerland.</li>
 	      <li><a href="http://www.autobahnen.ch/">The Swiss Motorways</a>. Hobbyist site covering the motorway network of Switzerland.</li>
+	      <li><a href="https://www.dreamango.com/de/tour/touristische-strassen/grand-tour-of-switzerland/18634381/#dm=1&dmdtab=oax-tab1">Grand Tour of Switzerland</a>.</li>
 	    </ul>
 	  </li>
 	  <li>Turkey
@@ -736,6 +734,9 @@ following sources of highway information.</p>
 	  <li>Pennsylvania, USA
 	    <ul>
 	    <li><a href="http://www.penndot.gov/ProjectAndPrograms/Planning/Maps/Pages/default.aspx">PennDOT Maps</a>. Official highway maps of Pennsylvania, United States.</li>
+	    <li><a href="https://www.penndot.gov/ProjectAndPrograms/ResearchandTesting/RoadwayManagementandTesting/Pages/RMS-Annual-SLDs-By-County.aspx">RMS Annual SLDs By County</a>. RMS Annual Straight Line Diagrams from the Pennsylvania Department of Transportation</li>
+	    <li><a href="http://www.dot7.state.pa.us/videolog/"></a>. Pennsylvania Department of Transportation (PennDOT) VideoLog that shows roadway information and images.</li>
+            <li><a href="https://www.penndot.gov/ProjectAndPrograms/Planning/Maps/Pages/Traffic-Volume.aspx/"></a>. Pennsylvania Department of Transportation (PennDOT) Traffic Volume Maps.</li>
 	    </ul>
 	  </li>
 <!--	  <li>Puerto Rico, USA
@@ -775,10 +776,11 @@ following sources of highway information.</p>
 <li><a href="https://tnris.org/data-catalog/entry/txdot-roadways/">TxDOT Roadways</a>. Shapefiles maintained by TxDOT Transportation Planning and Programming Division.</li>
 	    </ul>
 	  </li> 
-<!--	  <li>Utah, USA
+	  <li>Utah, USA
 	    <ul>
+<li><a href="https://maps.udot.utah.gov/uplan_data/documents/HRO/">Highway Reference Online</a>. Online route inventory from the Utah Department of Transportation.</li>
 	    </ul>
-	  </li> -->
+	  </li>
 	  <li>Vermont, USA
 	    <ul>
 	    <li><a href="http://www.aot.state.vt.us/planning/MapGIS/Town_Maps1.htm">Town Highway Maps</a>. From the Vermont Agency of Transportation.</li>
@@ -866,10 +868,32 @@ following sources of highway information.</p>
 	  </li>
 	</ul>	
 
+<p class="heading"><a name="tools">Web/Software Tools</a></p>
+
+<ul>
+  <li>The project's free, public repositories are hosted on <a href="https://github.com">GitHub</a></li>
+  <li>Site update code uses <a href="https://www.python.org/">Python</a></li>
+  <li>The web server is hosted
+  at <a href="https://www.siena.edu">Siena College</a>, and is
+  a <a href="http://freebsd.org">FreeBSD server</a>
+  running <a href="https://httpd.apache.org/">Apache</a>
+  with <a href="http://php.net/">PHP</a>
+    and <a href="https://www.mysql.com/">MySQL</a>.</li>
+  <li>Mapping capabilities are provided
+  by <a href="https://leafletjs.com/">Leaflet</a> with
+  the <a href="https://github.com/marslan390/BeautifyMarker">extension</a>
+  and map tiles from various sources as indicated on the online maps</li>
+  <li>Other JavaScript libraries in use
+    include <a href="https://jquery.com/">jQuery</a>.</li>
+  <li>The shield generator
+  uses <a href="https://github.com/sammdot/roadgeek-fonts/releases">Roadgeek Fonts</a>.</li>
+</ul>
+
 <p class="heading"><a name="contributors">Project Contributors</a></p>
 
   <ul>
-  <li>Eric Bryant (yakra)<br> </li>
+  <li>Joseph Barnes (the_spui_ninja)<br> </li>
+  <li>Eric Bryant (yakra)<br> </li> 
   <li>Anthony Costanzo (duke87)<br> </li>
   <li>Evin Fairchild (compdude) </li>
   <li>Dave Filpus (dfilpus)<br>
@@ -882,15 +906,22 @@ following sources of highway information.</p>
         <a href="http://rickmastfan67.blogspot.com/">Rickmastfan67 Blog</a> </li>
   <li>Jeff Morrison (jeffm)<br>
         <a href="http://www.angelfire.com/ia/jdmorrison/ends/iaends.html">Iowa Highway Ends</a> </li>
+  <li>Mark Moore (Markkos1992)</li>
   <li>Mike Roberson (mapmikey)</li>
   <li>Dave S (mapcat)</li>
   <li>Christopher Steig (Bickendan)</li>
-  <li>Jim Teresco (terescoj), Primary Back End Development, Developed highway data for New York, Massachusetts, and New Mexico<br>
+  <li>Jim Teresco (terescoj), Primary Site Development<br>
       <a href="http://www.teresco.org/pics/signs/">Why Do You Have So Many Pictures of Road Signs?</a>  </li>
   <li>Oscar Voss (oscar)</li>
   </ul>
 
-<p class="text">These contributors built on the work
+<p class="heading"><a name="contributors">Predecessor Project</a></p>
+  
+<p class="text">Travel Mapping is the successor project to the
+dormant <a href="http://cmap.m-plex.com">Clinched Highway Mapping</a>
+(CHM) project, developed and operated by Timothy Reichard.  Some
+underlying code and the initial highway data are based on CHM.  The
+contributors listed above built on the work
 of <a href="http://cmap.m-plex.com/docs/collab.php">CHM's
 Collaborators</a>.</p>
 

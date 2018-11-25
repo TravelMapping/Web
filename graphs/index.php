@@ -42,7 +42,7 @@ description, number of vertices and edges in both the collapsed and
 simple <a
 href="http://courses.teresco.org/metal/graph-formats.shtml">formats</a>,
 and links to download the graph files.  <b>Note:</b> larger graphs
-greatly tax the Highway Data Examiner and the Google Maps API.  They
+greatly tax the Highway Data Examiner and the Leaflet maps.  They
 should all work, but large graphs require a lot of memory for your
 browser and some patience.
 
@@ -51,7 +51,7 @@ browser and some patience.
 <div class="text">
 
 If you would like a local copy of all of the latest graphs, you can
-download <a href="../graphs.zip">a zip archive of all of them</a>.
+download <a href="../graphdata/graphs.zip">a zip archive of all of them</a>.
 Beware that this is a large file!
 
 </div>
@@ -60,7 +60,7 @@ Beware that this is a large file!
 
 Graphs are copyright &copy; <a href="http://j.teresco.org/">James
 D. Teresco</a>, generated from highway data gathered and maintained by
-<a href="http://tm.teresco.org/credits.php#contributors">Travel
+<a href="http://travelmapping.net/credits.php#contributors">Travel
 Mapping Project</a> contributors.  Graphs may be downloaded freely for
 academic use.  Other use prohibited.
 
@@ -115,12 +115,12 @@ while ($row = $result->fetch_array()) {
 	else {
 		echo "<tr class = ".$row[5].">
 		<td>".$row[1]."</td>
-		<td><a href=".$row[0].">".$row[0]."</a></td>
+		<td><a href=../graphdata/".$row[0].">".$row[0]."</a></td>
 		<td class = c".$row[2].">".$row[2]."</td>
 		<td>".$row[3]."</td>";
 		
 		echo "
-		<td><a href=".$prevRow[0].">".$prevRow[0]."</a></td>
+		<td><a href=../graphdata/".$prevRow[0].">".$prevRow[0]."</a></td>
 		<td>".$prevRow[2]."</td>
 		<td>".$prevRow[3]."</td>
 		</tr>";
