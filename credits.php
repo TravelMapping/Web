@@ -911,6 +911,7 @@ following sources of highway information.</p>
   <li>Mihai-Lucian Radu (panda80)</li>	  
   <li>Dave S (mapcat)</li>
   <li>Christopher Steig (Bickendan)</li>
+  <li>Nick Tallyn (ntallyn)</li>
   <li>Jim Teresco (terescoj), Primary Site Development<br>
       <a href="http://www.teresco.org/pics/signs/">Why Do You Have So Many Pictures of Road Signs?</a>  </li>
   <li>Oscar Voss (oscar)</li>
