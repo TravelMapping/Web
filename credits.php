@@ -544,6 +544,7 @@ following sources of highway information.</p>
 	    <ul>
               <li>Official Transportation Map. Road map from the Delaware Department of Transportation.</li>
 	      <li><a href="https://www.deldot.gov/Publications/reports/gis/index.shtml">Road Network Files</a>. Shapefiles from the Delaware Department of Transportation.</li>
+	      <li><a href="https://www.deldot.gov/Publications/manuals/traffic_counts/index.shtml"></a>. Vehicle Volume Summary (Traffic Counts) from the Delaware Department of Transportation.    
  	    </ul>
 	  </li>
 <!--	  <li>District of Columbia, USA
