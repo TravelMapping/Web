@@ -37,11 +37,11 @@ href="http://j.teresco.org/">the author</a>.
 
 <div class="text">
 
-For each graph, the tables below gives the graph name, a brief
-description, number of vertices and edges in both the collapsed and
+For each graph, the table below gives a brief
+description, then download links and graph information for the collapsed, traveled, and
 simple <a
-href="http://courses.teresco.org/metal/graph-formats.shtml">formats</a>,
-and links to download the graph files.  <b>Note:</b> larger graphs
+href="http://courses.teresco.org/metal/graph-formats.shtml">formats</a>.
+<b>Note:</b> larger graphs
 greatly tax the Highway Data Examiner and the Leaflet maps.  They
 should all work, but large graphs require a lot of memory for your
 browser and some patience.
@@ -62,7 +62,7 @@ Graphs are copyright &copy; <a href="http://j.teresco.org/">James
 D. Teresco</a>, generated from highway data gathered and maintained by
 <a href="http://travelmapping.net/credits.php#contributors">Travel
 Mapping Project</a> contributors.  Graphs may be downloaded freely for
-academic use.  Other use prohibited.
+academic use.  Other use by explicit permission only.
 
 </div>
 <p class="subheading">All Graphs</p>
@@ -81,8 +81,8 @@ academic use.  Other use prohibited.
 			</div>
 			<table class="gratable" id="regTable" border="1">
 			<thead>
-			<tr><th rowspan="2">Graph Description</th><th colspan="3">Collapsed Format Graph</th><th colspan="3">Simple Format Graph</th></tr>
-			<tr><th>Download Link</th><th>Vertices</th><th>Edges</th><th>Download Link</th><th>Vertices</th><th>Edges</th></tr></thead>
+			<tr><th rowspan="2">Graph Description</th><th colspan="3">Collapsed Format Graph</th><th colspan="4">Traveled Format Graph</th><th colspan="3">Simple Format Graph</th></tr>
+			<tr><th>Download Link</th><th>Vertices</th><th>Edges</th><th>Download Link</th><th>Vertices</th><th>Edges</th><th>Travelers</th><th>Download Link</th><th>Vertices</th><th>Edges</th></tr></thead>
 			<tbody id="regBody">
 <?
 $tmconffile = fopen($_SERVER['DOCUMENT_ROOT']."/lib/tm.conf", "r");
@@ -102,30 +102,40 @@ catch ( Exception $e ) {
    //echoecho "<h1 style='color: red'>Failed to connect to database ".$tmdbname." on ".$tmdbhost." Please try again later.</h1>";
    exit;
 }
-$result = $tmdb->query("SELECT * FROM graphs");
+$result = $tmdb->query("SELECT * FROM graphs ORDER BY descr, format");
 $counter = 0;
 $prevRow;
 
-while ($row = $result->fetch_array()) {	
-	//keep track of simple info so we can put it after collapsed
-	if ($counter%2 == 0){		
-		$prevRow = $row;
-	}
-	//produce table row in correct order
-	else {
-		echo "<tr class = ".$row[5].">
-		<td>".$row[1]."</td>
-		<td><a href=../graphdata/".$row[0].">".$row[0]."</a></td>
-		<td class = c".$row[2].">".$row[2]."</td>
-		<td>".$row[3]."</td>";
+while ($counter < $result->num_rows) {
+
+      // get three entries: collapsed, simple, then traveled for each
+      $crow = $result->fetch_assoc();
+      $srow = $result->fetch_assoc();
+      $trow = $result->fetch_assoc();
+
+      $counter += 3;
+
+      if ($crow == NULL || $srow == NULL || $trow == NULL) {
+          // should produce some kind of error message
+          continue;
+      }
+
+      // build table row (was: class=collapsed)
+      echo "<tr class='".$crow['category']."'>
+	   <td>".$crow['descr']."</td>
+	   <td><a href=\"../graphdata/".$crow['filename']."\">".$crow['filename']."</a></td>
+	   <td class='c".$crow['vertices']."'>".$crow['vertices']."</td>
+	   <td>".$crow['edges']."</td>\n";
 		
-		echo "
-		<td><a href=../graphdata/".$prevRow[0].">".$prevRow[0]."</a></td>
-		<td>".$prevRow[2]."</td>
-		<td>".$prevRow[3]."</td>
-		</tr>";
-	}
-	$counter++;
+      echo "<td><a href=\"../graphdata/".$trow['filename']."\">".$trow['filename']."</a></td>
+	   <td>".$trow['vertices']."</td>
+	   <td>".$trow['edges']."</td>
+	   <td>".$trow['travelers']."</td>\n";
+
+      echo "<td><a href=\"../graphdata/".$srow['filename']."\">".$srow['filename']."</a></td>
+	   <td>".$srow['vertices']."</td>
+	   <td>".$srow['edges']."</td>
+           </tr>\n";
 }
 $values = array();
 $descr = array();
@@ -144,52 +154,77 @@ $("#regTable").DataTable(
 	info: false
 });
 
+// populate graph types menu
 var vals = <?php echo '["' . implode('", "', $values) . '"]' ?>;
 var inner = <?php echo '["' . implode('", "', $descr) . '"]' ?>;
-for (var i=0; i<vals.length; i++){
-	var op = document.createElement("option");
-	op.value = vals[i];
-	op.innerHTML = vals[i] + ": " + inner[i];
-	document.getElementById("regFil").appendChild(op);
+for (var i=0; i<vals.length; i++) {
+  var op = document.createElement("option");
+  op.value = vals[i];
+  op.innerHTML = vals[i] + ": " + inner[i];
+  document.getElementById("regFil").appendChild(op);
 }
 
+// filter for min/max number of vertices
 function tableFilter(event){
-	if (event.target.value > 0){
-		var str = event.target.id.substring(0,3)+"Body";
-		var tbody = document.getElementById(str);
-		for (var i=1; i<tbody.childNodes.length; i++){
-			if(event.target.id.substring(3) == "Max"){
-				if(parseInt(tbody.childNodes[i].childNodes[5].className.substring(1)) > event.target.value)
-					tbody.childNodes[i].classList.add("hideNumL");
-				else
-					tbody.childNodes[i].classList.remove("hideNumL");
-			}
-			else{
-				if(parseInt(tbody.childNodes[i].childNodes[5].className.substring(1)) < event.target.value)
-					tbody.childNodes[i].classList.add("hideNumS");
-				else
-					tbody.childNodes[i].classList.remove("hideNumS");
-			}
-			hideRow(tbody.childNodes[i]);			
-		}
-	}
+  if (event.target.value > 0) {
+    let tbody = document.getElementById("regBody");
+    // loop over each table row, where the cell at index 2
+    // has the size as its className prepended with a 'c'
+    // mark each row with a class indicating if should be hidden
+    // for exceeding the max or falling below the min
+    for (var i=0; i<tbody.rows.length; i++) {
+      let tRow = tbody.rows[i];
+      let numV = parseInt(tRow.cells[2].className.substring(1));
+      if (event.target.id == "regMax") {
+        if (numV > event.target.value) {
+          tRow.classList.add("hideNumL");
+        }
+        else {
+          tRow.classList.remove("hideNumL");
+        }
+      }
+      else {
+        if (numV < event.target.value) {
+          tRow.classList.add("hideNumS");
+        }
+        else {
+          rRow.classList.remove("hideNumS");
+        }
+      }
+      hideRow(tRow);      
+    }
+  }
 }
-function selFilter(event){	
-	var str = event.target.id.substring(0,3)+"Body";
-		var tbody = document.getElementById(str);
-		for (var i=1; i<tbody.childNodes.length; i++){	
-			if(document.getElementById("regFil").value != "all" && tbody.childNodes[i].className.indexOf(document.getElementById("regFil").value) == -1)
-				tbody.childNodes[i].classList.add("hideType");
-			else
-				tbody.childNodes[i].classList.remove("hideType");
-			hideRow(tbody.childNodes[i]);	
-		}
+
+// filter based on graph categories
+function selFilter(event) {  
+  let tbody = document.getElementById("regBody");
+
+  // loop over each row, if selection is anything but "all" we filter
+  // based on the category, which is stored as the class of each row
+  for (var i=0; i<tbody.rows.length; i++) {
+    if (document.getElementById("regFil").value != "all" &&
+        tbody.rows[i].className.indexOf(document.getElementById("regFil").value) == -1) {
+      tbody.rows[i].classList.add("hideType");
+    }
+    else {
+      tbody.rows[i].classList.remove("hideType");
+    }
+    hideRow(tbody.rows[i]);  
+  }
 }
-function hideRow(elem){
-	if(elem.classList.contains("hideType") || elem.classList.contains("hideNumL") || elem.classList.contains("hideNumS"))
-		elem.style.display = "none";
-	else
-		elem.style.display = "";
+
+// do the actual hide/show based on the existence of any of the
+// classes that would hide it based on one of those categories
+function hideRow(elem) {
+  if (elem.classList.contains("hideType") ||
+      elem.classList.contains("hideNumL") ||
+      elem.classList.contains("hideNumS")) {
+    elem.style.display = "none";
+  }
+  else {
+    elem.style.display = "";
+  }
 }
 </script>
 <p class="text">
