@@ -28,7 +28,7 @@ Most of the files below are regenerated during each site update.
 <div class="text">
 <ul>
 <li><a href="http://cmap.m-plex.com/tools/manual.php">CHM's Instruction Manual</a> (TM generally follows these rules, but we do need to develop our own manual)</li>
-<li><a href="http://travelmapping.net/wptedit/">TM's update of CHM's WPT file Editor</a> (Goal: develop our own new version)</li>
+<li><a href="/wptedit/">TM's update of CHM's WPT file Editor</a> (Goal: develop our own new version)</li>
 <li><a href="http://courses.teresco.org/metal/hdx/">Highway Data Examiner</a> (HDX) to view graph and near-miss data</li>
 </ul>
 </div>
