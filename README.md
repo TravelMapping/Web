@@ -56,7 +56,13 @@ Line 7: ThunderForest map key
 Line 8: MapBox token
 </pre>
 
-This file needs to be readable by the web server but should not be served by the web server.  Configure Apache to ensure this.
+This file needs to be readable by the web server but should not be served by the web server.  Configure Apache to ensure this.  There are various ways to accomplish this.  On the TM production server, this is done with this global directive in httpd.conf:
+
+<pre>
+<Files "tm.conf*">
+    Require all denied
+</Files>
+</pre>
 
 Also create a file motd in the root of the directory server.  This is the "message of the day" for TM.
 
