@@ -79,7 +79,7 @@
             $sql_command = <<<SQL
 SELECT 
   waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, 
-  systems.tier, systems.color, systems.systemname 
+  systems.tier, systems.color, systems.systemname, routes.route, routes.banner, routes.abbrev, routes.region
 FROM waypoints 
   JOIN routes ON routes.root = waypoints.root 
   JOIN systems ON routes.systemname = systems.systemname AND $activeClause $rteClause
@@ -92,7 +92,7 @@ SQL;
             $sql_command = <<<SQL
 SELECT 
   waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, 
-  systems.tier, systems.color, systems.systemname 
+  systems.tier, systems.color, systems.systemname, routes.route, routes.banner, routes.abbrev, routes.region
 FROM waypoints 
   JOIN routes ON routes.root = waypoints.root
   {$select_regions}{$select_systems}
@@ -103,7 +103,7 @@ SQL;
             $sql_command = <<<SQL
 SELECT 
   waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, 
-  systems.tier, systems.color, systems.systemname 
+  systems.tier, systems.color, systems.systemname, routes.route, routes.banner, routes.abbrev, routes.region
 FROM waypoints 
   JOIN routes ON routes.root = waypoints.root $select_regions $select_systems
   JOIN systems ON routes.systemname = systems.systemname AND $activeClause
@@ -122,9 +122,7 @@ SQL;
             if (!($row['root'] == $lastRoute)) {
                 echo <<<JS
 newRouteIndices[$routenum] = $pointnum;
-routeTier[$routenum] = {$row['tier']};
-routeColor[$routenum] = '{$row['color']}';
-routeSystem[$routenum] = '{$row['systemname']}';\n
+routeInfo[$routenum] = { tier: {$row['tier']}, color: "{$row['color']}", system: "{$row['systemname']}", label: "{$row['region']} {$row['route']}{$row['banner']}{$row['abbrev']}" };\n
 JS;
                 $lastRoute = $row['root'];
                 $routenum = $routenum + 1;
