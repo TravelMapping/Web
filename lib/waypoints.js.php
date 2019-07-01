@@ -205,6 +205,7 @@ SQL;
 
         // insert custom color code if needed
         tm_generate_custom_colors_array();
+	echo "mapStatus = mapStates.MAPVIEW;\n";
     }
     
     function select_single_route ()
@@ -284,14 +285,19 @@ SQL;
 		echo "\n];\n";
             }
             echo "mapClinched = true;\n";
+	    echo "mapStatus = mapStates.HB_ROUTE;\n";
         }
     }
 ?>
 
 function waypointsFromSQL() {
     <?php
-        if (array_key_exists('r', $_GET)) { select_single_route(); }
-        else { select_route_set(); }
+        if (array_key_exists('r', $_GET)) {
+	   select_single_route();
+	}
+        else {
+	    select_route_set();
+        }
     ?>
     genEdges = true;
 }
