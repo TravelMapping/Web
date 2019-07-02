@@ -121,7 +121,7 @@ SQL;
         while ($row = $res->fetch_assoc()) {
             if (!($row['root'] == $lastRoute)) {
                 echo <<<JS
-routeInfo[$routenum] = { firstWaypoint: $pointnum, tier: {$row['tier']}, color: "{$row['color']}", system: "{$row['systemname']}", label: "{$row['region']} {$row['route']}{$row['banner']}{$row['abbrev']}" };\n
+routeInfo[$routenum] = { firstWaypoint: $pointnum, root: "{$row['root']}", tier: {$row['tier']}, color: "{$row['color']}", system: "{$row['systemname']}", label: "{$row['region']} {$row['route']}{$row['banner']}{$row['abbrev']}" };\n
 JS;
                 $lastRoute = $row['root'];
                 $routenum = $routenum + 1;
