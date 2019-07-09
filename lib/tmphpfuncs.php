@@ -365,7 +365,7 @@ function tm_update_time() {
     }
     $res = tmdb_query($sql_command);
     $row = $res->fetch_assoc();
-    $ans = $row['create_time'];
+    $ans = $row['CREATE_TIME'];
     $res->free();
     return $ans;
 }
