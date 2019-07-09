@@ -128,6 +128,20 @@
         $routeparam = "";
     }
 
+    // parse lat, lon, zoom parameters if present
+    $lat = "null";
+    $lon = "null";
+    $zoom = "null";
+    if (array_key_exists("lat", $_GET)) {
+        $lat = floatval($_GET["lat"]);
+    }
+    if (array_key_exists("lon", $_GET)) {
+        $lon = floatval($_GET["lon"]);
+    }
+    if (array_key_exists("zoom", $_GET)) {
+        $zoom = intval($_GET["zoom"]);
+    }
+
     ?>
     <?php tm_common_js(); ?>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
@@ -175,7 +189,7 @@ if ($routeparam == "") {
 
 } 
 else {
-    echo "<body onload=\"loadmap(); waypointsFromSQL(); updateMap();\">\n";
+    echo "<body onload=\"loadmap(); waypointsFromSQL(); updateMap(".$lat.",".$lon.",".$zoom.");\">\n";
     require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
       
 }

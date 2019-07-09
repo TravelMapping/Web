@@ -117,7 +117,7 @@
     <title>Travel Mapping: Draft Map Overlay Viewer</title>
 </head>
 
-<body onload="loadmap(); waypointsFromSQL(); updateMap(); toggleTable();">
+<body onload="loadmap(); waypointsFromSQL(); updateMap(null,null,null); toggleTable();">
 <script type="application/javascript">
 
     function toggleTable() {
