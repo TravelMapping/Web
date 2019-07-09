@@ -260,7 +260,7 @@ SQL;
         $res = tmdb_query($sql_command);
         while($row = $res->fetch_assoc()) {
             $link = "/hb?u=".$_GET['u']."&amp;r=".$row['root'];
-            echo "<tr onclick=\"window.open('".$link."')\"><td class='routeName'>";
+            echo "<tr onclick=\"window.open('".$link."')\" onmouseover=\"mapviewRouteHover('".$row['root']."')\" onmouseout=\"mapviewRouteEndHover()\"><td class='routeName'>";
             //REGION ROUTE BANNER (CITY)
             echo $row['region'] . " " . $row['route'];
             if (strlen($row['banner']) > 0) {
