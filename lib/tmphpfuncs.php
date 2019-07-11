@@ -375,10 +375,10 @@ function tm_update_time() {
 // associative array) as the value associated with a new key 'rank'.
 function tm_fetch_user_row_with_rank($res, $rankBy) {
     global $tmuser;
-    $nextRank = 1;
+    $nextRank = 2;
     $rank = 1;
     $score = 0;
-    $row = array();
+    $row = $res->fetch_assoc();
     while($row['traveler'] != $tmuser && $row = $res->fetch_assoc()) {
         if ($score != $row[$rankBy]) {
             $score = $row[$rankBy];
