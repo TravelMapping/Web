@@ -128,6 +128,20 @@
         $routeparam = "";
     }
 
+    // parse lat, lon, zoom parameters if present
+    $lat = "null";
+    $lon = "null";
+    $zoom = "null";
+    if (array_key_exists("lat", $_GET)) {
+        $lat = floatval($_GET["lat"]);
+    }
+    if (array_key_exists("lon", $_GET)) {
+        $lon = floatval($_GET["lon"]);
+    }
+    if (array_key_exists("zoom", $_GET)) {
+        $zoom = intval($_GET["zoom"]);
+    }
+
     ?>
     <?php tm_common_js(); ?>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
@@ -175,7 +189,7 @@ if ($routeparam == "") {
 
 } 
 else {
-    echo "<body onload=\"loadmap(); waypointsFromSQL(); updateMap();\">\n";
+    echo "<body onload=\"loadmap(); waypointsFromSQL(); updateMap(".$lat.",".$lon.",".$zoom.");\">\n";
     require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
       
 }
@@ -326,7 +340,7 @@ SQL;
 ENDA;
     if ($routeparam != "") {
         echo "<table><tbody><tr><td>";
-    	echo "<a href='/user/mapview.php?rte={$routeInfo['route']}'>View Associated Routes</a>";
+    	echo "<a href='/user/mapview.php?rte={$routeInfo['route']}'>Related Routes</a>";
         echo "</td><td>";
         echo "<input id=\"showMarkers\" type=\"checkbox\" name=\"Show Markers\" onclick=\"showMarkersClicked()\" checked=\"false\" />&nbsp;Show Markers&nbsp;";
         echo "</td><td>";
@@ -338,6 +352,8 @@ ENDA;
         echo "</td><td>";
         echo "<input type=\"hidden\" name=\"r\" value=\"".$routeparam."\" />";
         echo "<input type=\"submit\" value=\"Apply\" />";
+        echo "</td><td>";
+        echo "<a href='/hb/?r=".$routeparam."'>Zoom to Fit</a>";
         echo "</td></tr></tbody></table>\n";
     }
     echo <<<ENDB

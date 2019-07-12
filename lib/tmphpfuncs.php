@@ -358,7 +358,7 @@ function tm_generate_custom_colors_array() {
 function tm_update_time() {
     global $tmdb;
     global $tmdbname;
-    $sql_command = "SELECT create_time FROM information_schema.tables WHERE TABLE_SCHEMA = '".$tmdbname."' ORDER BY create_time DESC;";
+    $sql_command = "SELECT CREATE_TIME FROM information_schema.tables WHERE TABLE_SCHEMA = '".$tmdbname."' ORDER BY CREATE_TIME DESC;";
     global $tmsqldebug;
     if ($tmsqldebug) {
         echo "<!-- SQL: ".$sql_command." -->\n";
