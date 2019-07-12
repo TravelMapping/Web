@@ -340,7 +340,7 @@ SQL;
 ENDA;
     if ($routeparam != "") {
         echo "<table><tbody><tr><td>";
-    	echo "<a href='/user/mapview.php?rte={$routeInfo['route']}'>View Associated Routes</a>";
+    	echo "<a href='/user/mapview.php?rte={$routeInfo['route']}'>Related Routes</a>";
         echo "</td><td>";
         echo "<input id=\"showMarkers\" type=\"checkbox\" name=\"Show Markers\" onclick=\"showMarkersClicked()\" checked=\"false\" />&nbsp;Show Markers&nbsp;";
         echo "</td><td>";
@@ -352,6 +352,8 @@ ENDA;
         echo "</td><td>";
         echo "<input type=\"hidden\" name=\"r\" value=\"".$routeparam."\" />";
         echo "<input type=\"submit\" value=\"Apply\" />";
+        echo "</td><td>";
+        echo "<a href='/hb/?r=".$routeparam."'>Zoom to Fit</a>";
         echo "</td></tr></tbody></table>\n";
     }
     echo <<<ENDB
