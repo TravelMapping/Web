@@ -90,7 +90,7 @@
 <body 
 <?php
 if (( $tmuser != "null") || ( $system != "" )) {
-  echo "onload=\"loadmap(); waypointsFromSQL(); updateMap();\"";
+  echo "onload=\"loadmap(); waypointsFromSQL(); updateMap(null,null,null);\"";
 }
 ?>
 >
