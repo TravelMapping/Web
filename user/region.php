@@ -342,6 +342,7 @@ SQL;
         $sql_command = <<<SQL
 	SELECT
 	  systems.fullName,
+	  systems.level,
 	  miByRegion.systemName,
           ROUND(IFNULL(clinchedByRegion.mileage, 0), 2) as clinchedMileage,
           ROUND(miByRegion.mileage, 2) as totalMileage,
@@ -357,7 +358,7 @@ SQL;
 
         $res = tmdb_query($sql_command);
         while ($row = $res->fetch_assoc()) {
-            echo "<tr onClick=\"window.open('/user/system.php?u=" . $tmuser . "&sys=" . $row['systemName'] . "&amp;rg=" . $region . "')\" class=\"status-" . $row['status'] . "\">";
+            echo "<tr onClick=\"window.open('/user/system.php?u=" . $tmuser . "&sys=" . $row['systemName'] . "&amp;rg=" . $region . "')\" class=\"status-" . $row['level'] . "\">";
             echo "<td>" . $row['systemName'] . "</td>";
             echo "<td>" . $row['fullName'] . "</td>";
             echo "<td>" . tm_convert_distance($row['clinchedMileage']) . "</td>";
