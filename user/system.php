@@ -204,13 +204,14 @@ SQL;
                 SELECT
                     ccr.traveler,
                     count(ccr.route) as driven,
-                    sum(ccr.clinched) as clinched
+                    sum(ccr.clinched) as clinched,
+		    RANK() OVER (ORDER BY COUNT(ccr.route) DESC) drivenRank,
+		    RANK() OVER (ORDER BY SUM(ccr.clinched) DESC) clinchedRank
                 FROM connectedRoutes as cr
                 LEFT JOIN clinchedConnectedRoutes as ccr
                 ON cr.firstRoot = ccr.route
                 WHERE cr.systemName = '$system'
-                GROUP BY traveler
-                ORDER BY clinched DESC;
+                GROUP BY traveler;
 SQL;
             } else {
                 $totalRoutes = tm_count_rows("routes", "WHERE systemName='".$system."' AND region='".$region."'");
@@ -218,20 +219,21 @@ SQL;
                 SELECT
                     ccr.traveler,
                     count(ccr.route) as driven,
-                    sum(ccr.clinched) as clinched
+                    sum(ccr.clinched) as clinched,
+		    RANK() OVER (ORDER BY COUNT(ccr.route) DESC) drivenRank,
+		    RANK() OVER (ORDER BY SUM(ccr.clinched) DESC) clinchedRank
                 FROM routes as cr
                 LEFT JOIN clinchedRoutes as ccr
                 ON cr.root = ccr.route
                 WHERE cr.region = '$region' AND cr.systemName = '$system'
-                GROUP BY ccr.traveler
-                ORDER BY clinched DESC
+                GROUP BY ccr.traveler;
 SQL;
             }
             $res = tmdb_query($sql_command);
-            $row = tm_fetch_user_row_with_rank($res, 'clinched');
+            $row = tm_fetch_user_row_with_rank($res, 'clinched'); //FIXME? We no longer need the rank, just the user row.
             $res->free();
-            echo "<tr onClick=\"" . $link . "\"><td>Routes Traveled</td><td>" . $row['driven'] . " of ".$totalRoutes." (" . round($row['driven'] / $totalRoutes * 100, 2) ."%)</td></tr>";
-	    echo "<tr onClick=\"" . $link . "\"><td>Routes Clinched</td><td>" . $row['clinched'] . " of " . $totalRoutes . " (" . round($row['clinched'] / $totalRoutes * 100, 2) . "%) Rank: {$row['rank']}</td></tr>\n";
+            echo "<tr onClick=\"" . $link . "\"><td>Routes Traveled</td><td>" . $row['driven']   . " of " . $totalRoutes . " (" . round($row['driven']   / $totalRoutes * 100, 2) . "%) Rank: {$row['drivenRank']}</td></tr>\n";
+	    echo "<tr onClick=\"" . $link . "\"><td>Routes Clinched</td><td>" . $row['clinched'] . " of " . $totalRoutes . " (" . round($row['clinched'] / $totalRoutes * 100, 2) . "%) Rank: {$row['clinchedRank']}</td></tr>\n";
             ?>
             </tbody>
         </table>
@@ -281,6 +283,13 @@ HTML;
         }
         ?>
         <table class="gratable tablesorter" id="routeTable">
+	    <?php
+	    if($region != "") {
+		echo <<<HTML
+	    <caption>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</caption>
+HTML;
+	    }
+	    ?>
             <thead>
             <tr>
                 <th colspan="8">Statistics by Route</th>
