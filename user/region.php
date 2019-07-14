@@ -252,7 +252,8 @@ SQL;
 SQL;
 
             $activeDrivenRes = tmdb_query($sql_command);
-            $row = tm_fetch_user_row_with_rank($activeDrivenRes, 'clinchedPct'); //FIXME? We no longer need the rank, just the user row.
+	    $row = $activeDrivenRes->fetch_assoc();
+	    while($row['traveler'] != $tmuser && $row = $activeDrivenRes->fetch_assoc());
 	    $drivenActiveRoutes = $row['driven'];
 	    $drivenActiveRoutesPct = $row['drivenPct'];
 	    $clinchedActiveRoutes = $row['clinched'];
@@ -287,7 +288,8 @@ SQL;
 SQL;
 
             $activePreviewDrivenRes = tmdb_query($sql_command);
-            $row = tm_fetch_user_row_with_rank($activePreviewDrivenRes, 'clinchedPct'); //FIXME? We no longer need the rank, just the user row.
+	    $row = $activePreviewDrivenRes->fetch_assoc();
+	    while($row['traveler'] != $tmuser && $row = $activePreviewDrivenRes->fetch_assoc());
 	    $drivenActivePreviewRoutes = $row['driven'];
 	    $drivenActivePreviewRoutesPct = $row['drivenPct'];
 	    $clinchedActivePreviewRoutes = $row['clinched'];

@@ -230,7 +230,8 @@ SQL;
 SQL;
             }
             $res = tmdb_query($sql_command);
-            $row = tm_fetch_user_row_with_rank($res, 'clinched'); //FIXME? We no longer need the rank, just the user row.
+	    $row = $res->fetch_assoc();
+	    while($row['traveler'] != $tmuser && $row = $res->fetch_assoc());
             $res->free();
             echo "<tr onClick=\"" . $link . "\"><td>Routes Traveled</td><td>" . $row['driven']   . " of " . $totalRoutes . " (" . round($row['driven']   / $totalRoutes * 100, 2) . "%) Rank: {$row['drivenRank']}</td></tr>\n";
 	    echo "<tr onClick=\"" . $link . "\"><td>Routes Clinched</td><td>" . $row['clinched'] . " of " . $totalRoutes . " (" . round($row['clinched'] / $totalRoutes * 100, 2) . "%) Rank: {$row['clinchedRank']}</td></tr>\n";
