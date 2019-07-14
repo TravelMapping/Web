@@ -230,7 +230,6 @@ SQL;
 
             // Second, fetch routes clinched/driven
             $totalActiveRoutes = tm_count_rows("routes", "LEFT JOIN systems on routes.systemName = systems.systemName WHERE region = '$region' AND systems.level = 'active'");
-
             $totalActivePreviewRoutes = tm_count_rows("routes", "LEFT JOIN systems on routes.systemName = systems.systemName WHERE region = '$region' AND ".$activeClause." ");
 
             $sql_command = <<<SQL
@@ -239,7 +238,9 @@ SQL;
               COUNT(cr.route) AS driven,
               SUM(cr.clinched) AS clinched,
               ROUND(COUNT(cr.route) / $totalActiveRoutes * 100, 2) as drivenPct,
-              ROUND(sum(cr.clinched) / $totalActiveRoutes * 100, 2) as clinchedPct
+              ROUND(sum(cr.clinched) / $totalActiveRoutes * 100, 2) as clinchedPct,
+              RANK() OVER (ORDER BY COUNT(cr.route) DESC) drivenRank,
+              RANK() OVER (ORDER BY SUM(cr.clinched) DESC) clinchedRank
             FROM routes AS r
               LEFT JOIN clinchedRoutes AS cr
                 ON cr.route = r.root
@@ -247,20 +248,18 @@ SQL;
                 ON r.systemName = systems.systemName
             WHERE (r.region = '$region' AND 
                 systems.level = 'active')
-            GROUP BY traveler
-            ORDER BY clinchedPct DESC;
+            GROUP BY traveler;
 SQL;
 
             $activeDrivenRes = tmdb_query($sql_command);
-            $row = tm_fetch_user_row_with_rank($activeDrivenRes, 'clinchedPct');
+	    $row = $activeDrivenRes->fetch_assoc();
+	    while($row['traveler'] != $tmuser && $row = $activeDrivenRes->fetch_assoc());
 	    $drivenActiveRoutes = $row['driven'];
 	    $drivenActiveRoutesPct = $row['drivenPct'];
 	    $clinchedActiveRoutes = $row['clinched'];
 	    $clinchedActiveRoutesPct = $row['clinchedPct'];
-	    $clinchedActiveRoutesRank = $row['rank'];
-	    $activeDrivenRes->data_seek(0);
-            $row = tm_fetch_user_row_with_rank($activeDrivenRes, 'drivenPct');
-	    $drivenActiveRoutesRank = $row['rank'];
+	    $clinchedActiveRoutesRank = $row['clinchedRank'];
+	    $drivenActiveRoutesRank = $row['drivenRank'];
 
 	    // add to the table of travelers by region stats
 	    $activeDrivenRes->data_seek(0);
@@ -275,7 +274,9 @@ SQL;
               COUNT(cr.route) AS driven,
               SUM(cr.clinched) AS clinched,
               ROUND(COUNT(cr.route) / $totalActivePreviewRoutes * 100, 2) as drivenPct,
-              ROUND(sum(cr.clinched) / $totalActivePreviewRoutes * 100, 2) as clinchedPct
+              ROUND(sum(cr.clinched) / $totalActivePreviewRoutes * 100, 2) as clinchedPct,
+              RANK() OVER (ORDER BY COUNT(cr.route) DESC) drivenRank,
+              RANK() OVER (ORDER BY SUM(cr.clinched) DESC) clinchedRank
             FROM routes AS r
               LEFT JOIN clinchedRoutes AS cr
                 ON cr.route = r.root
@@ -283,20 +284,18 @@ SQL;
                 ON r.systemName = systems.systemName
             WHERE (r.region = '$region' AND 
                 (systems.level='preview' OR systems.level='active'))
-            GROUP BY traveler
-            ORDER BY clinchedPct DESC;
+            GROUP BY traveler;
 SQL;
 
             $activePreviewDrivenRes = tmdb_query($sql_command);
-            $row = tm_fetch_user_row_with_rank($activePreviewDrivenRes, 'clinchedPct');
+	    $row = $activePreviewDrivenRes->fetch_assoc();
+	    while($row['traveler'] != $tmuser && $row = $activePreviewDrivenRes->fetch_assoc());
 	    $drivenActivePreviewRoutes = $row['driven'];
 	    $drivenActivePreviewRoutesPct = $row['drivenPct'];
 	    $clinchedActivePreviewRoutes = $row['clinched'];
 	    $clinchedActivePreviewRoutesPct = $row['clinchedPct'];
-	    $clinchedActivePreviewRoutesRank = $row['rank'];
-	    $activePreviewDrivenRes->data_seek(0);
-            $row = tm_fetch_user_row_with_rank($activePreviewDrivenRes, 'drivenPct');
-	    $drivenActivePreviewRoutesRank = $row['rank'];
+	    $clinchedActivePreviewRoutesRank = $row['clinchedRank'];
+	    $drivenActivePreviewRoutesRank = $row['drivenRank'];
 
 	    // add to the table of travelers by region stats
 	    $activePreviewDrivenRes->data_seek(0);
@@ -308,7 +307,7 @@ SQL;
 
 
             echo "<tr onClick=\"window.open('/shields/clinched.php?u={$tmuser}')\">";
-	    echo "<td>Routes Driven</td>";
+	    echo "<td>Routes Traveled</td>";
 	    echo "<td>".$drivenActiveRoutes." of " . $totalActiveRoutes . " (" . $drivenActiveRoutesPct . "%) Rank: ".$drivenActiveRoutesRank."</td>";
 	    echo "<td>".$drivenActivePreviewRoutes." of " . $totalActivePreviewRoutes . " (" . $drivenActivePreviewRoutesPct . "%) Rank: ".$drivenActivePreviewRoutesRank."</td>";
 	    echo "</tr>";
