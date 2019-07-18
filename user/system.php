@@ -317,7 +317,7 @@ HTML;
         ?>
         <table class="gratable tablesorter" id="routeTable">
 	    <?php
-	    if($region != "") {
+	    if ($region != "") {
 		echo <<<HTML
 	    <caption>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</caption>
 HTML;
@@ -331,7 +331,10 @@ HTML;
                 <th class="nonsortable">Route</th>
                 <th class="sortable">#</th>
                 <th class="nonsortable">Banner</th>
-                <th class="nonsortable">Abbrev</th>
+		<?php if ($region == "") {
+		    echo "<th class=\"nonsortable\">Abbrev</th>";
+		}
+		?>
                 <th class="nonsortable">Section</th>
                 <th class="sortable">Clinched (<?php tm_echo_units(); ?>)</th>
                 <th class="sortable">Total (<?php tm_echo_units(); ?>)</th>
@@ -362,7 +365,9 @@ HTML;
                 echo "<td>" . $row['route'] . "</td>";
                 echo "<td width='0'>" . $row['routeNum'] . "</td>";
                 echo "<td>" . $row['banner'] . "</td>";
-                echo "<td>" . $row['abbrev'] . "</td>";
+		if ($region == "") {
+                    echo "<td>" . $row['abbrev'] . "</td>";
+		}
                 echo "<td>" . $row['city'] . "</td>";
                 echo "<td>" . tm_convert_distance($row['clinchedMileage']) . "</td>";
                 echo "<td>" . tm_convert_distance($row['totalMileage']) . "</td>";
