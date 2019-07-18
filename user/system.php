@@ -203,38 +203,70 @@ SQL;
                 $sql_command = <<<SQL
                 SELECT
                     ccr.traveler,
-                    count(ccr.route) as driven,
-                    sum(ccr.clinched) as clinched,
-		    RANK() OVER (ORDER BY COUNT(ccr.route) DESC) drivenRank,
-		    RANK() OVER (ORDER BY SUM(ccr.clinched) DESC) clinchedRank
+                    sum(ccr.clinched) as clinched
                 FROM connectedRoutes as cr
                 LEFT JOIN clinchedConnectedRoutes as ccr
                 ON cr.firstRoot = ccr.route
                 WHERE cr.systemName = '$system'
-                GROUP BY traveler;
+                GROUP BY traveler
+		ORDER BY clinched DESC;
 SQL;
+		$res = tmdb_query($sql_command);
+		$row = tm_fetch_user_row_with_rank($res, 'clinched');
+		$clinchedRank = $row['rank'];
+		$res->free();
+                $sql_command = <<<SQL
+                SELECT
+                    ccr.traveler,
+                    count(ccr.route) as driven,
+                    sum(ccr.clinched) as clinched
+                FROM connectedRoutes as cr
+                LEFT JOIN clinchedConnectedRoutes as ccr
+                ON cr.firstRoot = ccr.route
+                WHERE cr.systemName = '$system'
+                GROUP BY traveler
+		ORDER BY driven DESC;
+SQL;
+		$res = tmdb_query($sql_command);
+		$row = tm_fetch_user_row_with_rank($res, 'driven');
+		$drivenRank = $row['rank'];
+		$res->free();
             } else {
                 $totalRoutes = tm_count_rows("routes", "WHERE systemName='".$system."' AND region='".$region."'");
                 $sql_command = <<<SQL
                 SELECT
                     ccr.traveler,
-                    count(ccr.route) as driven,
-                    sum(ccr.clinched) as clinched,
-		    RANK() OVER (ORDER BY COUNT(ccr.route) DESC) drivenRank,
-		    RANK() OVER (ORDER BY SUM(ccr.clinched) DESC) clinchedRank
+                    sum(ccr.clinched) as clinched
                 FROM routes as cr
                 LEFT JOIN clinchedRoutes as ccr
                 ON cr.root = ccr.route
                 WHERE cr.region = '$region' AND cr.systemName = '$system'
-                GROUP BY ccr.traveler;
+                GROUP BY ccr.traveler
+		ORDER BY clinched DESC;
 SQL;
+		$res = tmdb_query($sql_command);
+		$row = tm_fetch_user_row_with_rank($res, 'clinched');
+		$clinchedRank = $row['rank'];
+		$res->free();
+                $sql_command = <<<SQL
+                SELECT
+                    ccr.traveler,
+                    count(ccr.route) as driven,
+                    sum(ccr.clinched) as clinched
+                FROM routes as cr
+                LEFT JOIN clinchedRoutes as ccr
+                ON cr.root = ccr.route
+                WHERE cr.region = '$region' AND cr.systemName = '$system'
+                GROUP BY ccr.traveler
+		ORDER BY driven DESC;
+SQL;
+		$res = tmdb_query($sql_command);
+		$row = tm_fetch_user_row_with_rank($res, 'driven');
+		$drivenRank = $row['rank'];
+		$res->free();
             }
-            $res = tmdb_query($sql_command);
-	    $row = $res->fetch_assoc();
-	    while($row['traveler'] != $tmuser && $row = $res->fetch_assoc());
-            $res->free();
-            echo "<tr onClick=\"" . $link . "\"><td>Routes Traveled</td><td>" . $row['driven']   . " of " . $totalRoutes . " (" . round($row['driven']   / $totalRoutes * 100, 2) . "%) Rank: {$row['drivenRank']}</td></tr>\n";
-	    echo "<tr onClick=\"" . $link . "\"><td>Routes Clinched</td><td>" . $row['clinched'] . " of " . $totalRoutes . " (" . round($row['clinched'] / $totalRoutes * 100, 2) . "%) Rank: {$row['clinchedRank']}</td></tr>\n";
+            echo "<tr onClick=\"" . $link . "\"><td>Routes Traveled</td><td>" . $row['driven']   . " of " . $totalRoutes . " (" . round($row['driven']   / $totalRoutes * 100, 2) . "%) Rank: {$drivenRank}</td></tr>\n";
+	    echo "<tr onClick=\"" . $link . "\"><td>Routes Clinched</td><td>" . $row['clinched'] . " of " . $totalRoutes . " (" . round($row['clinched'] / $totalRoutes * 100, 2) . "%) Rank: {$clinchedRank}</td></tr>\n";
             ?>
             </tbody>
         </table>
