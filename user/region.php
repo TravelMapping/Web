@@ -167,21 +167,30 @@ if (( $tmuser == "null") || ( $region == "" )) {
         </thead>
         <tbody>
             <?php
-            //First fetch overall mileage, active only
+            //First fetch overall mileage
+	    $sql_command = "select * from overallMileageByRegion where region = '".$region."'";
+	    $row = tmdb_query($sql_command)->fetch_assoc();
+	    $activeTotalMileage = $row['activeMileage'];
+	    $activePreviewTotalMileage = $row['activePreviewMileage'];
+
+	    // active only
             $sql_command = <<<SQL
-            SELECT o.activeMileage AS totalActiveMileage, c.traveler, c.activeMileage as activeClinched, round(c.activeMileage / o.activeMileage * 100, 2) AS activePercentage
-            FROM clinchedOverallMileageByRegion AS c
-            LEFT JOIN overallMileageByRegion AS o ON c.region = o.region
-            WHERE c.region = '$region' AND c.activeMileage > 0
+            SELECT
+		traveler,
+		activeMileage as activeClinched
+            FROM clinchedOverallMileageByRegion
+            WHERE region = '$region' AND activeMileage > 0
             ORDER BY activeClinched DESC;
 SQL;
             $activeClinchedRes = tmdb_query($sql_command);
             $row = tm_fetch_user_row_with_rank($activeClinchedRes, 'activeClinched');
 //            $link = "redirect('/user/mapview.php?u=" . $tmuser . "&amp;rg=" . $region . "')";
-	    $activeTotalMileage = $row['totalActiveMileage'];
 	    $activeClinchedMileage = $row['activeClinched'];
-	    $activeMileagePercentage = $row['activePercentage'];
-	    $activeMileageRank = $row['rank'];
+	    if ($row['traveler'] != "") {
+		$activeMileageRank = $row['rank'];
+	    } else {
+		$activeMileageRank = "N/A";
+	    }
 
 	    // build arrays that will form the contents of the travelers
 	    // by region stats for active systems
@@ -189,24 +198,26 @@ SQL;
 	    $activeClinchedRes->data_seek(0);
 	    while ($row = $activeClinchedRes->fetch_assoc()) {
 		$activeTravelerInfo[$row['traveler']]['activeClinched'] = $row['activeClinched'];
-		$activeTravelerInfo[$row['traveler']]['activePercentage'] = $row['activePercentage'];
             }
 
 	    // and active+preview
             $sql_command = <<<SQL
-            SELECT o.activePreviewMileage AS totalActivePreviewMileage, c.traveler, c.activePreviewMileage as activePreviewClinched, round(c.activePreviewMileage / o.activePreviewMileage * 100, 2) AS activePreviewPercentage
-            FROM clinchedOverallMileageByRegion AS c
-            LEFT JOIN overallMileageByRegion AS o ON c.region = o.region
-            WHERE c.region = '$region' AND c.activePreviewMileage > 0
+            SELECT
+		traveler,
+		activePreviewMileage as activePreviewClinched
+            FROM clinchedOverallMileageByRegion
+            WHERE region = '$region' AND activePreviewMileage > 0
             ORDER BY activePreviewClinched DESC;
 SQL;
             $activePreviewClinchedRes = tmdb_query($sql_command);
             $row = tm_fetch_user_row_with_rank($activePreviewClinchedRes, 'activePreviewClinched');
 //            $link = "redirect('/user/mapview.php?u=" . $tmuser . "&amp;rg=" . $region . "')";
-	    $activePreviewTotalMileage = $row['totalActivePreviewMileage'];
 	    $activePreviewClinchedMileage = $row['activePreviewClinched'];
-	    $activePreviewMileagePercentage = $row['activePreviewPercentage'];
-	    $activePreviewMileageRank = $row['rank'];
+	    if ($row['traveler'] != "") {
+		$activePreviewMileageRank = $row['rank'];
+	    } else {
+		$activePreviewMileageRank = "N/A";
+	    }
 
 	    // build arrays that will form the contents of the travelers
 	    // by region stats for active+preview systems
@@ -214,17 +225,16 @@ SQL;
 	    $activePreviewClinchedRes->data_seek(0);
 	    while ($row = $activePreviewClinchedRes->fetch_assoc()) {
 		$activePreviewTravelerInfo[$row['traveler']]['activePreviewClinched'] = $row['activePreviewClinched'];
-		$activePreviewTravelerInfo[$row['traveler']]['activePreviewPercentage'] = $row['activePreviewPercentage'];
             }
 
             echo "<tr class='notclickable' style=\"background-color:#EEEEFF\"><td>Distance Traveled</td>";
 	    echo "<td>" . tm_convert_distance($activeClinchedMileage);
 	    echo " of " . tm_convert_distance($activeTotalMileage) . " " . $tmunits . " (";
-	    echo $activeMileagePercentage . "%) ";
+	    echo round($activeClinchedMileage / $activeTotalMileage * 100, 2) . "%) ";
 	    echo "Rank: " . $activeMileageRank . "</td>";
 	    echo "<td>" . tm_convert_distance($activePreviewClinchedMileage);
 	    echo " of " . tm_convert_distance($activePreviewTotalMileage) . " " .$tmunits . " (";
-	    echo $activePreviewMileagePercentage . "%) ";
+	    echo round($activePreviewClinchedMileage / $activePreviewTotalMileage * 100, 2) . "%) ";
 	    echo "Rank: " . $activePreviewMileageRank . "</td>";
 	    echo "</tr>";
 
@@ -236,8 +246,7 @@ SQL;
             $sql_command = <<<SQL
             SELECT
               traveler,
-              SUM(cr.clinched) AS clinched,
-              ROUND(sum(cr.clinched) / $totalActiveRoutes * 100, 2) as clinchedPct
+              SUM(cr.clinched) AS clinched
             FROM routes AS r
               LEFT JOIN clinchedRoutes AS cr
                 ON cr.route = r.root
@@ -250,17 +259,20 @@ SQL;
 SQL;
             $activeClinchedRes = tmdb_query($sql_command);
 	    $row = tm_fetch_user_row_with_rank($activeClinchedRes, 'clinched');
-	    $clinchedActiveRoutes = $row['clinched'];
-	    $clinchedActiveRoutesPct = $row['clinchedPct'];
-	    $clinchedActiveRoutesRank = $row['rank'];
+	    if ($row['traveler'] != "") {
+		$clinchedActiveRoutes = $row['clinched'];
+		$clinchedActiveRoutesRank = $row['rank'];
+	    } else {
+		$clinchedActiveRoutes = 0;
+		$clinchedActiveRoutesRank = "N/A";
+	    }
 
 	    // Active only, driven
             $sql_command = <<<SQL
             SELECT
               traveler,
               COUNT(cr.route) AS driven,
-              SUM(cr.clinched) AS clinched,
-              ROUND(COUNT(cr.route) / $totalActiveRoutes * 100, 2) as drivenPct
+              SUM(cr.clinched) AS clinched
             FROM routes AS r
               LEFT JOIN clinchedRoutes AS cr
                 ON cr.route = r.root
@@ -273,9 +285,13 @@ SQL;
 SQL;
             $activeDrivenRes = tmdb_query($sql_command);
 	    $row = tm_fetch_user_row_with_rank($activeDrivenRes, 'driven');
-	    $drivenActiveRoutes = $row['driven'];
-	    $drivenActiveRoutesPct = $row['drivenPct'];
-	    $drivenActiveRoutesRank = $row['rank'];
+	    if ($row['traveler'] != "") {
+		$drivenActiveRoutes = $row['driven'];
+		$drivenActiveRoutesRank = $row['rank'];
+	    } else {
+		$drivenActiveRoutes = 0;
+		$drivenActiveRoutesRank = "N/A";
+	    }
 
 	    // add to the table of travelers by region stats
 	    $activeDrivenRes->data_seek(0);
@@ -288,8 +304,7 @@ SQL;
             $sql_command = <<<SQL
             SELECT
               traveler,
-              SUM(cr.clinched) AS clinched,
-              ROUND(sum(cr.clinched) / $totalActivePreviewRoutes * 100, 2) as clinchedPct
+              SUM(cr.clinched) AS clinched
             FROM routes AS r
               LEFT JOIN clinchedRoutes AS cr
                 ON cr.route = r.root
@@ -302,17 +317,20 @@ SQL;
 SQL;
             $activePreviewClinchedRes = tmdb_query($sql_command);
 	    $row = tm_fetch_user_row_with_rank($activePreviewClinchedRes, 'clinched');
-	    $clinchedActivePreviewRoutes = $row['clinched'];
-	    $clinchedActivePreviewRoutesPct = $row['clinchedPct'];
-	    $clinchedActivePreviewRoutesRank = $row['rank'];
+	    if ($row['traveler'] != "") {
+		$clinchedActivePreviewRoutes = $row['clinched'];
+		$clinchedActivePreviewRoutesRank = $row['rank'];
+	    } else {
+		$clinchedActivePreviewRoutes = 0;
+		$clinchedActivePreviewRoutesRank = "N/A";
+	    }
 
 	    // Active+Preview, driven
             $sql_command = <<<SQL
             SELECT
               traveler,
               COUNT(cr.route) AS driven,
-              SUM(cr.clinched) AS clinched,
-              ROUND(COUNT(cr.route) / $totalActivePreviewRoutes * 100, 2) as drivenPct
+              SUM(cr.clinched) AS clinched
             FROM routes AS r
               LEFT JOIN clinchedRoutes AS cr
                 ON cr.route = r.root
@@ -325,9 +343,13 @@ SQL;
 SQL;
             $activePreviewDrivenRes = tmdb_query($sql_command);
 	    $row = tm_fetch_user_row_with_rank($activePreviewDrivenRes, 'driven');
-	    $drivenActivePreviewRoutes = $row['driven'];
-	    $drivenActivePreviewRoutesPct = $row['drivenPct'];
-	    $drivenActivePreviewRoutesRank = $row['rank'];
+	    if ($row['traveler'] != "") {
+		$drivenActivePreviewRoutes = $row['driven'];
+		$drivenActivePreviewRoutesRank = $row['rank'];
+	    } else {
+		$drivenActivePreviewRoutes = 0;
+		$drivenActivePreviewRoutesRank = "N/A";
+	    }
 
 	    // add to the table of travelers by region stats
 	    $activePreviewDrivenRes->data_seek(0);
@@ -340,14 +362,14 @@ SQL;
 
             echo "<tr onClick=\"window.open('/shields/clinched.php?u={$tmuser}')\">";
 	    echo "<td>Routes Traveled</td>";
-	    echo "<td>".$drivenActiveRoutes." of " . $totalActiveRoutes . " (" . $drivenActiveRoutesPct . "%) Rank: ".$drivenActiveRoutesRank."</td>";
-	    echo "<td>".$drivenActivePreviewRoutes." of " . $totalActivePreviewRoutes . " (" . $drivenActivePreviewRoutesPct . "%) Rank: ".$drivenActivePreviewRoutesRank."</td>";
+	    echo "<td>".$drivenActiveRoutes." of " . $totalActiveRoutes . " (" . round($drivenActiveRoutes/$totalActiveRoutes*100, 2) . "%) Rank: ".$drivenActiveRoutesRank."</td>";
+	    echo "<td>".$drivenActivePreviewRoutes." of " . $totalActivePreviewRoutes . " (" . round($drivenActivePreviewRoutes/$totalActivePreviewRoutes*100, 2) . "%) Rank: ".$drivenActivePreviewRoutesRank."</td>";
 	    echo "</tr>";
 
             echo "<tr onClick=\"window.open('/shields/clinched.php?u={$tmuser}')\">";
 	    echo "<td>Routes Clinched</td>";
-	    echo "<td>".$clinchedActiveRoutes." of " . $totalActiveRoutes . " (" . $clinchedActiveRoutesPct . "%) Rank: ". $clinchedActiveRoutesRank."</td>";
-	    echo "<td>".$clinchedActivePreviewRoutes." of " . $totalActivePreviewRoutes . " (" . $clinchedActivePreviewRoutesPct . "%) Rank: ". $clinchedActivePreviewRoutesRank."</td>";
+	    echo "<td>".$clinchedActiveRoutes." of " . $totalActiveRoutes . " (" . round($clinchedActiveRoutes/$totalActiveRoutes*100, 2) . "%) Rank: ". $clinchedActiveRoutesRank."</td>";
+	    echo "<td>".$clinchedActivePreviewRoutes." of " . $totalActivePreviewRoutes . " (" . round($clinchedActivePreviewRoutes/$totalActivePreviewRoutes*100, 2) . "%) Rank: ". $clinchedActivePreviewRoutesRank."</td>";
 	    echo "</tr>";
 
             ?>
@@ -468,7 +490,7 @@ SQL;
               } else {
                  $highlight = '';
               }
-	      echo "<tr class=\"".$highlight."\" onClick=\"window.document.location='?u=".$traveler."&rg=$region'\"><td>".$traveler."</td><td>".tm_convert_distance($stats['activeClinched'])."</td><td>".$stats['activePercentage']."%</td><td>".$stats['driven']."</td><td>".$stats['clinched']."</td></tr>\n";
+	      echo "<tr class=\"".$highlight."\" onClick=\"window.document.location='?u=".$traveler."&rg=$region'\"><td>".$traveler."</td><td>".tm_convert_distance($stats['activeClinched'])."</td><td>".round($stats['activeClinched'] / $activeTotalMileage * 100, 2)."%</td><td>".$stats['driven']."</td><td>".$stats['clinched']."</td></tr>\n";
           }
 	  ?>
 	</tbody>
@@ -490,7 +512,7 @@ SQL;
               } else {
                  $highlight = '';
               }
-	      echo "<tr class=\"".$highlight."\" onClick=\"window.document.location='?u=".$traveler."&rg=$region'\"><td>".$traveler."</td><td>".tm_convert_distance($stats['activePreviewClinched'])."</td><td>".$stats['activePreviewPercentage']."%</td><td>".$stats['driven']."</td><td>".$stats['clinched']."</td></tr>\n";
+	      echo "<tr class=\"".$highlight."\" onClick=\"window.document.location='?u=".$traveler."&rg=$region'\"><td>".$traveler."</td><td>".tm_convert_distance($stats['activePreviewClinched'])."</td><td>".round($stats['activePreviewClinched'] / $activePreviewTotalMileage * 100, 2)."%</td><td>".$stats['driven']."</td><td>".$stats['clinched']."</td></tr>\n";
           }
 	  ?>
 	</tbody>

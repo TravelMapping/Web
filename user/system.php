@@ -195,7 +195,12 @@ SQL;
   	        $percentage = $row['clinchedMileage'] / $system_mileage * 100;
 	    }
             $link = "window.open('/shields/clinched.php?u=" . $tmuser . "&amp;sys=" . $system . "')";
-            echo "<tr style=\"background-color:#EEEEFF\"><td>Distance Traveled</td><td>".tm_convert_distance($row['clinchedMileage'])." of ".tm_convert_distance($system_mileage)." ".$tmunits." (".sprintf('%0.2f',$percentage)."%) Rank: {$row['rank']}</td></tr>";
+	    if ($row['traveler'] != "") {
+		$rank = $row['rank'];
+	    } else {
+		$rank = "N/A";
+	    }
+            echo "<tr style=\"background-color:#EEEEFF\"><td>Distance Traveled</td><td>".tm_convert_distance($row['clinchedMileage'])." of ".tm_convert_distance($system_mileage)." ".$tmunits." (".sprintf('%0.2f',$percentage)."%) Rank: ".$rank."</td></tr>";
 
             //Second, fetch routes clinched/driven
             if ($region == "") {
@@ -213,7 +218,13 @@ SQL;
 SQL;
 		$res = tmdb_query($sql_command);
 		$row = tm_fetch_user_row_with_rank($res, 'clinched');
-		$clinchedRank = $row['rank'];
+		if ($row['traveler'] != "") {
+		    $clinched = $row['clinched'];
+		    $clinchedRank = $row['rank'];
+		} else {
+		    $clinched = 0;
+		    $clinchedRank = "N/A";
+		}
 		$res->free();
                 $sql_command = <<<SQL
                 SELECT
@@ -229,7 +240,13 @@ SQL;
 SQL;
 		$res = tmdb_query($sql_command);
 		$row = tm_fetch_user_row_with_rank($res, 'driven');
-		$drivenRank = $row['rank'];
+		if ($row['traveler'] != "") {
+		    $driven = $row['driven'];
+		    $drivenRank = $row['rank'];
+		} else {
+		    $driven = 0;
+		    $drivenRank = "N/A";
+		}
 		$res->free();
             } else {
                 $totalRoutes = tm_count_rows("routes", "WHERE systemName='".$system."' AND region='".$region."'");
@@ -246,7 +263,13 @@ SQL;
 SQL;
 		$res = tmdb_query($sql_command);
 		$row = tm_fetch_user_row_with_rank($res, 'clinched');
-		$clinchedRank = $row['rank'];
+		if ($row['traveler'] != "") {
+		    $clinched = $row['clinched'];
+		    $clinchedRank = $row['rank'];
+		} else {
+		    $clinched = 0;
+		    $clinchedRank = "N/A";
+		}
 		$res->free();
                 $sql_command = <<<SQL
                 SELECT
@@ -262,11 +285,17 @@ SQL;
 SQL;
 		$res = tmdb_query($sql_command);
 		$row = tm_fetch_user_row_with_rank($res, 'driven');
-		$drivenRank = $row['rank'];
+		if ($row['traveler'] != "") {
+		    $driven = $row['driven'];
+		    $drivenRank = $row['rank'];
+		} else {
+		    $driven = 0;
+		    $drivenRank = "N/A";
+		}
 		$res->free();
             }
-            echo "<tr onClick=\"" . $link . "\"><td>Routes Traveled</td><td>" . $row['driven']   . " of " . $totalRoutes . " (" . round($row['driven']   / $totalRoutes * 100, 2) . "%) Rank: {$drivenRank}</td></tr>\n";
-	    echo "<tr onClick=\"" . $link . "\"><td>Routes Clinched</td><td>" . $row['clinched'] . " of " . $totalRoutes . " (" . round($row['clinched'] / $totalRoutes * 100, 2) . "%) Rank: {$clinchedRank}</td></tr>\n";
+            echo "<tr onClick=\"" . $link . "\"><td>Routes Traveled</td><td>" . $driven   . " of " . $totalRoutes . " (" . round($driven   / $totalRoutes * 100, 2) . "%) Rank: {$drivenRank}</td></tr>\n";
+	    echo "<tr onClick=\"" . $link . "\"><td>Routes Clinched</td><td>" . $clinched . " of " . $totalRoutes . " (" . round($clinched / $totalRoutes * 100, 2) . "%) Rank: {$clinchedRank}</td></tr>\n";
             ?>
             </tbody>
         </table>
