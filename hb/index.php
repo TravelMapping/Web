@@ -253,6 +253,9 @@ if ($routeparam != "") {
     echo "<span>.list name: <span style='font-family:courier'>" . $routeInfo['region'] . " " . $routeInfo['route'] . $routeInfo['banner'] . $routeInfo['abbrev'] . "</span></span>\n";
 
     echo "<table id='routeInfo' class=\"gratable\"><thead><tr><th colspan='2'>Route Stats</th></tr></thead><tbody>";
+    $sql_command = "SELECT * FROM routes WHERE root = '$routeparam'";
+    $row = tmdb_query($sql_command) -> fetch_assoc();
+    $totalMileage = $row['mileage'];
     $sql_command = <<<SQL
       SELECT
           COUNT(*) as numDrivers,
@@ -266,15 +269,12 @@ if ($routeparam != "") {
           GROUP_CONCAT(cr.traveler SEPARATOR ', ') as drivers,
           GROUP_CONCAT(IF(cr.clinched = 1, cr.traveler, null) separator ', ') as clinchers,
           ROUND(AVG(cr.mileage), 2) as avgMileage,
-          ROUND(r.mileage, 2) as totalMileage,
-          ROUND(avg(cr.mileage) / r.mileage * 100, 2) as mileagePct
+          ROUND(avg(cr.mileage) / $totalMileage * 100, 2) as mileagePct
         FROM clinchedRoutes as cr
-          JOIN routes as r ON cr.route = r.root
         WHERE cr.route = '$routeparam'
 SQL;
     $row = tmdb_query($sql_command) -> fetch_assoc();
-    $totalMileage = $row['totalMileage'];
-    $totalLength = tm_convert_distance($row['totalMileage']) . " " . $tmunits;
+    $totalLength = tm_convert_distance($totalMileage) . " " . $tmunits;
     $averageTraveled = tm_convert_distance($row['avgMileage']). " " . $tmunits;
     echo <<<HTML
     <tr><td class="important">Total Length</td><td>{$totalLength}</td></tr>
