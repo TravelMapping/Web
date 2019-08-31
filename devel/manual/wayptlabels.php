@@ -360,10 +360,6 @@ official name, use the river name. </td>
 U-turn ramp. If more than one is needed for the same highway, use _U1, 
 _U2, etc. </td>
   </tr>
-  <tr valign="top">
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
 </tbody></table>
 
 <p class="heading">Putting two highways in a waypoint label</p>
