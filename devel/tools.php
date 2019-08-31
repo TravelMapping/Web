@@ -48,7 +48,6 @@ Most of the files below are regenerated during each site update.
       <li><a href="manual/points.php">Positioning waypoints </a></li>
       </ul>
   </li>
-  <li>Checking for common errors</li>
   <li><a href="manual/maintenance.php">Maintaining files for activated routes</a></li>
 </ul>
 </div>
