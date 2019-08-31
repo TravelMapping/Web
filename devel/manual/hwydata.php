@@ -18,7 +18,7 @@ a .wpt extension.</p>
 
 <p class="heading">.wpt Filenames</p>
 
-<p class="text">
+<div class="text">
 <ul>
   <li>One .wpt file is needed for each highway in each region. Highways 
 crossing into multiple subdivisions of a subdivided country (e.g., 
@@ -65,11 +65,11 @@ cat, pit). </li>
       </ul>
   </li>
 </ul>
-</p>
+</div>
 
 <p class="heading">.wpt Data Format</p>
 
-<p class="text">
+<div class="text">
 <ul>
   <li>The format is simple. Each line as two fields separated by a space.
     <ol>
@@ -96,12 +96,11 @@ US30 http://www.openstreetmap.org/?lat=39.936539&lon=-77.660417
   </li>
   <li>No blank or comment lines. The file may end with a final return character.</li>
   </ul>
-  </p>
+  </div>
   
   <p class="heading">Getting a coordinate URL</p>
 
-  <p class="text">
-    (EXPAND THIS SECTION?)
+  <div class="text">
 
     <ul>
       <li>The easiest way to find the coordinates to
@@ -116,9 +115,11 @@ US30 http://www.openstreetmap.org/?lat=39.936539&lon=-77.660417
 	academic offshoot.</li>
       <li> Do not use commercial mapping sources, such as Google Maps, Yahoo Maps, or Bing Maps.</li>
   </ul>
-  </p>
+  </div>
 
-  <p class="heading">Multiplexes</p>
+<p class="heading">Multiplexes</p>
+
+<div class="text">
 <ul>
   <li>Concurrent highways (multiplexes) have multiple designations for the same section of highway.</li>
   <li><strong>The .wpt files of concurrent highways must have the same waypoints with exactly identical coordinates.</strong> This will allow my scripts to auto-detect multiplexes and remove duplicated mileage where appropriate.</li>
@@ -170,8 +171,12 @@ US422Bus http://www.openstreetmap.org/?lat=40.335187&lon=-75.939630
   <li>Sometimes the waypoints are listed in different orders between the
  concurrent highway files. You might need to flip the waypoint order 
 after pasting the lines into your file.</li>
-  </ul>
+</ul>
+</div>
+
 <p class="heading">Waypoint order</p>
+
+<div class="text">
 <ul>
   <li>In general, put the waypoints in the order normally used by the 
 country. Exit numbers or roadside distance markers often reveal this 
@@ -185,6 +190,7 @@ north (I-95) to south). </li>
 numbers increasing radially outward and circumferentially in a certain 
 direction.</li>
 </ul>
+</div>
 
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
 </body>
