@@ -293,9 +293,8 @@ SQL;
         LEFT JOIN (
             SELECT
               waypoints.pointId,
-              count(*),
-              count(*) / $numDrivers * 100 as driverPercent,
-              clinched.segmentId
+              sum(!ISNULL(clinched.traveler)) / $numDrivers * 100 as driverPercent,
+              segments.segmentId
             FROM segments
             LEFT JOIN clinched ON segments.segmentId = clinched.segmentId
             LEFT JOIN waypoints ON segments.waypoint1 = waypoints.pointId
