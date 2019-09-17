@@ -23,11 +23,39 @@ interest to Travel Mapping project contributors.
 Most of the files below are regenerated during each site update.
 </p>
 
+<p class="heading">Developer Manual</p>
+
+<div class="text">
+
+  TM's highway data is developed and maintained by a group
+  of <a href="/credits.php#contributors">volunteer project
+  contributors</a>.  The data is stored in
+  a <a href="https://github.com/TravelMapping/HighwayData">GitHub
+  repository</a>, organized as
+  described <a href="https://github.com/TravelMapping/HighwayData/blob/master/README.md">here</a>.
+  The content at the pages linked below serve as the manual to help
+  TM contributors to maintain consistent and high-quality highway data
+  for the project.  It is based on the manual from TM's predecessor,
+  the Clinched Highway Mapping project.
+  
+<ul>
+  <li><a href="manual/syshwylist.php">Making the system highway list (.csv)</a> </li>
+  <li>Making the highway data files (.wpt)
+    <ul>
+      <li><a href="manual/hwydata.php">Highway data files</a></li>
+      <li><a href="manual/includepts.php">Waypoints to include</a></li>
+      <li><a href="manual/wayptlabels.php">Labeling waypoints</a></li>
+      <li><a href="manual/points.php">Positioning waypoints </a></li>
+      </ul>
+  </li>
+  <li><a href="manual/maintenance.php">Maintaining files for activated routes</a></li>
+</ul>
+</div>
+
 <p class="heading">Developer Tools</p>
 
 <div class="text">
 <ul>
-<li><a href="http://cmap.m-plex.com/tools/manual.php">CHM's Instruction Manual</a> (TM generally follows these rules, but we do need to develop our own manual)</li>
 <li><a href="/wptedit/">TM's update of CHM's WPT file Editor</a> (Goal: develop our own new version)</li>
 <li><a href="http://courses.teresco.org/metal/hdx/">Highway Data Examiner</a> (HDX) to view graph and near-miss data</li>
 </ul>

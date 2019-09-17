@@ -358,7 +358,7 @@ function tm_generate_custom_colors_array() {
 function tm_update_time() {
     global $tmdb;
     global $tmdbname;
-    $sql_command = "SELECT create_time FROM information_schema.tables WHERE TABLE_SCHEMA = '".$tmdbname."' ORDER BY create_time DESC;";
+    $sql_command = "SELECT CREATE_TIME FROM information_schema.tables WHERE TABLE_SCHEMA = '".$tmdbname."' ORDER BY CREATE_TIME DESC;";
     global $tmsqldebug;
     if ($tmsqldebug) {
         echo "<!-- SQL: ".$sql_command." -->\n";
@@ -379,6 +379,7 @@ function tm_fetch_user_row_with_rank($res, $rankBy) {
     $rank = 1;
     $score = 0;
     $row = array();
+    $row['traveler'] = NULL;
     while($row['traveler'] != $tmuser && $row = $res->fetch_assoc()) {
         if ($score != $row[$rankBy]) {
             $score = $row[$rankBy];
