@@ -9,7 +9,7 @@ basedir=/home/www/
 rootdir=tmtest
 shieldsdir=
 wpteditdir=
-otherdirs="user lib devel hb css graphs"
+otherdirs="user lib devel devel/manual hb css graphs"
 while (( "$#" )); do
 
     if [ "$1" == "--prod" ]; then
@@ -32,7 +32,7 @@ while (( "$#" )); do
 done
 
 echo "Updating to $server:$basedir$rootdir, directories . $otherdirs $shieldsdir $wpteditdir"
-scp *.php $server:$basedir$rootdir
+scp *.php favicon.* $server:$basedir$rootdir
 for dir in $otherdirs $shieldsdir $wpteditdir; do
     ssh $server mkdir -p $basedir$rootdir/$dir
     scp $dir/*.{php,js,svg,css,png,gif} $server:$basedir$rootdir/$dir

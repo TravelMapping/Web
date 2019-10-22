@@ -90,7 +90,7 @@
 <body 
 <?php
 if (( $tmuser != "null") || ( $system != "" )) {
-  echo "onload=\"loadmap(); waypointsFromSQL(); updateMap();\"";
+  echo "onload=\"loadmap(); waypointsFromSQL(); updateMap(null,null,null);\"";
 }
 ?>
 >
@@ -195,11 +195,37 @@ SQL;
   	        $percentage = $row['clinchedMileage'] / $system_mileage * 100;
 	    }
             $link = "window.open('/shields/clinched.php?u=" . $tmuser . "&amp;sys=" . $system . "')";
-            echo "<tr style=\"background-color:#EEEEFF\"><td>Distance Traveled</td><td>".tm_convert_distance($row['clinchedMileage'])." of ".tm_convert_distance($system_mileage)." ".$tmunits." (".sprintf('%0.2f',$percentage)."%) Rank: {$row['rank']}</td></tr>";
+	    if ($row['traveler'] != "") {
+		$rank = $row['rank'];
+	    } else {
+		$rank = "N/A";
+	    }
+            echo "<tr style=\"background-color:#EEEEFF\"><td>Distance Traveled</td><td>".tm_convert_distance($row['clinchedMileage'])." of ".tm_convert_distance($system_mileage)." ".$tmunits." (".sprintf('%0.2f',$percentage)."%) Rank: ".$rank."</td></tr>";
 
             //Second, fetch routes clinched/driven
             if ($region == "") {
                 $totalRoutes = tm_count_rows("connectedRoutes", "WHERE systemName='".$system."'");
+                $sql_command = <<<SQL
+                SELECT
+                    ccr.traveler,
+                    sum(ccr.clinched) as clinched
+                FROM connectedRoutes as cr
+                LEFT JOIN clinchedConnectedRoutes as ccr
+                ON cr.firstRoot = ccr.route
+                WHERE cr.systemName = '$system'
+                GROUP BY traveler
+		ORDER BY clinched DESC;
+SQL;
+		$res = tmdb_query($sql_command);
+		$row = tm_fetch_user_row_with_rank($res, 'clinched');
+		if ($row['traveler'] != "") {
+		    $clinched = $row['clinched'];
+		    $clinchedRank = $row['rank'];
+		} else {
+		    $clinched = 0;
+		    $clinchedRank = "N/A";
+		}
+		$res->free();
                 $sql_command = <<<SQL
                 SELECT
                     ccr.traveler,
@@ -210,10 +236,41 @@ SQL;
                 ON cr.firstRoot = ccr.route
                 WHERE cr.systemName = '$system'
                 GROUP BY traveler
-                ORDER BY clinched DESC;
+		ORDER BY driven DESC;
 SQL;
+		$res = tmdb_query($sql_command);
+		$row = tm_fetch_user_row_with_rank($res, 'driven');
+		if ($row['traveler'] != "") {
+		    $driven = $row['driven'];
+		    $drivenRank = $row['rank'];
+		} else {
+		    $driven = 0;
+		    $drivenRank = "N/A";
+		}
+		$res->free();
             } else {
                 $totalRoutes = tm_count_rows("routes", "WHERE systemName='".$system."' AND region='".$region."'");
+                $sql_command = <<<SQL
+                SELECT
+                    ccr.traveler,
+                    sum(ccr.clinched) as clinched
+                FROM routes as cr
+                LEFT JOIN clinchedRoutes as ccr
+                ON cr.root = ccr.route
+                WHERE cr.region = '$region' AND cr.systemName = '$system'
+                GROUP BY ccr.traveler
+		ORDER BY clinched DESC;
+SQL;
+		$res = tmdb_query($sql_command);
+		$row = tm_fetch_user_row_with_rank($res, 'clinched');
+		if ($row['traveler'] != "") {
+		    $clinched = $row['clinched'];
+		    $clinchedRank = $row['rank'];
+		} else {
+		    $clinched = 0;
+		    $clinchedRank = "N/A";
+		}
+		$res->free();
                 $sql_command = <<<SQL
                 SELECT
                     ccr.traveler,
@@ -224,14 +281,21 @@ SQL;
                 ON cr.root = ccr.route
                 WHERE cr.region = '$region' AND cr.systemName = '$system'
                 GROUP BY ccr.traveler
-                ORDER BY clinched DESC
+		ORDER BY driven DESC;
 SQL;
+		$res = tmdb_query($sql_command);
+		$row = tm_fetch_user_row_with_rank($res, 'driven');
+		if ($row['traveler'] != "") {
+		    $driven = $row['driven'];
+		    $drivenRank = $row['rank'];
+		} else {
+		    $driven = 0;
+		    $drivenRank = "N/A";
+		}
+		$res->free();
             }
-            $res = tmdb_query($sql_command);
-            $row = tm_fetch_user_row_with_rank($res, 'clinched');
-            $res->free();
-            echo "<tr onClick=\"" . $link . "\"><td>Routes Traveled</td><td>" . $row['driven'] . " of ".$totalRoutes." (" . round($row['driven'] / $totalRoutes * 100, 2) ."%)</td></tr>";
-	    echo "<tr onClick=\"" . $link . "\"><td>Routes Clinched</td><td>" . $row['clinched'] . " of " . $totalRoutes . " (" . round($row['clinched'] / $totalRoutes * 100, 2) . "%) Rank: {$row['rank']}</td></tr>\n";
+            echo "<tr onClick=\"" . $link . "\"><td>Routes Traveled</td><td>" . $driven   . " of " . $totalRoutes . " (" . round($driven   / $totalRoutes * 100, 2) . "%) Rank: {$drivenRank}</td></tr>\n";
+	    echo "<tr onClick=\"" . $link . "\"><td>Routes Clinched</td><td>" . $clinched . " of " . $totalRoutes . " (" . round($clinched / $totalRoutes * 100, 2) . "%) Rank: {$clinchedRank}</td></tr>\n";
             ?>
             </tbody>
         </table>
@@ -281,6 +345,13 @@ HTML;
         }
         ?>
         <table class="gratable tablesorter" id="routeTable">
+	    <?php
+	    if ($region != "") {
+		echo <<<HTML
+	    <caption>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</caption>
+HTML;
+	    }
+	    ?>
             <thead>
             <tr>
                 <th colspan="8">Statistics by Route</th>
@@ -289,7 +360,10 @@ HTML;
                 <th class="nonsortable">Route</th>
                 <th class="sortable">#</th>
                 <th class="nonsortable">Banner</th>
-                <th class="nonsortable">Abbrev</th>
+		<?php if ($region == "") {
+		    echo "<th class=\"nonsortable\">Abbrev</th>";
+		}
+		?>
                 <th class="nonsortable">Section</th>
                 <th class="sortable">Clinched (<?php tm_echo_units(); ?>)</th>
                 <th class="sortable">Total (<?php tm_echo_units(); ?>)</th>
@@ -320,7 +394,9 @@ HTML;
                 echo "<td>" . $row['route'] . "</td>";
                 echo "<td width='0'>" . $row['routeNum'] . "</td>";
                 echo "<td>" . $row['banner'] . "</td>";
-                echo "<td>" . $row['abbrev'] . "</td>";
+		if ($region == "") {
+                    echo "<td>" . $row['abbrev'] . "</td>";
+		}
                 echo "<td>" . $row['city'] . "</td>";
                 echo "<td>" . tm_convert_distance($row['clinchedMileage']) . "</td>";
                 echo "<td>" . tm_convert_distance($row['totalMileage']) . "</td>";

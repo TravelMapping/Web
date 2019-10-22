@@ -358,14 +358,14 @@ function tm_generate_custom_colors_array() {
 function tm_update_time() {
     global $tmdb;
     global $tmdbname;
-    $sql_command = "SELECT create_time FROM information_schema.tables WHERE TABLE_SCHEMA = '".$tmdbname."' ORDER BY create_time DESC;";
+    $sql_command = "SELECT CREATE_TIME FROM information_schema.tables WHERE TABLE_SCHEMA = '".$tmdbname."' ORDER BY CREATE_TIME DESC;";
     global $tmsqldebug;
     if ($tmsqldebug) {
         echo "<!-- SQL: ".$sql_command." -->\n";
     }
     $res = tmdb_query($sql_command);
     $row = $res->fetch_assoc();
-    $ans = $row['create_time'];
+    $ans = $row['CREATE_TIME'];
     $res->free();
     return $ans;
 }
@@ -379,6 +379,7 @@ function tm_fetch_user_row_with_rank($res, $rankBy) {
     $rank = 1;
     $score = 0;
     $row = array();
+    $row['traveler'] = NULL;
     while($row['traveler'] != $tmuser && $row = $res->fetch_assoc()) {
         if ($score != $row[$rankBy]) {
             $score = $row[$rankBy];
@@ -456,9 +457,9 @@ function tm_common_js() {
   echo "</script>\n";
 
 echo <<<END
-  <link rel="stylesheet" href="/leaflet/leaflet.css" />
-  <script src="/leaflet/leaflet.js"></script>
-  <script src="/leaflet/leaflet-providers.js"></script>
+  <link rel="stylesheet" href="/leaflet-1.5.1/leaflet.css" />
+  <script src="/leaflet-1.5.1/leaflet.js"></script>
+  <script src="/leaflet-1.5.1/leaflet-providers.js"></script>
   <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
   <!-- jQuery -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

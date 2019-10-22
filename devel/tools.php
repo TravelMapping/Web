@@ -23,12 +23,40 @@ interest to Travel Mapping project contributors.
 Most of the files below are regenerated during each site update.
 </p>
 
+<p class="heading">Developer Manual</p>
+
+<div class="text">
+
+  TM's highway data is developed and maintained by a group
+  of <a href="/credits.php#contributors">volunteer project
+  contributors</a>.  The data is stored in
+  a <a href="https://github.com/TravelMapping/HighwayData">GitHub
+  repository</a>, organized as
+  described <a href="https://github.com/TravelMapping/HighwayData/blob/master/README.md">here</a>.
+  The content at the pages linked below serve as the manual to help
+  TM contributors to maintain consistent and high-quality highway data
+  for the project.  It is based on the manual from TM's predecessor,
+  the Clinched Highway Mapping project.
+  
+<ul>
+  <li><a href="manual/syshwylist.php">Making the system highway list (.csv)</a> </li>
+  <li>Making the highway data files (.wpt)
+    <ul>
+      <li><a href="manual/hwydata.php">Highway data files</a></li>
+      <li><a href="manual/includepts.php">Waypoints to include</a></li>
+      <li><a href="manual/wayptlabels.php">Labeling waypoints</a></li>
+      <li><a href="manual/points.php">Positioning waypoints </a></li>
+      </ul>
+  </li>
+  <li><a href="manual/maintenance.php">Maintaining files for activated routes</a></li>
+</ul>
+</div>
+
 <p class="heading">Developer Tools</p>
 
 <div class="text">
 <ul>
-<li><a href="http://cmap.m-plex.com/tools/manual.php">CHM's Instruction Manual</a> (TM generally follows these rules, but we do need to develop our own manual)</li>
-<li><a href="http://travelmapping.net/wptedit/">TM's update of CHM's WPT file Editor</a> (Goal: develop our own new version)</li>
+<li><a href="/wptedit/">TM's update of CHM's WPT file Editor</a> (Goal: develop our own new version)</li>
 <li><a href="http://courses.teresco.org/metal/hdx/">Highway Data Examiner</a> (HDX) to view graph and near-miss data</li>
 </ul>
 </div>
@@ -43,7 +71,7 @@ $activedc = tm_count_rows("datacheckErrors", "join routes on datacheckErrors.rou
 <div class="text">
 <ul>
   <li><a href="datacheck.php">Datacheck</a> (Currently <?php echo $activedc; ?> errors in active systems)<br />
-    These errors should be corrected, or reported as false positives by adding the entry from the last column to the datacheck FP list.</li>
+    These errors should be corrected, or reported as false positives (FPs) by adding the entry from the last column to the datacheck FP list.</li>
   <li><a href="../logs/unmatchedfps.log">Datacheck false positive entries that did not correspond to any detected datacheck error</a>
     <br />
   Cleaning these are low priority tasks for the project.</li>
@@ -51,10 +79,13 @@ $activedc = tm_count_rows("datacheckErrors", "join routes on datacheckErrors.rou
   <li><a href="../graphs/">Travel Mapping Graph Data</a>
     <br />
     Graphs can be loaded into HDX to verify unexpected or broken concurrencies.</li>
-  <li><a href="../graphs/tm-master.nmp">Master Near-Miss Point (NMP) file</a>
+  <li><a href="../logs/nearmisspoints.log">Log of points that are very close together ("near-miss points, or NMPs") and might be candidates to merge</a></li>
+  <li><a href="../logs/tm-master.nmp">Master Near-Miss Point (NMP) file</a>
     <br />
     NMP file can be loaded into HDX to find very nearby points that might be appropriate to combine.</li>
-<li><a href="../logs/nearmisspoints.log">Log of points that are very close together and might be candidates to merge</a></li>
+  <li><a href="../logs/nmpbyregion/">NMP files filtered by region (individual files)</a></li>
+  <li><a href="../logs/nmpbyregion/nmpbyregion.zip">NMP files filtered by region (zip archive)</a></li>
+  <li><a href="../logs/nmpfpsunmatched.log">Log of FP entries from nmpfps.log that did not match any entry in nearmisspoints.log</a></li>
   <li><a href="../logs/unprocessedwpts.log">List of unprocessed wpt files</a>
     <br />
     Waypoint files in the repository that were not processed because they were not listed in any highway system's csv files</li>

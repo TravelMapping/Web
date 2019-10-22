@@ -228,6 +228,7 @@ following sources of highway information.</p>
 	      <li>Baden-Württemberg
 	        <ul>
 	          <li><a href="http://www.svz-bw.de/verkehrszaehlung.html">Traffic monitoring</a>. Road map.</li>
+	          <li><a href="https://www.geoportal-bw.de/">Geo portal BW</a>. Road map.</li>
 	        </ul>
 	      </li>
 	      <li>Bavaria
@@ -242,7 +243,8 @@ following sources of highway information.</p>
 	      </li>
 	      <li>Brandenburg
 	        <ul>
-	          <li><a href="http://isk.geobasis-bb.de/strassennetz/basiskarte.html">Brandenburg viewer</a>. Road map.</li>
+	          <li><a href="http://bb-viewer.geobasis-bb.de/strassennetz/">Brandenburg viewer</a>. Road map viewer.</li>
+		  <li><a href="http://www.ls.brandenburg.de/cms/detail.php/bb1.c.260097.de">Net node maps</a>.</li>
 	        </ul>
 	      </li>
 	      <li>Hamburg
@@ -252,7 +254,7 @@ following sources of highway information.</p>
 	      </li>
 	      <li>Hesse
 	        <ul>
-	          <li><a href="https://mobil.hessen.de/%C3%BCber-uns/downloads-formulare/netzknotenkarten-hessen">Net node maps</a>. </li>
+	          <li><a href="https://mobil.hessen.de/%C3%BCber-uns/downloads-formulare/netzknotenkarten-hessen">Net node maps.</a> </li>
 	        </ul>
 	      </li>
 	      <li>Lower Saxony
@@ -272,7 +274,8 @@ following sources of highway information.</p>
 	      </li>
 	      <li>Rhineland-Palatinate
 	        <ul>
-	          <li><a href="https://lbm.rlp.de/de/service/informationsmaterial/strassenkarte-rheinland-pfalz/">Road map</a>. </li>
+	          <li><a href="https://lbm.rlp.de/de/service/informationsmaterial/strassenkarte-rheinland-pfalz/">Road map</a>.</li>
+	          <li><a href="http://www.geoportal.rlp.de/portal/karten.html">Geo portal RLP</a>.</li>
 	        </ul>
 	      </li>
 	      <li>Saarland
@@ -453,6 +456,7 @@ following sources of highway information.</p>
 	    <ul>
 	      <li><a href="http://www.admin.ch/ch/d/sr/741_272/app1.html">List of Motorways and Expressways</a>. Legislative highway definitions for the national highway network of Switzerland.</li>
 	      <li><a href="http://www.autobahnen.ch/">The Swiss Motorways</a>. Hobbyist site covering the motorway network of Switzerland.</li>
+	      <li><a href="https://www.dreamango.com/de/tour/touristische-strassen/grand-tour-of-switzerland/18634381/#dm=1&dmdtab=oax-tab1">Grand Tour of Switzerland</a>.</li>
 	    </ul>
 	  </li>
 	  <li>Turkey
@@ -540,6 +544,7 @@ following sources of highway information.</p>
 	    <ul>
               <li>Official Transportation Map. Road map from the Delaware Department of Transportation.</li>
 	      <li><a href="https://www.deldot.gov/Publications/reports/gis/index.shtml">Road Network Files</a>. Shapefiles from the Delaware Department of Transportation.</li>
+	      <li><a href="https://www.deldot.gov/Publications/manuals/traffic_counts/index.shtml"></a>. Vehicle Volume Summary (Traffic Counts) from the Delaware Department of Transportation.    
  	    </ul>
 	  </li>
 <!--	  <li>District of Columbia, USA
@@ -770,6 +775,7 @@ following sources of highway information.</p>
 <li><a href="http://www.txdot.gov/travel/county_grid_search.htm">County Grid Map Search</a>. Grid maps from the Texas Department of Transportation, organized by county.</li>
 <li><a href="http://www.txdot.gov/travel/planning_map.htm">Statewide Planning Map</a>. From the Texas Department of Transportation.</li>
 <li><a href="https://tnris.org/data-catalog/entry/txdot-roadways/">TxDOT Roadways</a>. Shapefiles maintained by TxDOT Transportation Planning and Programming Division.</li>
+<li><a href="http://gis-txdot.opendata.arcgis.com/">Open Data Portal</a>. TxDOT GIS data.</li>
 	    </ul>
 	  </li> 
 	  <li>Utah, USA
@@ -888,7 +894,8 @@ following sources of highway information.</p>
 <p class="heading"><a name="contributors">Project Contributors</a></p>
 
   <ul>
-  <li>Eric Bryant (yakra)<br> </li>
+  <li>Joseph Barnes (the_spui_ninja)<br> </li>
+  <li>Eric Bryant (yakra)<br> </li> 
   <li>Anthony Costanzo (duke87)<br> </li>
   <li>Evin Fairchild (compdude) </li>
   <li>Dave Filpus (dfilpus)<br>
@@ -903,8 +910,10 @@ following sources of highway information.</p>
         <a href="http://www.angelfire.com/ia/jdmorrison/ends/iaends.html">Iowa Highway Ends</a> </li>
   <li>Mark Moore (Markkos1992)</li>
   <li>Mike Roberson (mapmikey)</li>
+  <li>Mihai-Lucian Radu (panda80)</li>	  
   <li>Dave S (mapcat)</li>
   <li>Christopher Steig (Bickendan)</li>
+  <li>Nick Tallyn (ntallyn)</li>
   <li>Jim Teresco (terescoj), Primary Site Development<br>
       <a href="http://www.teresco.org/pics/signs/">Why Do You Have So Many Pictures of Road Signs?</a>  </li>
   <li>Oscar Voss (oscar)</li>
