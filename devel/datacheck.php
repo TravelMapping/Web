@@ -51,7 +51,18 @@
         if (strcmp($row['value'],"") != 0) {
           echo $row['value'];
         }
-        echo "</td><td><tt>".$row['route'].";".$row['label1'].";".$row['label2'].";".$row['label3'].";".$row['code'].";".$row['value']."</tt></td></tr>\n";
+	if ((strcmp($row['code'],"DUPLICATE_LABEL") == 0) ||
+	  (strcmp($row['code'],"HIDDEN_TERMINUS") == 0) ||
+	  (strcmp($row['code'],"LABEL_INVALID_CHAR") == 0) ||
+	  (strcmp($row['code'],"LABEL_SLASHES") == 0) ||
+	  (strcmp($row['code'],"LONG_UNDERSCORE") == 0) ||
+	  (strcmp($row['code'],"MALFORMED_URL") == 0) ||
+	  (strcmp($row['code'],"NONTERMINAL_UNDERSCORE") == 0)) {
+          echo "</td><td style=\"color: gray\"><i>This is always a true error and cannot be marked false positive.</i></td></tr>\n";
+	}
+        else {
+          echo "</td><td><tt>".$row['route'].";".$row['label1'].";".$row['label2'].";".$row['label3'].";".$row['code'].";".$row['value']."</tt></td></tr>\n";
+        }
       }
       $res->free();
   }
