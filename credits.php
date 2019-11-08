@@ -544,7 +544,7 @@ following sources of highway information.</p>
 	    <ul>
               <li>Official Transportation Map. Road map from the Delaware Department of Transportation.</li>
 	      <li><a href="https://www.deldot.gov/Publications/reports/gis/index.shtml">Road Network Files</a>. Shapefiles from the Delaware Department of Transportation.</li>
-	      <li><a href="https://www.deldot.gov/Publications/manuals/traffic_counts/index.shtml"></a>. Vehicle Volume Summary (Traffic Counts) from the Delaware Department of Transportation.    
+	      <li><a href="https://deldot.gov/Publications/manuals/traffic_counts/index.shtml">Vehicle Volume Summary (Traffic Counts)</a>. Traffic Counts and Road Information from the Delaware Department of Transportation.    
  	    </ul>
 	  </li>
 <!--	  <li>District of Columbia, USA
@@ -736,8 +736,8 @@ following sources of highway information.</p>
 	    <ul>
 	    <li><a href="http://www.penndot.gov/ProjectAndPrograms/Planning/Maps/Pages/default.aspx">PennDOT Maps</a>. Official highway maps of Pennsylvania, United States.</li>
 	    <li><a href="https://www.penndot.gov/ProjectAndPrograms/ResearchandTesting/RoadwayManagementandTesting/Pages/RMS-Annual-SLDs-By-County.aspx">RMS Annual SLDs By County</a>. RMS Annual Straight Line Diagrams from the Pennsylvania Department of Transportation</li>
-	    <li><a href="http://www.dot7.state.pa.us/videolog/"></a>. Pennsylvania Department of Transportation (PennDOT) VideoLog that shows roadway information and images.</li>
-            <li><a href="https://www.penndot.gov/ProjectAndPrograms/Planning/Maps/Pages/Traffic-Volume.aspx/"></a>. Pennsylvania Department of Transportation (PennDOT) Traffic Volume Maps.</li>
+	    <li><a href="https://gis.penndot.gov/Videolog/">PennDOT VideoLog</a>. Pennsylvania Department of Transportation (PennDOT) VideoLog that shows roadway information and images.</li>
+            <li><a href="https://www.penndot.gov/ProjectAndPrograms/Planning/Maps/Pages/Traffic-Volume.aspx/">PennDOT Traffic Volume Maps</a>. Official highway maps of Pennsylvania that also show traffic volumes along state routes.</li>
 	    </ul>
 	  </li>
 <!--	  <li>Puerto Rico, USA
