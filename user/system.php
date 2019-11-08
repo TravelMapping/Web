@@ -385,7 +385,7 @@ HTML;
 
             while ($row = $res->fetch_assoc()) {
                 if ($region == "") {
-                    $link = "window.open('/user/mapview.php?u=" . $tmuser . "&amp;rte=" . $row['route'] . "')";
+                    $link = "window.open('/user/mapview.php?u=" . $tmuser . "&amp;rte=" . $row['route'] . "&amp;sys=" . $system . "')";
                 } else {
                     $link = "window.open('/hb?u=" . $tmuser . "&amp;r=" . $row['root'] . "')";
                 }
