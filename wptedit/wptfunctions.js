@@ -414,8 +414,8 @@ function WptTable(wpts)
 function LabelClick(i, n, label, lat, lon, errors, altlabelsstring)
 {
     var info = MarkerInfo(i, n, new Waypoint(label, lat, lon, errors, altlabelsstring));
-    map.panTo([lat, lon]);
     L.popup().setLatLng([lat, lon]).setContent(info).openOn(map);
+    map.panTo([lat, lon]);
 }
 
 function UpdateMap(pan)
