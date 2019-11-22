@@ -438,8 +438,8 @@ SQL;
                     FROM routes AS r 
                     LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '{$tmuser}'
                     LEFT JOIN systems AS sys ON r.systemName = sys.systemName 
-		    LEFT JOIN connectedRouteRoots AS crr ON r.root = crr.root
-  		    LEFT JOIN connectedRoutes as conr on crr.firstRoot = conr.firstRoot OR conr.firstRoot = r.root
+                    LEFT JOIN connectedRouteRoots AS crr ON r.root = crr.root
+                    LEFT JOIN connectedRoutes as conr on crr.firstRoot = conr.firstRoot OR conr.firstRoot = r.root
                     WHERE region = '{$region}'
                     ORDER BY sys.tier, conr.csvOrder, r.rootOrder
 SQL;
