@@ -2,14 +2,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
  ***
- * Highway Browser Main Page. If a root is supplied, a map will show that root's path along with its waypoints.
+ * Highway Browser Main Page.
+ * If a root is supplied, a map will show that root's path along with its waypoints.
  * Otherwise, it will show a list of routes that the user can select from, with filters by region and system availible.
+ * If all three of lat, lon, and zoom are provided, the map will initialize to those coordinates and zoom level.
+ * Otherwise, the map will pan and zoom to fit the entire route at the center.
  * URL Params:
  *  r - root of route to view waypoints for. When set, the page will display a map with the route params. (required for displaying map)
  *  u - user to display highlighting for on map (optional)
+ *  lat - initial latitude at center of map
+ *  lon - initial longitude at center of map
+ *  zoom - initial zoom level of map
  *  rg - region to filter for on the highway browser list (optional)
  *  sys - system to filter for on the highway browser list (optional)
- *  ([r [u]] [rg | sys])
+ *  ([r [u] [lat lon zoom]] [rg] [sys])
  ***
  -->
 <html xmlns="http://www.w3.org/1999/xhtml">
