@@ -51,10 +51,14 @@
         if (strcmp($row['value'],"") != 0) {
           echo $row['value'];
         }
-	if ((strcmp($row['code'],"DUPLICATE_LABEL") == 0) ||
+	// This list should match the datacheck_always_error list in the siteupdate program.
+	// Do not print FP entries for these cases.
+	if ((strcmp($row['code'],"BAD_ANGLE") == 0) ||
+	  (strcmp($row['code'],"DUPLICATE_LABEL") == 0) ||
 	  (strcmp($row['code'],"HIDDEN_TERMINUS") == 0) ||
 	  (strcmp($row['code'],"LABEL_INVALID_CHAR") == 0) ||
 	  (strcmp($row['code'],"LABEL_SLASHES") == 0) ||
+	  (strcmp($row['code'],"LABEL_UNDERSCORES") == 0) ||
 	  (strcmp($row['code'],"LONG_UNDERSCORE") == 0) ||
 	  (strcmp($row['code'],"MALFORMED_URL") == 0) ||
 	  (strcmp($row['code'],"NONTERMINAL_UNDERSCORE") == 0)) {
