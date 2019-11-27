@@ -57,6 +57,7 @@
 	  (strcmp($row['code'],"DUPLICATE_LABEL") == 0) ||
 	  (strcmp($row['code'],"HIDDEN_TERMINUS") == 0) ||
 	  (strcmp($row['code'],"LABEL_INVALID_CHAR") == 0) ||
+	  (strcmp($row['code'],"LABEL_PARENS") == 0) ||
 	  (strcmp($row['code'],"LABEL_SLASHES") == 0) ||
 	  (strcmp($row['code'],"LABEL_UNDERSCORES") == 0) ||
 	  (strcmp($row['code'],"LONG_UNDERSCORE") == 0) ||
