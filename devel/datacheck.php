@@ -56,6 +56,8 @@
 	if ((strcmp($row['code'],"BAD_ANGLE") == 0) ||
 	  (strcmp($row['code'],"DUPLICATE_LABEL") == 0) ||
 	  (strcmp($row['code'],"HIDDEN_TERMINUS") == 0) ||
+	  (strcmp($row['code'],"INVALID_FINAL_CHAR") == 0) ||
+	  (strcmp($row['code'],"INVALID_FIRST_CHAR") == 0) ||
 	  (strcmp($row['code'],"LABEL_INVALID_CHAR") == 0) ||
 	  (strcmp($row['code'],"LABEL_PARENS") == 0) ||
 	  (strcmp($row['code'],"LABEL_SLASHES") == 0) ||
