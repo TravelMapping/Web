@@ -537,7 +537,8 @@ following sources of highway information.</p>
 	  <li>Connecticut, USA
 	    <ul>
 	    <li><a href="http://kurumi.com/roads/ct/">Connecticut Roads</a>. Hobbyist site by Scott Oglesby covering highways in Connecticut.</li>
-	    <li><a href="http://www.ct.gov/dot/maps">ConnDOT: Maps</a>. Transportation Related Mapping from the Connecticut Department of Transportation.</li>
+	    <li><a href="https://portal.ct.gov/DOT/PP_Bureau/Documents/Maps">ConnDOT: Maps</a>. Transportation Related Mapping from the Connecticut Department of Transportation. Accessed 2019-11-11.</li>
+	    <li><a href="http://magic.lib.uconn.edu/connecticut_data.html#roads">Connecticut GIS Data @ MAGIC</a>. Roads and Transportation shapefiles from the UCONN Map and Geographic Information Center. Accessed 2019-11-11.</li>
 	    </ul>
 	  </li>
 	  <li>Delaware, USA
