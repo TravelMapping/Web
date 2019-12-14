@@ -29,7 +29,19 @@
       $res = $db->query($sql_command);
 
       while ($row = $res->fetch_assoc()) {
-        echo "<tr><td><a href=\"../hb?r=".$row['route']."\">".$row['route']."</a></td><td>";
+        // find coords of error waypoint for HB link
+        if (strcmp($row['label2'],"") != 0) {
+          $label = $row['label2'];
+        }
+        else {
+          $label = $row['label1'];
+        }
+        $sql_command = "select latitude, longitude from waypoints where pointName = '".$label."' and root = '".$row['route']."';";
+        $res2 = tmdb_query($sql_command);
+        $row2 = $res2->fetch_assoc();
+
+        // write table row
+        echo "<tr><td><a href=\"../hb?r=".$row['route']."&lat=".$row2['latitude']."&lon=".$row2['longitude']."&zoom=17\">".$row['route']."</a></td><td>";
         if (strcmp($row['label1'],"") != 0) {
           echo $row['label1'];
         }
