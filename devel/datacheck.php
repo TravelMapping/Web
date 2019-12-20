@@ -63,6 +63,8 @@
 	  (strcmp($row['code'],"LABEL_SLASHES") == 0) ||
 	  (strcmp($row['code'],"LABEL_UNDERSCORES") == 0) ||
 	  (strcmp($row['code'],"LONG_UNDERSCORE") == 0) ||
+	  (strcmp($row['code'],"MALFORMED_LAT") == 0) ||
+	  (strcmp($row['code'],"MALFORMED_LON") == 0) ||
 	  (strcmp($row['code'],"MALFORMED_URL") == 0) ||
 	  (strcmp($row['code'],"NONTERMINAL_UNDERSCORE") == 0)) {
           echo "</td><td style=\"color: gray\"><i>This is always a true error and cannot be marked false positive.</i></td></tr>\n";
