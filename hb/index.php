@@ -102,6 +102,20 @@
             text-align: right;
         }
 
+	.status-active {
+	    background-color: #CCFFCC;
+            font-size: 14px;
+	}
+
+	.status-preview {
+	    background-color: #FFFFCC;
+            font-size: 14px;
+	}
+	
+	.status-devel {
+	    background-color: #FFCCCC;
+            font-size: 14px;
+	}
 
     </style>
     <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
@@ -250,19 +264,19 @@ JS;
 if ($routeparam != "") {
     require $_SERVER['DOCUMENT_ROOT'] . "/shields/shieldgen.php";
     echo "<div id=\"pointbox\">\n";
+    echo "<span class='status-".$routeInfo['level']."' style='text-align:center'><a href='/hb/?sys=".$routeInfo['systemName']."'>".$routeInfo['fullName']." (".$routeInfo['systemName'].")</a></span>\n";
+    if ($routeInfo['level'] == 'preview') {
+        echo "<span class='status-preview' style='text-align:center' title='Preview systems are substantially complete, but are undergoing final review and revisions. These may still undergo significant changes without notification in the updates log. Users can include these systems in list files for mapping and stats, but should expect to revise as the system progresses toward activation.'>Warning: ".$routeInfo['systemName']." is a preview system.</span>\n";
+    }
+    else if ($routeInfo['level'] == 'devel') {
+        echo "<span class='status-devel' style='text-align:center' title='Devel systems are a work in progress. Routes in these systems are not yet available for mapping and inclusion in user stats, and are shown in the Highway Browser primarily for the benefit of the highway data managers who are developing the system. Once the system is substantially complete it will be upgraded to preview status, at which time users can begin to plot their travels in the system.'>Warning: ".$routeInfo['systemName']." is an in-development system.</span>\n";
+    }
     echo "<span class='bigshield'>" . generate($routeparam, true) . "</span>\n";
     echo "<span>" . $routeInfo['banner'];
     if (strlen($routeInfo['city']) > 0) {
         echo " (" . $routeInfo['city'] . ")";
     }
     echo "</span>\n";
-    echo "<span style='text-align:center'>" . $routeInfo['fullName'] . " (" . $routeInfo['systemName'] . ")</span>\n";
-    if ($routeInfo['level'] == 'preview') {
-        echo "<span style='text-align:center'>Preview system: routes may change without notice</span>\n";
-    }
-    else if ($routeInfo['level'] == 'devel') {
-        echo "<span style='text-align:center'>Development system: not yet available for user mapping</span>\n";
-    }
     echo "<span>.list name: <span style='font-family:courier'>" . $routeInfo['region'] . " " . $routeInfo['route'] . $routeInfo['banner'] . $routeInfo['abbrev'] . "</span></span>\n";
 
     echo "<table id='routeInfo' class=\"gratable\"><thead><tr><th colspan='2'>Route Stats</th></tr></thead><tbody>\n";
