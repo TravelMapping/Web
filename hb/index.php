@@ -162,7 +162,7 @@
     </script>
     <title><?php
         if ($routeparam != "") {
-            $sql_command = "SELECT * FROM routes WHERE root = '" . $routeparam . "'";
+            $sql_command = "SELECT * FROM routes LEFT JOIN systems on routes.systemName = systems.systemName WHERE root = '" . $routeparam . "'";
             $res = tmdb_query($sql_command);
             $routeInfo = $res->fetch_array();
             $res->free();
@@ -256,6 +256,13 @@ if ($routeparam != "") {
         echo " (" . $routeInfo['city'] . ")";
     }
     echo "</span>\n";
+    echo "<span style='text-align:center'>" . $routeInfo['fullName'] . " (" . $routeInfo['systemName'] . ")</span>\n";
+    if ($routeInfo['level'] == 'preview') {
+        echo "<span style='text-align:center'>Preview system: routes may change without notice</span>\n";
+    }
+    else if ($routeInfo['level'] == 'devel') {
+        echo "<span style='text-align:center'>Development system: not yet available for user mapping</span>\n";
+    }
     echo "<span>.list name: <span style='font-family:courier'>" . $routeInfo['region'] . " " . $routeInfo['route'] . $routeInfo['banner'] . $routeInfo['abbrev'] . "</span></span>\n";
 
     echo "<table id='routeInfo' class=\"gratable\"><thead><tr><th colspan='2'>Route Stats</th></tr></thead><tbody>\n";
