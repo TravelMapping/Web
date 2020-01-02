@@ -58,7 +58,7 @@
           echo ",".$row['label3'];
         }
 	if ((strcmp($row['code'],"VISIBLE_DISTANCE") == 0) ||
-	  (strcmp($row['code'],"LONG_DISTANCE") == 0) ||
+	  (strcmp($row['code'],"LONG_SEGMENT") == 0) ||
 	  (strcmp($row['code'],"SHARP_ANGLE") == 0)) {
 	  echo "</td><td>".$row['code']."</td><td>";
 	}
