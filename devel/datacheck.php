@@ -10,17 +10,23 @@
 <?php
 
   # function to generate a table with FP or not
-  function writeTable($db, $fpVal, $joins, $region, $system) {
+  function writeTable($db, $fpVal, $joins) {
       global $tmsqldebug;
 
       // select all errors in the DB with the given $fpVal
       $sql_command = "select datacheckErrors.* from datacheckErrors ".$joins." falsePositive=".$fpVal;
       // check for query string parameter for system and region filters
-      if ($system != "") {
-          $sql_command .= " AND routes.systemName = '" .$system. "'";
+      if (array_key_exists("sys", $_GET)) {
+          $sql_command .= " AND ".orClauseBuilder('sys', 'systemName', 'routes');
       }
-      if ($region != "") {
-          $sql_command .= " AND routes.region = '" .$region. "'";
+      if (array_key_exists("rg", $_GET)) {
+          $sql_command .= " AND ".orClauseBuilder('rg', 'region', 'routes');
+      }
+      if (array_key_exists("show", $_GET)) {
+          $sql_command .= " AND ".orClauseBuilder('show', 'code', 'datacheckErrors');
+      }
+      if (array_key_exists("hide", $_GET)) {
+          $sql_command .= " AND NOT ".orClauseBuilder('hide', 'code', 'datacheckErrors');
       }
       $sql_command .= ";";
       if ($tmsqldebug) {
@@ -29,7 +35,19 @@
       $res = $db->query($sql_command);
 
       while ($row = $res->fetch_assoc()) {
-        echo "<tr><td><a href=\"../hb?r=".$row['route']."\">".$row['route']."</a></td><td>";
+        // find coords of error waypoint for HB link
+        if (strcmp($row['label2'],"") != 0) {
+          $label = $row['label2'];
+        }
+        else {
+          $label = $row['label1'];
+        }
+        $sql_command = "select latitude, longitude from waypoints where pointName = '".$label."' and root = '".$row['route']."';";
+        $res2 = tmdb_query($sql_command);
+        $row2 = $res2->fetch_assoc();
+
+        // write table row
+        echo "<tr><td><a href=\"../hb?r=".$row['route']."&lat=".$row2['latitude']."&lon=".$row2['longitude']."&zoom=17\">".$row['route']."</a></td><td>";
         if (strcmp($row['label1'],"") != 0) {
           echo $row['label1'];
         }
@@ -63,6 +81,8 @@
 	  (strcmp($row['code'],"LABEL_SLASHES") == 0) ||
 	  (strcmp($row['code'],"LABEL_UNDERSCORES") == 0) ||
 	  (strcmp($row['code'],"LONG_UNDERSCORE") == 0) ||
+	  (strcmp($row['code'],"MALFORMED_LAT") == 0) ||
+	  (strcmp($row['code'],"MALFORMED_LON") == 0) ||
 	  (strcmp($row['code'],"MALFORMED_URL") == 0) ||
 	  (strcmp($row['code'],"NONTERMINAL_UNDERSCORE") == 0)) {
           echo "</td><td style=\"color: gray\"><i>This is always a true error and cannot be marked false positive.</i></td></tr>\n";
@@ -76,28 +96,6 @@
 ?>
 
 <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
-<?php
-    // check for region and/or system parameters
-    $regions = tm_qs_multi_or_comma_to_array("rg");
-    if (count($regions) > 0) {
-        $region = $regions[0];
-        $regionName = tm_region_code_to_name($region);
-    }
-    else {
-        $region = "";
-        $regionName = "No Region Specified";
-    }
-
-    $systems = tm_qs_multi_or_comma_to_array("sys");
-    if (count($systems) > 0) {
-        $system = $systems[0];
-        $systemName = tm_system_code_to_name($system);
-    }
-    else {
-        $system = "";
-        $systemName = "No System Specified";
-    }
-?>
 <title>Travel Mapping Highway Data Datacheck Errors</title>
 </head>
 
@@ -160,7 +158,7 @@ datacheckfps.csv]</a>.</p>
 
   <table border="1" style="background-color:#fcc"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry to Submit</th></tr>
     <?php
-      writeTable($tmdb, "0", "join routes on datacheckErrors.route = routes.root join systems on routes.systemName = systems.systemName where systems.level=\"active\" and ", $region, $system);
+      writeTable($tmdb, "0", "join routes on datacheckErrors.route = routes.root join systems on routes.systemName = systems.systemName where systems.level=\"active\" and ");
     ?>
   </table>
 
@@ -178,7 +176,7 @@ datacheckfps.csv]</a>.</p>
 
   <table border="1" style="background-color:#ccf"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry to Submit</th></tr>
     <?php
-      writeTable($tmdb, "0", "join routes on datacheckErrors.route = routes.root join systems on routes.systemName = systems.systemName where systems.level=\"preview\" and ", $region, $system);
+      writeTable($tmdb, "0", "join routes on datacheckErrors.route = routes.root join systems on routes.systemName = systems.systemName where systems.level=\"preview\" and ");
     ?>
   </table>
 
@@ -195,7 +193,7 @@ datacheckfps.csv]</a>.</p>
 
   <table border="1" style="background-color:#cfc"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry to Submit</th></tr>
     <?php
-      writeTable($tmdb, "0", "join routes on datacheckErrors.route = routes.root join systems on routes.systemName = systems.systemName where systems.level=\"devel\" and ", $region, $system);
+      writeTable($tmdb, "0", "join routes on datacheckErrors.route = routes.root join systems on routes.systemName = systems.systemName where systems.level=\"devel\" and ");
     ?>
   </table>
 
@@ -212,7 +210,7 @@ if ($showmarked) {
 
   <table border="1" style="background-color:#ccc;font-size:60%"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry Matched</th></tr>
     <?php
-      writeTable($tmdb, "1", "join routes on datacheckErrors.route = routes.root join systems on routes.systemName = systems.systemName where ", $region, $system);
+      writeTable($tmdb, "1", "join routes on datacheckErrors.route = routes.root join systems on routes.systemName = systems.systemName where ");
     ?>
   </table>
 <?php
