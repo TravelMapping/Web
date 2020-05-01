@@ -12,16 +12,23 @@
 
 <h1>Travel Mapping Manual: Positioning Waypoints</h1>
 
-<p class="heading">Rules of thumb</p>
+<p class="heading"><a name="thumb"></a><a style="text-decoration:none" href="#thumb">&#x1f517</a>
+Rules of thumb</p>
 
 <div class="text">
-<li>At non-intersections (such as hidden shaping points), position the waypoint on the centerline of the highway.</li>
-  <li>Usually  position the waypoint at the point where the centerlines 
+<ul>
+  <li><a name="shaping_points"></a><a style="text-decoration:none" href="#shaping_points">&#x1f517</a>
+At non-intersections (such as hidden shaping points), position the waypoint on the centerline of the highway.</li>
+  <li><a name="hwy_cross"></a><a style="text-decoration:none" href="#hwy_cross">&#x1f517</a>
+Usually  position the waypoint at the point where the centerlines 
 of the two highways cross. Often the same coordinates can be used for 
 both highways. </li>
-  <li>These centerlines are defined by through lanes, not by turning lanes at intersections nor the equivalent in interchange ramps. </li>
-  <li>For couplets and divided highways, usually split the difference between the two roadways. </li>
-  <li>There are common exceptions to positioning 
+  <li><a name="through_lanes"></a><a style="text-decoration:none" href="#through_lanes">&#x1f517</a>
+These centerlines are defined by through lanes, not by turning lanes at intersections nor the equivalent in interchange ramps. </li>
+  <li><a name="couplets"></a><a style="text-decoration:none" href="#couplets">&#x1f517</a>
+For couplets and divided highways, usually split the difference between the two roadways. </li>
+  <li><a name="conn_ramps"></a><a style="text-decoration:none" href="#conn_ramps">&#x1f517</a>
+There are common exceptions to positioning 
 at centerline crossings, such as interchanges where ramps connect 
 nearby, non-intersecting highways, or where a short access road connects
  a road to another with a trumpet or similar interchange. In these 
@@ -29,8 +36,9 @@ cases, the waypoints for the same interchange on the separate highways
 cannot be at the same coordinates. Instead, the waypoints should be 
 where the connecting ramps or access road interchange with each highway.
 </li>
-  <li>Designations of the roadways are irrelevant. The physical configuration of the junction is what matters. <br />
-    As an example, imagine a cloverleaf interchange where one loop ramp 
+  <li><a name="designation"></a><a style="text-decoration:none" href="#designation">&#x1f517</a>
+Designations of the roadways are irrelevant. The physical configuration of the junction is what matters. <br />
+    <ol>As an example, imagine a cloverleaf interchange where one loop ramp 
 was replaced by a flyover ramp. Consider the I-97 &amp; MD 3 &amp; MD 32
  interchange.
     <!-- img src="staticmap_015.png" -->
@@ -41,12 +49,14 @@ the NW-SE and the NE-SW through lanes. One might have expected the point
  for I-97's file to be on the apparent SE-NE mainline, or even two 
 points where MD 32 connects at the SE and MD 3 at the NE. But it is one 
 interchange, and the point for all three routes should go in the middle.
- </li>
-  <li>Some interchanges have unusual shapes or are stretched-out versions of normal interchanges. Use your best judgment. </li>
+ </ol></li>
+  <li><a name="unusual_shapes"></a><a style="text-decoration:none" href="#unusual_shapes">&#x1f517</a>
+Some interchanges have unusual shapes or are stretched-out versions of normal interchanges. Use your best judgment. </li>
     </ul>
     </div>
     
-    <p class="heading">Interchanges</p>
+    <p class="heading"><a name="interchanges"></a><a style="text-decoration:none" href="#interchanges">&#x1f517</a>
+    Interchanges</p>
 
     <div class="text">
 <ul>
