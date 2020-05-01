@@ -79,7 +79,7 @@
             $sql_command = <<<SQL
 SELECT 
   waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, 
-  systems.tier, systems.color, systems.systemname 
+  systems.tier, systems.color, systems.systemname, routes.route, routes.banner, routes.abbrev, routes.region
 FROM waypoints 
   JOIN routes ON routes.root = waypoints.root 
   JOIN systems ON routes.systemname = systems.systemname AND $activeClause $rteClause
@@ -92,7 +92,7 @@ SQL;
             $sql_command = <<<SQL
 SELECT 
   waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, 
-  systems.tier, systems.color, systems.systemname 
+  systems.tier, systems.color, systems.systemname, routes.route, routes.banner, routes.abbrev, routes.region
 FROM waypoints 
   JOIN routes ON routes.root = waypoints.root
   {$select_regions}{$select_systems}
@@ -103,7 +103,7 @@ SQL;
             $sql_command = <<<SQL
 SELECT 
   waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, 
-  systems.tier, systems.color, systems.systemname 
+  systems.tier, systems.color, systems.systemname, routes.route, routes.banner, routes.abbrev, routes.region
 FROM waypoints 
   JOIN routes ON routes.root = waypoints.root $select_regions $select_systems
   JOIN systems ON routes.systemname = systems.systemname AND $activeClause
@@ -121,10 +121,7 @@ SQL;
         while ($row = $res->fetch_assoc()) {
             if (!($row['root'] == $lastRoute)) {
                 echo <<<JS
-newRouteIndices[$routenum] = $pointnum;
-routeTier[$routenum] = {$row['tier']};
-routeColor[$routenum] = '{$row['color']}';
-routeSystem[$routenum] = '{$row['systemname']}';\n
+routeInfo[$routenum] = { firstWaypoint: $pointnum, root: "{$row['root']}", tier: {$row['tier']}, color: "{$row['color']}", system: "{$row['systemname']}", label: "{$row['region']} {$row['route']}{$row['banner']}{$row['abbrev']}" };\n
 JS;
                 $lastRoute = $row['root'];
                 $routenum = $routenum + 1;
@@ -207,6 +204,7 @@ SQL;
 
         // insert custom color code if needed
         tm_generate_custom_colors_array();
+	echo "mapStatus = mapStates.MAPVIEW;\n";
     }
     
     function select_single_route ()
@@ -286,14 +284,19 @@ SQL;
 		echo "\n];\n";
             }
             echo "mapClinched = true;\n";
+	    echo "mapStatus = mapStates.HB_ROUTE;\n";
         }
     }
 ?>
 
 function waypointsFromSQL() {
     <?php
-        if (array_key_exists('r', $_GET)) { select_single_route(); }
-        else { select_route_set(); }
+        if (array_key_exists('r', $_GET)) {
+	   select_single_route();
+	}
+        else {
+	    select_route_set();
+        }
     ?>
     genEdges = true;
 }

@@ -537,13 +537,15 @@ following sources of highway information.</p>
 	  <li>Connecticut, USA
 	    <ul>
 	    <li><a href="http://kurumi.com/roads/ct/">Connecticut Roads</a>. Hobbyist site by Scott Oglesby covering highways in Connecticut.</li>
-	    <li><a href="http://www.ct.gov/dot/maps">ConnDOT: Maps</a>. Transportation Related Mapping from the Connecticut Department of Transportation.</li>
+	    <li><a href="https://portal.ct.gov/DOT/PP_Bureau/Documents/Maps">ConnDOT: Maps</a>. Transportation Related Mapping from the Connecticut Department of Transportation. Accessed 2019-11-11.</li>
+	    <li><a href="http://magic.lib.uconn.edu/connecticut_data.html#roads">Connecticut GIS Data @ MAGIC</a>. Roads and Transportation shapefiles from the UCONN Map and Geographic Information Center. Accessed 2019-11-11.</li>
 	    </ul>
 	  </li>
 	  <li>Delaware, USA
 	    <ul>
               <li>Official Transportation Map. Road map from the Delaware Department of Transportation.</li>
 	      <li><a href="https://www.deldot.gov/Publications/reports/gis/index.shtml">Road Network Files</a>. Shapefiles from the Delaware Department of Transportation.</li>
+	      <li><a href="https://deldot.gov/Publications/manuals/traffic_counts/index.shtml">Vehicle Volume Summary (Traffic Counts)</a>. Traffic Counts and Road Information from the Delaware Department of Transportation.    
  	    </ul>
 	  </li>
 <!--	  <li>District of Columbia, USA
@@ -735,8 +737,8 @@ following sources of highway information.</p>
 	    <ul>
 	    <li><a href="http://www.penndot.gov/ProjectAndPrograms/Planning/Maps/Pages/default.aspx">PennDOT Maps</a>. Official highway maps of Pennsylvania, United States.</li>
 	    <li><a href="https://www.penndot.gov/ProjectAndPrograms/ResearchandTesting/RoadwayManagementandTesting/Pages/RMS-Annual-SLDs-By-County.aspx">RMS Annual SLDs By County</a>. RMS Annual Straight Line Diagrams from the Pennsylvania Department of Transportation</li>
-	    <li><a href="http://www.dot7.state.pa.us/videolog/"></a>. Pennsylvania Department of Transportation (PennDOT) VideoLog that shows roadway information and images.</li>
-            <li><a href="https://www.penndot.gov/ProjectAndPrograms/Planning/Maps/Pages/Traffic-Volume.aspx/"></a>. Pennsylvania Department of Transportation (PennDOT) Traffic Volume Maps.</li>
+	    <li><a href="https://gis.penndot.gov/Videolog/">PennDOT VideoLog</a>. Pennsylvania Department of Transportation (PennDOT) VideoLog that shows roadway information and images.</li>
+            <li><a href="https://www.penndot.gov/ProjectAndPrograms/Planning/Maps/Pages/Traffic-Volume.aspx/">PennDOT Traffic Volume Maps</a>. Official highway maps of Pennsylvania that also show traffic volumes along state routes.</li>
 	    </ul>
 	  </li>
 <!--	  <li>Puerto Rico, USA
@@ -774,6 +776,7 @@ following sources of highway information.</p>
 <li><a href="http://www.txdot.gov/travel/county_grid_search.htm">County Grid Map Search</a>. Grid maps from the Texas Department of Transportation, organized by county.</li>
 <li><a href="http://www.txdot.gov/travel/planning_map.htm">Statewide Planning Map</a>. From the Texas Department of Transportation.</li>
 <li><a href="https://tnris.org/data-catalog/entry/txdot-roadways/">TxDOT Roadways</a>. Shapefiles maintained by TxDOT Transportation Planning and Programming Division.</li>
+<li><a href="http://gis-txdot.opendata.arcgis.com/">Open Data Portal</a>. TxDOT GIS data.</li>
 	    </ul>
 	  </li> 
 	  <li>Utah, USA
@@ -844,7 +847,7 @@ following sources of highway information.</p>
 	<li><a href="http://conversecounty.org/220/Road-Information">Converse County road numbers</a></li>
 	<li><a href="http://www.plattecountywyoming.com/RoadandBridge/documents/maps/PLATTE%20COUNTY%20ROADS.pdf">Platte County road map</a></li>
 	<li><a href="http://www.niobraracounty.org/_departments/_assessor/_PDF/maps/2016/NiobraraRoadMap.pdf">Niobrara County numbered roads</a></li>
-	<li>Weston County (names and numbers): <a href="http://westongov.com/_departments/_county_assessor/_pdfs/Road_Map.pdf">1</a>, <a href=http://westongov.com/_departments/_growth_development/_pdf/Cnty_Road_Maintenance.pdf>2</a></li>
+	<li>Weston County (names and numbers): <a href="https://www.westongov.com/wp-content/uploads/2019/05/Road-Map.pdf">1</a>, <a href=https://www.westongov.com/wp-content/uploads/2019/05/Milepost-Map.pdf>2</a></li>
 	</ul></li>
 <li>Forest Service MVUMs:
 	<ul>
@@ -908,8 +911,10 @@ following sources of highway information.</p>
         <a href="http://www.angelfire.com/ia/jdmorrison/ends/iaends.html">Iowa Highway Ends</a> </li>
   <li>Mark Moore (Markkos1992)</li>
   <li>Mike Roberson (mapmikey)</li>
+  <li>Mihai-Lucian Radu (panda80)</li>	  
   <li>Dave S (mapcat)</li>
   <li>Christopher Steig (Bickendan)</li>
+  <li>Nick Tallyn (ntallyn)</li>
   <li>Jim Teresco (terescoj), Primary Site Development<br>
       <a href="http://www.teresco.org/pics/signs/">Why Do You Have So Many Pictures of Road Signs?</a>  </li>
   <li>Oscar Voss (oscar)</li>
