@@ -22,6 +22,7 @@ This page gathers information, tools, and other links primarily of
 interest to Travel Mapping project contributors.
 Most of the files below are regenerated during each site update.
 </p>
+<a href="../devel_new/devel.php"><i>Draft of new developer page</i></a>
 
 <p class="heading">Developer Manual</p>
 
