@@ -16,7 +16,23 @@
 file, which we often refer to as a "waypoint file".  These files have
 a .wpt extension.</p>
 
-<p class="heading">.wpt Filenames</p>
+<p class="heading">
+  Contents</p>
+
+<div class="text">
+<ul>
+  <li><a href="#filename">.wpt Filenames</a></li>
+  <li><a href="#format">.wpt Data Format</a></li>
+  <li><a href="#url">Getting a coordinate URL</a></li>
+  <li><a href="#multiplexes">Multiplexes</a></li>
+  <li><a href="#wporder">Waypoint order</a></li>
+</ul>
+</div>
+
+
+
+<p class="heading"><a name="filename"></a><a style="text-decoration:none" href="#filename">&#x1f517</a>
+.wpt Filenames</p>
 
 <div class="text">
 <ul>
@@ -67,7 +83,8 @@ cat, pit). </li>
 </ul>
 </div>
 
-<p class="heading">.wpt Data Format</p>
+<p class="heading"><a name="format"></a><a style="text-decoration:none" href="#format">&#x1f517</a>
+.wpt Data Format</p>
 
 <div class="text">
 <ul>
@@ -98,7 +115,8 @@ US30 http://www.openstreetmap.org/?lat=39.936539&lon=-77.660417
   </ul>
   </div>
   
-  <p class="heading">Getting a coordinate URL</p>
+  <p class="heading"><a name="url"></a><a style="text-decoration:none" href="#url">&#x1f517</a>
+Getting a coordinate URL</p>
 
   <div class="text">
 
@@ -117,7 +135,8 @@ US30 http://www.openstreetmap.org/?lat=39.936539&lon=-77.660417
   </ul>
   </div>
 
-<p class="heading">Multiplexes</p>
+<p class="heading"><a name="multiplexes"></a><a style="text-decoration:none" href="#multiplexes">&#x1f517</a>
+Multiplexes</p>
 
 <div class="text">
 <ul>
@@ -174,7 +193,8 @@ after pasting the lines into your file.</li>
 </ul>
 </div>
 
-<p class="heading">Waypoint order</p>
+<p class="heading"><a name="wporder"></a><a style="text-decoration:none" href="#wporder">&#x1f517</a>
+Waypoint order</p>
 
 <div class="text">
 <ul>

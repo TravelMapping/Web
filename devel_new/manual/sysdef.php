@@ -58,7 +58,7 @@ System Status</p>
   </ul>
 </div>
 <p class="text">
-  The system categories are color-coded indicated throughout the site. User stats are generally divided into stats for travels in <active>active</active> systems and <active>active</active> + <preview>preview</preview> systems.
+  The system categories are indicated by color-code throughout the site. User stats are generally divided into stats for travels in <active>active</active> systems and <active>active</active> + <preview>preview</preview> systems.
 </p>
 
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
