@@ -24,7 +24,7 @@ connerr2 {color: #48C0A0;}
 
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 
-<h1>Travel Mapping Manual: Deal with data errors</h1>
+<h1 style="color:red">Travel Mapping Manual: Deal with data errors - <i>Draft</i></h1>
 
 <p class="text">
   The developer tools execute different kind of data checks to indicate potential errors.

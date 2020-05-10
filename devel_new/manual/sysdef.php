@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Travel Mapping Manual: System Definition</title>
+<title>Travel Mapping Manual: Definition of a system</title>
 <link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
 <link rel="shortcut icon" type="image/png" href="favicon.png">
 </head>
@@ -17,7 +17,7 @@ devel {background-color: #FFCCCC;}
 
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 
-<h1>Definition of a Travelmapping road system</h1>
+<h1 style="color:red">Travel Mapping Manual: Definition of a system - <i>Draft</i></h1>
 
 <p class="heading"><a name="roadsys"></a><a style="text-decoration:none" href="#roadsys">&#x1f517</a>
 What is a highway or road system?</p>
@@ -36,7 +36,7 @@ What is a highway or road system?</p>
 What are Travelmapping road systems?</p>
 
 <p class="text" >
-  The Travelmapping project aims to cover as many road systems as possible from all over the world. But we want to have a data set with high quality so that roadgeeks can safely claim having clinched a whole road systems. We only include road systems which are signed along the routes. Please refer to the <a href="sysnew.php">Create a new system (<devel><i>in work</i></devel>)</a> for further information to the requirements <devel><i>(and exceptions)</i></devel>.
+  The Travelmapping project aims to cover as many road systems as possible from all over the world. But we want to have a data set with high quality so that roadgeeks can safely claim having clinched a whole road systems. We only include road systems which are signed along the routes. Please refer to the <a href="sysnew.php">Create a new system</a> for further information to the requirements.
 </p>
 
 

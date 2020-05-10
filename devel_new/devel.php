@@ -23,32 +23,31 @@
 
 This page gathers information, tools, and other links primarily of
 interest to Travel Mapping project contributors.
-</br></br>  TM's highway data is developed and maintained by a group
-  of <a href="/credits.php#contributors">volunteer project
-  contributors</a>.  The data is stored in
-  a <a href="https://github.com/TravelMapping/HighwayData">GitHub
-  repository</a>, organized as
-  described <a href="https://github.com/TravelMapping/HighwayData/blob/master/README.md">here</a>.
+</br></br>
   The content at the pages linked below serve as the manual to help
   TM contributors to maintain consistent and high-quality highway data
   for the project.  It is based on the manual from TM's predecessor,
   the Clinched Highway Mapping project.
 </p>
 
+<p class="heading">Contribution to the project</i></p>
+<div class="text">
+  TM's highway data is developed and maintained by a group of <a href="/credits.php#contributors">volunteer project contributors</a>. Learn more on <a href="manual/contribute.php">how to contribute to the project</a>.
+</div>
+
+
 <p class="heading">Highway Systems <i>(work in progress)</i></p>
 <div class="text">
   <ul>
     <li><a href="manual/sysdef.php">Definition of a system</a></li>
-<!--    <li><a href="manual/sysnew.php">Create a new system</a></li>-->
-    <li>Create a new system</li>
+    <li><a href="manual/sysnew.php">Create a new system</a></li>
     <li><a href="manual/syserr.php">Deal with data errors</a></li>
-<!--    <li><a href="manual/sysrev.php">Review a preview system</a></li>-->
-    <li>Review a preview system</li>
+    <li><a href="manual/sysrev.php">Review a preview system</a></li>
     <li><a href="manual/maintenance.php">Maintain an active system</a></li>
   </ul>
 </div>
 
-<p class="heading">Route Files <i>(no changes yet)</i></p>
+<p class="heading">Route Files <i>(no changes except of formatting yet)</i></p>
 <div class="text">
   <ul>
     <li><a href="manual/hwydata.php">Highway data files</a></li>

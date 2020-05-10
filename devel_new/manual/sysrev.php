@@ -10,17 +10,38 @@
 <body>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 
-<h1>Travel Mapping Manual: Review a preview system</h1>
+<h1 style="color:red">Travel Mapping Manual: Review a preview system - <i>Draft</i></h1>
 
-<p class="heading"><a name="to_be_added_head"></a><a style="text-decoration:none" href="#to_be_added_head">&#x1f517</a>
-To be added...</p>
+<p class="text" style="color:red">ToDo: Complete the descriptions with more details, make correct sentences, add links!</p>
 
 <div class="text">
-  <ul>
-    <li><a name="to_be_added"></a><a style="text-decoration:none" href="#to_be_added">&#x1f517</a>
-    To be added...</li>
-    <li>...</li>
-  </ul>
+  Any kind of review helps. Anyone can report issues to the system / region on the forum. Active systems vs. preview systems in the respective board etc.
+  </br>
+  Thorough peer-review of a preview system to get it active:
+  <ol>
+    <li><a name="ask"></a><a style="text-decoration:none" href="#ask">&#x1f517</a>
+    Agree with the developer of the system that you will do a peer-review (on the forums thread of the system). You should be familar with the manual.</li>
+    <li><a name="sources"></a><a style="text-decoration:none" href="#sources">&#x1f517</a>
+    Check sources for route list / map indicated on the thread, credits, readme.md,... Have a general look on the system to get familar with the region-specific attitudes. Ask for sources if missing, find additional sources.</li>
+    <li><a name="dataerror"></a><a style="text-decoration:none" href="#dataerror">&#x1f517</a>
+    Data check errors incl. NMPs. If there are others than VD, SA, ask the developer for fixing first.</li>
+    <li><a name="generalcheck"></a><a style="text-decoration:none" href="#generalcheck">&#x1f517</a>
+    General mapview, HB or HDX check for missing routes or anything generally looking odd.</li>
+    <li><a name="names"></a><a style="text-decoration:none" href="#names">&#x1f517</a>
+    Check route names, banners, city names etc. in HB route list.</li>
+    <li><a name="concurrency"></a><a style="text-decoration:none" href="#concurrency">&#x1f517</a>
+    Thorough HDX concurrencies check - not just system but region - to avoid getting confused later. Fixing this is also a danger to break things. Better to have it done before the peer-review.</li>
+    <li><a name="wpteditor"></a><a style="text-decoration:none" href="#wpteditor">&#x1f517</a>
+    WPT editor check route by route for exceeding limits + routing + end position + missing wps, then wp by wp for position and name of non-HB-routes (GSV). <a href="http://forum.travelmapping.net/index.php?topic=3039.msg17115#msg17115">wp off</a></li>
+    <li><a name="hb"></a><a style="text-decoration:none" href="#hb">&#x1f517</a>
+    HB check route by route to check intersecting HB routes and their names.</li>
+    <li><a name="questions"></a><a style="text-decoration:none" href="#questions">&#x1f517</a>
+    Check forum for questions.</li>
+    <li><a name="finalcheck"></a><a style="text-decoration:none" href="#finalcheck">&#x1f517</a>
+    Final general mapview, HB or HDX check for anything generally looking odd.</li>
+  </ol>
+  Report everything to the forum thread, clearly indicate the route names. Make batches especially when it's one of your first or the developers first systems.
+  Note on the forum if you skipped a step, for instance if HDX is too fancy for you.
 </div>
   
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
