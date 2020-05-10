@@ -18,6 +18,9 @@
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 <h1>Travel Mapping Developer Logs</h1>
 
+<div class="text">This page gathers additional developer logs for highway data and web site. The log files are also directly accessable in a 
+<a href="../logs/">dedicated folder</a>.</div>
+
 <p class="heading"><a name="hwylogs"></a><a style="text-decoration:none" href="#hwylogs">&#x1f517</a>
   Highway Data Development Logs</p>
 

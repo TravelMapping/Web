@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Travel Mapping Manual: System Definition</title>
+<title>Travel Mapping Manual: Definition of a system</title>
 <link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
 <link rel="shortcut icon" type="image/png" href="favicon.png">
 </head>
@@ -17,17 +17,34 @@ devel {background-color: #FFCCCC;}
 
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 
-<h1>Travel Mapping Manual: System Definition</h1>
+<h1 style="color:red">Travel Mapping Manual: Definition of a system - <i>Draft</i></h1>
 
-<p class="text" style="color:red">
-  <i>
-    TO DO:</br>
-    What we consider as a highway system (how to be distinguished from other systems)</br>
-    What needs to be fulfilled for routes to be added (signed in field, signed on maps, indicated in official documents,...)</br>
-    Which sources are required (likely different depending on the region, country or continent)
-</br>
-Especially "Select" systems need a clear definition (eursf, usansf, usasf, usanp, eurtr, cannf, mexsf,...), please refer to http://forum.travelmapping.net/index.php?topic=3480</i>
+<p class="heading"><a name="roadsys"></a><a style="text-decoration:none" href="#roadsys">&#x1f517</a>
+What is a highway or road system?</p>
+
+<p class="text" >
+  Highways are often named and numbered by the governments that typically develop and maintain them. National highway systems are usually defined as a network by law. In addition, the regional commissions of the United Nations Economic and Social Council define international routes. Other national or international organizations define tourist routes which also form a road system.
   </br>
+  The regions usually have different classifications. A typical classification is as follows (top down): freeway system, national primary highway system, national or state secondary road system, district or county system, and local roads. The classification also depends on the law of the specific region. Different systems usually have different names with specific route prefixes and a specific numbering.
+  </br>
+  The routes of each road system are typically indicated with signs on the road. Route numbers or names are usually indicated on direction signs. Especially routes of lower classification networks are sometimes only indicated on mile posts. The classifications are often indicated with different colors or symbols. The frequency and quality of signposting is highly depending on the maintaining authorities.
+  </br>
+  Route numbers are usually indicated on printed and online maps.
+</p>
+
+<p class="heading"><a name="tmsys"></a><a style="text-decoration:none" href="#tmsys">&#x1f517</a>
+What are Travelmapping road systems?</p>
+
+<p class="text" >
+  The Travelmapping project aims to cover as many road systems as possible from all over the world. But we want to have a data set with high quality so that roadgeeks can safely claim having clinched a whole road systems. We only include road systems which are signed along the routes. Please refer to the <a href="sysnew.php">Create a new system</a> for further information to the requirements.
+</p>
+
+
+<p class="heading"><a name="selectsys"></a><a style="text-decoration:none" href="#selectsys">&#x1f517</a>
+What are <i>Select</i> road systems?</p>
+
+<p class="text" >
+  There are routes with high importance to travelers which do not belong to any official road system. These are routes which are maintained by local authorities, are privately owned, or belong to systems which are extensive and not yet included to the project. Travelmapping categorizes these routes to an own Travelmapping road system if possible. These systems are called <i>Select</i> because they cannot be considered being complete. We only include routes which the highway data manager of the region considers being relevant.
 </p>
 
 <p class="heading"><a name="status"></a><a style="text-decoration:none" href="#status">&#x1f517</a>
@@ -58,7 +75,7 @@ System Status</p>
   </ul>
 </div>
 <p class="text">
-  The system categories are color-coded indicated throughout the site. User stats are generally divided into stats for travels in <active>active</active> systems and <active>active</active> + <preview>preview</preview> systems.
+  The system categories are indicated by color-code throughout the site. User stats are generally divided into stats for travels in <active>active</active> systems and <active>active</active> + <preview>preview</preview> systems.
 </p>
 
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
