@@ -16,7 +16,7 @@
 
 <body>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
-<h1 style="color:red">Travel Mapping Developer - <i>Draft of a new developer page</i></h1>
+<h1 style="color:red">Travel Mapping Developer Tools and Links - <i>Draft of a new developer page</i></h1>
 
 
 <p class="text">
@@ -39,10 +39,10 @@ interest to Travel Mapping project contributors.
 <p class="heading">Highway Systems <i>(work in progress)</i></p>
 <div class="text">
   <ul>
-    <li><a href="manual/sysdef.php">Definition of a system</a></li>
-    <li><a href="manual/sysnew.php">Create a new system</a></li>
+    <li><a href="manual/sysdef.php">Definition of a highway system</a></li>
+    <li><a href="manual/sysnew.php">Create a new highway system</a></li>
     <li><a href="manual/syserr.php">Deal with data errors</a></li>
-    <li><a href="manual/sysrev.php">Review a preview system</a></li>
+    <li><a href="manual/sysrev.php">Review a preview highway system</a></li>
     <li><a href="manual/maintenance.php">Maintain an active system</a></li>
   </ul>
 </div>

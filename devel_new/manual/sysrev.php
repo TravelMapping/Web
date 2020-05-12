@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Travel Mapping Manual: Review a preview system</title>
+<title>Travel Mapping Manual: Review a preview highway system</title>
 <link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
 <link rel="shortcut icon" type="image/png" href="favicon.png">
 </head>
 <body>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 
-<h1 style="color:red">Travel Mapping Manual: Review a preview system - <i>Draft</i></h1>
+<h1 style="color:red">Travel Mapping Manual: Review a preview highway system - <i>Draft</i></h1>
 
 <p class="text" style="color:red">ToDo: Complete the descriptions with more details, make correct sentences, add links!</p>
 
@@ -20,9 +20,9 @@
   Thorough peer-review of a preview system to get it active:
   <ol>
     <li><a name="ask"></a><a style="text-decoration:none" href="#ask">&#x1f517</a>
-    Agree with the developer of the system that you will do a peer-review (on the forums thread of the system). You should be familar with the manual.</li>
+    Agree with the developer of the highway system that you will do a peer-review (on the forums thread of the highway system). You should be familar with the manual.</li>
     <li><a name="sources"></a><a style="text-decoration:none" href="#sources">&#x1f517</a>
-    Check sources for route list / map indicated on the thread, credits, readme.md,... Have a general look on the system to get familar with the region-specific attitudes. Ask for sources if missing, find additional sources.</li>
+    Check sources for route list / map indicated on the thread, credits, readme.md,... Have a general look on the highway system to get familar with the region-specific attitudes. Ask for sources if missing, find additional sources.</li>
     <li><a name="dataerror"></a><a style="text-decoration:none" href="#dataerror">&#x1f517</a>
     Data check errors incl. NMPs. If there are others than VD, SA, ask the developer for fixing first.</li>
     <li><a name="generalcheck"></a><a style="text-decoration:none" href="#generalcheck">&#x1f517</a>
@@ -40,7 +40,7 @@
     <li><a name="finalcheck"></a><a style="text-decoration:none" href="#finalcheck">&#x1f517</a>
     Final general mapview, HB or HDX check for anything generally looking odd.</li>
   </ol>
-  Report everything to the forum thread, clearly indicate the route names. Make batches especially when it's one of your first or the developers first systems.
+  Report everything to the forum thread, clearly indicate the route names. Make batches especially when it's one of your first or the developers first highway systems.
   Note on the forum if you skipped a step, for instance if HDX is too fancy for you.
 </div>
   
