@@ -26,11 +26,11 @@ connerr2 {color: #48C0A0;}
 
 <h1 style="color:red">Travel Mapping Manual: Deal with data errors - <i>Draft</i></h1>
 
-<p class="text">
+<div class="text">
   The developer tools execute different kind of data checks to indicate potential errors.
   Highway data managers need to check for these errors to to ensure consistent, high quality highway data.
   Some of the data checks are available in the waypoint editor before submitting changes, but many need attention after the next site update.
-</p>
+</div>
 
 <p class="heading">
   Contents</p>
@@ -49,7 +49,7 @@ connerr2 {color: #48C0A0;}
 <p class="heading"><a name="errors"></a><a style="text-decoration:none" href="#errors">&#x1f517</a>
 Data errors</p>
 
-<p class="text">
+<div class="text">
   When working with the <a href="/wptedit/">WPT file editor</a>, a data check for the loaded route is executed with every modification. The <code>code</code> of a data error is indicated in the last column of the waypoint table. Use the tool tip for additional info.
   After manual changes within the editor field, the data check is done on the next editor action, e.g. when pressing the <code>Load</code> button.
   </br>
@@ -59,7 +59,7 @@ Data errors</p>
   </br>
   Note: Not all data errors are yet detected by the WPT file editor, see last column below.
   </br>
-</p>
+</div>
 
 <table border="1" cellpadding="2" cellspacing="2" width="1200" class="text">
   <tbody><tr valign="top">
@@ -268,7 +268,7 @@ Data errors</p>
 <p class="heading"><a name="dataerror"></a><a style="text-decoration:none" href="#dataerror">&#x1f517</a>
 Highway data error list</p>
 
-<p class="text">
+<div class="text">
   When changes to highway data have been submitted and are live on the site, all routes of the project have been checked during the site update process. They are reported on the <a href="../dataerrors.php">data error list</a>. The list is sorted by the system categories active, preview and in-development.
   </br>
   <ul>
@@ -282,13 +282,13 @@ Highway data error list</p>
   </ul>
   Note: It is possible to edit the url in the address bar of the browser to filter for more than one region or system. For instance, it is possible to create a link to all regions a highway data manager maintains. Save it to your browser bookmark and load it when needed for the check.
   </br>
-</p>
+</div>
 
 
 <p class="heading"><a name="falsepositive"></a><a style="text-decoration:none" href="#falsepositive">&#x1f517</a>
 Marking errors false positive (FP)</p>
 
-<p class="text">
+<div class="text">
   <ul>
     <li>The last column of the <a href="../dataerrors.php">data error list</a> contains the <code>FP entry to Submit</code>.</li>
     <ul>
@@ -304,18 +304,18 @@ Marking errors false positive (FP)</p>
     </ul>
     <li>Submit the change. The data error will disappear from the list with the next site update.</li>
   </ul>
-</p>
+</div>
 
-<p class="text">
+<div class="text">
   <ul>
     <li>Do not forget checking for <a href="../../logs/unmatchedfps.log">unmatched FPs</a>. Remove them from <a href="https://github.com/TravelMapping/HighwayData/blob/master/datacheckfps.csv">the datacheck FP list</a>.</li>
   </ul>
-</p>
+</div>
 
 <p class="heading"><a name="concurrency"></a><a style="text-decoration:none" href="#concurrency">&#x1f517</a>
 Concurrency check</p>
 
-<p class="text">
+<div class="text">
   Concurrent segments of different routes are detected and considered for calculating user stats. If a concurrency is broken by accident, stats are affected.
   Highway data managers need to pay attention to check broken concurrencies in their regions. The check can not be done before submitting changes but is currently only possible with the data of the last site update.
   </br>
@@ -363,11 +363,11 @@ Concurrency check</p>
     <li>Load the changed wpt files into the <a href="/wptedit/">WPT file editor</a> to avoid causing unintended <a href="#errors">data errors</a>.</li>
     <li>Broken concurrencies of short segments can hardly be found this way. It is recommended to check <a href="#nearmisspoint"> NMPs</a> to find these errors.</li>
   </ul>
-</p>
+</div>
 
 <p class="heading"><a name="nearmisspoint"></a><a style="text-decoration:none" href="#nearmisspoint">&#x1f517</a>
 Near-miss points</p>
-<p class="text">
+<div class="text">
   Where two or more routes intersect, the routes must have a waypoint. If the coordinates of the waypoints are identical, the graph is connected and the Highway Browser can indicate intersecting routes to ease navigation through the routes when mapping travels. Near-miss points (NMPs) are waypoints very close together. They should be checked whether they are candidates to merge to fix broken intersecting links, and broken concurrencies.
   </br>
   <a href="../logs.php#nmplogs">NMP files</a> can also be loaded into HDX to visualize their positions on a map. The desired NMP file cannot be selected directly but needs to be downloaded first.
@@ -399,13 +399,13 @@ Near-miss points</p>
     <li>Fix the coordinates in the corresponding wpt files.</li>
     <li>Load the changed wpt files into the <a href="/wptedit/">WPT file editor</a> to avoid causing unintended <a href="#errors">data errors</a>.</li>
   </ul>
-</p>
+</div>
 
 
 <p class="heading"><a name="nmpfp"></a><a style="text-decoration:none" href="#nmpfp">&#x1f517</a>
 Marking NMPs false positive FP</p>
 
-<p class="text">
+<div class="text">
   Marking NMPs false positive is trickier than for simple data errors but works the same way.
   <ul>
     <li>The <code>FP Entry to Submit</code> can only be found in <a href="../../logs/nearmisspoints.log">nearmisspoints.log</a> which contains all NMP entries including those which are already marked FP. The list is sorted by region code.
@@ -420,13 +420,13 @@ Marking NMPs false positive FP</p>
       <li>If not all entries for a NMP hotspot have previously been marked FP, only the missing entries need to be added. Entries ending with <code>[MARKED FP]</code> are already entered as FP.</li>
     </ul>
   </ul>
-</p>
+</div>
 
-<p class="text">
+<div class="text">
   <ul>
     <li>Do not forget checking for <a href="../../logs/nmpfpsunmatched.log">unmatched NMP FPs</a>. Remove them from <a href="https://github.com/TravelMapping/HighwayData/blob/master/nmpfps.log">nmpfps.log</a>.</li>
   </ul>
-</p>
+</div>
 
 
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
