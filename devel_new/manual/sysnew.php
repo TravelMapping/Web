@@ -129,7 +129,7 @@ Develop routes in devel status</p>
   <li><a name="developcsv"></a><a style="text-decoration:none" href="#developcsv">&#x1f517</a>
   Make the <a href="syshwylist.php">highway system lists (.csv)</a></li>
   <li><a name="developsystem"></a><a style="text-decoration:none" href="#developsystem">&#x1f517</a>
-  Promote the system to <devel>devel</devel> status when a first batch of routes is available.</li>
+  Promote the system to <a href="sysdef.php#devel"><devel>devel</devel> status</a> when a first batch of routes is available.</li>
   <ul>
     <li>This requires a new entry to <a href="https://github.com/TravelMapping/HighwayData/blob/master/systems.csv">system.csv</a> on Github.</li>
     <ul>
@@ -175,7 +175,7 @@ We don't notify the promotion of a highway system to in-development <a href="htt
 <p class="heading"><a name="preview"></a><a style="text-decoration:none" href="#preview">&#x1f517</a>
 Promote highway system to preview</p>
 
-<div class="text" >When the first draft of all routes is in the highway browser, you can promote the highway system to <preview>preview</preview> status
+<div class="text" >When the first draft of all routes is in the highway browser, you can promote the highway system to <a href="sysdef.php#preview"><preview>preview</preview> status</a>.
 <ul>
   <li><a name="previewsystem"></a><a style="text-decoration:none" href="#previewsystem">&#x1f517</a>
   The entry from <a href="https://github.com/TravelMapping/HighwayData/blob/master/systems.csv">system.csv</a> must be moved from the in-development segment of the file to the preview segment.</li>
@@ -235,13 +235,19 @@ Changes proposed on the forum thread should be processed short-term while the pe
   Make changes to the routes as required from users on the forum.</li>
   <li><a name="reviewrejects"></a><a style="text-decoration:none" href="#reviewrejects">&#x1f517</a>
   If you don't agree with proposed changes, explain on the forum why they should not be made. Provide a link to the manual or other sources if possible.</li>
+  <li><a name="reviewbreak"></a><a style="text-decoration:none" href="#reviewbreak">&#x1f517</a>
+  Care is taken to ensure that changes do not "break" a user's list file.</li>
+  <ul>
+    <li>If a <a href="../logs/pointsinuse.log">waypoint labels is in use by current TM users</a> we should <a href="maintenance.php">add alternative labels</a> if possible.</li>
+    <li>We don't add notifications <a href="http://travelmapping.net/devel/updates.php">to the updates page</a> because we are still in <preview>preview</preview>.</li>
+  </ul>
 </ul>
 </div>
 
 <p class="heading"><a name="activate"></a><a style="text-decoration:none" href="#activate">&#x1f517</a>
 Activate the highway system</p>
 
-<div class="text" >When the system is complete and there are no critical open issues, promote the highway system to <active>active</active> status.
+<div class="text" >When the system is complete and there are no critical open issues, promote the highway system to <a href="sysdef.php#active"><active>active</active> status</a>.
 <ul>
   <li><a name="activatesystem"></a><a style="text-decoration:none" href="#activatesystem">&#x1f517</a>
   The entry from <a href="https://github.com/TravelMapping/HighwayData/blob/master/systems.csv">system.csv</a> must be moved from the preview segment of the file to the segment with active systems.</li>
@@ -267,7 +273,7 @@ Maintain the highway system</p>
   <li><a name="maintainregion"></a><a style="text-decoration:none" href="#maintainregion">&#x1f517</a>
   If you are responsible for the region(s) of the highway system, you need to <a href="maintenance.php">maintain the system</a>. Follow the discussion on the forum.</li>
   <li><a name="maintainupdates"></a><a style="text-decoration:none" href="#maintainupdates">&#x1f517</a>
-  All user-relevant changes to the routes must be notified <a href="http://travelmapping.net/devel/updates.php">on the updates page</a> now.</li>
+  All user-relevant changes to the routes must be notified <a href="http://travelmapping.net/devel/updates.php">on the updates page</a> now since the system is <active>active</active>.</li>
 </ul>
 </div>
 
