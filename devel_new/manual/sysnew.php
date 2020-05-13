@@ -21,7 +21,7 @@ devel {background-color: #FFCCCC;}
 
 
 
-<p class="text">New highway systems are developed by our volunteer highway data managers who went through the <a href="contribute.php">procedure of getting a contributor</a>. When they have reached the right level of experience, they can start developing further highway systems. The subsequent list describes the procedure on how to develop a new highway system. It is mandatory for new highway data managers to work through it step by step. It is recommended for highly experienced highway data managers.</p>
+<div class="text">New highway systems are developed by our volunteer highway data managers who went through the <a href="contribute.php">procedure of getting a contributor</a>. When they have reached the right level of experience, they can start developing further highway systems. The subsequent list describes the procedure on how to develop a new highway system. It is mandatory for new highway data managers to work through it step by step. It is recommended for highly experienced highway data managers.</div>
 
 <p class="heading"><a name="overview"></a><a style="text-decoration:none" href="#overview">&#x1f517</a>
 Steps to introduce a new highway system</p>
@@ -125,7 +125,6 @@ Develop routes in devel status</p>
       <li>For some regions, e.g. with poor street view coverage, it is sufficient when the routing is indicated on maps.</li>
     </ul>
     <li>Notes to exceptions should be clearly described on the forum thread and / or in a README.md file on the Github folder for the wpt files.</li>
-    <li></li>
   </ul>
   <li><a name="developcsv"></a><a style="text-decoration:none" href="#developcsv">&#x1f517</a>
   Make the <a href="syshwylist.php">highway system lists (.csv)</a></li>
@@ -266,7 +265,7 @@ Maintain the highway system</p>
 <div class="text" >
 <ul>
   <li><a name="maintainregion"></a><a style="text-decoration:none" href="#maintainregion">&#x1f517</a>
-  If you are responsible for the region(s) of the highway system, you need to <a href="manual/maintenance.php">maintain the system</a>. Follow the discussion on the forum.</li>
+  If you are responsible for the region(s) of the highway system, you need to <a href="maintenance.php">maintain the system</a>. Follow the discussion on the forum.</li>
   <li><a name="maintainupdates"></a><a style="text-decoration:none" href="#maintainupdates">&#x1f517</a>
   All user-relevant changes to the routes must be notified <a href="http://travelmapping.net/devel/updates.php">on the updates page</a> now.</li>
 </ul>

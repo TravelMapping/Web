@@ -12,9 +12,9 @@
 
 <h1>Travel Mapping Manual: Highway Data (.wpt) Files</h1>
 
-<p class="text">Each route in TM is represented by a highway data
+<div class="text">Each route in TM is represented by a highway data
 file, which we often refer to as a "waypoint file".  These files have
-a .wpt extension.</p>
+a .wpt extension.</div>
 
 <p class="heading">
   Contents</p>

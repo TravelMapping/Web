@@ -53,11 +53,11 @@ What are <i>Select</i> highway systems?</p>
 <p class="heading"><a name="status"></a><a style="text-decoration:none" href="#status">&#x1f517</a>
 System Status</p>
 
-<p class="text">
+<div class="text">
   Highway systems in TM are categorized in one of three groups,
   depending on its level of completeness and the maintainers'
   confidence in its accuracy:
-</p>
+</div>
 
 
 <div class="text">
@@ -77,9 +77,9 @@ System Status</p>
     </li>
   </ul>
 </div>
-<p class="text">
+<div class="text">
   The system categories are indicated by color-code throughout the site. User stats are generally divided into stats for travels in <active>active</active> systems and <active>active</active> + <preview>preview</preview> systems.
-</p>
+</div>
 
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
 </body>
