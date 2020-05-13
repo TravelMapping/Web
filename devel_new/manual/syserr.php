@@ -303,11 +303,7 @@ Marking errors false positive (FP)</p>
       <li>The list is sorted by region codes. Insert your entry at the right position.</li>
     </ul>
     <li>Submit the change. The data error will disappear from the list with the next site update.</li>
-  </ul>
-</div>
-
-<div class="text">
-  <ul>
+    </br>
     <li>Do not forget checking for <a href="../../logs/unmatchedfps.log">unmatched FPs</a>. Remove them from <a href="https://github.com/TravelMapping/HighwayData/blob/master/datacheckfps.csv">the datacheck FP list</a>.</li>
   </ul>
 </div>
@@ -419,11 +415,7 @@ Marking NMPs false positive FP</p>
       <li>If the entry ends with <code>[LOOKS INTENTIONAL]</code>, this part of the entry must be removed.</li>
       <li>If not all entries for a NMP hotspot have previously been marked FP, only the missing entries need to be added. Entries ending with <code>[MARKED FP]</code> are already entered as FP.</li>
     </ul>
-  </ul>
-</div>
-
-<div class="text">
-  <ul>
+    </br>
     <li>Do not forget checking for <a href="../../logs/nmpfpsunmatched.log">unmatched NMP FPs</a>. Remove them from <a href="https://github.com/TravelMapping/HighwayData/blob/master/nmpfps.log">nmpfps.log</a>.</li>
   </ul>
 </div>
