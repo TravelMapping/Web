@@ -168,8 +168,8 @@ datacheckfps.csv]</a>.</p>
   corrected, or reported as false positives by adding the entry from
   the last column
   to <a href="https://github.com/TravelMapping/HighwayData/blob/master/datacheckfps.csv">the
-  datacheck FP list</a> during the final review process to promote a
-  system from 'preview' to 'active'.  A system should have no entries
+  datacheck FP list</a> during the final review process to promote a highway
+  system from 'preview' to 'active'.  A highway system should have no entries
   here before activation.  Errors shown in <span style="color:
   red">red</span> should be fixed as soon as possible, while others
   can wait until final preparation for system activation.</p>
@@ -186,7 +186,7 @@ datacheckfps.csv]</a>.</p>
   corrected, or reported as false positives by adding the entry from
   the last column
   to <a href="https://github.com/TravelMapping/HighwayData/blob/master/datacheckfps.csv">the
-  datacheck FP list</a> before the system is promoted from 'devel' to
+  datacheck FP list</a> before the highway system is promoted from 'devel' to
   'preview'.  Note: less severe errors, such as distance and angle
   errors can be left until final preparation for promotion to
   'active'.</p>

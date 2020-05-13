@@ -273,7 +273,7 @@ Highway data error list</p>
   </br>
   <ul>
     <li>Check the table for errors. It is possible to filter the list by system or by region.</li>
-    <li>Click on the link in the <code>Route</code> column to load the route into the HB.
+    <li>Click on the link in the <code>Route</code> column to load the route into the HB.</li>
     <ul>
       <li>Fix unintended errors by using the <a href="/wptedit/">WPT file editor</a>.</li>
       <li>Mark intended errors <a href="#falsepositive">false positive</a>.</li>

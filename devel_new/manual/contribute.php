@@ -25,13 +25,13 @@ The steps to become a highway data manager are as follows:
     <li><a name="follow"></a><a style="text-decoration:none" href="#follow">&#x1f517</a>
     Catch up on previous discussions and follow current discussions <a href="http://forum.travelmapping.net/">on the forum</a> about highway data updates.</li>
     <li><a name="report"></a><a style="text-decoration:none" href="#report">&#x1f517</a>
-    Report updates and problems in existing systems <a href="http://forum.travelmapping.net/">on the forum</a>.</li>
+    Report updates and problems in existing highway systems <a href="http://forum.travelmapping.net/">on the forum</a>.</li>
     <li><a name="review"></a><a style="text-decoration:none" href="#review">&#x1f517</a>
-    Participate in <a href="sysnew.php">peer review</a> of a preview system.</li>
+    Participate in <a href="sysrev.php">peer review</a> of a preview highway system.</li>
     <li><a name="structure"></a><a style="text-decoration:none" href="#structure">&#x1f517</a>
     Understand the project structure and how highway data is <a href="https://github.com/TravelMapping/HighwayData/blob/master/README.md">organised on Github</a>.</li>
     <li><a name="develop"></a><a style="text-decoration:none" href="#develop">&#x1f517</a>
-    Develop a <a href="sysnew.php">new system</a></li>
+    Develop a <a href="sysnew.php">new highway system</a></li>
     <li><a name="maintain"></a><a style="text-decoration:none" href="#maintain">&#x1f517</a>
     Take <a href="maintenance.php">responsibility for updates</a> in an unclaimed region, or by requesting to become the maintainer for a region from someone looking to unload some of theirs</li>
   </ol>
