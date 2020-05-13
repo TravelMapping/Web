@@ -12,12 +12,26 @@
 
 <h1>Travel Mapping Manual: Maintenance of Highway Data</h1>
 
-<p class="heading">Which changes to activated routes are newsworthy
-  (need an updates entry)?</p>
+<p class="heading">
+  Contents</p>
 
 <div class="text">
 <ul>
-  <li><span class="postbody"><span style="font-weight: bold;">Waypoint label is wrong. (Not newsworthy)</span> <br />
+  <li><a href="#newsworthy">Which changes to activated routes are newsworthy</a></li>
+  <ul>
+    <li><a href="#faq">FAQs</a></li>
+  </ul>
+  <li><a href="#newsreport">Format for reporting newsworthy changes</a></li>
+</ul>
+</div>
+
+<p class="heading"><a name="newsworthy"></a><a style="text-decoration:none" href="#newsworthy">&#x1f517</a>
+Which changes to activated routes are newsworthy (need an updates entry)?</p>
+
+<div class="text">
+<ul>
+  <li><a name="labelwrong"></a><a style="text-decoration:none" href="#labelwrong">&#x1f517</a>
+     <span class="postbody"><span style="font-weight: bold;">Waypoint label is wrong (<span style="background-color: #CCFFCC;">Not newsworthy</span>)</span> <br />
       <br />
 Waypoint P1 is mislabeled but at the correct location. It should be NewP1 instead. <br />
 <br />
@@ -34,19 +48,25 @@ Put the new label first in the line, and add a + to the old label: NewP1 +P1 [ur
 but it can still be used by everyone who is trying to use it. The 
 correct label NewP1 is the new primary label will appear in the HB for 
 future use for the same point. </span></li>
-  <li><span class="postbody"><span style="font-weight: bold;">An actual route was truncated. (Newsworthy)</span> <br />
+  <br/>
+  <li><a name="truncated"></a><a style="text-decoration:none" href="#truncated">&#x1f517</a>
+    <span class="postbody"><span style="font-weight: bold;">An actual route was truncated (<span style="background-color: #FFCCCC;">Newsworthy</span>)</span> <br />
       <br />
 You need to truncate the route by the deleting the waypoints that are no
  longer part of the route. This action will break the route for anyone 
 using the removed points, but there is no way around it. <br />
 <br />
-Possibly there will be the need to change the label of the new end waypoint. See "Waypoint label is wrong." above. </span></li>
-  <li><span class="postbody"><span style="font-weight: bold;">An actual route was extended. (Newsworthy)</span> <br />
+Possibly there will be the need to change the label of the new end waypoint. Please refer to <a href="#labelwrong">Waypoint label is wrong</a>.</span></li>
+  <br/>
+  <li><a name="extended"></a><a style="text-decoration:none" href="#extended">&#x1f517</a>
+    <span class="postbody"><span style="font-weight: bold;">An actual route was extended (<span style="background-color: #FFCCCC;">Newsworthy</span>)</span> <br />
       <br />
 Adding new waypoints can be done without worrying about breaking the route for anyone using it. <br />
 <br />
-Possibly there will be the need to change the label of the old end waypoint. See "Waypoint label is wrong." above. </span></li>
-  <li><span class="postbody"><span style="font-weight: bold;">Part of an actual route was relocated. (Newsworthy)</span> <br />
+Possibly there will be the need to change the label of the old end waypoint. Please refer to <a href="#labelwrong">Waypoint label is wrong</a>. </span></li>
+  <br/>
+  <li><a name="relocated"></a><a style="text-decoration:none" href="#relocated">&#x1f517</a>
+    <span class="postbody"><span style="font-weight: bold;">Part of an actual route was relocated (<span style="background-color: #FFCCCC;">Newsworthy</span>)</span> <br />
       <br />
 To update the route, you need to remove some waypoints in the middle of 
 the file and insert new ones there. Anyone using a removed waypoint will
@@ -54,14 +74,17 @@ the file and insert new ones there. Anyone using a removed waypoint will
 <br />
 Possibly there will be the need to change the labels of the two "pivot 
 waypoints", where the old and new alignments meet. This should be done 
-without breaking the route for anyone. See "Waypoint label is wrong." 
-above. </span></li>
-  <li><span class="postbody"><span style="font-weight: bold;">One route 
+without breaking the route for anyone. Please refer to <a href="#labelwrong">Waypoint label is wrong</a>. </span></li>
+  <br/>
+  <li><a name="intersectchange"></a><a style="text-decoration:none" href="#intersectchange">&#x1f517</a>
+    <span class="postbody"><span style="font-weight: bold;">One route 
 was newsworthily changed (extended/truncated/relocated) and begs for a 
-now- or previously intersecting route's waypoint to change.</span> <br />
+now- or previously intersecting route's waypoint to change  (<span style="background-color: #CCFFCC;">Not newsworthy</span>)</span></span> <br />
 <br />
-See "Waypoint label is wrong." above. </span></li>
-  <li><span class="postbody"><span style="font-weight: bold;">A route has new exit numbers, so many of its waypoints should be relabeled with the new exit numbers. (Possibly newsworthy)</span> <br />
+Please refer to <a href="#labelwrong">Waypoint label is wrong</a>. </span></li>
+  <br/>
+  <li><a name="exitnumbers"></a><a style="text-decoration:none" href="#exitnumbers">&#x1f517</a>
+    <span class="postbody"><span style="font-weight: bold;">A route has new exit numbers, so many of its waypoints should be relabeled with the new exit numbers (<span style="background-color: #FFFFCC;">Possibly newsworthy</span>)</span> <br />
       <br />
 If none of the new exit numbers are the same as the old ones, then this 
 update can be accomplished without breaking any routes for anyone. Hide 
@@ -88,7 +111,9 @@ Sometimes in the latter case, a second option can be chosen for the
 duplicated point (76) that causes the small problem. If new interchange 
 76 is in use has A and B exits, then this is preferable: <br />
 New file: <span style="color: blue;">76A</span> <span style="color: blue;">+74</span>, <span style="color: green;">77</span>, <span style="color: darkred;">78</span> <span style="color: darkred;">+76</span>. </span></li>
-  <li><span class="postbody"><span style="font-weight: bold;">An intersection was closed.</span> <br />
+  <br/>
+  <li><a name="closed"></a><a style="text-decoration:none" href="#closed">&#x1f517</a>
+    <span class="postbody"><span style="font-weight: bold;">An intersection was closed  (<span style="background-color: #CCFFCC;">Not newsworthy</span>)</span></span> <br />
       <br />
 Add an asterisk(*) at the beginning of the waypoint and leave it 
 otherwise unchanged. If the point 37 was closed, change it to *37. Any 
@@ -100,7 +125,8 @@ ignored when matching waypoints in .list files with waypoints in the HB.
   <ul>
   </div>
   
-  <p class="subheading">FAQs:</p>
+  <p class="subheading"><a name="faq"></a><a style="text-decoration:none" href="#faq">&#x1f517</a>
+  FAQs:</p>
 
   <p class="text">
 Q: I found a route where most of the labels are correct but are applied 
@@ -147,7 +173,8 @@ included any part of this route." with the entry on the Updates page? <br />
 A: No. That note is implied for most or all entries on that page, so it's not worth mentioning on any individual basis. </span>
 </p>
 
-<p class="heading">Format for reporting newsworthy changes</p>
+<p class="heading"><a name="newsreport"></a><a style="text-decoration:none" href="#newsreport">&#x1f517</a>
+Format for reporting newsworthy changes</p>
 
 <p class="text">Please include updates entries when you
   make changes to the data files. Don't let the changes get lost in the
