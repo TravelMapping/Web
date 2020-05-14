@@ -238,7 +238,7 @@ Changes proposed on the forum thread should be processed short-term while the pe
   <li><a name="reviewbreak"></a><a style="text-decoration:none" href="#reviewbreak">&#x1f517</a>
   Care is taken to ensure that changes do not "break" a user's list file.</li>
   <ul>
-    <li>If a <a href="../logs/pointsinuse.log">waypoint labels is in use by current TM users</a> we should <a href="maintenance.php">add alternative labels</a> if possible.</li>
+    <li>If a <a href="../logs/pointsinuse.log">waypoint labels is in use by current TM users</a> we should <a href="maintenance.php#labelwrong">add alternative labels</a> if possible.</li>
     <li>We don't add notifications <a href="http://travelmapping.net/devel/updates.php">to the updates page</a> because we are still in <preview>preview</preview>.</li>
   </ul>
 </ul>
