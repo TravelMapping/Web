@@ -28,7 +28,7 @@ connerr2 {color: #48C0A0;}
 
 <div class="text">
   The developer tools execute different kind of data checks to indicate potential errors.
-  Highway data managers need to check for these errors to to ensure consistent, high quality highway data.
+  Highway data managers need to check for these errors to ensure consistent and correct highway data.
   Some of the data checks are available in the waypoint editor before submitting changes, but many need attention after the next site update.
 </div>
 
@@ -37,8 +37,8 @@ connerr2 {color: #48C0A0;}
 
 <div class="text">
 <ul>
-  <li><a href="#errors">Data Errors</a></li>
-  <li><a href="#dataerror">Highway data error list</a></li>
+  <li><a href="#errors">Data errors</a></li>
+  <li><a href="#dataerror">Highway data check list</a></li>
   <li><a href="#falsepositive">Marking errors false positive (FP)</a></li>
   <li><a href="#concurrency">Concurrency check</a></li>
   <li><a href="#nearmisspoint">Near-miss points</a></li>
@@ -266,10 +266,10 @@ Data errors</p>
 
 
 <p class="heading"><a name="dataerror"></a><a style="text-decoration:none" href="#dataerror">&#x1f517</a>
-Highway data error list</p>
+Highway data check list</p>
 
 <div class="text">
-  When changes to highway data have been submitted and are live on the site, all routes of the project have been checked during the site update process. They are reported on the <a href="../dataerrors.php">data error list</a>. The list is sorted by the system categories active, preview and in-development.
+  When changes to highway data have been submitted and are live on the site, all routes of the project have been checked during the site update process. They are reported on the <a href="../dataerrors.php">data check list</a>. The list is sorted by the system categories active, preview and in-development.
   </br>
   <ul>
     <li>Check the table for errors. It is possible to filter the list by system or by region.</li>
@@ -290,19 +290,19 @@ Marking errors false positive (FP)</p>
 
 <div class="text">
   <ul>
-    <li>The last column of the <a href="../dataerrors.php">data error list</a> contains the <code>FP entry to Submit</code>.</li>
+    <li>The last column of the <a href="../datacheck.php">data check list</a> contains the <code>FP entry to Submit</code>.</li>
     <ul>
       <li>If no FP Entry is specified, it is always a true error and cannot be marked false positive.</li>
     </ul>
     <li>If a FP entry is specified, select and copy it.</li>
     <ul>
-      <li>To quickly mark the whole FP entry, some web browsers allow to click three times onto the entry.</li>
+      <li>To quickly mark the whole FP entry, some web browsers allow to triple-click the entry.</li>
     </ul>
     <li>Paste it into your copy of <a href="https://github.com/TravelMapping/HighwayData/blob/master/datacheckfps.csv">the datacheck FP list</a>.</li>
     <ul>
       <li>The list is sorted by region codes. Insert your entry at the right position.</li>
     </ul>
-    <li>Submit the change. The data error will disappear from the list with the next site update.</li>
+    <li>Submit the change. The data error will disappear from the data check list with the next site update.</li>
     </br>
     <li>Do not forget checking for <a href="../../logs/unmatchedfps.log">unmatched FPs</a>. Remove them from <a href="https://github.com/TravelMapping/HighwayData/blob/master/datacheckfps.csv">the datacheck FP list</a>.</li>
   </ul>

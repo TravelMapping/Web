@@ -77,7 +77,7 @@ interest to Travel Mapping project contributors.
       Run site update program to generate the same logs, stats, and database file that are produced as part of the regular site update process
     </li>
     <br/>
-    <li><a href="dataerrors.php">Data Errors</a>
+    <li><a href="datacheck.php">Data Check</a>
       <br/>
       Check highway data errors
     </li>
