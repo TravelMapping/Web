@@ -17,7 +17,8 @@
 
 <div class="text">
 <ul>
-  <li><a href="#newsworthy">Which changes to activated routes are newsworthy</a></li>
+  <li><a href="#maintain">How to maintain a region?</a></li>
+  <li><a href="#newsworthy">Which changes to activated routes are newsworthy?</a></li>
   <ul>
     <li><a href="#faq">FAQs</a></li>
   </ul>
@@ -25,29 +26,59 @@
 </ul>
 </div>
 
+<p class="heading"><a name="maintain"></a><a style="text-decoration:none" href="#maintain">&#x1f517</a>
+How to maintain a region?</p>
+
+<div class="text">
+<ul>
+  <li>Regions are maintained by our volunteer highway data managers.
+  Please refer to the <a href="http://forum.travelmapping.net/index.php?topic=42">forum</a> to see who is responsible for what region.</li>
+  <li>Everyone can report required changes on the <a href="http://forum.travelmapping.net/index.php?topic=20">forum</a>.
+  The responsible highway data manager should frequently check the <a href="http://forum.travelmapping.net/index.php?board=3">board</a> for open issues.</li>
+  <li>In addition, the highway data manager should check official sources or forums proactive to get info about relevant changes.</li>
+  <li>Care must be taken to ensure that changes do not "break" a user's list file. In many cases, however, the changes needed will break user lists.
+  In those and other situations, changes are <a href="#newsworthy">newsworthy</a> and require an <a href="#newsreport">updates entry</a>.</li>
+</ul>
+</div>
+
 <p class="heading"><a name="newsworthy"></a><a style="text-decoration:none" href="#newsworthy">&#x1f517</a>
-Which changes to activated routes are newsworthy (need an updates entry)?</p>
+Which changes to activated routes are newsworthy?</p>
 
 <div class="text">
 <ul>
   <li><a name="labelwrong"></a><a style="text-decoration:none" href="#labelwrong">&#x1f517</a>
-     <span class="postbody"><span style="font-weight: bold;">Waypoint label is wrong (<span style="background-color: #CCFFCC;">Not newsworthy</span>)</span> <br />
+    <span class="postbody"><span style="font-weight: bold;">Waypoint label is wrong (<span style="background-color: #CCFFCC;">Not newsworthy</span>)</span> <br />
       <br />
-Waypoint P1 is mislabeled but at the correct location. It should be NewP1 instead. <br />
-<br />
-Check
-the <a href="http://travelmapping.net/logs/pointsinuse.log">points in
-use log</a>. <br />
-<br />
-If the label is not in use: <br />
-Simply change P1 to NewP1. The line is: NewP1 [url]<br />
-<br />
-If the label is in use: <br />
-Put the new label first in the line, and add a + to the old label: NewP1 +P1 [url]. The coordinates should remain identical. <br />
-+P1 is now an alternate (= deprecated) label and is hidden in the HB, 
-but it can still be used by everyone who is trying to use it. The 
-correct label NewP1 is the new primary label will appear in the HB for 
-future use for the same point. </span></li>
+      Example: Waypoint <code>P1</code> is mislabeled but at the correct location. It should be <code>NewP1</code> instead. <br />
+      <br />
+      Check the <a href="http://travelmapping.net/logs/pointsinuse.log">points in use log</a> manually or
+      load the corresponding line to the wpt file into the <a href="/wptedit/">Waypoint File Editor</a>.<br />
+      If there is no entry for the .wpt file at all, no label of the route is in use.<br/>
+      <br />
+      <ul>
+        <li><b>If the label is not in use:</b> <br />
+        Simply change <code>P1</code> to <code>NewP1</code>. The line is: <code>NewP1 [url]</code></li>
+        <br />
+        <li><b>If the label is in use:</b> <br />
+        Put the new label first in the line, and add a <code>+</code> to the old label: <code>NewP1 +P1 [url]</code>. The coordinates should remain identical. <br />
+        <code>+P1</code> is now an alternate (= deprecated) label and is hidden in the HB,
+        but it can still be used by everyone who is trying to use it. The 
+        correct label <code>NewP1</code> is the new primary label will appear in the HB for 
+        future use for the same point.</span></li>
+    </ul>
+  </li>
+  <br/>
+  <li><a name="newroute"></a><a style="text-decoration:none" href="#newroute">&#x1f517</a>
+    <span class="postbody"><span style="font-weight: bold;">A new route was added (<span style="background-color: #FFCCCC;">Newsworthy</span>)</span> <br />
+      <br />
+      New routes are always reported so that user can check whether they need to add the route.
+  </li>
+  <br/>
+  <li><a name="delroute"></a><a style="text-decoration:none" href="#delroute">&#x1f517</a>
+    <span class="postbody"><span style="font-weight: bold;">A new route was deleted (<span style="background-color: #FFCCCC;">Newsworthy</span>)</span> <br />
+      <br />
+      The deletion of a route is always reported even when it was not traveled by any TM user.
+  </li>
   <br/>
   <li><a name="truncated"></a><a style="text-decoration:none" href="#truncated">&#x1f517</a>
     <span class="postbody"><span style="font-weight: bold;">An actual route was truncated (<span style="background-color: #FFCCCC;">Newsworthy</span>)</span> <br />
@@ -128,117 +159,143 @@ ignored when matching waypoints in .list files with waypoints in the HB.
   <p class="subheading"><a name="faq"></a><a style="text-decoration:none" href="#faq">&#x1f517</a>
   FAQs:</p>
 
-  <p class="text">
+<div class="text">
+<ul>
+<li><a name="labelshift"></a><a style="text-decoration:none" href="#labelshift">&#x1f517</a>
 Q: I found a route where most of the labels are correct but are applied 
 to the wrong waypoints. To fix it, I should use many of the same labels 
 but shift them to the correct waypoints. Since that fix will alter but 
 not really break most of the points in use, can I just reenter the whole
- route and forget about hiding old points? <br />
-A: Probably. Mention the problem in this forum so we can make sure that breaking the route is warranted. It might be needed. <br />
-<br />
+ route and forget about hiding old points? <br /> <br />
+A: Probably. Mention the problem in this forum so we can make sure that breaking the route is warranted. It might be needed.</li> <br />
+<li><a name="newsys"></a><a style="text-decoration:none" href="#newsys">&#x1f517</a>
 Q: I want to add a new system of highways to a region, and I found some 
 changes to make to an activated system in the same region. Since I 
 expect users to update their .list file with the new highways, can I 
 break those activated highways at the same time rather than hiding used 
-points I changed? <br />
-A: No. Adding a new highway system shouldn't be an excuse to break routes in another system. <br />
-<br />
+points I changed? <br /> <br />
+A: No. Adding a new highway system shouldn't be an excuse to break routes in another system.</li> <br />
+<li><a name="gung-ho"></a><a style="text-decoration:none" href="#gung-ho">&#x1f517</a>
 Q: Don't you think you're way too gung-ho about not breaking routes? I'm
  only making changes one or twice a year that would break only a route 
 or two, so it's not a burden for the users to update their files once in
  awhile. It should be fine to "unnecessarily" break a small number of 
-routes infrequently. <br />
+routes infrequently. <br /> <br />
 A; No. There are more than 10 of you sporadically (and sometimes, 
 frequently) making minor changes, and without hiding copies of used 
 waypoints, that adds up to breaking routes every few weeks, sometimes 
 even more often. Users shouldn't have to make frequent changes to 
 1000-line files every few weeks when the changes don't reflect real 
 changes to highway alignments or real changes to the extent of their 
-travels. <br />
-<br />
-Q: Is there a preference for the order of hidden/visible pairs of same-location waypoints? <br />
-A: The visible label should always come first. <br />
-<br />
-Q: Can I delete unused hidden points with a visible companion point? <br />
+travels.</li> <br />
+<li><a name="order"></a><a style="text-decoration:none" href="#order">&#x1f517</a>
+Q: Is there a preference for the order of hidden/visible pairs of same-location waypoints? <br /> <br />
+A: The visible label should always come first.</li><br />
+<li><a name="delaltlabels"></a><a style="text-decoration:none" href="#delaltlabels">&#x1f517</a>
+Q: Can I delete unused hidden points with a visible companion point? <br /> <br />
 A: If you have verified that a hidden point isn't in use (we
 have <a href="http://travelmapping.net/logs/unusedaltlabels.log">a log
       file for that</a>) and that there 
 is a visible point at the same location, then you can delete the unused 
 hidden point. Just make sure you don't accidentally remove a shaping 
-point or a used point or a not-duplicated point. <br />
-<br />
+point or a used point or a not-duplicated point.</li> <br />
+<li><a name="updatenote"></a><a style="text-decoration:none" href="#updatenote">&#x1f517</a>
 Q: I made a necessary change that will unavoidably break a route for 
 some users. So would you include "Update your .list file if you've 
-included any part of this route." with the entry on the Updates page? <br />
-A: No. That note is implied for most or all entries on that page, so it's not worth mentioning on any individual basis. </span>
-</p>
+included any part of this route." with the entry on the Updates page? <br /> <br />
+A: No. That note is implied for most or all entries on that page, so it's not worth mentioning on any individual basis.</li> <br />
+</ul>
+</div>
 
 <p class="heading"><a name="newsreport"></a><a style="text-decoration:none" href="#newsreport">&#x1f517</a>
 Format for reporting newsworthy changes</p>
 
-<p class="text">Please include updates entries when you
-  make changes to the data files. Don't let the changes get lost in the
-  forum or elsewhere! </p>
-
-<div class="text">
-<p>
-  Updates are included in CSV format, so be sure to include all
+<div class="text">Newsworthy changes must must be logged in the <a href="https://github.com/TravelMapping/HighwayData/blob/master/updates.csv">updates list</a>,
+which is  available <a href="http://travelmapping.net/devel/updates.php">on the updates page</a> to help users keep their list files accurate.
+The list is ordered by regions. Add a new line at the beginning of the right region.
+Don't let the changes get lost in the forum or elsewhere!</br>
+</br>
+Updates are included in CSV format, so be sure to include all
 fields.  The last field is the description, and should be in plain
 English.  Keep them concise but just specific enough for someone to
-understand in the HB since they can't compare with the old
-route.  Examples of common changes are here: <br />
-<br />
-New route: <br />
-Pennsylvania I-67: Added route. <br />
-<br />
-Deleted route: <br />
-England M1: Deleted route. <br />
-<br />
-Extended route: <br />
-Pennsylvania I-99: Extended northward from Exit 52 (PA 350) near Bald Eagle to MusLn (Musser Lane) near Bellefonte. <br />
-(mentions intersections at old and new ends) <br />
-<br />
-Truncated route: <br />
-Maryland US 15 Business (Emmitsburg): Truncated from the old south end at US 15 to the new end at Main St in Emmitsburg. <br />
-(This mentions intersections at old and new ends. As you compose lines 
-like this one, remember that highways can be truncated, but end points 
-cannot.) <br />
-<br />
-Relocated route (in middle of route): <br />
-Pennsylvania US 220: Removed from Main Street and 5th Avenue, and 
-relocated onto a new northern Georgetown bypass, between US 23 and PA 
-70. 
-<br />
-(mentions both ends of the new part, that is, the intersections/places 
-where the old and new alignments meet) and both the old and new routes <br />
-<br />
-Relocated route (at end of route): <br />
-Pennsylvania US 220: Removed from Main Street and 5th Avenue between 4th
- Street and 9th Street, and relocated onto a new northern Georgetown 
-bypass between 4th Street  and PA 70. 
-<br />
-(mentions both the new and old routings as well as the bounding intersections of each)<br />
-<br />
-Changed label or recycled label: <br />
-Ontario ON 444: Changed waypoint labels 51 to 52 and 52 to 53. <br />
-(mention old and new waypoints for a small number of changes) <br />
-New York I-490: Reentered route with corrected waypoint labels. <br />
-(if there are too many changes to mention individually) <br />
-<br />
-You can also mention actual waypoints labels where skipping them isn't clear. 
-<br /><br />
-Avoid the following in the entries:
-<ul>
-<li>Don't refer to "the old route" or "the old end". Instead, say what the old route or end was.</li>
-<li>Don't refer to "the new route" or "the new end". Instead, say what the new route is.</li>
-<li>Don't use vague phrases like "the correct location", "onto new construction". Instead, say what the location or highway is.</li>
-<li>Wherever possible, avoid describing old and new routings by highway 
-names that changed.  Use stable highway names if they are available, or 
-describe the type and location of the highway.</li>
-</ul>
-</span></li>
-</ul>
+understand in the <a href="/hb/">Highway Browser</a> since they can't compare with the old
+route.</br></br></div>
 
+
+<div class="text"><a name="updatesformat"></a><a style="text-decoration:none" href="#updatesformat">&#x1f517</a>
+The format of the <a href="https://github.com/TravelMapping/HighwayData/blob/master/updates.csv">updates list file</a> is as follows:
+    <pre>
+date;region;route;root;description</br>
+...
+2016-03-12;Albania;A1 (Thumane);alb.a001thu;New Route
+2016-03-12;Albania;A3;;Route Deleted
+...
+2017-08-15;(Canada) New Brunswick;NB 565;nb.nb565;Route added
+...
+      </pre>
+The <code>date</code> refers to the day the update was made to TM. It is not the date when the actual change happened on-site.</br>
+The <code>region</code> column represents the country name. If it is a multi-region country, the country name is put in brackets followed by the region name.</br>
+The <code>route</code> is the full route name.</br>
+The <code>root</code> is the combination of region code and route code used in the HB.</br></br>
+</div>
+
+<div class="text"><a name="newsexamples"></a><a style="text-decoration:none" href="#newsexamples">&#x1f517</a>
+Examples of common changes:
+<ul>
+  <li><a name="newsnew"></a><a style="text-decoration:none" href="#newsnew">&#x1f517</a>
+  <b>New route:</b> <br />
+  <code>Added route.</code></br>
+  <code>New route.</code></br>
+  <code>Route added.</code></li><br />
+  <li><a name="newsdel"></a><a style="text-decoration:none" href="#newsdel">&#x1f517</a>
+  <b>Deleted route:</b> <br />
+  <code>Deleted route.</code></br>
+  <code>Route removed.</code></li><br />
+  <li><a name="newsext"></a><a style="text-decoration:none" href="#newsext">&#x1f517</a>
+  <b>Extended route:</b> <br />
+  <code>Extended northward from Exit 52 (PA 350) near Bald Eagle to MusLn (Musser Lane) near Bellefonte.</code> <br />
+  Mentions intersections at old and new ends.</li><br />
+  <li><a name="newstru"></a><a style="text-decoration:none" href="#newstru">&#x1f517</a>
+  <b>Truncated route:</b> <br />
+  <code>Truncated from the old south end at US 15 to the new end at Main St in Emmitsburg.</code> <br />
+  Mentions intersections at old and new ends. As you compose lines 
+  like this one, remember that highways can be truncated, but end points 
+  cannot.</li><br />
+  <li><a name="newsrel"></a><a style="text-decoration:none" href="#newsrel">&#x1f517</a>
+  <b>Relocated route (in middle of route):</b> <br />
+  <code>Removed from Main Street and 5th Avenue, and 
+  relocated onto a new northern Georgetown bypass, between US 23 and PA 
+  70.</code>
+  <br />
+  Mentions both ends of the new part, that is, the intersections/places 
+  where the old and new alignments meet) and both the old and new routes.</li><br />
+  <li><a name="newsrelend"></a><a style="text-decoration:none" href="#newsrelend">&#x1f517</a>
+  <b>Relocated route (at end of route):</b> <br />
+  <code>Removed from Main Street and 5th Avenue between 4th
+  Street and 9th Street, and relocated onto a new northern Georgetown 
+  bypass between 4th Street  and PA 70. </code>
+  <br />
+  Mentions both the new and old routings as well as the bounding intersections of each.</li><br />
+  <li><a name="newslabel"></a><a style="text-decoration:none" href="#newslabel">&#x1f517</a>
+  <b>Changed label or recycled label:</b> <br />
+  <code>Changed waypoint labels 51 to 52 and 52 to 53.</code> <br />
+  Mention old and new waypoints for a small number of changes. <br /><br />
+  <code>Reentered route with corrected waypoint labels.</code> <br />
+  If there are too many changes to mention individually. <br />
+  <br />
+  You can also mention actual waypoints labels where skipping them isn't clear.</li><br />
+  <br />
+  <li><a name="news"></a><a style="text-decoration:none" href="#newsavoid">&#x1f517</a>
+  <b>Avoid the following in the entries:</b>
+  <ul>
+    <li>Don't refer to <code>the old route</code> or <code>the old end</code>. Instead, say what the old route or end was.</li>
+    <li>Don't refer to <code>the new route</code> or <code>the new end</code>. Instead, say what the new route is.</li>
+    <li>Don't use vague phrases like <code>the correct location</code>, <code>onto new construction</code>. Instead, say what the location or highway is.</li>
+    <li>Wherever possible, avoid describing old and new routings by highway 
+    names that changed.  Use stable highway names if they are available, or 
+    describe the type and location of the highway.</li>
+  </ul>
+</ul>
 </div>
 
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
