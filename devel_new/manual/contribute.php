@@ -21,7 +21,7 @@ The steps to become a highway data manager are as follows:
 
 <ol>
     <li><a name="activeuser"></a><a style="text-decoration:none" href="#activeuser">&#x1f517</a>
-    Become an active user to be familiar with the project structure. Create a <a href="http://forum.travelmapping.net/index.php?topic=5">list files</a> and understand how routes are organized into highway systems.</li>
+    Become an active user to be familiar with the project structure. Create a <a href="#userlistfile">list files</a> and understand how routes are organized into highway systems.</li>
     <li><a name="follow"></a><a style="text-decoration:none" href="#follow">&#x1f517</a>
     Catch up on previous discussions and follow current discussions <a href="http://forum.travelmapping.net/">on the forum</a> about highway data updates.</li>
     <li><a name="report"></a><a style="text-decoration:none" href="#report">&#x1f517</a>
@@ -36,7 +36,15 @@ The steps to become a highway data manager are as follows:
     Take <a href="maintenance.php">responsibility for updates</a> in an unclaimed region, or by requesting to become the maintainer for a region from someone looking to unload some of theirs</li>
   </ol>
 </div>
-  
+
+<p class="heading"><a name="userlistfile"></a><a style="text-decoration:none" href="#userlistfile">&#x1f517</a>
+How to create a user list file</p>
+
+<div class="text">
+  Please refer to the <a href="http://forum.travelmapping.net/index.php?topic=5">forum</a>.
+</div>
+
+
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
 </body>
 </html>
