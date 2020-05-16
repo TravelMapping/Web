@@ -23,7 +23,7 @@
     Agree with the developer of the highway system that you will do a peer-review (on the forums thread of the highway system). You should be familar with the manual.</li>
     <li><a name="sources"></a><a style="text-decoration:none" href="#sources">&#x1f517</a>
     Check sources for route list / map indicated on the thread, credits, readme.md,... Have a general look on the highway system to get familar with the region-specific attitudes. Ask for sources if missing, find additional sources.</li>
-    <li><a name="dataerror"></a><a style="text-decoration:none" href="#dataerror">&#x1f517</a>
+    <li><a name="datacheck"></a><a style="text-decoration:none" href="#datacheck">&#x1f517</a>
     Data check errors incl. NMPs. If there are others than VD, SA, ask the developer for fixing first.</li>
     <li><a name="generalcheck"></a><a style="text-decoration:none" href="#generalcheck">&#x1f517</a>
     General mapview, HB or HDX check for missing routes or anything generally looking odd.</li>

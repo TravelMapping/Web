@@ -32,10 +32,10 @@ Steps to introduce a new highway system</p>
     <li><a href="#existing">Check existing routes and add waypoints</a></li>
     <li><a href="#develop">Develop routes in devel status</a></li>
     <li><a href="#preview">Promote highway system to preview</a></li>
-    <li><a href="#dataerrors">Clear datacheck, broken concurrencies and NMP issues</a></li>
+    <li><a href="#datacheck">Clear datacheck, broken concurrencies and NMP issues</a></li>
     <li><a href="#peerreview">Request peer review</a></li>
     <li><a href="#review">Make changes based on peer review</a></li>
-    <li><a href="#dataerrors">Clear datacheck, broken concurrencies and NMP issues again</a></li>
+    <li><a href="#datacheck">Clear datacheck, broken concurrencies and NMP issues again</a></li>
     <li><a href="#activate">Activate the highway system</a></li>
     <li><a href="#maintain">Maintain the highway system</a></li>
   </ol>
@@ -129,7 +129,7 @@ Develop routes in devel status</p>
   <li><a name="developcsv"></a><a style="text-decoration:none" href="#developcsv">&#x1f517</a>
   Make the <a href="syshwylist.php">highway system lists (.csv)</a></li>
   <li><a name="developsystem"></a><a style="text-decoration:none" href="#developsystem">&#x1f517</a>
-  Promote the system to <devel>devel</devel> status when a first batch of routes is available.</li>
+  Promote the system to <a href="sysdef.php#devel"><devel>devel</devel> status</a> when a first batch of routes is available.</li>
   <ul>
     <li>This requires a new entry to <a href="https://github.com/TravelMapping/HighwayData/blob/master/systems.csv">system.csv</a> on Github.</li>
     <ul>
@@ -175,7 +175,7 @@ We don't notify the promotion of a highway system to in-development <a href="htt
 <p class="heading"><a name="preview"></a><a style="text-decoration:none" href="#preview">&#x1f517</a>
 Promote highway system to preview</p>
 
-<div class="text" >When the first draft of all routes is in the highway browser, you can promote the highway system to <preview>preview</preview> status
+<div class="text" >When the first draft of all routes is in the highway browser, you can promote the highway system to <a href="sysdef.php#preview"><preview>preview</preview> status</a>.
 <ul>
   <li><a name="previewsystem"></a><a style="text-decoration:none" href="#previewsystem">&#x1f517</a>
   The entry from <a href="https://github.com/TravelMapping/HighwayData/blob/master/systems.csv">system.csv</a> must be moved from the in-development segment of the file to the preview segment.</li>
@@ -194,17 +194,17 @@ brabr;BRA;Brazil Rodovias Federais;green;4;preview
 Especially when drafting a huge highway system, it is possible to split it into several sub-systems with partial preview promotion. Ask on the forum thread for more details.
 </div>
 
-<p class="heading"><a name="dataerrors"></a><a style="text-decoration:none" href="#dataerrors">&#x1f517</a>
+<p class="heading"><a name="datacheck"></a><a style="text-decoration:none" href="#datacheck">&#x1f517</a>
 Clear datacheck, broken concurrencies and NMP issues</p>
 
 <div class="text" >
 A first complete check should be done when the system is in <preview>preview</preview> status, a second run must be done <b>before</b> the activation of the system.
 <ul>
-  <li><a name="dataerrorserrors"></a><a style="text-decoration:none" href="#dataerrorserrors">&#x1f517</a>
+  <li><a name="datacheckerrors"></a><a style="text-decoration:none" href="#datacheckerrors">&#x1f517</a>
   <a href="syserr.php#errors">Data errors</a> can be checked as soon as the system is in <devel>devel</devel> state.</li>
-  <li><a name="dataerrorsconcurrency"></a><a style="text-decoration:none" href="#dataerrorsconcurrency">&#x1f517</a>
+  <li><a name="datacheckconcurrency"></a><a style="text-decoration:none" href="#datacheckconcurrency">&#x1f517</a>
   <a href="syserr.php#concurrency">Concurrency checks</a> can be done when the system is minimum in <preview>preview</preview> state.</li>
-  <li><a name="dataerrorsnearmisspoint"></a><a style="text-decoration:none" href="#dataerrornearmisspoint">&#x1f517</a>
+  <li><a name="datachecknearmisspoint"></a><a style="text-decoration:none" href="#datachecknearmisspoint">&#x1f517</a>
   <a href="syserr.php#nearmisspoint">Near-miss point checks</a> can be done when the system is minimum in <preview>preview</preview> state.</li>
 </ul>
 
@@ -235,13 +235,19 @@ Changes proposed on the forum thread should be processed short-term while the pe
   Make changes to the routes as required from users on the forum.</li>
   <li><a name="reviewrejects"></a><a style="text-decoration:none" href="#reviewrejects">&#x1f517</a>
   If you don't agree with proposed changes, explain on the forum why they should not be made. Provide a link to the manual or other sources if possible.</li>
+  <li><a name="reviewbreak"></a><a style="text-decoration:none" href="#reviewbreak">&#x1f517</a>
+  Care is taken to ensure that changes do not "break" a user's list file.</li>
+  <ul>
+    <li>If a <a href="../logs/pointsinuse.log">waypoint labels is in use by current TM users</a> we should <a href="maintenance.php#labelwrong">add alternative labels</a> if possible.</li>
+    <li>We don't add notifications <a href="http://travelmapping.net/devel/updates.php">to the updates page</a> because we are still in <preview>preview</preview>.</li>
+  </ul>
 </ul>
 </div>
 
 <p class="heading"><a name="activate"></a><a style="text-decoration:none" href="#activate">&#x1f517</a>
 Activate the highway system</p>
 
-<div class="text" >When the system is complete and there are no critical open issues, promote the highway system to <active>active</active> status.
+<div class="text" >When the system is complete and there are no critical open issues, promote the highway system to <a href="sysdef.php#active"><active>active</active> status</a>.
 <ul>
   <li><a name="activatesystem"></a><a style="text-decoration:none" href="#activatesystem">&#x1f517</a>
   The entry from <a href="https://github.com/TravelMapping/HighwayData/blob/master/systems.csv">system.csv</a> must be moved from the preview segment of the file to the segment with active systems.</li>
@@ -267,7 +273,7 @@ Maintain the highway system</p>
   <li><a name="maintainregion"></a><a style="text-decoration:none" href="#maintainregion">&#x1f517</a>
   If you are responsible for the region(s) of the highway system, you need to <a href="maintenance.php">maintain the system</a>. Follow the discussion on the forum.</li>
   <li><a name="maintainupdates"></a><a style="text-decoration:none" href="#maintainupdates">&#x1f517</a>
-  All user-relevant changes to the routes must be notified <a href="http://travelmapping.net/devel/updates.php">on the updates page</a> now.</li>
+  All user-relevant changes to the routes must be notified <a href="http://travelmapping.net/devel/updates.php">on the updates page</a> now since the system is <active>active</active>.</li>
 </ul>
 </div>
 
