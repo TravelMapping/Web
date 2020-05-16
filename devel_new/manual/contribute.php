@@ -21,6 +21,7 @@
   <ul>
     <li><a href="#firststeps">First steps with email submission</a></li>
     <li><a href="#problems">Solutions to common problems</a></li>
+    <li><a href="#examples">More examples of how to break down your travels</a></li>
     <li><a href="#advanced">Advanced features</a></li>
   </ul>
   <li><a href="#hwydatamanager">How to become a highway data manager</a></li>
@@ -99,10 +100,7 @@ First steps with email submission</p>
         </li>
       </ul>
       </br>
-      Continue to complete your travels.
-      <span style="color: red;">See our Examples page for more examples of how to break down your travels into "sections" to enter into the file.</br>
-      <i>TODO, do we still need the <a href="https://web.archive.org/web/20181117145826/http://cmap.m-plex.com/docs/examples.php">examples page we had on CHM?</a>
-      Replace it by a link to the list files on Github?</i></span></br>
+      Continue to complete your travels. <a href="#examples">See below</a> if you need more examples on how to break down your travels into "sections" to enter into the file.</br>
       </br>
       Note that a mechanism is in place to automatically include concurrent highways.</br>
       </br>
@@ -214,6 +212,13 @@ Solutions to common problems</p>
       or modify lines in their file but also to delete them as needed.
     </li>
   </ol>
+</div>
+
+<p class="subheading"><a name="examples"></a><a style="text-decoration:none" href="#examples">&#x1f517</a>
+More examples of how to break down your travels</p>
+
+<div class="text">
+  <span style="color: red;"><i>TODO, <a href="https://web.archive.org/web/20181117145826/http://cmap.m-plex.com/docs/examples.php">examples page we had on CHM</a></i></span>
 </div>
 
 <p class="subheading"><a name="advanced"></a><a style="text-decoration:none" href="#advanced">&#x1f517</a>
