@@ -75,12 +75,9 @@ Shaping points</p>
   <ul>
     <li><a name="check"></a><a style="text-decoration:none" href="#check">&#x1f517</a>
     Once the required intersections are added, look at the trace 
-    on top of OpenStreetMap in the Waypoint Editor or in the Highway 
-    Browser.
-    <!-- For the Highway Browser, manually add "&amp;highlight=1" to the
-    hwymap.php URL to turn on the red line. The highlight variable has a 
-    few options with values 0, 1, and 2. -->
+    on top of map layer in the Waypoint Editor.
     </li>
+    <ul>
     <li><a name="exceed"></a><a style="text-decoration:none" href="#exceed">&#x1f517</a>
     Identify sections of the route that go outside the thick red 
     line overlaid on the map.
@@ -91,6 +88,7 @@ Shaping points</p>
     centerline of your route as shown in OpenStreetMap stays within the 
     line. All waypoints should be positioned on the highway. The highlight 
     line helps you decide if another shaping point is needed.</li>
+    </ul>
     <li><a name="sharpturns"></a><a style="text-decoration:none" href="#sharpturns">&#x1f517</a>
     If the route has sharp turns or switchbacks and adding a few 
     more shaping points there would significantly improve the trace, 
