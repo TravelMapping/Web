@@ -118,14 +118,11 @@ First steps with email submission</p>
       </br>
       <ul>
         <li><b>Each line has exactly the four required fields:</b> region, highway, and two waypoint labels.</li>
-        <li><span style="color: red;"><b>The fields have only a single space between them.</b> Tabs, commas, or other
-        delimiters may prevent the mapping script from parsing your file correctly.
-        </br><i>TODO: <a href="http://forum.travelmapping.net/index.php?topic=3172.msg18595#msg18595">wait for yakra</a> what's actually implemented!</i></span></li>
-        <li><b>The file is saved as plain text with a .list extension.</b> Word processor files (Microsoft Word,
+        <li><b>The fields have only spaces or tabs between them.</b> Other
+        delimiters may prevent the mapping script from parsing your file correctly.</li>
+        <li><b>The file is saved as plain text with a <code>.list</code> extension.</b> Word processor files (Microsoft Word,
         Open Office Write, etc.) and rich-text formats will not work. If you use a word processor to create your file,
         be sure to select "Save As..." and save the file in a plain text format.</li>
-        <li><b>Including a small number of blank lines is acceptable.</b> You might wish to break up your list into
-        chunks by region or highway type to make it easier to read or manage.</li>
       </ul>
     </li>
     </br>
@@ -243,6 +240,14 @@ Advanced features</p>
     <code>MO I-70 MO/IL 249 #This is the section in Missouri</code>
     </br>
     </br>
+  </li>
+  <li><a name="blanklines"></a><a style="text-decoration:none" href="#blanklines">&#x1f517</a>
+    Structure <code>.list</code> file</br>
+    </br>
+    Break up your list into chunks by region or highway type to make it easier to read or manage.
+    You can also use blank lines as desired.
+  </br>
+  </br>
   </li>
   <li><a name="githubsubmit"></a><a style="text-decoration:none" href="#githubsubmit">&#x1f517</a>
     Github submission</br>
