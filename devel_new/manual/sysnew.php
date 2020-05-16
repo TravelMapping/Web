@@ -32,10 +32,10 @@ Steps to introduce a new highway system</p>
     <li><a href="#existing">Check existing routes and add waypoints</a></li>
     <li><a href="#develop">Develop routes in devel status</a></li>
     <li><a href="#preview">Promote highway system to preview</a></li>
-    <li><a href="#dataerrors">Clear datacheck, broken concurrencies and NMP issues</a></li>
+    <li><a href="#datacheck">Clear datacheck, broken concurrencies and NMP issues</a></li>
     <li><a href="#peerreview">Request peer review</a></li>
     <li><a href="#review">Make changes based on peer review</a></li>
-    <li><a href="#dataerrors">Clear datacheck, broken concurrencies and NMP issues again</a></li>
+    <li><a href="#datacheck">Clear datacheck, broken concurrencies and NMP issues again</a></li>
     <li><a href="#activate">Activate the highway system</a></li>
     <li><a href="#maintain">Maintain the highway system</a></li>
   </ol>
@@ -194,17 +194,17 @@ brabr;BRA;Brazil Rodovias Federais;green;4;preview
 Especially when drafting a huge highway system, it is possible to split it into several sub-systems with partial preview promotion. Ask on the forum thread for more details.
 </div>
 
-<p class="heading"><a name="dataerrors"></a><a style="text-decoration:none" href="#dataerrors">&#x1f517</a>
+<p class="heading"><a name="datacheck"></a><a style="text-decoration:none" href="#datacheck">&#x1f517</a>
 Clear datacheck, broken concurrencies and NMP issues</p>
 
 <div class="text" >
 A first complete check should be done when the system is in <preview>preview</preview> status, a second run must be done <b>before</b> the activation of the system.
 <ul>
-  <li><a name="dataerrorserrors"></a><a style="text-decoration:none" href="#dataerrorserrors">&#x1f517</a>
+  <li><a name="datacheckerrors"></a><a style="text-decoration:none" href="#datacheckerrors">&#x1f517</a>
   <a href="syserr.php#errors">Data errors</a> can be checked as soon as the system is in <devel>devel</devel> state.</li>
-  <li><a name="dataerrorsconcurrency"></a><a style="text-decoration:none" href="#dataerrorsconcurrency">&#x1f517</a>
+  <li><a name="datacheckconcurrency"></a><a style="text-decoration:none" href="#datacheckconcurrency">&#x1f517</a>
   <a href="syserr.php#concurrency">Concurrency checks</a> can be done when the system is minimum in <preview>preview</preview> state.</li>
-  <li><a name="dataerrorsnearmisspoint"></a><a style="text-decoration:none" href="#dataerrornearmisspoint">&#x1f517</a>
+  <li><a name="datachecknearmisspoint"></a><a style="text-decoration:none" href="#datachecknearmisspoint">&#x1f517</a>
   <a href="syserr.php#nearmisspoint">Near-miss point checks</a> can be done when the system is minimum in <preview>preview</preview> state.</li>
 </ul>
 

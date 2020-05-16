@@ -38,7 +38,7 @@ connerr2 {color: #48C0A0;}
 <div class="text">
 <ul>
   <li><a href="#errors">Data errors</a></li>
-  <li><a href="#dataerror">Highway data check list</a></li>
+  <li><a href="#datacheck">Highway data check list</a></li>
   <li><a href="#falsepositive">Marking errors false positive (FP)</a></li>
   <li><a href="#concurrency">Concurrency check</a></li>
   <li><a href="#nearmisspoint">Near-miss points</a></li>
@@ -265,11 +265,11 @@ Data errors</p>
 </tbody></table>
 
 
-<p class="heading"><a name="dataerror"></a><a style="text-decoration:none" href="#dataerror">&#x1f517</a>
+<p class="heading"><a name="datacheck"></a><a style="text-decoration:none" href="#datacheck">&#x1f517</a>
 Highway data check list</p>
 
 <div class="text">
-  When changes to highway data have been submitted and are live on the site, all routes of the project have been checked during the site update process. They are reported on the <a href="../dataerrors.php">data check list</a>. The list is sorted by the system categories active, preview and in-development.
+  When changes to highway data have been submitted and are live on the site, all routes of the project have been checked during the site update process. They are reported on the <a href="../datacheck.php">data check list</a>. The list is sorted by the system categories active, preview and in-development.
   </br>
   <ul>
     <li>Check the table for errors. It is possible to filter the list by system or by region.</li>
