@@ -313,7 +313,7 @@ systems in development.  Highly experienced users can learn how to plot new high
 The steps to become a highway data manager are as follows:
   <ol>
     <li><a name="activeuser"></a><a style="text-decoration:none" href="#activeuser">&#x1f517</a>
-    Become an active user to be familiar with the project structure. Create a <a href="#userlistfile">list files</a> and understand how routes are organized into highway systems.</li>
+    Become an active user get familiar with the project structure. Create a <a href="#userlistfile">list files</a> and understand how routes are organized into highway systems.</li>
     <li><a name="follow"></a><a style="text-decoration:none" href="#follow">&#x1f517</a>
     Catch up on previous discussions and follow current discussions <a href="http://forum.travelmapping.net/">on the forum</a> about highway data updates.</li>
     <li><a name="report"></a><a style="text-decoration:none" href="#report">&#x1f517</a>
