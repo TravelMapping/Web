@@ -34,7 +34,9 @@ interest to Travel Mapping project contributors.
 Contribution to the project</i></p>
 
 <div class="text">
-  Anyone can submit their travels to be included in the site. TM's highway data is developed and maintained by a group of <a href="/credits.php#contributors">volunteer project contributors</a>. Learn more on <a href="manual/contribute.php">how to contribute to the project</a>.
+  Anyone can submit their travels to be included in the site. TM's highway data is developed and maintained by a group of <a href="/credits.php#contributors">volunteer project contributors</a>.
+  </br></br>
+  Learn more on <a href="manual/contribute.php">how to contribute to the project</a>.
 </div>
 
 
