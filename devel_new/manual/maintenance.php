@@ -41,7 +41,7 @@ How to maintain a region?</p>
 </ul>
 </div>
 
-<p class="heading"><a name="newsworthy"></a><a style="text-decoration:none" href="#newsworthy">&#x1f517</a>
+<p class="subheading"><a name="newsworthy"></a><a style="text-decoration:none" href="#newsworthy">&#x1f517</a>
 Which changes to activated routes are newsworthy?</p>
 
 <div class="text">
@@ -207,7 +207,7 @@ A: No. That note is implied for most or all entries on that page, so it's not wo
 </ul>
 </div>
 
-<p class="heading"><a name="newsreport"></a><a style="text-decoration:none" href="#newsreport">&#x1f517</a>
+<p class="subheading"><a name="newsreport"></a><a style="text-decoration:none" href="#newsreport">&#x1f517</a>
 Format for reporting newsworthy changes</p>
 
 <div class="text">Newsworthy changes must must be logged in the <a href="https://github.com/TravelMapping/HighwayData/blob/master/updates.csv">updates list</a>,

@@ -38,7 +38,7 @@ Contribution to the project</i></p>
 </div>
 
 
-<p class="heading"><a name="systems"></a><a style="text-decoration:none" href="#systems">&#x1f517</a>
+<p class="subheading"><a name="systems"></a><a style="text-decoration:none" href="#systems">&#x1f517</a>
 Highway Systems <i>(work in progress)</i></p>
 
 <div class="text">
@@ -47,11 +47,11 @@ Highway Systems <i>(work in progress)</i></p>
     <li><a href="manual/sysnew.php">Create a new highway system</a></li>
     <li><a href="manual/syserr.php">Deal with data errors</a></li>
     <li><a href="manual/sysrev.php">Review a preview highway system</a></li>
-    <li><a href="manual/maintenance.php">Maintain an active system</a></li>
+    <li><a href="manual/maintenance.php">Maintain highway data</a></li>
   </ul>
 </div>
 
-<p class="heading"><a name="routes"></a><a style="text-decoration:none" href="#routes">&#x1f517</a>
+<p class="subheading"><a name="routes"></a><a style="text-decoration:none" href="#routes">&#x1f517</a>
 Route Files <i>(no changes except of formatting yet)</i></p>
 
 <div class="text">
@@ -63,7 +63,7 @@ Route Files <i>(no changes except of formatting yet)</i></p>
   </ul>
 </div>
 
-<p class="heading"><a name="tools"></a><a style="text-decoration:none" href="#tools">&#x1f517</a>
+<p class="subheading"><a name="tools"></a><a style="text-decoration:none" href="#tools">&#x1f517</a>
 Tools</p>
 
 <div class="text">
