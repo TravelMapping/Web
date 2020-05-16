@@ -30,13 +30,17 @@ interest to Travel Mapping project contributors.
   the Clinched Highway Mapping project.
 </p>
 
-<p class="heading">Contribution to the project</i></p>
+<p class="heading"><a name="contribute"></a><a style="text-decoration:none" href="#contribute">&#x1f517</a>
+Contribution to the project</i></p>
+
 <div class="text">
-  TM's highway data is developed and maintained by a group of <a href="/credits.php#contributors">volunteer project contributors</a>. Learn more on <a href="manual/contribute.php">how to contribute to the project</a>.
+  Anyone can submit their travels to be included in the site. TM's highway data is developed and maintained by a group of <a href="/credits.php#contributors">volunteer project contributors</a>. Learn more on <a href="manual/contribute.php">how to contribute to the project</a>.
 </div>
 
 
-<p class="heading">Highway Systems <i>(work in progress)</i></p>
+<p class="heading"><a name="systems"></a><a style="text-decoration:none" href="#systems">&#x1f517</a>
+Highway Systems <i>(work in progress)</i></p>
+
 <div class="text">
   <ul>
     <li><a href="manual/sysdef.php">Definition of a highway system</a></li>
@@ -47,7 +51,9 @@ interest to Travel Mapping project contributors.
   </ul>
 </div>
 
-<p class="heading">Route Files <i>(no changes except of formatting yet)</i></p>
+<p class="heading"><a name="routes"></a><a style="text-decoration:none" href="#routes">&#x1f517</a>
+Route Files <i>(no changes except of formatting yet)</i></p>
+
 <div class="text">
   <ul>
     <li><a href="manual/hwydata.php">Highway data files</a></li>
@@ -57,7 +63,9 @@ interest to Travel Mapping project contributors.
   </ul>
 </div>
 
-<p class="heading">Tools</p>
+<p class="heading"><a name="tools"></a><a style="text-decoration:none" href="#tools">&#x1f517</a>
+Tools</p>
+
 <div class="text">
   <ul>
     <li><a href="/wptedit/">Waypoint File Editor</a>
