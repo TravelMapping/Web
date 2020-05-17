@@ -21,6 +21,7 @@
   <ul>
     <li><a href="#firststeps">First steps with email submission</a></li>
     <li><a href="#problems">Solutions to common problems</a></li>
+    <li><a href="#examples">More examples of how to break down your travels</a></li>
     <li><a href="#advanced">Advanced features</a></li>
   </ul>
   <li><a href="#hwydatamanager">How to become a highway data manager</a></li>
@@ -99,10 +100,7 @@ First steps with email submission</p>
         </li>
       </ul>
       </br>
-      Continue to complete your travels.
-      <span style="color: red;">See our Examples page for more examples of how to break down your travels into "sections" to enter into the file.</br>
-      <i>TODO, do we still need the <a href="https://web.archive.org/web/20181117145826/http://cmap.m-plex.com/docs/examples.php">examples page we had on CHM?</a>
-      Replace it by a link to the list files on Github?</i></span></br>
+      Continue to complete your travels. <a href="#examples">See below</a> if you need more examples on how to break down your travels into "sections" to enter into the file.</br>
       </br>
       Note that a mechanism is in place to automatically include concurrent highways.</br>
       </br>
@@ -118,14 +116,11 @@ First steps with email submission</p>
       </br>
       <ul>
         <li><b>Each line has exactly the four required fields:</b> region, highway, and two waypoint labels.</li>
-        <li><span style="color: red;"><b>The fields have only a single space between them.</b> Tabs, commas, or other
-        delimiters may prevent the mapping script from parsing your file correctly.
-        </br><i>TODO: <a href="http://forum.travelmapping.net/index.php?topic=3172.msg18595#msg18595">wait for yakra</a> what's actually implemented!</i></span></li>
-        <li><b>The file is saved as plain text with a .list extension.</b> Word processor files (Microsoft Word,
+        <li><b>The fields have only spaces or tabs between them.</b> Other
+        delimiters may prevent the mapping script from parsing your file correctly.</li>
+        <li><b>The file is saved as plain text with a <code>.list</code> extension.</b> Word processor files (Microsoft Word,
         Open Office Write, etc.) and rich-text formats will not work. If you use a word processor to create your file,
         be sure to select "Save As..." and save the file in a plain text format.</li>
-        <li><b>Including a small number of blank lines is acceptable.</b> You might wish to break up your list into
-        chunks by region or highway type to make it easier to read or manage.</li>
       </ul>
     </li>
     </br>
@@ -147,7 +142,7 @@ First steps with email submission</p>
     <li><a name="errorlog"></a><a style="text-decoration:none" href="#errorlog">&#x1f517</a>
       <b>Check the user log file.</b></br>
       </br>
-      Check your <a href="../logs/users/">online log file</a> (also directly linked on your user stats pages).
+      Check your <a href="/logs/users/">online log file</a> (also directly linked on your user stats pages).
       If you included a highway or point label that the mapping script does not recognize, it will tell you
       in your log file. Sometimes the highway data is updated, and this may generate a new error. Check
       <a href="http://travelmapping.net/devel/updates.php">the updates page</a> for info on what has been changed
@@ -219,87 +214,108 @@ Solutions to common problems</p>
   </ol>
 </div>
 
+<p class="subheading"><a name="examples"></a><a style="text-decoration:none" href="#examples">&#x1f517</a>
+More examples of how to break down your travels</p>
+
+<div class="text">
+  <span style="color: red;"><i>TODO, <a href="https://web.archive.org/web/20181117145826/http://cmap.m-plex.com/docs/examples.php">examples page we had on CHM</a></i></span>
+</div>
+
 <p class="subheading"><a name="advanced"></a><a style="text-decoration:none" href="#advanced">&#x1f517</a>
 Advanced features</p>
 
-<p class="text"><a name="mapview"></a><a style="text-decoration:none" href="#mapview">&#x1f517</a>
-Open Highway Browser from a map</p>
-
 <div class="text">
-  Viewing regions or systems on a map helps to see all your traveled segments. Click on the overlays to open the info window.
-  The link directly opens the route in the Highway Browser so that you can create your <code>.list</code> file line.
-</div>
-
-<p class="text"><a name="comment"></a><a style="text-decoration:none" href="#comment">&#x1f517</a>
-Using comments</p>
-
-<div class="text">
-  Use <code>#</code> to comment lines you like to add for info purpose.</br>
-  In-line comments are also possible:</br>
+<ul>
+  <li><a name="mapview"></a><a style="text-decoration:none" href="#mapview">&#x1f517</a>
+    Open Highway Browser from a map</br>
+    </br>
+    Viewing regions or systems on a map helps to see all your traveled segments. Click on the overlays to open the info window.
+    The link directly opens the route in the Highway Browser so that you can create your <code>.list</code> file line.
+    </br>
+    </br>
+  </li>
+  <li><a name="comment"></a><a style="text-decoration:none" href="#comment">&#x1f517</a>
+    Using comments</br>
+    </br>
+    Use <code>#</code> to comment lines you like to add for info purpose.</br>
+    In-line comments are also possible:</br>
+    </br>
+    <code>#My first travel section</code></br>
+    <code>IL I-70 52 MO/IL  #This is the section in Illinois</code></br>
+    <code>MO I-70 MO/IL 249 #This is the section in Missouri</code>
+    </br>
+    </br>
+  </li>
+  <li><a name="blanklines"></a><a style="text-decoration:none" href="#blanklines">&#x1f517</a>
+    Structure <code>.list</code> file</br>
+    </br>
+    Break up your list into chunks by region or highway type to make it easier to read or manage.
+    You can also use blank lines as desired.
   </br>
-  <code>#My first travel section</code></br>
-  <code>IL I-70 52 MO/IL  #This is the section in Illinois</code></br>
-  <code>MO I-70 MO/IL 249 #This is the section in Missouri</code>
-</div>
-
-
-<p class="text"><a name="githubsubmit"></a><a style="text-decoration:none" href="#githubsubmit">&#x1f517</a>
-Github submission</p>
-
-<div class="text">
-  Instead of emailing, you can also fork our GitHub repository at
-  <a href="https://github.com/TravelMapping/UserData">https://github.com/TravelMapping/UserData</a> and submit a pull request.</br>
   </br>
-  Your first user list file submission should be done by <a href="#emailsubmission">sending an email</a>.</br>
-  Your user will be added with the next site update and your user list file will be published on GitHub.</br>
-  </br>
-  <a name="gitinit"></a><a style="text-decoration:none" href="#gitinit">&#x1f517</a>
-  <b>To be done initially:</b></br>
-  <ol>
-    <li><a name="gitsign"></a><a style="text-decoration:none" href="#gitsign">&#x1f517</a>
-    Sign up on <a href="https://github.com">https://github.com</a> and create your own Github user.</li>
-    <li><a name="gitrepo"></a><a style="text-decoration:none" href="#gitrepo">&#x1f517</a>
-    Go to <a href="https://github.com/TravelMapping/UserData">https://github.com/TravelMapping/UserData</a>.</li>
-    <li><a name="gitfork"></a><a style="text-decoration:none" href="#gitfork">&#x1f517</a>
-    Press <code>Fork</code> at top of the page.</li>
-    <li><a name="gitforkexe"></a><a style="text-decoration:none" href="#gitforkexe">&#x1f517</a>
-    Click on your <i>Github user name</i> icon.</li>
-  </ol>
-  <a name="gitmod"></a><a style="text-decoration:none" href="#gitmod">&#x1f517</a>
-  <b>To be done with every modification of your user list file:</b>
-  <ol>
-    <li><a name="gitopen"></a><a style="text-decoration:none" href="#gitopen">&#x1f517</a>
-    Go to your user list file:
-    <span style="color: brown;">https://github.com/<i>&lt;your <b>Github</b> user name&gt;</i>/UserData/blob/master/list_files/<i>&lt;your <b>Travelmapping</b> user name&gt;</i>.list</span>.</li>
-    <li><a name="gitedit"></a><a style="text-decoration:none" href="#gitedit">&#x1f517</a>
-    Click on the <i>Edit this file</i> icon.</li>
-    <li><a name="gitchange"></a><a style="text-decoration:none" href="#gitchange">&#x1f517</a>
-    Make your edits or copy the content of your offline user list file.</li>
-    <li><a name="gitcommitdir"></a><a style="text-decoration:none" href="#gitcommitdir">&#x1f517</a>
-    Select <code>Commit directly to the master branch</code> on the bottom of the page.</li>
-    <li><a name="gitcommit"></a><a style="text-decoration:none" href="#gitcommit">&#x1f517</a>
-    Press <code>Commit changes</code>.</li>
-    <li><a name="gitswitch"></a><a style="text-decoration:none" href="#gitswitch">&#x1f517</a>
-    Go to <span style="color: brown;">https://github.com/<i>&lt;your <b>Github</b> user name&gt;</i>/UserData</span> (link on top of the page).</li>
-    <li><a name="gitnewpull"></a><a style="text-decoration:none" href="#gitnewpull">&#x1f517</a>
-    Press <code>Pull request</code>.</li>
-    <li><a name="gitcheck"></a><a style="text-decoration:none" href="#gitcheck">&#x1f517</a>
-    Check your changes indicated in <span style="color: green; background-color: #CCFFCC;">green</span> and <span style="color: red; background-color: #FFCCCC;">red</span>.</li>
-    <li><a name="gitcreatepull"></a><a style="text-decoration:none" href="#gitcreatepull">&#x1f517</a>
-    Press <code>Create pull request</code>.</li>
-    <li><a name="gitcreatepullagain"></a><a style="text-decoration:none" href="#gitcreatepullagain">&#x1f517</a>
-    Press <code>Create pull request</code> again.</li>
-  </ol>
-  Your pull request will be merged by an admin before the next site update.</br>
-  To undo your changes, press <code>Close pull request</code>.
-</div>
-<p class="subheading"><a name="verification"></a><a style="text-decoration:none" href="#verification">&#x1f517</a>
-Data verification</p>
-
-<div class="text">
-  For advanced users, it is possible to check the changes to the <code>.list</code> file by running the site update to
-  create the user log file before <a href="#gitnewpull">submitting the Github pull request</a>. You can use the
-  <a href="https://github.com/TravelMapping/DataProcessing/blob/master/SETUP.md">data verification</a> tool.
+  </li>
+  <li><a name="githubsubmit"></a><a style="text-decoration:none" href="#githubsubmit">&#x1f517</a>
+    Github submission</br>
+    </br>
+    Instead of emailing, you can also fork our GitHub repository at
+    <a href="https://github.com/TravelMapping/UserData">https://github.com/TravelMapping/UserData</a> and submit a pull request.</br>
+    </br>
+    Your first user list file submission should be done by <a href="#emailsubmission">sending an email</a>.</br>
+    Your user will be added with the next site update and your user list file will be published on GitHub.</br>
+    </br>
+    <a name="gitinit"></a><a style="text-decoration:none" href="#gitinit">&#x1f517</a>
+    <b>To be done initially:</b></br>
+    <ol>
+      <li><a name="gitsign"></a><a style="text-decoration:none" href="#gitsign">&#x1f517</a>
+      Sign up on <a href="https://github.com">https://github.com</a> and create your own Github user.</li>
+      <li><a name="gitrepo"></a><a style="text-decoration:none" href="#gitrepo">&#x1f517</a>
+      Go to <a href="https://github.com/TravelMapping/UserData">https://github.com/TravelMapping/UserData</a>.</li>
+      <li><a name="gitfork"></a><a style="text-decoration:none" href="#gitfork">&#x1f517</a>
+      Press <code>Fork</code> at top of the page.</li>
+      <li><a name="gitforkexe"></a><a style="text-decoration:none" href="#gitforkexe">&#x1f517</a>
+      Click on your <i>Github user name</i> icon.</li>
+    </ol>
+    </br>
+    <a name="gitmod"></a><a style="text-decoration:none" href="#gitmod">&#x1f517</a>
+    <b>To be done with every modification of your user list file:</b>
+    <ol>
+      <li><a name="gitopen"></a><a style="text-decoration:none" href="#gitopen">&#x1f517</a>
+      Go to your user list file:
+      <span style="color: brown;">https://github.com/<i>&lt;your <b>Github</b> user name&gt;</i>/UserData/blob/master/list_files/<i>&lt;your <b>Travelmapping</b> user name&gt;</i>.list</span>.</li>
+      <li><a name="gitedit"></a><a style="text-decoration:none" href="#gitedit">&#x1f517</a>
+      Click on the <i>Edit this file</i> icon.</li>
+      <li><a name="gitchange"></a><a style="text-decoration:none" href="#gitchange">&#x1f517</a>
+      Make your edits or copy the content of your offline user list file.</li>
+      <li><a name="gitcommitdir"></a><a style="text-decoration:none" href="#gitcommitdir">&#x1f517</a>
+      Select <code>Commit directly to the master branch</code> on the bottom of the page.</li>
+      <li><a name="gitcommit"></a><a style="text-decoration:none" href="#gitcommit">&#x1f517</a>
+      Press <code>Commit changes</code>.</li>
+      <li><a name="gitswitch"></a><a style="text-decoration:none" href="#gitswitch">&#x1f517</a>
+      Go to <span style="color: brown;">https://github.com/<i>&lt;your <b>Github</b> user name&gt;</i>/UserData</span> (link on top of the page).</li>
+      <li><a name="gitnewpull"></a><a style="text-decoration:none" href="#gitnewpull">&#x1f517</a>
+      Press <code>Pull request</code>.</li>
+      <li><a name="gitcheck"></a><a style="text-decoration:none" href="#gitcheck">&#x1f517</a>
+      Check your changes indicated in <span style="color: green; background-color: #CCFFCC;">green</span> and <span style="color: red; background-color: #FFCCCC;">red</span>.</li>
+      <li><a name="gitcreatepull"></a><a style="text-decoration:none" href="#gitcreatepull">&#x1f517</a>
+      Press <code>Create pull request</code>.</li>
+      <li><a name="gitcreatepullagain"></a><a style="text-decoration:none" href="#gitcreatepullagain">&#x1f517</a>
+      Press <code>Create pull request</code> again.</li>
+    </ol>
+    Your pull request will be merged by an admin before the next site update.</br>
+    To undo your changes, press <code>Close pull request</code>.
+    </br>
+    </br>
+  </li>
+  <li><a name="verification"></a><a style="text-decoration:none" href="#verification">&#x1f517</a>
+    Data verification</br>
+    </br>
+    For advanced users, it is possible to check the changes to the <code>.list</code> file by running the site update to
+    create the user log file before <a href="#gitnewpull">submitting the Github pull request</a>. You can use the
+    <a href="https://github.com/TravelMapping/DataProcessing/blob/master/SETUP.md">data verification</a> tool.
+    </br>
+    </br>
+  </li>
+</ul>
 </div>
 
 <p class="heading"><a name="hwydatamanager"></a><a style="text-decoration:none" href="#hwydatamanager">&#x1f517</a>
@@ -313,7 +329,7 @@ systems in development.  Highly experienced users can learn how to plot new high
 The steps to become a highway data manager are as follows:
   <ol>
     <li><a name="activeuser"></a><a style="text-decoration:none" href="#activeuser">&#x1f517</a>
-    Become an active user get familiar with the project structure. Create a <a href="#userlistfile">list files</a> and understand how routes are organized into highway systems.</li>
+    Become an active user and get familiar with the project structure. Create a <a href="#userlistfile">list files</a> and understand how routes are organized into highway systems.</li>
     <li><a name="follow"></a><a style="text-decoration:none" href="#follow">&#x1f517</a>
     Catch up on previous discussions and follow current discussions <a href="http://forum.travelmapping.net/">on the forum</a> about highway data updates.</li>
     <li><a name="report"></a><a style="text-decoration:none" href="#report">&#x1f517</a>

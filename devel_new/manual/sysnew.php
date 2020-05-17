@@ -42,7 +42,7 @@ Steps to introduce a new highway system</p>
 </div>
 
 
-<p class="heading"><a name="research"></a><a style="text-decoration:none" href="#research">&#x1f517</a>
+<p class="subheading"><a name="research"></a><a style="text-decoration:none" href="#research">&#x1f517</a>
 Research about the highway system and discussion on the forum</p>
 
 <div class="text" >
@@ -87,7 +87,7 @@ Before you can start the development of a new highway system, the following requ
 Note that there are a few exceptions to the strict <a href="sysdef.php#tmsys">TM highway system requirements</a>. Don't hestiate with opening a thread on the forum to ask whether the potential highway system is qualified for TM.
 </div>
 
-<p class="heading"><a name="existing"></a><a style="text-decoration:none" href="#existing">&#x1f517</a>
+<p class="subheading"><a name="existing"></a><a style="text-decoration:none" href="#existing">&#x1f517</a>
 Check existing routes and add waypoints</p>
 
 <div class="text" >
@@ -103,7 +103,7 @@ Check existing routes and add waypoints</p>
 The existing wpt files are stored on <a href="https://github.com/TravelMapping/HighwayData">Github</a>. They can be loaded into the <a href="/wptedit/">Waypoint File Editor</a> for modifications. The changed files must be submitted to Github with a pull request. Please refer to <a href="#develop">the development instructions</a> for more info about how to deal with the files and tools.
 </div>
 
-<p class="heading"><a name="develop"></a><a style="text-decoration:none" href="#develop">&#x1f517</a>
+<p class="subheading"><a name="develop"></a><a style="text-decoration:none" href="#develop">&#x1f517</a>
 Develop routes in devel status</p>
 
 <div class="text" >
@@ -172,7 +172,7 @@ We don't notify the promotion of a highway system to in-development <a href="htt
 <b>When promoting a system to <devel>devel</devel>, the system is processed for the first time. If any wpt or csv file has an incorrect format or reference, the site update will fail. Please run <a href="https://github.com/TravelMapping/DataProcessing/blob/master/SETUP.md">data verification</a> to find the errors before submitting the files.</b>
 </div>
 
-<p class="heading"><a name="preview"></a><a style="text-decoration:none" href="#preview">&#x1f517</a>
+<p class="subheading"><a name="preview"></a><a style="text-decoration:none" href="#preview">&#x1f517</a>
 Promote highway system to preview</p>
 
 <div class="text" >When the first draft of all routes is in the highway browser, you can promote the highway system to <a href="sysdef.php#preview"><preview>preview</preview> status</a>.
@@ -194,7 +194,7 @@ brabr;BRA;Brazil Rodovias Federais;green;4;preview
 Especially when drafting a huge highway system, it is possible to split it into several sub-systems with partial preview promotion. Ask on the forum thread for more details.
 </div>
 
-<p class="heading"><a name="datacheck"></a><a style="text-decoration:none" href="#datacheck">&#x1f517</a>
+<p class="subheading"><a name="datacheck"></a><a style="text-decoration:none" href="#datacheck">&#x1f517</a>
 Clear datacheck, broken concurrencies and NMP issues</p>
 
 <div class="text" >
@@ -212,7 +212,7 @@ A first complete check should be done when the system is in <preview>preview</pr
 
 </div>
 
-<p class="heading"><a name="peerreview"></a><a style="text-decoration:none" href="#peerreview">&#x1f517</a>
+<p class="subheading"><a name="peerreview"></a><a style="text-decoration:none" href="#peerreview">&#x1f517</a>
 Request peer review</p>
 
 <div class="text" >
@@ -225,7 +225,7 @@ Request peer review</p>
   The peer review is complete, when the reviewer says it is complete.</li>
 </div>
 
-<p class="heading"><a name="review"></a><a style="text-decoration:none" href="#review">&#x1f517</a>
+<p class="subheading"><a name="review"></a><a style="text-decoration:none" href="#review">&#x1f517</a>
 Make changes based on peer review</p>
 
 <div class="text" >
@@ -244,7 +244,7 @@ Changes proposed on the forum thread should be processed short-term while the pe
 </ul>
 </div>
 
-<p class="heading"><a name="activate"></a><a style="text-decoration:none" href="#activate">&#x1f517</a>
+<p class="subheading"><a name="activate"></a><a style="text-decoration:none" href="#activate">&#x1f517</a>
 Activate the highway system</p>
 
 <div class="text" >When the system is complete and there are no critical open issues, promote the highway system to <a href="sysdef.php#active"><active>active</active> status</a>.
@@ -265,7 +265,7 @@ brabr;BRA;Brazil Rodovias Federais;green;4;active
 </ul>
 </div>
 
-<p class="heading"><a name="maintain"></a><a style="text-decoration:none" href="#maintain">&#x1f517</a>
+<p class="subheading"><a name="maintain"></a><a style="text-decoration:none" href="#maintain">&#x1f517</a>
 Maintain the highway system</p>
 
 <div class="text" >
