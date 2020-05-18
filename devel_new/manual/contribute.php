@@ -1,8 +1,10 @@
+<?php require $_SERVER['DOCUMENT_ROOT'] . "/lib/tmphpuser.php" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
 <title>Travel Mapping Manual: How to contribute to the project</title>
 <link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
 <link rel="shortcut icon" type="image/png" href="favicon.png">
@@ -33,8 +35,8 @@ How to create a user list file</p>
 
 <div class="text">
   The basic idea is to make a list of highway sections you have traveled and collect them into a <em>plain text file</em>
-  to be submitted to Travelmapping. The text file will be 
-  processed and converted into a set of custom stats pages and maps 
+  to be submitted to Travel Mapping. The text file will be 
+  processed to populate a set of custom stats pages and maps 
   describing your travels.</br>
   </br>
   For examples, you can browse the <a href="http://travelmapping.net/stat.php">travel summaries</a> of any of our users.
@@ -64,8 +66,8 @@ First steps with email submission</p>
       </br>
       The <a href="/hb/">Highway Browser</a> is designed to help you with this process.
       The Highway Browser lists all available systems and routes that you can use
-      (we recommend starting with <a href="sysdef.php#active">active systems</a>). For each route,
-      the Highway Browser also provides a list of waypoints that you can use as a start or end point.</br>
+      (we recommend starting with only <a href="sysdef.php#active">active systems</a>). For each route,
+      the Highway Browser also provides a list of <i>waypoints</i> that you can use as a start or end point.</br>
       </br>
       
       Break up your travels into traveled sections by region and route. For each route section,
@@ -73,7 +75,7 @@ First steps with email submission</p>
       </br>
       <code>Region Route Waypoint1 Waypoint2</code></br>
       </br>
-      For example, if you traveled on Interstate 70 in Illinois, USA between Exit 52 and the Missouri border, you would put the following line in your file:</br>
+      For example, if you traveled in the United States on Interstate 70 in Illinois between Exit 52 and the Missouri border, you would put the following line in your file:</br>
       </br>
       <code>IL I-70 52 MO/IL</code></br>
       </br>
@@ -84,7 +86,7 @@ First steps with email submission</p>
         <li>Copy the first line of the info window to get the correct name <code>52</code>.</li>
         <li>Click on the end point <code>MO/IL</code> or click the waypoint on the map
         to open the info window and copy the label name <code>MO/IL</code>.</li>
-        <li>The order of the waypoints is not relevant for the process.</li>
+        <li>The waypoints at the ends of the traveled segment may be listed in either order.</li>
       </ul></br>
       You most likely continued your travel in Missouri. If you left Interstate 70 at Exit 249, you would put the second line in your file:</br>
       </br>
@@ -128,12 +130,10 @@ First steps with email submission</p>
       <b>Send your <code>.list</code> file by email to <code>travmap@teresco.org</code> destination.
       Mention in the subject line that your username is a new one.</b></br>
       </br>
-      You have now finished your part! Your file will be included in the next site update, <span style="color: red;">which usually occurs more often than weekly.
-      <i></br>TODO, <a href="http://forum.travelmapping.net/index.php?topic=3172.msg18595#msg18595">wait for Jim</a>
-      whether we really want to say that we usually update it once per day?</br></i></span></li>
+      You have now finished your part! Your file will be included in the next site update, which typically occurs nightly between 9 and 11 PM US/Eastern.</br></i></span></li>
     </br>
     <li><a name="aftersiteupdate"></a><a style="text-decoration:none" href="#aftersiteupdate">&#x1f517</a>
-      <b>Later, look for your name on the <a href="http://travelmapping.net/stat.php">Traveler List</a>.</b></br>
+      <b>After the next site update, look for your name on the <a href="http://travelmapping.net/stat.php">Traveler List</a>.</b></br>
       </br>
       Once your file has been processed, your name will appear in this list along with all the other travelers.
       Click on your username and enjoy your traveled highway stats and maps.</br>
@@ -144,7 +144,7 @@ First steps with email submission</p>
       </br>
       Check your <a href="/logs/users/">online log file</a> (also directly linked on your user stats pages).
       If you included a highway or point label that the mapping script does not recognize, it will tell you
-      in your log file. Sometimes the highway data is updated, and this may generate a new error. Check
+      in your log file. Sometimes highway data is updated, and this may generate a new error. Check
       <a href="http://travelmapping.net/devel/updates.php">the updates page</a> for info on what has been changed
       to the route. You should also check the updates page frequently to find highway changes like simple relocations
       that don't break your list file and cannot be reported in your log file.
@@ -155,9 +155,9 @@ First steps with email submission</p>
       <b>Update your file as needed by emailing an updated copy.</b></br>
       </br>
       If you do more traveling, you can update your <code>.list</code> file to reflect the new highways on which you
-      have traveled. To update your file, just email it again, and it will be processed in the subsequent site update.</li>
+      have traveled. To submit your updated file, just email it again, and it will be processed in the subsequent site update.</li>
   </ol>
-  The Travelmapping collaborators hope that you enjoy your free maps and stats pages.
+  Travel Mapping's volunteers hope that you enjoy your maps and stats pages from this free service!
 </div>
 
 
@@ -179,8 +179,8 @@ Solutions to common problems</p>
       HighwayGuy80.list, arkansas.list, motorways.list, nor other filenames. Note that since usernames generally do not
       change, the valid filename also generally does not change.</br>
       </br>
-      Due to Windows operating systems hiding the file extension .list by default and/or including an extra, hidden .txt
-      extension, a .list.txt extension is also accepted (e.g., highwayguy80.list.txt). However, users are asked to avoid the
+      Due to Mac and Windows operating systems hiding the file extension <code>.list</code> by default and/or including an extra, hidden <code>.txt</code>
+      extension, a <code>.list.txt</code> extension is also accepted (e.g., <code>highwayguy80.list.txt</code>). However, users are asked to avoid the
       double extension so that files do not need to be renamed after being submitted.
     </li>
     </br>
@@ -188,27 +188,30 @@ Solutions to common problems</p>
       <b>The file was not emailed.</b></br>
       </br>
       Check that you attached your file to the email you thought you sent, and check that the email was sent. Files that are not
-      emailed cannot be processed.
+      received cannot be processed.
     </li>
     </br>
     <li><a name="notprocessed"></a><a style="text-decoration:none" href="#notprocessed">&#x1f517</a>
       <b>The file was sent but has not yet been processed.</b></br>
-      </br>
-      <span style="color: red;">File processing is not automated at this time, and a few days may pass between receipt of the file and its processing.
-      If your file has not been processed and more than 7 days have passed since you sent the email with the file attached to it,
-      then simply send your file by email once more. If instead, 7 or less days have passed, no action is needed on your part.</br>
-      </br>
-      Note that occasionally processing may take place more than 7 days after receipt. If this is the case, a notice will appear
-      on the home page to inform you of the temporary suspension of file processing. Your file will be processed when processing
-      resumes without any further action needed on your part.
-      </br></br><i>TODO, <a href="http://forum.travelmapping.net/index.php?topic=3172.msg18595#msg18595">wait for Jim</a> how we should change this!</i></span>
+</br>
+
+Site updates typically occur daily, and the
+time of the last update can be found at the bottom of the project's
+home page (the most recent update was completed at <?php echo
+tm_update_time(); ?> US/Eastern).
+
+  If your file was sent more than about 30 minutes before the most
+  recent update, you can check on its status with an additional email
+  or simply resend. </br>
+
+      Note that occasionally processing may be delayed.  Any expected delays will be mentioned in the project forum.
     </li>
     </br>
     <li><a name="vanished"></a><a style="text-decoration:none" href="#vanished">&#x1f517</a>
       <b>The new file was processed, but all the highways from the previous file have vanished.</b></br>
       </br>
       The new file should contain all your traveled highways, not just additions to those from a previously submitted file.
-      The new file always replaces the previous file rather than supplementing it. This system allows users to not only add
+      The new file always replaces the previous file rather than supplementing it. This allows users to not only add
       or modify lines in their file but also to delete them as needed.
     </li>
   </ol>
@@ -237,8 +240,12 @@ Advanced features</p>
   <li><a name="comment"></a><a style="text-decoration:none" href="#comment">&#x1f517</a>
     Using comments</br>
     </br>
-    Use <code>#</code> to comment lines you like to add for info purpose.</br>
-    In-line comments are also possible:</br>
+    Just as is the case in programming languages, Travel Mapping
+    allows you to add <i>comments</i> to your <code>.list</code>
+    file.  All text on a given line after a <code>#</code> is treated
+    as a comment, and is ignored by the site update process.  You can
+    comment out entire lines, or use them to include an annotatation at
+    the end of the line.</br>
     </br>
     <code>#My first travel section</code></br>
     <code>IL I-70 52 MO/IL  #This is the section in Illinois</code></br>
@@ -249,22 +256,28 @@ Advanced features</p>
   <li><a name="blanklines"></a><a style="text-decoration:none" href="#blanklines">&#x1f517</a>
     Structure <code>.list</code> file</br>
     </br>
-    Break up your list into chunks by region or highway type to make it easier to read or manage.
-    You can also use blank lines as desired.
+    Many users break up list files into chunks by region or highway
+    type to make it easier to read or manage. 
+    You can also use blank lines as desired to enhance readability.
   </br>
   </br>
   </li>
   <li><a name="githubsubmit"></a><a style="text-decoration:none" href="#githubsubmit">&#x1f517</a>
-    Github submission</br>
-    </br>
-    Instead of emailing, you can also fork our GitHub repository at
+    GitHub submission</br>
+</br>
+When you submit a <code>.list</code> file, it is placed under source
+    code control using GitHub.
+    Instead of emailing updates, some users fork our GitHub repository at
     <a href="https://github.com/TravelMapping/UserData">https://github.com/TravelMapping/UserData</a> and submit a pull request.</br>
     </br>
-    Your first user list file submission should be done by <a href="#emailsubmission">sending an email</a>.</br>
-    Your user will be added with the next site update and your user list file will be published on GitHub.</br>
+    Using GitHub directly is by no means required.  Unless you are an
+    experienced Git/GitHub user, it's usually best to submit at least
+    your initial file by <a href="#emailsubmission">email</a> to
+    ensure it ends up in the correct location and does not have any
+    problems that would cause problems with the system.</br>
     </br>
     <a name="gitinit"></a><a style="text-decoration:none" href="#gitinit">&#x1f517</a>
-    <b>To be done initially:</b></br>
+    <b>Initial setup to use GitHub directly:</b></br>
     <ol>
       <li><a name="gitsign"></a><a style="text-decoration:none" href="#gitsign">&#x1f517</a>
       Sign up on <a href="https://github.com">https://github.com</a> and create your own Github user.</li>
