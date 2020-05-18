@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
-<title>Travel Mapping Manual: How to contribute to the project</title>
+<title>Travel Mapping Manual: How to participate to the project</title>
 <link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
 <link rel="shortcut icon" type="image/png" href="favicon.png">
 </head>
 <body>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 
-<h1 style="color:red">Travel Mapping Manual: How to contribute to the project - <i>Draft</i></h1>
+<h1 style="color:red">Travel Mapping Manual: How to participate to the project - <i>Draft</i></h1>
 
 <p class="heading">
   Contents</p>
