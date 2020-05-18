@@ -297,7 +297,7 @@ SQL;
 function waypointsFromSQL() {
     <?php
         if (array_key_exists('v', $_GET)) {
-	    // function does nothing
+	    echo "showAllInView = true;\n";
 	}
         else if (array_key_exists('r', $_GET)) {
 	    select_single_route();
