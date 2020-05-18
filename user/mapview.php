@@ -9,8 +9,10 @@
  *  rg - region to show routes for on the map (optional)
  *  country - country to show routes for on the map (optional)
  *  sys - system to show routes for on the map (optional)
+ *  v - show routes/points on the visible portion of the map (optional)
  *  rte - route name to show on the map. Supports pattern matching, with _ matching a single character, and % matching 0 or multiple characters.
- * (u, [rg|sys|country][rte])
+ * (u, [rg|sys|country|v][rte])
+ *
  ***
  -->
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -217,6 +219,9 @@
             <td class="clinched">&nbsp;</td><td class='overall'>&nbsp;</td><td class='percent'>&nbsp;</td>
 	</tr>
         <?php
+	// this will be filled in later by AJAX if the v QS parameter
+	// was included
+	if (!array_key_exists('v', $_GET)) {
 	$add_regions = "";
 	// TODO: a toggle to include/exclude devel routes?
         $sql_command = <<<SQL
@@ -277,6 +282,7 @@ SQL;
 HTML
 .tm_convert_distance($row['clinched'])."</td><td class='overall'>".tm_convert_distance($row['total'])."</td><td class='percent'>".$pct."%</td></tr>\n";
         }
+	}
         ?>
         </tbody>
     </table>
