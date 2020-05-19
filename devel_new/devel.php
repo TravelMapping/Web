@@ -32,7 +32,7 @@ interest to Travel Mapping project contributors.
 </p>
 
 <p class="heading"><a name="participate"></a><a style="text-decoration:none" href="#participate">&#x1f517</a>
-Participate to the project</i></p>
+Participate in the project</i></p>
 
 <div class="text">
   Anyone can submit their travels to be included in the site. Some experienced users volunteer to help the project.
