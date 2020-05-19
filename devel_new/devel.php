@@ -24,19 +24,20 @@
 This page gathers information, tools, and other links primarily of
 interest to Travel Mapping project contributors.
 </br></br>
-  The content at the pages linked below serve as the manual to help
-  TM contributors to maintain consistent and high-quality highway data
+  The content at the pages linked below serve as the manual to help the
+  <a href="/credits.php#contributors">volunteer project contributors</a>
+  to maintain consistent and high-quality highway data
   for the project.  It is based on the manual from TM's predecessor,
   the Clinched Highway Mapping project.
 </p>
 
-<p class="heading"><a name="contribute"></a><a style="text-decoration:none" href="#contribute">&#x1f517</a>
-Contribution to the project</i></p>
+<p class="heading"><a name="participate"></a><a style="text-decoration:none" href="#participate">&#x1f517</a>
+Participate in the project</i></p>
 
 <div class="text">
-  Anyone can submit their travels to be included in the site. TM's highway data is developed and maintained by a group of <a href="/credits.php#contributors">volunteer project contributors</a>.
+  Anyone can submit their travels to be included in the site. Some experienced users volunteer to help the project.
   </br></br>
-  Learn more on <a href="manual/contribute.php">how to contribute to the project</a>.
+  Learn more on <a href="participate.php">how to participate</a>.
 </div>
 
 
