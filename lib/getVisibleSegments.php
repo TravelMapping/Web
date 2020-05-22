@@ -24,7 +24,10 @@ $response = array('roots'=>array(),
 		  'w2lat'=>array(),
 		  'w2lng'=>array(),
 		  'routeroots'=>array(),
-		  'routelistnames'=>array()
+		  'routelistnames'=>array(),
+		  'routemileages'=>array(),
+		  'routecolors'=>array(),
+		  'routetiers'=>array()
 		  );
 
 // make DB query for all segments with at least one waypoint in
@@ -46,12 +49,15 @@ while ($row = $result->fetch_assoc()) {
 $result->free();
 
 // build a query to get information about all of the routes
-$result = tmdb_query("select * from routes where root in ('".implode("','",array_unique($response['roots']))."');");
+$result = tmdb_query("select r.root, r.region, r.route, r.banner, r.abbrev, r.city, r.mileage, s.color, s.tier from routes as r join systems as s on r.systemName=s.systemName where r.root in ('".implode("','",array_unique($response['roots']))."');");
 
 // parse results into the response array
 while ($row = $result->fetch_assoc()) {
       array_push($response['routeroots'], $row['root']);
       array_push($response['routelistnames'], $row['region']." ".$row['route'].$row['banner'].$row['abbrev']);
+      array_push($response['routemileages'], $row['mileage']);
+      array_push($response['routecolors'], $row['color']);
+      array_push($response['routetiers'], $row['tier']);
 }
 
 $tmdb->close();
