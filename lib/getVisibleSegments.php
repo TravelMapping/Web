@@ -29,19 +29,12 @@ $response = array('roots'=>array(),
 
 // make DB query for all segments with at least one waypoint in
 // the bounding area
-$result = tmdb_query("select segments.root, w1.pointName as w1name, w1.latitude as w1lat, w1.longitude as w1lng, w2.pointName as w2name, w2.latitude as w2lat, w2.longitude as w2lng from segments join waypoints as w1 on segments.waypoint1=w1.pointId join waypoints as w2 on segments.waypoint2=w2.pointId where ((w1.latitude>".$params['minLat']." and w1.latitude<".$params['maxLat']." and w1.longitude<".$params['maxLng']." and w1.longitude>".$params['minLng'].") or (w2.latitude>".$params['minLat']." and w2.latitude<".$params['maxLat']." and w2.longitude<".$params['maxLng']." and w2.longitude>".$params['minLng']."));");
-
-// temp array of unique root values of the segments
-$allroots = array();
+$result = tmdb_query("select segments.root, w1.pointName as w1name, w1.latitude as w1lat, w1.longitude as w1lng, w2.pointName as w2name, w2.latitude as w2lat, w2.longitude as w2lng from segments join waypoints as w1 on segments.waypoint1=w1.pointId join waypoints as w2 on segments.waypoint2=w2.pointId where ((w1.latitude>".$params['minLat']." and w1.latitude<".$params['maxLat']." and w1.longitude<".$params['maxLng']." and w1.longitude>".$params['minLng'].") or (w2.latitude>".$params['minLat']." and w2.latitude<".$params['maxLat']." and w2.longitude<".$params['maxLng']." and w2.longitude>".$params['minLng'].")) order by segments.root;");
 
 // parse results into the response array
 while ($row = $result->fetch_assoc()) {
 
     array_push($response['roots'], $row['root']);
-    // did we find a new root we haven't seen before?
-    if (!in_array($row['root'], $allroots)) {
-       array_push($allroots, $row['root']);
-    }
     array_push($response['w1name'], $row['w1name']);
     array_push($response['w1lat'], $row['w1lat']);
     array_push($response['w1lng'], $row['w1lng']);
@@ -53,7 +46,7 @@ while ($row = $result->fetch_assoc()) {
 $result->free();
 
 // build a query to get information about all of the routes
-$result = tmdb_query("select * from routes where root in ('".implode("','",$allroots)."');");
+$result = tmdb_query("select * from routes where root in ('".implode("','",array_unique($response['roots']))."');");
 
 // parse results into the response array
 while ($row = $result->fetch_assoc()) {
