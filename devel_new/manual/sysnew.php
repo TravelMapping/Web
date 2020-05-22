@@ -35,6 +35,7 @@ Steps to introduce a new highway system</p>
     <li><a href="#research">Research about the highway system and discussion on the forum</a></li>
     <li><a href="#existing">Check existing routes and add waypoints</a></li>
     <li><a href="#develop">Develop routes in devel status</a></li>
+    <li><a href="#sources">Indicate the highway data sources on the site</a></li>
     <li><a href="#preview">Promote highway system to preview</a></li>
     <li><a href="#datacheck">Clear datacheck, broken concurrencies and NMP issues</a></li>
     <li><a href="#peerreview">Request peer review</a></li>
@@ -192,10 +193,21 @@ If any wpt or csv file has an incorrect format or reference, the site update wil
 to find the errors before submitting the files.</b>
 </div>
 
+<p class="subheading"><a name="sources"></a><a style="text-decoration:none" href="#sources">&#x1f517</a>
+Indicate the <a href="credits.php">highway data sources</a> on the site</p>
+
+<div class="text">
+The sources must be indicated visibly on the site under <a href="credits.php">credits.php</a>.
+<ul>
+  <li>Edit the file from <a href="https://github.com/TravelMapping/Web/tree/master/credits.php">the web repository on Github</a>
+  if you have used additional sources.</li>
+</ul>
+</div>
+
 <p class="subheading"><a name="preview"></a><a style="text-decoration:none" href="#preview">&#x1f517</a>
 Promote highway system to preview</p>
 
-<div class="text" >When the first draft of all routes is in the highway browser, you can promote the highway
+<div class="text">When the first draft of all routes is in the highway browser, you can promote the highway
 system to <a href="sysdef.php#preview"><preview>preview</preview> status</a>.
 <ul>
   <li><a name="previewsystem"></a><a style="text-decoration:none" href="#previewsystem">&#x1f517</a>
