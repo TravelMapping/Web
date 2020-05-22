@@ -21,7 +21,11 @@ devel {background-color: #FFCCCC;}
 
 
 
-<div class="text">New highway systems are developed by our volunteer highway data managers who went through the <a href="../participate.php#hwydatamanager">procedure of getting a contributor</a>. When they have reached the right level of experience, they can start developing further highway systems. The subsequent list describes the procedure on how to develop a new highway system. It is mandatory for new highway data managers to work through it step by step. It is recommended for highly experienced highway data managers.</div>
+<div class="text">New highway systems are developed by our volunteer highway data managers who went through the
+  <a href="../participate.php#hwydatamanager">procedure of getting a contributor</a>. When they have reached the
+  right level of experience, they can start developing further highway systems. The subsequent list describes the
+  procedure on how to develop a new highway system. It is mandatory for new highway data managers to work through
+  it step by step. It is recommended for highly experienced highway data managers.</div>
 
 <p class="heading"><a name="overview"></a><a style="text-decoration:none" href="#overview">&#x1f517</a>
 Steps to introduce a new highway system</p>
@@ -81,10 +85,12 @@ Before you can start the development of a new highway system, the following requ
 <!-- Do we need a description for tier and system colors? -->
 
 
-    <li>Be patient since we are volunteering contributors and don't have time to answer immediately. Accept asks for better research and accept when we don't see the system as a future TM highway system.</li>
+    <li>Be patient since we are volunteering contributors and don't have time to answer immediately. Accept asks
+    for better research and accept when we don't see the system as a future TM highway system.</li>
   </ul>
 </ul>
-Note that there are a few exceptions to the strict <a href="sysdef.php#tmsys">TM highway system requirements</a>. Don't hestiate with opening a thread on the forum to ask whether the potential highway system is qualified for TM.
+Note that there are a few exceptions to the strict <a href="sysdef.php#tmsys">TM highway system requirements</a>.
+Don't hestiate with opening a thread on the forum to ask whether the potential highway system is qualified for TM.
 </div>
 
 <p class="subheading"><a name="existing"></a><a style="text-decoration:none" href="#existing">&#x1f517</a>
@@ -100,7 +106,10 @@ Check existing routes and add waypoints</p>
   <li><a name="existingadd"></a><a style="text-decoration:none" href="#existingadd">&#x1f517</a>
   Add the waypoints which are required for the future highway system to the existing routes.</li>
 </ul>
-The existing wpt files are stored on <a href="https://github.com/TravelMapping/HighwayData">Github</a>. They can be loaded into the <a href="/wptedit/">Waypoint File Editor</a> for modifications. The changed files must be submitted to Github with a pull request. Please refer to <a href="#develop">the development instructions</a> for more info about how to deal with the files and tools.
+The existing wpt files are stored on <a href="https://github.com/TravelMapping/HighwayData">Github</a>. They can be
+loaded into the <a href="/wptedit/">Waypoint File Editor</a> for modifications. The changed files must be submitted
+to Github with a pull request. Please refer to <a href="#develop">the development instructions</a> for more info about
+how to deal with the files and tools.
 </div>
 
 <p class="subheading"><a name="develop"></a><a style="text-decoration:none" href="#develop">&#x1f517</a>
@@ -112,7 +121,12 @@ Develop routes in devel status</p>
   Develop routes by creating <a href="hwydata.php">highway data files</a>.</li>
   <ul>
     <li>Create the files route by route in a desired order but make sure that you don't miss any route.</li>
-    <li>Only add routes which are fully signed.</li>
+    <ul>
+      <li><a href="manual/includepts.php">Waypoints to include</a></li>
+      <li><a href="manual/points.php">Positioning waypoints</a></li>
+      <li><a href="manual/wayptlabels.php">Labeling waypoints</a></li>
+    </ul>
+    <li>Only add routes which are fully signed:</li>
     <ul>
       <li>Signed at the beginning of the route.</li>
       <li>Signed at the end of the route.</li>
@@ -141,7 +155,8 @@ brabr;BRA;Brazil Rodovias Federais;green;4;devel
 ...
       </pre>
       <li>The <code>system</code> code starts with the country, region or continent code, followed by a system abbreviation</li>
-      <li>The region or continent or <code>country code</code> can be found in <a href="https://github.com/TravelMapping/HighwayData/blob/master/regions.csv">regions.csv</a></li>
+      <li>The region or continent or <code>country code</code> can be found in
+      <a href="https://github.com/TravelMapping/HighwayData/blob/master/regions.csv">regions.csv</a></li>
       <li>The system <code>name</code> starts with the English region name followed by the system name in native language</li>
       <ul>
         <li>Use an English term like <i>Motorways</i> or <i>Main Roads</i> if the native name is not using a Latin-script alphabet.</li>
@@ -163,22 +178,29 @@ brabr;BRA;Brazil Rodovias Federais;green;4;devel
   <li><a name="developshield"></a><a style="text-decoration:none" href="#developshield">&#x1f517</a>
   Create the system shield <i>(optionally)</i></li>
   <ul>
-    <li>A svg file is used to show a system specific shield in the highway browser. They are generic and hosted on <a href="https://github.com/TravelMapping/Web/tree/master/shields">the web repository on Github</a>.</li>
+    <li>A svg file is used to show a system specific shield in the highway browser. They are generic and hosted on
+    <a href="https://github.com/TravelMapping/Web/tree/master/shields">the web repository on Github</a>.</li>
     <li>If no specific svg is available for the system, the standard shield is used.</li>
   </ul>
 </ul>
-We don't notify the promotion of a highway system to in-development <a href="http://travelmapping.net/devel/updates.php">on the updates page</a> but on the forum thread only.
+We don't notify the promotion of a highway system to in-development <a href="http://travelmapping.net/devel/updates.php">
+on the updates page</a> but on the forum thread only.
 </br>
-<b>When promoting a system to <devel>devel</devel>, the system is processed for the first time. If any wpt or csv file has an incorrect format or reference, the site update will fail. Please run <a href="https://github.com/TravelMapping/DataProcessing/blob/master/SETUP.md">data verification</a> to find the errors before submitting the files.</b>
+<b>When promoting a system to <devel>devel</devel>, the system is processed for the first time.
+If any wpt or csv file has an incorrect format or reference, the site update will fail. Please run
+<a href="https://github.com/TravelMapping/DataProcessing/blob/master/SETUP.md">data verification</a>
+to find the errors before submitting the files.</b>
 </div>
 
 <p class="subheading"><a name="preview"></a><a style="text-decoration:none" href="#preview">&#x1f517</a>
 Promote highway system to preview</p>
 
-<div class="text" >When the first draft of all routes is in the highway browser, you can promote the highway system to <a href="sysdef.php#preview"><preview>preview</preview> status</a>.
+<div class="text" >When the first draft of all routes is in the highway browser, you can promote the highway
+system to <a href="sysdef.php#preview"><preview>preview</preview> status</a>.
 <ul>
   <li><a name="previewsystem"></a><a style="text-decoration:none" href="#previewsystem">&#x1f517</a>
-  The entry from <a href="https://github.com/TravelMapping/HighwayData/blob/master/systems.csv">system.csv</a> must be moved from the in-development segment of the file to the preview segment.</li>
+  The entry from <a href="https://github.com/TravelMapping/HighwayData/blob/master/systems.csv">system.csv</a>
+must be moved from the in-development segment of the file to the preview segment.</li>
   <ul>
     <li>The <code>level</code> column must be changed from <devel>devel</devel> to <preview>preview</preview>.</li>
     <pre>
@@ -189,16 +211,19 @@ brabr;BRA;Brazil Rodovias Federais;green;4;preview
     </pre>
   </ul>
   <li><a name="previewupdate"></a><a style="text-decoration:none" href="#previewupdate">&#x1f517</a>
-  It must be logged on top of the <a href="https://github.com/TravelMapping/HighwayData/blob/master/systemupdates.csv">system updates list</a>, so that the notification <a href="http://travelmapping.net/devel/updates.php">on the updates page</a> will appear.</li>
+  It must be logged on top of the <a href="https://github.com/TravelMapping/HighwayData/blob/master/systemupdates.csv">system updates list</a>,
+  so that the notification will appear <a href="http://travelmapping.net/devel/updates.php">on the updates page</a>.</li>
 </ul>
-Especially when drafting a huge highway system, it is possible to split it into several sub-systems with partial preview promotion. Ask on the forum thread for more details.
+Especially when drafting a huge highway system, it is possible to split it into several sub-systems with partial preview promotion.
+Ask on the forum thread for more details.
 </div>
 
 <p class="subheading"><a name="datacheck"></a><a style="text-decoration:none" href="#datacheck">&#x1f517</a>
 Clear datacheck, broken concurrencies and NMP issues</p>
 
 <div class="text" >
-A first complete check should be done when the system is in <preview>preview</preview> status, a second run must be done <b>before</b> the activation of the system.
+A first complete check should be done when the system is in <preview>preview</preview> status,
+a second run must be done <b>before</b> the activation of the system.
 <ul>
   <li><a name="datacheckerrors"></a><a style="text-decoration:none" href="#datacheckerrors">&#x1f517</a>
   <a href="syserr.php#errors">Data errors</a> can be checked as soon as the system is in <devel>devel</devel> state.</li>
@@ -234,12 +259,15 @@ Changes proposed on the forum thread should be processed short-term while the pe
   <li><a name="reviewchanges"></a><a style="text-decoration:none" href="#reviewchanges">&#x1f517</a>
   Make changes to the routes as required from users on the forum.</li>
   <li><a name="reviewrejects"></a><a style="text-decoration:none" href="#reviewrejects">&#x1f517</a>
-  If you don't agree with proposed changes, explain on the forum why they should not be made. Provide a link to the manual or other sources if possible.</li>
+  If you don't agree with proposed changes, explain on the forum why they should not be made.
+  Provide a link to the manual or other sources if possible.</li>
   <li><a name="reviewbreak"></a><a style="text-decoration:none" href="#reviewbreak">&#x1f517</a>
   Care is taken to ensure that changes do not "break" a user's list file.</li>
   <ul>
-    <li>If a <a href="../logs/pointsinuse.log">waypoint labels is in use by current TM users</a> we should <a href="maintenance.php#labelwrong">add alternative labels</a> if possible.</li>
-    <li>We don't add notifications <a href="http://travelmapping.net/devel/updates.php">to the updates page</a> because we are still in <preview>preview</preview>.</li>
+    <li>If a <a href="../logs/pointsinuse.log">waypoint labels is in use by current TM users</a> we should
+    <a href="maintenance.php#labelwrong">add alternative labels</a> if possible.</li>
+    <li>We don't add notifications <a href="http://travelmapping.net/devel/updates.php">to the updates page</a>
+    because we are still in <preview>preview</preview>.</li>
   </ul>
 </ul>
 </div>
@@ -247,10 +275,12 @@ Changes proposed on the forum thread should be processed short-term while the pe
 <p class="subheading"><a name="activate"></a><a style="text-decoration:none" href="#activate">&#x1f517</a>
 Activate the highway system</p>
 
-<div class="text" >When the system is complete and there are no critical open issues, promote the highway system to <a href="sysdef.php#active"><active>active</active> status</a>.
+<div class="text" >When the system is complete and there are no critical open issues, promote the highway system to
+<a href="sysdef.php#active"><active>active</active> status</a>.
 <ul>
   <li><a name="activatesystem"></a><a style="text-decoration:none" href="#activatesystem">&#x1f517</a>
-  The entry from <a href="https://github.com/TravelMapping/HighwayData/blob/master/systems.csv">system.csv</a> must be moved from the preview segment of the file to the segment with active systems.</li>
+  The entry from <a href="https://github.com/TravelMapping/HighwayData/blob/master/systems.csv">system.csv</a>
+  must be moved from the preview segment of the file to the segment with active systems.</li>
   <ul>
     <li>The <code>level</code> column must be changed from <preview>preview</preview> to <active>active</active>.</li>
     <pre>
@@ -261,7 +291,8 @@ brabr;BRA;Brazil Rodovias Federais;green;4;active
     </pre>
   </ul>
   <li><a name="activateupdate"></a><a style="text-decoration:none" href="#activateupdate">&#x1f517</a>
-  It must be logged on top of the <a href="https://github.com/TravelMapping/HighwayData/blob/master/systemupdates.csv">system updates list</a>, so that the notification <a href="http://travelmapping.net/devel/updates.php">on the updates page</a> will appear.</li>
+  It must be logged on top of the <a href="https://github.com/TravelMapping/HighwayData/blob/master/systemupdates.csv">
+  system updates list</a>, so that the notification <a href="http://travelmapping.net/devel/updates.php">on the updates page</a> will appear.</li>
 </ul>
 </div>
 
@@ -271,9 +302,11 @@ Maintain the highway system</p>
 <div class="text" >
 <ul>
   <li><a name="maintainregion"></a><a style="text-decoration:none" href="#maintainregion">&#x1f517</a>
-  If you are responsible for the region(s) of the highway system, you need to <a href="maintenance.php">maintain the system</a>. Follow the discussion on the forum.</li>
+  If you are responsible for the region(s) of the highway system, you need to <a href="maintenance.php">maintain the system</a>.
+  Follow the discussion on the forum.</li>
   <li><a name="maintainupdates"></a><a style="text-decoration:none" href="#maintainupdates">&#x1f517</a>
-  All user-relevant changes to the routes must be notified <a href="http://travelmapping.net/devel/updates.php">on the updates page</a> now since the system is <active>active</active>.</li>
+  All user-relevant changes to the routes must be notified <a href="http://travelmapping.net/devel/updates.php">on the updates page</a>
+  now since the system is <active>active</active>.</li>
 </ul>
 </div>
 
