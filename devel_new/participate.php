@@ -412,6 +412,8 @@ The steps to become a highway data manager are as follows:
     Catch up on previous discussions and follow current discussions <a href="http://forum.travelmapping.net/">on the forum</a> about highway data updates.</li>
     <li><a name="report"></a><a style="text-decoration:none" href="#report">&#x1f517</a>
     Report updates and problems in existing highway systems <a href="http://forum.travelmapping.net/">on the forum</a>.</li>
+    <li><a name="manual"></a><a style="text-decoration:none" href="#manual">&#x1f517</a>
+    Read and understand the <a href="devel.php#participate">developer manual</a>.</li>
     <li><a name="review"></a><a style="text-decoration:none" href="#review">&#x1f517</a>
     Participate in <a href="manual/sysrev.php">peer review</a> of a preview highway system.</li>
     <li><a name="structure"></a><a style="text-decoration:none" href="#structure">&#x1f517</a>
