@@ -27,9 +27,10 @@ $response = array('roots'=>array(),
 		  'routelistnames'=>array(),
 		  'routemileages'=>array(),
 		  'routecolors'=>array(),
-		  'routetiers'=>array(),
-		  'routesystems'=>array(),
-		  'routelevels'=>array()
+		  'routesystemnames'=>array(),
+		  'routesystemcodes'=>array(),
+		  'routelevels'=>array(),
+		  'routetiers'=>array()
 		  );
 
 // make DB query for all segments with at least one waypoint in
@@ -59,9 +60,10 @@ while ($row = $result->fetch_assoc()) {
       array_push($response['routelistnames'], $row['region']." ".$row['route'].$row['banner'].$row['abbrev']);
       array_push($response['routemileages'], $row['mileage']);
       array_push($response['routecolors'], $row['color']);
+      array_push($response['routesystemcodes'], $row['systemName']);
+      array_push($response['routesystemnames'], $row['fullName']);
+      array_push($response['routelevels'], $row['level']);
       array_push($response['routetiers'], $row['tier']);
-      array_push($response['routesystems'], $row['fullName']." (".$row['systemName'].")");
-      array_push($response['routelevels'], $row['level']);      
 }
 
 $tmdb->close();
