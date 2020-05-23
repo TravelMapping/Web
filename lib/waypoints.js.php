@@ -297,6 +297,10 @@ SQL;
 function waypointsFromSQL() {
     <?php
         if (array_key_exists('v', $_GET)) {
+            if (array_key_exists('u', $_GET)) {
+                $tmuser = $_GET['u'];
+                echo "traveler = '$tmuser';\n";
+	    }
 	    echo "showAllInView = true;\n";
 	}
         else if (array_key_exists('r', $_GET)) {

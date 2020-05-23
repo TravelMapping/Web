@@ -2,12 +2,13 @@
 // read information from the TM database about all segments
 // that have at least one waypoint endpoint within the
 // latitude/longitude bounds given, and then information about
-// each route that those segments are parts of
+// each route that those segments are parts of, with a traveler name
+// to check if that person has traveled each segment
 //
 $params = json_decode($_POST['params'], true);
 
-// $params has 4 fields: minLat, maxLat, minLng, maxLng that specify
-// those bounds
+// $params has 5 fields: minLat, maxLat, minLng, maxLng that specify
+// those bounds, traveler to specify the traveler name
 
 // need to buffer and clean output since tmphpfuncs generates
 // some output that breaks the JSON output
@@ -23,6 +24,7 @@ $response = array('roots'=>array(),
 		  'w2name'=>array(),
 		  'w2lat'=>array(),
 		  'w2lng'=>array(),
+		  'clinched'=>array(),
 		  'routeroots'=>array(),
 		  'routelistnames'=>array(),
 		  'routemileages'=>array(),
@@ -35,7 +37,7 @@ $response = array('roots'=>array(),
 
 // make DB query for all segments with at least one waypoint in
 // the bounding area
-$result = tmdb_query("select segments.root, w1.pointName as w1name, w1.latitude as w1lat, w1.longitude as w1lng, w2.pointName as w2name, w2.latitude as w2lat, w2.longitude as w2lng from segments join waypoints as w1 on segments.waypoint1=w1.pointId join waypoints as w2 on segments.waypoint2=w2.pointId where ((w1.latitude>".$params['minLat']." and w1.latitude<".$params['maxLat']." and w1.longitude<".$params['maxLng']." and w1.longitude>".$params['minLng'].") or (w2.latitude>".$params['minLat']." and w2.latitude<".$params['maxLat']." and w2.longitude<".$params['maxLng']." and w2.longitude>".$params['minLng'].")) order by segments.root;");
+$result = tmdb_query("select segments.root, if (cl.segmentId is null, false, true) as clinched, w1.pointName as w1name, w1.latitude as w1lat, w1.longitude as w1lng, w2.pointName as w2name, w2.latitude as w2lat, w2.longitude as w2lng from segments join waypoints as w1 on segments.waypoint1=w1.pointId join waypoints as w2 on segments.waypoint2=w2.pointId left join clinched as cl on (cl.segmentId=segments.segmentId and cl.traveler='".$params['traveler']."') where ((w1.latitude>".$params['minLat']." and w1.latitude<".$params['maxLat']." and w1.longitude<".$params['maxLng']." and w1.longitude>".$params['minLng'].") or (w2.latitude>".$params['minLat']." and w2.latitude<".$params['maxLat']." and w2.longitude<".$params['maxLng']." and w2.longitude>".$params['minLng'].")) order by segments.root;");
 
 // parse results into the response array
 while ($row = $result->fetch_assoc()) {
@@ -47,6 +49,7 @@ while ($row = $result->fetch_assoc()) {
     array_push($response['w2name'], $row['w2name']);
     array_push($response['w2lat'], $row['w2lat']);
     array_push($response['w2lng'], $row['w2lng']);
+    array_push($response['clinched'], $row['clinched']);
 }
 
 $result->free();
