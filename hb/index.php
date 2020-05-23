@@ -437,7 +437,6 @@ HTML;
 }
 $tmdb->close();
 ?>
-<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
 </body>
 <script type="application/javascript" src="../lib/waypoints.js.php?<?php echo "r=$routeparam&u=$tmuser";?>"></script>
 </html>
