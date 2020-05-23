@@ -10,12 +10,27 @@
 <body>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 
-<p class="heading">Highway Data Sources</p>
+<p class="heading">Contents</p>
+
+<div class="text">
+<ul>
+  <li><a href="#sources">Highway Data Sources</a></li>
+  <ul>
+    <li><a href="#mapref">General Map References</a></li>
+    <li><a href="#regionsources">Highway Departments and Hobbyist Sites</a></li>
+  </ul>
+  <li><a href="#tools">Software Tools</a></li>
+  <li><a href="#contributors">Project Contributors</a></li>
+  <li><a href="#predecessor">Predecessor Project</a></li>
+</ul>
+</div>
+
+<p class="heading"><a name="sources"></a>Highway Data Sources</p>
 
 <p class="text">We would like to credit and thank the authors of the
 following sources of highway information.</p>
 
-<p class="subheading">General Map References</p>
+<p class="subheading"><a name="mapref"></a>General Map References</p>
 
 	<ul class="sources">
 	  <li>Path Coordinates
@@ -44,7 +59,7 @@ following sources of highway information.</p>
 	  </li>
 	</ul>
 
-<p class="subheading">Highway Departments and Hobbyist Sites</p>
+<p class="subheading"><a name="regionsources"></a>Highway Departments and Hobbyist Sites</p>
 	<ul class="sources">
 	  <li>Armenia
 	    <ul>
@@ -920,7 +935,7 @@ following sources of highway information.</p>
   <li>Oscar Voss (oscar)</li>
   </ul>
 
-<p class="heading"><a name="contributors">Predecessor Project</a></p>
+<p class="heading"><a name="predecessor">Predecessor Project</a></p>
   
 <p class="text">Travel Mapping is the successor project to the
 dormant <a href="http://cmap.m-plex.com">Clinched Highway Mapping</a>

@@ -61,8 +61,8 @@ Route Files <i>(no changes except of formatting yet)</i></p>
   <ul>
     <li><a href="manual/hwydata.php">Highway data files</a></li>
     <li><a href="manual/includepts.php">Waypoints to include</a></li>
+    <li><a href="manual/points.php">Positioning waypoints</a></li>
     <li><a href="manual/wayptlabels.php">Labeling waypoints</a></li>
-    <li><a href="manual/points.php">Positioning waypoints </a></li>
   </ul>
 </div>
 

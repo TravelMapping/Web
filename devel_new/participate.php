@@ -65,13 +65,14 @@ First steps with email submission</p>
       <b>Make a list of highway sections you have traveled.</b></br>
       </br>
       The <a href="/hb/">Highway Browser</a> is designed to help you with this process.
-      The Highway Browser lists all available systems and routes that you can use
-      (we recommend starting with only <a href="sysdef.php#active"><span style="background-color: #CCFFCC;">active</span> systems</a>). For each route,
+      The Highway Browser lists all available systems and routes that you can use.
+      For each route,
       the Highway Browser also provides a list of <i>waypoints</i> that you can use as a start or end point.</br>
       </br>
       
-      Break up your travels into traveled sections by region and route. For each route section,
-      add one line to your <code>.list</code> file with the following format:</br>
+      Break up your travels into traveled sections by region and route (we recommend starting with only
+      <a href="manual/sysdef.php#active"><span style="background-color: #CCFFCC;">active</span> systems</a>).
+      For each route section, add one line to your <code>.list</code> file with the following format:</br>
       </br>
       <code>Region Route Waypoint1 Waypoint2</code></br>
       </br>
@@ -147,7 +148,7 @@ First steps with email submission</p>
       <a href="http://travelmapping.net/devel/updates.php">the updates page</a> for info on what has been changed
       to the route. You should also check the updates page frequently to find highway changes like simple relocations
       that don't break your list file and cannot be reported in your log file.
-      Changes to <a href="sysdef.php#preview">systems in preview state</a> are not notified.
+      Changes to <a href="manual/sysdef.php#preview">systems in preview state</a> are not notified.
     </li>
     </br>
     <li><a name="nextupdate"></a><a style="text-decoration:none" href="#nextupdate">&#x1f517</a>
@@ -411,6 +412,8 @@ The steps to become a highway data manager are as follows:
     Catch up on previous discussions and follow current discussions <a href="http://forum.travelmapping.net/">on the forum</a> about highway data updates.</li>
     <li><a name="report"></a><a style="text-decoration:none" href="#report">&#x1f517</a>
     Report updates and problems in existing highway systems <a href="http://forum.travelmapping.net/">on the forum</a>.</li>
+    <li><a name="manual"></a><a style="text-decoration:none" href="#manual">&#x1f517</a>
+    Read and understand the <a href="devel.php#participate">developer manual</a>.</li>
     <li><a name="review"></a><a style="text-decoration:none" href="#review">&#x1f517</a>
     Participate in <a href="manual/sysrev.php">peer review</a> of a preview highway system.</li>
     <li><a name="structure"></a><a style="text-decoration:none" href="#structure">&#x1f517</a>
