@@ -49,7 +49,7 @@ while ($row = $result->fetch_assoc()) {
 $result->free();
 
 // build a query to get information about all of the routes
-$result = tmdb_query("select r.root, r.region, r.route, r.banner, r.abbrev, r.city, r.mileage, s.color, s.tier from routes as r join systems as s on r.systemName=s.systemName where r.root in ('".implode("','",array_unique($response['roots']))."');");
+$result = tmdb_query("select r.root, r.region, r.route, r.banner, r.abbrev, r.city, r.mileage, s.color, s.tier from routes as r join systems as s on r.systemName=s.systemName where r.root in ('".implode("','",array_unique($response['roots']))."') order by s.tier, r.csvOrder;");
 
 // parse results into the response array
 while ($row = $result->fetch_assoc()) {
