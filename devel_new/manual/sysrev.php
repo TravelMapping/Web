@@ -23,9 +23,9 @@ devel {background-color: #FFCCCC;}
 If you notice incorrect highway data, please report it. If the route belongs to a
 <a href="sysdef.php#active"><active>active</active> system</a>, the issue should be reported
 on the <a href="http://forum.travelmapping.net/index.php?topic=20">forum</a>.
-If the route belongs to a system with <a href="sysdef.php#preview"><devel>in-development</devel> status</a> or
+If the route belongs to a system with <a href="sysdef.php#devel"><devel>in-development</devel> status</a> or
 <a href="sysdef.php#preview"><preview>preview</preview> status</a>, or the issue is in relation to such a system,
-you can report it anytime on the existing <a href="sysnew.php#peerreview">forum thread</a> for the system.</br>
+you can report it anytime on the existing <a href="sysnew.php#research">forum thread</a> for the system.</br>
 </br>
 The introduction of a <a href="sysnew.php">new highway system</a> requires a peer-review</a>.
 This is usually done by a volunteer contributor when the review was <a href="sysnew.php#peerreview">requested
@@ -59,7 +59,7 @@ Announce that you wil do a peer-review</p>
 
 <div class="text">
 <ul>
-  <li>If you want to make a thorough peer-review, you must have reached the <a href="../participate#hwydatamanager">
+  <li>If you want to make a thorough peer-review, you must have reached the <a href="../participate.php#hwydatamanager">
   required level on the way to become a highway data manager</a>.</li>
   <li>The thorough peer-review can begin when the system is in <preview>preview</preview> and when the developer of the system
   has made his final checks. The developer usually <a href="sysnew.php#peerreview">notifies this on the forum's thread</a>.</li>
@@ -76,7 +76,8 @@ Check the highway system for completeness</p>
 <ul>
   <li>Have a general look on the highway system to get familar with the region-specific attitudes.</li>
   <li>Check the sources indicated on the <a href="sysnew.php#research">forum's thread</a>, under
-  <a href="credits.php">credits.php or README.md on <a href="https://github.com/TravelMapping/HighwayData/tree/master/hwy_data">Github</a>.</li>
+  <a href="/credits.php#regionsources">credits.php</a> or README.md on
+  <a href="https://github.com/TravelMapping/HighwayData/tree/master/hwy_data">Github</a>.</li>
   <ul>
     <li>Ask on the forum's thread for sources if they are not indicated.</li>
     <li>Find additional sources if required.</li>
@@ -118,7 +119,7 @@ General mapview or HDX check</p>
 </div>
 
 <p class="subheading"><a name="names"></a><a style="text-decoration:none" href="#names">&#x1f517</a>
-Check route names in HB route list</p>
+Check route names in Highway Browser route list</p>
 
 <div class="text">
 <ul>
@@ -145,7 +146,7 @@ Check routes with Waypoint File Editor</p>
     <li><a href="sysnew.php#developwpt">Signed endpoints for the route and correct routing</a>.</li>
     </br>Check with deep zoom into the map:
     <li><a href="points.php">Position of the waypoints</a>.
-    <li><a href="wayptlabels.php">Label names</a> of waypoints which do <b>not</b> refer to other TM routes in HB.</li>
+    <li><a href="wayptlabels.php">Label names</a> of waypoints which do <b>not</b> refer to other TM routes in Highway Browser.</li>
   </ul>
 </ul>
 </div>

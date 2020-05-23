@@ -123,9 +123,9 @@ Develop routes in devel status</p>
   <ul>
     <li>Create the files route by route in a desired order but make sure that you don't miss any route.</li>
     <ul>
-      <li><a href="manual/includepts.php">Waypoints to include</a></li>
-      <li><a href="manual/points.php">Positioning waypoints</a></li>
-      <li><a href="manual/wayptlabels.php">Labeling waypoints</a></li>
+      <li><a href="includepts.php">Waypoints to include</a></li>
+      <li><a href="points.php">Positioning waypoints</a></li>
+      <li><a href="wayptlabels.php">Labeling waypoints</a></li>
     </ul>
     <li>Only add routes which are fully signed:</li>
     <ul>
@@ -194,10 +194,10 @@ to find the errors before submitting the files.</b>
 </div>
 
 <p class="subheading"><a name="sources"></a><a style="text-decoration:none" href="#sources">&#x1f517</a>
-Indicate the <a href="../../credits.php#regionsources">specific highway data sources</a> on the site</p>
+Indicate the highway data sources on the site</p>
 
 <div class="text">
-The sources must be indicated visibly on the site under <a href="credits.php">credits.php</a>.
+The sources for the system must be indicated visibly on the site under <a href="/credits.php#regionsources">credits.php</a>.
 <ul>
   <li>Edit the file from <a href="https://github.com/TravelMapping/Web/tree/master/credits.php">the web repository on Github</a>
   if you have used additional sources.</li>
@@ -255,7 +255,7 @@ Request peer review</p>
 <div class="text" >
 <ul>
   <li><a name="peerreviewrequest"></a><a style="text-decoration:none" href="#peerreviewrequest">&#x1f517</a>
-  Notify on the forum thread that the system is ready for a review by another contributor.</li>
+  Notify on the forum thread that the system is ready for a <a href="sysrev.php">review by another contributor</a>.</li>
   <li><a name="peerreviewany"></a><a style="text-decoration:none" href="#peerreviewany">&#x1f517</a>
   Any other user can also report issues which should be considered.</li>
   <li><a name="peerreviewcomplete"></a><a style="text-decoration:none" href="#peerreviewcomplete">&#x1f517</a>
