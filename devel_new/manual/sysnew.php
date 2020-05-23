@@ -194,7 +194,7 @@ to find the errors before submitting the files.</b>
 </div>
 
 <p class="subheading"><a name="sources"></a><a style="text-decoration:none" href="#sources">&#x1f517</a>
-Indicate the <a href="credits.php">highway data sources</a> on the site</p>
+Indicate the <a href="../../credits.php#regionsources">specific highway data sources</a> on the site</p>
 
 <div class="text">
 The sources must be indicated visibly on the site under <a href="credits.php">credits.php</a>.
