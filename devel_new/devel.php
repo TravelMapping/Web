@@ -42,7 +42,7 @@ Participate in the project</i></p>
 
 
 <p class="subheading"><a name="systems"></a><a style="text-decoration:none" href="#systems">&#x1f517</a>
-Highway Systems <i>(work in progress)</i></p>
+Highway Systems</p>
 
 <div class="text">
   <ul>
