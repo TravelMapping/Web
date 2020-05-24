@@ -6,12 +6,15 @@
  * Map viewer page. Displays the routes selected using the url params on a map, as well as on a table to the side.
  * URL Params:
  *  u - user to display highlighting for on map (required)
+ *  lat - initial latitude at center of map
+ *  lon - initial longitude at center of map
+ *  zoom - initial zoom level of map
  *  rg - region to show routes for on the map (optional)
  *  country - country to show routes for on the map (optional)
  *  sys - system to show routes for on the map (optional)
  *  v - show routes/points on the visible portion of the map (optional)
  *  rte - route name to show on the map. Supports pattern matching, with _ matching a single character, and % matching 0 or multiple characters.
- * (u, [rg|sys|country|v][rte])
+ * (u, [lat lng zoom][rg|sys|country|v][rte])
  *
  ***
  -->
@@ -119,7 +122,23 @@
     <title>Travel Mapping: Draft Map Overlay Viewer</title>
 </head>
 
-<body onload="loadmap(); waypointsFromSQL(); updateMap(null,null,null); toggleTable();">
+<?php
+    // parse lat, lon, zoom parameters if present
+    $lat = "null";
+    $lon = "null";
+    $zoom = "null";
+    if (array_key_exists("lat", $_GET)) {
+        $lat = floatval($_GET["lat"]);
+    }
+    if (array_key_exists("lon", $_GET)) {
+        $lon = floatval($_GET["lon"]);
+    }
+    if (array_key_exists("zoom", $_GET)) {
+        $zoom = intval($_GET["zoom"]);
+    }
+?>
+
+<body onload="loadmap(); waypointsFromSQL(); updateMap(<?php echo $lat.",".$lon.",".$zoom; ?>); toggleTable();">
 <script type="application/javascript">
 
     function toggleTable() {
