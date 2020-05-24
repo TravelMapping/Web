@@ -28,6 +28,8 @@ $response = array('roots'=>array(),
 		  'routeroots'=>array(),
 		  'routelistnames'=>array(),
 		  'routemileages'=>array(),
+		  'routeclinchedmileages'=>array(),
+		  'routeclinched'=>array(),
 		  'routecolors'=>array(),
 		  'routesystemnames'=>array(),
 		  'routesystemcodes'=>array(),
@@ -55,13 +57,15 @@ while ($row = $result->fetch_assoc()) {
 $result->free();
 
 // build a query to get information about all of the routes
-$result = tmdb_query("select r.root, r.region, r.route, r.banner, r.abbrev, r.city, r.mileage, s.color, s.tier, s.systemName, s.fullName, s.level from routes as r join systems as s on r.systemName=s.systemName where r.root in ('".implode("','",array_unique($response['roots']))."') order by s.tier, r.csvOrder;");
+$result = tmdb_query("select r.root, r.region, r.route, r.banner, r.abbrev, r.city, r.mileage, COALESCE(cr.mileage, 0) as clinchedmileage, cr.clinched, s.color, s.tier, s.systemName, s.fullName, s.level from routes as r join systems as s on r.systemName=s.systemName LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler='".$params['traveler']."' where r.root in ('".implode("','",array_unique($response['roots']))."') order by s.tier, r.csvOrder;");
 
 // parse results into the response array
 while ($row = $result->fetch_assoc()) {
       array_push($response['routeroots'], $row['root']);
       array_push($response['routelistnames'], $row['region']." ".$row['route'].$row['banner'].$row['abbrev']);
       array_push($response['routemileages'], $row['mileage']);
+      array_push($response['routeclinchedmileages'], $row['clinchedmileage']);
+      array_push($response['routeclinched'], $row['clinched']);
       array_push($response['routecolors'], $row['color']);
       array_push($response['routesystemcodes'], $row['systemName']);
       array_push($response['routesystemnames'], $row['fullName']);
