@@ -138,7 +138,7 @@
     }
 ?>
 
-<body onload="loadmap(); waypointsFromSQL(); updateMap(<?php echo $lat.",".$lon.",".$zoom; ?>); toggleTable();">
+<body onload="mapviewStartup(<?php echo $lat.",".$lon.",".$zoom; ?>);">
 <script type="application/javascript">
 
     function toggleTable() {
