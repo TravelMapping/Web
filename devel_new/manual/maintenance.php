@@ -51,7 +51,8 @@ How to maintain a region?</p>
     <li>If a <a href="../logs/listnamesinuse.log">.list name label is in use by current TM users</a> we should
     <a href="syshwylist.php#caltroute">add alternative route names</a> if possible.</li>
     <li>In many cases, however, the changes needed will break user lists.
-    In those and other situations, changes are <a href="#newsworthy">newsworthy</a> and require an <a href="#newsreport">updates entry</a>.</li>
+    In those and other situations, changes are <a href="#newsworthy">newsworthy</a> and require an <a href="#newsreport">updates entry</a>
+    for <span style="background-color: #CCFFCC;">active</span> systems.</li>
   </ul>
   </br>
   <li><a name="errorcheck"></a><a style="text-decoration:none" href="#errorcheck">&#x1f517</a>
