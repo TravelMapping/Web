@@ -22,6 +22,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="/css/travelMapping.css" />
+    <link rel="stylesheet" type="text/css" href="/css/L.Control.Window.css" />
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <style type="text/css">
         #controlbox {
@@ -119,6 +120,7 @@
     </style>
     <?php tm_common_js(); ?>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
+    <script src="../lib/L.Control.Window.js" type="text/javascript"></script>
     <title>Travel Mapping: Draft Map Overlay Viewer</title>
 </head>
 
