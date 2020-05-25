@@ -166,6 +166,7 @@ Check routes with Highway Browser</p>
       <li>Check for missing use of TM routes in the label name.</li>
       <li>Check that TM routes used in the label name do have the intersecting TM route link.
       </br>Note that there are rare exceptions where the waypoint does not necessarily match.</li>
+      <li>Check for correct usage of the direction letters.</li>
     </ul>
   </ul>
 </ul>

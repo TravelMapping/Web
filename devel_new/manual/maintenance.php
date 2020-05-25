@@ -23,6 +23,9 @@
     <li><a href="#faq">FAQs</a></li>
   </ul>
   <li><a href="#newsreport">Format for reporting newsworthy changes</a></li>
+  <ul>
+    <li><a href="#newsexamples">Examples of common changes</a></li>
+  </ul>
 </ul>
 </div>
 
@@ -31,17 +34,45 @@ How to maintain a region?</p>
 
 <div class="text">
 <ul>
-  <li>Regions are maintained by our volunteer highway data managers.
+  <li><a name="maintainer"></a><a style="text-decoration:none" href="#maintainer">&#x1f517</a>
+  Regions are maintained by our volunteer highway data managers.
   Please refer to the <a href="http://forum.travelmapping.net/index.php?topic=42">forum</a> to see who is responsible for what region.</li>
-  <li>Everyone can report required changes on the <a href="http://forum.travelmapping.net/index.php?topic=20">forum</a>.
+  <li><a name="reporter"></a><a style="text-decoration:none" href="#reporter">&#x1f517</a>
+  Everyone can report required changes on the <a href="http://forum.travelmapping.net/index.php?topic=20">forum</a>.
   The responsible highway data manager should frequently check the <a href="http://forum.travelmapping.net/index.php?board=3">board</a> for open issues.</li>
-  <li>In addition, the highway data manager should check official sources or forums proactive to get info about relevant changes.</li>
-  <li>Care must be taken to ensure that changes do not "break" a user's list file. In many cases, however, the changes needed will break user lists.
-  In those and other situations, changes are <a href="#newsworthy">newsworthy</a> and require an <a href="#newsreport">updates entry</a>.</li>
+  <li><a name="check"></a><a style="text-decoration:none" href="#check">&#x1f517</a>
+  In addition, the highway data manager should check official sources or forums proactive to get info about relevant changes.</li>
+  </br>
+  <li><a name="break"></a><a style="text-decoration:none" href="#break">&#x1f517</a>
+  Care must be taken to ensure that changes do not "break" a user's list file.</li>
+  <ul>
+    <li>If a <a href="../logs/pointsinuse.log">waypoint label is in use by current TM users</a> we should
+    <a href="#labelwrong">add alternative labels</a> if possible.</li>
+    <li>If a <a href="../logs/listnamesinuse.log">.list name label is in use by current TM users</a> we should
+    <a href="syshwylist.php#caltroute">add alternative route names</a> if possible.</li>
+    <li>In many cases, however, the changes needed will break user lists.
+    In those and other situations, changes are <a href="#newsworthy">newsworthy</a> and require an <a href="#newsreport">updates entry</a>.</li>
+  </ul>
+  </br>
+  <li><a name="errorcheck"></a><a style="text-decoration:none" href="#errorcheck">&#x1f517</a>
+  When you have submitted changes, <a href="sysnew.php#datacheck">check for errors</a> after the next site update.</li>
+  </br>
+  <li><a name="cleanupunused"></a><a style="text-decoration:none" href="#cleanupunused">&#x1f517</a>
+  Clean-up the alternative labels and .list names if they are no longer used</li>
+  <ul>
+    <li>Alternate (i.e., hidden) <a href="../logs/unusedaltlabels.log">waypoint labels not in use by current TM users</a>
+    can safely be removed from <code>.wpt</code> files.</li>
+    <li>Alternate (i.e., hidden) <a href="../logs/unusedaltroutenames.log">route names not in use by current TM users</a>
+    can safely be removed from <code>.csv</code> files.</li>
+  </ul>
+  <li><a name="cleanupfps"></a><a style="text-decoration:none" href="#cleanupfps">&#x1f517</a>
+  Clean-up the <a href="syserr.php#falsepositive">unmatched FPs</a>.</li>
+  <li><a name="cleanupnmpfps"></a><a style="text-decoration:none" href="#cleanupnmpfps">&#x1f517</a>
+  Clean-up the <a href="syserr.php#nmpfp">unmatched NMP FPs</a>.</li>
 </ul>
 </div>
 
-<p class="subheading"><a name="newsworthy"></a><a style="text-decoration:none" href="#newsworthy">&#x1f517</a>
+<p class="heading"><a name="newsworthy"></a><a style="text-decoration:none" href="#newsworthy">&#x1f517</a>
 Which changes to activated routes are newsworthy?</p>
 
 <div class="text">
@@ -207,7 +238,7 @@ A: No. That note is implied for most or all entries on that page, so it's not wo
 </ul>
 </div>
 
-<p class="subheading"><a name="newsreport"></a><a style="text-decoration:none" href="#newsreport">&#x1f517</a>
+<p class="heading"><a name="newsreport"></a><a style="text-decoration:none" href="#newsreport">&#x1f517</a>
 Format for reporting newsworthy changes</p>
 
 <div class="text">Newsworthy changes must must be logged in the <a href="https://github.com/TravelMapping/HighwayData/blob/master/updates.csv">updates list</a>,
@@ -239,8 +270,10 @@ The <code>route</code> is the full route name.</br>
 The <code>root</code> is the combination of region code and route code used in the HB.</br></br>
 </div>
 
-<div class="text"><a name="newsexamples"></a><a style="text-decoration:none" href="#newsexamples">&#x1f517</a>
-Examples of common changes:
+<p class="subheading"><a name="newsexamples"></a><a style="text-decoration:none" href="#newsexamples">&#x1f517</a>
+Examples of common changes</p>
+
+<div class="text">
 <ul>
   <li><a name="newsnew"></a><a style="text-decoration:none" href="#newsnew">&#x1f517</a>
   <b>New route:</b> <br />
