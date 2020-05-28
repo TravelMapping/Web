@@ -81,6 +81,7 @@ Before you can start the development of a new highway system, the following requ
     <li>Present your source for the routes.</li>
     <li>Describe what you found out about the highway system, especially about the quality of signposting.</li>
     <li>Ask whether there are objections to add the highway system.</li>
+    <li>Suggest the highway designation types for this and other highway systems to be used in waypoints.</li>
     <li>Suggest <a href="#developsystem">system code, tier index and color code</a> for the system.</li>
     <li>Be patient since we are volunteering contributors and don't have time to answer immediately. Accept asks
     for better research and accept when we don't see the system as a future TM highway system.</li>
