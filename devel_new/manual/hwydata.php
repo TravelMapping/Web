@@ -24,7 +24,6 @@ a .wpt extension.</div>
   <li><a href="#filename">.wpt Filenames</a></li>
   <li><a href="#format">.wpt Data Format</a></li>
   <ul>
-    <li><a href="#url">Getting a coordinate URL</a></li>
     <li><a href="#multiplexes">Multiplexes</a></li>
     <li><a href="#wporder">Waypoint order</a></li>
   </ul>
@@ -120,35 +119,12 @@ GuiSprRd http://www.openstreetmap.org/?lat=39.897681&lon=-77.675327
 OrcDr http://www.openstreetmap.org/?lat=39.914143&lon=-77.668498
 PA316 http://www.openstreetmap.org/?lat=39.927337&lon=-77.662439
 US30 http://www.openstreetmap.org/?lat=39.936539&lon=-77.660417
-    </pre>
-    
-  </li>
+    </pre>  </li>
   <li><a name="noblank"></a><a style="text-decoration:none" href="#noblank">&#x1f517</a>
   No blank or comment lines. The file may end with a final return character.</li>
 </ul>
 </div>
-  
-<p class="subheading"><a name="url"></a><a style="text-decoration:none" href="#url">&#x1f517</a>
-Getting a coordinate URL</p>
 
-<div class="text">
-<ul>
-  <li><a name="wpteditor"></a><a style="text-decoration:none" href="#wpteditor">&#x1f517</a>
-  The easiest way to find the coordinates to
-  be used in waypoint files is to use the <a href="/wptedit/">WPT
-  File Editor</a>.</li>
-  <li><a name="existingwpts"></a><a style="text-decoration:none" href="#existingwpts">&#x1f517</a>
-  It is also helpful to get coordinates from
-  existing routes where they intersect the route you are editing to
-  avoid "near miss points" which enables links to intersecting
-  routes and improves the quality of the <a href="/graphs">graph
-  data</a> used
-  by <a href="http://courses.teresco.org/metal/">METAL</a>, TM's
-  academic offshoot.</li>
-  <li><a name="nocommercial"></a><a style="text-decoration:none" href="#nocommercial">&#x1f517</a>
-  Do not use commercial mapping sources, such as Google Maps, Yahoo Maps, or Bing Maps.</li>
-</ul>
-</div>
 
 <p class="subheading"><a name="multiplexes"></a><a style="text-decoration:none" href="#multiplexes">&#x1f517</a>
 Multiplexes</p>
@@ -158,7 +134,8 @@ Multiplexes</p>
   <li><a name="concurrenthwy"></a><a style="text-decoration:none" href="#concurrenthwy">&#x1f517</a>
   Concurrent highways (multiplexes) have multiple designations for the same section of highway.</li>
   <li><a name="samecoords"></a><a style="text-decoration:none" href="#samecoords">&#x1f517</a>
-  <strong>The .wpt files of concurrent highways must have the same waypoints with exactly identical coordinates.</strong> This will allow my scripts to auto-detect multiplexes and remove duplicated mileage where appropriate.</li>
+  <strong>The .wpt files of concurrent highways must have the same waypoints with exactly identical coordinates.</strong>
+  This will allow the scripts to auto-detect multiplexes and remove duplicated mileage where appropriate.</li>
   <li><a name="notworkedout"></a><a style="text-decoration:none" href="#notworkedout">&#x1f517</a>
   If you encounter a multiplex in your work and the concurrent highways have not been worked out, then proceed normally.</li>
   <li><a name="workedout"></a><a style="text-decoration:none" href="#workedout">&#x1f517</a>

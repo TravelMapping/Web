@@ -118,10 +118,13 @@ Develop routes in devel status</p>
   Develop routes by creating <a href="hwydata.php">highway data files (<code>.wpt</code>)</a>.</li>
   <ul>
     <li>Create the files route by route in a desired order but make sure that you don't miss any route.</li>
+    <li>Use the <a href="/wptedit/">Waypoint File Editor</a> to find the coordinates for the waypoints:</li>
     <ul>
-      <li><a href="includepts.php">Waypoints to include</a></li>
+      <li><a href="includepts.php">Waypoints to include</a></br>
+      It is recommended to start with copying the waypoint coordinates from existing <code.wpt</code> files.</li>
       <li><a href="points.php">Positioning waypoints</a></li>
       <li><a href="wayptlabels.php">Labeling waypoints</a></li>
+      <li>Do not use commercial mapping sources, such as Google Maps, Yahoo Maps, or Bing Maps.</li>
     </ul>
     <li>Only add routes which are fully signed:</li>
     <ul>
