@@ -20,9 +20,7 @@ require "./tmphpfuncs.php";
 ob_end_clean();
 
 // initialize the array of responses
-$response = array('routes'=>array(),
-		  'mileages'=>array()
-		  );
+$response = array();
 
 // build the SQL query
 $sql = "select r.root, r.mileage from routes as r left join clinchedRoutes as cr on r.root=cr.route and traveler='".$params['traveler']."'";
@@ -50,8 +48,10 @@ $result = tmdb_query($sql);
 // parse results into the response array
 while ($row = $result->fetch_assoc()) {
 
-    array_push($response['routes'], $row['root']);
-    array_push($response['mileages'], $row['mileage']);
+    $nextobj = new stdClass();
+    $nextobj->root = $row['root'];
+    $nextobj->mileage = $row['mileage'];
+    array_push($response, $nextobj);
 }
 
 $result->free();
