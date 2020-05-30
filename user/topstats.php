@@ -47,12 +47,13 @@ function updateStats() {
 function parseLongestClinchedData(data) {
 
     let response = $.parseJSON(data);
-    // we have an array in response, each element has fields root and mileage
+    // we have an array in response, each element has fields
+    // root (for link), routeinfo (human-readable), and mileage
     // build the table of longest clinched from that
     let tbody = document.getElementById("longestClinchedRoutes");
     let rows = "";
     for (let i = 0; i < response.length; i++) {
-        rows += "<tr><td>" + response[i].root + "</td><td>" +
+        rows += "<tr><td>" + response[i].routeinfo + "</td><td>" +
 	    response[i].mileage + "</td></tr>";
     }
     tbody.innerHTML = rows;

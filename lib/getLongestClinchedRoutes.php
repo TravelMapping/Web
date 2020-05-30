@@ -23,7 +23,7 @@ ob_end_clean();
 $response = array();
 
 // build the SQL query
-$sql = "select r.root, r.mileage from routes as r left join clinchedRoutes as cr on r.root=cr.route and traveler='".$params['traveler']."'";
+$sql = "select r.root, r.region, r.route, r.banner, r.city, r.mileage from routes as r left join clinchedRoutes as cr on r.root=cr.route and traveler='".$params['traveler']."'";
 
 $morejoins = "";
 if ($params['system'] != "null") {
@@ -50,6 +50,10 @@ while ($row = $result->fetch_assoc()) {
 
     $nextobj = new stdClass();
     $nextobj->root = $row['root'];
+    $nextobj->routeinfo = $row['region']." ".$row['route'].$row['banner'];
+    if ($row['city'] != "") {
+        $nextobj->routeinfo .= " (".$row['city'].")";
+    }
     $nextobj->mileage = $row['mileage'];
     array_push($response, $nextobj);
 }
