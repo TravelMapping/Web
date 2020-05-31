@@ -37,9 +37,27 @@ $response = array('roots'=>array(),
 		  'routetiers'=>array()
 		  );
 
+// first DB query to get all waypoints in the bounding area
+$result = tmdb_query("select pointId from waypoints where latitude>".$params['minLat']." and latitude<".$params['maxLat']." and longitude<".$params['maxLng']." and longitude>".$params['minLng']);
+
+$waypoints = array();
+while ($row = $result->fetch_assoc()) {
+    array_push($waypoints, $row['pointId']);
+}
+
+$result->free();
+
 // make DB query for all segments with at least one waypoint in
 // the bounding area
-$result = tmdb_query("select segments.root, if (cl.segmentId is null, false, true) as clinched, w1.pointName as w1name, w1.latitude as w1lat, w1.longitude as w1lng, w2.pointName as w2name, w2.latitude as w2lat, w2.longitude as w2lng from segments join waypoints as w1 on segments.waypoint1=w1.pointId join waypoints as w2 on segments.waypoint2=w2.pointId left join clinched as cl on (cl.segmentId=segments.segmentId and cl.traveler='".$params['traveler']."') where ((w1.latitude>".$params['minLat']." and w1.latitude<".$params['maxLat']." and w1.longitude<".$params['maxLng']." and w1.longitude>".$params['minLng'].") or (w2.latitude>".$params['minLat']." and w2.latitude<".$params['maxLat']." and w2.longitude<".$params['maxLng']." and w2.longitude>".$params['minLng'].")) order by segments.root;");
+// if the number of waypoints is reasonably small, we will use it to restrict segments,
+// otherwise we will search segments for endpoint coordinates
+// NOTE: should do some experiments to see what this threshold should be
+if (count($waypoints) < 500) {
+    $result = tmdb_query("select segments.root, if (cl.segmentId is null, false, true) as clinched, w1.pointName as w1name, w1.latitude as w1lat, w1.longitude as w1lng, w2.pointName as w2name, w2.latitude as w2lat, w2.longitude as w2lng from segments join waypoints as w1 on segments.waypoint1=w1.pointId join waypoints as w2 on segments.waypoint2=w2.pointId left join clinched as cl on (cl.segmentId=segments.segmentId and cl.traveler='".$params['traveler']."') where ((w1.pointId in ('".implode("','",$waypoints)."')) or (w2.pointId in ('".implode("','",$waypoints)."'))) order by segments.root;");
+}
+else {
+    $result = tmdb_query("select segments.root, if (cl.segmentId is null, false, true) as clinched, w1.pointName as w1name, w1.latitude as w1lat, w1.longitude as w1lng, w2.pointName as w2name, w2.latitude as w2lat, w2.longitude as w2lng from segments join waypoints as w1 on segments.waypoint1=w1.pointId join waypoints as w2 on segments.waypoint2=w2.pointId left join clinched as cl on (cl.segmentId=segments.segmentId and cl.traveler='".$params['traveler']."') where ((w1.latitude>".$params['minLat']." and w1.latitude<".$params['maxLat']." and w1.longitude<".$params['maxLng']." and w1.longitude>".$params['minLng'].") or (w2.latitude>".$params['minLat']." and w2.latitude<".$params['maxLat']." and w2.longitude<".$params['maxLng']." and w2.longitude>".$params['minLng'].")) order by segments.root;");
+}
 
 // parse results into the response array
 while ($row = $result->fetch_assoc()) {
