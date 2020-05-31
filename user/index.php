@@ -29,6 +29,10 @@
         	text-align: center;
     		font-size: 14px;
         }
+        #scrollableMapview {
+        	text-align: center;
+    		font-size: 24px;
+        }
     </style>
     <!-- jQuery -->
     <script type="application/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -79,7 +83,10 @@ echo "<h1>Traveler Stats for ".$tmuser."</h1>";
 </div>
 <div id="body">
 	<div id="logLinks">
-		<a href="/logs/users/<?php echo $tmuser; ?>.log">Log File</a>
+		<a href="/logs/users/<?php echo $tmuser; ?>.log">Log File</a>, where you can find any errors from processing <?php echo $tmuser; ?>.list, and statistics.
+	</div>
+	<div id="scrollableMapview">
+	New: Browse the travels of <?php echo $tmuser; ?> with <a href="mapview.php?v">Scrollable Mapview</a>.
 	</div>
     <div id="overall">
         <h2>Overall Stats</h2>

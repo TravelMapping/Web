@@ -6,17 +6,23 @@
  * Map viewer page. Displays the routes selected using the url params on a map, as well as on a table to the side.
  * URL Params:
  *  u - user to display highlighting for on map (required)
+ *  lat - initial latitude at center of map
+ *  lon - initial longitude at center of map
+ *  zoom - initial zoom level of map
  *  rg - region to show routes for on the map (optional)
  *  country - country to show routes for on the map (optional)
  *  sys - system to show routes for on the map (optional)
+ *  v - show routes/points on the visible portion of the map (optional)
  *  rte - route name to show on the map. Supports pattern matching, with _ matching a single character, and % matching 0 or multiple characters.
- * (u, [rg|sys|country][rte])
+ * (u, [lat lng zoom][rg|sys|country|v][rte])
+ *
  ***
  -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="/css/travelMapping.css" />
+    <link rel="stylesheet" type="text/css" href="/css/L.Control.Window.css" />
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <style type="text/css">
         #controlbox {
@@ -114,10 +120,27 @@
     </style>
     <?php tm_common_js(); ?>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
-    <title>Travel Mapping: Draft Map Overlay Viewer</title>
+    <script src="../lib/L.Control.Window.js" type="text/javascript"></script>
+    <title>Travel Mapping: Mapview</title>
 </head>
 
-<body onload="loadmap(); waypointsFromSQL(); updateMap(null,null,null); toggleTable();">
+<?php
+    // parse lat, lon, zoom parameters if present
+    $lat = "null";
+    $lon = "null";
+    $zoom = "null";
+    if (array_key_exists("lat", $_GET)) {
+        $lat = floatval($_GET["lat"]);
+    }
+    if (array_key_exists("lon", $_GET)) {
+        $lon = floatval($_GET["lon"]);
+    }
+    if (array_key_exists("zoom", $_GET)) {
+        $zoom = intval($_GET["zoom"]);
+    }
+?>
+
+<body onload="mapviewStartup(<?php echo $lat.",".$lon.",".$zoom; ?>);">
 <script type="application/javascript">
 
     function toggleTable() {
@@ -217,6 +240,9 @@
             <td class="clinched">&nbsp;</td><td class='overall'>&nbsp;</td><td class='percent'>&nbsp;</td>
 	</tr>
         <?php
+	// this will be filled in later by AJAX if the v QS parameter
+	// was included
+	if (!array_key_exists('v', $_GET)) {
 	$add_regions = "";
 	// TODO: a toggle to include/exclude devel routes?
         $sql_command = <<<SQL
@@ -277,6 +303,7 @@ SQL;
 HTML
 .tm_convert_distance($row['clinched'])."</td><td class='overall'>".tm_convert_distance($row['total'])."</td><td class='percent'>".$pct."%</td></tr>\n";
         }
+	}
         ?>
         </tbody>
     </table>
