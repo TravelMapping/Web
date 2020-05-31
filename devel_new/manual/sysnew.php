@@ -22,7 +22,7 @@ devel {background-color: #FFCCCC;}
 
 
 <div class="text">New highway systems are developed by our volunteer highway data managers who went through the
-  <a href="../participate.php#hwydatamanager">procedure of getting a contributor</a>. When they have reached the
+  <a href="/participate.php#hwydatamanager">procedure of getting a contributor</a>. When they have reached the
   right level of experience, they can start developing further highway systems. The subsequent list describes the
   procedure on how to develop a new highway system. It is mandatory for new highway data managers to work through
   it step by step. It is recommended for highly experienced highway data managers.</div>

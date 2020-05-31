@@ -42,7 +42,7 @@ Participate in the project</i></p>
 <div class="text">
   Anyone can submit their travels to be included in the site. Some experienced users volunteer to help the project.
   </br></br>
-  Learn more on <a href="participate.php">how to participate</a>.
+  Learn more on <a href="/participate.php">how to participate</a>.
 </div>
 
 

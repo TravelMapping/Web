@@ -59,7 +59,7 @@ Announce that you wil do a peer-review</p>
 
 <div class="text">
 <ul>
-  <li>If you want to make a thorough peer-review, you must have reached the <a href="../participate.php#hwydatamanager">
+  <li>If you want to make a thorough peer-review, you must have reached the <a href="/participate.php#hwydatamanager">
   required level on the way to become a highway data manager</a>.</li>
   <li>The thorough peer-review can begin when the system is in <preview>preview</preview> and when the developer of the system
   has made his final checks. The developer usually <a href="sysnew.php#peerreview">notifies this on the forum's thread</a>.</li>
