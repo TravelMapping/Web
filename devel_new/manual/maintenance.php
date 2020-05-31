@@ -46,7 +46,7 @@ How to maintain a region?</p>
   <li><a name="break"></a><a style="text-decoration:none" href="#break">&#x1f517</a>
   Care must be taken to ensure that changes do not "break" a user's list file.</li>
   <ul>
-    <li>If a <a href="../logs/pointsinuse.log">waypoint label is in use by current TM users</a> we should
+    <li>If a <a href="http://travelmapping.net/logs/pointsinuse.log">waypoint label is in use by current TM users</a> we should
     <a href="#labelwrong">add alternative labels</a> if possible.</li>
     <li>If a <a href="../logs/listnamesinuse.log">.list name label is in use by current TM users</a> we should
     <a href="syshwylist.php#caltroute">add alternative route names</a> if possible.</li>
