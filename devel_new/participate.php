@@ -49,7 +49,7 @@ First steps with email submission</p>
     <li><a name="username"></a><a style="text-decoration:none" href="#username">&#x1f517</a>
       <b>Choose an alphanumeric username.</b></br>
       </br>
-      Use only English letters (A-Z or a-z), numbers (0-9), and underscores (_) in your username,
+      Use only English letters (<code>A-Z</code> or <code>a-z</code>), numbers (<code>0-9</code>), and underscores <code>_</code> in your username,
       and keep the name at or under 48 characters long. Avoid characters with diacritical marks,
       and characters from other alphabets; otherwise your file will not be processed.
     </li>
@@ -168,14 +168,15 @@ Solutions to common problems</p>
     <li><a name="invaliduser"></a><a style="text-decoration:none" href="#invaliduser">&#x1f517</a>
       <b>An invalid username was chosen.</b></br>
       </br>
-      Only the characters A-Z, a-z, 0-9, and the underscore (_) are allowed in usernames. If you used other
+      Only the characters <code>A-Z</code>, <code>a-z</code>, <code>0-9</code>, and the underscore <code>_</code>
+      are allowed in usernames. If you used other
       characters, such as non-English characters or symbols, remove them.
     </li>
     </br>
     <li><a name="namemismatch"></a><a style="text-decoration:none" href="#namemismatch">&#x1f517</a>
       <b>The filename does not match the username.</b></br>
       </br>
-      If the username is highwayguy80, then the filename should be <code>highwayguy80.list</code>, not <code>highwayguy80.txt</code>,
+      If the username is <code>highwayguy80</code>, then the filename should be <code>highwayguy80.list</code>, not <code>highwayguy80.txt</code>,
       <code>HighwayGuy80.list</code>, <code>arkansas.list</code>, <code>motorways.list</code>, nor other filenames.
       Note that since usernames generally do not
       change, the valid filename also generally does not change.</br>
