@@ -900,9 +900,11 @@ following sources of highway information.</p>
   <li>Mapping capabilities are provided
   by <a href="https://leafletjs.com/">Leaflet</a> with
   the <a href="https://github.com/marslan390/BeautifyMarker">extension</a>
-  and map tiles from various sources as indicated on the online maps</li>
+    and map tiles from various sources as indicated on the online maps</li>
+  <li>Geocoding capabilities use <a href="https://nominatim.org/">Nominatim</a>.</li>
   <li>Other JavaScript libraries in use
-    include <a href="https://jquery.com/">jQuery</a>.</li>
+    include <a href="https://jquery.com/">jQuery</a>, and code adapted
+    from <a href="http://moutjs.com/">MOUT</a>.</li>
   <li>The shield generator
   uses <a href="https://github.com/sammdot/roadgeek-fonts/releases">Roadgeek Fonts</a>.</li>
 </ul>
