@@ -22,7 +22,7 @@ devel {background-color: #FFCCCC;}
 
 
 <div class="text">New highway systems are developed by our volunteer highway data managers who went through the
-  <a href="../participate.php#hwydatamanager">procedure of getting a contributor</a>. When they have reached the
+  <a href="/participate.php#hwydatamanager">procedure of getting a contributor</a>. When they have reached the
   right level of experience, they can start developing further highway systems. The subsequent list describes the
   procedure on how to develop a new highway system. It is mandatory for new highway data managers to work through
   it step by step. It is recommended for highly experienced highway data managers.</div>
@@ -81,11 +81,8 @@ Before you can start the development of a new highway system, the following requ
     <li>Present your source for the routes.</li>
     <li>Describe what you found out about the highway system, especially about the quality of signposting.</li>
     <li>Ask whether there are objections to add the highway system.</li>
+    <li>Suggest the highway designation types for this and other highway systems to be used in waypoints.</li>
     <li>Suggest <a href="#developsystem">system code, tier index and color code</a> for the system.</li>
-
-<!-- Do we need a description for tier and system colors? -->
-
-
     <li>Be patient since we are volunteering contributors and don't have time to answer immediately. Accept asks
     for better research and accept when we don't see the system as a future TM highway system.</li>
   </ul>
@@ -119,13 +116,16 @@ Develop routes in devel status</p>
 <div class="text" >
 <ul>
   <li><a name="developwpt"></a><a style="text-decoration:none" href="#developwpt">&#x1f517</a>
-  Develop routes by creating <a href="hwydata.php">highway data files</a>.</li>
+  Develop routes by creating <a href="hwydata.php">highway data files (<code>.wpt</code>)</a>.</li>
   <ul>
     <li>Create the files route by route in a desired order but make sure that you don't miss any route.</li>
+    <li>Use the <a href="/wptedit/">Waypoint File Editor</a> to find the coordinates for the waypoints:</li>
     <ul>
-      <li><a href="includepts.php">Waypoints to include</a></li>
+      <li><a href="includepts.php">Waypoints to include</a></br>
+      It is recommended to start with copying the waypoint coordinates from existing <code.wpt</code> files.</li>
       <li><a href="points.php">Positioning waypoints</a></li>
       <li><a href="wayptlabels.php">Labeling waypoints</a></li>
+      <li>Do not use commercial mapping sources, such as Google Maps, Yahoo Maps, or Bing Maps.</li>
     </ul>
     <li>Only add routes which are fully signed:</li>
     <ul>
@@ -142,7 +142,7 @@ Develop routes in devel status</p>
     <li>Notes to exceptions should be clearly described on the forum thread and / or in a README.md file on the Github folder for the wpt files.</li>
   </ul>
   <li><a name="developcsv"></a><a style="text-decoration:none" href="#developcsv">&#x1f517</a>
-  Make the <a href="syshwylist.php">highway system lists (.csv)</a></li>
+  Make the <a href="syshwylist.php">highway system lists (<code>.csv</code>)</a></li>
   <li><a name="developsystem"></a><a style="text-decoration:none" href="#developsystem">&#x1f517</a>
   Promote the system to <a href="sysdef.php#devel"><devel>devel</devel> status</a> when a first batch of routes is available.</li>
   <ul>
@@ -166,18 +166,24 @@ brabr;BRA;Brazil Rodovias Federais;green;4;devel
       <ul>
         <li>The color must be unique for each region to distinguish the systems.</li>
         <li>The color should represent the color which is used on signs to indicate the routes.</li>
+        <li>Available colors are: <span style="color: #0000DC;">blue</span>, <span style="color: #996600;">brown</span>,
+        <span style="color: #E00000;">red</span>, <span style="color: #E8B000;">yellow</span>,
+        <span style="color: #008CA0;">teal</span>, <span style="color: #00E000;">green</span>,
+        <span style="color: #D000D0;">magenta</span> and <span style="color: #F09673;">lightsalmon</span>.</li>
         <li>Standard colors are often used for a continent to avoid confusing users.</li>
       </ul>
       <li>The <code>tier</code> index is used to distinguish systems top down.</li>
       <ul>
         <li>It is used on maps to draw the TM graph. If there are concurrent routes, the color of the higher level system is on top.</li>
+        <li>The more important the system to non-local travel, the lower the tier index.</li>
         <li>Standard tiers are often used for a continent to avoid confusing users.</li>
+        <li>We currently only use <code>tier 1</code> to <code>tier 5</code>.</li>
       </ul>
       <li>The <code>level</code> is always <devel>devel</devel> at this point.</li>
     </ul>
   </ul>
   <li><a name="developshield"></a><a style="text-decoration:none" href="#developshield">&#x1f517</a>
-  Create the system shield <i>(optionally)</i></li>
+  Create the system shield (<code>.svg</code>) <i>(optionally)</i></li>
   <ul>
     <li>A svg file is used to show a system specific shield in the highway browser. They are generic and hosted on
     <a href="https://github.com/TravelMapping/Web/tree/master/shields">the web repository on Github</a>.</li>
@@ -243,6 +249,10 @@ a second run must be done <b>before</b> the activation of the system.
   <a href="syserr.php#concurrency">Concurrency checks</a> can be done when the system is minimum in <preview>preview</preview> state.</li>
   <li><a name="datachecknearmisspoint"></a><a style="text-decoration:none" href="#datachecknearmisspoint">&#x1f517</a>
   <a href="syserr.php#nearmisspoint">Near-miss point checks</a> can be done when the system is minimum in <preview>preview</preview> state.</li>
+  </br>
+  <li><a name="unprocessedwpt"></a><a style="text-decoration:none" href="#unprocessedwpt">&#x1f517</a>
+  The <a href="../logs/unprocessedwpts.log">List of unprocessed wpt files</a> helps to identify highway data files (<code>.wpt</code>)
+  in the repository which are not listed in any highway system list (<code>.csv</code>).</li>
 </ul>
 
 <b>Errors from <active>active</active> systems should always be corrected or reported as false positives short-term.</b>
@@ -274,10 +284,8 @@ Changes proposed on the forum thread should be processed short-term while the pe
   If you don't agree with proposed changes, explain on the forum why they should not be made.
   Provide a link to the manual or other sources if possible.</li>
   <li><a name="reviewbreak"></a><a style="text-decoration:none" href="#reviewbreak">&#x1f517</a>
-  Care is taken to ensure that changes do not "break" a user's list file.</li>
+  Care must be taken to ensure that <a href="maintenance.php#break">changes do not "break" a user's list file</a>.</li>
   <ul>
-    <li>If a <a href="../logs/pointsinuse.log">waypoint labels is in use by current TM users</a> we should
-    <a href="maintenance.php#labelwrong">add alternative labels</a> if possible.</li>
     <li>We don't add notifications <a href="http://travelmapping.net/devel/updates.php">to the updates page</a>
     because we are still in <preview>preview</preview>.</li>
   </ul>
@@ -316,6 +324,8 @@ Maintain the highway system</p>
   <li><a name="maintainregion"></a><a style="text-decoration:none" href="#maintainregion">&#x1f517</a>
   If you are responsible for the region(s) of the highway system, you need to <a href="maintenance.php">maintain the system</a>.
   Follow the discussion on the forum.</li>
+  <li><a name="maintainbreak"></a><a style="text-decoration:none" href="#maintainbreak">&#x1f517</a>
+  Care must be taken to ensure that <a href="maintenance.php#break">changes do not "break" a user's list file</a>.
   <li><a name="maintainupdates"></a><a style="text-decoration:none" href="#maintainupdates">&#x1f517</a>
   All user-relevant changes to the routes must be notified <a href="http://travelmapping.net/devel/updates.php">on the updates page</a>
   now since the system is <active>active</active>.</li>

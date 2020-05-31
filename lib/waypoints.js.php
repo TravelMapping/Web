@@ -14,9 +14,12 @@
  */
     require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php";
 
-    if(!array_key_exists('r', $_GET) && !array_key_exists('sys', $_GET) && !array_key_exists('rg', $_GET) && !array_key_exists('rte', $_GET))
-    {
-        echo "Missing parameter: one of r, rg, sys, or rte MUST be set.";
+    if (!array_key_exists('v', $_GET) &&
+        !array_key_exists('r', $_GET) &&
+	!array_key_exists('sys', $_GET) &&
+	!array_key_exists('rg', $_GET) &&
+	!array_key_exists('rte', $_GET)) {
+        echo "Missing parameter: one of v, r, rg, sys, or rte MUST be set.";
         http_response_code(400);
         exit();
     }
@@ -205,6 +208,7 @@ SQL;
         // insert custom color code if needed
         tm_generate_custom_colors_array();
 	echo "mapStatus = mapStates.MAPVIEW;\n";
+	echo "genEdges = true;\n";
     }
     
     function select_single_route ()
@@ -285,18 +289,25 @@ SQL;
             }
             echo "mapClinched = true;\n";
 	    echo "mapStatus = mapStates.HB_ROUTE;\n";
+	    echo "genEdges = true;\n";
         }
     }
 ?>
 
 function waypointsFromSQL() {
     <?php
-        if (array_key_exists('r', $_GET)) {
-	   select_single_route();
+        if (array_key_exists('v', $_GET)) {
+            if (array_key_exists('u', $_GET)) {
+                $tmuser = $_GET['u'];
+                echo "traveler = '$tmuser';\n";
+	    }
+	    echo "showAllInView = true;\n";
+	}
+        else if (array_key_exists('r', $_GET)) {
+	    select_single_route();
 	}
         else {
 	    select_route_set();
         }
     ?>
-    genEdges = true;
 }

@@ -29,8 +29,7 @@ Required intersections</p>
     Visibly numbered Interstate highways, US highways, and state 
     highways, or the equivalent in countries besides the US. 
     County/local/secondary/municipal/township etc. routes are not required 
-    points. The highway designation types to be included should be clarified
-    before work is begun.</li>
+    points.</li>
     <li><a name="interchange"></a><a style="text-decoration:none" href="#interchange">&#x1f517</a>
     Highways intersecting at an interchange. </li>
     <li><a name="majorhwy"></a><a style="text-decoration:none" href="#majorhwy">&#x1f517</a>

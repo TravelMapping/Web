@@ -18,6 +18,11 @@
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 <h1 style="color:red">Travel Mapping Developer Tools and Links - <i>Draft of a new developer page</i></h1>
 
+<style>
+active {background-color: #CCFFCC;}
+preview {background-color: #FFFFCC;}
+devel {background-color: #FFCCCC;}
+</style>
 
 <p class="text">
 
@@ -37,7 +42,7 @@ Participate in the project</i></p>
 <div class="text">
   Anyone can submit their travels to be included in the site. Some experienced users volunteer to help the project.
   </br></br>
-  Learn more on <a href="participate.php">how to participate</a>.
+  Learn more on <a href="/participate.php">how to participate</a>.
 </div>
 
 
@@ -69,6 +74,11 @@ Route Files <i>(no changes except of formatting yet)</i></p>
 <p class="subheading"><a name="tools"></a><a style="text-decoration:none" href="#tools">&#x1f517</a>
 Tools</p>
 
+<?php
+//$sql_command = "select count(*) as c from datacheckErrors join routes on datacheckErrors.route = routes.root join systems on routes.systemName = systems.systemName where systems.level=\"active\" and falsePositive=\"0\"";
+$activedc = tm_count_rows("datacheckErrors", "join routes on datacheckErrors.route = routes.root join systems on routes.systemName = systems.systemName where systems.level=\"active\" and falsePositive=\"0\"");
+?>
+
 <div class="text">
   <ul>
     <li><a href="/wptedit/">Waypoint File Editor</a>
@@ -90,7 +100,7 @@ Tools</p>
     <br/>
     <li><a href="datacheck.php">Data Check</a>
       <br/>
-      Check highway data errors
+      Check highway data errors (Currently <?php echo $activedc; ?> errors in <active>active</active> systems)
     </li>
     <br/>
     <li><a href="logs.php">Log Files</a>

@@ -33,13 +33,22 @@ $activedc = tm_count_rows("datacheckErrors", "join routes on datacheckErrors.rou
 <ul>
   <li><a href="../logs/pointsinuse.log">Waypoint labels in use by current TM users</a>
     <br />
-    To be considered if wpt files of active systems are modified to avoid breaking user files, can be loaded to CHM's WPT file Editor.</li>
+    To be considered if wpt files of active systems are modified to avoid breaking user files, can be loaded to the Waypoint File Editor.</li>
   <li><a href="../logs/unusedaltlabels.log">Alternate (i.e., hidden) waypoint labels not in use by current TM users</a>
     <br />
     These alternate labels can safely be removed from wpt files.</li>
+  </br>
+  <li><a href="../logs/listnamesinuse.log">.list name labels in use by current TM users</a>
+    <br />
+    To be considered if csv files of active systems are modified to avoid breaking user files.</li>
+  <li><a href="../logs/unusedaltroutenames.log">Alternate (i.e., hidden) route names not in use by current TM users</a>
+    <br />
+    These alternate labels can safely be removed from csv files.</li>
+  </br>
   <li><a href="../logs/unprocessedwpts.log">List of unprocessed wpt files</a>
     <br />
     Waypoint files in the repository that were not processed because they were not listed in any highway system's csv files</li>
+  </br>
   <li><a href="../graphs/">Travel Mapping Graph Data</a>
     <br />
     Graphs can be loaded into HDX to verify unexpected or broken concurrencies.</li>

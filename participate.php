@@ -39,7 +39,7 @@ How to create a user list file</p>
   processed to populate a set of custom stats pages and maps 
   describing your travels.</br>
   </br>
-  For examples, you can browse the <a href="http://travelmapping.net/stat.php">travel summaries</a> of any of our users.
+  For examples, you can browse the <a href="stat.php">travel summaries</a> of any of our users.
 </div>
 
 <p class="subheading"><a name="firststeps"></a><a style="text-decoration:none" href="#firststeps">&#x1f517</a>
@@ -49,7 +49,7 @@ First steps with email submission</p>
     <li><a name="username"></a><a style="text-decoration:none" href="#username">&#x1f517</a>
       <b>Choose an alphanumeric username.</b></br>
       </br>
-      Use only English letters (A-Z or a-z), numbers (0-9), and underscores (_) in your username,
+      Use only English letters (<code>A-Z</code> or <code>a-z</code>), numbers (<code>0-9</code>), and underscores <code>_</code> in your username,
       and keep the name at or under 48 characters long. Avoid characters with diacritical marks,
       and characters from other alphabets; otherwise your file will not be processed.
     </li>
@@ -71,7 +71,7 @@ First steps with email submission</p>
       </br>
       
       Break up your travels into traveled sections by region and route (we recommend starting with only
-      <a href="manual/sysdef.php#active"><span style="background-color: #CCFFCC;">active</span> systems</a>).
+      <a href="devel_new/manual/sysdef.php#active"><span style="background-color: #CCFFCC;">active</span> systems</a>).
       For each route section, add one line to your <code>.list</code> file with the following format:</br>
       </br>
       <code>Region Route Waypoint1 Waypoint2</code></br>
@@ -133,7 +133,7 @@ First steps with email submission</p>
       You have now finished your part! Your file will be included in the next site update, which typically occurs nightly between 9 and 11 PM US/Eastern.</br></i></span></li>
     </br>
     <li><a name="aftersiteupdate"></a><a style="text-decoration:none" href="#aftersiteupdate">&#x1f517</a>
-      <b>After the next site update, look for your name on the <a href="http://travelmapping.net/stat.php">Traveler List</a>.</b></br>
+      <b>After the next site update, look for your name on the <a href="stat.php">Traveler List</a>.</b></br>
       </br>
       Once your file has been processed, your name will appear in this list along with all the other travelers.
       Click on your username and enjoy your traveled highway stats and maps.</br>
@@ -145,10 +145,10 @@ First steps with email submission</p>
       Check your <a href="/logs/users/">online log file</a> (also directly linked on your user stats pages).
       If you included a highway or point label that the mapping script does not recognize, it will tell you
       in your log file. Sometimes highway data is updated, and this may generate a new error. Check
-      <a href="http://travelmapping.net/devel/updates.php">the updates page</a> for info on what has been changed
+      <a href="devel/updates.php">the updates page</a> for info on what has been changed
       to the route. You should also check the updates page frequently to find highway changes like simple relocations
-      that don't break your list file and cannot be reported in your log file.
-      Changes to <a href="manual/sysdef.php#preview">systems in preview state</a> are not notified.
+      that don't break your <code>.list</code> file and cannot be reported in your log file.
+      Changes to <a href="devel_new/manual/sysdef.php#preview">systems in preview state</a> are not notified.
     </li>
     </br>
     <li><a name="nextupdate"></a><a style="text-decoration:none" href="#nextupdate">&#x1f517</a>
@@ -168,15 +168,17 @@ Solutions to common problems</p>
     <li><a name="invaliduser"></a><a style="text-decoration:none" href="#invaliduser">&#x1f517</a>
       <b>An invalid username was chosen.</b></br>
       </br>
-      Only the characters A-Z, a-z, 0-9, and the underscore (_) are allowed in usernames. If you used other
+      Only the characters <code>A-Z</code>, <code>a-z</code>, <code>0-9</code>, and the underscore <code>_</code>
+      are allowed in usernames. If you used other
       characters, such as non-English characters or symbols, remove them.
     </li>
     </br>
     <li><a name="namemismatch"></a><a style="text-decoration:none" href="#namemismatch">&#x1f517</a>
       <b>The filename does not match the username.</b></br>
       </br>
-      If the username is highwayguy80, then the filename should be highwayguy80.list, not highwayguy80.txt,
-      HighwayGuy80.list, arkansas.list, motorways.list, nor other filenames. Note that since usernames generally do not
+      If the username is <code>highwayguy80</code>, then the filename should be <code>highwayguy80.list</code>, not <code>highwayguy80.txt</code>,
+      <code>HighwayGuy80.list</code>, <code>arkansas.list</code>, <code>motorways.list</code>, nor other filenames.
+      Note that since usernames generally do not
       change, the valid filename also generally does not change.</br>
       </br>
       Due to Mac and Windows operating systems hiding the file extension <code>.list</code> by default and/or including an extra, hidden <code>.txt</code>
@@ -230,7 +232,7 @@ Below are several example entries for a user's <code>.list</code> file.</br>
   For the segment of I-80 between Exits 161 and 224 in Pennsylvania, USA, look up the highway and waypoint
   labels for those interchanges in the <a href="/hb/index.php?r=pa.i080">Highway Browser</a>. The Highway Browser
   shows the highway as <code>PA I-80</code> and lists the waypoints as <code>161</code> and <code>224</code>.
-  Enter the following line into your .list file:</br>
+  Enter the following line into your <code>.list</code> file:</br>
   <pre>
 PA I-80 161 224
   </pre></li>
@@ -259,7 +261,7 @@ NY I-81 PA/NY 10
   </br>
   In single-region beltways, a waypoint has been selected as both the highway's <i>beginning</i> and <i>end</i>.
   This location is used for both the first and last waypoints of the highway, with a different waypoint label for each end.
-  If the segment you wish to enter into your .list file crosses that point, split your segment into two at that point.</br>
+  If the segment you wish to enter into your <code>.list</code> file crosses that point, split your segment into two at that point.</br>
   </br>
   Consider first the segment of the Baltimore Beltway (<a href="/hb/index.php?r=md.i695">MD I-695</a>) between Exits
   17 and 31 along the <i>northern</i> side of Baltimore. I-695 begins and ends at a southern waypoint called both 0 and 48.
@@ -285,7 +287,11 @@ MD I-695 0 48
   <b>Beltways crossing into multiple regions.</b></br>
   </br>
   Treat segments along these beltways just as you would any other segment that crosses into multiple regions:
-  one <code>.list</code> file line per region.</br></li>
+  one <code>.list</code> file line per region.</br></br></li>
+  <li><a name="nearbywp"></a><a style="text-decoration:none" href="#nearbywp">&#x1f517</a>
+  <b>No waypoint where your travel started or ended.</b></br>
+  </br>
+  If the route does not have a waypoint in the Highway Browser where your travel on this highway started or ended, you need to find a nearby waypoint in the Highway Browser.</li>
 </ul>
 </div>
 
@@ -318,11 +324,12 @@ Advanced features</p>
     </br>
     </br>
   </li>
-  <li><a name="blanklines"></a><a style="text-decoration:none" href="#blanklines">&#x1f517</a>
+  <li><a name="structure"></a><a style="text-decoration:none" href="#structure">&#x1f517</a>
     Structure <code>.list</code> file</br>
     </br>
-    Many users break up list files into chunks by region or highway
-    type to make it easier to read or manage. 
+    Many users break up <code>.list</code> files into chunks by system, region
+    or individual travel to make it easier to read or manage.
+    We recommend sorting by system to keep the <code>.list</code> file small.
     You can also use blank lines as desired to enhance readability.
   </br>
   </br>
@@ -413,15 +420,15 @@ The steps to become a highway data manager are as follows:
     <li><a name="report"></a><a style="text-decoration:none" href="#report">&#x1f517</a>
     Report updates and problems in existing highway systems <a href="http://forum.travelmapping.net/">on the forum</a>.</li>
     <li><a name="manual"></a><a style="text-decoration:none" href="#manual">&#x1f517</a>
-    Read and understand the <a href="devel.php#participate">developer manual</a>.</li>
+    Read and understand the <a href="devel_new/devel.php#participate">developer manual</a>.</li>
     <li><a name="review"></a><a style="text-decoration:none" href="#review">&#x1f517</a>
-    Participate in <a href="manual/sysrev.php">peer review</a> of a preview highway system.</li>
+    Participate in <a href="devel_new/manual/sysrev.php">peer review</a> of a preview highway system.</li>
     <li><a name="structure"></a><a style="text-decoration:none" href="#structure">&#x1f517</a>
     Understand the project structure and how highway data is <a href="https://github.com/TravelMapping/HighwayData/blob/master/README.md">organised on Github</a>.</li>
     <li><a name="develop"></a><a style="text-decoration:none" href="#develop">&#x1f517</a>
-    Develop a <a href="manual/sysnew.php">new highway system</a></li>
+    Develop a <a href="devel_new/manual/sysnew.php">new highway system</a></li>
     <li><a name="maintain"></a><a style="text-decoration:none" href="#maintain">&#x1f517</a>
-    Take <a href="manual/maintenance.php">responsibility for updates</a> in an unclaimed region, or by requesting to become the maintainer for a region from someone looking to unload some of theirs</li>
+    Take <a href="devel_new/manual/maintenance.php">responsibility for updates</a> in an unclaimed region, or by requesting to become the maintainer for a region from someone looking to unload some of theirs</li>
   </ol>
 </div>
 
