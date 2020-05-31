@@ -147,7 +147,7 @@ First steps with email submission</p>
       in your log file. Sometimes highway data is updated, and this may generate a new error. Check
       <a href="http://travelmapping.net/devel/updates.php">the updates page</a> for info on what has been changed
       to the route. You should also check the updates page frequently to find highway changes like simple relocations
-      that don't break your list file and cannot be reported in your log file.
+      that don't break your <code>.list</code> file and cannot be reported in your log file.
       Changes to <a href="manual/sysdef.php#preview">systems in preview state</a> are not notified.
     </li>
     </br>
@@ -175,8 +175,9 @@ Solutions to common problems</p>
     <li><a name="namemismatch"></a><a style="text-decoration:none" href="#namemismatch">&#x1f517</a>
       <b>The filename does not match the username.</b></br>
       </br>
-      If the username is highwayguy80, then the filename should be highwayguy80.list, not highwayguy80.txt,
-      HighwayGuy80.list, arkansas.list, motorways.list, nor other filenames. Note that since usernames generally do not
+      If the username is highwayguy80, then the filename should be <code>highwayguy80.list</code>, not <code>highwayguy80.txt</code>,
+      <code>HighwayGuy80.list</code>, <code>arkansas.list</code>, <code>motorways.list</code>, nor other filenames.
+      Note that since usernames generally do not
       change, the valid filename also generally does not change.</br>
       </br>
       Due to Mac and Windows operating systems hiding the file extension <code>.list</code> by default and/or including an extra, hidden <code>.txt</code>
@@ -230,7 +231,7 @@ Below are several example entries for a user's <code>.list</code> file.</br>
   For the segment of I-80 between Exits 161 and 224 in Pennsylvania, USA, look up the highway and waypoint
   labels for those interchanges in the <a href="/hb/index.php?r=pa.i080">Highway Browser</a>. The Highway Browser
   shows the highway as <code>PA I-80</code> and lists the waypoints as <code>161</code> and <code>224</code>.
-  Enter the following line into your .list file:</br>
+  Enter the following line into your <code>.list</code> file:</br>
   <pre>
 PA I-80 161 224
   </pre></li>
@@ -259,7 +260,7 @@ NY I-81 PA/NY 10
   </br>
   In single-region beltways, a waypoint has been selected as both the highway's <i>beginning</i> and <i>end</i>.
   This location is used for both the first and last waypoints of the highway, with a different waypoint label for each end.
-  If the segment you wish to enter into your .list file crosses that point, split your segment into two at that point.</br>
+  If the segment you wish to enter into your <code>.list</code> file crosses that point, split your segment into two at that point.</br>
   </br>
   Consider first the segment of the Baltimore Beltway (<a href="/hb/index.php?r=md.i695">MD I-695</a>) between Exits
   17 and 31 along the <i>northern</i> side of Baltimore. I-695 begins and ends at a southern waypoint called both 0 and 48.
@@ -318,11 +319,12 @@ Advanced features</p>
     </br>
     </br>
   </li>
-  <li><a name="blanklines"></a><a style="text-decoration:none" href="#blanklines">&#x1f517</a>
+  <li><a name="structure"></a><a style="text-decoration:none" href="#structure">&#x1f517</a>
     Structure <code>.list</code> file</br>
     </br>
-    Many users break up list files into chunks by region or highway
-    type to make it easier to read or manage. 
+    Many users break up <code>.list</code> files into chunks by system, region
+    or individual travel to make it easier to read or manage.
+    We recommend sorting by system to keep the <code>.list</code> file small.
     You can also use blank lines as desired to enhance readability.
   </br>
   </br>
