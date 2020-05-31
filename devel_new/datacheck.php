@@ -109,6 +109,13 @@ if (array_key_exists("showmarked", $_GET)) {
 }
 ?>
 
+<style>
+active {background-color: #CCFFCC;}
+preview {background-color: #FFFFCC;}
+devel {background-color: #FFCCCC;}
+</style>
+
+
 <p class="heading">Travel Mapping Highway Data Datacheck Errors</p>
 
 <?php
@@ -125,7 +132,10 @@ if (array_key_exists("showmarked", $_GET)) {
     echo "<label for=\"showmarked\"> Show Marked FPs </label>";
     echo "<input type=\"submit\" value=\"Apply Filter\" /></form>";
 ?>
-<p class="info">Quick links: <a href="#active">[Errors in Active Systems]</a><a href="#preview">[Errors in Preview Systems]</a><a href="#indev">[Errors in In-Dev Systems]</a><a href="manual/syserr.php">[Manual]</a>
+<p class="info">Quick links: <a href="#active">[Errors in <active>Active</active> Systems]</a>
+<a href="#preview">[Errors in <preview>Preview</preview> Systems]</a>
+<a href="#indev">[Errors in <devel>In-Dev</devel> Systems]</a>
+<a href="manual/syserr.php">[Manual]</a>
 <?php
 if ($showmarked) {
   echo '<a href="#marked">[Errors Marked as FPs]</a>.';
@@ -137,9 +147,8 @@ if ($showmarked) {
 </p>
 
 <p class="info">See also the <a href="../logs/unmatchedfps.log">[Log
-of Unmatched FPs from datacheckfps.csv]</a> and
-the <a href="../logs/unprocessedwpts.log">[Log of Unprocessed WPTs in
-the Repository]</a>.  Cleaning these up are low priority tasks for the
+of Unmatched FPs from datacheckfps.csv]</a>.
+Cleaning these up are low priority tasks for the
 project.  Some of these are likely fixable from the information in
 the <a href="../logs/nearmatchfps.log">[Log of Near-Match FPs from
 datacheckfps.csv]</a>.</p>
