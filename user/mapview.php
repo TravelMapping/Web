@@ -121,7 +121,7 @@
     <?php tm_common_js(); ?>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
     <script src="../lib/L.Control.Window.js" type="text/javascript"></script>
-    <title>Travel Mapping: Draft Map Overlay Viewer</title>
+    <title>Travel Mapping: Mapview</title>
 </head>
 
 <?php
