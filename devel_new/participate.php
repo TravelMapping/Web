@@ -287,7 +287,11 @@ MD I-695 0 48
   <b>Beltways crossing into multiple regions.</b></br>
   </br>
   Treat segments along these beltways just as you would any other segment that crosses into multiple regions:
-  one <code>.list</code> file line per region.</br></li>
+  one <code>.list</code> file line per region.</br></br></li>
+  <li><a name="nearbywp"></a><a style="text-decoration:none" href="#nearbywp">&#x1f517</a>
+  <b>No waypoint where your travel started or ended.</b></br>
+  </br>
+  If the route does not have a waypoint in the Highway Browser where your travel on this highway started or ended, you need to find a nearby waypoint in the Highway Browser.</li>
 </ul>
 </div>
 
