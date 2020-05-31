@@ -382,7 +382,7 @@ following sources of highway information.</p>
 	  </li>
 	  <li>Latvia
 	    <ul>
-<li><a href="http://www.lvceli.lv/en/PC/PageImages/Original/302.jpg">Map of International European Roads in Lithuania</a>. Official map showing routes of the International European Roads from the Latvia State Roads department.</li>
+<li><a href="http://likumi.lv/doc.php?id=198589">Lists of State Roads and Sections of Municipal Roads</a>. Official listing of routes from the Latvia State Roads department.</li>
 	      <li><a href="http://www.unece.org/trans/doc/2006/sc1/ECE-TRANS-SC1-2006-03e.pdf">UNECE map of E264</a>. Official map showing the route of E264 in Estonia and Latvia from the United Nations Economic Commission for Europe.</li>
 	    </ul>
 	  </li>
