@@ -27,6 +27,8 @@ function updateStats() {
 
     let controls = document.getElementById("controlbox");
     let selects = controls.getElementsByTagName("select");
+    distanceUnits = selects[1].value;
+    document.getElementById("unitsText").innerHTML = distanceUnits;
     let params = {
 	traveler: selects[0].value,
 	system: selects[3].value,
@@ -52,9 +54,18 @@ function parseLongestClinchedData(data) {
     // build the table of longest clinched from that
     let tbody = document.getElementById("longestClinchedRoutes");
     let rows = "";
-    for (let i = 0; i < response.length; i++) {
-        rows += "<tr><td>" + response[i].routeinfo + "</td><td>" +
-	    response[i].mileage + "</td></tr>";
+    if (response.length == 0) {
+       rows = '<tr><td colspan="2" style="text-align:center">No Routes Clinched</td></tr>';
+    }
+    else {
+        for (let i = 0; i < response.length; i++) {
+	    let link = "/hb/?r=" + response[i].root;
+            rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
+	        response[i].routeinfo +
+	        '</td><td style="text-align: right">' +
+	        convertToCurrentUnits(response[i].mileage).toFixed(2) +
+		"</td></tr>";
+        }
     }
     tbody.innerHTML = rows;
 }
@@ -67,30 +78,28 @@ function parseLongestClinchedData(data) {
 <div id="controlbox">
     <table id="optionsTable" class="gratable">
     <thead>
-    <tr><th>Select Map Options</th></tr>
+    <tr><th>Select Options To Display Stats</th></tr>
     </thead>
     <tbody>
     <tr><td>User: 
 <?php tm_user_select(); ?>
-    </td></tr>
-    
-    <tr><td>Units: 
+    &nbsp;Units: 
 <?php tm_units_select(); ?>
     </td></tr>
     
-    <tr><td>Region: <br />
+    <tr><td>Region:
 <?php tm_region_select(FALSE); ?>
     </td></tr>
 
-    <tr><td>System: <br />
+    <tr><td>System:
 <?php tm_system_select(FALSE); ?>
     </td></tr>
 
-<tr><td>Entries per table: <br />
+<tr><td>Max entries per table:
 <input id="numentries" type="number" min="1" max="500" value="25" />
     </td></tr>
     
-    <tr><td>
+    <tr><td style="text-align: center">
     <input type="submit" onclick="updateStats();" />	
     </td></tr>
     </tbody>
@@ -101,7 +110,7 @@ function parseLongestClinchedData(data) {
         <thead>
             <tr><th colspan="2" class="routeName">Longest Clinched Routes</th></tr>
             <tr><th class="routeName">Route</th>
-                <th class="clinched">Length (<?php tm_echo_units(); ?>)</th>
+                <th class="clinched">Length (<span id="unitsText"><?php tm_echo_units(); ?></span>)</th>
         </thead>
         <tbody id="longestClinchedRoutes">
         </tbody>
