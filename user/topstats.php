@@ -23,52 +23,65 @@
 </head>
 
 <script type="text/javascript">
-function updateStats() {
+var selects = new Object();
+function initUI() {
 
     let controls = document.getElementById("controlbox");
-    let selects = controls.getElementsByTagName("select");
-    distanceUnits = selects[1].value;
+    let allselects = controls.getElementsByTagName("select");
+    for (let i = 0; i < allselects.length; i++) {
+        selects[allselects[i].name] = allselects[i];
+    }
+    selects['rg'].disabled = true;
+}
+
+function updateStats() {
+
+    distanceUnits = selects['units'].value;
     document.getElementById("unitsText").innerHTML = distanceUnits;
     let params = {
-	traveler: selects[0].value,
-	system: selects[3].value,
-        region: selects[2].value,
+	traveler: selects['u'].value,
+	system: selects['sys'].value,
+        region: selects['rg'].value,
 	numentries: document.getElementById("numentries").value
     };
     
     let jsonParams = JSON.stringify(params);
-    // regular clinched routes (in a single region)
-    $.ajax({
-	type: "POST",
-	url: "/lib/getLongestClinchedRoutes.php",
-	datatype: "json",
-	data: { "params" : jsonParams },
-	success: parseLongestClinchedData
-    });
-    // connected clinched routes
-    $.ajax({
-	type: "POST",
-	url: "/lib/getLongestClinchedConnectedRoutes.php",
-	datatype: "json",
-	data: { "params" : jsonParams },
-	success: parseLongestClinchedConnectedData
-    });
-    // longest travels on routes (in a single region)
-    $.ajax({
-	type: "POST",
-	url: "/lib/getLongestTraveledRoutes.php",
-	datatype: "json",
-	data: { "params" : jsonParams },
-	success: parseLongestTraveledData
-    });
-    // longest travels on connected routes
-    $.ajax({
-	type: "POST",
-	url: "/lib/getLongestTraveledConnectedRoutes.php",
-	datatype: "json",
-	data: { "params" : jsonParams },
-	success: parseLongestTraveledConnectedData
-    });
+    if (selects['connected'].value == "inregion") {
+        // regular clinched routes (in a single region)
+        $.ajax({
+    	    type: "POST",
+	    url: "/lib/getLongestClinchedRoutes.php",
+	    datatype: "json",
+	    data: { "params" : jsonParams },
+	    success: parseLongestClinchedData
+        });
+        // longest travels on routes (in a single region)
+        $.ajax({
+    	    type: "POST",
+ 	    url: "/lib/getLongestTraveledRoutes.php",
+	    datatype: "json",
+	    data: { "params" : jsonParams },
+	    success: parseLongestTraveledData
+        });
+    }
+    else {
+        // connected clinched routes
+        $.ajax({
+	    type: "POST",
+	    url: "/lib/getLongestClinchedConnectedRoutes.php",
+	    datatype: "json",
+	    data: { "params" : jsonParams },
+	    success: parseLongestClinchedConnectedData
+        });
+        // longest travels on connected routes
+        $.ajax({
+	    type: "POST",
+	    url: "/lib/getLongestTraveledConnectedRoutes.php",
+	    datatype: "json",
+	    data: { "params" : jsonParams },
+	    success: parseLongestTraveledConnectedData
+        });
+    }
 }
 
 function parseLongestClinchedData(data) {
@@ -101,7 +114,7 @@ function parseLongestClinchedConnectedData(data) {
     // we have an array in response, each element has fields
     // root (for link), routeinfo (human-readable), and mileage
     // build the table of longest clinched from that
-    let tbody = document.getElementById("longestClinchedConnectedRoutes");
+    let tbody = document.getElementById("longestClinchedRoutes");
     let rows = "";
     if (response.length == 0) {
        rows = '<tr><td colspan="2" style="text-align:center">No Routes Clinched</td></tr>';
@@ -152,7 +165,7 @@ function parseLongestTraveledConnectedData(data) {
     // we have an array in response, each element has fields
     // root (for link), routeinfo (human-readable), and mileage
     // build the table of longest traveled from that
-    let tbody = document.getElementById("longestTraveledConnectedRoutes");
+    let tbody = document.getElementById("longestTraveledRoutes");
     let rows = "";
     if (response.length == 0) {
        rows = '<tr><td colspan="3" style="text-align:center">No Routes Traveled</td></tr>';
@@ -174,7 +187,7 @@ function parseLongestTraveledConnectedData(data) {
 
 </script>
 
-<body>
+<body onload="initUI();">
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 
 <div id="controlbox">
@@ -190,7 +203,7 @@ function parseLongestTraveledConnectedData(data) {
     </td></tr>
     
     <tr><td>Region:
-<?php tm_region_select(FALSE); ?> (does not apply to connected routes)
+<?php tm_region_select(FALSE); ?><span id="regionlabel"> (does not apply to connected routes)</span>
     </td></tr>
 
     <tr><td>System:
@@ -199,10 +212,18 @@ function parseLongestTraveledConnectedData(data) {
 
 <tr><td>Max entries per table:
 <input id="numentries" type="number" min="1" max="500" value="25" />
+    <select name="connected">
+    <option value="connected">Connected Routes</option>
+    <option value="inregion">In-Region Routes</option>
+    </select>
+    <select name="preview">
+    <option value="no">Active Systems Only</option>
+    <option value="yes">Active+Preview Systems</option>
+    </select>
     </td></tr>
     
     <tr><td style="text-align: center">
-    <input type="submit" onclick="updateStats();" />	
+    <input type="submit" onclick="updateStats();" />
     </td></tr>
     </tbody>
     </table>
@@ -210,30 +231,11 @@ function parseLongestTraveledConnectedData(data) {
 <div id="stats">
     <table class="gratable">
         <thead>
-            <tr><th colspan="2" class="routeName">Longest Clinched Connected Routes</th></tr>
-            <tr><th class="routeName">Route</th>
-                <th class="clinched">Length (<span id="unitsText"><?php tm_echo_units(); ?></span>)</th>
-        </thead>
-        <tbody id="longestClinchedConnectedRoutes">
-        </tbody>
-    </table>
-    <table class="gratable">
-        <thead>
             <tr><th colspan="2" class="routeName">Longest Clinched Routes</th></tr>
             <tr><th class="routeName">Route</th>
                 <th class="clinched">Length (<span id="unitsText"><?php tm_echo_units(); ?></span>)</th>
         </thead>
         <tbody id="longestClinchedRoutes">
-        </tbody>
-    </table>
-    <table class="gratable">
-        <thead>
-            <tr><th colspan="3" class="routeName">Most Traveled Connected Routes</th></tr>
-            <tr><th class="routeName">Route</th>
-                <th class="clinched">Traveled (<span id="unitsText"><?php tm_echo_units(); ?></span>)</th>
-                <th class="clinched">Length (<span id="unitsText"><?php tm_echo_units(); ?></span>)</th>
-        </thead>
-        <tbody id="longestTraveledConnectedRoutes">
         </tbody>
     </table>
     <table class="gratable">
