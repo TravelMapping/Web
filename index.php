@@ -106,8 +106,8 @@ tm_echo_units();
 <p class="text">
 
 Anyone can submit their travels to be included in the site.  Please
-see the information in <a href="http://forum.travelmapping.net">the project forum</a> for how
-to create and submit your data.
+see the information for <a href="/participate.php">how
+to create and submit your data</a>.
 
 </p>
 
@@ -119,18 +119,6 @@ summary of your travels on your <a href="/user">user page</a>.  Click
 around on the various links and table entries to find more ways to see
 your travels, both as tabular statistics and plotted on maps.
 
-</p>
-
-<p class="text">
-
-Some experienced users volunteer to help the project.  If this
-interests you, start by reporting problems with existing highway data.
-Those who have learned the project's structure and highway data rules
-and guidelines can help greatly by providing review of new highway
-systems in development.  Highly experienced users can learn how to
-plot new highway systems under the guidance of experienced
-contributors.  Again, see <a href="http://forum.travelmapping.net">the project forum</a> for
-more information.
 </p>
 
 <p class="text">
