@@ -48,15 +48,17 @@ $result = tmdb_query($sql);
 // parse results into the response array
 while ($row = $result->fetch_assoc()) {
 
-    $nextobj = new stdClass();
-    $nextobj->root = $row['root'];
-    $nextobj->routeinfo = $row['region']." ".$row['route'].$row['banner'];
-    if ($row['city'] != "") {
-        $nextobj->routeinfo .= " (".$row['city'].")";
+    if ($row['traveled'] > 0) {
+        $nextobj = new stdClass();
+        $nextobj->root = $row['root'];
+        $nextobj->routeinfo = $row['region']." ".$row['route'].$row['banner'];
+        if ($row['city'] != "") {
+            $nextobj->routeinfo .= " (".$row['city'].")";
+        }
+        $nextobj->traveled = $row['traveled'];
+        $nextobj->mileage = $row['mileage'];
+        array_push($response, $nextobj);
     }
-    $nextobj->traveled = $row['traveled'];
-    $nextobj->mileage = $row['mileage'];
-    array_push($response, $nextobj);
 }
 
 $result->free();
