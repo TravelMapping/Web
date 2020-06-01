@@ -69,6 +69,14 @@ function updateStats() {
 	    data: { "params" : jsonParams },
 	    success: parseLongestTraveledData
         });
+        // shortest unclinched travels on traveled routes (in a single region)
+        $.ajax({
+    	    type: "POST",
+ 	    url: "/lib/getClosestToClinchedTraveledRoutes.php",
+	    datatype: "json",
+	    data: { "params" : jsonParams },
+	    success: parseClosestToClinchedTraveledData
+        });
     }
     else {
         // connected clinched routes
@@ -86,6 +94,14 @@ function updateStats() {
 	    datatype: "json",
 	    data: { "params" : jsonParams },
 	    success: parseLongestTraveledConnectedData
+        });
+        // shortest unclinched travels on traveled connected routes
+        $.ajax({
+    	    type: "POST",
+ 	    url: "/lib/getClosestToClinchedConnectedTraveledRoutes.php",
+	    datatype: "json",
+	    data: { "params" : jsonParams },
+	    success: parseClosestToClinchedConnectedTraveledData
         });
     }
 }
@@ -191,6 +207,59 @@ function parseLongestTraveledConnectedData(data) {
     tbody.innerHTML = rows;
 }
 
+function parseClosestToClinchedTraveledData(data) {
+
+    let response = $.parseJSON(data);
+    // we have an array in response, each element has fields
+    // root (for link), routeinfo (human-readable), missing (in miles)
+    // and mileage (of route)
+    // build the table of longest traveled from that
+    let tbody = document.getElementById("closestToClinchedTraveledRoutes");
+    let rows = "";
+    if (response.length == 0) {
+       rows = '<tr><td colspan="3" style="text-align:center">No Unclinched Routes Traveled</td></tr>';
+    }
+    else {
+        for (let i = 0; i < response.length; i++) {
+	    let link = "/hb/?r=" + response[i].root;
+            rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
+	        response[i].routeinfo +
+	        '</td><td style="text-align: right">' +
+	        convertToCurrentUnits(response[i].missing).toFixed(2) +
+		'</td><td style="text-align: right">' +
+	        convertToCurrentUnits(response[i].mileage).toFixed(2) +
+		"</td></tr>";
+        }
+    }
+    tbody.innerHTML = rows;
+}
+
+function parseClosestToClinchedConnectedTraveledData(data) {
+
+    let response = $.parseJSON(data);
+    // we have an array in response, each element has fields
+    // root (for link), routeinfo (human-readable), missing (in miles)
+    // and mileage (of route)
+    // build the table of longest traveled from that
+    let tbody = document.getElementById("closestToClinchedTraveledRoutes");
+    let rows = "";
+    if (response.length == 0) {
+       rows = '<tr><td colspan="3" style="text-align:center">No Unclinched Routes Traveled</td></tr>';
+    }
+    else {
+        for (let i = 0; i < response.length; i++) {
+	    let link = "/user/mapview.php?rte=" + response[i].routeonly;
+            rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
+	        response[i].routeinfo +
+	        '</td><td style="text-align: right">' +
+	        convertToCurrentUnits(response[i].missing).toFixed(2) +
+		'</td><td style="text-align: right">' +
+	        convertToCurrentUnits(response[i].mileage).toFixed(2) +
+		"</td></tr>";
+        }
+    }
+    tbody.innerHTML = rows;
+}
 </script>
 
 <body onload="initUI();">
@@ -252,6 +321,16 @@ function parseLongestTraveledConnectedData(data) {
                 <th class="clinched">Length (<span id="unitsText"><?php tm_echo_units(); ?></span>)</th>
         </thead>
         <tbody id="longestTraveledRoutes">
+        </tbody>
+    </table>
+    <table class="gratable">
+        <thead>
+            <tr><th colspan="3" class="routeName">Unclinched Traveled Routes Closest to Clinched</th></tr>
+            <tr><th class="routeName">Route</th>
+                <th class="clinched">Untraveled (<span id="unitsText"><?php tm_echo_units(); ?></span>)</th>
+                <th class="clinched">Length (<span id="unitsText"><?php tm_echo_units(); ?></span>)</th>
+        </thead>
+        <tbody id="closestToClinchedTraveledRoutes">
         </tbody>
     </table>
 </div>
