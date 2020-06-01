@@ -55,7 +55,7 @@ Note on the forum if you skipped a step, for instance if using the HDX is too fa
 </div>
 
 <p class="subheading"><a name="announce"></a><a style="text-decoration:none" href="#announce">&#x1f517</a>
-Announce that you wil do a peer-review</p>
+Announce that you will do a peer-review</p>
 
 <div class="text">
 <ul>

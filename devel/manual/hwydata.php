@@ -23,7 +23,7 @@ a .wpt extension.</p>
   <li>One .wpt file is needed for each highway in each region. Highways 
 crossing into multiple subdivisions of a subdivided country (e.g., 
 states in the USA), or crossing into multiple countries (e.g., 
-Euroroutes in Europe) must be chopped at borders into separate files for
+UNECE International 'E' Roads in Europe) must be chopped at borders into separate files for
  each region. </li>
   <li>Filenames are entirely lowercase and have a .wpt extension.</li>
   <li>Be sure you can see file extensions in your operating system. 
@@ -185,7 +185,7 @@ order. </li>
  from west to east or south to north. Some spurs might not follow this 
 as they begin at a parent highway and end away from it (e.g., NC I-795: 
 north (I-95) to south). </li>
-  <li>Euroroutes should run west to east and north to south.</li>
+  <li>UNECE International 'E' Roads should run west to east and north to south.</li>
   <li>Some countries use a major city as the origin and have exit 
 numbers increasing radially outward and circumferentially in a certain 
 direction.</li>
