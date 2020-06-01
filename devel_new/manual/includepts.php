@@ -32,6 +32,8 @@ Required intersections</p>
     points.</li>
     <li><a name="interchange"></a><a style="text-decoration:none" href="#interchange">&#x1f517</a>
     Highways intersecting at an interchange. </li>
+    <li><a name="restarea"></a><a style="text-decoration:none" href="#restarea">&#x1f517</a>
+    Rest areas or service plazas accessible by car from both freeway carriageways, at which travelers can return the way they came.</li>
     <li><a name="majorhwy"></a><a style="text-decoration:none" href="#majorhwy">&#x1f517</a>
     Other major highways that serve regional (not only local) travelers:
     <ul>
