@@ -12,7 +12,7 @@
 <body>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 
-<h1 style="color:red">Travel Mapping Manual: How to participate in the project - <i>Draft</i></h1>
+<h1>Travel Mapping Manual: How to participate in the project</h1>
 
 <p class="heading">
   Contents</p>
@@ -329,7 +329,6 @@ Advanced features</p>
     </br>
     Many users break up <code>.list</code> files into chunks by system, region
     or individual travel to make it easier to read or manage.
-    We recommend sorting by system to keep the <code>.list</code> file small.
     You can also use blank lines as desired to enhance readability.
   </br>
   </br>
