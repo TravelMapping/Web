@@ -53,6 +53,14 @@ function updateStats() {
 	data: { "params" : jsonParams },
 	success: parseLongestClinchedConnectedData
     });
+    // longest travels on routes (in a single region)
+    $.ajax({
+	type: "POST",
+	url: "/lib/getLongestTraveledRoutes.php",
+	datatype: "json",
+	data: { "params" : jsonParams },
+	success: parseLongestTraveledData
+    });
 }
 
 function parseLongestClinchedData(data) {
@@ -96,6 +104,33 @@ function parseLongestClinchedConnectedData(data) {
             rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
 	        response[i].routeinfo +
 	        '</td><td style="text-align: right">' +
+	        convertToCurrentUnits(response[i].mileage).toFixed(2) +
+		"</td></tr>";
+        }
+    }
+    tbody.innerHTML = rows;
+}
+
+function parseLongestTraveledData(data) {
+
+    let response = $.parseJSON(data);
+    // we have an array in response, each element has fields
+    // root (for link), routeinfo (human-readable), traveled (in miles)
+    // and mileage (of route)
+    // build the table of longest traveled from that
+    let tbody = document.getElementById("longestTraveledRoutes");
+    let rows = "";
+    if (response.length == 0) {
+       rows = '<tr><td colspan="3" style="text-align:center">No Routes Traveled</td></tr>';
+    }
+    else {
+        for (let i = 0; i < response.length; i++) {
+	    let link = "/hb/?r=" + response[i].root;
+            rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
+	        response[i].routeinfo +
+	        '</td><td style="text-align: right">' +
+	        convertToCurrentUnits(response[i].traveled).toFixed(2) +
+		'</td><td style="text-align: right">' +
 	        convertToCurrentUnits(response[i].mileage).toFixed(2) +
 		"</td></tr>";
         }
@@ -155,6 +190,16 @@ function parseLongestClinchedConnectedData(data) {
                 <th class="clinched">Length (<span id="unitsText"><?php tm_echo_units(); ?></span>)</th>
         </thead>
         <tbody id="longestClinchedRoutes">
+        </tbody>
+    </table>
+    <table class="gratable">
+        <thead>
+            <tr><th colspan="3" class="routeName">Most Traveled Routes</th></tr>
+            <tr><th class="routeName">Route</th>
+                <th class="clinched">Traveled (<span id="unitsText"><?php tm_echo_units(); ?></span>)</th>
+                <th class="clinched">Length (<span id="unitsText"><?php tm_echo_units(); ?></span>)</th>
+        </thead>
+        <tbody id="longestTraveledRoutes">
         </tbody>
     </table>
 </div>
