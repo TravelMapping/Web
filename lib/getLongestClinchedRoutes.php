@@ -23,19 +23,22 @@ ob_end_clean();
 $response = array();
 
 // build the SQL query
-$sql = "select r.root, r.region, r.route, r.banner, r.city, r.mileage from routes as r left join clinchedRoutes as cr on r.root=cr.route and traveler='".$params['traveler']."'";
+$sql = "select r.root, r.region, r.route, r.banner, r.city, r.mileage from routes as r left join clinchedRoutes as cr on r.root=cr.route and traveler='".$params['traveler']."' join systems as s on s.systemName=r.systemName";
 
 $morejoins = "";
-if ($params['system'] != "null") {
-    $morejoins = " join systems as s on s.systemName=r.systemName";
-}
 if ($params['region'] != "null") {
     $morejoins .= " join regions as rg on rg.code=r.region";
 }
 $sql = $sql.$morejoins." where cr.clinched='1'";
 $morewhere = "";
+if ($params['preview']) {
+    $morewhere .= " and (s.level='active' or s.level='preview')";
+}
+else {
+    $morewhere .= " and s.level='active'";
+}
 if ($params['system'] != "null") {
-    $morewhere = " and s.systemName='".$params['system']."'";
+    $morewhere .= " and s.systemName='".$params['system']."'";
 }
 if ($params['region'] != "null") {
     $morewhere .= " and rg.code='".$params['region']."'";

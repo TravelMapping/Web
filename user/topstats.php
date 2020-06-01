@@ -34,6 +34,11 @@ function initUI() {
     selects['rg'].disabled = true;
 }
 
+function connectedChanged() {
+
+    selects['rg'].disabled = selects['connected'].value == "connected";
+}
+
 function updateStats() {
 
     distanceUnits = selects['units'].value;
@@ -42,6 +47,7 @@ function updateStats() {
 	traveler: selects['u'].value,
 	system: selects['sys'].value,
         region: selects['rg'].value,
+	preview: selects['preview'].value == "yes",
 	numentries: document.getElementById("numentries").value
     };
     
@@ -212,7 +218,7 @@ function parseLongestTraveledConnectedData(data) {
 
 <tr><td>Max entries per table:
 <input id="numentries" type="number" min="1" max="500" value="25" />
-    <select name="connected">
+    <select name="connected" onchange="connectedChanged();" >
     <option value="connected">Connected Routes</option>
     <option value="inregion">In-Region Routes</option>
     </select>

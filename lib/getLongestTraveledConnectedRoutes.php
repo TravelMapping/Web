@@ -22,17 +22,17 @@ ob_end_clean();
 $response = array();
 
 // build the SQL query
-$sql = "select r.firstRoot, r.route, r.banner, r.groupName, r.mileage, cr.mileage as traveled from connectedRoutes as r left join clinchedConnectedRoutes as cr on r.firstRoot=cr.route and traveler='".$params['traveler']."'";
+$sql = "select r.firstRoot, r.route, r.banner, r.groupName, r.mileage, cr.mileage as traveled from connectedRoutes as r left join clinchedConnectedRoutes as cr on r.firstRoot=cr.route and traveler='".$params['traveler']."' join systems as s on s.systemName=r.systemName";
 
-$morejoins = "";
-if ($params['system'] != "null") {
-    $morejoins = " join systems as s on s.systemName=r.systemName";
-}
-
-$sql = $sql.$morejoins;
 $morewhere = "";
+if ($params['preview']) {
+    $morewhere .= " and (s.level='active' or s.level='preview')";
+}
+else {
+    $morewhere .= " and s.level='active'";
+}
 if ($params['system'] != "null") {
-    $morewhere = " and s.systemName='".$params['system']."'";
+    $morewhere .= " and s.systemName='".$params['system']."'";
 }
 $sql = $sql.$morewhere."  order by traveled desc limit ".$params['numentries'];
 
