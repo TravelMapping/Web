@@ -1,6 +1,6 @@
 <?
 // read information from the TM database about the top
-// longest clinched routes for a given user, alternately
+// longest clinched connected routes for a given user, alternately
 // restricted to a system
 //
 // Author: Jim Teresco, Travel Mapping Project, May 2020
@@ -22,19 +22,19 @@ ob_end_clean();
 $response = array();
 
 // build the SQL query
-$sql = "select r.firstRoot, r.route, r.banner, r.groupName, r.mileage from connectedRoutes as r left join clinchedConnectedRoutes as cr on r.firstRoot=cr.route and traveler='".$params['traveler']."'";
+$sql = "select r.firstRoot, r.route, r.banner, r.groupName, r.mileage, cr.mileage as traveled from connectedRoutes as r left join clinchedConnectedRoutes as cr on r.firstRoot=cr.route and traveler='".$params['traveler']."'";
 
 $morejoins = "";
 if ($params['system'] != "null") {
     $morejoins = " join systems as s on s.systemName=r.systemName";
 }
 
-$sql = $sql.$morejoins." where cr.clinched='1'";
+$sql = $sql.$morejoins;
 $morewhere = "";
 if ($params['system'] != "null") {
     $morewhere = " and s.systemName='".$params['system']."'";
 }
-$sql = $sql.$morewhere."  order by r.mileage desc limit ".$params['numentries'];
+$sql = $sql.$morewhere."  order by traveled desc limit ".$params['numentries'];
 
 // make the specified DB query 
 $result = tmdb_query($sql);
@@ -49,6 +49,7 @@ while ($row = $result->fetch_assoc()) {
     if ($row['groupName'] != "") {
         $nextobj->routeinfo .= " (".$row['groupName'].")";
     }
+    $nextobj->traveled = $row['traveled'];
     $nextobj->mileage = $row['mileage'];
     array_push($response, $nextobj);
 }
