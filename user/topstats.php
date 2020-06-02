@@ -264,7 +264,7 @@ function parseClosestToClinchedConnectedTraveledData(data) {
 <body onload="initUI(); updateStats(); ">
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 
-<div id="controlbox">
+<div id="controlbox" style="padding: 20px;">
     <table id="optionsTable" class="gratable">
     <thead>
     <tr><th>Select Options To Display Stats</th></tr>
@@ -303,8 +303,8 @@ function parseClosestToClinchedConnectedTraveledData(data) {
     </table>
 </div>
 <center>
-<span style="display: inline-block">
-    <table class="gratable">
+<span style="display: inline-block; vertical-align: top;">
+    <table class="gratable" style="padding: 10px;">
         <thead>
             <tr><th colspan="2" class="routeName">Longest Clinched Routes</th></tr>
             <tr><th class="routeName">Route</th>
@@ -313,8 +313,8 @@ function parseClosestToClinchedConnectedTraveledData(data) {
         <tbody id="longestClinchedRoutes">
         </tbody>
     </table>
-</span><span style="display: inline-block">
-    <table class="gratable">
+</span><span style="display: inline-block; vertical-align: top;">
+    <table class="gratable" style="padding: 10px;">
         <thead>
             <tr><th colspan="3" class="routeName">Most Traveled Routes</th></tr>
             <tr><th class="routeName">Route</th>
@@ -324,8 +324,8 @@ function parseClosestToClinchedConnectedTraveledData(data) {
         <tbody id="longestTraveledRoutes">
         </tbody>
     </table>
-</span><span style="display: inline-block">
-    <table class="gratable">
+</span><span style="display: inline-block; vertical-align: top;">
+    <table class="gratable" style="padding: 10px;">
         <thead>
             <tr><th colspan="3" class="routeName">Unclinched Traveled Routes Closest to Clinched</th></tr>
             <tr><th class="routeName">Route</th>
