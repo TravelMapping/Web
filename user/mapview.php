@@ -90,7 +90,7 @@
 	    z-index: 850; /* above all Leaflet layers except controls */
             right: 10px;
             top: 90px;
-            bottom: 20px;
+	    max-height: 80%;
             overflow-y: auto;
             max-width: 40%;
 	    opacity: .75;
