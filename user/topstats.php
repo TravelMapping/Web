@@ -262,7 +262,7 @@ function parseClosestToClinchedConnectedTraveledData(data) {
 }
 </script>
 
-<body onload="initUI();">
+<body onload="initUI(); updateStats(); ">
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 
 <div id="controlbox">
@@ -298,7 +298,7 @@ function parseClosestToClinchedConnectedTraveledData(data) {
     </td></tr>
     
     <tr><td style="text-align: center">
-    <input type="submit" onclick="updateStats();" />
+    <input type="button" value="Update Stats" onclick="updateStats();" />
     </td></tr>
     </tbody>
     </table>
