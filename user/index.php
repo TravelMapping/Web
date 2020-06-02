@@ -33,6 +33,10 @@
         	text-align: center;
     		font-size: 24px;
         }
+        #topstats {
+        	text-align: center;
+    		font-size: 24px;
+        }
     </style>
     <!-- jQuery -->
     <script type="application/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -87,6 +91,9 @@ echo "<h1>Traveler Stats for ".$tmuser."</h1>";
 	</div>
 	<div id="scrollableMapview">
 	New: Browse the travels of <?php echo $tmuser; ?> with <a href="mapview.php?v">Scrollable Mapview</a>.
+	</div>
+	<div id="topstats">
+	New: <a href="topstats.php">Browse the top stats for the travels of <?php echo $tmuser; ?></a>.
 	</div>
     <div id="overall">
         <h2>Overall Stats</h2>
