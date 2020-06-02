@@ -25,6 +25,9 @@ of the two highways cross. Often the same coordinates can be used for
 both highways. </li>
   <li><a name="through_lanes"></a><a style="text-decoration:none" href="#through_lanes">&#x1f517</a>
 These centerlines are defined by through lanes, not by turning lanes at intersections nor the equivalent in interchange ramps. </li>
+  <li><a name="accuracy"></a><a style="text-decoration:none" href="#accuracy">&#x1f517</a>
+The accuracy of the waypoint position depends on the accuracy of the underlaying map.
+Check the position with satellite views if possible.</li>
   <li><a name="couplets"></a><a style="text-decoration:none" href="#couplets">&#x1f517</a>
 For couplets and divided highways, usually split the difference between the two roadways. </li>
   <li><a name="conn_ramps"></a><a style="text-decoration:none" href="#conn_ramps">&#x1f517</a>

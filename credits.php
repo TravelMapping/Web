@@ -10,12 +10,27 @@
 <body>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 
-<p class="heading">Highway Data Sources</p>
+<p class="heading">Contents</p>
+
+<div class="text">
+<ul>
+  <li><a href="#sources">Highway Data Sources</a></li>
+  <ul>
+    <li><a href="#mapref">General Map References</a></li>
+    <li><a href="#regionsources">Highway Departments and Hobbyist Sites</a></li>
+  </ul>
+  <li><a href="#tools">Software Tools</a></li>
+  <li><a href="#contributors">Project Contributors</a></li>
+  <li><a href="#predecessor">Predecessor Project</a></li>
+</ul>
+</div>
+
+<p class="heading"><a name="sources"></a>Highway Data Sources</p>
 
 <p class="text">We would like to credit and thank the authors of the
 following sources of highway information.</p>
 
-<p class="subheading">General Map References</p>
+<p class="subheading"><a name="mapref"></a>General Map References</p>
 
 	<ul class="sources">
 	  <li>Path Coordinates
@@ -44,7 +59,7 @@ following sources of highway information.</p>
 	  </li>
 	</ul>
 
-<p class="subheading">Highway Departments and Hobbyist Sites</p>
+<p class="subheading"><a name="regionsources"></a>Highway Departments and Hobbyist Sites</p>
 	<ul class="sources">
 	  <li>Armenia
 	    <ul>
@@ -367,7 +382,7 @@ following sources of highway information.</p>
 	  </li>
 	  <li>Latvia
 	    <ul>
-<li><a href="http://www.lvceli.lv/en/PC/PageImages/Original/302.jpg">Map of International European Roads in Lithuania</a>. Official map showing routes of the International European Roads from the Latvia State Roads department.</li>
+<li><a href="http://likumi.lv/doc.php?id=198589">Lists of State Roads and Sections of Municipal Roads</a>. Official listing of routes from the Latvia State Roads department.</li>
 	      <li><a href="http://www.unece.org/trans/doc/2006/sc1/ECE-TRANS-SC1-2006-03e.pdf">UNECE map of E264</a>. Official map showing the route of E264 in Estonia and Latvia from the United Nations Economic Commission for Europe.</li>
 	    </ul>
 	  </li>
@@ -885,9 +900,11 @@ following sources of highway information.</p>
   <li>Mapping capabilities are provided
   by <a href="https://leafletjs.com/">Leaflet</a> with
   the <a href="https://github.com/marslan390/BeautifyMarker">extension</a>
-  and map tiles from various sources as indicated on the online maps</li>
+    and map tiles from various sources as indicated on the online maps</li>
+  <li>Geocoding capabilities use <a href="https://nominatim.org/">Nominatim</a>.</li>
   <li>Other JavaScript libraries in use
-    include <a href="https://jquery.com/">jQuery</a>.</li>
+    include <a href="https://jquery.com/">jQuery</a>, and code adapted
+    from <a href="http://moutjs.com/">MOUT</a>.</li>
   <li>The shield generator
   uses <a href="https://github.com/sammdot/roadgeek-fonts/releases">Roadgeek Fonts</a>.</li>
 </ul>
@@ -920,7 +937,7 @@ following sources of highway information.</p>
   <li>Oscar Voss (oscar)</li>
   </ul>
 
-<p class="heading"><a name="contributors">Predecessor Project</a></p>
+<p class="heading"><a name="predecessor">Predecessor Project</a></p>
   
 <p class="text">Travel Mapping is the successor project to the
 dormant <a href="http://cmap.m-plex.com">Clinched Highway Mapping</a>

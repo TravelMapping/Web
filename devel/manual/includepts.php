@@ -28,6 +28,7 @@ County/local/secondary/municipal/township etc. routes are not required
 points. The highway designation types to be included should be clarified
  before work is begun.</li>
       <li>Highways intersecting at an interchange. </li>
+      <li>Rest areas or service plazas accessible by car from both freeway carriageways, at which travelers can return the way they came. </li>
   <li>Other major highways that serve regional (not only local) travelers:
         <ul>
           <li>Connections to a nearby parallel expressway.</li>
