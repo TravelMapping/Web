@@ -303,7 +303,8 @@ function parseClosestToClinchedConnectedTraveledData(data) {
     </tbody>
     </table>
 </div>
-<div id="stats">
+<center>
+<span style="display: inline-block">
     <table class="gratable">
         <thead>
             <tr><th colspan="2" class="routeName">Longest Clinched Routes</th></tr>
@@ -313,6 +314,7 @@ function parseClosestToClinchedConnectedTraveledData(data) {
         <tbody id="longestClinchedRoutes">
         </tbody>
     </table>
+</span><span style="display: inline-block">
     <table class="gratable">
         <thead>
             <tr><th colspan="3" class="routeName">Most Traveled Routes</th></tr>
@@ -323,6 +325,7 @@ function parseClosestToClinchedConnectedTraveledData(data) {
         <tbody id="longestTraveledRoutes">
         </tbody>
     </table>
+</span><span style="display: inline-block">
     <table class="gratable">
         <thead>
             <tr><th colspan="3" class="routeName">Unclinched Traveled Routes Closest to Clinched</th></tr>
@@ -333,7 +336,8 @@ function parseClosestToClinchedConnectedTraveledData(data) {
         <tbody id="closestToClinchedTraveledRoutes">
         </tbody>
     </table>
-</div>
+</span>
+</center>
 </body>
 <?php
     $tmdb->close();
