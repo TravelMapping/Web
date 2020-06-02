@@ -42,9 +42,12 @@ function connectedChanged() {
 function updateStats() {
 
     distanceUnits = selects['units'].value;
+    set_units_cookie();
+    traveler = selects['u'].value;
+    set_traveler_cookie();
     document.getElementById("unitsText").innerHTML = distanceUnits;
     let params = {
-	traveler: selects['u'].value,
+	traveler: traveler,
 	system: selects['sys'].value,
         region: selects['rg'].value,
 	preview: selects['preview'].value == "yes",
