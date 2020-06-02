@@ -188,6 +188,19 @@
             initFloatingHeaders($routesTable);
         }
     );
+
+let scrollableMapviewDialog = `
+<p><b>Set Initial Location and Zoom Level</b></br >
+Find place: <input id="placeinput" name="placeinput" type="text" size="20" maxlength="100" />&nbsp;<input id="findbutton" name="findbutton" type="button" value="Press to Search and Set Coords" onclick="nominatimLookup('placeinput');" /><br />
+(Geocoding by <a target="_blank" href="https://nominatim.openstreetmap.org/">OSM Nominatim</a>)<br />
+<hr />
+Latitude: <input id="latvalinput" name="latvalinput" type="number" min="-90" max="90" size="15" maxlength="12" step="any" value="` + setlat + `" /><br />
+Longitude: <input id="lonvalinput" name="lonvalinput" type="number" min="-180" max="180" size="15" maxlength="12" step="any" value="` + setlon + `" /><br />
+Zoom level: [Far]<input id="zoomvalinput" name="zoomvalinput" type="range" min="8" max="15" value="` + setzoom + `" step="1" size="2" />[Close]<br />
+<hr />
+User: <?php tm_user_select(); ?>&nbsp;Units: <?php tm_units_select(); ?><br />
+</p>
+`;
 </script>
 <?php $nobigheader = 1; ?>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
