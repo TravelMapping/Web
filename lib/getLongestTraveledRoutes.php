@@ -29,7 +29,7 @@ $morejoins = "";
 if ($params['region'] != "null") {
     $morejoins .= " join regions as rg on rg.code=r.region";
 }
-$sql = $sql.$morejoins;
+$sql = $sql.$morejoins." where cr.mileage > 0";
 $morewhere = "";
 if ($params['preview']) {
     $morewhere .= " and (s.level='active' or s.level='preview')";

@@ -6,10 +6,6 @@
  * Top stats page.
  * URL Params:
  *  u - user whose stats to display (required)
- *  rg - region to consider (optional)
- *  country - country to consider (optional, not yet implemented)
- *  sys - system to consider (optional)
- * (u, [rg|sys|country])
  ***
  -->
 <html xmlns="http://www.w3.org/1999/xhtml">
