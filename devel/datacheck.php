@@ -82,7 +82,6 @@
 	  strcmp($row['code'],"VISIBLE_HIDDEN_COLOC") &&
 	  strcmp($row['code'],"HIDDEN_JUNCTION") &&
 	  strcmp($row['code'],"BUS_WITH_I") &&
-	  strcmp($row['code'],"LABEL_TOO_LONG") &&
 	  strcmp($row['code'],"LACKS_GENERIC") &&
 	  strcmp($row['code'],"OUT_OF_BOUNDS") &&
 	  strcmp($row['code'],"US_BANNER")) {
