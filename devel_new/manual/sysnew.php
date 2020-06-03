@@ -118,70 +118,103 @@ Develop routes in devel status</p>
   <li><a name="developwpt"></a><a style="text-decoration:none" href="#developwpt">&#x1f517</a>
   Develop routes by creating <a href="hwydata.php">highway data files (<code>.wpt</code>)</a>.</li>
   <ul>
+    </br>
     <li>Create the files route by route in a desired order but make sure that you don't miss any route.</li>
+    </br>
     <li>Use the <a href="/wptedit/">Waypoint File Editor</a> to find the coordinates for the waypoints:</li>
     <ul>
       <li><a href="includepts.php">Waypoints to include</a></br>
-      It is recommended to start with copying the waypoint coordinates from existing <code.wpt</code> files.</li>
+      It is recommended to start with copying the required waypoint coordinates from existing <code.wpt</code> files for:</li>
+      <ul>
+        <li>Intersecting routes:</br>
+        Waypoint labels must usually be renamed</li>
+        <li>Concurrent routes (multiplexes):</br>
+        Waypoint labels are usually not renamed</li>
+      </ul>
+      because they must have the same coordinates.
       <li><a href="points.php">Positioning waypoints</a></li>
       <li><a href="wayptlabels.php">Labeling waypoints</a></li>
       <li>Do not use commercial mapping sources, such as Google Maps, Yahoo Maps, or Bing Maps.</li>
+      <li>Properly shaped routes in non-remote areas 
+      typically have average waypoint spacing of 1.5-2.5 miles for surface 
+      routes and 2.0-3.0 miles for freeways, considering all visible and 
+      hidden waypoints together. There are routes that should fall outside 
+      those ranges, but those ranges are the norm.  These averages are not 
+      suggested spacings to aim for.  When the routes are worked out according
+      to the above instructions, these ranges are typical of the average 
+      waypoint spacing.</li>
     </ul>
-    <li>Only add routes which are fully signed:</li>
+    </br>
+    <li>Only add routes which are fully signed</li>
     <ul>
       <li>Signed at the beginning of the route.</li>
       <li>Signed at the end of the route.</li>
       <li>Signed along the route so that there is no doubt about the actual routing.</li>
+      </br>
+      <li>If the routing is partially not clear or obvious, you need to shorten or interupt the route.</li>
+      <li>If the number of fully unsigned routes is <i>small</i>, they can be included when there is a clear evidence for their existance.</li>
+      <ul>
+        <li>Evidence is, when they are on the latest official list from the responsible road authority or state institution.</li>
+        <li>For some regions, e.g. with poor street view coverage, it is sufficient when the routing is indicated on maps.</li>
+      </ul>
+      <li>Notes to exceptions should be clearly described on the forum thread and / or in a README.md file on the Github folder for the wpt files.</li>
     </ul>
-    <li>If the routing is partially not clear or obvious, you need to shorten or interupt the route.</li>
-    <li>If the number of fully unsigned routes is <i>small</i>, they can be included when there is a clear evidence for their existance.</li>
+    </br>
+    <li>Waypoint order</li>
     <ul>
-      <li>Evidence is, when they are on the latest official list from the responsible road authority or state institution.</li>
-      <li>For some regions, e.g. with poor street view coverage, it is sufficient when the routing is indicated on maps.</li>
+      <li>In general, put the waypoints in the order normally used by the 
+      country. Exit numbers or roadside distance markers often reveal this order.</li>
+      <li>In the US and Canada, most highways should have waypoints in order
+      from west to east or south to north. Some spurs might not follow this 
+      as they begin at a parent highway and end away from it (e.g., NC I-795: 
+      north (I-95) to south). </li>
+      <li>UNECE International 'E' Roads should run west to east and north to south.</li>
+      <li>Some countries use a major city as the origin and have exit 
+      numbers increasing radially outward and circumferentially in a certain direction.</li>
     </ul>
-    <li>Notes to exceptions should be clearly described on the forum thread and / or in a README.md file on the Github folder for the wpt files.</li>
+    </br>
   </ul>
   <li><a name="developcsv"></a><a style="text-decoration:none" href="#developcsv">&#x1f517</a>
   Make the <a href="syshwylist.php">highway system lists (<code>.csv</code>)</a></li>
+  </br>
   <li><a name="developsystem"></a><a style="text-decoration:none" href="#developsystem">&#x1f517</a>
-  Promote the system to <a href="sysdef.php#devel"><devel>devel</devel> status</a> when a first batch of routes is available.</li>
+  Promote the system to <a href="sysdef.php#devel"><devel>devel</devel> status</a> when a first batch of routes is available.
+  This requires a new entry to <a href="https://github.com/TravelMapping/HighwayData/blob/master/systems.csv">system.csv</a> on Github:</li>
   <ul>
-    <li>This requires a new entry to <a href="https://github.com/TravelMapping/HighwayData/blob/master/systems.csv">system.csv</a> on Github.</li>
-    <ul>
-      <li>Enter a new line to the last segment of the file where the in-development systems are listed. The structure is as follows:</li>
-      <pre>
+    <li>Enter a new line to the last segment of the file where the in-development systems are listed. The structure is as follows:</li>
+    <pre>
 System;CountryCode;Name;Color;Tier;Level</br>
 ...
 brabr;BRA;Brazil Rodovias Federais;green;4;devel
 ...
-      </pre>
-      <li>The <code>system</code> code starts with the country, region or continent code, followed by a system abbreviation</li>
-      <li>The region or continent or <code>country code</code> can be found in
-      <a href="https://github.com/TravelMapping/HighwayData/blob/master/regions.csv">regions.csv</a></li>
-      <li>The system <code>name</code> starts with the English region name followed by the system name in native language</li>
-      <ul>
-        <li>Use an English term like <i>Motorways</i> or <i>Main Roads</i> if the native name is not using a Latin-script alphabet.</li>
-      </ul>
-      <li>The <code>color</code> represents the color which is used on maps to draw the TM graph.</li>
-      <ul>
-        <li>The color must be unique for each region to distinguish the systems.</li>
-        <li>The color should represent the color which is used on signs to indicate the routes.</li>
-        <li>Available colors are: <span style="color: #0000DC;">blue</span>, <span style="color: #996600;">brown</span>,
-        <span style="color: #E00000;">red</span>, <span style="color: #E8B000;">yellow</span>,
-        <span style="color: #008CA0;">teal</span>, <span style="color: #00E000;">green</span>,
-        <span style="color: #D000D0;">magenta</span> and <span style="color: #F09673;">lightsalmon</span>.</li>
-        <li>Standard colors are often used for a continent to avoid confusing users.</li>
-      </ul>
-      <li>The <code>tier</code> index is used to distinguish systems top down.</li>
-      <ul>
-        <li>It is used on maps to draw the TM graph. If there are concurrent routes, the color of the higher level system is on top.</li>
-        <li>The more important the system to non-local travel, the lower the tier index.</li>
-        <li>Standard tiers are often used for a continent to avoid confusing users.</li>
-        <li>We currently only use <code>tier 1</code> to <code>tier 5</code>.</li>
-      </ul>
-      <li>The <code>level</code> is always <devel>devel</devel> at this point.</li>
+    </pre>
+    <li>The <code>system</code> code starts with the country, region or continent code, followed by a system abbreviation</li>
+    <li>The region or continent or <code>country code</code> can be found in
+    <a href="https://github.com/TravelMapping/HighwayData/blob/master/regions.csv">regions.csv</a></li>
+    <li>The system <code>name</code> starts with the English region name followed by the system name in native language</li>
+    <ul>
+      <li>Use an English term like <i>Motorways</i> or <i>Main Roads</i> if the native name is not using a Latin-script alphabet.</li>
     </ul>
+    <li>The <code>color</code> represents the color which is used on maps to draw the TM graph.</li>
+    <ul>
+      <li>The color must be unique for each region to distinguish the systems.</li>
+      <li>The color should represent the color which is used on signs to indicate the routes.</li>
+      <li>Available colors are: <span style="color: #0000DC;">blue</span>, <span style="color: #996600;">brown</span>,
+      <span style="color: #E00000;">red</span>, <span style="color: #E8B000;">yellow</span>,
+      <span style="color: #008CA0;">teal</span>, <span style="color: #00E000;">green</span>,
+      <span style="color: #D000D0;">magenta</span> and <span style="color: #F09673;">lightsalmon</span>.</li>
+      <li>Standard colors are often used for a continent to avoid confusing users.</li>
+    </ul>
+    <li>The <code>tier</code> index is used to distinguish systems top down.</li>
+    <ul>
+      <li>It is used on maps to draw the TM graph. If there are concurrent routes, the color of the higher level system is on top.</li>
+      <li>The more important the system to non-local travel, the lower the tier index.</li>
+      <li>Standard tiers are often used for a continent to avoid confusing users.</li>
+      <li>We currently only use <code>tier 1</code> to <code>tier 5</code>.</li>
+    </ul>
+    <li>The <code>level</code> is always <devel>devel</devel> at this point.</li>
   </ul>
+  </br>
   <li><a name="developshield"></a><a style="text-decoration:none" href="#developshield">&#x1f517</a>
   Create the system shield (<code>.svg</code>) <i>(optionally)</i></li>
   <ul>
