@@ -206,7 +206,7 @@ function tm_system_select($multiple) {
 function tm_user_select() {
     global $tmdb;
     global $tmuser;
-    echo "<select name=\"u\">\n";
+    echo "<select name=\"u\" id=\"tmuserselect\">\n";
     echo "<option value=\"null\">[None Selected]</option>\n";
     $res = tmdb_query("SELECT DISTINCT traveler FROM clinchedOverallMileageByRegion ORDER by traveler ASC;");
     while ($row = $res->fetch_assoc()) {
@@ -226,7 +226,7 @@ function tm_user_select() {
 function tm_units_select() {
     global $tmunits;
     global $tm_supported_units;
-    echo "<select name=\"units\">\n";
+    echo "<select name=\"units\" id=\"tmunitsselect\">\n";
     foreach ($tm_supported_units as $unit => $conv) {
         echo "<option value=\"".$unit."\"";
         if ($unit == $tmunits) {

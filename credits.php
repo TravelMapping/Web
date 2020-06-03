@@ -904,7 +904,7 @@ following sources of highway information.</p>
   <li>Geocoding capabilities use <a href="https://nominatim.org/">Nominatim</a>.</li>
   <li>Other JavaScript libraries in use
     include <a href="https://jquery.com/">jQuery</a>, and code adapted
-    from <a href="http://moutjs.com/">MOUT</a>.</li>
+    from <a href="http://moutjs.com/">MOUT</a> and <a href="https://github.com/mapshakers/leaflet-control-window">leaflet-control-window</a>.</li>
   <li>The shield generator
   uses <a href="https://github.com/sammdot/roadgeek-fonts/releases">Roadgeek Fonts</a>.</li>
 </ul>

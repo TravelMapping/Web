@@ -69,22 +69,22 @@
         if (strcmp($row['value'],"") != 0) {
           echo $row['value'];
         }
-	// This list should match the datacheck_always_error list in the siteupdate program.
-	// Do not print FP entries for these cases.
-	if ((strcmp($row['code'],"BAD_ANGLE") == 0) ||
-	  (strcmp($row['code'],"DUPLICATE_LABEL") == 0) ||
-	  (strcmp($row['code'],"HIDDEN_TERMINUS") == 0) ||
-	  (strcmp($row['code'],"INVALID_FINAL_CHAR") == 0) ||
-	  (strcmp($row['code'],"INVALID_FIRST_CHAR") == 0) ||
-	  (strcmp($row['code'],"LABEL_INVALID_CHAR") == 0) ||
-	  (strcmp($row['code'],"LABEL_PARENS") == 0) ||
-	  (strcmp($row['code'],"LABEL_SLASHES") == 0) ||
-	  (strcmp($row['code'],"LABEL_UNDERSCORES") == 0) ||
-	  (strcmp($row['code'],"LONG_UNDERSCORE") == 0) ||
-	  (strcmp($row['code'],"MALFORMED_LAT") == 0) ||
-	  (strcmp($row['code'],"MALFORMED_LON") == 0) ||
-	  (strcmp($row['code'],"MALFORMED_URL") == 0) ||
-	  (strcmp($row['code'],"NONTERMINAL_UNDERSCORE") == 0)) {
+	// If not an error type for which FPs are
+	// allowed, don't print an FP entry.
+	// This list is in descending order by frequency, to reduce
+	// the amount of conditional branching & unnecessary tests
+	if (strcmp($row['code'],"VISIBLE_DISTANCE") &&
+	  strcmp($row['code'],"SHARP_ANGLE") &&
+	  strcmp($row['code'],"LABEL_SELFREF") &&
+	  strcmp($row['code'],"LABEL_LOOKS_HIDDEN") &&
+	  strcmp($row['code'],"DUPLICATE_COORDS") &&
+	  strcmp($row['code'],"LONG_SEGMENT") &&
+	  strcmp($row['code'],"VISIBLE_HIDDEN_COLOC") &&
+	  strcmp($row['code'],"HIDDEN_JUNCTION") &&
+	  strcmp($row['code'],"BUS_WITH_I") &&
+	  strcmp($row['code'],"LACKS_GENERIC") &&
+	  strcmp($row['code'],"OUT_OF_BOUNDS") &&
+	  strcmp($row['code'],"US_BANNER")) {
           echo "</td><td style=\"color: gray\"><i>This is always a true error and cannot be marked false positive.</i></td></tr>\n";
 	}
         else {
