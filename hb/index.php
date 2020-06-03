@@ -299,18 +299,24 @@ SQL;
     $row = tmdb_query($sql_command) -> fetch_assoc();
     $numDrivers = $row['numDrivers'];
     echo "    <tr><td class=\"important\">Total Length</td><td>".tm_convert_distance($totalMileage)." ".$tmunits."</td></tr>\n";
-    echo "    <tr title=\"".$row['drivers']."\"><td>Total Drivers</td><td>".$numDrivers." (".round($numDrivers / $numUsers * 100, 2)."%)</td>\n";
+    $style = 'style="background-color: '.tm_color_for_amount_traveled($numDrivers,$numUsers).';"';
+    echo "    <tr title=\"".$row['drivers']."\"><td>Total Drivers</td><td ".$style.">".$numDrivers." (".round($numDrivers / $numUsers * 100, 2)."%)</td>\n";
     if ($numDrivers == 0) {
-        echo "    <tr class=\"link\" title=\"".$row['clinchers']."\"><td>Total Clinched</td><td>".$row['numClinched']." (".round($row['numClinched'] / $numUsers * 100, 2)."%)</td>\n";
+        $style = 'style="background-color: '.tm_color_for_amount_traveled($row['numClinched'],$numUsers).';"';
+        echo "    <tr class=\"link\" title=\"".$row['clinchers']."\"><td>Total Clinched</td><td ".$style.">".$row['numClinched']." (".round($row['numClinched'] / $numUsers * 100, 2)."%)</td>\n";
     } else {
-        echo "    <tr class=\"link\" title=\"".$row['clinchers']."\"><td rowspan=\"2\">Total Clinched</td><td>".$row['numClinched']." (".round($row['numClinched'] / $numUsers * 100, 2)."%)</td>\n";
-        echo "    <tr class=\"link\" title=\"".$row['clinchers']."\"><td>".round($row['numClinched'] / $numDrivers * 100, 2)."% of drivers</td>\n";
+        $style = 'style="background-color: '.tm_color_for_amount_traveled($row['numClinched'],$numUsers).';"';
+        echo "    <tr class=\"link\" title=\"".$row['clinchers']."\"><td rowspan=\"2\">Total Clinched</td><td ".$style.">".$row['numClinched']." (".round($row['numClinched'] / $numUsers * 100, 2)."%)</td>\n";
+        $style = 'style="background-color: '.tm_color_for_amount_traveled($row['numClinched'],$numDrivers).';"';
+        echo "    <tr class=\"link\" title=\"".$row['clinchers']."\"><td ".$style.">".round($row['numClinched'] / $numDrivers * 100, 2)."% of drivers</td>\n";
     }
-    echo "    <tr><td>Average Traveled</td><td>".tm_convert_distance(round($row['avgMileage'],2))." ".$tmunits." (".round(100 * $row['avgMileage'] / $totalMileage, 2)."%)</td></tr>\n";
+    $style = 'style="background-color: '.tm_color_for_amount_traveled($row['avgMileage'],$totalMileage).';"';
+    echo "    <tr><td>Average Traveled</td><td ".$style.">".tm_convert_distance(round($row['avgMileage'],2))." ".$tmunits." (".round(100 * $row['avgMileage'] / $totalMileage, 2)."%)</td></tr>\n";
     if ($tmuser != "null") {
       $sql_command = "SELECT mileage FROM clinchedRoutes where traveler='" . $tmuser . "' AND route='" . $routeparam . "'";
       $row = tmdb_query($sql_command) -> fetch_assoc();
-      echo "    <tr><td>{$tmuser} Traveled</td><td>".tm_convert_distance($row['mileage'])." ".$tmunits." (".round(100 * $row['mileage'] / $totalMileage, 2)."%)</td></tr>\n";
+      $style = 'style="background-color: '.tm_color_for_amount_traveled($row['mileage'],$numUsers).';"';
+      echo "    <tr><td>{$tmuser} Traveled</td><td ".$style.">".tm_convert_distance($row['mileage'])." ".$tmunits." (".round(100 * $row['mileage'] / $totalMileage, 2)."%)</td></tr>\n";
     }
     echo"</tbody></table>\n";
     echo "<table id='waypoints' class=\"gratable\"><thead><tr><th colspan=\"2\">Waypoints</th></tr><tr><th>Name</th><th title='Percent of people who have driven this route who have driven the segment starting at this point.'>%</th></tr></thead><tbody>\n";
@@ -341,9 +347,14 @@ SQL;
 	    else {	      
 		$color1 = "rgb(255,255,255)";
 	    }
-            $colorFactor = $row['driverPercent'] / 100;
-            $colors = [255, 255 - round($colorFactor * 128), 255 - round($colorFactor * 128)];
-            echo "<tr onClick='javascript:labelClick(" . $waypointnum . ",\"" . $row['pointName'] . "\"," . $row['latitude'] . "," . $row['longitude'] . ",0);'><td class='link' style='background-color: ".$color1."'>" . $row['pointName'] . "</td><td style='background-color: rgb({$colors[0]},{$colors[1]},{$colors[2]})'>";
+            if ($row['driverPercent'] != null) {
+	        $style = 'style="background-color: '.tm_color_for_amount_traveled($row['driverPercent'],100).';"';
+ 	    }
+	    else {
+	    	 $style = 'style="background-color: white"';
+	    }
+	    
+            echo "<tr onClick='javascript:labelClick(" . $waypointnum . ",\"" . $row['pointName'] . "\"," . $row['latitude'] . "," . $row['longitude'] . ",0);'><td class='link' style='background-color: ".$color1."'>" . $row['pointName'] . "</td><td ".$style.">";
             if ($row['driverPercent'] != null) {
                 echo round($row['driverPercent'],2);
             }
