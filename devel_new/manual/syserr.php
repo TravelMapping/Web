@@ -165,7 +165,7 @@ Data errors</p>
     <td>LABEL_TOO_LONG</td>
     <td>Label is too long to fit in the space allocated for the DB field.</td>
     <td><yellow>NO</yellow></td>
-    <td><yellow>YES</yellow></td>
+    <td><red>NO</red></td>
   </tr>
 <!--
   <tr valign="top">

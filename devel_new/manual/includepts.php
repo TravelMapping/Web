@@ -69,7 +69,7 @@ Required intersections</p>
   </ul>
 </div>
 
-<p class="subheading"><a name="intersections"></a><a style="text-decoration:none" href="#intersections">&#x1f517</a>
+<p class="subheading"><a name="shapingpoints"></a><a style="text-decoration:none" href="#shapingpoints">&#x1f517</a>
 Shaping points</p>
 
 <div class="text">
@@ -113,18 +113,6 @@ Shaping points</p>
     </ul>
   </li>
 </div>
-
-<p class="subheading"><a name="bestpractise"></a><a style="text-decoration:none" href="#bestpractise">&#x1f517</a>
-Best practise</p>
-
-<p class="text">Properly shaped routes in non-remote areas 
-typically have average waypoint spacing of 1.5-2.5 miles for surface 
-routes and 2.0-3.0 miles for freeways, considering all visible and 
-hidden waypoints together. There are routes that should fall outside 
-those ranges, but those ranges are the norm.  These averages are not 
-suggested spacings to aim for.  When the routes are worked out according
- to the above instructions, these ranges are typical of the average 
-waypoint spacing.</p>
 
 
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
