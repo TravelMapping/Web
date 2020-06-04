@@ -121,7 +121,8 @@ function parseLongestClinchedData(data) {
 	    let link = "/hb/?r=" + response[i].root;
             rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
 	        response[i].routeinfo +
-	        '</td><td style="text-align: right">' +
+	        '</td><td style="text-align: right; background-color: ' +
+		colorForAmountTraveled(1,1) + '">' +
 	        convertToCurrentUnits(response[i].mileage).toFixed(2) +
 		"</td></tr>";
         }
@@ -145,7 +146,8 @@ function parseLongestClinchedConnectedData(data) {
 	    let link = "/user/mapview.php?rte=" + response[i].routeonly;
             rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
 	        response[i].routeinfo +
-	        '</td><td style="text-align: right">' +
+	        '</td><td style="text-align: right; background-color: ' +
+		colorForAmountTraveled(1,1) + '">' +
 	        convertToCurrentUnits(response[i].mileage).toFixed(2) +
 		"</td></tr>";
         }
@@ -168,11 +170,13 @@ function parseLongestTraveledData(data) {
     else {
         for (let i = 0; i < response.length; i++) {
 	    let link = "/hb/?r=" + response[i].root;
+	    let style = "background-color: " + 
+	    	colorForAmountTraveled(response[i].traveled,response[i].mileage);
             rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
 	        response[i].routeinfo +
-	        '</td><td style="text-align: right">' +
+	        '</td><td style="text-align: right; ' + style + '">' +
 	        convertToCurrentUnits(response[i].traveled).toFixed(2) +
-		'</td><td style="text-align: right">' +
+		'</td><td style="text-align: right; ' + style + '">' +
 	        convertToCurrentUnits(response[i].mileage).toFixed(2) +
 		"</td></tr>";
         }
@@ -194,11 +198,13 @@ function parseLongestTraveledConnectedData(data) {
     else {
         for (let i = 0; i < response.length; i++) {
 	    let link = "/user/mapview.php?rte=" + response[i].routeonly;
+	    let style = "background-color: " + 
+	    	colorForAmountTraveled(response[i].traveled,response[i].mileage);
             rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
 	        response[i].routeinfo +
-	        '</td><td style="text-align: right">' +
+	        '</td><td style="text-align: right; ' + style + '">' +
 	        convertToCurrentUnits(response[i].traveled).toFixed(2) +
-	        '</td><td style="text-align: right">' +
+	        '</td><td style="text-align: right; ' + style + '">' +
 	        convertToCurrentUnits(response[i].mileage).toFixed(2) +
 		"</td></tr>";
         }
@@ -221,11 +227,14 @@ function parseClosestToClinchedTraveledData(data) {
     else {
         for (let i = 0; i < response.length; i++) {
 	    let link = "/hb/?r=" + response[i].root;
+	    let style = "background-color: " + 
+	    	colorForAmountTraveled(response[i].mileage-response[i].missing,
+		                       response[i].mileage);
             rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
 	        response[i].routeinfo +
-	        '</td><td style="text-align: right">' +
+	        '</td><td style="text-align: right; ' + style + '">' +
 	        convertToCurrentUnits(response[i].missing).toFixed(2) +
-		'</td><td style="text-align: right">' +
+		'</td><td style="text-align: right; ' + style + '">' +
 	        convertToCurrentUnits(response[i].mileage).toFixed(2) +
 		"</td></tr>";
         }
@@ -248,11 +257,14 @@ function parseClosestToClinchedConnectedTraveledData(data) {
     else {
         for (let i = 0; i < response.length; i++) {
 	    let link = "/user/mapview.php?rte=" + response[i].routeonly;
+	    let style = "background-color: " + 
+	    	colorForAmountTraveled(response[i].mileage-response[i].missing,
+		                       response[i].mileage);
             rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
 	        response[i].routeinfo +
-	        '</td><td style="text-align: right">' +
+	        '</td><td style="text-align: right; ' + style + '">' +
 	        convertToCurrentUnits(response[i].missing).toFixed(2) +
-		'</td><td style="text-align: right">' +
+		'</td><td style="text-align: right; ' + style + '">' +
 	        convertToCurrentUnits(response[i].mileage).toFixed(2) +
 		"</td></tr>";
         }
