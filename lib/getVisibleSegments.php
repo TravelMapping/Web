@@ -47,6 +47,13 @@ while ($row = $result->fetch_assoc()) {
 
 $result->free();
 
+// No waypoints?  No results.
+if (count($waypoints) == 0) {
+    $tmdb->close();
+    echo json_encode($response);
+    return;
+}  
+
 // make DB query for all segments with at least one waypoint in
 // the bounding area
 // if the number of waypoints is reasonably small, we will use it to restrict segments,
