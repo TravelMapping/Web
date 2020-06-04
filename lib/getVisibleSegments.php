@@ -75,7 +75,7 @@ while ($row = $result->fetch_assoc()) {
 $result->free();
 
 // build a query to get information about all of the routes
-$result = tmdb_query("select r.root, r.region, r.route, r.banner, r.abbrev, r.city, r.mileage, COALESCE(cr.mileage, 0) as clinchedmileage, cr.clinched, s.color, s.tier, s.systemName, s.fullName, s.level from routes as r join systems as s on r.systemName=s.systemName LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler='".$params['traveler']."' where r.root in ('".implode("','",array_unique($response['roots']))."') order by s.tier, r.csvOrder;");
+$result = tmdb_query("select r.root, r.region, r.route, r.banner, r.abbrev, r.city, round(r.mileage,4) as mileage, COALESCE(cr.mileage, 0) as clinchedmileage, cr.clinched, s.color, s.tier, s.systemName, s.fullName, s.level from routes as r join systems as s on r.systemName=s.systemName LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler='".$params['traveler']."' where r.root in ('".implode("','",array_unique($response['roots']))."') order by s.tier, r.csvOrder;");
 
 // parse results into the response array
 while ($row = $result->fetch_assoc()) {
