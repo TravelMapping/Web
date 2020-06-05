@@ -52,7 +52,7 @@ if (count($waypoints) == 0) {
     $tmdb->close();
     echo json_encode($response);
     return;
-}  
+}
 
 // make DB query for all segments with at least one waypoint in
 // the bounding area
