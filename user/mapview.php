@@ -217,6 +217,8 @@ function mapviewRouteEndHover() {
 // first loaded
 function mapviewStartup(lat, lon, zoom) {
 
+    // honor v QS param
+    document.getElementById("updateCheckbox").checked = showAllInView;
     loadmap();
     updateMap(lat, lon, zoom);
 }
@@ -258,15 +260,73 @@ function mapviewStartup(lat, lon, zoom) {
     $tmdb->close();
     // set up for initial map load
     echo "<script type=\"application/javascript\">\n";
+
+    // check for user
     if (array_key_exists('u', $_GET)) {
         $tmuser = $_GET['u'];
         echo "traveler = '$tmuser';\n";
     }
+
+    // check for scrollable mapview
     if (array_key_exists('v', $_GET)) {
         echo "showAllInView = true;\n";
     }
     else {
         echo "showAllInView = false;\n";
+    }
+    // check for other QS parameters, put them into this object
+
+    // route patterns, QS param 'rte'
+    echo "var mapviewParams = new Object();\n";
+    if (array_key_exists('rte', $_GET)) {
+        echo "mapviewParams.routePattern = '".$_GET['rte']."';\n";
+    }
+    else {
+        echo "mapviewParams.routePattern = '';\n";
+    }
+
+    // regions, QS param 'rg'
+    echo "mapviewParams.regions = [];\n";
+    if (array_key_exists('rg', $_GET)) {
+        $array = array();
+        if (is_array($_GET['rg'])) {
+            foreach ($GET['rg'] as $r) {
+	        $array = array_merge($array, explode(',', $r));
+            }
+        }
+	else {
+	    $array = explode(",", $_GET['rg']);
+	}
+	$array = array_diff($array, array("null"));
+	foreach ($array as $r) {
+	    echo "mapviewParams.regions.push('".$r."');\n";
+	}
+    }
+
+    // systems, QS param 'sys'
+    echo "mapviewParams.systems = [];\n";
+    if (array_key_exists('sys', $_GET)) {
+        $array = array();
+        if (is_array($_GET['sys'])) {
+            foreach ($GET['sys'] as $s) {
+	        $array = array_merge($array, explode(',', $s));
+            }
+        }
+	else {
+	    $array = explode(",", $_GET['sys']);
+	}
+	$array = array_diff($array, array("null"));
+	foreach ($array as $s) {
+	    echo "mapviewParams.systems.push('".$s."');\n";
+	}
+    }
+
+    // country, QS param 'country'
+    if (array_key_exists('country', $_GET)) {
+        echo "mapviewParams.country = '".$_GET['country']."';\n";
+    }
+    else {
+        echo "mapviewParams.country = '';\n";
     }
 ?>
 </script>
