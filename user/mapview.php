@@ -100,7 +100,6 @@
 
 <body onload="mapviewStartup(<?php echo $lat.",".$lon.",".$zoom; ?>);">
 <script type="application/javascript">
-console.log("Setting scrollableMapviewDialog");
 let scrollableMapviewDialog = `
 <p><b>Set Initial Location and Zoom Level</b></br >
 Find place: <input id="placeinput" name="placeinput" type="text" size="20" maxlength="100" />&nbsp;<input id="findbutton" name="findbutton" type="button" value="Press to Search and Set Coords" onclick="nominatimLookup('placeinput');" /><br />
@@ -135,7 +134,7 @@ function showHideRouteTable() {
     <tbody>
       <tr>
       <td>
-          <input id="jumpButton" type="button" value="Jump" onclick="scrollableMapviewPopup();" />
+          <input id="jumpButton" type="button" value="Jump" onclick="showScrollableMapviewPopup();" />
       </td>
       <td>
 	  <input id="showRoutesCheckbox" type="checkbox" name="showRoutes" checked onclick="showHideRouteTable();" />&nbsp;Show Route Table<br>
