@@ -127,12 +127,100 @@ function showHideRouteTable() {
 
 function updateCheckboxChanged() {
 
-    let check = document.getElementById("updateCheckbox");
-    showAllInView = check.checked;
-    if (check.checked) {
+    showAllInView = document.getElementById("updateCheckbox").checked;
+    // if we just turned on updating, launch an update
+    if (showAllInView) {
         updateVisibleData();
     }
 }
+
+// highlight route segments for all routes
+// in the given system when that system's header entry is hovered over
+// in the table of routes
+function mapviewRouteHoverSystem(system) {
+
+    connections.forEach(function(value) {
+	if (value.TMsystemshere.includes(system)) {
+	    value.TMoverlay = L.polyline(value.getLatLngs(), {
+		color: "black",
+		weight: polylineWeight*2,
+		opacity: 0.4
+	    }).addTo(map);
+	}
+    });
+}
+
+// highlight route segments when route is hovered over in the table of
+// routes (here, we have no routeInfo or waypoints array
+function mapviewRouteHoverRoot(root) {
+
+    // Note: unclear if it's likely more efficient to attach a reference
+    // to the overlay polyline to each one in the connections array, or
+    // maintain a list that we traverse on remove.  The former seems better
+    // for maps with not too many routes, the latter for maps with lots of
+    // routes, but doing the former to start
+    connections.forEach(function(value) {
+	if (value.TMrouteshere.includes(root)) {
+	    value.TMoverlay = L.polyline(value.getLatLngs(), {
+		color: "black",
+		weight: polylineWeight*2,
+		opacity: 0.4
+	    }).addTo(map);
+	}
+    });
+}
+
+// remove any overlays added by mapviewRouteEndHover
+function mapviewRouteEndHoverRoot() {
+    connections.forEach(function(value) {
+	if (value.hasOwnProperty("TMoverlay")) {
+	    value.TMoverlay.remove();
+	    delete value.TMoverlay;
+	}
+    });
+}
+
+// highlight route segments when route is hovered over
+// in the table of routes
+function mapviewRouteHover(root) {
+
+    // find the route in the routeInfo array
+    let firstWaypoint = 0;
+    let lastWaypoint = waypoints.length-1;
+    for (let routeIndex = 0; routeIndex < routeInfo.length; routeIndex++) {
+	if (routeInfo[routeIndex].root == root) {
+	    firstWaypoint = routeInfo[routeIndex].firstWaypoint;
+	    if (routeIndex != routeInfo.length - 1) {
+		lastWaypoint = routeInfo[routeIndex+1].firstWaypoint - 1;
+	    }
+	    break;
+	}
+    }
+    let pointList = new Array();
+    for (let i = firstWaypoint; i <= lastWaypoint; i++) {
+	pointList.push([waypoints[i].lat, waypoints[i].lon]);
+    }
+    mapviewHoverRoute = L.polyline(pointList, {
+	color: "black",
+	weight: polylineWeight*2,
+	opacity: 0.4
+    }).addTo(map);
+}
+
+function mapviewRouteEndHover() {
+
+    mapviewHoverRoute.remove();
+    mapviewHoverRoute = null;
+}
+
+// function to perform the sequence of actions when mapview pages are
+// first loaded
+function mapviewStartup(lat, lon, zoom) {
+
+    loadmap();
+    updateMap(lat, lon, zoom);
+}
+
 </script>
 <?php $nobigheader = 1; ?>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
@@ -168,13 +256,17 @@ function updateCheckboxChanged() {
 </body>
 <?php
     $tmdb->close();
+    // set up for initial map load
     echo "<script type=\"application/javascript\">\n";
+    if (array_key_exists('u', $_GET)) {
+        $tmuser = $_GET['u'];
+        echo "traveler = '$tmuser';\n";
+    }
     if (array_key_exists('v', $_GET)) {
-        if (array_key_exists('u', $_GET)) {
-            $tmuser = $_GET['u'];
-            echo "traveler = '$tmuser';\n";
-        }
         echo "showAllInView = true;\n";
+    }
+    else {
+        echo "showAllInView = false;\n";
     }
 ?>
 </script>
