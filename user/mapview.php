@@ -124,6 +124,15 @@ function showHideRouteTable() {
         table.style.display = "none";
     }
 }
+
+function updateCheckboxChanged() {
+
+    let check = document.getElementById("updateCheckbox");
+    showAllInView = check.checked;
+    if (check.checked) {
+        updateVisibleData();
+    }
+}
 </script>
 <?php $nobigheader = 1; ?>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
@@ -138,6 +147,9 @@ function showHideRouteTable() {
       </td>
       <td>
 	  <input id="showRoutesCheckbox" type="checkbox" name="showRoutes" checked onclick="showHideRouteTable();" />&nbsp;Show Route Table<br>
+	</td>
+      <td>
+	  <input id="updateCheckbox" type="checkbox" name="updateRoutes" checked onclick="updateCheckboxChanged();" />&nbsp;Always Update Visible Routes<br>
 	</td>
       </tr>
     </tbody>
