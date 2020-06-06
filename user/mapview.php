@@ -25,6 +25,14 @@
     <link rel="stylesheet" type="text/css" href="/css/L.Control.Window.css" />
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <style type="text/css">
+    	#loadingMsg {
+            background-color: white;
+            position: absolute;
+            top: 100px;
+            left: 150px;
+            z-index: 11000;
+        }
+
         #topControlPanel {
             background-color: white;
             position: absolute;
@@ -117,6 +125,11 @@ User: <?php tm_user_select(); ?>&nbsp;Units: <?php tm_units_select(); ?><br />
 <?php $nobigheader = 1; ?>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 <div id="map">
+</div>
+<div id="loadingMsg" style="display: none";>
+<table class="gratable">
+<tr><td style="font-size: 500%;">Loading Data...</td></tr>
+</table>
 </div>
 <div id="topControlPanel">
   <table id="topControlPanelTable">
