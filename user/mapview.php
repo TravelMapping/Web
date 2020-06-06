@@ -144,6 +144,21 @@ User: <?php tm_user_select(); ?>&nbsp;Units: <?php tm_units_select(); ?><br />
       <td>
 	  <input id="updateCheckbox" type="checkbox" name="updateRoutes" checked onclick="updateCheckboxChanged();" />&nbsp;Always Update Visible Routes<br>
 	</td>
+	<td>
+    <select id="coloring" name="coloring" onchange="updateConnectionColors();" >
+    <option value="system">Highway System Colors</option>
+    <option value="concurrent">Color by Concurrencies</option>
+    <option value="plain">Plain</option>
+    </select>
+    </td>
+    <td>
+    <select id="highlighting" name="highlighting" onchange="updateConnectionColors();" >
+    <option value="traveled">Highlight Traveled</option>
+    <option value="untraveled">Highlight Untraveled</option>
+    <option value="all">Highlight All</option>
+    <option value="none">Highlight None</option>
+    </select>
+    </td>
       </tr>
     </tbody>
   </table>
