@@ -176,7 +176,6 @@ User: <?php tm_user_select(); ?>&nbsp;Units: <?php tm_units_select(); ?><br />
 </div>
 </body>
 <?php
-    $tmdb->close();
     // set up for initial map load
     echo "<script type=\"application/javascript\">\n";
 
@@ -222,6 +221,15 @@ User: <?php tm_user_select(); ?>&nbsp;Units: <?php tm_units_select(); ?><br />
 	}
     }
 
+    // country, QS param 'country'
+    if (array_key_exists('country', $_GET)) {
+        $result = tmdb_query("select regions.code from regions where country='".$_GET['country']."';");
+	while ($row = $result->fetch_assoc()) {
+	    echo "mapviewParams.regions.push('".$row['code']."');\n";
+        }
+	$result->free();
+    }
+    
     // systems, QS param 'sys'
     echo "mapviewParams.systems = [];\n";
     if (array_key_exists('sys', $_GET)) {
@@ -241,12 +249,13 @@ User: <?php tm_user_select(); ?>&nbsp;Units: <?php tm_units_select(); ?><br />
     }
 
     // country, QS param 'country'
-    if (array_key_exists('country', $_GET)) {
-        echo "mapviewParams.country = '".$_GET['country']."';\n";
-    }
-    else {
-        echo "mapviewParams.country = '';\n";
-    }
+    //if (array_key_exists('country', $_GET)) {
+    //    echo "mapviewParams.country = '".$_GET['country']."';\n";
+   // }
+   // else {
+    //    echo "mapviewParams.country = '';\n";
+    //}
+    $tmdb->close();
 ?>
 </script>
 </html>
