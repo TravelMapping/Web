@@ -18,6 +18,7 @@ ob_end_clean();
 
 // initialize the array of responses
 $response = array('roots'=>array(),
+		  'segmentids'=>array(),
 		  'w1name'=>array(),
 		  'w1lat'=>array(),
 		  'w1lng'=>array(),
@@ -46,6 +47,7 @@ $result = tmdb_query("select segments.root, segments.segmentId, count(acl.segmen
 while ($row = $result->fetch_assoc()) {
 
     array_push($response['roots'], $row['root']);
+    array_push($response['segmentids'], $row['segmentId']);
     array_push($response['w1name'], $row['w1name']);
     array_push($response['w1lat'], $row['w1lat']);
     array_push($response['w1lng'], $row['w1lng']);
