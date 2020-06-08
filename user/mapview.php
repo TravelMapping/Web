@@ -6,15 +6,17 @@
  * Map viewer page. Displays the routes selected using the url params on a map, as well as on a table to the side.
  * URL Params:
  *  u - user to display highlighting for on map (required)
- *  lat - initial latitude at center of map
- *  lon - initial longitude at center of map
- *  zoom - initial zoom level of map
+ *  units - units to display distances (optional)
+ *  lat - initial latitude at center of map (optional)
+ *  lon - initial longitude at center of map (optional)
+ *  zoom - initial zoom level of map (optional)
  *  rg - region to show routes for on the map (optional)
  *  country - country to show routes for on the map (optional)
  *  sys - system to show routes for on the map (optional)
  *  v - show routes/points on the visible portion of the map (optional)
- *  rte - route name to show on the map. Supports pattern matching, with _ matching a single character, and % matching 0 or multiple characters.
- * (u, [lat lng zoom][rg|sys|country|v][rte])
+ *  rte - route name to show on the map, all routes with the same "route" will appear (optional)
+ *  cr - connected route to show, provide the root of any in-region route as parameter (optional)
+ * (u, [units][lat lng zoom][rg|sys|country|rte|cr][v])
  *
  ***
  -->
