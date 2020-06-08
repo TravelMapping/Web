@@ -90,12 +90,10 @@
     .mapviewLegend {
       padding: 6px 8px;
       font: 14px/16px Arial, Helvetica, sans-serif;
-      background: white;
       background: rgba(255,255,255,0.8);
       box-shadow: 0 0 15px rgba(0,0,0,0.2);
       border-radius: 5px;
       line-height: 18px;
-      color: 555;
     }
     .mapviewLegend i {
       width: 18px;
