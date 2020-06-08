@@ -22,7 +22,7 @@ ob_end_clean();
 $response = array();
 
 // build the SQL query
-$sql = "select r.firstRoot, r.route, r.banner, r.groupName, round(r.mileage,4) from connectedRoutes as r left join clinchedConnectedRoutes as cr on r.firstRoot=cr.route and traveler='".$params['traveler']."' join systems as s on s.systemName=r.systemName";
+$sql = "select r.firstRoot, r.route, r.banner, r.groupName, round(r.mileage,4) as mileage from connectedRoutes as r left join clinchedConnectedRoutes as cr on r.firstRoot=cr.route and traveler='".$params['traveler']."' join systems as s on s.systemName=r.systemName";
 
 $sql = $sql.$morejoins." where cr.clinched='1'";
 $morewhere = "";

@@ -23,7 +23,7 @@ ob_end_clean();
 $response = array();
 
 // build the SQL query
-$sql = "select r.root, r.region, r.route, r.city, r.abbrev, r.banner, round(cr.mileage,4) as traveled, round(r.mileage,4), (r.mileage - cr.mileage) as missing from routes as r left join clinchedRoutes as cr on r.root=cr.route and traveler='".$params['traveler']."' join systems as s on s.systemName=r.systemName";
+$sql = "select r.root, r.region, r.route, r.city, r.abbrev, r.banner, round(cr.mileage,4) as traveled, round(r.mileage,4) as mileage, (r.mileage - cr.mileage) as missing from routes as r left join clinchedRoutes as cr on r.root=cr.route and traveler='".$params['traveler']."' join systems as s on s.systemName=r.systemName";
 
 $morejoins = "";
 if ($params['region'] != "null") {
