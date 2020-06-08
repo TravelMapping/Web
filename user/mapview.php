@@ -85,6 +85,25 @@
             max-width: 40%;
 	    opacity: .75;
         }
+
+    // from Leaflet https://leafletjs.com/examples/choropleth/
+    .mapviewLegend {
+      padding: 6px 8px;
+      font: 14px/16px Arial, Helvetica, sans-serif;
+      background: white;
+      background: rgba(255,255,255,0.8);
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      border-radius: 5px;
+      line-height: 18px;
+      color: 555;
+    }
+    .mapviewLegend i {
+      width: 18px;
+      height: 18px;
+      float: left;
+      margin-left: 8px;
+      opacity: 0.7;
+    }
     </style>
     <?php tm_common_js(); ?>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
