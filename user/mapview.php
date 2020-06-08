@@ -203,6 +203,27 @@ User: <?php tm_user_select(); ?>&nbsp;Units: <?php tm_units_select(); ?><br />
         echo "mapviewParams.routePattern = '';\n";
     }
 
+    // all in connected route given any root, QS param 'cr'
+    echo "mapviewParams.roots = [];\n";
+    if (array_key_exists('cr', $_GET)) {
+        $result = tmdb_query("select firstRoot from connectedrouteroots where root='".$_GET['cr']."';");
+        $row = $result->fetch_assoc();
+	$firstRoot = "";
+	if ($row == NULL) {
+	    $firstRoot = $_GET['cr'];
+	}
+	else {
+	    $firstRoot = $row['firstRoot'];
+	}
+	$result->free();
+        echo "mapviewParams.roots.push('".$firstRoot."');\n";
+        $result2 = tmdb_query("select root from connectedRouteRoots where firstRoot='".$firstRoot."';");
+	while ($row2 = $result2->fetch_assoc()) {
+            echo "mapviewParams.roots.push('".$row2['root']."');\n";
+        }
+	$result2->free();
+    }
+
     // regions, QS param 'rg'
     echo "mapviewParams.regions = [];\n";
     if (array_key_exists('rg', $_GET)) {
