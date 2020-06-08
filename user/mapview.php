@@ -16,7 +16,7 @@
  *  v - show routes/points on the visible portion of the map (optional)
  *  rte - route name to show on the map, all routes with the same "route" will appear (optional)
  *  cr - connected route to show, provide the root of any in-region route as parameter (optional)
- * (u, [units][lat lng zoom][rg|sys|country|rte|cr][v])
+ * (u, [units][lat lon zoom][rg|sys|country|rte|cr][v])
  *
  ***
  -->
