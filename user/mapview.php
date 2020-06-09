@@ -179,6 +179,10 @@ User: <?php tm_user_select(); ?>&nbsp;Units: <?php tm_units_select(); ?><br />
     <option value="none">Highlight None</option>
     </select>
     </td>
+      <td>
+	  <input id="legendCheckbox" type="checkbox" name="legendCheckbox" checked onclick="legendCheckboxChanged();" />&nbsp;Show Legend<br>
+	</td>
+	<td>
       </tr>
     </tbody>
   </table>
