@@ -84,6 +84,26 @@ Data errors</p>
     <td><green>YES</green></td>
   </tr>
   <tr valign="top">
+    <td><a name="DISCONNECTED_ROUTE"></a><a style="text-decoration:none" href="#DISCONNECTED_ROUTE">&#x1f517</a></td>
+    <td>DISCONNECTED_ROUTE</td>
+    <td>The 3 potential underlying causes are:
+    <ol>
+      <li>Routes that are not connected in the first place.</li>
+      <li><a href="syshwylist.php#conncroots">Roots are out of order</a> within the <code>_con.csv</code> line.</li>
+      <li>Just plain mismatched coordinates at a border, whether <a href="#nearmisspoint">NMP</a> or too far apart to be flagged.</li>
+    </ol>
+    How to fix:
+    <ol>
+      <li>Make sure all <a href="syshwylist.php#conncroots">roots</a> in the <code>_con.csv</code> line are in fact connected. If not, split into multiple <code>_con.csv</code> lines.</li>
+      <li>Make sure the <a href="syshwylist.php#conncroots">roots are in sequential order</a> within the <code>_con.csv</code> line.</li>
+      <li>Make sure coordinates match at regional boundaries. If this means changing a <code>.wpt</code> file in a region
+      maintained by somebody else, coordinate as needed with that person on making the changes.</li>
+    </ol>
+    </td>
+    <td><red>NO</red></td>
+    <td><red>NO</red></td>
+  </tr>
+  <tr valign="top">
     <td><a name="DUPLICATE_COORDS"></a><a style="text-decoration:none" href="#DUPLICATE_COORDS">&#x1f517</a></td>
     <td>DUPLICATE_COORDS</td>
     <td>Duplicated coordinates for two or more waypoints</td>
