@@ -354,6 +354,17 @@ function tm_generate_custom_colors_array() {
     }
 }
 
+// function to generate hsl color specifications based on an amount
+// traveled and a total distance, should be kept consistent with
+// colorForAmountTraveled in tmjsfuncs.js
+function tm_color_for_amount_traveled($traveled, $total) {
+
+    $l = "80%";
+    if ($traveled == 0) $l = "70%";
+    if (number_format($traveled, 2) == number_format($total, 2)) $l = "70%";
+    return "hsl( " . (240*$traveled/$total) . ", 70%, " . $l . ")";
+}
+
 // get the timestamp of most recent DB update
 function tm_update_time() {
     global $tmdb;
