@@ -47,27 +47,22 @@ Participate in the project</i></p>
 
 
 <p class="subheading"><a name="systems"></a><a style="text-decoration:none" href="#systems">&#x1f517</a>
-Highway Systems</p>
+Highway Systems Tutorials</p>
 
 <div class="text">
   <ul>
     <li><a href="manual/sysdef.php">Definition of a highway system</a></li>
     <li><a href="manual/sysnew.php">Create a new highway system</a></li>
+    <ul>
+      <li><a href="manual/hwydata.php">Highway data files</a></li>
+      <li><a href="manual/includepts.php">Waypoints to include</a></li>
+      <li><a href="manual/points.php">Positioning waypoints</a></li>
+      <li><a href="manual/wayptlabels.php">Labeling waypoints</a></li>
+      <li><a href="manual/syshwylist.php">Highway system lists</a></li>
+    </ul>
     <li><a href="manual/syserr.php">Deal with data errors</a></li>
     <li><a href="manual/sysrev.php">Review a preview highway system</a></li>
     <li><a href="manual/maintenance.php">Maintain highway data</a></li>
-  </ul>
-</div>
-
-<p class="subheading"><a name="routes"></a><a style="text-decoration:none" href="#routes">&#x1f517</a>
-Route Files <i>(no changes except of formatting yet)</i></p>
-
-<div class="text">
-  <ul>
-    <li><a href="manual/hwydata.php">Highway data files</a></li>
-    <li><a href="manual/includepts.php">Waypoints to include</a></li>
-    <li><a href="manual/points.php">Positioning waypoints</a></li>
-    <li><a href="manual/wayptlabels.php">Labeling waypoints</a></li>
   </ul>
 </div>
 
@@ -100,7 +95,7 @@ $activedc = tm_count_rows("datacheckErrors", "join routes on datacheckErrors.rou
     <br/>
     <li><a href="datacheck.php">Data Check</a>
       <br/>
-      Check highway data errors (Currently <?php echo $activedc; ?> errors in <active>active</active> systems)
+      Check highway data errors (Currently <span style="color: red;"><?php echo $activedc; ?> errors</span> in <active>active</active> systems)
     </li>
     <br/>
     <li><a href="logs.php">Log Files</a>

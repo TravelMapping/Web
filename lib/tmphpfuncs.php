@@ -206,7 +206,7 @@ function tm_system_select($multiple) {
 function tm_user_select() {
     global $tmdb;
     global $tmuser;
-    echo "<select name=\"u\">\n";
+    echo "<select name=\"u\" id=\"tmuserselect\">\n";
     echo "<option value=\"null\">[None Selected]</option>\n";
     $res = tmdb_query("SELECT DISTINCT traveler FROM clinchedOverallMileageByRegion ORDER by traveler ASC;");
     while ($row = $res->fetch_assoc()) {
@@ -226,7 +226,7 @@ function tm_user_select() {
 function tm_units_select() {
     global $tmunits;
     global $tm_supported_units;
-    echo "<select name=\"units\">\n";
+    echo "<select name=\"units\" id=\"tmunitsselect\">\n";
     foreach ($tm_supported_units as $unit => $conv) {
         echo "<option value=\"".$unit."\"";
         if ($unit == $tmunits) {
@@ -352,6 +352,17 @@ function tm_generate_custom_colors_array() {
             $colorNum = $colorNum + 1;
         }
     }
+}
+
+// function to generate hsl color specifications based on an amount
+// traveled and a total distance, should be kept consistent with
+// colorForAmountTraveled in tmjsfuncs.js
+function tm_color_for_amount_traveled($traveled, $total) {
+
+    $l = "80%";
+    if ($traveled == 0) $l = "70%";
+    if (number_format($traveled, 2) == number_format($total, 2)) $l = "70%";
+    return "hsl( " . (240*$traveled/$total) . ", 70%, " . $l . ")";
 }
 
 // get the timestamp of most recent DB update

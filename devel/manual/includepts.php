@@ -21,12 +21,14 @@
       <li>International border points (if applicable).</li>
       <li>State/subdivisional border points (if applicable and only if 
 in a country we have split into subdivisions, such as the US, Canada, 
-Mexico, the UK, Russia, etc.) . </li>
-      <li>Visibly numbered Interstate highways, US highways, and state 
-highways, or the equivalent in countries besides the US. 
-County/local/secondary/municipal/township etc. routes are not required 
-points. The highway designation types to be included should be clarified
- before work is begun.</li>
+Mexico, the UK etc.).</li>
+    <li>Highways in other TM systems, or in systems likely to be included to TM in the future.
+    Local or secondary routes are not required points if they do not belong to another TM system.</li>
+    <ul>
+      <li>Use the exact coordinates from existing routes (if applicable according to the
+      <a href="points.php">positioning waypoint rules</a>) where the waypoint positons should be
+      identical to avoid "near miss points"</li>
+      </ul>
       <li>Highways intersecting at an interchange. </li>
       <li>Rest areas or service plazas accessible by car from both freeway carriageways, at which travelers can return the way they came. </li>
   <li>Other major highways that serve regional (not only local) travelers:
@@ -44,12 +46,11 @@ large creek, river, or bay, but without any other water crossing serving
 fill in a gap of 1.5 or more miles between visible waypoints in urban 
 areas.</li>
 	<li>Road (not driveway/parking lot) to a national or state-level park, major airport, or popular tourist attraction.</li>
-    <li>Not roads to specific businesses (malls, restaurants, parking 
-garages, gas stations, etc.), your relative/friend's house, minor 
-tourist attractions, or destinations not regularly used by regional 
-traveler. Most automobile travel begins and ends with local/non-regional
- travel, but the our target is places a regional traveler would likely 
-enter/exit a road.</li>
+    <li>Most automobile travel begins and ends with local/non-regional
+ travel, but our target is places a regional traveler would likely 
+enter/exit a road. Roads to specific businesses (malls, restaurants, parking 
+garages, gas stations, etc.), or destinations not regularly used by regional 
+traveler should not be included.</li>
         </ul>
         </li>
       <li>Intersections to split up long segments of 10+ miles (16+ km).

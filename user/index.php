@@ -33,6 +33,10 @@
         	text-align: center;
     		font-size: 24px;
         }
+        #topstats {
+        	text-align: center;
+    		font-size: 24px;
+        }
     </style>
     <!-- jQuery -->
     <script type="application/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -88,6 +92,9 @@ echo "<h1>Traveler Stats for ".$tmuser."</h1>";
 	<div id="scrollableMapview">
 	New: Browse the travels of <?php echo $tmuser; ?> with <a href="mapview.php?v">Scrollable Mapview</a>.
 	</div>
+	<div id="topstats">
+	New: <a href="topstats.php">Browse the top stats for the travels of <?php echo $tmuser; ?></a>.
+	</div>
     <div id="overall">
         <h2>Overall Stats</h2>
         <table class="gratable" style="width: 60%" id="tierTable">
@@ -111,12 +118,16 @@ SQL;
             $res = tmdb_query($sql_command);
             $row = $res->fetch_assoc();
             $res->free();
-            echo "<tr class='notclickable' style=\"background-color:#EEEEFF\"><td>Distance Traveled</td>";
-	    echo "<td>" . tm_convert_distance($row['clinchedActiveMileage']);
+            echo "<tr class='notclickable'><td>Distance Traveled</td>";
+	    echo '<td style="background-color: ';
+	    echo tm_color_for_amount_traveled($row['clinchedActiveMileage'],$row['totalActiveMileage']);
+	    echo ';">' . tm_convert_distance($row['clinchedActiveMileage']);
 	    echo "/" . tm_convert_distance($row['totalActiveMileage']) . " ";
 	    tm_echo_units();
 	    echo " (" . $row['activePercentage'] . "%) Rank: TBD</td>";
-	    echo "<td>" . tm_convert_distance($row['clinchedActivePreviewMileage']);
+	    echo '<td style="background-color: ';
+	    echo tm_color_for_amount_traveled($row['clinchedActivePreviewMileage'],$row['totalActivePreviewMileage']);
+	    echo ';">' . tm_convert_distance($row['clinchedActivePreviewMileage']);
 	    echo "/" . tm_convert_distance($row['totalActivePreviewMileage']) . " ";
 	    tm_echo_units();
 	    echo " (" . $row['activePreviewPercentage'] . "%) Rank: TBD</td>";
@@ -157,14 +168,22 @@ SQL;
 
             echo "<tr onclick=\"window.open('/shields/clinched.php?u={$tmuser}&amp;cort=traveled')\">";
 	    echo "<td>Routes Traveled</td>";
-	    echo "<td>".$activeDriven." of " . $activeRoutes . " (" . $activeDrivenPct . "%) Rank: TBD</td>";
-	    echo "<td>".$activePreviewDriven." of " . $activePreviewRoutes . " (" . $activePreviewDrivenPct . "%) Rank: TBD</td>";
+	    echo '<td style="background-color: ';
+	    echo tm_color_for_amount_traveled($activeDriven,$activeRoutes);
+	    echo ';">'.$activeDriven." of " . $activeRoutes . " (" . $activeDrivenPct . "%) Rank: TBD</td>";
+	    echo '<td style="background-color: ';
+	    echo tm_color_for_amount_traveled($activePreviewDriven,$activePreviewRoutes);
+	    echo ';">'.$activePreviewDriven." of " . $activePreviewRoutes . " (" . $activePreviewDrivenPct . "%) Rank: TBD</td>";
 	    echo "</tr>";
 
             echo "<tr onclick=\"window.open('/shields/clinched.php?u={$tmuser}')\">";
 	    echo "<td>Routes Clinched</td>";
-	    echo "<td>".$activeClinched." of " . $activeRoutes . " (" . $activeClinchedPct . "%) Rank: TBD</td>";
-	    echo "<td>".$activePreviewClinched." of " . $activePreviewRoutes . " (" . $activePreviewClinchedPct . "%) Rank: TBD</td>";
+	    echo '<td style="background-color: ';
+	    echo tm_color_for_amount_traveled($activeClinched,$activeRoutes);
+	    echo ';">'.$activeClinched." of " . $activeRoutes . " (" . $activeClinchedPct . "%) Rank: TBD</td>";
+	    echo '<td style="background-color: ';
+	    echo tm_color_for_amount_traveled($activePreviewClinched,$activePreviewRoutes);
+	    echo ';">'.$activePreviewClinched." of " . $activePreviewRoutes . " (" . $activePreviewClinchedPct . "%) Rank: TBD</td>";
 	    echo "</tr>";
             ?>
             </tbody>
@@ -214,7 +233,9 @@ SQL;
             }
             $activePreviewPercent = round($row['clinchedActivePreviewMileage'] / $row['totalActivePreviewMileage'] * 100.0, 2);
 	    $activePreviewPercent = sprintf('%0.2f', $activePreviewPercent);
-            echo "<tr onclick=\"window.document.location='/user/region.php?u=" . $tmuser . "&amp;rg=" . $row['code'] . "'\"><td>" . $row['country'] . "</td><td>" . $row['name'] . "</td><td>" . tm_convert_distance($row['clinchedActiveMileage']) . "</td><td>" . tm_convert_distance($row['totalActiveMileage']) . "</td><td>" . $activePercent . "%</td><td>" . tm_convert_distance($row['clinchedActivePreviewMileage']) . "</td><td>" . tm_convert_distance($row['totalActivePreviewMileage']) . "</td><td>" . $activePreviewPercent . "%</td><td class='link'><a href=\"/user/mapview.php?u=" . $tmuser . "&amp;rg=" . $row['code'] . "\">Map</a></td><td class='link'><a href='/hb?rg={$row['code']}'>HB</a></td></tr>";
+	    $activeStyle = 'style="background-color: '.tm_color_for_amount_traveled($row['clinchedActiveMileage'],$row['totalActiveMileage']).';"';
+	    $activePreviewStyle = 'style="background-color: '.tm_color_for_amount_traveled($row['clinchedActivePreviewMileage'],$row['totalActivePreviewMileage']).';"';
+            echo "<tr onclick=\"window.document.location='/user/region.php?u=" . $tmuser . "&amp;rg=" . $row['code'] . "'\"><td>" . $row['country'] . "</td><td>" . $row['name'] . '</td><td '.$activeStyle.'>' . tm_convert_distance($row['clinchedActiveMileage']) . "</td><td ".$activeStyle.">" . tm_convert_distance($row['totalActiveMileage']) . "</td><td ".$activeStyle.">" . $activePercent . "%</td><td ".$activePreviewStyle.">" . tm_convert_distance($row['clinchedActivePreviewMileage']) . "</td><td ".$activePreviewStyle.">" . tm_convert_distance($row['totalActivePreviewMileage']) . "</td><td ".$activePreviewStyle.">" . $activePreviewPercent . "%</td><td class='link'><a href=\"/user/mapview.php?u=" . $tmuser . "&amp;rg=" . $row['code'] . "\">Map</a></td><td class='link'><a href='/hb?rg={$row['code']}'>HB</a></td></tr>";
         }
         $res->free();
         ?>
@@ -263,15 +284,16 @@ SQL;
         $res = tmdb_query($sql_command);
         while ($row = $res->fetch_assoc()) {
 	    if ($row['clinchedMileage'] == 0) continue;
+	    $systemStyle = 'style="background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$row['totalMileage']).';"';
             echo "<tr onclick=\"window.document.location='/user/system.php?u=" . $tmuser . "&amp;sys=" . $row['systemName'] . "'\" class=\"status-" . $row['level'] . "\">";
             echo "<td>" . $row['countryCode'] . "</td>";
             echo "<td>" . $row['systemName'] . "</td>";
             echo "<td>" . $row['fullName'] . "</td>";
             echo "<td>Tier " . $row['tier'] . "</td>";
             echo "<td>" . $row['level'] . "</td>";
-            echo "<td>" . tm_convert_distance($row['clinchedMileage']) . "</td>";
-            echo "<td>" . tm_convert_distance($row['totalMileage']) . "</td>";
-            echo "<td>" . $row['percentage'] . "%</td>";
+            echo "<td ".$systemStyle.">" . tm_convert_distance($row['clinchedMileage']) . "</td>";
+            echo "<td ".$systemStyle.">" . tm_convert_distance($row['totalMileage']) . "</td>";
+            echo "<td ".$systemStyle.">" . $row['percentage'] . "%</td>";
             echo "<td class='link'><a href=\"/user/mapview.php?u={$tmuser}&amp;sys={$row['systemName']}\">Map</a></td>";
             echo "<td class='link'><a href='/hb?sys={$row['systemName']}'>HB</a></td></tr>";
         }

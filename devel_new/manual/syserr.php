@@ -18,6 +18,11 @@ conn2 {color: #00FF00;}
 conn3 {color: #FF00FF;}
 conn4 {color: #FFFF00;}
 conn5 {color: #FF0000;}
+conn6 {color: #00FFFF;}
+conn7 {color: #700080;}
+conn8 {color: #B0B000;}
+conn9 {color: #FF8000;}
+conn10 {color: #808080;}
 connerr1 {color: #4040A0;}
 connerr2 {color: #48C0A0;}
 </style>
@@ -82,6 +87,26 @@ Data errors</p>
     <td>Label looks like an Interstate with <code>Bus</code> banner instead of <code>BL</code> or <code>BS</code>.</td>
     <td><green>YES</green></td>
     <td><green>YES</green></td>
+  </tr>
+  <tr valign="top">
+    <td><a name="DISCONNECTED_ROUTE"></a><a style="text-decoration:none" href="#DISCONNECTED_ROUTE">&#x1f517</a></td>
+    <td>DISCONNECTED_ROUTE</td>
+    <td>The 3 potential underlying causes are:
+    <ol>
+      <li>Routes that are not connected in the first place.</li>
+      <li><a href="syshwylist.php#conncroots">Roots are out of order</a> within the <code>_con.csv</code> line.</li>
+      <li>Just plain mismatched coordinates at a border, whether <a href="#nearmisspoint">NMP</a> or too far apart to be flagged.</li>
+    </ol>
+    How to fix:
+    <ol>
+      <li>Make sure all <a href="syshwylist.php#conncroots">roots</a> in the <code>_con.csv</code> line are in fact connected. If not, split into multiple <code>_con.csv</code> lines.</li>
+      <li>Make sure the <a href="syshwylist.php#conncroots">roots are in sequential order</a> within the <code>_con.csv</code> line.</li>
+      <li>Make sure coordinates match at regional boundaries. If this means changing a <code>.wpt</code> file in a region
+      maintained by somebody else, coordinate as needed with that person on making the changes.</li>
+    </ol>
+    </td>
+    <td><red>NO</red></td>
+    <td><red>NO</red></td>
   </tr>
   <tr valign="top">
     <td><a name="DUPLICATE_COORDS"></a><a style="text-decoration:none" href="#DUPLICATE_COORDS">&#x1f517</a></td>
@@ -165,7 +190,7 @@ Data errors</p>
     <td>LABEL_TOO_LONG</td>
     <td>Label is too long to fit in the space allocated for the DB field.</td>
     <td><yellow>NO</yellow></td>
-    <td><yellow>YES</yellow></td>
+    <td><red>NO</red></td>
   </tr>
 <!--
   <tr valign="top">
@@ -339,7 +364,12 @@ Concurrency check</p>
       <li><conn2>Green line = two concurrent routes</conn2></li>
       <li><conn3>Magenta line = three concurrent routes</conn3></li>
       <li><conn4>Yellow line = four concurrent routes</conn4></li>
-      <li><conn5>Red line = five or more concurrent routes</conn5></li>
+      <li><conn5>Red line = five concurrent routes</conn5></li>
+      <li><conn6>Aqua line = six concurrent routes</conn6></li>
+      <li><conn7>Purple line = seven concurrent routes</conn7></li>
+      <li><conn8>Olive line = eight concurrent routes</conn8></li>
+      <li><conn9>Orange line = nine concurrent routes</conn9></li>
+      <li><conn10>Grey line = ten or more concurrent routes</conn10></li>
     </ul>
     <li>When there is a <conn2>green line</conn2> - 2 routes concurrent - but interrupted by a <connerr1>dark blue line</connerr1> at visible or hidden waypoints, it's a sign that concurrencies are broken</li>
     <ul>
