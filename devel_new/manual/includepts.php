@@ -24,12 +24,15 @@ Required intersections</p>
     <li><a name="border"></a><a style="text-decoration:none" href="#border">&#x1f517</a>
     State/subdivisional border points (if applicable and only if 
     in a country we have split into subdivisions, such as the US, Canada, 
-    Mexico, the UK, Russia, etc.) . </li>
-    <li><a name="numberedhwy"></a><a style="text-decoration:none" href="#numberedhwy">&#x1f517</a>
-    Visibly numbered Interstate highways, US highways, and state 
-    highways, or the equivalent in countries besides the US. 
-    County/local/secondary/municipal/township etc. routes are not required 
-    points.</li>
+    Mexico, the UK etc.).</li>
+    <li><a name="otherhwy"></a><a style="text-decoration:none" href="#otherhwy">&#x1f517</a>
+    Highways in other TM systems, or in systems likely to be included to TM in the future.
+    Local or secondary routes are not required points if they do not belong to another TM system.</li>
+    <ul>
+      <li>Use the exact coordinates from existing routes (if applicable according to the
+      <a href="points.php">positioning waypoint rules</a>) where the waypoint positons should be
+      identical to avoid "<a href="syserr.php#nearmisspoint">near miss points</a>"</li>
+    </ul>
     <li><a name="interchange"></a><a style="text-decoration:none" href="#interchange">&#x1f517</a>
     Highways intersecting at an interchange. </li>
     <li><a name="restarea"></a><a style="text-decoration:none" href="#restarea">&#x1f517</a>
@@ -54,12 +57,11 @@ Required intersections</p>
       <li><a name="attraction"></a><a style="text-decoration:none" href="#attraction">&#x1f517</a>
       Road (not driveway/parking lot) to a national or state-level park, major airport, or popular tourist attraction.</li>
       <li><a name="nottoinclude"></a><a style="text-decoration:none" href="#nottoinclude">&#x1f517</a>
-      <span style="color: red;">Not roads to specific businesses (malls, restaurants, parking 
-      garages, gas stations, etc.), your relative/friend's house, minor 
-      tourist attractions, or destinations not regularly used by regional 
-      traveler. Most automobile travel begins and ends with local/non-regional
+      Most automobile travel begins and ends with local/non-regional
       travel, but our target is places a regional traveler would likely 
-      enter/exit a road.</span></li>
+      enter/exit a road. Roads to specific businesses (malls, restaurants, parking 
+      garages, gas stations, etc.), or destinations not regularly used by regional 
+      traveler should not be included.</li>
     </ul>
     </li>
     <li><a name="longsegment"></a><a style="text-decoration:none" href="#longsegment">&#x1f517</a>
