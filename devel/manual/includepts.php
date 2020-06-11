@@ -21,12 +21,14 @@
       <li>International border points (if applicable).</li>
       <li>State/subdivisional border points (if applicable and only if 
 in a country we have split into subdivisions, such as the US, Canada, 
-Mexico, the UK, Russia, etc.) . </li>
-      <li>Visibly numbered Interstate highways, US highways, and state 
-highways, or the equivalent in countries besides the US. 
-County/local/secondary/municipal/township etc. routes are not required 
-points. The highway designation types to be included should be clarified
- before work is begun.</li>
+Mexico, the UK etc.).</li>
+    <li>Highways in other TM systems, or in systems likely to be included to TM in the future.
+    Local or secondary routes are not required points if they do not belong to another TM system.</li>
+    <ul>
+      <li>Use the exact coordinates from existing routes (if applicable according to the
+      <a href="points.php">positioning waypoint rules</a>) where the waypoint positons should be
+      identical to avoid "near miss points"</li>
+      </ul>
       <li>Highways intersecting at an interchange. </li>
       <li>Rest areas or service plazas accessible by car from both freeway carriageways, at which travelers can return the way they came. </li>
   <li>Other major highways that serve regional (not only local) travelers:
