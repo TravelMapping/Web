@@ -46,12 +46,11 @@ large creek, river, or bay, but without any other water crossing serving
 fill in a gap of 1.5 or more miles between visible waypoints in urban 
 areas.</li>
 	<li>Road (not driveway/parking lot) to a national or state-level park, major airport, or popular tourist attraction.</li>
-    <li>Not roads to specific businesses (malls, restaurants, parking 
-garages, gas stations, etc.), your relative/friend's house, minor 
-tourist attractions, or destinations not regularly used by regional 
-traveler. Most automobile travel begins and ends with local/non-regional
- travel, but the our target is places a regional traveler would likely 
-enter/exit a road.</li>
+    <li>Most automobile travel begins and ends with local/non-regional
+ travel, but our target is places a regional traveler would likely 
+enter/exit a road. Roads to specific businesses (malls, restaurants, parking 
+garages, gas stations, etc.), or destinations not regularly used by regional 
+traveler should not be included.</li>
         </ul>
         </li>
       <li>Intersections to split up long segments of 10+ miles (16+ km).

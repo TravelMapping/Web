@@ -57,12 +57,11 @@ Required intersections</p>
       <li><a name="attraction"></a><a style="text-decoration:none" href="#attraction">&#x1f517</a>
       Road (not driveway/parking lot) to a national or state-level park, major airport, or popular tourist attraction.</li>
       <li><a name="nottoinclude"></a><a style="text-decoration:none" href="#nottoinclude">&#x1f517</a>
-      <span style="color: red;">Not roads to specific businesses (malls, restaurants, parking 
-      garages, gas stations, etc.), your relative/friend's house, minor 
-      tourist attractions, or destinations not regularly used by regional 
-      traveler. Most automobile travel begins and ends with local/non-regional
+      Most automobile travel begins and ends with local/non-regional
       travel, but our target is places a regional traveler would likely 
-      enter/exit a road.</span></li>
+      enter/exit a road. Roads to specific businesses (malls, restaurants, parking 
+      garages, gas stations, etc.), or destinations not regularly used by regional 
+      traveler should not be included.</li>
     </ul>
     </li>
     <li><a name="longsegment"></a><a style="text-decoration:none" href="#longsegment">&#x1f517</a>
