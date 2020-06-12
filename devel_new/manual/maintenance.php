@@ -46,7 +46,7 @@ How to maintain a region?</p>
   <li><a name="break"></a><a style="text-decoration:none" href="#break">&#x1f517</a>
   Care must be taken to ensure that changes do not "break" a user's list file.</li>
   <ul>
-    <li>If a <a href="https://travelmapping.net/logs/pointsinuse.log">waypoint label is in use by current TM users</a> we should
+    <li>If a <a href="/logs/pointsinuse.log">waypoint label is in use by current TM users</a> we should
     <a href="#labelwrong">add alternative labels</a> if possible.</li>
     <li>If a <a href="../logs/listnamesinuse.log">.list name label is in use by current TM users</a> we should
     <a href="syshwylist.php#caltroute">add alternative route names</a> if possible.</li>
@@ -83,7 +83,7 @@ Which changes to activated routes are newsworthy?</p>
       <br />
       Example: Waypoint <code>P1</code> is mislabeled but at the correct location. It should be <code>NewP1</code> instead. <br />
       <br />
-      Check the <a href="https://travelmapping.net/logs/pointsinuse.log">points in use log</a> manually or
+      Check the <a href="/logs/pointsinuse.log">points in use log</a> manually or
       load the corresponding line to the wpt file into the <a href="/wptedit/">Waypoint File Editor</a>.<br />
       If there is no entry for the .wpt file at all, no label of the route is in use.<br/>
       <br />
@@ -226,7 +226,7 @@ A: The visible label should always come first.</li><br />
 <li><a name="delaltlabels"></a><a style="text-decoration:none" href="#delaltlabels">&#x1f517</a>
 Q: Can I delete unused hidden points with a visible companion point? <br /> <br />
 A: If you have verified that a hidden point isn't in use (we
-have <a href="https://travelmapping.net/logs/unusedaltlabels.log">a log
+have <a href="/logs/unusedaltlabels.log">a log
       file for that</a>) and that there 
 is a visible point at the same location, then you can delete the unused 
 hidden point. Just make sure you don't accidentally remove a shaping 
@@ -243,7 +243,7 @@ A: No. That note is implied for most or all entries on that page, so it's not wo
 Format for reporting newsworthy changes</p>
 
 <div class="text">Newsworthy changes must must be logged in the <a href="https://github.com/TravelMapping/HighwayData/blob/master/updates.csv">updates list</a>,
-which is  available <a href="https://travelmapping.net/devel/updates.php">on the updates page</a> to help users keep their list files accurate.
+which is  available <a href="/devel/updates.php">on the updates page</a> to help users keep their list files accurate.
 The list is ordered by regions. Add a new line at the beginning of the right region.
 Don't let the changes get lost in the forum or elsewhere!</br>
 </br>

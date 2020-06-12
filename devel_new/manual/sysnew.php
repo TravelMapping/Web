@@ -223,7 +223,7 @@ brabr;BRA;Brazil Rodovias Federais;green;4;devel
     <li>If no specific svg is available for the system, the standard shield is used.</li>
   </ul>
 </ul>
-We don't notify the promotion of a highway system to in-development <a href="https://travelmapping.net/devel/updates.php">
+We don't notify the promotion of a highway system to in-development <a href="/devel/updates.php">
 on the updates page</a> but on the forum thread only.
 </br>
 <b>When promoting a system to <devel>devel</devel>, the system is processed for the first time.
@@ -263,7 +263,7 @@ brabr;BRA;Brazil Rodovias Federais;green;4;preview
   </ul>
   <li><a name="previewupdate"></a><a style="text-decoration:none" href="#previewupdate">&#x1f517</a>
   It must be logged on top of the <a href="https://github.com/TravelMapping/HighwayData/blob/master/systemupdates.csv">system updates list</a>,
-  so that the notification will appear <a href="https://travelmapping.net/devel/updates.php">on the updates page</a>.</li>
+  so that the notification will appear <a href="/devel/updates.php">on the updates page</a>.</li>
 </ul>
 Especially when drafting a huge highway system, it is possible to split it into several sub-systems with partial preview promotion.
 Ask on the forum thread for more details.
@@ -319,7 +319,7 @@ Changes proposed on the forum thread should be processed short-term while the pe
   <li><a name="reviewbreak"></a><a style="text-decoration:none" href="#reviewbreak">&#x1f517</a>
   Care must be taken to ensure that <a href="maintenance.php#break">changes do not "break" a user's list file</a>.</li>
   <ul>
-    <li>We don't add notifications <a href="https://travelmapping.net/devel/updates.php">to the updates page</a>
+    <li>We don't add notifications <a href="/devel/updates.php">to the updates page</a>
     because we are still in <preview>preview</preview>.</li>
   </ul>
 </ul>
@@ -345,7 +345,7 @@ brabr;BRA;Brazil Rodovias Federais;green;4;active
   </ul>
   <li><a name="activateupdate"></a><a style="text-decoration:none" href="#activateupdate">&#x1f517</a>
   It must be logged on top of the <a href="https://github.com/TravelMapping/HighwayData/blob/master/systemupdates.csv">
-  system updates list</a>, so that the notification <a href="https://travelmapping.net/devel/updates.php">on the updates page</a> will appear.</li>
+  system updates list</a>, so that the notification <a href="/devel/updates.php">on the updates page</a> will appear.</li>
 </ul>
 </div>
 
@@ -360,7 +360,7 @@ Maintain the highway system</p>
   <li><a name="maintainbreak"></a><a style="text-decoration:none" href="#maintainbreak">&#x1f517</a>
   Care must be taken to ensure that <a href="maintenance.php#break">changes do not "break" a user's list file</a>.
   <li><a name="maintainupdates"></a><a style="text-decoration:none" href="#maintainupdates">&#x1f517</a>
-  All user-relevant changes to the routes must be notified <a href="https://travelmapping.net/devel/updates.php">on the updates page</a>
+  All user-relevant changes to the routes must be notified <a href="/devel/updates.php">on the updates page</a>
   now since the system is <active>active</active>.</li>
 </ul>
 </div>
