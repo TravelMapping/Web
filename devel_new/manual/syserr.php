@@ -55,14 +55,16 @@ connerr2 {color: #48C0A0;}
 Data errors</p>
 
 <div class="text">
-  When working with the <a href="/wptedit/">WPT file editor</a>, a data check for the loaded route is executed with every modification. The <code>code</code> of a data error is indicated in the last column of the waypoint table. Use the tool tip for additional info.
+  When working with the <a href="/wptedit/">WPT file editor</a>, a data check for the loaded route is executed with every modification.
+  The <code>code</code> of a data error is indicated in the last column of the waypoint table. Use the tool tip for additional info.
   After manual changes within the editor field, the data check is done on the next editor action, e.g. when pressing the <code>Load</code> button.
   </br>
   </br>
   Check the table for errors before saving the wpt file. Fix unintended errors or mark intended errors <a href="#falsepositive">false positive</a>.
   </br>
   </br>
-  Note: Not all data errors are yet detected by the WPT file editor, see last column below.
+  Note: Not all data errors are detected by the WPT file editor, see below: <green>supported</green>,
+  <yellow>proposed but not yet supported</yellowed>, <red>not possbile to be detected in WPT file editor</red>.
   </br>
 </div>
 
@@ -77,7 +79,7 @@ Data errors</p>
   <tr valign="top">
     <td><a name="BAD_ANGLE"></a><a style="text-decoration:none" href="#BAD_ANGLE">&#x1f517</a></td>
     <td>BAD_ANGLE</td>
-    <td>Angles cannot be computed for 2 adjacent points @ same coords. Instead, use AltLabels or fix coords of one point or both.</td>
+    <td>Angles cannot be computed for two adjacent points at the same coordinates. Instead, use <code>AltLabels</code> or fix coordinates of one point or both.</td>
     <td><yellow>NO</yellow></td>
     <td><red>NO</red></td>
   </tr>
@@ -126,13 +128,14 @@ Data errors</p>
     <td><a name="HIDDEN_JUNCTION"></a><a style="text-decoration:none" href="#HIDDEN_JUNCTION">&#x1f517</a></td>
     <td>HIDDEN_JUNCTION</td>
     <td>Concurrent route splits off at a hidden waypoint. The concurrency is most likely broken by accident, or the waypoint needs to be visible.</td>
-    <td><yellow>NO</yellow></td>
+    <td><red>NO</red></td>
     <td><green>YES</green></td>
   </tr>
   <tr valign="top">
     <td><a name="HIDDEN_TERMINUS"></a><a style="text-decoration:none" href="#HIDDEN_TERMINUS">&#x1f517</a></td>
     <td>HIDDEN_TERMINUS</td>
-    <td>...</td>
+    <td>Hidden point at the beginning or end of a route. Routes must begin and end with visible waypoints
+    so that users can mark all of them as traveled.</td>
     <td><yellow>NO</yellow></td>
     <td><red>NO</red></td>
   </tr>
@@ -181,7 +184,7 @@ Data errors</p>
   <tr valign="top">
     <td><a name="LABEL_SLASHES"></a><a style="text-decoration:none" href="#LABEL_SLASHES">&#x1f517</a></td>
     <td>LABEL_SLASHES</td>
-    <td>Too many slashes in label (> 1).</td>
+    <td>Too many slashes in label (<code>> 1</code>).</td>
     <td><yellow>NO</yellow></td>
     <td><red>NO</red></td>
   </tr>
@@ -204,21 +207,21 @@ Data errors</p>
   <tr valign="top">
     <td><a name="LABEL_UNDERSCORES"></a><a style="text-decoration:none" href="#LABEL_UNDERSCORES">&#x1f517</a></td>
     <td>LABEL_UNDERSCORES</td>
-    <td>Too many underscored suffixes (> 1)</td>
+    <td>Too many underscored suffixes (<code>> 1</code>)</td>
     <td><green>YES</green></td>
     <td><red>NO</red></td>
   </tr>
   <tr valign="top">
     <td><a name="LONG_SEGMENT"></a><a style="text-decoration:none" href="#LONG_SEGMENT">&#x1f517</a></td>
     <td>LONG_SEGMENT</td>
-    <td>Long segment (distance > 10 mi, 16 km) between this and the previous hidden point.</td>
+    <td>Long segment (distance <code>> 10 mi</code>, <code>16 km</code>) between this and the previous hidden point.</td>
     <td><yellow>NO</yellow></td>
     <td><green>YES</green></td>
   </tr>
   <tr valign="top">
     <td><a name="LONG_UNDERSCORE"></a><a style="text-decoration:none" href="#LONG_UNDERSCORE">&#x1f517</a></td>
     <td>LONG_UNDERSCORE</td>
-    <td>Label has long underscore suffix (>4 characters after underscore)</td>
+    <td>Label has long underscore suffix (<code>> 4</code> characters after underscore)</td>
     <td><green>YES</green></td>
     <td><red>NO</red></td>
   </tr>
@@ -253,14 +256,15 @@ Data errors</p>
   <tr valign="top">
     <td><a name="OUT_OF_BOUNDS"></a><a style="text-decoration:none" href="#OUT_OF_BOUNDS">&#x1f517</a></td>
     <td>OUT_OF_BOUNDS</td>
-    <td>...</td>
+    <td>Latitude <code>> 90°</code> or <code>< -90°</code>, or longitude <code>> 180°</code> or <code>< -180°</code>.
+    False positives are allowed for the rare potential case of routes spanning the international date line.</td>
     <td><yellow>NO</yellow></td>
     <td><green>YES</green></td>
   </tr>
   <tr valign="top">
     <td><a name="SHARP_ANGLE"></a><a style="text-decoration:none" href="#SHARP_ANGLE">&#x1f517</a></td>
     <td>SHARP_ANGLE</td>
-    <td>Sharp angle (> 135 deg) with previous and next waypoint.</td>
+    <td>Sharp angle (<code>> 135 deg</code>) with previous and next waypoint.</td>
     <td><yellow>NO</yellow></td>
     <td><green>YES</green></td>
   </tr>
@@ -276,7 +280,7 @@ Data errors</p>
   <tr valign="top">
     <td><a name="VISIBLE_DISTANCE"></a><a style="text-decoration:none" href="#VISIBLE_DISTANCE">&#x1f517</a></td>
     <td>VISIBLE_DISTANCE</td>
-    <td>Long distance (Visible distance > 10 mi, 16 km) between this and the previous visible point. Not reported for active routes!</td>
+    <td>Long distance (Visible distance <code>> 10 mi</code>, <code>16 km</code>) between this and the previous visible point. Not reported for active routes!</td>
     <td><green>YES</green></td>
     <td><green>YES</green></td>
   </tr>
