@@ -149,7 +149,7 @@ Data errors</p>
   <tr valign="top">
     <td><a name="INVALID_FIRST_CHAR"></a><a style="text-decoration:none" href="#INVALID_FIRST_CHAR">&#x1f517</a></td>
     <td>INVALID_FIRST_CHAR</td>
-    <td>Disallowed character at beginning of label</td>
+    <td>Disallowed character at beginning (after any leading <code>*</code> characters) of label</td>
     <td><yellow>NO</yellow></td>
     <td><red>NO</red></td>
   </tr>
