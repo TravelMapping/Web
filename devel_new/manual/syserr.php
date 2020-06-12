@@ -64,7 +64,7 @@ Data errors</p>
   </br>
   </br>
   Note: Not all data errors are detected by the WPT file editor, see below: <green>supported</green>,
-  <yellow>proposed but not yet supported</yellowed>, <red>not possbile to be detected in WPT file editor</red>.
+  <yellow>proposed but not yet supported</yellow>, <red>not possbile to be detected in WPT file editor</red>.
   </br>
 </div>
 
@@ -265,7 +265,7 @@ Data errors</p>
     <td><a name="SHARP_ANGLE"></a><a style="text-decoration:none" href="#SHARP_ANGLE">&#x1f517</a></td>
     <td>SHARP_ANGLE</td>
     <td>Sharp angle (<code>> 135°</code>) with previous and next waypoint.</td>
-    <td><yellow>NO</yellow></td>
+    <td><green>YES</green></td>
     <td><green>YES</green></td>
   </tr>
 <!--
@@ -288,7 +288,7 @@ Data errors</p>
     <td><a name="VISIBLE_HIDDEN_COLOC"></a><a style="text-decoration:none" href="#VISIBLE_HIDDEN_COLOC">&#x1f517</a></td>
     <td>VISIBLE_HIDDEN_COLOC</td>
     <td>The visisble waypoint is hidden on concurrent route(s).</td>
-    <td><yellow>NO</yellow></td>
+    <td><red>NO</red></td>
     <td><green>YES</green></td>
   </tr>
 </tbody></table>
@@ -385,7 +385,7 @@ Concurrency check</p>
       <li>When there is a <conn2>green line</conn2> (2 concurrent routes) interrupted by a <connerr1>dark blue</connerr1> line at visible or hidden waypoints, it is a sign of potentially broken concurrencies. The <connerr1>dark blue</connerr1> is created when two normal <conn1>blue lines</conn1> are overlapping.</li>
       <li>Other non-standard colors are caused by multiple lines overlapping in the same place.</li>
       <ul>
-        <li>For example, a <conn1>green line</conn1> (2 concurrent routes) overlapping a <conn1>blue line</conn1> (one route only) will result in a <connerr2>darker more bluish green<connerr2>.</li>
+        <li>For example, a <conn2>green line</conn1> (2 concurrent routes) overlapping a <conn1>blue line</conn1> (one route only) will result in a <connerr2>darker more bluish green<connerr2>.</li>
       </ul>
     </ul>
     <li>When you spot errors, click on the lines or markers to get info about the route and waypoint labels. It is sometimes difficult to click all routes when they are mostly overlapped.</li>
