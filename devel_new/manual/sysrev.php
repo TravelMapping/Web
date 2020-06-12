@@ -22,7 +22,7 @@ devel {background-color: #FFCCCC;}
 <div class="text">
 If you notice incorrect highway data, please report it. If the route belongs to a
 <a href="sysdef.php#active"><active>active</active> system</a>, the issue should be reported
-on the <a href="http://forum.travelmapping.net/index.php?topic=20">forum</a>.
+on the <a href="https://forum.travelmapping.net/index.php?topic=20">forum</a>.
 If the route belongs to a system with <a href="sysdef.php#devel"><devel>in-development</devel> status</a> or
 <a href="sysdef.php#preview"><preview>preview</preview> status</a>, or the issue is in relation to such a system,
 you can report it anytime on the existing <a href="sysnew.php#research">forum thread</a> for the system.</br>

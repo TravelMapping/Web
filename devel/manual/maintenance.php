@@ -37,7 +37,7 @@
   lists.  In those situations, changes must be logged in
   the <a href="https://github.com/TravelMapping/HighwayData/blob/master/updates.csv">updates
   list</a>, which is
-  available <a href="http://travelmapping.net/devel/updates.php">on
+  available <a href="/devel/updates.php">on
   the updates page</a> to help users keep their list files accurate.
 </p>
 
@@ -51,7 +51,7 @@
 Waypoint P1 is mislabeled but at the correct location. It should be NewP1 instead. <br />
 <br />
 Check
-the <a href="http://travelmapping.net/logs/pointsinuse.log">points in
+the <a href="/logs/pointsinuse.log">points in
 use log</a>. <br />
 <br />
 If the label is not in use: <br />
@@ -164,7 +164,7 @@ A: The visible label should always come first. <br />
 <br />
 Q: Can I delete unused hidden points with a visible companion point? <br />
 A: If you have verified that a hidden point isn't in use (we
-have <a href="http://travelmapping.net/logs/unusedaltlabels.log">a log
+have <a href="/logs/unusedaltlabels.log">a log
       file for that</a>) and that there 
 is a visible point at the same location, then you can delete the unused 
 hidden point. Just make sure you don't accidentally remove a shaping 

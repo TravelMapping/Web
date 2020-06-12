@@ -348,7 +348,7 @@ Concurrency check</p>
   The best practise to do this, is as follows:
   </br>
   <ul>
-    <li>Open the <a href="http://courses.teresco.org/metal/hdx/">Highway Data Examiner</a> (HDX).</li>
+    <li>Open the <a href="https://courses.teresco.org/metal/hdx/">Highway Data Examiner</a> (HDX).</li>
     <li>Go to <code>Option 1</code> on the left and enter the name of the region you want to check.</li>
     <li>Press enter.</li>
     <li>Wait. The graph is automatically loaded after a few seconds but it might take longer with large graphs.</li>
@@ -406,14 +406,14 @@ Near-miss points</p>
   The best practise to check NMPs, is as follows:
   </br>
   <ul>
-    <li>Open the <a href="http://travelmapping.net/logs/nmpbyregion/">NMP files filtered by region</a> directory.</li>
+    <li>Open the <a href="/logs/nmpbyregion/">NMP files filtered by region</a> directory.</li>
     <li>Select the nmp file for the region you want to check.</li>
     <li>Open the file.</li>
     <ul>
       <li>If it is blank, the region has no NMPs.</li>
     </ul>
     <li>If there are entries, download the file.</li>
-    <li>Open the <a href="http://courses.teresco.org/metal/hdx/">Highway Data Examiner</a> (HDX).</li>
+    <li>Open the <a href="https://courses.teresco.org/metal/hdx/">Highway Data Examiner</a> (HDX).</li>
     <li>Go to <code>Option 3</code> on the left and select the downloaded nmp file.</li>
     <ul>
       <li>You can see your region with some colored dots on the map now. These are NMP hotspots.</li>

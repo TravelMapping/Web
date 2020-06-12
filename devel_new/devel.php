@@ -83,7 +83,7 @@ $activedc = tm_count_rows("datacheckErrors", "join routes on datacheckErrors.rou
       <i>TM's update of CHM's WPT file Editor; Goal: develop our own new version</i>
     </li>
     <br/>
-    <li><a href="http://courses.teresco.org/metal/hdx/">Highway Data Examiner</a> (HDX)
+    <li><a href="https://courses.teresco.org/metal/hdx/">Highway Data Examiner</a> (HDX)
       <br/>
       View graph and near-miss data
     </li>

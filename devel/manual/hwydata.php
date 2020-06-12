@@ -111,7 +111,7 @@ US30 http://www.openstreetmap.org/?lat=39.936539&lon=-77.660417
     avoid "near miss points" which enables links to intersecting
     routes and improves the quality of the <a href="/graphs">graph
     data</a> used
-    by <a href="http://courses.teresco.org/metal/">METAL</a>, TM's
+    by <a href="https://courses.teresco.org/metal/">METAL</a>, TM's
 	academic offshoot.</li>
       <li> Do not use commercial mapping sources, such as Google Maps, Yahoo Maps, or Bing Maps.</li>
   </ul>
