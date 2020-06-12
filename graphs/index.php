@@ -12,8 +12,8 @@ table.dataTable tbody td{
 padding:0px;
 }
 </style>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js" type="text/javascript"></script>
 </head>
 <body>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
@@ -24,14 +24,14 @@ padding:0px;
 
 This is the repository of graphs generated from the current <a
 href="/">Travel Mapping Project</a> data.  These were created for use
-in the <a href="http://courses.teresco.org/metal/">Map-based
+in the <a href="https://courses.teresco.org/metal/">Map-based
 Educational Tools for Algorithm Learning (METAL)</a> academic project.
-You may contact <a href="http://j.teresco.org/">the author</a> if you
+You may contact <a href="https://j.teresco.org/">the author</a> if you
 would like an archive of some or all of the graphs, or if you have
 special requests for a graph of specific subset of the project's data
 to be generated.  If you do decide to make use of these graphs and/or
 the tools described here, please drop a note to <a
-href="http://j.teresco.org/">the author</a>.
+href="https://j.teresco.org/">the author</a>.
 
 </div>
 
@@ -40,7 +40,7 @@ href="http://j.teresco.org/">the author</a>.
 For each graph, the table below gives a brief
 description, then download links and graph information for the collapsed, traveled, and
 simple <a
-href="http://courses.teresco.org/metal/graph-formats.shtml">formats</a>.
+href="https://courses.teresco.org/metal/graph-formats.shtml">formats</a>.
 <b>Note:</b> larger graphs
 greatly tax the Highway Data Examiner and the Leaflet maps.  They
 should all work, but large graphs require a lot of memory for your
@@ -58,9 +58,9 @@ Beware that this is a large file!
 
 <div class="text"> 
 
-Graphs are copyright &copy; <a href="http://j.teresco.org/">James
+Graphs are copyright &copy; <a href="https://j.teresco.org/">James
 D. Teresco</a>, generated from highway data gathered and maintained by
-<a href="http://travelmapping.net/credits.php#contributors">Travel
+<a href="https://travelmapping.net/credits.php#contributors">Travel
 Mapping Project</a> contributors.  Graphs may be downloaded freely for
 academic use.  Other use by explicit permission only.
 

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css" href="/css/travelMapping.css" />
 <!-- jQuery -->
-<script type="application/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="application/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <!-- TableSorter -->
 <script type="application/javascript" src="/lib/jquery.tablesorter.min.js"></script>
 <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
@@ -58,7 +58,7 @@ Most of the files below are regenerated during each site update.
 <div class="text">
 <ul>
 <li><a href="/wptedit/">TM's update of CHM's WPT file Editor</a> (Goal: develop our own new version)</li>
-<li><a href="http://courses.teresco.org/metal/hdx/">Highway Data Examiner</a> (HDX) to view graph and near-miss data</li>
+<li><a href="https://courses.teresco.org/metal/hdx/">Highway Data Examiner</a> (HDX) to view graph and near-miss data</li>
 </ul>
 </div>
 

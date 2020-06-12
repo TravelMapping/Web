@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="/css/travelMapping.css"/>
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <!-- jQuery -->
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <!-- TableSorter -->
     <script src="/lib/jquery.tablesorter.min.js"></script>
     <title>Traveler Statistics</title>
