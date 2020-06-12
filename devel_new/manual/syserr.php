@@ -264,7 +264,7 @@ Data errors</p>
   <tr valign="top">
     <td><a name="SHARP_ANGLE"></a><a style="text-decoration:none" href="#SHARP_ANGLE">&#x1f517</a></td>
     <td>SHARP_ANGLE</td>
-    <td>Sharp angle (<code>> 135 deg</code>) with previous and next waypoint.</td>
+    <td>Sharp angle (<code>> 135°</code>) with previous and next waypoint.</td>
     <td><yellow>NO</yellow></td>
     <td><green>YES</green></td>
   </tr>
