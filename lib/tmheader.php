@@ -18,7 +18,7 @@ END;
 <a href="/">Home</a> &nbsp;&nbsp;&nbsp;
 <a href="/stat.php">Traveler Stats</a> &nbsp;&nbsp;&nbsp;
 <a href="/hb">Highway Browser</a> &nbsp;&nbsp;&nbsp;
-<a href="http://forum.travelmapping.net">Project Forum</a> &nbsp;&nbsp;&nbsp;
+<a href="https://forum.travelmapping.net">Project Forum</a> &nbsp;&nbsp;&nbsp;
 <a href="/devel/updates.php">Updates</a>
 </p>
 

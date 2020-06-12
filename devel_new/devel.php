@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="/css/travelMapping.css" />
 
 <!-- jQuery -->
-<script type="application/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="application/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <!-- TableSorter -->
 <script type="application/javascript" src="/lib/jquery.tablesorter.min.js"></script>
 <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
