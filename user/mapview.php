@@ -132,6 +132,7 @@ let scrollableMapviewDialog = `
 <p><b>Set Initial Location and Zoom Level</b></br >
 Find place: <input id="placeinput" name="placeinput" type="text" size="20" maxlength="100" onkeypress="nominatimLookupIfEnter(event);"/>&nbsp;<input id="findbutton" name="findbutton" type="button" value="Press to Search and Set Coords" onclick="nominatimLookup('placeinput');" /><br />
 (Geocoding by <a target="_blank" href="https://nominatim.openstreetmap.org/">OSM Nominatim</a>)<br />
+<input id="currentbutton" name="currentbutton" type="button" value="Press to Query Current Location and Set Coords" onclick="getCurrentLocationMapview();" /><br />
 <hr />
 Latitude: <input id="latvalinput" name="latvalinput" type="number" min="-90" max="90" size="15" maxlength="12" step="any" value="` + setlat + `" /><br />
 Longitude: <input id="lonvalinput" name="lonvalinput" type="number" min="-180" max="180" size="15" maxlength="12" step="any" value="` + setlon + `" /><br />
