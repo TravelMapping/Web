@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="/css/travelMapping.css" />
 
 <!-- jQuery -->
-<script type="application/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="application/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <!-- TableSorter -->
 <script type="application/javascript" src="/lib/jquery.tablesorter.min.js"></script>
 <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
@@ -83,7 +83,7 @@ $activedc = tm_count_rows("datacheckErrors", "join routes on datacheckErrors.rou
       <i>TM's update of CHM's WPT file Editor; Goal: develop our own new version</i>
     </li>
     <br/>
-    <li><a href="http://courses.teresco.org/metal/hdx/">Highway Data Examiner</a> (HDX)
+    <li><a href="https://courses.teresco.org/metal/hdx/">Highway Data Examiner</a> (HDX)
       <br/>
       View graph and near-miss data
     </li>

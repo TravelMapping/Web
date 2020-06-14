@@ -471,10 +471,10 @@ echo <<<END
   <link rel="stylesheet" href="/leaflet-1.5.1/leaflet.css" />
   <script src="/leaflet-1.5.1/leaflet.js"></script>
   <script src="/leaflet-1.5.1/leaflet-providers.js"></script>
-  <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+  <script type="text/javascript" src="https://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
   <!-- jQuery -->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <!-- TableSorter -->
   <script src="/lib/jquery.tablesorter.min.js" type="text/javascript"></script>
 

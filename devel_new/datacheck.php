@@ -57,9 +57,21 @@
         if (strcmp($row['label3'],"") != 0) {
           echo ",".$row['label3'];
         }
-	if ((strcmp($row['code'],"VISIBLE_DISTANCE") == 0) ||
+	if ((strcmp($row['code'],"BUS_WITH_I") == 0) ||
+	  (strcmp($row['code'],"INVALID_FINAL_CHAR") == 0) ||
+	  (strcmp($row['code'],"INVALID_FIRST_CHAR") == 0) ||
+	  (strcmp($row['code'],"LABEL_LOOKS_HIDDEN") == 0) ||
+	  (strcmp($row['code'],"LABEL_PARENS") == 0) ||
+	  (strcmp($row['code'],"LABEL_SELFREF") == 0) ||
+	  (strcmp($row['code'],"LABEL_SLASHES") == 0) ||
+	  (strcmp($row['code'],"LABEL_UNDERSCORES") == 0) ||
+	  (strcmp($row['code'],"LACKS_GENERIC") == 0) ||
 	  (strcmp($row['code'],"LONG_SEGMENT") == 0) ||
-	  (strcmp($row['code'],"SHARP_ANGLE") == 0)) {
+	  (strcmp($row['code'],"LONG_UNDERSCORE") == 0) ||
+	  (strcmp($row['code'],"NONTERMINAL_UNDERSCORE") == 0) ||
+	  (strcmp($row['code'],"US_BANNER") == 0) ||
+	  (strcmp($row['code'],"VISIBLE_HIDDEN_COLOC") == 0) ||
+	  (strcmp($row['code'],"VISIBLE_DISTANCE") == 0)) {
 	  echo "</td><td>".$row['code']."</td><td>";
 	}
         else {

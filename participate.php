@@ -137,7 +137,7 @@ First steps with email submission</p>
       </br>
       Once your file has been processed, your name will appear in this list along with all the other travelers.
       Click on your username and enjoy your traveled highway stats and maps.</br>
-      Lots of stats are available in csv files linked from <a href="/stats/">http://travelmapping.net/stats/</a>.</li>
+      Lots of stats are available in csv files linked from <a href="/stats/">https://travelmapping.net/stats/</a>.</li>
     </br>
     <li><a name="errorlog"></a><a style="text-decoration:none" href="#errorlog">&#x1f517</a>
       <b>Check the user log file.</b></br>
@@ -415,9 +415,9 @@ The steps to become a highway data manager are as follows:
     <li><a name="activeuser"></a><a style="text-decoration:none" href="#activeuser">&#x1f517</a>
     Become an active user and get familiar with the project structure. Create a <a href="#userlistfile">list files</a> and understand how routes are organized into highway systems.</li>
     <li><a name="follow"></a><a style="text-decoration:none" href="#follow">&#x1f517</a>
-    Catch up on previous discussions and follow current discussions <a href="http://forum.travelmapping.net/">on the forum</a> about highway data updates.</li>
+    Catch up on previous discussions and follow current discussions <a href="https://forum.travelmapping.net/">on the forum</a> about highway data updates.</li>
     <li><a name="report"></a><a style="text-decoration:none" href="#report">&#x1f517</a>
-    Report updates and problems in existing highway systems <a href="http://forum.travelmapping.net/">on the forum</a>.</li>
+    Report updates and problems in existing highway systems <a href="https://forum.travelmapping.net/">on the forum</a>.</li>
     <li><a name="manual"></a><a style="text-decoration:none" href="#manual">&#x1f517</a>
     Read and understand the <a href="devel_new/devel.php#participate">developer manual</a>.</li>
     <li><a name="review"></a><a style="text-decoration:none" href="#review">&#x1f517</a>
