@@ -385,7 +385,7 @@ Concurrency check</p>
       <li>When there is a <conn2>green line</conn2> (2 concurrent routes) interrupted by a <connerr1>dark blue</connerr1> line at visible or hidden waypoints, it is a sign of potentially broken concurrencies. The <connerr1>dark blue</connerr1> is created when two normal <conn1>blue lines</conn1> are overlapping.</li>
       <li>Other non-standard colors are caused by multiple lines overlapping in the same place.</li>
       <ul>
-        <li>For example, a <conn2>green line</conn1> (2 concurrent routes) overlapping a <conn1>blue line</conn1> (one route only) will result in a <connerr2>darker more bluish green<connerr2>.</li>
+        <li>For example, a <conn2>green line</conn2> (2 concurrent routes) overlapping a <conn1>blue line</conn1> (one route only) will result in a <connerr2>darker more bluish green<connerr2>.</li>
       </ul>
     </ul>
     <li>When you spot errors, click on the lines or markers to get info about the route and waypoint labels. It is sometimes difficult to click all routes when they are mostly overlapped.</li>
