@@ -183,7 +183,9 @@ User: <?php tm_user_select(); ?>&nbsp;Units: <?php tm_units_select(); ?><br />
       <td>
 	  <input id="legendCheckbox" type="checkbox" name="legendCheckbox" checked onclick="legendCheckboxChanged();" />&nbsp;Show Legend<br>
 	</td>
-	<td>
+      <td>
+	  <input id="posCheckbox" type="checkbox" name="posCheckbox" checked onclick="posCheckboxChanged();" />&nbsp;Mark Current Location<br>
+	</td>
       </tr>
     </tbody>
   </table>
