@@ -641,27 +641,32 @@ with their abbreviation regardless of a local convention (Michigan State
   </tr>
   <tr valign="top">
     <td><a name="over2"></a><a style="text-decoration:none" href="#over2">&#x1f517</a></td>
-    <td>US25:<br />
-      US90_A<br />
+    <td>US90_A<br />
       US90_B<br />
       US90_C</p>
       <br />
-      US95:<br />
       NV57_Ren<br />
       NV57_Tah<br />
       NV88_PitS<br />
-      NV88_PitN<br /></td>
+      NV88_PitN<br />
+      ME161_FtKS<br />
+      ME161_FtKN<br /></td>
     <td>If more than two points for the same non-exit-numbered cross 
       road are needed, there are two options which can be used in combination 
       with or ignoring the previous options for pairs of identical labels.<br />
       1. Use alphabetical suffixes _A, _B, _C, etc.<br />
-      2. Choose 3-letter suffixes for a nearby towns if they are fairly close. The 3-letter suffix should be the <em>first</em>
-      3 letters of the town name. Add a suffix with an underscore and those 3
-      letters. If you need the same town twice, add a 4th letter that is a 
+      2. Choose 3-letter suffixes for nearby towns if they are fairly close. The 3-letter suffix should be the <em>first</em>
+      3 letters of the town name. or a desired 3-letter abbreviation if the name consists
+      of more than one word. Add a suffix with an underscore and those 3 letters.
+      <ul>
+      <li>Standard town prefixes like "Bad", "Le", "Saint", "San", "Sankt" can be omitted or abbreviated.</li>
+      <li>If you need the same town twice, add a 4th letter that is a 
       direction letter (_PitS and _PitN for southern and northern junctions 
-      near Pittston). If the town suffixes are not useful, are confusing, or 
-      require further elaboration (3+ junctions with same town), use the 
-      alphabetical suffixes instead. </td>
+      near Pittston or _FtKN and _FtKS for southern and northern junctions near Fort Kent).</li>
+      <li>If the town suffixes are not useful, are confusing,
+      require further elaboration (3+ junctions with same town),
+      or no towns are nearby, use the county name or alphabetical suffixes instead.</li>
+      </ul></td>
   </tr>
   <tr valign="top">
     <td><a name="differentnames"></a><a style="text-decoration:none" href="#differentnames">&#x1f517</a></td>
