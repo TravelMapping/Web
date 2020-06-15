@@ -38,9 +38,9 @@ function connectedChanged() {
 function updateStats() {
 
     distanceUnits = selects['units'].value;
-    set_units_cookie();
+    setTMCookie("units", distanceUnits);
     traveler = selects['u'].value;
-    set_traveler_cookie();
+    setTMCookie("traveler", traveler);
     document.getElementById("unitsText").innerHTML = distanceUnits;
     let params = {
 	traveler: traveler,
