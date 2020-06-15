@@ -385,7 +385,9 @@ ENDA;
         echo "<input type=\"submit\" value=\"Apply\" />";
         echo "</td><td>";
         echo "<a href='/hb/?r=".$routeparam."'>Zoom to Fit</a>";
-        echo "</td></tr></tbody></table>\n";
+        echo "</td><td>";
+        tm_position_checkbox();
+	echo "</td></tr></tbody></table>\n";
     }
     echo <<<ENDB
   </span>
