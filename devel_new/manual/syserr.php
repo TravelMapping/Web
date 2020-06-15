@@ -64,7 +64,7 @@ Data errors</p>
   </br>
   </br>
   Note: Not all data errors are detected by the WPT file editor, see below: <green>supported</green>,
-  <yellow>proposed but not yet supported</yellow>, <red>not possbile to be detected in WPT file editor</red>.
+  <yellow>proposed but not yet supported</yellow>, <red>not possible to be detected in WPT file editor</red>.
   </br>
 </div>
 
@@ -80,7 +80,7 @@ Data errors</p>
     <td><a name="BAD_ANGLE"></a><a style="text-decoration:none" href="#BAD_ANGLE">&#x1f517</a></td>
     <td>BAD_ANGLE</td>
     <td>Angles cannot be computed for two adjacent points at the same coordinates. Instead, use <code>AltLabels</code> or fix coordinates of one point or both.</td>
-    <td><yellow>NO</yellow></td>
+    <td><green>YES</green></td>
     <td><red>NO</red></td>
   </tr>
   <tr valign="top">
@@ -136,35 +136,35 @@ Data errors</p>
     <td>HIDDEN_TERMINUS</td>
     <td>Hidden point at the beginning or end of a route. Routes must begin and end with visible waypoints
     so that users can mark all of them as traveled.</td>
-    <td><yellow>NO</yellow></td>
+    <td><green>YES</green></td>
     <td><red>NO</red></td>
   </tr>
   <tr valign="top">
     <td><a name="INVALID_FINAL_CHAR"></a><a style="text-decoration:none" href="#INVALID_FINAL_CHAR">&#x1f517</a></td>
     <td>INVALID_FINAL_CHAR</td>
     <td>Disallowed character at end of label</td>
-    <td><yellow>NO</yellow></td>
+    <td><green>YES</green></td>
     <td><red>NO</red></td>
   </tr>
   <tr valign="top">
     <td><a name="INVALID_FIRST_CHAR"></a><a style="text-decoration:none" href="#INVALID_FIRST_CHAR">&#x1f517</a></td>
     <td>INVALID_FIRST_CHAR</td>
     <td>Disallowed character at beginning (after any leading <code>*</code> characters) of label</td>
-    <td><yellow>NO</yellow></td>
+    <td><green>YES</green></td>
     <td><red>NO</red></td>
   </tr>
   <tr valign="top">
     <td><a name="LABEL_INVALID_CHAR"></a><a style="text-decoration:none" href="#LABEL_INVALID_CHAR">&#x1f517</a></td>
     <td>LABEL_INVALID_CHAR</td>
     <td>Label contains characters not allowed in labels, e.g. non-ASCII.</td>
-    <td><yellow>NO</yellow></td>
+    <td><green>YES</green></td>
     <td><red>NO</red></td>
   </tr>
   <tr valign="top">
     <td><a name="LABEL_LOOKS_HIDDEN"></a><a style="text-decoration:none" href="#LABEL_LOOKS_HIDDEN">&#x1f517</a></td>
     <td>LABEL_LOOKS_HIDDEN</td>
     <td><code>X123456</code> style label without a leading <code>+</code>. </td>
-    <td><yellow>NO</yellow></td>
+    <td><green>YES</green></td>
     <td><green>YES</green></td>
   </tr>
   <tr valign="top">
@@ -185,25 +185,23 @@ Data errors</p>
     <td><a name="LABEL_SLASHES"></a><a style="text-decoration:none" href="#LABEL_SLASHES">&#x1f517</a></td>
     <td>LABEL_SLASHES</td>
     <td>Too many slashes in label (<code>> 1</code>).</td>
-    <td><yellow>NO</yellow></td>
+    <td><green>YES</green></td>
     <td><red>NO</red></td>
   </tr>
   <tr valign="top">
     <td><a name="LABEL_TOO_LONG"></a><a style="text-decoration:none" href="#LABEL_TOO_LONG">&#x1f517</a></td>
     <td>LABEL_TOO_LONG</td>
     <td>Label is too long to fit in the space allocated for the DB field.</td>
-    <td><yellow>NO</yellow></td>
+    <td><green>YES</green></td>
     <td><red>NO</red></td>
   </tr>
-<!--
   <tr valign="top">
     <td><a name="LACKS_GENERIC"></a><a style="text-decoration:none" href="#LACKS_GENERIC">&#x1f517</a></td>
     <td>LACKS_GENERIC</td>
-    <td>Placeholder; not currently implemented.</td>
-    <td><yellow>NO</yellow></td>
     <td>...</td>
+    <td><green>YES</green></td>
+    <td><green>YES</green></td>
   </tr>
--->
   <tr valign="top">
     <td><a name="LABEL_UNDERSCORES"></a><a style="text-decoration:none" href="#LABEL_UNDERSCORES">&#x1f517</a></td>
     <td>LABEL_UNDERSCORES</td>
@@ -214,14 +212,15 @@ Data errors</p>
   <tr valign="top">
     <td><a name="LONG_SEGMENT"></a><a style="text-decoration:none" href="#LONG_SEGMENT">&#x1f517</a></td>
     <td>LONG_SEGMENT</td>
-    <td>Long segment (distance <code>> 10 mi</code>, <code>16 km</code>) between this and the previous hidden point.</td>
-    <td><yellow>NO</yellow></td>
+    <td>Long segment (distance <code>> 20 mi</code>, <code>32 km</code>) between this and the previous hidden point.</td>
+    <td><green>YES</green></td>
     <td><green>YES</green></td>
   </tr>
   <tr valign="top">
     <td><a name="LONG_UNDERSCORE"></a><a style="text-decoration:none" href="#LONG_UNDERSCORE">&#x1f517</a></td>
     <td>LONG_UNDERSCORE</td>
-    <td>Label has long underscore suffix (<code>> 4</code> characters after underscore)</td>
+    <td>Label has long underscore suffix: <code>> 4</code> characters after underscore,
+    or 4 characters not ending in a capital letter.</td>
     <td><green>YES</green></td>
     <td><red>NO</red></td>
   </tr>
@@ -258,7 +257,7 @@ Data errors</p>
     <td>OUT_OF_BOUNDS</td>
     <td>Latitude <code>> 90°</code> or <code>< -90°</code>, or longitude <code>> 180°</code> or <code>< -180°</code>.
     False positives are allowed for the rare potential case of routes spanning the international date line.</td>
-    <td><yellow>NO</yellow></td>
+    <td><green>YES</green></td>
     <td><green>YES</green></td>
   </tr>
   <tr valign="top">
@@ -287,7 +286,7 @@ Data errors</p>
   <tr valign="top">
     <td><a name="VISIBLE_HIDDEN_COLOC"></a><a style="text-decoration:none" href="#VISIBLE_HIDDEN_COLOC">&#x1f517</a></td>
     <td>VISIBLE_HIDDEN_COLOC</td>
-    <td>The visisble waypoint is hidden on concurrent route(s).</td>
+    <td>The visible waypoint is hidden on concurrent route(s).</td>
     <td><red>NO</red></td>
     <td><green>YES</green></td>
   </tr>
