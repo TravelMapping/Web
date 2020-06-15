@@ -139,10 +139,10 @@ function tm_region_select($multiple) {
     global $tmdb;
 
     if ($multiple) {
-        echo "<select name=\"rg[]\" multiple=\"multiple\">\n";
+        echo "<select id=\"regions\" name=\"rg[]\" multiple=\"multiple\">\n";
     }
     else {
-        echo "<select name=\"rg\">\n";
+        echo "<select id=\"region\" name=\"rg\">\n";
     }
     $regions = tm_qs_multi_or_comma_to_array("rg");
     echo "<option value=\"null\">[None Selected]</option>\n";
@@ -183,10 +183,10 @@ function tm_system_select($multiple) {
     global $tmdb;
 
     if ($multiple) {
-        echo "<select name=\"sys[]\" multiple=\"multiple\">\n";
+        echo "<select id=\"systems\" name=\"sys[]\" multiple=\"multiple\">\n";
     }
     else {
-        echo "<select name=\"sys\">\n";
+        echo "<select id=\"system\" name=\"sys\">\n";
     }
     $systems = tm_qs_multi_or_comma_to_array("sys");
     echo "<option value=\"null\">[None Selected]</option>\n";
