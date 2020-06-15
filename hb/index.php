@@ -386,8 +386,8 @@ ENDA;
         echo "</td><td>";
         echo "<a href='/hb/?r=".$routeparam."'>Zoom to Fit</a>";
         echo "</td><td>";
-	echo "<input id=\"posCheckbox\" type=\"checkbox\" name=\"posCheckbox\" checked onclick=\"posCheckboxChanged();\" />&nbsp;Mark Current Location<br></td>";
-	echo "</tr></tbody></table>\n";
+        tm_position_checkbox();
+	echo "</td></tr></tbody></table>\n";
     }
     echo <<<ENDB
   </span>
