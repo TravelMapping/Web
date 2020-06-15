@@ -220,7 +220,7 @@ Data errors</p>
     <td><a name="LONG_UNDERSCORE"></a><a style="text-decoration:none" href="#LONG_UNDERSCORE">&#x1f517</a></td>
     <td>LONG_UNDERSCORE</td>
     <td>Label has long underscore suffix: <code>> 4</code> characters after underscore,
-    or 4 characters not ending in a capital letter.</td>
+    or <code>4</code> characters not ending in a capital letter.</td>
     <td><green>YES</green></td>
     <td><red>NO</red></td>
   </tr>
