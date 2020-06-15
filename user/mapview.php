@@ -39,7 +39,7 @@
             background-color: white;
             position: absolute;
             top: 25px;
-            left: 150px;
+            left: 75px;
             z-index: 11000;
         }
 
@@ -159,7 +159,7 @@ User: <?php tm_user_select(); ?>&nbsp;Units: <?php tm_units_select(); ?><br />
           <input id="jumpButton" type="button" value="Jump" onclick="showScrollableMapviewPopup();" />
       </td>
       <td>
-	  <input id="showRoutesCheckbox" type="checkbox" name="showRoutes" checked onclick="showHideRouteTable();" />&nbsp;Show Route Table<br>
+	  <input id="showRoutesCheckbox" type="checkbox" name="showRoutes" checked onclick="showHideRouteTable();" />&nbsp;Route Table<br>
 	</td>
       <td>
 	  <input id="updateCheckbox" type="checkbox" name="updateRoutes" checked onclick="updateCheckboxChanged();" />&nbsp;Always Update Visible Routes<br>
@@ -181,7 +181,7 @@ User: <?php tm_user_select(); ?>&nbsp;Units: <?php tm_units_select(); ?><br />
     </select>
     </td>
       <td>
-	  <input id="legendCheckbox" type="checkbox" name="legendCheckbox" checked onclick="legendCheckboxChanged();" />&nbsp;Show Legend<br>
+	  <input id="legendCheckbox" type="checkbox" name="legendCheckbox" checked onclick="legendCheckboxChanged();" />&nbsp;Legend<br>
       </td>
       <td>
         <?php tm_position_checkbox(); ?><br>
