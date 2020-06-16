@@ -198,7 +198,8 @@ Data errors</p>
   <tr valign="top">
     <td><a name="LACKS_GENERIC"></a><a style="text-decoration:none" href="#LACKS_GENERIC">&#x1f517</a></td>
     <td>LACKS_GENERIC</td>
-    <td>...</td>
+    <td>Label begins with <a href="wayptlabels.php#genericnumbred"><code>Old</code> followed immediately by a number without a
+    preceding generic designation type</a> such as <code>US</code>, <code>E</code>, <code>A</code>, <code>Hwy</code>, <code>Rte</code>, etc.</td>
     <td><green>YES</green></td>
     <td><green>YES</green></td>
   </tr>
