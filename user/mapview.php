@@ -39,7 +39,7 @@
             background-color: white;
             position: absolute;
             top: 25px;
-            left: 150px;
+            left: 75px;
             z-index: 11000;
         }
 
@@ -132,6 +132,7 @@ let scrollableMapviewDialog = `
 <p><b>Set Initial Location and Zoom Level</b></br >
 Find place: <input id="placeinput" name="placeinput" type="text" size="20" maxlength="100" onkeypress="nominatimLookupIfEnter(event);"/>&nbsp;<input id="findbutton" name="findbutton" type="button" value="Press to Search and Set Coords" onclick="nominatimLookup('placeinput');" /><br />
 (Geocoding by <a target="_blank" href="https://nominatim.openstreetmap.org/">OSM Nominatim</a>)<br />
+<input id="currentbutton" name="currentbutton" type="button" value="Press to Query Current Location and Set Coords" onclick="getCurrentLocationMapview();" /><br />
 <hr />
 Latitude: <input id="latvalinput" name="latvalinput" type="number" min="-90" max="90" size="15" maxlength="12" step="any" value="` + setlat + `" /><br />
 Longitude: <input id="lonvalinput" name="lonvalinput" type="number" min="-180" max="180" size="15" maxlength="12" step="any" value="` + setlon + `" /><br />
@@ -158,7 +159,7 @@ User: <?php tm_user_select(); ?>&nbsp;Units: <?php tm_units_select(); ?><br />
           <input id="jumpButton" type="button" value="Jump" onclick="showScrollableMapviewPopup();" />
       </td>
       <td>
-	  <input id="showRoutesCheckbox" type="checkbox" name="showRoutes" checked onclick="showHideRouteTable();" />&nbsp;Show Route Table<br>
+	  <input id="showRoutesCheckbox" type="checkbox" name="showRoutes" checked onclick="showHideRouteTable();" />&nbsp;Route Table<br>
 	</td>
       <td>
 	  <input id="updateCheckbox" type="checkbox" name="updateRoutes" checked onclick="updateCheckboxChanged();" />&nbsp;Always Update Visible Routes<br>
@@ -180,9 +181,11 @@ User: <?php tm_user_select(); ?>&nbsp;Units: <?php tm_units_select(); ?><br />
     </select>
     </td>
       <td>
-	  <input id="legendCheckbox" type="checkbox" name="legendCheckbox" checked onclick="legendCheckboxChanged();" />&nbsp;Show Legend<br>
-	</td>
-	<td>
+	  <input id="legendCheckbox" type="checkbox" name="legendCheckbox" checked onclick="legendCheckboxChanged();" />&nbsp;Legend<br>
+      </td>
+      <td>
+        <?php tm_position_checkbox(); ?><br>
+      </td>
       </tr>
     </tbody>
   </table>

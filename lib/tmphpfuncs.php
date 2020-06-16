@@ -248,6 +248,13 @@ function tm_user_select_form($action = "\".\"") {
     echo "</p></form>\n";
 }
 
+// function to generate the current position checkbox and label
+function tm_position_checkbox() {
+
+    echo "<input id=\"posCheckbox\" type=\"checkbox\" name=\"posCheckbox\" checked onclick=\"posCheckboxChanged();\" />&nbsp;<span id=\"posCheckboxLabel\">Mark Current Location</span>";
+
+}
+
 // function to get a count from a table of rows matching a "where" clause
 function tm_count_rows($table, $clause) {
     global $tmdb;

@@ -183,7 +183,7 @@ datacheckfps.csv]</a>.</p>
   datacheck FP list</a> during the final review process to promote a
   system from 'preview' to 'active'.  A system should have no entries
   here before activation.  Errors shown in <span style="color:
-  red">red</span> should be fixed as soon as possible, while others
+  red">red</span> potentially effect travelers and should be fixed as soon as possible, while others
   can wait until final preparation for system activation.</p>
 
   <table border="1" style="background-color:#ccf"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry to Submit</th></tr>

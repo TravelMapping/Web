@@ -304,20 +304,6 @@ SQL;
         </table>
         <?php
         if($region == "") {
-            echo <<<HTML
-                <table class="gratable tablesorter" id="regionsTable">
-                    <caption>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</caption>
-                    <thead>
-                    <tr><th colspan="4">Statistics by Region</th></tr>
-                    <tr>
-                        <th class="sortable">Region</th>
-                        <th class="sortable">Clinched ({$tmunits})</th>
-                        <th class="sortable">Total ({$tmunits})</th>
-                        <th class="sortable">%</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-HTML;
             $sql_command = <<<SQL
             SELECT
               miByRegion.region,
@@ -331,7 +317,22 @@ HTML;
             ORDER BY percentage DESC ;
 SQL;
             $res = tmdb_query($sql_command);
-            while ($row = $res->fetch_assoc()) {
+	    if ($res->num_rows > 1) {
+              echo <<<HTML
+                <table class="gratable tablesorter" id="regionsTable">
+                    <caption>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</caption>
+                    <thead>
+                    <tr><th colspan="4">Statistics by Region</th></tr>
+                    <tr>
+                        <th class="sortable">Region</th>
+                        <th class="sortable">Clinched ({$tmunits})</th>
+                        <th class="sortable">Total ({$tmunits})</th>
+                        <th class="sortable">%</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+HTML;
+              while ($row = $res->fetch_assoc()) {
 		$clinched = tm_convert_distance($row['clinchedMileage']);
 		$total = tm_convert_distance($row['totalMileage']);
 	    	$style = 'style="background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$row['totalMileage']).';"';
@@ -345,8 +346,9 @@ SQL;
                 </tr>
 HTML;
             }
-            $res->free();
             echo "</tbody></table>";
+	  }
+          $res->free();
         }
         ?>
         <table class="gratable tablesorter" id="routeTable">

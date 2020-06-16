@@ -288,7 +288,9 @@ a second run must be done <b>before</b> the activation of the system.
   in the repository which are not listed in any highway system list (<code>.csv</code>).</li>
 </ul>
 
-<b>Errors from <active>active</active> systems should always be corrected or reported as false positives short-term.</b>
+<b>Errors from <active>active</active> systems should always be corrected or reported as false positives short-term.</br>
+Errors shown in <span style="color:red">red</span> potentially effect travelers and should be fixed as soon as possible for
+<active>active</active> and <preview>preview</preview> systems.</b>
 
 </div>
 
