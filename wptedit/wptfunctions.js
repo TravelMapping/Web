@@ -978,45 +978,45 @@ function Error2Abbrev(e)
 {
   text = '';
   if(e & DC_BUS_WITH_I)
-    text += '<span title="Label uses Bus with I- (Interstate)">[BUS_WITH_I]</span><br>';
+    text += '<span title="Label uses Bus with I- (Interstate)">BUS_WITH_I</span><br>';
   if(e & DC_BAD_ANGLE)
-    text += '<span title="Consecutive points at same coordinates">[BAD_ANGLE]</span><br>';
+    text += '<span title="Consecutive points at same coordinates">BAD_ANGLE</span><br>';
   if(e & DC_DUPLICATE_COORDS)
-    text += '<span title="Duplicated coordinates">[DUPLICATE_COORDS]</span><br>';
+    text += '<span title="Duplicated coordinates">DUPLICATE_COORDS</span><br>';
   if(e & DC_DUPLICATE_LABEL)
-    text += '<span title="Duplicated labels">[DUPLICATE_LABEL]</span><br>';
+    text += '<span title="Duplicated labels">DUPLICATE_LABEL</span><br>';
   if(e & DC_HIDDEN_TERMINUS)
-    text += '<span title="Terminus is not visible">[HIDDEN_TERMINUS]</span><br>';
+    text += '<span title="Terminus is not visible">HIDDEN_TERMINUS</span><br>';
   if(e & DC_INVALID_FINAL_CHAR)
-    text += '<span title="Invalid char at end of label">[INVALID_FINAL_CHAR]</span><br>';
+    text += '<span title="Invalid char at end of label">INVALID_FINAL_CHAR</span><br>';
   if(e & DC_INVALID_FIRST_CHAR)
-    text += '<span title="Invalid char at beginning of label">[INVALID_FIRST_CHAR]</span><br>';
+    text += '<span title="Invalid char at beginning of label">INVALID_FIRST_CHAR</span><br>';
   if(e & DC_LABEL_INVALID_CHAR)
-    text += '<span title="Invalid character(s)">[LABEL_INVALID_CHAR]</span><br>';
+    text += '<span title="Invalid character(s)">LABEL_INVALID_CHAR</span><br>';
   if(e & DC_LABEL_LOOKS_HIDDEN)
-    text += '<span title="Looks like a default hidden waypont label without the leading +">[LABEL_LOOKS_HIDDEN]</span><br>';
+    text += '<span title="Looks like a default hidden waypont label without the leading +">LABEL_LOOKS_HIDDEN</span><br>';
   if(e & DC_LABEL_PARENS)
-    text += '<span title="Reversed or wrong number of parentheses in primary label">[LABEL_PARENS]</span><br>';
+    text += '<span title="Reversed or wrong number of parentheses in primary label">LABEL_PARENS</span><br>';
   if(e & DC_LABEL_SLASHES)
-    text += '<span title="Too many slashes (> 1)">[LABEL_SLASHES]</span><br>';
+    text += '<span title="Too many slashes (> 1)">LABEL_SLASHES</span><br>';
   if(e & DC_LABEL_TOO_LONG)
-    text += '<span title="Label too long to fit in database">[LABEL_TOO_LONG]</span><br>';
+    text += '<span title="Label too long to fit in database">LABEL_TOO_LONG</span><br>';
   if(e & DC_LABEL_UNDERSCORES)
-    text += '<span title="Too many underscored suffixes (> 1)">[LABEL_UNDERSCORES]</span><br>';
+    text += '<span title="Too many underscored suffixes (> 1)">LABEL_UNDERSCORES</span><br>';
   if(e & DC_LACKS_GENERIC)
-    text += '<span title="Label lacks the generic highway type">[LACKS_GENERIC]</span><br>';
+    text += '<span title="Label lacks the generic highway type">LACKS_GENERIC</span><br>';
   if(e & DC_LONG_SEGMENT)
-    text += '<span title="single segment > 20 miles">[LONG_SEGMENT]</span><br>';
+    text += '<span title="single segment > 20 miles">LONG_SEGMENT</span><br>';
   if(e & DC_LONG_UNDERSCORE)
-    text += '<span title="Label has long underscore suffix">[LONG_UNDERSCORE]</span><br>';
+    text += '<span title="Label has long underscore suffix">LONG_UNDERSCORE</span><br>';
   if(e & DC_NONTERMINAL_UNDERSCORE)
-    text += '<span title="Label has underscore suffix before slash">[NONTERMINAL_UNDERSCORE]</span><br>';
+    text += '<span title="Label has underscore suffix before slash">NONTERMINAL_UNDERSCORE</span><br>';
   if(e & DC_OUT_OF_BOUNDS)
-    text += '<span title="Latitude beyond +/-90 deg or longitude beyiond +/- 180 deg">[OUT_OF_BOUNDS]</span><br>';
+    text += '<span title="Latitude beyond +/-90 deg or longitude beyiond +/- 180 deg">OUT_OF_BOUNDS</span><br>';
   if(e & DC_SHARP_ANGLE)
-    text += '<span title="Sharp Angle (> 135 deg)">[SHARP_ANGLE]</span><br>';
+    text += '<span title="Sharp Angle (> 135 deg)">SHARP_ANGLE</span><br>';
   if(e & DC_VISIBLE_DISTANCE)
-    text += '<span title="Long distance (Vis. Dist. > 10 mi, 16 km) between this and the previous visible point">[VISIBLE_DISTANCE]</span><br>';
+    text += '<span title="Long distance (Vis. Dist. > 10 mi, 16 km) between this and the previous visible point">VISIBLE_DISTANCE</span><br>';
   
   return text;
   
