@@ -4,10 +4,11 @@
  ***
  * Highway Browser Show Route page
  *
- * Two modes of operation, depending on which required parameter is provided
+ * Two modes of operation, depending on whether cr parameter is provided
  *
- * r= will display the "chopped" route for the given TM root (e.g., ny.ny005)
- * cr= will display the the entire "connected" route that contains
+ * r= the "chopped" route for the given TM root (e.g., ny.ny005) to display
+ *
+ * cr, if provided, will display the the entire "connected" route that contains
  *   the given TM root
  *
  * Other QS parameters:
@@ -22,7 +23,7 @@
  *
  * Otherwise, the map will pan and zoom to fit the entire route at the center.
  *
- *  r|cr [u] [lat lon zoom]
+ *  r [cr] [u] [lat lon zoom]
  ***
  -->
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -149,7 +150,6 @@
     }
     
     // check for required parameters
-    $routetype = "NONE";
     if (array_key_exists("r", $_GET)) {
         $rootparam = tm_validate_root($_GET['r']);
 	check_root_error('r', $rootparam, $_GET['r']);
@@ -163,15 +163,50 @@
         }
 	$titleRoute = $routeInfo['region']." ".$routeInfo['route'].$routeInfo['banner'].$routeInfo['abbrev'];
     }
-    else if (array_key_exists("cr", $_GET)) {
-        $rootparam = tm_validate_root($_GET['cr']);
-	check_root_error('cr', $rootparam, $_GET['cr']);
-	$routetype = "connected";
-    }
     else {
-    	showroute_error("Query string parameter r= or cr= required.");
+    	showroute_error("Query string parameter r= required.");
     }
 
+    // build JS info about the roots to be displayed
+    echo "<script type=\"application/javascript\">\n";
+    echo "var showrouteParams = new Object();\n";
+    echo "showrouteParams.roots = [];\n";
+    
+    // is the entire connected route requested?
+    $connected = array_key_exists("cr", $_GET);
+    if ($connected) {
+        // TODO: factor out code from here and mapview into tmphpfuncs.php
+        $result = tmdb_query("select firstRoot from connectedrouteroots where root='".$rootparam."';");
+        $row = $result->fetch_assoc();
+	$firstRoot = "";
+	if ($row == NULL) {
+	    $firstRoot = $rootparam;
+	}
+	else {
+	    $firstRoot = $row['firstRoot'];
+	}
+	$result->free();
+        echo "showrouteParams.roots.push('".$firstRoot."');\n";
+        $result2 = tmdb_query("select root from connectedRouteRoots where firstRoot='".$firstRoot."';");
+	while ($row2 = $result2->fetch_assoc()) {
+            echo "showrouteParams.roots.push('".$row2['root']."');\n";
+        }
+	$result2->free();
+	$result = tmdb_query("select * from connectedroutes where firstRoot='".$firstRoot."';");
+	$connInfo = $result->fetch_assoc();
+	$result->free();
+	$titleRoute = $connInfo['route'].$connInfo['banner'];
+	if ($connInfo['groupName'] != "") {
+	   $titleRoute .= ' ('.$connInfo['groupName'].')';
+	}
+        echo "showrouteParams.connected = true;\n";
+    }
+    else {
+        echo "showrouteParams.roots.push('".$rootparam."');\n";
+        echo "showrouteParams.connected = false;\n";
+    }
+    echo "</script>\n";
+    
     // parse lat, lon, zoom parameters if present
     $lat = "null";
     $lon = "null";
@@ -189,37 +224,44 @@
     ?>
     <?php tm_common_js(); ?>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
+    <script src="../lib/showroutefuncs.js" type="text/javascript"></script>
     <title><?php echo $titleRoute; ?> - TM Highway Browser</title>
 </head>
 <?php 
 $nobigheader = 1;
 echo "<body onload=\"showrouteStartup(".$lat.",".$lon.",".$zoom.");\">\n";
 require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
-?>
-<script type="text/javascript">
-function showrouteStartup($lat, $lon, $zoom) {
-
-    loadmap();
-}
-</script>
-
-<?php
 require $_SERVER['DOCUMENT_ROOT'] . "/shields/shieldgen.php";
 echo "<div id=\"pointbox\">\n";
 echo "<span class='status-".$routeInfo['level']."' style='text-align:center'><a href='/hb/?sys=".$routeInfo['systemName']."'>".$routeInfo['fullName']." (".$routeInfo['systemName'].")</a></span>\n";
 if ($routeInfo['level'] == 'preview') {
-    echo "<span class='status-preview' style='text-align:center' title='Preview systems are substantially complete, but are undergoing final review and revisions. These may still undergo significant changes without notification in the updates log. Users can include these systems in list files for mapping and stats, but should expect to revise as the system progresses toward activation.  Users plotting travels in preview systems may wish to follow the forum discussions to see the progress and find out about revisions being made.'>Warning: ".$routeInfo['systemName']." is a preview system.</span>\n";
+    $msg = 'Preview systems are substantially complete, but are undergoing final review and revisions. These may still undergo significant changes without notification in the updates log. Users can include these systems in list files for mapping and stats, but should expect to revise as the system progresses toward activation.  Users plotting travels in preview systems may wish to follow the forum discussions to see the progress and find out about revisions being made.';
+    echo "<span class='status-preview' style='text-align:center' title='".$msg."'>Warning: ".$routeInfo['systemName']." is a preview system. <span onclick='alert(\"".$msg."\");'>(?)</span></span>\n";
 }
 else if ($routeInfo['level'] == 'devel') {
-    echo "<span class='status-devel' style='text-align:center' title='Devel systems are a work in progress. Routes in these systems are not yet available for mapping and inclusion in user stats, and are shown in the Highway Browser primarily for the benefit of the highway data managers who are developing the system. Once the system is substantially complete it will be upgraded to preview status, at which time users can begin to plot their travels in the system.'>Warning: ".$routeInfo['systemName']." is an in-development system.</span>\n";
+    $msg = 'Devel systems are a work in progress. Routes in these systems are not yet available for mapping and inclusion in user stats, and are shown in the Highway Browser primarily for the benefit of the highway data managers who are developing the system. Once the system is substantially complete it will be upgraded to preview status, at which time users can begin to plot their travels in the system.';
+    echo "<span class='status-devel' style='text-align:center' title='".$msg."'>Warning: ".$routeInfo['systemName']." is an in-development system. <span onclick='alert(\"".$msg."\");'>(?)</span></span>\n";
 }
-echo "<span class='bigshield'>" . generate($rootparam, true) . "</span>\n";
-echo "<span>" . $routeInfo['banner'];
-if (strlen($routeInfo['city']) > 0) {
-    echo " (" . $routeInfo['city'] . ")";
+
+// shield and other info, depending on whether we are showing
+// connected or chopped route
+// always have the shield based on the root
+echo "<span class='bigshield'>".generate($rootparam, true)."</span>\n";
+if ($connected) {
+    echo "<span>" . $connInfo['banner'];
+    if (strlen($connInfo['groupName']) > 0) {
+        echo " (" . $connInfo['groupName'] . ")";
+    }
+    echo "</span>\n";
 }
-echo "</span>\n";
-echo "<span>.list name: <span style='font-family:courier'>" . $routeInfo['region'] . " " . $routeInfo['route'] . $routeInfo['banner'] . $routeInfo['abbrev'] . "</span></span>\n";
+else {
+    echo "<span>" . $routeInfo['banner'];
+    if (strlen($routeInfo['city']) > 0) {
+        echo " (" . $routeInfo['city'] . ")";
+    }
+    echo "</span>\n";
+    echo "<span>.list name: <span style='font-family:courier'>" . $routeInfo['region'] . " " . $routeInfo['route'] . $routeInfo['banner'] . $routeInfo['abbrev'] . "</span></span>\n";
+}
 
 echo "<table id='routeInfo' class=\"gratable\"><thead><tr><th colspan='2'>Route Stats</th></tr></thead><tbody>\n";
 $sql_command = "SELECT COUNT(DISTINCT traveler) as numUsers FROM clinchedOverallMileageByRegion";
@@ -313,8 +355,6 @@ echo <<<ENDA
       <span id="controlboxroute">
 ENDA;
 echo "<table><tbody><tr><td>";
-echo "<a href='/user/mapview.php?rte={$routeInfo['route']}'>Related Routes</a>";
-echo "</td><td>";
 echo "<input id=\"showMarkers\" type=\"checkbox\" name=\"Show Markers\" onclick=\"showMarkersClicked()\" checked=\"false\" />&nbsp;Show Markers&nbsp;";
 echo "</td><td>";
 echo "<form id=\"userForm\" action=\"/hb/index.php\">";
@@ -334,6 +374,11 @@ echo <<<ENDB
   </span>
 </div>
 <div id="map">
+</div>
+<div id="loadingMsg" style="display: none";>
+<table class="gratable">
+<tr><td style="font-size: 500%;">Loading Data...</td></tr>
+</table>
 </div>
 ENDB;
 $tmdb->close();
