@@ -33,6 +33,14 @@
     <link rel="stylesheet" type="text/css" href="/fonts/roadgeek.css" />
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <style type="text/css">
+    	#loadingMsg {
+            background-color: white;
+            position: absolute;
+            top: 100px;
+            left: 150px;
+            z-index: 11000;
+        }
+
         #headerbox {
             position: absolute;
             top: 0px;
@@ -169,6 +177,7 @@
 
     // build JS info about the roots to be displayed
     echo "<script type=\"application/javascript\">\n";
+    echo "traveler = '".$tmuser."';\n";
     echo "var showrouteParams = new Object();\n";
     echo "showrouteParams.roots = [];\n";
     
