@@ -29,6 +29,7 @@ $roots = $params['roots'];
 // total number of users
 
 // gather info about each chopped route
+$response['listNames'] = array();
 $response['pointNames'] = array();
 $response['latitudes'] = array();
 $response['longitudes'] = array();
@@ -36,6 +37,13 @@ $response['driverCounts'] = array();
 $response['segmentIds'] = array();
 $response['clinched'] = array();
 foreach ($roots as $root) {
+
+    $result = tmdb_query("SELECT region, route, abbrev, banner FROM routes WHERE root='".$root."'");
+    $row = $result->fetch_assoc();
+    $listName = $row['region']." ".$row['route'].$row['banner'].$row['abbrev'];
+    array_push($response['listNames'], $listName);
+    $result->free();
+
     $rootPointNames = array();
     $rootLatitudes = array();
     $rootLongitudes = array();

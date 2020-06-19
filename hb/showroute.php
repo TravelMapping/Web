@@ -280,7 +280,7 @@ else {
 
 <table id='waypoints' class="gratable">
 <thead>
-<tr><th colspan=\"2\">Waypoints</th></tr>
+<tr><th colspan="2">Waypoints</th></tr>
 <tr><th>Name</th><th title='Percent of people who have driven this route who have driven the segment starting at this point.'>%</th></tr>
 </thead><tbody id='waypointsTBody'>
 </tbody></table>
