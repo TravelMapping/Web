@@ -70,7 +70,12 @@ SQL;
         $sql_command = "SELECT round(mileage,4) as mileage FROM clinchedRoutes where traveler='".$params['traveler']."' AND route='".$root."'";
         $result = tmdb_query($sql_command);
         $row = $result->fetch_assoc();
-        array_push($response['clinchedMileage'], $row['mileage']);
+	if ($row != null) {
+            array_push($response['clinchedMileage'], $row['mileage']);
+	}
+	else {
+	    array_push($response['clinchedMileage'], "0.0");
+	}
 	$result->free();
     }
 }

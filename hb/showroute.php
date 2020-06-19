@@ -298,6 +298,7 @@ User:
 <?php tm_units_select(); ?>
 </td><td>
 <input type="hidden" name="r" value="<?php echo $rootparam ?>" />
+<?php if ($connected) echo '<input type="hidden" name="cr" value="true" />' ?>
 <input type="submit" value="Apply" />
 </td><td>
 <a href='/hb/showroute.php?r="<?php echo $rootparam; if ($connected) echo "&cr"; ?>"'>Zoom to Fit</a>
