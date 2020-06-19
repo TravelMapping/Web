@@ -6,10 +6,9 @@
 //
 $params = json_decode($_POST['params'], true);
 
-// $params has 3 fields:
+// $params has 2 fields:
 // roots - array of TM chopped route roots (e.g., ny.i090)
 // traveler - user whose stats are to be included
-// connected - are we dealing with a connected route? (boolean)
 
 // note that roots are in connected-route order for a connected route with
 // multiple chopped routes, will be a single route for a chopped route
@@ -30,14 +29,6 @@ $roots = $params['roots'];
 $result = tmdb_query("SELECT COUNT(DISTINCT traveler) as numUsers FROM clinchedOverallMileageByRegion");
 $response['numUsers'] = $result->fetch_assoc()['numUsers'];
 $result->free();
-
-// connected route info if we are doing that
-if ($params['connected']) {
-   // mileage of the connected route
-   $result = tmdb_query("SELECT ROUND(mileage,4) as mileage FROM connectedroutes WHERE firstRoot='".$roots[0]."'");
-   $response['connMileage'] = $result->fetch_assoc()['mileage'];
-   $result->free();
-}
 
 // gather info about each chopped route
 $response['mileage'] = array();
