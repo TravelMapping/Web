@@ -60,8 +60,8 @@ foreach ($roots as $root) {
       SELECT
           COUNT(*) as numDrivers,
           IFNULL(SUM(clinched), 0) as numClinched,
-          GROUP_CONCAT(traveler SEPARATOR ', ') as drivers,
-          GROUP_CONCAT(IF(clinched = 1, traveler, null) separator ', ') as clinchers,
+          GROUP_CONCAT(traveler SEPARATOR ',') as drivers,
+          GROUP_CONCAT(IF(clinched = 1, traveler, null) separator ',') as clinchers,
           ROUND(AVG(mileage),4) as avgMileage
         FROM clinchedRoutes
         WHERE route = '$root'
