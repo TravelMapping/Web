@@ -1,6 +1,7 @@
 <?
 // read information from the TM database about the
-// routes for the HB showroutes Route Stats table
+// routes for the HB showroutes Route Stats table:
+// waypoints and traveled info for connections
 //
 // Author: Jim Teresco, Travel Mapping Project, June 2020
 //
@@ -26,60 +27,57 @@ $response = array();
 $roots = $params['roots'];
 
 // total number of users
-$result = tmdb_query("SELECT COUNT(DISTINCT traveler) as numUsers FROM clinchedOverallMileageByRegion");
-$response['numUsers'] = $result->fetch_assoc()['numUsers'];
-$result->free();
 
 // gather info about each chopped route
-$response['mileage'] = array();
-$response['listNames'] = array();
-$response['numDrivers'] = array();
-$response['numClinched'] = array();
-$response['drivers'] = array();
-$response['clinchers'] = array();
-$response['avgMileage'] = array();
-$response['clinchedMileage'] = array();
+$response['pointNames'] = array();
+$response['latitudes'] = array();
+$response['longitudes'] = array();
+$response['driverCounts'] = array();
+$response['segmentIds'] = array();
+$response['clinched'] = array();
 foreach ($roots as $root) {
-    $result = tmdb_query("SELECT ROUND(mileage,4) as mileage, region, route, abbrev, banner FROM routes WHERE root='".$root."'");
-    $row = $result->fetch_assoc();
-    array_push($response['mileage'], $row['mileage']);
-    $listName = $row['region']." ".$row['route'].$row['banner'].$row['abbrev'];
-    array_push($response['listNames'], $listName);
-    $result->free();
-
+    $rootPointNames = array();
+    $rootLatitudes = array();
+    $rootLongitudes = array();
+    $rootDriverCounts = array();
+    $rootSegmentIds = array();
+    $rootClinched = array();
     $sql_command = <<<SQL
-      SELECT
-          COUNT(*) as numDrivers,
-          IFNULL(SUM(clinched), 0) as numClinched,
-          GROUP_CONCAT(traveler SEPARATOR ',') as drivers,
-          GROUP_CONCAT(IF(clinched = 1, traveler, null) separator ',') as clinchers,
-          ROUND(AVG(mileage),4) as avgMileage
-        FROM clinchedRoutes
-        WHERE route = '$root'
+        SELECT pointName, latitude, longitude, driverCount, segmentId
+        FROM waypoints
+        LEFT JOIN (
+            SELECT
+              waypoints.pointId,
+              sum(!ISNULL(clinched.traveler)) as driverCount,
+              segments.segmentId
+            FROM segments
+            LEFT JOIN clinched ON segments.segmentId = clinched.segmentId
+            LEFT JOIN waypoints ON segments.waypoint1 = waypoints.pointId
+            WHERE segments.root = '$root'
+            GROUP BY segments.segmentId
+        ) as pointStats on pointStats.pointId = waypoints.pointId
+        WHERE root = '$root';
 SQL;
     $result = tmdb_query($sql_command);
-    $row = $result->fetch_assoc();
-    array_push($response['numDrivers'], $row['numDrivers']);
-    array_push($response['numClinched'], $row['numClinched']);
-    array_push($response['drivers'], $row['drivers']);
-    array_push($response['clinchers'], $row['clinchers']);
-    array_push($response['avgMileage'], $row['avgMileage']);
-    $result->free();
-    
-    if ($params['traveler'] != null) {
-        $sql_command = "SELECT round(mileage,4) as mileage FROM clinchedRoutes where traveler='".$params['traveler']."' AND route='".$root."'";
-        $result = tmdb_query($sql_command);
-        $row = $result->fetch_assoc();
-	if ($row != null) {
-            array_push($response['clinchedMileage'], $row['mileage']);
-	}
-	else {
-	    array_push($response['clinchedMileage'], "0.0");
-	}
-	$result->free();
+    while ($row = $result->fetch_assoc()) {
+        array_push($rootPointNames, $row['pointName']);
+        array_push($rootLatitudes, $row['latitude']);
+        array_push($rootLongitudes, $row['longitude']);
+        array_push($rootDriverCounts, $row['driverCount']);
+        array_push($rootSegmentIds, $row['segmentId']);
+	// an additional query to see if the traveler has clinched this segment
+	array_push($rootClinched,
+	    tm_count_rows("clinched", "WHERE traveler='".$params['traveler']."' AND segmentId='".$row['segmentId']."'"));
     }
-}
+    $result->free();
 
+    array_push($response['pointNames'], $rootPointNames);
+    array_push($response['latitudes'], $rootLatitudes);
+    array_push($response['longitudes'], $rootLongitudes);
+    array_push($response['driverCounts'], $rootDriverCounts);
+    array_push($response['segmentIds'], $rootSegmentIds);
+    array_push($response['clinched'], $rootClinched);
+}
 $tmdb->close();
 echo json_encode($response);
 ?>

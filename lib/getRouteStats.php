@@ -1,6 +1,7 @@
 <?
 // read information from the TM database about the
-// routes for the HB showroutes Route Stats table
+// routes for the HB showroutes Route Stats table:
+// mileage and traveler stat info
 //
 // Author: Jim Teresco, Travel Mapping Project, June 2020
 //
