@@ -27,8 +27,12 @@ $response = array();
 $roots = $params['roots'];
 
 // total number of users
+$result = tmdb_query("SELECT COUNT(DISTINCT traveler) as numUsers FROM clinchedOverallMileageByRegion");
+$response['numUsers'] = $result->fetch_assoc()['numUsers'];
+$result->free();
 
 // gather info about each chopped route
+$response['traveler'] = $params['traveler'];
 $response['listNames'] = array();
 $response['pointNames'] = array();
 $response['latitudes'] = array();
