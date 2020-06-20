@@ -302,7 +302,7 @@ User:
 <?php if ($connected) echo '<input type="hidden" name="cr" value="true" />' ?>
 <input type="submit" value="Apply" />
 </td><td>
-<a href='/hb/showroute.php?r=<?php echo $rootparam; if ($connected) echo "&cr"; ?>'>Zoom to Fit</a>
+<input type="button" onclick="map.fitBounds(new L.featureGroup(markers).getBounds());" value="Zoom to Fit" />
 </td><td>
 <?php tm_position_checkbox(); ?>
 </td></tr></tbody></table>
