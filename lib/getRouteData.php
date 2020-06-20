@@ -40,6 +40,7 @@ $response['longitudes'] = array();
 $response['driverCounts'] = array();
 $response['segmentIds'] = array();
 $response['clinched'] = array();
+$response['intersects'] = array();
 foreach ($roots as $root) {
 
     $result = tmdb_query("SELECT region, route, abbrev, banner FROM routes WHERE root='".$root."'");
@@ -54,6 +55,7 @@ foreach ($roots as $root) {
     $rootDriverCounts = array();
     $rootSegmentIds = array();
     $rootClinched = array();
+    $rootIntersects = array();
     $sql_command = <<<SQL
         SELECT pointName, latitude, longitude, driverCount, segmentId
         FROM waypoints
@@ -80,6 +82,29 @@ SQL;
 	// an additional query to see if the traveler has clinched this segment
 	array_push($rootClinched,
 	    tm_count_rows("clinched", "WHERE traveler='".$params['traveler']."' AND segmentId='".$row['segmentId']."'"));
+	// check for intersecting routes, but skip for hidden points as they
+	// will not be given Markers on the map anyway
+	if ($row['pointName'][0] != '+') {
+	    $iresult = tmdb_query("SELECT DISTINCT w.root, r.route, r.region, r.banner, r.abbrev FROM waypoints AS w LEFT JOIN routes AS r ON w.root = r.root WHERE w.latitude='".$row['latitude']."' AND w.longitude='".$row['longitude']."';");
+	    if ($iresult->num_rows > 1) {
+	        $myIntersects = array();
+	        while ($match_row = $iresult->fetch_assoc()) {
+		    if ($match_row['root'] != $root) {
+		        $matchListName = $match_row['region']." ".$match_row['route'].$match_row['banner'].$match_row['abbrev'];
+		        array_push($myIntersects, array($match_row['root'],
+						        $matchListName));
+                    }
+                }
+	        array_push($rootIntersects, $myIntersects);
+	    }
+	    else {
+	        array_push($rootIntersects, null);
+	    }
+	    $iresult->free();
+	}
+	else {
+	    array_push($rootIntersects, null);
+	}
     }
     $result->free();
 
@@ -89,6 +114,7 @@ SQL;
     array_push($response['driverCounts'], $rootDriverCounts);
     array_push($response['segmentIds'], $rootSegmentIds);
     array_push($response['clinched'], $rootClinched);
+    array_push($response['intersects'], $rootIntersects);
 }
 $tmdb->close();
 echo json_encode($response);
