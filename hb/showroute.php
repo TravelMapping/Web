@@ -289,7 +289,7 @@ else {
 <div id="controlbox">
 <span id="controlboxroute">
 <table><tbody><tr><td>
-<input id="showMarkers" type="checkbox" name="Show Markers" onclick="showMarkersClicked()" checked="false" />&nbsp;Show Markers&nbsp;
+<input id="showMarkers" type="checkbox" name="Show Markers" onclick="hideShowMarkers()" checked />&nbsp;Show Markers&nbsp;
 </td><td>
 <form id="userForm" action="/hb/showroute.php">
 User: 
