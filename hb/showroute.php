@@ -257,7 +257,7 @@ else if ($routeInfo['level'] == 'devel') {
 // always have the shield based on the root
 echo "<span class='bigshield'>".generate($rootparam, true)."</span>\n";
 if ($connected) {
-    echo "<span>" . $connInfo['banner'];
+    echo "<span style=\"text-align: center;\">" . $connInfo['banner'];
     if (strlen($connInfo['groupName']) > 0) {
         echo " (" . $connInfo['groupName'] . ")";
     }
