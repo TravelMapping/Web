@@ -270,6 +270,7 @@ else {
     }
     echo "</span>\n";
     echo "<span>.list name: <span style='font-family:courier'>" . $routeInfo['region'] . " " . $routeInfo['route'] . $routeInfo['banner'] . $routeInfo['abbrev'] . "</span></span>\n";
+    echo '<span><a href="/hb/showroute.php?r='.$rootparam.'&cr">View Connected Route</a></span>'."\n";
 }
 ?>
 
@@ -301,7 +302,7 @@ User:
 <?php if ($connected) echo '<input type="hidden" name="cr" value="true" />' ?>
 <input type="submit" value="Apply" />
 </td><td>
-<a href='/hb/showroute.php?r="<?php echo $rootparam; if ($connected) echo "&cr"; ?>"'>Zoom to Fit</a>
+<a href='/hb/showroute.php?r=<?php echo $rootparam; if ($connected) echo "&cr"; ?>'>Zoom to Fit</a>
 </td><td>
 <?php tm_position_checkbox(); ?>
 </td></tr></tbody></table>
