@@ -341,8 +341,8 @@ User:
 <div id="lEToolboxHeader">
 .list Entry Toolbox
 </div>
-<input type="button" onclick="letClear();" value="Clear Selection">
-<input type="button" onclick="letAddClinched();" value="Select Clinched Segments">
+<input type="button" onclick="connections.forEach(c => {c.selected = false;}); updateLEToolboxSelection();" value="Clear Selection">
+<input type="button" onclick="connections.forEach(c => {c.selected = c.clinched;}); updateLEToolboxSelection();" value="Select Clinched Segments">
 <textarea name="lEToolboxLines" id="lEToolboxLines" readonly="readonly" rows="4" cols="50">Press "Select Clinched Segments" or
 click on a segment on the map to begin.
 </textarea>
