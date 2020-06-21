@@ -133,6 +133,24 @@
             font-size: 14px;
 	}
 
+	#listEntryToolbox {
+	    position: absolute;
+	    top: 75px;
+	    left: 75%;
+	    z-index: 1000;
+	    background-color: #f1f1f1;
+	    border: 1px solid #000000;
+	    text-align: center;
+            font-size: 14px;
+         }
+
+	 #lEToolboxHeader {
+	     padding: 2px;
+	     cursor: move;
+	     z-index: 1001;
+	     background-color: #101010;
+	     color: #fff;
+	 }
     </style>
     <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
     <?php
@@ -289,8 +307,11 @@ else {
 
 <div id="controlbox">
 <span id="controlboxroute">
-<table><tbody><tr style="font-size: smaller;"><td>
+<table><tbody><tr style="font-size: smaller;">
+<td>
 <input id="showMarkers" type="checkbox" name="Show Markers" onclick="hideShowMarkers()" checked />&nbsp;Show Markers&nbsp;
+</td><td>
+<input id="showToolbox" type="checkbox" name="Show Toolbox" onclick="hideShowToolbox()" />&nbsp;Show Toolbox&nbsp;
 </td><td>
 <form id="userForm" action="/hb/showroute.php">
 User: 
@@ -310,10 +331,16 @@ User:
 </div>
 <div id="map">
 </div>
-<div id="loadingMsg" style="display: none";>
+<div id="loadingMsg" style="display: none">
 <table class="gratable">
 <tr><td id="loadingMsgText" style="font-size: 500%;">Loading Data...</td></tr>
 </table>
+</div>
+<div id="listEntryToolbox" style="display: none">
+<div id="lEToolboxHeader">
+.list Entry Toolbox
+</div>
+<p>This draggable window will be a .list entry tool</p>
 </div>
 <?php $tmdb->close(); ?>
 </body>
