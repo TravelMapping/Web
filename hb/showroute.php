@@ -312,7 +312,7 @@ User:
 </div>
 <div id="loadingMsg" style="display: none";>
 <table class="gratable">
-<tr><td style="font-size: 500%;">Loading Data...</td></tr>
+<tr><td id="loadingMsgText" style="font-size: 500%;">Loading Data...</td></tr>
 </table>
 </div>
 <?php $tmdb->close(); ?>
