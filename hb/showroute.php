@@ -142,6 +142,7 @@
 	    border: 1px solid #000000;
 	    text-align: center;
             font-size: 14px;
+	    width: 20%;
          }
 
 	 #lEToolboxHeader {
@@ -340,7 +341,11 @@ User:
 <div id="lEToolboxHeader">
 .list Entry Toolbox
 </div>
-<p>This draggable window will be a .list entry tool</p>
+<input type="button" onclick="letClear();" value="Clear Selection">
+<input type="button" onclick="letAddClinched();" value="Select Clinched Segments">
+<textarea name="lEToolboxLines" id="lEToolboxLines" readonly="readonly" rows="4" cols="50">Press "Select Clinched Segments" or
+click on a segment on the map to begin.
+</textarea>
 </div>
 <?php $tmdb->close(); ?>
 </body>
