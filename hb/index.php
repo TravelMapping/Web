@@ -194,9 +194,8 @@ if ($routeparam == "") {
 
 } 
 else {
-    echo "<body onload=\"loadmap(); waypointsFromSQL(); updateMap(".$lat.",".$lon.",".$zoom.");\">\n";
+    echo "<body>\n";
     require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
-      
 }
 ?>
 <script type="text/javascript">
