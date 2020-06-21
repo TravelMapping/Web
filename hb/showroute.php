@@ -75,8 +75,8 @@
 
         #controlbox {
             position: fixed;
-            top: 30px;
-            bottom: 60px;
+            top: 22px;
+            bottom: 52px;
             height: 100%;
             left: 300px;
             right: 0px;
@@ -87,7 +87,7 @@
 
         #map {
             position: absolute;
-            top: 70px;
+            top: 60px;
             bottom: 0px;
             left: 275px;
             right: 0px;
@@ -270,7 +270,7 @@ else {
     }
     echo "</span>\n";
     echo "<span>.list name: <span style='font-family:courier'>" . $routeInfo['region'] . " " . $routeInfo['route'] . $routeInfo['banner'] . $routeInfo['abbrev'] . "</span></span>\n";
-    echo '<span><a href="/hb/showroute.php?r='.$rootparam.'&cr">View Connected Route</a></span>'."\n";
+    echo '<span style="font-size: smaller;"><a href="/hb/showroute.php?r='.$rootparam.'&cr">View Connected Route</a></span>'."\n";
 }
 ?>
 
@@ -289,7 +289,7 @@ else {
 
 <div id="controlbox">
 <span id="controlboxroute">
-<table><tbody><tr><td>
+<table><tbody><tr style="font-size: smaller;"><td>
 <input id="showMarkers" type="checkbox" name="Show Markers" onclick="hideShowMarkers()" checked />&nbsp;Show Markers&nbsp;
 </td><td>
 <form id="userForm" action="/hb/showroute.php">
