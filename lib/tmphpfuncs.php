@@ -366,6 +366,7 @@ function tm_generate_custom_colors_array() {
 // colorForAmountTraveled in tmjsfuncs.js
 function tm_color_for_amount_traveled($traveled, $total) {
 
+    if ($total == 0) return "#ffffff";
     $l = "80%";
     if ($traveled == 0) $l = "70%";
     if (number_format($traveled, 2) == number_format($total, 2)) $l = "70%";
