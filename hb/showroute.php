@@ -343,6 +343,7 @@ User:
 </div>
 <input type="button" onclick="connections.forEach(c => {c.selected = false;}); updateLEToolboxSelection();" value="Clear Selection">
 <input type="button" onclick="connections.forEach(c => {c.selected = c.clinched;}); updateLEToolboxSelection();" value="Select Clinched Segments">
+<input type="button" class="let" data-clipboard-target="#lEToolboxLines" value="Copy to Clipboard">
 <textarea name="lEToolboxLines" id="lEToolboxLines" readonly="readonly" rows="4" cols="50">Press "Select Clinched Segments" or click on a segment on
 the map to begin.  .list file entries for selected segments
 will appear here.  Hold shift to select/unselect all segments
