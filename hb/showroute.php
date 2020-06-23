@@ -78,9 +78,11 @@
             top: 22px;
             bottom: 52px;
             height: 100%;
-            left: 300px;
+            left: 275px;
             right: 0px;
-            overflow: auto;
+	    white-space: nowrap;
+            overflow-x: scroll;
+            overflow-y: hidden;
             padding: 5px;
             font-size: 18px;
         }
