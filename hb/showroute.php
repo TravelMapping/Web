@@ -135,7 +135,7 @@
             font-size: 14px;
 	}
 
-	#listEntryToolbox {
+	#listToolbox {
 	    position: absolute;
 	    top: 75px;
 	    left: 75%;
@@ -147,7 +147,7 @@
 	    width: 20%;
          }
 
-	 #lEToolboxHeader {
+	 #listToolboxHeader {
 	     padding: 2px;
 	     cursor: move;
 	     z-index: 1001;
@@ -314,7 +314,7 @@ else {
 <td>
 <input id="showMarkers" type="checkbox" name="Show Markers" onclick="hideShowMarkers()" checked />&nbsp;Show Markers&nbsp;
 </td><td>
-<input id="showToolbox" type="checkbox" name="Show Toolbox" onclick="hideShowToolbox()" />&nbsp;Show Toolbox&nbsp;
+<input id="showToolbox" type="checkbox" name=".list Tool" onclick="hideShowToolbox()" />&nbsp;.list Tool&nbsp;
 </td><td>
 <form id="userForm" action="/hb/showroute.php">
 User: 
@@ -339,16 +339,16 @@ User:
 <tr><td id="loadingMsgText" style="font-size: 500%;">Loading Data...</td></tr>
 </table>
 </div>
-<div id="listEntryToolbox" style="display: none">
-<div id="lEToolboxHeader">
-.list Entry Toolbox
+<div id="listToolbox" style="display: none">
+<div id="listToolboxHeader">
+.list Toolbox
 </div>
-<input type="button" onclick="connections.forEach(c => {c.selected = false;}); updateLEToolboxSelection();" value="Clear Selection">
-<input type="button" onclick="connections.forEach(c => {c.selected = true;}); updateLEToolboxSelection();" value="Select All Segments">
-<input type="button" onclick="connections.forEach(c => {c.selected = c.clinched;}); updateLEToolboxSelection();" value="Select Clinched Segments">
-<input type="button" class="let" data-clipboard-target="#lEToolboxLines" value="Copy to Clipboard">
+<input type="button" onclick="connections.forEach(c => {c.selected = false;}); updateListToolboxSelection();" value="Clear Selection">
+<input type="button" onclick="connections.forEach(c => {c.selected = true;}); updateListToolboxSelection();" value="Select All Segments">
+<input type="button" onclick="connections.forEach(c => {c.selected = c.clinched;}); updateListToolboxSelection();" value="Select Clinched Segments">
+<input type="button" class="listtoolbox" data-clipboard-target="#listToolboxLines" value="Copy to Clipboard">
 <hr />
-<textarea name="lEToolboxLines" id="lEToolboxLines" readonly="readonly" rows="4" cols="50">Press "Select Clinched Segments" or click on a segment on
+<textarea name="listToolboxLines" id="listToolboxLines" readonly="readonly" rows="4" cols="50">Press "Select Clinched Segments" or click on a segment on
 the map to begin.  .list file entries for selected segments
 will appear here.  Hold shift to select/unselect all segments
 to previous click.
