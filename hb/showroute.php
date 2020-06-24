@@ -324,10 +324,10 @@ User:
 <?php tm_user_select(); ?>
 <label>Units: </label>
 <?php tm_units_select(); ?>
-</td><td>
 <input type="hidden" name="r" value="<?php echo $rootparam ?>" />
 <?php if ($connected) echo '<input type="hidden" name="cr" value="true" />' ?>
 <input type="submit" value="Apply" />
+</form>
 </td><td>
 <input type="button" onclick="map.fitBounds(new L.featureGroup(markers).getBounds());" value="Zoom to Fit" />
 <input type="button" class="linkhere" data-clipboard-target="#linkheretext" value="Copy Link" />
