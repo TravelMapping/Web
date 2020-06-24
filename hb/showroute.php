@@ -200,6 +200,9 @@
     echo "<script type=\"application/javascript\">\n";
     echo "traveler = '".$tmuser."';\n";
     echo "var showrouteParams = new Object();\n";
+    echo "showrouteParams.tier = '".$routeInfo['tier']."';\n";
+    echo "showrouteParams.system = '".$routeInfo['systemName']."';\n";
+    echo "showrouteParams.color = '".$routeInfo['color']."';\n";
     echo "showrouteParams.roots = [];\n";
     
     // is the entire connected route requested?
