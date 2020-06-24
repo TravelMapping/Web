@@ -118,7 +118,7 @@ function parseLongestClinchedData(data) {
     }
     else {
         for (let i = 0; i < response.length; i++) {
-	    let link = "/hb/?r=" + response[i].root;
+	    let link = "/hb/showroute.php?r=" + response[i].root;
             rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
 	        response[i].routeinfo +
 	        '</td><td style="text-align: right; background-color: ' +
@@ -143,7 +143,7 @@ function parseLongestClinchedConnectedData(data) {
     }
     else {
         for (let i = 0; i < response.length; i++) {
-	    let link = "/user/mapview.php?cr=" + response[i].root;
+	    let link = "/hb/showroute.php?cr&r==" + response[i].root;
             rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
 	        response[i].routeinfo +
 	        '</td><td style="text-align: right; background-color: ' +
@@ -169,7 +169,7 @@ function parseLongestTraveledData(data) {
     }
     else {
         for (let i = 0; i < response.length; i++) {
-	    let link = "/hb/?r=" + response[i].root;
+	    let link = "/hb/showroute.php?r=" + response[i].root;
 	    let style = "background-color: " + 
 	    	colorForAmountTraveled(response[i].traveled,response[i].mileage);
             rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
@@ -197,7 +197,7 @@ function parseLongestTraveledConnectedData(data) {
     }
     else {
         for (let i = 0; i < response.length; i++) {
-	    let link = "/user/mapview.php?cr=" + response[i].root;
+	    let link = "/hb/showroute.php?cr&r=" + response[i].root;
 	    let style = "background-color: " + 
 	    	colorForAmountTraveled(response[i].traveled,response[i].mileage);
             rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
@@ -226,7 +226,7 @@ function parseClosestToClinchedTraveledData(data) {
     }
     else {
         for (let i = 0; i < response.length; i++) {
-	    let link = "/hb/?r=" + response[i].root;
+	    let link = "/hb/showroute.php?r=" + response[i].root;
 	    let style = "background-color: " + 
 	    	colorForAmountTraveled(response[i].mileage-response[i].missing,
 		                       response[i].mileage);
@@ -256,7 +256,7 @@ function parseClosestToClinchedConnectedTraveledData(data) {
     }
     else {
         for (let i = 0; i < response.length; i++) {
-	    let link = "/user/mapview.php?cr=" + response[i].root;
+	    let link = "/hb/showroute.php?cr&r=" + response[i].root;
 	    let style = "background-color: " + 
 	    	colorForAmountTraveled(response[i].mileage-response[i].missing,
 		                       response[i].mileage);

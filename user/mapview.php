@@ -131,12 +131,17 @@
 let scrollableMapviewDialog = `
 <p><b>Set Initial Location and Zoom Level</b></br >
 Find place: <input id="placeinput" name="placeinput" type="text" size="20" maxlength="100" onkeypress="nominatimLookupIfEnter(event);"/>&nbsp;<input id="findbutton" name="findbutton" type="button" value="Press to Search and Set Coords" onclick="nominatimLookup('placeinput');" /><br />
-(Geocoding by <a target="_blank" href="https://nominatim.openstreetmap.org/">OSM Nominatim</a>)<br />
-<input id="currentbutton" name="currentbutton" type="button" value="Press to Query Current Location and Set Coords" onclick="getCurrentLocationMapview();" /><br />
+<span style="font-size: smaller">(Geocoding by <a target="_blank" href="https://nominatim.openstreetmap.org/">OSM Nominatim</a>)</span><br />
+or <input id="currentbutton" name="currentbutton" type="button" value="Press to Query Current Location and Set Coords" onclick="getCurrentLocationMapview();" /><br />
 <hr />
-Latitude: <input id="latvalinput" name="latvalinput" type="number" min="-90" max="90" size="15" maxlength="12" step="any" value="` + setlat + `" /><br />
-Longitude: <input id="lonvalinput" name="lonvalinput" type="number" min="-180" max="180" size="15" maxlength="12" step="any" value="` + setlon + `" /><br />
+Coords: (<input id="latvalinput" name="latvalinput" type="number" min="-90" max="90" size="15" maxlength="12" step="any" value="` + setlat + `" />,
+<input id="lonvalinput" name="lonvalinput" type="number" min="-180" max="180" size="15" maxlength="12" step="any" value="` + setlon + `" />)<br />
 Zoom level: [Far]<input id="zoomvalinput" name="zoomvalinput" type="range" min="8" max="15" value="` + setzoom + `" step="1" size="2" />[Close]<br />
+<hr />
+<b>OR Select by Region and/or System</b></br >
+<table border="0"><tr><td>Region(s)</td><td>System(s)</td></tr>
+<tr><td><?php tm_region_select(TRUE); ?></td><td><?php tm_system_select(TRUE); ?></td></tr></table>
+<span style="font-size: smaller">Note that if regions and/or systems are seleced, the coords and zoom above will be ignored.</span><br />
 <hr />
 User: <?php tm_user_select(); ?>&nbsp;Units: <?php tm_units_select(); ?><br />
 </p>
