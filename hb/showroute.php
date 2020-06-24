@@ -153,7 +153,7 @@
 	     z-index: 1001;
 	     background-color: #101010;
 	     color: #fff;
-	 }
+	}
     </style>
     <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
     <?php
@@ -327,6 +327,7 @@ User:
 <input type="submit" value="Apply" />
 </td><td>
 <input type="button" onclick="map.fitBounds(new L.featureGroup(markers).getBounds());" value="Zoom to Fit" />
+<input type="button" class="linkhere" data-clipboard-target="#linkheretext" value="Copy Link" />
 </td><td>
 <?php tm_position_checkbox(); ?>
 </td></tr></tbody></table>
@@ -354,6 +355,9 @@ will appear here.  Hold shift to select/unselect all segments
 to previous click.
 </textarea>
 </div>
+<div id="linkherediv" style="position: fixed; top: 60px; left: 275px; color: #ff0000;">
+<span id="linkheretext">URL Placeholder</span>
+</div>  
 <?php $tmdb->close(); ?>
 </body>
 </html>
