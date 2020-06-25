@@ -1,0 +1,119 @@
+<?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpuser.php" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+ ***
+ * Highway Browser Route Lookup Page
+ * URL Params:
+ *  u - user to display highlighting for on map (optional)
+ *  rg - region to filter for on the highway browser list (optional)
+ *  sys - system to filter for on the highway browser list (optional)
+ *  ([r [u] [lat lon zoom]] [rg] [sys])
+ ***
+ -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="/css/travelMapping.css" />
+    <link rel="shortcut icon" type="image/png" href="/favicon.png">
+    <style type="text/css">
+        #routebox {
+            position: fixed;
+            left: 0px;
+            top: 110px;
+            bottom: 0px;
+            width: 100%;
+            overflow: auto;
+        }
+
+        #routeInfo td {
+            text-align: right;
+        }
+
+	.status-active {
+	    background-color: #CCFFCC;
+            font-size: 14px;
+	}
+
+	.status-preview {
+	    background-color: #FFFFCC;
+            font-size: 14px;
+	}
+	
+	.status-devel {
+	    background-color: #FFCCCC;
+            font-size: 14px;
+	}
+
+    </style>
+    <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
+    <?php
+    // check for region and/or system parameters
+    $regions = tm_qs_multi_or_comma_to_array("rg");
+    if (count($regions) > 0) {
+        $region = $regions[0];
+        $regionName = tm_region_code_to_name($region);
+    }
+    else {
+        $region = "";
+        $regionName = "No Region Specified";
+    }
+
+    $systems = tm_qs_multi_or_comma_to_array("sys");
+    if (count($systems) > 0) {
+        $system = $systems[0];
+        $systemName = tm_system_code_to_name($system);
+    }
+    else {
+        $system = "";
+        $systemName = "No System Specified";
+    }
+    ?>
+    <?php tm_common_js(); ?>
+    <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
+    <script src="../lib/showroutefuncs.js" type="text/javascript"></script>
+    <title>Travel Mapping Highway Browser</title>
+</head>
+<?php
+echo "<body onload=\"findrouteStartup(".$system.",".$region.");\">";
+$nobigheader = 1;
+require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
+?>
+<h1>Travel Mapping Highway Browser</h1>
+<div id="choppedbox">
+<table class="gratable" id="chopped">
+<thead>
+<tr><th colspan="8">Select Route to Display</th></tr>
+<tr><th>Tier</th><th>System</th><th>Country</th><th>Region</th><th>Route&nbsp;Name</th><th>.list Name</th><th>Level</th><th>Link</th></tr>
+<tr><th>
+<select id="choptier" name="choptier" onchange="filterChopped();">
+<option value="any" selected>Any</option>
+</select>
+</th><th>
+<select id="chopsys" name="chopsys" onchange="filterChopped();">
+<option value="any" selected>Any</option>
+</select>
+</th><th>
+<select id="chopcountry" name="chopcountry" onchange="filterChopped();">
+<option value="any" selected>Any</option>
+</select>
+</th><th>
+<select id="chopregion" name="chopregion" onchange="filterChopped();">
+<option value="any" selected>Any</option>
+</select>
+</th><th></th><th></th><th>
+<select id="choplevel" name="choplevel" onchange="filterChopped();">
+<option value="activepreview" selected>Active+Preview</option>
+<option value="active">Active</option>
+<option value="preview">Preview</option>
+<option value="all">All</option>
+</select>
+</th><th></th></tr>
+</thead>
+<tbody id="choppedboxtbody">
+<tr><td colspan="8">Loading Route Data...</td></tr>
+</tbody>
+</table>
+</div>
+<?php $tmdb->close(); ?>
+</body>
+</html>
