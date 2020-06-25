@@ -153,7 +153,7 @@
 	     z-index: 1001;
 	     background-color: #101010;
 	     color: #fff;
-	 }
+	}
     </style>
     <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
     <?php
@@ -200,6 +200,9 @@
     echo "<script type=\"application/javascript\">\n";
     echo "traveler = '".$tmuser."';\n";
     echo "var showrouteParams = new Object();\n";
+    echo "showrouteParams.tier = '".$routeInfo['tier']."';\n";
+    echo "showrouteParams.system = '".$routeInfo['systemName']."';\n";
+    echo "showrouteParams.color = '".$routeInfo['color']."';\n";
     echo "showrouteParams.roots = [];\n";
     
     // is the entire connected route requested?
@@ -321,12 +324,13 @@ User:
 <?php tm_user_select(); ?>
 <label>Units: </label>
 <?php tm_units_select(); ?>
-</td><td>
 <input type="hidden" name="r" value="<?php echo $rootparam ?>" />
 <?php if ($connected) echo '<input type="hidden" name="cr" value="true" />' ?>
 <input type="submit" value="Apply" />
+</form>
 </td><td>
 <input type="button" onclick="map.fitBounds(new L.featureGroup(markers).getBounds());" value="Zoom to Fit" />
+<input type="button" class="linkhere" data-clipboard-target="#linkheretext" value="Copy Link" />
 </td><td>
 <?php tm_position_checkbox(); ?>
 </td></tr></tbody></table>
@@ -354,6 +358,9 @@ will appear here.  Hold shift to select/unselect all segments
 to previous click.
 </textarea>
 </div>
+<div id="linkherediv" style="position: fixed; top: 60px; left: 275px; color: #ff0000;">
+<span id="linkheretext">URL Placeholder</span>
+</div>  
 <?php $tmdb->close(); ?>
 </body>
 </html>
