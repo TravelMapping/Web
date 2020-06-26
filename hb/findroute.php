@@ -71,6 +71,17 @@
     <?php tm_common_js(); ?>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
     <script src="../lib/findroutefuncs.js" type="text/javascript"></script>
+    <script type="text/javascript">
+var findrouteSystems = [];
+    <?php
+    // read info about systems to reduce later transfer
+    $result = tmdb_query("SELECT systemName, fullName, tier, level from systems;");
+    while ($row = $result->fetch_assoc()) {
+       echo "findrouteSystems['".$row['systemName']."'] = { name: \"".$row['fullName']."\", tier: ".$row['tier'].", level: '".$row['level']."' };\n";
+    }
+    $result->free();
+    ?>
+    </script>
     <title>Travel Mapping Highway Browser</title>
 </head>
 <?php
