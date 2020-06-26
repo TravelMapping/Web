@@ -102,10 +102,11 @@ require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
 </select>
 </th><th></th><th></th><th>
 <select id="choplevel" name="choplevel" onchange="filterChopped();">
-<option value="activepreview" selected>Active+Preview</option>
-<option value="active">Active</option>
-<option value="preview">Preview</option>
-<option value="all">All</option>
+<option value="apd">All</option>
+<option value="ap" selected>Active+Preview</option>
+<option value="a">Active Only</option>
+<option value="p">Preview Only</option>
+<option value="d">Devel Only</option>
 </select>
 </th><th></th></tr>
 <tr><th colspan="8" style="color:red; text-align:center;" id="chopmessage">Loading Route Data...</th></tr>
