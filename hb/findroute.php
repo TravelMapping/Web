@@ -70,11 +70,11 @@
     ?>
     <?php tm_common_js(); ?>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
-    <script src="../lib/showroutefuncs.js" type="text/javascript"></script>
+    <script src="../lib/findroutefuncs.js" type="text/javascript"></script>
     <title>Travel Mapping Highway Browser</title>
 </head>
 <?php
-echo "<body onload=\"findrouteStartup(".$system.",".$region.");\">";
+echo "<body onload=\"findrouteStartup('".$system."','".$region."');\">";
 $nobigheader = 1;
 require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
 ?>
@@ -84,7 +84,7 @@ require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
 <thead>
 <tr><th colspan="8">Select Route to Display</th></tr>
 <tr><th>Tier</th><th>System</th><th>Country</th><th>Region</th><th>Route&nbsp;Name</th><th>.list Name</th><th>Level</th><th>Link</th></tr>
-<tr><th>
+<tr id="chopselectrow" style="display: none"><th>
 <select id="choptier" name="choptier" onchange="filterChopped();">
 <option value="any" selected>Any</option>
 </select>
@@ -108,9 +108,9 @@ require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
 <option value="all">All</option>
 </select>
 </th><th></th></tr>
+<tr><th colspan="8" style="color:red; text-align:center;" id="chopmessage">Loading Route Data...</th></tr>
 </thead>
-<tbody id="choppedboxtbody">
-<tr><td colspan="8">Loading Route Data...</td></tr>
+<tbody id="chopboxtbody">
 </tbody>
 </table>
 </div>
