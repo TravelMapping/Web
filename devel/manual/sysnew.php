@@ -17,7 +17,7 @@ devel {background-color: #FFCCCC;}
 
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 
-<h1 style="color:red">Travel Mapping Manual: Create a new highway system - <i>Draft</i></h1>
+<h1>Travel Mapping Manual: Create a new highway system</h1>
 
 
 
@@ -284,7 +284,7 @@ a second run must be done <b>before</b> the activation of the system.
   <a href="syserr.php#nearmisspoint">Near-miss point checks</a> can be done when the system is minimum in <preview>preview</preview> state.</li>
   </br>
   <li><a name="unprocessedwpt"></a><a style="text-decoration:none" href="#unprocessedwpt">&#x1f517</a>
-  The <a href="../logs/unprocessedwpts.log">List of unprocessed wpt files</a> helps to identify highway data files (<code>.wpt</code>)
+  The <a href="/logs/unprocessedwpts.log">List of unprocessed wpt files</a> helps to identify highway data files (<code>.wpt</code>)
   in the repository which are not listed in any highway system list (<code>.csv</code>).</li>
 </ul>
 
@@ -357,7 +357,7 @@ Maintain the highway system</p>
 <div class="text" >
 <ul>
   <li><a name="maintainregion"></a><a style="text-decoration:none" href="#maintainregion">&#x1f517</a>
-  If you are responsible for the region(s) of the highway system, you need to <a href="maintenance.php">maintain the system</a>.
+  If you are responsible for the region(s) of the highway system, you need to <a href="maintenance.php">maintain the routes</a>.
   Follow the discussion on the forum.</li>
   <li><a name="maintainbreak"></a><a style="text-decoration:none" href="#maintainbreak">&#x1f517</a>
   Care must be taken to ensure that <a href="maintenance.php#break">changes do not "break" a user's list file</a>.

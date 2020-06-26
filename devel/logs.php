@@ -31,25 +31,25 @@ $activedc = tm_count_rows("datacheckErrors", "join routes on datacheckErrors.rou
 
 <div class="text">
 <ul>
-  <li><a href="../logs/pointsinuse.log">Waypoint labels in use by current TM users</a>
+  <li><a href="/logs/pointsinuse.log">Waypoint labels in use by current TM users</a>
     <br />
     To be considered if wpt files of active systems are modified to avoid breaking user files, can be loaded to the Waypoint File Editor.</li>
-  <li><a href="../logs/unusedaltlabels.log">Alternate (i.e., hidden) waypoint labels not in use by current TM users</a>
+  <li><a href="/logs/unusedaltlabels.log">Alternate (i.e., hidden) waypoint labels not in use by current TM users</a>
     <br />
     These alternate labels can safely be removed from wpt files.</li>
   </br>
-  <li><a href="../logs/listnamesinuse.log">.list name labels in use by current TM users</a>
+  <li><a href="/logs/listnamesinuse.log">.list name labels in use by current TM users</a>
     <br />
     To be considered if csv files of active systems are modified to avoid breaking user files.</li>
-  <li><a href="../logs/unusedaltroutenames.log">Alternate (i.e., hidden) route names not in use by current TM users</a>
+  <li><a href="/logs/unusedaltroutenames.log">Alternate (i.e., hidden) route names not in use by current TM users</a>
     <br />
     These alternate labels can safely be removed from csv files.</li>
   </br>
-  <li><a href="../logs/unprocessedwpts.log">List of unprocessed wpt files</a>
+  <li><a href="/logs/unprocessedwpts.log">List of unprocessed wpt files</a>
     <br />
     Waypoint files in the repository that were not processed because they were not listed in any highway system's csv files</li>
   </br>
-  <li><a href="../graphs/">Travel Mapping Graph Data</a>
+  <li><a href="/graphs/">Travel Mapping Graph Data</a>
     <br />
     Graphs can be loaded into HDX to verify unexpected or broken concurrencies.</li>
 </ul>
@@ -62,11 +62,11 @@ $activedc = tm_count_rows("datacheckErrors", "join routes on datacheckErrors.rou
 <div class="text">
 Near-miss points (NMPs) are waypoints very close together and might be candidates to merge. NMP files can be loaded into HDX to visualize their positions on a map.
 <ul>
-  <li><a href="../logs/tm-master.nmp">Master NMP file with all near-miss points of the project</a></li>
-  <li><a href="../logs/nmpbyregion/">NMP files filtered by region (individual files)</a></li>
-  <li><a href="../logs/nmpbyregion/nmpbyregion.zip">NMP files filtered by region (zip archive)</a></li>
-  <li><a href="../logs/nearmisspoints.log">Log of all near-miss point entries for marking false positives (FP)</a></li>
-  <li><a href="../logs/nmpfpsunmatched.log">Log of unmatched FP entries from nmpfps.log</a></li>
+  <li><a href="/logs/tm-master.nmp">Master NMP file with all near-miss points of the project</a></li>
+  <li><a href="/logs/nmpbyregion/">NMP files filtered by region (individual files)</a></li>
+  <li><a href="/logs/nmpbyregion/nmpbyregion.zip">NMP files filtered by region (zip archive)</a></li>
+  <li><a href="/logs/nearmisspoints.log">Log of all near-miss point entries for marking false positives (FP)</a></li>
+  <li><a href="/logs/nmpfpsunmatched.log">Log of unmatched FP entries from nmpfps.log</a></li>
 </ul>
 </div>
 
@@ -75,9 +75,9 @@ Near-miss points (NMPs) are waypoints very close together and might be candidate
 
 <div class="text">
 <ul>
-<li><a href="../logs/siteupdate.log">Complete output log from the site update process</a></li>
-<li><a href="../logs/highwaydatastats.log">Log of highway data stats, useful to verify web code</a></li>
-<li><a href="../logs/concurrencies.log">List of highway concurrencies detected</a></li>
+<li><a href="/logs/siteupdate.log">Complete output log from the site update process</a></li>
+<li><a href="/logs/highwaydatastats.log">Log of highway data stats, useful to verify web code</a></li>
+<li><a href="/logs/concurrencies.log">List of highway concurrencies detected</a></li>
 </ul>
 </div>
 

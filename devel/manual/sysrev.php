@@ -17,7 +17,7 @@ devel {background-color: #FFCCCC;}
 
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 
-<h1 style="color:red">Travel Mapping Manual: Review a preview highway system - <i>Draft</i></h1>
+<h1>Travel Mapping Manual: Review a preview highway system</h1>
 
 <div class="text">
 If you notice incorrect highway data, please report it. If the route belongs to a

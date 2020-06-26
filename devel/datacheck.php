@@ -122,6 +122,13 @@ if (array_key_exists("showmarked", $_GET)) {
 }
 ?>
 
+<style>
+active {background-color: #CCFFCC;}
+preview {background-color: #FFFFCC;}
+devel {background-color: #FFCCCC;}
+</style>
+
+
 <p class="heading">Travel Mapping Highway Data Datacheck Errors</p>
 
 <?php
@@ -138,7 +145,10 @@ if (array_key_exists("showmarked", $_GET)) {
     echo "<label for=\"showmarked\"> Show Marked FPs </label>";
     echo "<input type=\"submit\" value=\"Apply Filter\" /></form>";
 ?>
-<p class="info">Quick links: <a href="#active">[Errors in Active Systems]</a><a href="#preview">[Errors in Preview Systems]</a><a href="#indev">[Errors in In-Dev Systems]</a>
+<p class="info">Quick links: <a href="#active">[Errors in <active>Active</active> Systems]</a>
+<a href="#preview">[Errors in <preview>Preview</preview> Systems]</a>
+<a href="#indev">[Errors in <devel>In-Dev</devel> Systems]</a>
+<a href="manual/syserr.php">[Manual]</a>
 <?php
 if ($showmarked) {
   echo '<a href="#marked">[Errors Marked as FPs]</a>.';
@@ -149,12 +159,11 @@ if ($showmarked) {
 ?>
 </p>
 
-<p class="info">See also the <a href="../logs/unmatchedfps.log">[Log
-of Unmatched FPs from datacheckfps.csv]</a> and
-the <a href="../logs/unprocessedwpts.log">[Log of Unprocessed WPTs in
-the Repository]</a>.  Cleaning these up are low priority tasks for the
+<p class="info">See also the <a href="/logs/unmatchedfps.log">[Log
+of Unmatched FPs from datacheckfps.csv]</a>.
+Cleaning these up are low priority tasks for the
 project.  Some of these are likely fixable from the information in
-the <a href="../logs/nearmatchfps.log">[Log of Near-Match FPs from
+the <a href="/logs/nearmatchfps.log">[Log of Near-Match FPs from
 datacheckfps.csv]</a>.</p>
 
 <div id="errors">
@@ -181,8 +190,8 @@ datacheckfps.csv]</a>.</p>
   corrected, or reported as false positives by adding the entry from
   the last column
   to <a href="https://github.com/TravelMapping/HighwayData/blob/master/datacheckfps.csv">the
-  datacheck FP list</a> during the final review process to promote a
-  system from 'preview' to 'active'.  A system should have no entries
+  datacheck FP list</a> during the final review process to promote a highway
+  system from 'preview' to 'active'.  A highway system should have no entries
   here before activation.  Errors shown in <span style="color:
   red">red</span> potentially effect travelers and should be fixed as soon as possible, while others
   can wait until final preparation for system activation.</p>
@@ -199,7 +208,7 @@ datacheckfps.csv]</a>.</p>
   corrected, or reported as false positives by adding the entry from
   the last column
   to <a href="https://github.com/TravelMapping/HighwayData/blob/master/datacheckfps.csv">the
-  datacheck FP list</a> before the system is promoted from 'devel' to
+  datacheck FP list</a> before the highway system is promoted from 'devel' to
   'preview'.  Note: less severe errors, such as distance and angle
   errors can be left until final preparation for promotion to
   'active'.</p>

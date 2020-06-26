@@ -17,7 +17,7 @@ devel {background-color: #FFCCCC;}
 
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 
-<h1 style="color:red">Travel Mapping Manual: Definition of a highway system - <i>Draft</i></h1>
+<h1>Travel Mapping Manual: Definition of a highway system</h1>
 
 <p class="heading"><a name="roadsys"></a><a style="text-decoration:none" href="#roadsys">&#x1f517</a>
 What is a highway system?</p>

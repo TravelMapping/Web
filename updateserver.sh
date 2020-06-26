@@ -9,7 +9,7 @@ basedir=/home/www/
 rootdir=tmtest
 shieldsdir=
 wpteditdir=
-otherdirs="user lib devel devel/manual devel_new devel_new/manual hb css graphs"
+otherdirs="user lib devel devel/manual hb css graphs"
 while (( "$#" )); do
 
     if [ "$1" == "--prod" ]; then
