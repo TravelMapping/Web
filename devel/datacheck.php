@@ -159,11 +159,11 @@ if ($showmarked) {
 ?>
 </p>
 
-<p class="info">See also the <a href="../logs/unmatchedfps.log">[Log
+<p class="info">See also the <a href="/logs/unmatchedfps.log">[Log
 of Unmatched FPs from datacheckfps.csv]</a>.
 Cleaning these up are low priority tasks for the
 project.  Some of these are likely fixable from the information in
-the <a href="../logs/nearmatchfps.log">[Log of Near-Match FPs from
+the <a href="/logs/nearmatchfps.log">[Log of Near-Match FPs from
 datacheckfps.csv]</a>.</p>
 
 <div id="errors">

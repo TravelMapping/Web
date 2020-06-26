@@ -306,7 +306,7 @@ Highway data check list</p>
     <ul>
       <li>Fix unintended errors by using the <a href="/wptedit/">WPT file editor</a>.</li>
       <li>Mark intended errors <a href="#falsepositive">false positive</a>.</li>
-      <li>Some of the errors are likely fixable from the information in the <a href="../../logs/nearmatchfps.log">Log of Near-Match FPs from datacheckfps.csv</a>. These are FP entries which have previously been added but due to minor changes, e.g. repositioning a waypoint, they no longer match the actual FP entry.</li>
+      <li>Some of the errors are likely fixable from the information in the <a href="/logs/nearmatchfps.log">Log of Near-Match FPs from datacheckfps.csv</a>. These are FP entries which have previously been added but due to minor changes, e.g. repositioning a waypoint, they no longer match the actual FP entry.</li>
     </ul>
   </ul>
   Note: It is possible to edit the url in the address bar of the browser to filter for more than one region or system. For instance, it is possible to create a link to all regions a highway data manager maintains. Save it to your browser bookmark and load it when needed for the check.
@@ -333,7 +333,7 @@ Marking errors false positive (FP)</p>
     </ul>
     <li>Submit the change. The data error will disappear from the data check list with the next site update.</li>
     </br>
-    <li>Do not forget checking for <a href="../../logs/unmatchedfps.log">unmatched FPs</a>. Remove them from <a href="https://github.com/TravelMapping/HighwayData/blob/master/datacheckfps.csv">the datacheck FP list</a>.</li>
+    <li>Do not forget checking for <a href="/logs/unmatchedfps.log">unmatched FPs</a>. Remove them from <a href="https://github.com/TravelMapping/HighwayData/blob/master/datacheckfps.csv">the datacheck FP list</a>.</li>
   </ul>
 </div>
 
@@ -400,7 +400,7 @@ Near-miss points</p>
 <div class="text">
   Where two or more routes intersect, the routes must have a waypoint. If the coordinates of the waypoints are identical, the graph is connected and the Highway Browser can indicate intersecting routes to ease navigation through the routes when mapping travels. Near-miss points (NMPs) are waypoints very close together. They should be checked whether they are candidates to merge to fix broken intersecting links, and broken concurrencies.
   </br>
-  <a href="../logs.php#nmplogs">NMP files</a> can also be loaded into HDX to visualize their positions on a map. The desired NMP file cannot be selected directly but needs to be downloaded first.
+  <a href="/logs.php#nmplogs">NMP files</a> can also be loaded into HDX to visualize their positions on a map. The desired NMP file cannot be selected directly but needs to be downloaded first.
   </br>
   </br>
   The best practise to check NMPs, is as follows:
@@ -438,7 +438,7 @@ Marking NMPs false positive FP</p>
 <div class="text">
   Marking NMPs false positive is trickier than for simple data errors but works the same way.
   <ul>
-    <li>The <code>FP Entry to Submit</code> can only be found in <a href="../../logs/nearmisspoints.log">nearmisspoints.log</a> which contains all NMP entries including those which are already marked FP. The list is sorted by region code.
+    <li>The <code>FP Entry to Submit</code> can only be found in <a href="/logs/nearmisspoints.log">nearmisspoints.log</a> which contains all NMP entries including those which are already marked FP. The list is sorted by region code.
     <ul>
       <li>Best practise is to use the browser search function to find <code>lat</code> or <code>lon</code> coordinates (or route code) which one can copy from the HDX table.</li>
       <li>There are minimum two FP entries per hotspot but very often even more, please refer to the issue with multiple lines on the HDX table mentioned above.</li>
@@ -450,7 +450,7 @@ Marking NMPs false positive FP</p>
       <li>If not all entries for a NMP hotspot have previously been marked FP, only the missing entries need to be added. Entries ending with <code>[MARKED FP]</code> are already entered as FP.</li>
     </ul>
     </br>
-    <li>Do not forget checking for <a href="../../logs/nmpfpsunmatched.log">unmatched NMP FPs</a>. Remove them from <a href="https://github.com/TravelMapping/HighwayData/blob/master/nmpfps.log">nmpfps.log</a>.</li>
+    <li>Do not forget checking for <a href="/logs/nmpfpsunmatched.log">unmatched NMP FPs</a>. Remove them from <a href="https://github.com/TravelMapping/HighwayData/blob/master/nmpfps.log">nmpfps.log</a>.</li>
   </ul>
 </div>
 
