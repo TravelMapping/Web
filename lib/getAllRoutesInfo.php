@@ -27,7 +27,7 @@ $response['regions'] = array();
 $response['countries'] = array();
 $response['roots'] = array();
 
-$result = tmdb_query("select * from routes left join systems on systems.systemName=routes.systemName left join regions on routes.region=regions.code");
+$result = tmdb_query("select route, banner, abbrev, city, region, systems.tier, systems.systemName, systems.fullName, systems.level, regions.country, root from routes left join systems on systems.systemName=routes.systemName left join regions on routes.region=regions.code");
 while ($row = $result->fetch_assoc()) {
     $routeName = $row['route'].$row['banner'].$row['abbrev'];
     if ($row['city'] != "") {
@@ -37,7 +37,7 @@ while ($row = $result->fetch_assoc()) {
     array_push($response['listNames'], $listName);
     array_push($response['tiers'], $row['tier']);
     array_push($response['systems'], $row['systemName']);
-    array_push($response['systemNames'], $row['fullName']);
+    //array_push($response['systemNames'], $row['fullName']);
     array_push($response['levels'], $levels[$row['level']]);
     array_push($response['routeNames'], $routeName);
     array_push($response['regions'], $row['region']);

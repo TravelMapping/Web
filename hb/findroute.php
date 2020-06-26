@@ -87,18 +87,23 @@ require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
 <tr id="chopselectrow" style="display: none"><th>
 <select id="choptier" name="choptier" onchange="filterChopped();">
 <option value="any" selected>Any</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
 </select>
 </th><th>
 <select id="chopsys" name="chopsys" onchange="filterChopped();">
-<option value="any" selected>Any</option>
+<option selected>Any</option>
 </select>
 </th><th>
 <select id="chopcountry" name="chopcountry" onchange="filterChopped();">
-<option value="any" selected>Any</option>
+<option selected>Any</option>
 </select>
 </th><th>
 <select id="chopregion" name="chopregion" onchange="filterChopped();">
-<option value="any" selected>Any</option>
+<option selected>Any</option>
 </select>
 </th><th></th><th></th><th>
 <select id="choplevel" name="choplevel" onchange="filterChopped();">
