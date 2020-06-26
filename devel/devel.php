@@ -16,7 +16,7 @@
 
 <body>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
-<h1 style="color:red">Travel Mapping Developer Tools and Links - <i>Draft of a new developer page</i></h1>
+<h1>Travel Mapping Developer Tools and Links</h1>
 
 <style>
 active {background-color: #CCFFCC;}

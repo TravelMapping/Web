@@ -17,7 +17,7 @@ devel {background-color: #FFCCCC;}
 
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 
-<h1 style="color:red">Travel Mapping Manual: Create a new highway system - <i>Draft</i></h1>
+<h1>Travel Mapping Manual: Create a new highway system</h1>
 
 
 
