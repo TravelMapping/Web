@@ -105,7 +105,9 @@ require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
 <select id="chopregion" name="chopregion" onchange="filterChopped();">
 <option selected>Any</option>
 </select>
-</th><th></th><th></th><th>
+</th><th>
+<input id="choppattern" name="choppattern" type="text" size="20" maxlength="20" onkeypress="filterChoppedIfEnter(event);" />
+</th><th></th><th>
 <select id="choplevel" name="choplevel" onchange="filterChopped();">
 <option value="apd">All</option>
 <option value="ap" selected>Active+Preview</option>
@@ -113,7 +115,8 @@ require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
 <option value="p">Preview Only</option>
 <option value="d">Devel Only</option>
 </select>
-</th><th></th></tr>
+</th><th>
+</th></tr>
 <tr><th colspan="8" style="color:red; text-align:center;" id="chopmessage">Loading Route Data...</th></tr>
 </thead>
 <tbody id="chopboxtbody">
