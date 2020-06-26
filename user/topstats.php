@@ -143,7 +143,7 @@ function parseLongestClinchedConnectedData(data) {
     }
     else {
         for (let i = 0; i < response.length; i++) {
-	    let link = "/hb/showroute.php?cr&r==" + response[i].root;
+	    let link = "/hb/showroute.php?cr&r=" + response[i].root;
             rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
 	        response[i].routeinfo +
 	        '</td><td style="text-align: right; background-color: ' +
