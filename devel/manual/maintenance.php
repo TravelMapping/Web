@@ -48,7 +48,7 @@ How to maintain a region?</p>
   <ul>
     <li>If a <a href="/logs/pointsinuse.log">waypoint label is in use by current TM users</a> we should
     <a href="#labelwrong">add alternative labels</a> if possible.</li>
-    <li>If a <a href="../logs/listnamesinuse.log">.list name label is in use by current TM users</a> we should
+    <li>If a <a href="/logs/listnamesinuse.log">.list name label is in use by current TM users</a> we should
     <a href="syshwylist.php#caltroute">add alternative route names</a> if possible.</li>
     <li>In many cases, however, the changes needed will break user lists.
     In those and other situations, changes are <a href="#newsworthy">newsworthy</a> and require an <a href="#newsreport">updates entry</a>
@@ -61,9 +61,9 @@ How to maintain a region?</p>
   <li><a name="cleanupunused"></a><a style="text-decoration:none" href="#cleanupunused">&#x1f517</a>
   Clean-up the alternative labels and .list names if they are no longer used</li>
   <ul>
-    <li>Alternate (i.e., hidden) <a href="../logs/unusedaltlabels.log">waypoint labels not in use by current TM users</a>
+    <li>Alternate (i.e., hidden) <a href="/logs/unusedaltlabels.log">waypoint labels not in use by current TM users</a>
     can safely be removed from <code>.wpt</code> files.</li>
-    <li>Alternate (i.e., hidden) <a href="../logs/unusedaltroutenames.log">route names not in use by current TM users</a>
+    <li>Alternate (i.e., hidden) <a href="/logs/unusedaltroutenames.log">route names not in use by current TM users</a>
     can safely be removed from <code>.csv</code> files.</li>
   </ul>
   <li><a name="cleanupfps"></a><a style="text-decoration:none" href="#cleanupfps">&#x1f517</a>
