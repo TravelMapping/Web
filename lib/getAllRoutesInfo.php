@@ -19,9 +19,10 @@ $response['systems'] = array();
 $response['routeNames'] = array();
 $response['regions'] = array();
 $response['countries'] = array();
+$response['continents'] = array();
 $response['roots'] = array();
 
-$result = tmdb_query("select route, banner, abbrev, city, region, systemName, regions.country, root from routes left join regions on routes.region=regions.code order by regions.country, systemName");
+$result = tmdb_query("select route, banner, abbrev, city, region, systemName, regions.country, regions.continent, root from routes left join regions on routes.region=regions.code order by regions.country, systemName");
 while ($row = $result->fetch_assoc()) {
     $routeName = $row['route'].$row['banner'].$row['abbrev'];
     if ($row['city'] != "") {
@@ -33,6 +34,7 @@ while ($row = $result->fetch_assoc()) {
     array_push($response['routeNames'], $routeName);
     array_push($response['regions'], $row['region']);
     array_push($response['countries'], $row['country']);
+    array_push($response['continents'], $row['continent']);
     array_push($response['roots'], $row['root']);
 }
 $result->free();

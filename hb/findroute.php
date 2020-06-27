@@ -94,7 +94,7 @@ require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
 <table class="gratable" id="chopped">
 <thead>
 <tr><th colspan="8">Select Route to Display</th></tr>
-<tr><th>Tier</th><th>System</th><th>Country</th><th>Region</th><th>Route&nbsp;Name</th><th>.list Name</th><th>Level</th><th>Link</th></tr>
+<tr><th>Tier</th><th>Continent</th><th>Country</th><th>Region</th><th>System</th><th>Route&nbsp;Name</th><th>.list Name</th><th>Level</th></tr>
 <tr id="chopselectrow" style="display: none"><th>
 <select id="choptier" name="choptier" onchange="filterChopped();">
 <option value="any" selected>Any</option>
@@ -105,7 +105,7 @@ require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
 <option value="5">5</option>
 </select>
 </th><th>
-<select id="chopsys" name="chopsys" onchange="filterChopped();">
+<select id="chopcontinent" name="chopcontinent" onchange="filterChopped();">
 <option selected>Any</option>
 </select>
 </th><th>
@@ -114,6 +114,10 @@ require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
 </select>
 </th><th>
 <select id="chopregion" name="chopregion" onchange="filterChopped();">
+<option selected>Any</option>
+</select>
+</th><th>
+<select id="chopsys" name="chopsys" onchange="filterChopped();">
 <option selected>Any</option>
 </select>
 </th><th>
@@ -126,7 +130,6 @@ require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
 <option value="p">Preview Only</option>
 <option value="d">Devel Only</option>
 </select>
-</th><th>
 </th></tr>
 <tr><th colspan="8" style="color:red; text-align:center;" id="chopmessage">Loading Route Data...</th></tr>
 </thead>
