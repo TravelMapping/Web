@@ -94,6 +94,7 @@ require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
 <table class="gratable" id="chopped">
 <thead>
 <tr><th colspan="8">Select Route to Display</th></tr>
+<tr><th colspan="8" style="color:red; text-align:center;" id="chopmessage">Loading Route Data...</th></tr>
 <tr><th>Tier</th><th>Continent</th><th>Country</th><th>Region</th><th>System</th><th>Route&nbsp;Name</th><th>.list Name</th><th>Level</th></tr>
 <tr id="chopselectrow" style="display: none"><th>
 <select id="choptier" name="choptier" onchange="filterChopped();">
@@ -131,7 +132,6 @@ require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
 <option value="d">Devel Only</option>
 </select>
 </th></tr>
-<tr><th colspan="8" style="color:red; text-align:center;" id="chopmessage">Loading Route Data...</th></tr>
 </thead>
 <tbody id="chopboxtbody">
 </tbody>
