@@ -81,7 +81,7 @@ First steps with email submission</p>
       <code>IL I-70 52 MO/IL</code></br>
       </br>
       <ul>
-        <li>The region and route combination is indicated on the left after <code>.list name:</code> in the <a href="/hb/index.php?r=il.i070">Highway Browser</a>.</li>
+        <li>The region and route combination is indicated on the left after <code>.list name:</code> in the <a href="/hb/showroute.php?r=il.i070">Highway Browser</a>.</li>
         <li>Click the start point <code>52</code> of your travel segment on the table
         to center the map at this point.</li>
         <li>Copy the first line of the info window to get the correct name <code>52</code>.</li>
@@ -230,7 +230,7 @@ Below are several example entries for a user's <code>.list</code> file.</br>
   <b>Highway segment within a single region.</b></br>
   </br>
   For the segment of I-80 between Exits 161 and 224 in Pennsylvania, USA, look up the highway and waypoint
-  labels for those interchanges in the <a href="/hb/index.php?r=pa.i080">Highway Browser</a>. The Highway Browser
+  labels for those interchanges in the <a href="/hb/showroute.php?r=pa.i080">Highway Browser</a>. The Highway Browser
   shows the highway as <code>PA I-80</code> and lists the waypoints as <code>161</code> and <code>224</code>.
   Enter the following line into your <code>.list</code> file:</br>
   <pre>
@@ -245,7 +245,7 @@ PA I-80 161 224
   West Virginia, Maryland, and Pennsylvania, so use waypoints <code>WV/MD</code>, <code>MD/PA</code>, and
   <code>PA/NY</code> for these states. The New York segment begins at the Pennsylvania border and ends at Exit 10,
   so use waypoints <code>PA/NY and 10</code>. All of these waypoints are listed in the Highway Browser. Start with
-  <a href="/hb/index.php?r=va.i081">Virgina</a> and click on the intersecting route links to change the regions
+  <a href="/hb/showroute.php?r=va.i081">Virgina</a> and click on the intersecting route links to change the regions
   till you've reached New York.</br>
   </br>
   Catch up the entries for your <code>.list</code> which should be read as follows for the whole segment:</br>
@@ -263,7 +263,7 @@ NY I-81 PA/NY 10
   This location is used for both the first and last waypoints of the highway, with a different waypoint label for each end.
   If the segment you wish to enter into your <code>.list</code> file crosses that point, split your segment into two at that point.</br>
   </br>
-  Consider first the segment of the Baltimore Beltway (<a href="/hb/index.php?r=md.i695">MD I-695</a>) between Exits
+  Consider first the segment of the Baltimore Beltway (<a href="/hb/showroute.php?r=md.i695">MD I-695</a>) between Exits
   17 and 31 along the <i>northern</i> side of Baltimore. I-695 begins and ends at a southern waypoint called both 0 and 48.
   Since the waypoints run continuously from 17 to 31 without crossing that southern point (compare to next example),
   treat this segment simply as beginning at waypoint <code>17</code> and ending at waypoint <code>31</code>:</br>
