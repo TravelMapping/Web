@@ -45,17 +45,17 @@ The following list shows the preferred waypoint type in order. Choose the first 
     Desired waypoints.
     <ol>
       <li><a name="desired_borderpoints"></a><a style="text-decoration:none" href="#desired_borderpoints">&#x1f517</a>
-	Border points. These points often begin and end files. If a 
+	<b>Border points:</b> These points often begin and end files. If a 
 	required intersection coincides with a border point, use a border point 
 	and skip the intersection point. The only border points in use are 
 	international boundaries (all countries) and subdivisional boundaries 
 	(for only countries we subdivide in this project). </li>
       <li><a name="desired_exitnumbers"></a><a style="text-decoration:none" href="#desired_exitnumbers">&#x1f517</a>
-	Exit numbers - if the highway has interchanges with exit numbers for itself. We don't use exit numbers on the US highways. </li>
+	<b>Exit numbers:</b> If the highway has interchanges with exit numbers for itself. We don't use exit numbers on the US highways. </li>
       <li><a name="desired_visiblynumbered"></a><a style="text-decoration:none" href="#desired_visiblynumbered">&#x1f517</a>
-	Visibly numbered cross road designation. US 42, A17, I-40 Business Loop, etc. </li>
+	<b>Visibly numbered cross road designation:</b> US 42, A17, I-40 Business Loop, etc. </li>
       <li><a name="desired_named"></a><a style="text-decoration:none" href="#desired_named">&#x1f517</a>
-	Truncated, visible cross road name. Magothy Bridge Road, etc.</li>
+	<b>Truncated, visible cross road name:</b> Magothy Bridge Road, etc.</li>
     </ol>
     </li>
   <li><a name="inadequatedata"></a><a style="text-decoration:none" href="#inadequatedata">&#x1f517</a>
@@ -64,18 +64,18 @@ The following list shows the preferred waypoint type in order. Choose the first 
     according to the above options.
     <ol start="5">
       <li><a name="junctionname"></a><a style="text-decoration:none" href="#junctionname">&#x1f517</a>
-	Truncated junction name - for freeways/expressways with 
+	<b>Truncated junction name:</b> For freeways/expressways with 
 	official destination-based named junctions (e.g., some European 
 	countries use these).</li>
       <li><a name="trailblazer"></a><a style="text-decoration:none" href="#trailblazer">&#x1f517</a>
-	Trailblazer label - the type ToA5, if the cross road immediately serves a more major highway like A5. </li>
+	<b>Trailblazer label:</b> The type ToA5, if the cross road immediately serves a more major highway like A5. </li>
       <li><a name="nearbytown"></a><a style="text-decoration:none" href="#nearbytown">&#x1f517</a>
-	Truncated, nearby town name - for a town immediately served by
+	<b>Truncated, nearby town name:</b> For a town immediately served by
 	the unnamed cross road. If a localized national park or tourist 
 	attraction is immediately served by the cross road, a truncated version 
 	of its name could also suffice. </li>
       <li><a name="distanttown"></a><a style="text-decoration:none" href="#distanttown">&#x1f517</a>
-	Truncated, distant town name - a more distant location that 
+	<b>Truncated, distant town name:</b> A more distant location that 
 	either the cross road serves or that is mentioned on guide signs at the 
 	junction. You couldn't find anything near the intersection and now 
 	you're grabbing for just about anything to use to identify the waypoint.</li>
