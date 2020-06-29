@@ -400,7 +400,7 @@ Near-miss points</p>
 <div class="text">
   Where two or more routes intersect, the routes must have a waypoint. If the coordinates of the waypoints are identical, the graph is connected and the Highway Browser can indicate intersecting routes to ease navigation through the routes when mapping travels. Near-miss points (NMPs) are waypoints very close together. They should be checked whether they are candidates to merge to fix broken intersecting links, and broken concurrencies.
   </br>
-  <a href="/logs.php#nmplogs">NMP files</a> can also be loaded into HDX to visualize their positions on a map. The desired NMP file cannot be selected directly but needs to be downloaded first.
+  <a href="../logs.php#nmplogs">NMP files</a> can also be loaded into HDX to visualize their positions on a map. The desired NMP file cannot be selected directly but needs to be downloaded first.
   </br>
   </br>
   The best practise to check NMPs, is as follows:
