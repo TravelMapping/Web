@@ -383,8 +383,8 @@ with their abbreviation regardless of a local convention (Michigan State
 
 
 
-<p class="heading"><a name="rarecases"></a><a style="text-decoration:none" href="#rarecases">&#x1f517</a>
-  Highway ends at non-intersections, non-borders, and other rare cases</p>
+<p class="heading"><a name="other"></a><a style="text-decoration:none" href="#other">&#x1f517</a>
+  Other intersections</p>
     
 <table border="1" cellpadding="2" cellspacing="2" width="640" class="text">
   <tbody><tr valign="top">
@@ -400,6 +400,30 @@ with their abbreviation regardless of a local convention (Michigan State
     <td>For ends at a park or other non-commercial endpoint, abbreviate 
       the park name as if it were a named highway (see rules above). Use NP 
       for national park, PP for provincial park, SP for state park. </td>
+  </tr>
+  <tr valign="top">
+    <td><a name="uturn"></a><a style="text-decoration:none" href="#uturn">&#x1f517</a></td>
+    <td>A3:<br />A3_U
+      A3:<br />
+      A3_U1<br />
+      A3_U2</td>
+    <td>Use a _U suffix for interchanges that are nothing more than a 
+      U-turn ramp. If more than one is needed for the same highway, use _U1, 
+      _U2, etc. </td>
+  </tr>
+</tbody></table>
+
+
+
+<p class="headin<p class="heading"><a name="highwayends"></a><a style="text-decoration:none" href="#highwayends">&#x1f517</a>
+  Highway ends at non-intersections or non-borders</p>
+    
+<table border="1" cellpadding="2" cellspacing="2" width="640" class="text">
+  <tbody><tr valign="top">
+    <td width="40">Link</td>
+    <td width="200">File:<br />
+      Waypoint </td>
+    <td width="400">Description</td>
   </tr>
   <tr valign="top">
     <td><a name="continuing"></a><a style="text-decoration:none" href="#continuing">&#x1f517</a></td>
@@ -432,16 +456,6 @@ with their abbreviation regardless of a local convention (Michigan State
       of the bridge can be used, truncated like a highway name. If there is 
       no official bridge name but the bridge traverses only a river with an 
       official name, use the river name. </td>
-  </tr>
-  <tr valign="top">
-    <td><a name="uturn"></a><a style="text-decoration:none" href="#uturn">&#x1f517</a></td>
-    <td>A3:<br />A3_U
-      A3:<br />
-      A3_U1<br />
-      A3_U2</td>
-    <td>Use a _U suffix for interchanges that are nothing more than a 
-      U-turn ramp. If more than one is needed for the same highway, use _U1, 
-      _U2, etc. </td>
   </tr>
 </tbody></table>
 
