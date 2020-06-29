@@ -89,6 +89,9 @@ First steps with email submission</p>
         to open the info window and copy the label name <code>MO/IL</code>.</li>
         <li>The waypoints at the ends of the traveled segment may be listed in either order.</li>
       </ul></br>
+      <font color="#ff0000"><b>NEW</b></font> The <code>.list Tool</code> option helps generating the full <code>.list</code> file line
+      by clicking on the first and last segment of your travel.</br>
+      </br>
       You most likely continued your travel in Missouri. If you left Interstate 70 at Exit 249, you would put the second line in your file:</br>
       </br>
       <code>MO I-70 MO/IL 249</code></br>
@@ -102,6 +105,11 @@ First steps with email submission</p>
         and on exit 249 to get the second waypoint.</br>
         </li>
       </ul>
+      </br>
+      <font color="#ff0000"><b>NEW</b></font> The <a href="#multiregion">multi-region</a> option helps generating a <code>.list</code>
+      file line which covers a travel on connected routes beyond region borders:</br>
+      </br>
+      <code>IL I-70 52 MO I-70 249</code></br>
       </br>
       Continue to complete your travels. <a href="#examples">See below</a> if you need more examples on how to break down your travels into "sections" to enter into the file.</br>
       </br>
@@ -117,7 +125,7 @@ First steps with email submission</p>
       Make sure the following items are correct:</br>
       </br>
       <ul>
-        <li><b>Each line has exactly the four required fields:</b> region, highway, and two waypoint labels.</li>
+        <li><b>Each line has exactly the four or six required fields:</b> <code>Region Route Waypoint1 Waypoint2</code> or <code>Region1 Route1 Waypoint1 Region2 Route2 Waypoint2</code></li>
         <li><b>The fields have only spaces or tabs between them.</b> Other
         delimiters may prevent the mapping script from parsing your file correctly.</li>
         <li><b>The file is saved as plain text with a <code>.list</code> extension.</b> Word processor files (Microsoft Word,
@@ -255,6 +263,11 @@ WV I-81 VA/WV WV/MD
 MD I-81 WV/MD MD/PA
 PA I-81 MD/PA PA/NY
 NY I-81 PA/NY 10
+  </pre>
+Or add a <a href="#multiregion">multi-region</a> line by specifying the first waypoint in West Virgina and the last waypoint in New York only:
+  </br>
+  <pre>
+VA I-81 300 NY I-81 10
   </pre></li>
   <li><a name="exbeltway"></a><a style="text-decoration:none" href="#exbeltway">&#x1f517</a>
   <b>Beltways (full loop highways) within a single region.</b></br>
@@ -303,7 +316,7 @@ Advanced features</p>
   <li><a name="mapview"></a><a style="text-decoration:none" href="#mapview">&#x1f517</a>
     Open Highway Browser from a map</br>
     </br>
-    Viewing regions or systems on a map helps to see all your traveled segments. Click on the overlays to open the info window.
+    Viewing regions or systems on a <a href="/user/mapview.php?v">map</a> helps to see all your traveled segments. Click on the overlays to open the info window.
     The link directly opens the route in the Highway Browser so that you can create your <code>.list</code> file line.
     </br>
     </br>
@@ -330,6 +343,24 @@ Advanced features</p>
     Many users break up <code>.list</code> files into chunks by system, region
     or individual travel to make it easier to read or manage.
     You can also use blank lines as desired to enhance readability.
+  </br>
+  </br>
+  </li>
+  <li><a name="multiregion"></a><a style="text-decoration:none" href="#multiregion">&#x1f517</a>
+    <font color="#ff0000"><b>NEW</b></font> Multi-region <code>.list</code> file line</br>
+    </br>
+    In addition to the common <code>.list</code> file line with four fields, it is possible to use six fields to cover a multi-region travel
+    on a connected route.
+    For each route section, add one line to your <code>.list</code> file with the following format:</br>
+      </br>
+      <code>Region1 Route1 Waypoint1 Region2 Route2 Waypoint2</code></br>
+  </br>
+  Click <code>View Connected Route</code> in the <a href="/hb/showroute.php?r=il.i070">Highway Browser</a>
+  to load the <a href="/hb/showroute.php?r=il.i070&cr">connected route</a> for all regions.
+  The first line of the waypoint info window comprises the required region, route and waypoint combination to be copied into your <code>.list</code> file.
+  Put both waypoints into the same line:
+  </br>
+  <code>IL I-70 52 MO I-70 249</code>
   </br>
   </br>
   </li>
