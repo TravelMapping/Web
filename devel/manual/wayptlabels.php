@@ -411,6 +411,12 @@ with their abbreviation regardless of a local convention (Michigan State
       U-turn ramp. If more than one is needed for the same highway, use <code>_U1</code>, 
       <code>_U2</code>, etc. </td>
   </tr>
+  <tr valign="top">
+    <td><a name="ferry"></a><a style="text-decoration:none" href="#ferry">&#x1f517</a></td>
+    <td>Fry<br />
+      LilProFry</td>
+    <td><code>Fry</code> is normally the appropriate label for ferry terminals. If required or desired to distinguish ferry terminals, additional names can be added, e.g. departure or destination locations.</td>
+  </tr>
 </tbody></table>
 
 
