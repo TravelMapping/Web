@@ -397,19 +397,18 @@ with their abbreviation regardless of a local convention (Michigan State
     <td><a name="park"></a><a style="text-decoration:none" href="#park">&#x1f517</a></td>
     <td>RayWinSP<br />
       GreSmoNP</td>
-    <td>For ends at a park or other non-commercial endpoint, abbreviate 
-      the park name as if it were a named highway (see rules above). Use NP 
-      for national park, PP for provincial park, SP for state park. </td>
+    <td>For a park or other non-commercial point, abbreviate 
+      the name as if it were a named highway (see rules above). Use <code>NP</code>
+      for national park, <code>PP</code> for provincial park, <code>SP</code> for state park. </td>
   </tr>
   <tr valign="top">
     <td><a name="uturn"></a><a style="text-decoration:none" href="#uturn">&#x1f517</a></td>
-    <td>A3:<br />A3_U
-      A3:<br />
+    <td>A3_U<br />
       A3_U1<br />
       A3_U2</td>
-    <td>Use a _U suffix for interchanges that are nothing more than a 
-      U-turn ramp. If more than one is needed for the same highway, use _U1, 
-      _U2, etc. </td>
+    <td>Use a <code>_U</code> suffix for interchanges that are nothing more than a 
+      U-turn ramp. If more than one is needed for the same highway, use <code>_U1</code>, 
+      <code>_U2</code>, etc. </td>
   </tr>
 </tbody></table>
 
