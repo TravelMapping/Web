@@ -69,11 +69,10 @@ The following list shows the preferred waypoint type in order. Choose the first 
 	countries use these).</li>
       <li><a name="trailblazer"></a><a style="text-decoration:none" href="#trailblazer">&#x1f517</a>
 	<b>Trailblazer label:</b> The type ToA5, if the cross road immediately serves a more major highway like A5. </li>
-      <li><a name="nearbytown"></a><a style="text-decoration:none" href="#nearbytown">&#x1f517</a>
-	<b>Truncated, nearby town name:</b> For a town immediately served by
-	the unnamed cross road. If a localized national park or tourist 
-	attraction is immediately served by the cross road, a truncated version 
-	of its name could also suffice. </li>
+      <li><a name="nearbytown"></a><a style="text-decoration:none" href="#parks">&#x1f517</a>
+	<b>Entrance roads for national/state/local parks or other tourist attractions:</b>
+    If immediately served by the cross road, a truncated version of the park's or attraction's name is sufficent.</li>
+	<b>Truncated, nearby town name:</b> For a town immediately served by the unnamed cross road.</li>
       <li><a name="distanttown"></a><a style="text-decoration:none" href="#distanttown">&#x1f517</a>
 	<b>Truncated, distant town name:</b> A more distant location that 
 	either the cross road serves or that is mentioned on guide signs at the 
