@@ -45,17 +45,17 @@ The following list shows the preferred waypoint type in order. Choose the first 
     Desired waypoints.
     <ol>
       <li><a name="desired_borderpoints"></a><a style="text-decoration:none" href="#desired_borderpoints">&#x1f517</a>
-	<b>Border points:</b> These points often begin and end files. If a 
+	<a href="#borderpoints"><b>Border points:</b></a> These points often begin and end files. If a 
 	required intersection coincides with a border point, use a border point 
 	and skip the intersection point. The only border points in use are 
 	international boundaries (all countries) and subdivisional boundaries 
 	(for only countries we subdivide in this project). </li>
       <li><a name="desired_exitnumbers"></a><a style="text-decoration:none" href="#desired_exitnumbers">&#x1f517</a>
-	<b>Exit numbers:</b> If the highway has interchanges with exit numbers for itself. We don't use exit numbers on the US highways. </li>
+	<a href="#exitnumbered"><b>Exit numbers:</b></a> If the highway has interchanges with exit numbers for itself.</li>
       <li><a name="desired_visiblynumbered"></a><a style="text-decoration:none" href="#desired_visiblynumbered">&#x1f517</a>
-	<b>Visibly numbered cross road designation:</b> US 42, A17, I-40 Business Loop, etc. </li>
+	<a href="#visiblynumbered"><b>Visibly numbered cross road designation:</b></a> US 42, A17, I-40 Business Loop, etc. </li>
       <li><a name="desired_named"></a><a style="text-decoration:none" href="#desired_named">&#x1f517</a>
-	<b>Truncated, visible cross road name:</b> Magothy Bridge Road, etc.</li>
+	<a href="#named"><b>Truncated, visible cross road name:</b></a> Magothy Bridge Road, etc.</li>
     </ol>
     </li>
   <li><a name="inadequatedata"></a><a style="text-decoration:none" href="#inadequatedata">&#x1f517</a>
