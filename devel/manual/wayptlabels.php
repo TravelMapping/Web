@@ -24,7 +24,8 @@
   <li><a href="#exitnumbered">Interchanges on exit-numbered highways</a></li>
   <li><a href="#visiblynumbered">Intersections with visibly numbered highways</a></li>
   <li><a href="#named">Intersections with named highways</a></li>
-  <li><a href="#rarecases">Highway ends at non-intersections, non-borders, and other rare cases</a></li>
+  <li><a href="#other">Other intersections</a></li>
+  <li><a href="#highwayends">Highway ends at non-intersections or non-borders</a></li>
   <li><a href="#2highways">Putting two highways in a waypoint label</a></li>
   <li><a href="#multiplex">Waypoint labels for multiplexes</a></li>
   <li><a href="#disambiguation">Distinguishing otherwise identical waypoints (not for exit numbers)</a></li>
@@ -414,7 +415,7 @@ with their abbreviation regardless of a local convention (Michigan State
 
 
 
-<p class="headin<p class="heading"><a name="highwayends"></a><a style="text-decoration:none" href="#highwayends">&#x1f517</a>
+<p class="heading"><a name="highwayends"></a><a style="text-decoration:none" href="#highwayends">&#x1f517</a>
   Highway ends at non-intersections or non-borders</p>
     
 <table border="1" cellpadding="2" cellspacing="2" width="640" class="text">
