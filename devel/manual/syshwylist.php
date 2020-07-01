@@ -290,7 +290,7 @@ International characters</p>
   <li><a name="intlatin"></a><a style="text-decoration:none" href="#intlatin">&#x1f517</a>
   Excel doesn't cooperate with this, so if using Excel, consider 
   downloading OpenOffice (it's free), or if you insist on using Excel, you
-  must manually encode the characters. See the <a href="utfconvert.html">UTF-8 to Latin character table</a>.</li>
+  must manually encode the characters.</li>
   <li><a name="intsymbols"></a><a style="text-decoration:none" href="#intsymbols">&#x1f517</a>
   International characters will appear as weird symbols or question 
   marks on the web site if the encoding isn't properly done. This is bad!</li>
