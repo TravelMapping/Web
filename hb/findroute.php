@@ -103,7 +103,9 @@ Table updates after changing the filters can also take a few seconds.
 <div id="choppedbox">
 <table class="gratable" id="chopped">
 <thead>
-<tr><th colspan="8">Select Route to Display</th></tr>
+<tr><th colspan="8">Select Route to Display, Select Filters, or
+<input type="button" onclick="clearChoppedFilters();" value="Clear Filters" />
+</th></tr>
 <tr><th colspan="8" style="color:red; text-align:center;" id="chopmessage">Loading Route Data...</th></tr>
 <tr><th>Tier</th><th>Continent</th><th>Country</th><th>Region</th><th>System</th><th>Route&nbsp;Name</th><th>.list Name</th><th>Level</th></tr>
 <tr id="chopselectrow" style="display: none"><th>
