@@ -141,7 +141,7 @@ Zoom level: [Far]<input id="zoomvalinput" name="zoomvalinput" type="range" min="
 <b>OR Select by Region and/or System</b></br >
 <table border="0"><tr><td>Region(s)</td><td>System(s)</td></tr>
 <tr><td><?php tm_region_select(TRUE); ?></td><td><?php tm_system_select(TRUE); ?></td></tr></table>
-<span style="font-size: smaller">Note that if regions and/or systems are seleced, the coords and zoom above will be ignored.</span><br />
+<span style="font-size: smaller">Note that if regions and/or systems are selected, the coords and zoom above will be ignored.</span><br />
 <hr />
 User: <?php tm_user_select(); ?>&nbsp;Units: <?php tm_units_select(); ?><br />
 </p>
