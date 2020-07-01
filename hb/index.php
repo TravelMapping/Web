@@ -174,7 +174,7 @@
             }
         );
     </script>
-    <title>Travel Mapping Highway Browser (Draft)</title>
+    <title>Travel Mapping Highway Browser</title>
 </head>
 <?php 
 $nobigheader = 1;
@@ -182,7 +182,7 @@ $nobigheader = 1;
 if ($routeparam == "") {
     echo "<body>\n";
     require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
-    echo "<h1>Travel Mapping Highway Browser (Draft)</h1>";
+    echo "<h1>Travel Mapping Highway Browser</h1>";
     echo "<form id=\"selectHighways\" name=\"HighwaySearch\" action=\"/hb/index.php?u={$tmuser}\">";
     echo "<label for=\"sys\">Filter routes by...  System: </label>";
     tm_system_select(FALSE);
@@ -272,7 +272,7 @@ elseif (($region != "") or ($system != "")) {  // we have no r=, so we will show
 
     $sql_command .= ";";
     echo "<div id=\"routebox\">\n";
-    echo "<table class=\"gratable tablesorter ws_data_table\" id=\"routes\"><thead><tr><th colspan=\"7\">Select Route to Display (click a header to sort by that column)</th></tr><tr class='float'><th class=\"sortable\">Tier</th><th class=\"sortable\">System</th><th class=\"sortable\">Region</th><th class=\"sortable\">Route&nbsp;Name</th><th>.list Name</th><th class=\"sortable\">Level</th><th>Root</th></tr></thead><tbody>\n";
+    echo "<table class=\"gratable tablesorter ws_data_table\" id=\"routes\"><thead><tr><th colspan=\"7\">Select Route to Display (click a header to sort by that column)</th></tr><tr><th class=\"sortable\">Tier</th><th class=\"sortable\">System</th><th class=\"sortable\">Region</th><th class=\"sortable\">Route&nbsp;Name</th><th>.list Name</th><th class=\"sortable\">Level</th><th>Root</th></tr></thead><tbody>\n";
     $res = tmdb_query($sql_command);
     while ($row = $res->fetch_assoc()) {
         echo "<tr class=\"notclickable status-" . $row['level'] . "\"><td>{$row['tier']}</td><td>" . $row['systemName'] . "</td><td>" . $row['region'] . "</td><td>" . $row['route'] . $row['banner'];
