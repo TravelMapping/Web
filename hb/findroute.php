@@ -31,17 +31,14 @@
 
 	.status-active {
 	    background-color: #CCFFCC;
-            font-size: 14px;
 	}
 
 	.status-preview {
 	    background-color: #FFFFCC;
-            font-size: 14px;
 	}
 	
 	.status-devel {
 	    background-color: #FFCCCC;
-            font-size: 14px;
 	}
 
     </style>
@@ -75,9 +72,9 @@
 var findrouteSystems = [];
     <?php
     // read info about systems to reduce later transfer
-    $result = tmdb_query("SELECT systemName, fullName, tier, level from systems;");
+    $result = tmdb_query("SELECT systemName, fullName, tier, level, color from systems;");
     while ($row = $result->fetch_assoc()) {
-       echo "findrouteSystems['".$row['systemName']."'] = { name: \"".$row['fullName']."\", tier: ".$row['tier'].", level: '".$row['level']."' };\n";
+       echo "findrouteSystems['".$row['systemName']."'] = { name: \"".$row['fullName']."\", tier: ".$row['tier'].", level: '".$row['level']."', color: '".$row['color']."' };\n";
     }
     $result->free();
     ?>
