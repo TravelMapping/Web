@@ -295,6 +295,17 @@ else {
     echo "</span>\n";
     echo "<span>.list name: <span style='font-family:courier'>" . $routeInfo['region'] . " " . $routeInfo['route'] . $routeInfo['banner'] . $routeInfo['abbrev'] . "</span></span>\n";
     echo '<span style="font-size: smaller;"><a href="/hb/showroute.php?r='.$rootparam.'&cr">View Connected Route</a></span>'."\n";
+    // check for similar routes
+    $result = tmdb_query("select * from routes where (route like '".$routeInfo['route']."' or route regexp '".$routeInfo['route']."[A-Za-z]');");
+    if ($result->num_rows > 1) {
+        echo '<span><select id="similarroute" name="similarroute" onchange="jumpToSimilarRoute();">\n';
+	echo '<option value="None">Jump to Similar Route</option>\n';
+	while ($row = $result->fetch_assoc()) {
+            echo '<option value="'.$row['root'].'">'.$row['region'].' '.$row['route'].$row['banner'].$row['abbrev'].'</option>\n';
+        }
+	echo "</select></span>\n";
+    }
+    $result->free();
 }
 ?>
 
