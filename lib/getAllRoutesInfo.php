@@ -22,7 +22,7 @@ $response['countries'] = array();
 $response['continents'] = array();
 $response['roots'] = array();
 
-$result = tmdb_query("select route, banner, abbrev, city, region, systemName, regions.country, regions.continent, root from routes left join regions on routes.region=regions.code order by regions.country, systemName");
+$result = tmdb_query("select route, banner, abbrev, city, region, systemName, regions.country, regions.continent, root from routes left join regions on routes.region=regions.code order by csvOrder");
 while ($row = $result->fetch_assoc()) {
     $routeName = $row['route'].$row['banner'].$row['abbrev'];
     if ($row['city'] != "") {
