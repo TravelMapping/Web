@@ -3,19 +3,14 @@
 <!--
  ***
  * Highway Browser Main Page.
- * If a root is supplied, a map will show that root's path along with its waypoints.
+ * If a root is supplied, this page will redirect to showroute.php
  * Otherwise, it will show a list of routes that the user can select from, with filters by region and system availible.
- * If all three of lat, lon, and zoom are provided, the map will initialize to those coordinates and zoom level.
- * Otherwise, the map will pan and zoom to fit the entire route at the center.
  * URL Params:
  *  r - root of route to view waypoints for. When set, the page will display a map with the route params. (required for displaying map)
  *  u - user to display highlighting for on map (optional)
- *  lat - initial latitude at center of map
- *  lon - initial longitude at center of map
- *  zoom - initial zoom level of map
  *  rg - region to filter for on the highway browser list (optional)
  *  sys - system to filter for on the highway browser list (optional)
- *  ([r [u] [lat lon zoom]] [rg] [sys])
+ *  ([r [u]] [rg] [sys])
  ***
  -->
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -25,81 +20,11 @@
     <link rel="stylesheet" type="text/css" href="/fonts/roadgeek.css" />
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <style type="text/css">
-        #headerbox {
-            position: absolute;
-            top: 0px;
-            bottom: 50px;
-            width: 100%;
-            overflow: hidden;
-            text-align: center;
-            font-size: 20px;
-            font-family: "Times New Roman", serif;
-            font-style: bold;
-        }
-
         #routebox {
-            position: fixed;
             left: 0px;
-            top: 110px;
             bottom: 0px;
             width: 100%;
             overflow: auto;
-        }
-
-        #pointbox {
-            position: fixed;
-            left: 0px;
-            top: 30px;
-            right: 275px;
-            bottom: 0px;
-            width: 275px;
-            overflow: auto;
-            font-size: 18px;
-        }
-
-        #controlbox {
-            position: fixed;
-            top: 30px;
-            bottom: 60px;
-            height: 100%;
-            left: 300px;
-            right: 0px;
-            overflow: auto;
-            padding: 5px;
-            font-size: 18px;
-        }
-
-        #map {
-            position: absolute;
-            top: 70px;
-            bottom: 0px;
-            left: 275px;
-            right: 0px;
-            overflow: hidden;
-        }
-
-        #map * {
-            cursor: crosshair;
-        }
-
-        #waypoints:hover {
-            cursor: pointer;
-        }
-
-        #pointbox span {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 5px;
-        }
-
-        #pointbox table {
-            width: 95%;
-            margin-bottom: 15px;
-        }
-
-        #routeInfo td {
-            text-align: right;
         }
 
 	.status-active {
@@ -174,7 +99,7 @@
             }
         );
     </script>
-    <title>Travel Mapping Highway Browser (Draft)</title>
+    <title>Travel Mapping Highway Browser</title>
 </head>
 <?php 
 $nobigheader = 1;
@@ -182,14 +107,20 @@ $nobigheader = 1;
 if ($routeparam == "") {
     echo "<body>\n";
     require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
-    echo "<h1>Travel Mapping Highway Browser (Draft)</h1>";
+    echo <<<END
+<h1>Travel Mapping Highway Browser</h1>
+<p class="text" id="hbIntro">
+In addition to the Highway Browser functionality here to search for
+routes by system and region, TM's <a href="/hb/findroute.php">Route
+Finder</a> can help search for routes by other criteria.
+END;
+    tm_dismiss_button("hbIntro");
+    echo "</p>\n";
     echo "<form id=\"selectHighways\" name=\"HighwaySearch\" action=\"/hb/index.php?u={$tmuser}\">";
     echo "<label for=\"sys\">Filter routes by...  System: </label>";
     tm_system_select(FALSE);
     echo "<label for=\"rg\"> Region: </label>";
     tm_region_select(FALSE);
-    // should be taken care of by the cookie:
-    //echo "<input type=\"hidden\" name=\"u\" value=\"{$tmuser}\" />";
     echo "<input type=\"submit\" value=\"Apply Filter\" /></form>";
 
 } 
@@ -272,7 +203,7 @@ elseif (($region != "") or ($system != "")) {  // we have no r=, so we will show
 
     $sql_command .= ";";
     echo "<div id=\"routebox\">\n";
-    echo "<table class=\"gratable tablesorter ws_data_table\" id=\"routes\"><thead><tr><th colspan=\"7\">Select Route to Display (click a header to sort by that column)</th></tr><tr class='float'><th class=\"sortable\">Tier</th><th class=\"sortable\">System</th><th class=\"sortable\">Region</th><th class=\"sortable\">Route&nbsp;Name</th><th>.list Name</th><th class=\"sortable\">Level</th><th>Root</th></tr></thead><tbody>\n";
+    echo "<table class=\"gratable tablesorter ws_data_table\" id=\"routes\"><thead><tr><th colspan=\"7\">Select Route to Display (click a header to sort by that column)</th></tr><tr><th class=\"sortable\">Tier</th><th class=\"sortable\">System</th><th class=\"sortable\">Region</th><th class=\"sortable\">Route&nbsp;Name</th><th>.list Name</th><th class=\"sortable\">Level</th><th>Root</th></tr></thead><tbody>\n";
     $res = tmdb_query($sql_command);
     while ($row = $res->fetch_assoc()) {
         echo "<tr class=\"notclickable status-" . $row['level'] . "\"><td>{$row['tier']}</td><td>" . $row['systemName'] . "</td><td>" . $row['region'] . "</td><td>" . $row['route'] . $row['banner'];

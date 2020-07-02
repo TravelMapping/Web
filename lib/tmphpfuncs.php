@@ -297,6 +297,13 @@ function tm_sum_column_where($table, $column, $where) {
     return $ans;
 }
 
+// Function to generate a "Dismiss" button that hides the DOM element
+// with the given id when pressed
+function tm_dismiss_button($id) {
+
+    echo "<input type=\"button\" onclick=\"document.getElementById('".$id."').style.display = 'none';\" value=\"Dismiss\" />";
+}
+
 // Function to retrieve the name of a region by code from the DB
 function tm_region_code_to_name($code) {
     global $tmdb;
