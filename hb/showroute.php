@@ -209,7 +209,7 @@
     $connected = array_key_exists("cr", $_GET);
     if ($connected) {
         // TODO: factor out code from here and mapview into tmphpfuncs.php
-        $result = tmdb_query("select firstRoot from connectedrouteroots where root='".$rootparam."';");
+        $result = tmdb_query("select firstRoot from connectedRouteRoots where root='".$rootparam."';");
         $row = $result->fetch_assoc();
 	$firstRoot = "";
 	if ($row == NULL) {
@@ -225,7 +225,7 @@
             echo "showrouteParams.roots.push('".$row2['root']."');\n";
         }
 	$result2->free();
-	$result = tmdb_query("select * from connectedroutes where firstRoot='".$firstRoot."';");
+	$result = tmdb_query("select * from connectedRoutes where firstRoot='".$firstRoot."';");
 	$connInfo = $result->fetch_assoc();
 	$result->free();
 	$titleRoute = $connInfo['route'].$connInfo['banner'];

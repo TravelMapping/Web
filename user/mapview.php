@@ -237,7 +237,7 @@ User: <?php tm_user_select(); ?>&nbsp;Units: <?php tm_units_select(); ?><br />
     // all in connected route given any root, QS param 'cr'
     echo "mapviewParams.roots = [];\n";
     if (array_key_exists('cr', $_GET)) {
-        $result = tmdb_query("select firstRoot from connectedrouteroots where root='".$_GET['cr']."';");
+        $result = tmdb_query("select firstRoot from connectedRouteRoots where root='".$_GET['cr']."';");
         $row = $result->fetch_assoc();
 	$firstRoot = "";
 	if ($row == NULL) {
