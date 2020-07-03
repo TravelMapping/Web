@@ -61,53 +61,60 @@ following sources of highway information.</p>
 
 <p class="subheading"><a name="regionsources"></a>Highway Departments and Hobbyist Sites</p>
 	<ul class="sources">
-	  <li>Armenia
+	  <li><a name="arg"></a><a style="text-decoration:none" href="#arg">&#x1f517</a>Argentina
+	    <ul>
+<li><a href="https://www.argentina.gob.ar/sites/default/files/tabla_evento_0.pdf">Route List</a>. Official list of national routes.</li>
+	    </ul>
+	  </li>
+	  <li><a name="arm"></a><a style="text-decoration:none" href="#arm">&#x1f517</a>Armenia
 	    <ul>
 <li><a href="http://www.mtc.am/arm_map.html">Armenia Map</a>. Interactive national highway map from the Ministry of Transport and Communication of the Republic of Armenia.</li>
 	    </ul>
 	  </li>
-	  <li>Asia
+	  <li><a name="asi"></a><a style="text-decoration:none" href="#asi">&#x1f517</a>Asia
 	    <ul>
 <li><a href="http://www.unescap.org/our-work/transport">UNESCAP Transport</a>. UN site on transport in Asia and the Pacific. Includes Asian Highway list and maps.</li>
 	    </ul>
 	  </li>
-	  <li>Austria
+	  <li><a name="aut"></a><a style="text-decoration:none" href="#aut">&#x1f517</a>Austria
 	    <ul>
-																 <li><a href="http://www.asfinag.at/">ASFINAG: Motorways and Expressways Road Concessionaire</a>. Official site of the motorway/expressway network in Austria.</li>
+        <li><a href="https://www.asfinag.at/">ASFINAG: Motorways and Expressways Road Concessionaire</a>. Official site of the motorway/expressway network in Austria.</li>
 	    </ul>
 	  </li>
-	  <li>Azerbaijan
+	  <li><a name="aze"></a><a style="text-decoration:none" href="#aze">&#x1f517</a>Azerbaijan
 	    <ul>
 <li><a href="http://azeryol.az/az/content/325/">Roads of the Republic</a>. List of M and R routes from the Azerbaijan Ministry of Transport.</li>
 	    </ul>
 	  </li>
-	  <li>Belarus
+	  <li><a name="blr"></a><a style="text-decoration:none" href="#blr">&#x1f517</a>Belarus
 	    <ul>
 <li><a href="http://belavtodor.belhost.by/bridges-roads/network">Belarus road network</a>. Includes official map of the country's roads, from Department Belavtodor.</li>
 	    </ul>
 	  </li>
-	  <li>Belgium
+	  <li><a name="bel"></a><a style="text-decoration:none" href="#bel">&#x1f517</a>Belgium
 	    <ul>
-	      <li><a href="http://www.autosnelwegen.net/">Motorways of Belgium, Netherlands, and Luxembourg</a>. Hobbyist site covering the motorway networks of Belgium, Netherlands, and Luxembourg.</li>
+	      <li><a href="https://www.autosnelwegen.net/">Motorways of Belgium, Netherlands, and Luxembourg</a>. Hobbyist site covering the motorway networks of Belgium, Netherlands, and Luxembourg.</li>
+	      <li><a href="https://routes.fandom.com/wiki/Portail:Belgique">WikiSARA</a>. Hobbyist site covering the motorway network of Belgium.</li>
 	    </ul>
 	  </li>
-	  <li>Bosnia and Herzegovina
+	  <li><a name="bih"></a><a style="text-decoration:none" href="#bih">&#x1f517</a>Bosnia and Herzegovina
 	    <ul>
 	      <li><a href="http://www.fmpik.gov.ba/">Federal Ministry of Transport and Communications</a>. Official transportation site for Bosnia and Herzegovina.</li>
 <li>Map of Main and Regional Roads of Bosnia and Herzegovina. Road map of Bosnia and Herzegovina from Ceste d. d. Mostar.</li>
 	    </ul>
 	  </li>
-	  <li>Bulgaria
+	  <li><a name="bgr"></a><a style="text-decoration:none" href="#bgr">&#x1f517</a>Bulgaria
 	    <ul>
 	    <li><a href="http://www.optransport.bg/upload/docs/Non_Technical_resume___ppendix_6.pdf">Construction of General Master Plan.</a> Motorway plan from the Ministry of Transport, Information Technology, and Communications of the Republic of Bulgaria.</li>
 <li><a href="http://www.bgmaps.com/">BG Maps</a>. Tile highway map of Bulgaria from Datecs.</li>
             </ul>
 	  </li>
-																 <li>Canada (CAN)
+      <li><a name="can"></a><a style="text-decoration:none" href="#can">&#x1f517</a>Canada (CAN)
 	    <ul>
 	      <li><a href="http://www.geobase.ca/geobase/en/search.do?produit=nrn&amp;language=en">List of Available Datasets</a>. GIS shapefiles from GeoBase covering the Canadian provinces and territories.</li>
             </ul>
 	  </li>
+      <ul>
 																 <li>Alberta, CAN
 	    <ul>
 	      <li><a href="http://www.transportation.alberta.ca/608.htm">Government of Alberta Ministry of Transportation: Maps</a>.</li>
@@ -186,25 +193,28 @@ following sources of highway information.</p>
 <li><a href="http://www.hpw.gov.yk.ca/pdf/ReportHwyLogPublic2012withedits.pdf">Yukon Highways Log Book</a>. 2012 official list and definitions of territorial highways, with route details</li>
             </ul>
 	  </li>
-	  <li>Croatia
+      </ul>
+	  <li><a name="hrv"></a><a style="text-decoration:none" href="#hrv">&#x1f517</a>Croatia
 	    <ul>
-	      <li><a href="http://www.hac.hr/">Croatian Motorways Ltd.</a>. Official site of the motorway network in Croatia.</li>
-	      <li><a href="http://www.hrvatske-ceste.hr/Ceste.htm">Croatian Roads</a>. State highway list from Croatian Roads d. o. o.</li>
+	      <li><a href="https://www.hac.hr/">Croatian Motorways Ltd.</a>. Official site of the motorway network in Croatia.</li>
+	      <li><a href="https://www.hrvatske-ceste.hr/">Croatian Roads</a>. State highway list from Croatian Roads d. o. o.</li>
+	      <li><a href="https://narodne-novine.nn.hr/clanci/sluzbeni/2018_11_103_2021.html">List of dedicated routes</a>. Classification of public roads</li>
 	    </ul>
 	  </li>
-	  <li>Czechia
+	  <li><a name="cze"></a><a style="text-decoration:none" href="#cze">&#x1f517</a>Czechia
 	    <ul>
-	      <li><a href="http://www.ceskedalnice.cz/">Ceske Dalnice</a>. Hobbyist site covering the motorway/expressway network in Czechia.</li>
-	      <li><a href="http://www.rsd.cz/">Road and Motorway Directorate of Czechia</a>. Official site of the motorway/expressway network in Czechia.</li>
+	      <li><a href="https://www.ceskedalnice.cz/">Ceske Dalnice</a>. Hobbyist site covering the motorway/expressway network in Czechia.</li>
+	      <li><a href="https://www.rsd.cz/">Road and Motorway Directorate of Czechia</a>. Official site of the motorway/expressway network in Czechia.</li>
 	    </ul>
 	  </li>
-	  <li>Denmark
+	  <li><a name="dnk"></a><a style="text-decoration:none" href="#dnk">&#x1f517</a>Denmark
 	    <ul>
 <li><a href="http://www.trafikken.dk/wimpdoc.asp?page=document&amp;objno=14611">Motorway Exit Numbers</a>. Interchange listings from the Denmark Road Directorate.</li>
-<li><a href="http://www.trafikken.dk/wimpdoc.asp?page=document&amp;objno=2205">State Road Map</a>. Map of state-maintained roads of the Denmark Road Directorate.</li>
+<li><a href="https://trafikkort.vejdirektoratet.dk/">State Road Map</a>. Map of state-maintained roads of the Denmark Road Directorate.</li>
+<li><a href="https://naturstyrelsen.dk/naturoplevelser/naturguider/margueritruten">Margueritruten Road Map</a>. Map of the <i>Margueritruten</i> tourist route.</li>
 	    </ul>
 	  </li>
-	  <li>Estonia
+	  <li><a name="est"></a><a style="text-decoration:none" href="#est">&#x1f517</a>Estonia
 	    <ul>
 <li><a href="http://www.unece.org/trans/doc/2004/sc1/TRANS-SC1-2004-02e.pdf">UNECE map of Estonian E Roads</a>. Official map showing route of International European Roads Estonia from the United Nations Economic Commission for Europe.</li>
 <li><a href="http://www.unece.org/trans/doc/2006/sc1/ECE-TRANS-SC1-2006-03e.pdf">UNECE map of E264</a>. Official map showing the route of E264 in Estonia and Latvia from the United Nations Economic Commission for Europe.</li>
@@ -212,28 +222,28 @@ following sources of highway information.</p>
 <li><a href="https://www.riigiteataja.ee/akt/13266801 ">List of State Highways</a>.Official list of all highways in Estonia from the Office of Economic Affairs and Communications of Estonia.</li>
 	    </ul>
 	  </li>
-	  <li>Europe
+	  <li><a name="eur"></a><a style="text-decoration:none" href="#eur">&#x1f517</a>Europe
 	    <ul>
 <li><a href="http://www.unece.org/trans/welcome.html">UNECE Transport</a>. UN site on transport in Europe. Includes E Road list and maps.</li>
 	    </ul>
 	  </li>
-	  <li>Finland
+	  <li><a name="fin"></a><a style="text-decoration:none" href="#fin">&#x1f517</a>Finland
 	    <ul>
 	      <li><a href="http://www.mattigronroos.fi/Tiet/eng/index.htm">Introduction to Roads in Finland</a>. Hobbyist site by Matti Grönroos covering the Finnish road network.</li>
 	    </ul>
 	  </li>
-	  <li>France
+	  <li><a name="fra"></a><a style="text-decoration:none" href="#fra">&#x1f517</a>France
 	    <ul>
-<li><a href="http://routes.wikia.com/wiki/Portail:Autoroute_fran%C3%A7aise">French Autoroutes</a>. French Motorway section of the WikiSARA hobbyist web site.</li>
-<li><a href="http://saratlas.free.fr/">SARAtlas</a>. Motorway maps and exit guides site.</li>
+          <li><a href="https://routes.fandom.com/">WikiSARA</a>. Hobbyist web site.</li>
+          <li><a href="http://saratlas.free.fr/">SARAtlas</a>. Motorway maps and exit guides site.</li>
 	    </ul>
 	  </li>
-	  <li>Georgia
+	  <li><a name="geo"></a><a style="text-decoration:none" href="#geo">&#x1f517</a>Georgia
 	    <ul>
 <li><a href="http://www.georoad.ge/GeoroadMap.html">Georgia Road Map</a>. Interactive highway map from the Georgia Motor Roads Department.</li>
 	    </ul>
 	  </li>
-	  <li>Germany
+	  <li><a name="deu"></a><a style="text-decoration:none" href="#deu">&#x1f517</a>Germany
 	    <ul>
 	      <li><a href="http://www.autobahnatlas-online.de/index_e.html">Autobahn-Atlas</a>. Hobbyist site by Patrick Scholl covering the detailed routings and plans for German motorways.</li>
 	      <li><a href="http://www.bmvi.de/DE/Themen/Mobilitaet/Infrastrukturplanung-Investitionen/Bundesverkehrswegeplan-2030/bundesverkehrswegeplan-2030.html">Road Construction</a>. German motorway construction plans and maps from the Federal Minsitry of Transport, Building and Urban Development.</li>	    
@@ -320,7 +330,7 @@ following sources of highway information.</p>
 	      </li>
 	    </ul>
 	  </li>
-	  <li>Greece
+	  <li><a name="grc"></a><a style="text-decoration:none" href="#grc">&#x1f517</a>Greece
 	    <ul>
 	      <li><a href="http://www.greek-motorway.net/">Greek Motorway Net</a>. Hobbyist site covering transportation in Greece.</li>
 	      <li><a href="http://www.egnatia.eu/page/default.asp?la=2&amp;id=23">Egnatia Motorway Project</a>. Official site of Egnatia Odos, covering the motorway A2 and connectons to countries to the north.</li>
@@ -328,18 +338,18 @@ following sources of highway information.</p>
 	      <li><a href="http://www.moreas.com.gr/summary.asp?catid=16041&amp;tag=13459">Destination Information</a>. Map of A7 and A71 from Moreas  A. E. motorway company.</li>
 	      <li><a href="http://www.olympiaodos.gr/EN/index.php?ID=map">Map of A8 and A9</a>. Map from Olympia Odos.</li>	    </ul>
 	  </li>
-	  <li>Hungary
+	  <li><a name="hun"></a><a style="text-decoration:none" href="#hun">&#x1f517</a>Hungary
 	    <ul>
-	      <li><a href="http://www.nif.hu/">National Infrastructure Development Corporation</a>. Official site of the motorway/expressway network in Hungary, with information about construction works.</li>
+	      <li><a href="https://www.nif.hu/">National Infrastructure Development Corporation</a>. Official site of the motorway/expressway network in Hungary, with information about construction works.</li>
 	      <li><a href="http://www.motorway.hu/autopalyak">Road Network</a>. Traffic conditions and maps of Hungary's motorways from the State Motorway Management Company.</li>
 	    </ul>
 	  </li>
-	  <li>Iceland
+	  <li><a name="isl"></a><a style="text-decoration:none" href="#isl">&#x1f517</a>Iceland
 	    <ul>
 	      <li><a href="http://vegasja.vegagerdin.is/eng/#">Vegagerdin Map</a>. Official map from Vegagerdin, Iceland's national department of transportation. </li>
 	    </ul>
 	  </li>
-	  <li>Ireland
+	  <li><a name="irl"></a><a style="text-decoration:none" href="#irl">&#x1f517</a>Ireland
 	    <ul>
 <li><a href="http://nra.ie/Maps/">National Roads Network Maps</a>. Official highway maps from Ireland's National Roads Authority.</li>
 <li><a href="http://www.transport.ie/upload/general/7616-0.pdf">Roads Act 1993 (Classification of National Roads) Order 2006</a>. Official 2006 list of national roads of Ireland published by the Government Publications Office<li><a href="http://www.irishstatutebook.ie/2012/en/si/0053.html ">Roads Act 1993 (Classification of National Roads) Order 2012.</a>. Official list of Irish motorways and N roads, with route descriptions.</li>
@@ -347,144 +357,144 @@ following sources of highway information.</p>
 <li><a href="http://www.sabre-roads.org.uk/wiki/index.php?title=Category:N_Roads">N Roads</a>. Ireland National Roads section of the hobbyist site SABRE Roads.</li>
 	    </ul>	  
 	  </li>
-	  <li>Isle of Man
+	  <li><a name="imn"></a><a style="text-decoration:none" href="#imn">&#x1f517</a>Isle of Man
 	    <ul>
 <li><a href="http://www.sabre-roads.org.uk/wiki/index.php?title=Category:A_Roads_(Isle_of_Man)">A Roads (Isle of Man)</a>. Manx A Roads section of the hobbyist site SABRE Roads.</li>
 	    </ul>	  
 	  </li>
-	  <li>Italy
+	  <li><a name="ita"></a><a style="text-decoration:none" href="#ita">&#x1f517</a>Italy
 	    <ul>
 	      <li><a href="http://www.stradeanas.it/">ANAS</a>. Official site of the state highway network in Italy.</li>
 	      <li><a href="http://www.aiscat.it/index.htm">Italian Association of Concessionaires of Motorways and Tunnels</a>. Official site of the motorway companies in Italy.</li>
 	      <li><a href="http://www.autostrade.it/en/index.html">Motorways for Italy</a>. Official site of the motorway network of Italy.</li>
 	    </ul>	  
 	  </li>
-	  <li>Jamaica
+	  <li><a name="jam"></a><a style="text-decoration:none" href="#jam">&#x1f517</a>Jamaica
 	    <ul>
 	      <li><a href="http://www.h2kjamaica.com/html/default.aspx">Highway 2000</a>. Info about Jamaican motorways from the National Road Operating and Construction Company of Jamaica.</li>
 	    </ul>
 	  </li>
-	  <li>Jersey
+	  <li><a name="jey"></a><a style="text-decoration:none" href="#jey">&#x1f517</a>Jersey
 	    <ul>
 <li><a href="http://www.sabre-roads.org.uk/wiki/index.php?title=Category:A_Roads_(Jersey)">A Roads (Jersey)</a>. Jersey A Roads section of the hobbyist site SABRE Roads.</li>
 	    </ul>	  
 	  </li>
-	  <li>Kazakhstan
+	  <li><a name="kaz"></a><a style="text-decoration:none" href="#kaz">&#x1f517</a>Kazakhstan
 	    <ul>
 <li><a href="http://kad.gov.kz/?mod=chapter&amp;lng=rus&amp;opt=viewdoc&amp;id=50">Kazakhstan Oblast Road Maps</a>. Official highway maps from the Ministry of Transport and Communications of the Republic of Kazakhstan.</li>
 <li><a href="http://kad.gov.kz/upload/pravila_rus.doc">Conditions and Classifications of the highways of the Republic of Kazakhstan</a>. M, A, and R route listings from the Ministry of Transport and Communications of the Republic of Kazakhstan.</li>
 	    </ul>
 	  </li>
-	  <li>Kosovo
+	  <li><a name="rks"></a><a style="text-decoration:none" href="#rks">&#x1f517</a>Kosovo
 	    <ul>
 <li><a href="http://www.putevi-srbije.rs/pdf/serbia_main_and_regional_road.pdf">Road Network Map</a>. PDF map of the road network of Serbia and Kosovo from Road of Serbia.</li>
 	    </ul>
 	  </li>
-	  <li>Latvia
+	  <li><a name="lva"></a><a style="text-decoration:none" href="#lva">&#x1f517</a>Latvia
 	    <ul>
 <li><a href="http://likumi.lv/doc.php?id=198589">Lists of State Roads and Sections of Municipal Roads</a>. Official listing of routes from the Latvia State Roads department.</li>
 	      <li><a href="http://www.unece.org/trans/doc/2006/sc1/ECE-TRANS-SC1-2006-03e.pdf">UNECE map of E264</a>. Official map showing the route of E264 in Estonia and Latvia from the United Nations Economic Commission for Europe.</li>
 	    </ul>
 	  </li>
-	  <li>Luxembourg
+	  <li><a name="lux"></a><a style="text-decoration:none" href="#lux">&#x1f517</a>Luxembourg
 	    <ul>
-	      <li><a href="http://www.pch.public.lu/">Administration of Roads and Bridges</a>. Official site covering the highway network of Luxembourg.</li>
-	      <li><a href="http://www.autosnelwegen.net/">Motorways of Belgium, Netherlands, and Luxembourg</a>. Hobbyist site covering the motorway networks of Belgium, Netherlands, and Luxembourg.</li>
-	      <li><a href="http://routes.wikia.com/wiki/Portail:Luxembourg">WikiSARA</a>. Hobbyist site covering the motorway network of Luxembourg.</li>
+	      <li><a href="https://travaux.public.lu/">Administration of Roads and Bridges</a>. Official site covering the highway network of Luxembourg.</li>
+	      <li><a href="https://www.autosnelwegen.net/">Motorways of Belgium, Netherlands, and Luxembourg</a>. Hobbyist site covering the motorway networks of Belgium, Netherlands, and Luxembourg.</li>
+	      <li><a href="https://routes.wikia.com/wiki/Portail:Luxembourg">WikiSARA</a>. Hobbyist site covering the motorway network of Luxembourg.</li>
 	    </ul>
 	  </li>
-	  <li>Macedonia
+	  <li><a name="mkd"></a><a style="text-decoration:none" href="#mkd">&#x1f517</a>Macedonia
 	    <ul>
 	      <li><a href="http://www.roads.org.mk/en/prezentacija.html">Macedonia Road Network</a>. Maps and route lists at the official site, Fund for National and Regional Roads of the Republic of Macedonia.</li>
 	    </ul>
 	  </li>
-	  <li>Mexico
+	  <li><a name="mex"></a><a style="text-decoration:none" href="#mex">&#x1f517</a>Mexico
 	    <ul>
 	      <li><a href="http://www.sct.gob.mx/estadistica-y-cartografia/atlas-cartograficos/atlas-por-entidad-federativa/">Description of State Atlas</a>. Road maps of Mexico from the Secretariat of Communications and Transport of Mexico.</li>
 	      <li><a href="http://dgcc.sct.gob.mx/index.php?id=769">Physical State of Highways</a>. Road maps and federal highway logs by state in Mexico.</li>
 
 	    </ul>
 	  </li>
-	  <li>Moldova
+	  <li><a name="mda"></a><a style="text-decoration:none" href="#mda">&#x1f517</a>Moldova
 	    <ul>
 <li><a href="http://www.mtid.gov.md/images/stories/drumuri/EuroRoads.jpg">Map of International European Roads in Moldova</a>. Official map showing route of International European Roads in Moldova from the Moldova Ministry of Transportation and Highway Infrastructure.</li>
 	    </ul>
 	  </li>
-	  <li>Montenegro
+	  <li><a name="mne"></a><a style="text-decoration:none" href="#mne">&#x1f517</a>Montenegro
 	    <ul>
 	      <li><a href="http://dzscg.com/images1/Karta%20magistr%20i%20reg%20puteva%20u%20CG.jpg">Montenegro Main and Regional Road Map</a>. Official highway map from the Montenegro Transport Directorate.</li>
 	    </ul>
 	  </li>
-	  <li>Netherlands
+	  <li><a name="nld"></a><a style="text-decoration:none" href="#nld">&#x1f517</a>Netherlands
 	    <ul>
-	      <li><a href="http://www.autosnelwegen.net/">Motorways of Belgium, Netherlands, and Luxembourg</a>. Hobbyist site covering the motorway networks of Belgium, Netherlands, and Luxembourg.</li>
+	      <li><a href="https://www.autosnelwegen.net/">Motorways of Belgium, Netherlands, and Luxembourg</a>. Hobbyist site covering the motorway networks of Belgium, Netherlands, and Luxembourg.</li>
 	    </ul>
 	  </li>
-	  <li>Norway
-	    <ul>
-	      <li><a href="http://www.vegvesen.no/_attachment/129705/binary/256842">Exit Numbering</a>. Motorway exit numbers from the Norwegian Public Roads Administration.</li>
+	  <li><a name="nor"></a><a style="text-decoration:none" href="#nor">&#x1f517</a>Norway
+        <ul>
+	      <li><a href="https://vegkart.atlas.vegvesen.no/">Road Network Map</a>. Official site of the Norwegian Public Roads Administration.</li>
 	    </ul>
 	  </li>
-	  <li>Poland
+	  <li><a name="pol"></a><a style="text-decoration:none" href="#pol">&#x1f517</a>Poland
 	    <ul>
 	      <li><a href="http://www.gddkia.gov.pl/">General Directorate for National Roads and Motorways</a>. Official site of the highway network in Poland.</li>
 	    </ul>
 	  </li>
-	  <li>Portugal
+	  <li><a name="prt"></a><a style="text-decoration:none" href="#prt">&#x1f517</a>Portugal
 	    <ul>
 	      <li><a href="http://www.brisa.pt/PresentationLayer/homepageclientes.aspx?idiomax=2&amp;menuid=108">Brisa - Portugal</a>. Traffic and motorway site for Brisa in Portugal.</li>
 	    </ul>
 	  </li>
-	  <li>Romania
+	  <li><a name="rou"></a><a style="text-decoration:none" href="#rou">&#x1f517</a>Romania
 	    <ul>
 	    <li><a href="http://www.cnadnr.ro/proiecte.php?tip=79">Motorway Construction.</a> Information about the construction of Romania's motorway network from the National Motorways and National Roads Company of Romania.</li>
 	    <li><a href="http://www.mt.ro/nou/_img/documente/pp/proiecte_prioritare_MTI_RUTIER.pdf">Program of Motorway Construction.</a> Construction progress on Romania's motorway network from the Ministry of Transport and Infrastructure of Romania.</li>
 	    </ul>
 	  </li>
-	  <li>Serbia
+	  <li><a name="srb"></a><a style="text-decoration:none" href="#srb">&#x1f517</a>Serbia
 	    <ul>
 <li><a href="http://www.putevi-srbije.rs/pdf/serbia_main_and_regional_road.pdf">Road Network Map</a>. PDF map of the road network of Serbia and Kosovo from Road of Serbia.</li>
 	    </ul>
 	  </li>
-	  <li>Slovakia
+	  <li><a name="svk"></a><a style="text-decoration:none" href="#svk">&#x1f517</a>Slovakia
 	    <ul>
 	      <li><a href="http://www.ndsas.sk/">National Motorway Company</a>. Official site of the motorway/expressway network in Slovakia.</li>
 	    </ul>
 	  </li>
-	  <li>Slovenia
+	  <li><a name="svn"></a><a style="text-decoration:none" href="#svn">&#x1f517</a>Slovenia
 	    <ul>
 	      <li><a href="http://www.dars.si/">Motorway Company of the Republic of Slovenia</a>. Official site of the motorway/expressway network in Slovenia.</li>
 	    </ul>
 	  </li>
-	  <li>Spain
+	  <li><a name="esp"></a><a style="text-decoration:none" href="#esp">&#x1f517</a>Spain
 	    <ul>
 	      <li><a href="http://www.pacopaco.es/">Maps of Spanish Infrastructure</a>. Map of current motorway/expressway system of Spain by Francisco Diaz Pardo.</li>
 	      <li><a href="http://cmati.xunta.es/portal/cidadan/lang/gl/pid/78">System of Autonomous Highways</a>. Road maps and video highway log from the Galicia Directorate of Intrastructure.</li>
 	  </ul>
 	  </li>
-	  <li>Sweden
+	  <li><a name="swe"></a><a style="text-decoration:none" href="#swe">&#x1f517</a>Sweden
 	    <ul>
 	      <li><a href="http://trafikinfo.trafikverket.se/LIT/#url=Vagtrafiken/Karta">Maps of Swedisch Infrastructure</a>. Map of current road system of Sweden.</li>
 	  </ul>
 	  </li>
-	  <li>Switzerland
+	  <li><a name="che"></a><a style="text-decoration:none" href="#che">&#x1f517</a>Switzerland
 	    <ul>
-	      <li><a href="http://www.admin.ch/ch/d/sr/741_272/app1.html">List of Motorways and Expressways</a>. Legislative highway definitions for the national highway network of Switzerland.</li>
-	      <li><a href="http://www.autobahnen.ch/">The Swiss Motorways</a>. Hobbyist site covering the motorway network of Switzerland.</li>
+	      <li><a href="https://www.admin.ch/opc/de/classified-compilation/19910382/index.html#app1">List of Motorways and Expressways</a>. Legislative highway definitions for the national highway network of Switzerland.</li>
+	      <li><a href="https://www.autobahnen.ch/">The Swiss Motorways</a>. Hobbyist site covering the motorway network of Switzerland.</li>
 	      <li><a href="https://www.dreamango.com/de/tour/touristische-strassen/grand-tour-of-switzerland/18634381/#dm=1&dmdtab=oax-tab1">Grand Tour of Switzerland</a>.</li>
 	    </ul>
 	  </li>
-	  <li>Turkey
+	  <li><a name="tur"></a><a style="text-decoration:none" href="#tur">&#x1f517</a>Turkey
 	    <ul>
 	      <li><a href="http://www.kgm.gov.tr/Sayfalar/KGM/SiteTr/Root/default.aspx">General Directorate of Highways</a>. Official site of the motorway network in Turkey.</li>
 	    </ul>
 	  </li>
-	  <li>Ukraine
+	  <li><a name="ukr"></a><a style="text-decoration:none" href="#ukr">&#x1f517</a>Ukraine
 	    <ul>
 	      <li><a href="http://euro2012highway.blogspot.com">Euro 2012 Highway</a>. Hobbyist site on Ukrainian roads, including European routes in the country.</li>
 	    </ul>
 	  </li>
-	  <li>United Kingdom
+	  <li><a name="gbr"></a><a style="text-decoration:none" href="#gbr">&#x1f517</a>United Kingdom
 	    <ul>
 <li><a href="http://www.magazine.ordnancesurveyleisure.co.uk/magazine/tscontent/general/getamap-quick-start-guide.html">Ordnance Survey Get A Map</a>. Detailed official mapping of Britain and the Isle of Man.</li>
 <li><a href="http://www.cbrd.co.uk/motorway/">Motorway Database</a>. Motorway exit guides from Chris Marshall's hobbyist site Chris's British Roads Directory.</li>
@@ -494,7 +504,7 @@ following sources of highway information.</p>
 <li><a href="http://www.sabre-roads.org.uk/wiki/index.php?title=Category:A_Roads_%28Northern_Ireland%29">A Roads (Northern Ireland)</a>. Northern Ireland A Roads section of the hobbyist site SABRE Roads.</li>
 	    </ul>	  
 	  </li>
-		<li>United States of America (USA)
+		<li><a name="usa"></a><a style="text-decoration:none" href="#usa">&#x1f517</a>United States of America (USA)
 	    <ul>
 	      <li><a href="http://www.fhwa.dot.gov/reports/routefinder/">FHWA Route Log and Finder List</a>. Log of the US Interstate Highways from the Federal Highway Adminsitration.</li>
 	      <li><a href="http://www.kurumi.com/roads/3di/index.html">3 Digit Interstates at kurumi.com</a>. Comprehensive national directory of 3 digit interstates.</li>
@@ -503,6 +513,7 @@ following sources of highway information.</p>
 
 	    </ul>
 	  </li>
+      <ul>
 	  <li>Alabama, USA
 		   <ul>
 		   <li><a href="http://aldotgis.dot.state.al.us/milepostinternet/default.aspx">Milepost/General Highway Maps</a>. Official highway maps from the Alabama Department of Transportation.</li>
@@ -874,6 +885,7 @@ following sources of highway information.</p>
 	</ul></li>
 	    </ul>
 	  </li>
+    </ul>
 	<li>General
 	    <ul>
 	      <li><a href="http://sites.google.com/site/roadnumberingsystems/home">Road Numbering Systems</a>. Hobbyist site about the various road numbering systems around the world.</li>

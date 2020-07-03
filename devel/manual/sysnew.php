@@ -173,9 +173,16 @@ Develop routes in devel status</p>
       numbers increasing radially outward and circumferentially in a certain direction.</li>
     </ul>
     </br>
+    <li>Submit the highway data files to our <a href="https://github.com/TravelMapping/HighwayData">HighwayData GitHub repository</a> under:</br>
+    <span style="color: brown;">https://github.com/TravelMapping/HighwayData/tree/master/hwy_data/<i>&lt;uppercase region code&gt;</i>/<i>&lt;lowercase system code&gt;</i></span></li>
+    </br>
   </ul>
   <li><a name="developcsv"></a><a style="text-decoration:none" href="#developcsv">&#x1f517</a>
   Make the <a href="syshwylist.php">highway system lists (<code>.csv</code>)</a></li>
+  </br>
+  <ul>
+    <li>Submit the files to <a href="https://github.com/TravelMapping/HighwayData/tree/master/hwy_data/_systems">the systems directory</a> of the HighwayData GitHub repository.</li>
+  </ul>
   </br>
   <li><a name="developsystem"></a><a style="text-decoration:none" href="#developsystem">&#x1f517</a>
   Promote the system to <a href="sysdef.php#devel"><devel>devel</devel> status</a> when a first batch of routes is available.
