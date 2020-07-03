@@ -61,6 +61,11 @@ following sources of highway information.</p>
 
 <p class="subheading"><a name="regionsources"></a>Highway Departments and Hobbyist Sites</p>
 	<ul class="sources">
+	  <li>Argentina
+	    <ul>
+<li><a href="https://www.argentina.gob.ar/sites/default/files/tabla_evento_0.pdf">Route List</a>. Official list of national routes.</li>
+	    </ul>
+	  </li>
 	  <li>Armenia
 	    <ul>
 <li><a href="http://www.mtc.am/arm_map.html">Armenia Map</a>. Interactive national highway map from the Ministry of Transport and Communication of the Republic of Armenia.</li>
@@ -73,7 +78,7 @@ following sources of highway information.</p>
 	  </li>
 	  <li>Austria
 	    <ul>
-																 <li><a href="http://www.asfinag.at/">ASFINAG: Motorways and Expressways Road Concessionaire</a>. Official site of the motorway/expressway network in Austria.</li>
+        <li><a href="https://www.asfinag.at/">ASFINAG: Motorways and Expressways Road Concessionaire</a>. Official site of the motorway/expressway network in Austria.</li>
 	    </ul>
 	  </li>
 	  <li>Azerbaijan
@@ -88,7 +93,8 @@ following sources of highway information.</p>
 	  </li>
 	  <li>Belgium
 	    <ul>
-	      <li><a href="http://www.autosnelwegen.net/">Motorways of Belgium, Netherlands, and Luxembourg</a>. Hobbyist site covering the motorway networks of Belgium, Netherlands, and Luxembourg.</li>
+	      <li><a href="https://www.autosnelwegen.net/">Motorways of Belgium, Netherlands, and Luxembourg</a>. Hobbyist site covering the motorway networks of Belgium, Netherlands, and Luxembourg.</li>
+	      <li><a href="https://routes.fandom.com/wiki/Portail:Belgique">WikiSARA</a>. Hobbyist site covering the motorway network of Belgium.</li>
 	    </ul>
 	  </li>
 	  <li>Bosnia and Herzegovina
@@ -188,20 +194,22 @@ following sources of highway information.</p>
 	  </li>
 	  <li>Croatia
 	    <ul>
-	      <li><a href="http://www.hac.hr/">Croatian Motorways Ltd.</a>. Official site of the motorway network in Croatia.</li>
-	      <li><a href="http://www.hrvatske-ceste.hr/Ceste.htm">Croatian Roads</a>. State highway list from Croatian Roads d. o. o.</li>
+	      <li><a href="https://www.hac.hr/">Croatian Motorways Ltd.</a>. Official site of the motorway network in Croatia.</li>
+	      <li><a href="https://www.hrvatske-ceste.hr/">Croatian Roads</a>. State highway list from Croatian Roads d. o. o.</li>
+	      <li><a href="https://narodne-novine.nn.hr/clanci/sluzbeni/2018_11_103_2021.html">List of dedicated routes</a>. Classification of public roads</li>
 	    </ul>
 	  </li>
 	  <li>Czechia
 	    <ul>
-	      <li><a href="http://www.ceskedalnice.cz/">Ceske Dalnice</a>. Hobbyist site covering the motorway/expressway network in Czechia.</li>
-	      <li><a href="http://www.rsd.cz/">Road and Motorway Directorate of Czechia</a>. Official site of the motorway/expressway network in Czechia.</li>
+	      <li><a href="https://www.ceskedalnice.cz/">Ceske Dalnice</a>. Hobbyist site covering the motorway/expressway network in Czechia.</li>
+	      <li><a href="https://www.rsd.cz/">Road and Motorway Directorate of Czechia</a>. Official site of the motorway/expressway network in Czechia.</li>
 	    </ul>
 	  </li>
 	  <li>Denmark
 	    <ul>
 <li><a href="http://www.trafikken.dk/wimpdoc.asp?page=document&amp;objno=14611">Motorway Exit Numbers</a>. Interchange listings from the Denmark Road Directorate.</li>
-<li><a href="http://www.trafikken.dk/wimpdoc.asp?page=document&amp;objno=2205">State Road Map</a>. Map of state-maintained roads of the Denmark Road Directorate.</li>
+<li><a href="https://trafikkort.vejdirektoratet.dk/">State Road Map</a>. Map of state-maintained roads of the Denmark Road Directorate.</li>
+<li><a href="https://naturstyrelsen.dk/naturoplevelser/naturguider/margueritruten">Margueritruten Road Map</a>. Map of the <i>Margueritruten</i> tourist route.</li>
 	    </ul>
 	  </li>
 	  <li>Estonia
@@ -224,8 +232,8 @@ following sources of highway information.</p>
 	  </li>
 	  <li>France
 	    <ul>
-<li><a href="http://routes.wikia.com/wiki/Portail:Autoroute_fran%C3%A7aise">French Autoroutes</a>. French Motorway section of the WikiSARA hobbyist web site.</li>
-<li><a href="http://saratlas.free.fr/">SARAtlas</a>. Motorway maps and exit guides site.</li>
+          <li><a href="https://routes.fandom.com/">WikiSARA</a>. Hobbyist web site.</li>
+          <li><a href="http://saratlas.free.fr/">SARAtlas</a>. Motorway maps and exit guides site.</li>
 	    </ul>
 	  </li>
 	  <li>Georgia
@@ -330,7 +338,7 @@ following sources of highway information.</p>
 	  </li>
 	  <li>Hungary
 	    <ul>
-	      <li><a href="http://www.nif.hu/">National Infrastructure Development Corporation</a>. Official site of the motorway/expressway network in Hungary, with information about construction works.</li>
+	      <li><a href="https://www.nif.hu/">National Infrastructure Development Corporation</a>. Official site of the motorway/expressway network in Hungary, with information about construction works.</li>
 	      <li><a href="http://www.motorway.hu/autopalyak">Road Network</a>. Traffic conditions and maps of Hungary's motorways from the State Motorway Management Company.</li>
 	    </ul>
 	  </li>
@@ -388,9 +396,9 @@ following sources of highway information.</p>
 	  </li>
 	  <li>Luxembourg
 	    <ul>
-	      <li><a href="http://www.pch.public.lu/">Administration of Roads and Bridges</a>. Official site covering the highway network of Luxembourg.</li>
-	      <li><a href="http://www.autosnelwegen.net/">Motorways of Belgium, Netherlands, and Luxembourg</a>. Hobbyist site covering the motorway networks of Belgium, Netherlands, and Luxembourg.</li>
-	      <li><a href="http://routes.wikia.com/wiki/Portail:Luxembourg">WikiSARA</a>. Hobbyist site covering the motorway network of Luxembourg.</li>
+	      <li><a href="https://travaux.public.lu/">Administration of Roads and Bridges</a>. Official site covering the highway network of Luxembourg.</li>
+	      <li><a href="https://www.autosnelwegen.net/">Motorways of Belgium, Netherlands, and Luxembourg</a>. Hobbyist site covering the motorway networks of Belgium, Netherlands, and Luxembourg.</li>
+	      <li><a href="https://routes.wikia.com/wiki/Portail:Luxembourg">WikiSARA</a>. Hobbyist site covering the motorway network of Luxembourg.</li>
 	    </ul>
 	  </li>
 	  <li>Macedonia
@@ -417,12 +425,12 @@ following sources of highway information.</p>
 	  </li>
 	  <li>Netherlands
 	    <ul>
-	      <li><a href="http://www.autosnelwegen.net/">Motorways of Belgium, Netherlands, and Luxembourg</a>. Hobbyist site covering the motorway networks of Belgium, Netherlands, and Luxembourg.</li>
+	      <li><a href="https://www.autosnelwegen.net/">Motorways of Belgium, Netherlands, and Luxembourg</a>. Hobbyist site covering the motorway networks of Belgium, Netherlands, and Luxembourg.</li>
 	    </ul>
 	  </li>
 	  <li>Norway
+	      <li><a href="https://vegkart.atlas.vegvesen.no/">Road Network Map</a>. Official site of the Norwegian Public Roads Administration.</li>
 	    <ul>
-	      <li><a href="http://www.vegvesen.no/_attachment/129705/binary/256842">Exit Numbering</a>. Motorway exit numbers from the Norwegian Public Roads Administration.</li>
 	    </ul>
 	  </li>
 	  <li>Poland
@@ -469,8 +477,8 @@ following sources of highway information.</p>
 	  </li>
 	  <li>Switzerland
 	    <ul>
-	      <li><a href="http://www.admin.ch/ch/d/sr/741_272/app1.html">List of Motorways and Expressways</a>. Legislative highway definitions for the national highway network of Switzerland.</li>
-	      <li><a href="http://www.autobahnen.ch/">The Swiss Motorways</a>. Hobbyist site covering the motorway network of Switzerland.</li>
+	      <li><a href="https://www.admin.ch/opc/de/classified-compilation/19910382/index.html#app1">List of Motorways and Expressways</a>. Legislative highway definitions for the national highway network of Switzerland.</li>
+	      <li><a href="https://www.autobahnen.ch/">The Swiss Motorways</a>. Hobbyist site covering the motorway network of Switzerland.</li>
 	      <li><a href="https://www.dreamango.com/de/tour/touristische-strassen/grand-tour-of-switzerland/18634381/#dm=1&dmdtab=oax-tab1">Grand Tour of Switzerland</a>.</li>
 	    </ul>
 	  </li>
