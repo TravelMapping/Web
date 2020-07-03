@@ -1,4 +1,4 @@
-<?
+<?php
 // read information from the TM database about the travelers
 // on a given segment by id
 //

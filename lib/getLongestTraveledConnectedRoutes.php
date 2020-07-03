@@ -1,4 +1,4 @@
-<?
+<?php
 // read information from the TM database about the top
 // longest clinched connected routes for a given user, alternately
 // restricted to a system
