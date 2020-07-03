@@ -1,4 +1,4 @@
-<?
+<?php
 // read information from the TM database about all segments
 // in the given routes/systems, and then information about
 // each route that those segments are parts of, with a traveler name

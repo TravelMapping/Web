@@ -1,4 +1,4 @@
-<?
+<?php
 // read information from the TM database about the
 // traveled routes closest yo clinched for a given user, alternately
 // restricted to a region or system
