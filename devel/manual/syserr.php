@@ -29,7 +29,7 @@ connerr2 {color: #48C0A0;}
 
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 
-<h1 style="color:red">Travel Mapping Manual: Deal with data errors - <i>Draft</i></h1>
+<h1>Travel Mapping Manual: Deal with data errors</h1>
 
 <div class="text">
   The developer tools execute different kind of data checks to indicate potential errors.
@@ -64,7 +64,7 @@ Data errors</p>
   </br>
   </br>
   Note: Not all data errors are detected by the WPT file editor, see below: <green>supported</green>,
-  <yellow>proposed but not yet supported</yellow>, <red>not possbile to be detected in WPT file editor</red>.
+  <yellow>proposed but not yet supported</yellow>, <red>not possible to be detected in WPT file editor</red>.
   </br>
 </div>
 
@@ -80,7 +80,7 @@ Data errors</p>
     <td><a name="BAD_ANGLE"></a><a style="text-decoration:none" href="#BAD_ANGLE">&#x1f517</a></td>
     <td>BAD_ANGLE</td>
     <td>Angles cannot be computed for two adjacent points at the same coordinates. Instead, use <code>AltLabels</code> or fix coordinates of one point or both.</td>
-    <td><yellow>NO</yellow></td>
+    <td><green>YES</green></td>
     <td><red>NO</red></td>
   </tr>
   <tr valign="top">
@@ -136,35 +136,35 @@ Data errors</p>
     <td>HIDDEN_TERMINUS</td>
     <td>Hidden point at the beginning or end of a route. Routes must begin and end with visible waypoints
     so that users can mark all of them as traveled.</td>
-    <td><yellow>NO</yellow></td>
+    <td><green>YES</green></td>
     <td><red>NO</red></td>
   </tr>
   <tr valign="top">
     <td><a name="INVALID_FINAL_CHAR"></a><a style="text-decoration:none" href="#INVALID_FINAL_CHAR">&#x1f517</a></td>
     <td>INVALID_FINAL_CHAR</td>
     <td>Disallowed character at end of label</td>
-    <td><yellow>NO</yellow></td>
+    <td><green>YES</green></td>
     <td><red>NO</red></td>
   </tr>
   <tr valign="top">
     <td><a name="INVALID_FIRST_CHAR"></a><a style="text-decoration:none" href="#INVALID_FIRST_CHAR">&#x1f517</a></td>
     <td>INVALID_FIRST_CHAR</td>
     <td>Disallowed character at beginning (after any leading <code>*</code> characters) of label</td>
-    <td><yellow>NO</yellow></td>
+    <td><green>YES</green></td>
     <td><red>NO</red></td>
   </tr>
   <tr valign="top">
     <td><a name="LABEL_INVALID_CHAR"></a><a style="text-decoration:none" href="#LABEL_INVALID_CHAR">&#x1f517</a></td>
     <td>LABEL_INVALID_CHAR</td>
     <td>Label contains characters not allowed in labels, e.g. non-ASCII.</td>
-    <td><yellow>NO</yellow></td>
+    <td><green>YES</green></td>
     <td><red>NO</red></td>
   </tr>
   <tr valign="top">
     <td><a name="LABEL_LOOKS_HIDDEN"></a><a style="text-decoration:none" href="#LABEL_LOOKS_HIDDEN">&#x1f517</a></td>
     <td>LABEL_LOOKS_HIDDEN</td>
     <td><code>X123456</code> style label without a leading <code>+</code>. </td>
-    <td><yellow>NO</yellow></td>
+    <td><green>YES</green></td>
     <td><green>YES</green></td>
   </tr>
   <tr valign="top">
@@ -185,25 +185,24 @@ Data errors</p>
     <td><a name="LABEL_SLASHES"></a><a style="text-decoration:none" href="#LABEL_SLASHES">&#x1f517</a></td>
     <td>LABEL_SLASHES</td>
     <td>Too many slashes in label (<code>> 1</code>).</td>
-    <td><yellow>NO</yellow></td>
+    <td><green>YES</green></td>
     <td><red>NO</red></td>
   </tr>
   <tr valign="top">
     <td><a name="LABEL_TOO_LONG"></a><a style="text-decoration:none" href="#LABEL_TOO_LONG">&#x1f517</a></td>
     <td>LABEL_TOO_LONG</td>
     <td>Label is too long to fit in the space allocated for the DB field.</td>
-    <td><yellow>NO</yellow></td>
+    <td><green>YES</green></td>
     <td><red>NO</red></td>
   </tr>
-<!--
   <tr valign="top">
     <td><a name="LACKS_GENERIC"></a><a style="text-decoration:none" href="#LACKS_GENERIC">&#x1f517</a></td>
     <td>LACKS_GENERIC</td>
-    <td>Placeholder; not currently implemented.</td>
-    <td><yellow>NO</yellow></td>
-    <td>...</td>
+    <td>Label begins with <a href="wayptlabels.php#genericnumbred"><code>Old</code> followed immediately by a number without a
+    preceding generic designation type</a> such as <code>US</code>, <code>E</code>, <code>A</code>, <code>Hwy</code>, <code>Rte</code>, etc.</td>
+    <td><green>YES</green></td>
+    <td><green>YES</green></td>
   </tr>
--->
   <tr valign="top">
     <td><a name="LABEL_UNDERSCORES"></a><a style="text-decoration:none" href="#LABEL_UNDERSCORES">&#x1f517</a></td>
     <td>LABEL_UNDERSCORES</td>
@@ -214,14 +213,15 @@ Data errors</p>
   <tr valign="top">
     <td><a name="LONG_SEGMENT"></a><a style="text-decoration:none" href="#LONG_SEGMENT">&#x1f517</a></td>
     <td>LONG_SEGMENT</td>
-    <td>Long segment (distance <code>> 10 mi</code>, <code>16 km</code>) between this and the previous hidden point.</td>
-    <td><yellow>NO</yellow></td>
+    <td>Long segment (distance <code>> 20 mi</code>, <code>32 km</code>) between this and the previous hidden point.</td>
+    <td><green>YES</green></td>
     <td><green>YES</green></td>
   </tr>
   <tr valign="top">
     <td><a name="LONG_UNDERSCORE"></a><a style="text-decoration:none" href="#LONG_UNDERSCORE">&#x1f517</a></td>
     <td>LONG_UNDERSCORE</td>
-    <td>Label has long underscore suffix (<code>> 4</code> characters after underscore)</td>
+    <td>Label has long underscore suffix: <code>> 4</code> characters after underscore,
+    or <code>4</code> characters not ending in a capital letter.</td>
     <td><green>YES</green></td>
     <td><red>NO</red></td>
   </tr>
@@ -258,7 +258,7 @@ Data errors</p>
     <td>OUT_OF_BOUNDS</td>
     <td>Latitude <code>> 90°</code> or <code>< -90°</code>, or longitude <code>> 180°</code> or <code>< -180°</code>.
     False positives are allowed for the rare potential case of routes spanning the international date line.</td>
-    <td><yellow>NO</yellow></td>
+    <td><green>YES</green></td>
     <td><green>YES</green></td>
   </tr>
   <tr valign="top">
@@ -287,7 +287,7 @@ Data errors</p>
   <tr valign="top">
     <td><a name="VISIBLE_HIDDEN_COLOC"></a><a style="text-decoration:none" href="#VISIBLE_HIDDEN_COLOC">&#x1f517</a></td>
     <td>VISIBLE_HIDDEN_COLOC</td>
-    <td>The visisble waypoint is hidden on concurrent route(s).</td>
+    <td>The visible waypoint is hidden on concurrent route(s).</td>
     <td><red>NO</red></td>
     <td><green>YES</green></td>
   </tr>
@@ -306,7 +306,7 @@ Highway data check list</p>
     <ul>
       <li>Fix unintended errors by using the <a href="/wptedit/">WPT file editor</a>.</li>
       <li>Mark intended errors <a href="#falsepositive">false positive</a>.</li>
-      <li>Some of the errors are likely fixable from the information in the <a href="../../logs/nearmatchfps.log">Log of Near-Match FPs from datacheckfps.csv</a>. These are FP entries which have previously been added but due to minor changes, e.g. repositioning a waypoint, they no longer match the actual FP entry.</li>
+      <li>Some of the errors are likely fixable from the information in the <a href="/logs/nearmatchfps.log">Log of Near-Match FPs from datacheckfps.csv</a>. These are FP entries which have previously been added but due to minor changes, e.g. repositioning a waypoint, they no longer match the actual FP entry.</li>
     </ul>
   </ul>
   Note: It is possible to edit the url in the address bar of the browser to filter for more than one region or system. For instance, it is possible to create a link to all regions a highway data manager maintains. Save it to your browser bookmark and load it when needed for the check.
@@ -333,7 +333,7 @@ Marking errors false positive (FP)</p>
     </ul>
     <li>Submit the change. The data error will disappear from the data check list with the next site update.</li>
     </br>
-    <li>Do not forget checking for <a href="../../logs/unmatchedfps.log">unmatched FPs</a>. Remove them from <a href="https://github.com/TravelMapping/HighwayData/blob/master/datacheckfps.csv">the datacheck FP list</a>.</li>
+    <li>Do not forget checking for <a href="/logs/unmatchedfps.log">unmatched FPs</a>. Remove them from <a href="https://github.com/TravelMapping/HighwayData/blob/master/datacheckfps.csv">the datacheck FP list</a>.</li>
   </ul>
 </div>
 
@@ -438,7 +438,7 @@ Marking NMPs false positive FP</p>
 <div class="text">
   Marking NMPs false positive is trickier than for simple data errors but works the same way.
   <ul>
-    <li>The <code>FP Entry to Submit</code> can only be found in <a href="../../logs/nearmisspoints.log">nearmisspoints.log</a> which contains all NMP entries including those which are already marked FP. The list is sorted by region code.
+    <li>The <code>FP Entry to Submit</code> can only be found in <a href="/logs/nearmisspoints.log">nearmisspoints.log</a> which contains all NMP entries including those which are already marked FP. The list is sorted by region code.
     <ul>
       <li>Best practise is to use the browser search function to find <code>lat</code> or <code>lon</code> coordinates (or route code) which one can copy from the HDX table.</li>
       <li>There are minimum two FP entries per hotspot but very often even more, please refer to the issue with multiple lines on the HDX table mentioned above.</li>
@@ -450,7 +450,7 @@ Marking NMPs false positive FP</p>
       <li>If not all entries for a NMP hotspot have previously been marked FP, only the missing entries need to be added. Entries ending with <code>[MARKED FP]</code> are already entered as FP.</li>
     </ul>
     </br>
-    <li>Do not forget checking for <a href="../../logs/nmpfpsunmatched.log">unmatched NMP FPs</a>. Remove them from <a href="https://github.com/TravelMapping/HighwayData/blob/master/nmpfps.log">nmpfps.log</a>.</li>
+    <li>Do not forget checking for <a href="/logs/nmpfpsunmatched.log">unmatched NMP FPs</a>. Remove them from <a href="https://github.com/TravelMapping/HighwayData/blob/master/nmpfps.log">nmpfps.log</a>.</li>
   </ul>
 </div>
 

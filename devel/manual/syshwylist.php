@@ -12,17 +12,39 @@
 
 <h1>Travel Mapping Manual: System Highway Lists</h1>
 
-<p class="heading">Purpose of the files</p>
+<p class="heading">
+  Contents</p>
+
+<div class="text">
+<ul>
+  <li><a href="#purpose">Purpose of the files</a></li>
+  <li><a href="#createfiles">Creating the files</a></li>
+  <ul>
+    <li><a href="#chopped">Chopped Routes File (e.g., usai.csv) format</a></li>
+    <li><a href="#routeorder">Order of the routes in the file</a></li>
+    <li><a href="#connected">Connected Routes File (e.g., usai_con.csv) format</a></li>
+    <li><a href="#intcharacters">International characters</a></li>
+    <li><a href="#filetosubmit">The .csv file (the file to submit!)</a></li>
+  </ul>
+  <li><a href="#examplesystem">Example system: Takoma National H Routes (tach)</a></li>
+  <li><a href="#concurrencies">Concurrencies within which not all concurrent routes are signed</a></li>
+</ul>
+</div>
+
+<p class="heading"><a name="purpose"></a><a style="text-decoration:none" href="#purpose">&#x1f517</a>
+Purpose of the files</p>
 
 <p class="text">Each highway system needs to have two .csv files that list basic 
 information about each route that is part of the system. The Chopped 
-Routes File (e.g., <a href="https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/usai.csv">usai.csv</a>) tells our scripts which files to look for 
+Routes File (e.g., <a href="https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/usai.csv">usai.csv</a>)
+tells our scripts which files to look for 
 and to load into the web site. The Connected Routes File (e.g., 
 <a href="https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/usai_con.csv">usai_con.csv</a>)
 lists how those chopped routes are connected across boundaries to make
 full-length routes.</p>
 
-<p class="heading">Creating the files</p>
+<p class="heading"><a name="createfiles"></a><a style="text-decoration:none" href="#createfiles">&#x1f517</a>
+Creating the files</p>
 
 <p class="text">
   Make a spreadsheet with all the needed info for each of these 
@@ -31,229 +53,281 @@ files. Then save the spreadsheet as a .csv file as explained below. The
  format correct.
 </p>
 
-  <p class="subheading">Chopped Routes File (e.g., usai.csv) format: </p>
+<p class="subheading"><a name="chopped"></a><a style="text-decoration:none" href="#chopped">&#x1f517</a>
+Chopped Routes File (e.g., usai.csv) format</p>
 
 <div class="text">
 <ul>
-  <li>Make a spreadsheet in OpenOffice or a similar spreadsheet program with the name <i>systemcode</i>.xls. Replace <i>systemcode</i>
- with the lowercase system code assigned to your system. E.g., the 
-spreadsheet for the Ohio State Highways is usaoh.xls (system code = 
-"usaoh"). The .csv file is usaoh.csv. </li>
-  <li>The spreadsheet must have 8 columns and 1 header row. Use the 
-header row to label the columns, not to enter the first highway. In 
-processing, the first row is always ignored.<br />
-    <br />
-    The columns:
-  </li>
-</ul>
-<ol><li> <strong>System</strong>: the short, all-lowercase system code 
-for the system. It should appear in every row 
-of the spreadsheet even though it seems redundant. It is also used for 
-the filename above.</li>
-  <li> <strong>Region</strong>:
-For undivided countries, this is the uppercase 3-letter country abbreviation in which the highway is located. <span class="style19">IDN</span> for Indonesia, <span class="style19">LUX</span> for Luxembourg, <span class="style19">NZL</span> for New Zealand.
-In the United States and Canada, it's the uppercase state or province abbreviation. <span class="style19">FL</span> for Florida, <span class="style19">NT</span> for Northwest Territories.
-For other divided countries (DEU, ESP, MEX, etc.), use the 3-letter country code, followed by a hyphen, followed by the subdivision code (no spaces). <span class="style19">DEU-TH</span> for Thuringia, <span class="style19">ESP-AR for</span> for Aragon, <span class="style19">MEX-BC</span> for Baja California. </li>
-  <li><strong>Route</strong>: The name of the highway, ignoring any banners or qualifiers. No spaces! <span class="style19">US34</span> for US 34, <span class="style19">OH17</span> for OH 17, <span class="style19">PA66</span> for Business PA 66, <span class="style19">A7</span>
- for French Autoroute A7. Skip hyphens and slashes unless they separate 
-two numbers (M22-1), the route is a US Interstate or Business Interstate (I-80BL),
- or is a Quebec Autoroute (A-50). </li>
-  <li><strong>Banner</strong>: For bannered routes, put the 3-letter banner abbreviation(s) (<span class="style19">Bus, Alt, Spr</span>, etc.) here only if needed. Otherwise leave it completely blank (no whitespace). Lp for Loop is two letters. No more than six characters (for double-bannered routes) are allowed.</li>
-  <li><strong>Abbreviation</strong>: The three-letter city abbreviation if needed for auxiliary highways or for most piecemeal highways. <span class="style19">Pit</span> for Truck US 19 (Pittsburgh). Otherwise leave it blank (no whitespace). </li>
-  <li><strong>City</strong>: The spelled-out city name for an auxiliary route or for distinguishing between pieces of the same highway in the same region. <span class="style19">Pittsburgh</span>
- for Truck US 19 (Pittsburgh). This is the text that will appear below 
-the shield in the highway browser. Usually no text is needed except for 
-auxiliary highways, so leave it blank (no whitespace) in most cases. The
- City should be spelled as the locals spell it and using international 
-characters as needed. </li>
-  <li><strong>Filename root:</strong> The name of the .wpt file with the extension omitted. <span class="style19">pa.us019trkpit</span>, <span class="style19">oh.oh007</span>,
- etc. The filename roots are made all-lowercase and follow this formula:
- (Region without any hyphens) + period (.) + Route (number padded with 
-zeroes for three digits unless the number is 100+) + Banner (if there is
- one) + Abbreviation (if there is one). <font color="#ff0000">FIXME: Some systems have 4-digit routes now.</font> </li>
-<li><strong>Alt Route Names</strong> A comma-separated list of 
-deprecated route names, or blank if none.  This field is blank for most 
-routes and not blank only when necessary to handle route merges or name 
-changes.  While the primary route name is usually split into the Route, 
-Banner, and Abbrev columns, any alt route names have these 3 parts 
-concatenated. The result should be whatever would be entered in a .list file for the old name of the route, e.g. I-22FutTup.</li>
+  <li><a name="spreatsheet"></a><a style="text-decoration:none" href="#spreatsheet">&#x1f517</a>
+  Make a spreadsheet in OpenOffice or a similar spreadsheet program with the name <i>systemcode</i>.xls. Replace <i>systemcode</i>
+  with the lowercase system code assigned to your system. E.g., the 
+  spreadsheet for the Ohio State Highways is usaoh.xls (system code = 
+  "usaoh"). The .csv file is usaoh.csv. </li>
+  <li><a name="header"></a><a style="text-decoration:none" href="#header">&#x1f517</a>
+  The spreadsheet must have 8 columns and 1 header row. Use the 
+  header row to label the columns, not to enter the first highway. In 
+  processing, the first row is always ignored.<br />
+  <br />
+  <a name="columns"></a><a style="text-decoration:none" href="#columns">&#x1f517</a>
+  The columns:</li>
+  <ol>
+    <li><a name="csystem"></a><a style="text-decoration:none" href="#csystem">&#x1f517</a>
+    <strong>System</strong>: the short, all-lowercase system code 
+    for the system. It should appear in every row 
+    of the spreadsheet even though it seems redundant. It is also used for 
+    the filename above.</li>
+    <li><a name="cregion"></a><a style="text-decoration:none" href="#cregion">&#x1f517</a>
+    <strong>Region</strong>:
+    For undivided countries, this is the uppercase 3-letter country abbreviation in which the highway is located. <span class="style19">IDN</span> for Indonesia, <span class="style19">LUX</span> for Luxembourg, <span class="style19">NZL</span> for New Zealand.
+    In the United States and Canada, it's the uppercase state or province abbreviation. <span class="style19">FL</span> for Florida, <span class="style19">NT</span> for Northwest Territories.
+    For other divided countries (DEU, ESP, MEX, etc.), use the 3-letter country code, followed by a hyphen, followed by the subdivision code (no spaces). <span class="style19">DEU-TH</span> for Thuringia, <span class="style19">ESP-AR for</span> for Aragon, <span class="style19">MEX-BC</span> for Baja California. </li>
+    <li><a name="croute"></a><a style="text-decoration:none" href="#croute">&#x1f517</a>
+    <strong>Route</strong>: The name of the highway, ignoring any banners or qualifiers. No spaces! <span class="style19">US34</span> for US 34, <span class="style19">OH17</span> for OH 17, <span class="style19">PA66</span> for Business PA 66, <span class="style19">A7</span>
+    for French Autoroute A7. Skip hyphens and slashes unless they separate 
+    two numbers (M22-1), the route is a US Interstate or Business Interstate (I-80BL),
+    or is a Quebec Autoroute (A-50). </li>
+    <li><a name="cbanner"></a><a style="text-decoration:none" href="#cbanner">&#x1f517</a>
+    <strong>Banner</strong>: For bannered routes, put the 3-letter banner abbreviation(s) (<span class="style19">Bus, Alt, Spr</span>, etc.) here only if needed. Otherwise leave it completely blank (no whitespace). Lp for Loop is two letters. No more than six characters (for double-bannered routes) are allowed.</li>
+    <li><a name="cabbrev"></a><a style="text-decoration:none" href="#cabbrev">&#x1f517</a>
+    <strong>Abbreviation</strong>: The three-letter city abbreviation if needed for auxiliary highways or for most piecemeal highways. <span class="style19">Pit</span> for Truck US 19 (Pittsburgh). Otherwise leave it blank (no whitespace). </li>
+    <li><a name="ccity"></a><a style="text-decoration:none" href="#ccity">&#x1f517</a>
+    <strong>City</strong>: The spelled-out city name for an auxiliary route or for distinguishing between pieces of the same highway in the same region. <span class="style19">Pittsburgh</span>
+    for Truck US 19 (Pittsburgh). This is the text that will appear below 
+    the shield in the highway browser. Usually no text is needed except for 
+    auxiliary highways, so leave it blank (no whitespace) in most cases. The
+    City should be spelled as the locals spell it and using international 
+    characters as needed. </li>
+    <li><a name="croot"></a><a style="text-decoration:none" href="#croot">&#x1f517</a>
+    <strong>Filename root:</strong> The name of the .wpt file with the extension omitted. <span class="style19">pa.us019trkpit</span>, <span class="style19">oh.oh007</span>,
+    etc. The filename roots are made all-lowercase and follow this formula:
+    (Region without any hyphens) + period (.) + Route (number padded with 
+    zeroes for three digits unless the number is 100+) + Banner (if there is
+    one) + Abbreviation (if there is one). <font color="#ff0000">FIXME: Some systems have 4-digit routes now.</font> </li>
+    <li><a name="caltroute"></a><a style="text-decoration:none" href="#caltroute">&#x1f517</a>
+    <strong>Alt Route Names</strong> A comma-separated list of 
+    deprecated route names, or blank if none.  This field is blank for most 
+    routes and not blank only when necessary to handle route merges or name 
+    changes.  While the primary route name is usually split into the Route, 
+    Banner, and Abbrev columns, any alt route names have these 3 parts 
+    concatenated. The result should be whatever would be entered in a .list file for the old name of the route, e.g. I-22FutTup.</li>
   </ol>
+</ul>
 </div>
 
-<p class="subheading">Order of the routes in the file:</p>
+<p class="subheading"><a name="routeorder"></a><a style="text-decoration:none" href="#routeorder">&#x1f517</a>
+Order of the routes in the file</p>
 
 <div class="text">
 <ul>
-  <li>Route numbers are ascending by route number. <br />
-    PA3, PA5, PA8, etc. </li>
-  <li> For like route numbers, suffixless routes come first, followed by suffixed routes of the same number. <br />
-    MA2, MA3, MA3A, MA3B, MA4, MA4B, MA4H, MA5, etc.</li>
-  <li>For pieces of the same route, put them in the usual order for the country (i.e., south to north or west to east in the US).<br />
-    ..., PA42, PA43 Chadville, PA43 Brownsville, PA43 Pittsburgh, PA43AltCal, PA44, etc. </li>
-  <li>Bannered routes of a certain number come immediately after the 
-bannerless route of the same number and before any suffixed routes of 
-the same number. Bannered routes of the same number but with different 
-banners go in order of the banners. Bannered routes of the same number 
-and banner go in the usual order for the country (e.g., south to north 
-or west to east in the US). <br />
-    ..., PA42, PA42AltCen, PA42AltBlo, PA42TrkEag, PA42A, PA42ABusPit, PA42B, PA43, ...</li>
-  <li> Doubly bannered routes come right after the matching singly 
-bannered route. The banner immediately after the route number here 
-matches the banner immediately above the route number as signed in a 
-shield. <br />
-    US50AltBusDun is the Dunkirk City business route of US50Alt. 
-US50AltBusDun is signed with a Business banner on top, Alternate banner 
-in the middle, and the number shield at the bottom on a roadside sign 
-assembly.<br />
-    ..., US50, US50AltGeo, US50AltBusDun, US50BusFay, US50BusTrkUni, US50ScePin, US50TrkSno, US 51, ...<br />
-  </li>
-    </ul>
-    </div>
-    
-<p class="subheading">Connected Routes File (e.g., usai_con.csv) format:</p>
+  <li><a name="rascending"></a><a style="text-decoration:none" href="#rascending">&#x1f517</a>
+  Route numbers are ascending by route number. <br />
+  PA3, PA5, PA8, etc. </li>
+  <li><a name="rsuffix"></a><a style="text-decoration:none" href="#rsuffix">&#x1f517</a>
+  For like route numbers, suffixless routes come first, followed by suffixed routes of the same number. <br />
+  MA2, MA3, MA3A, MA3B, MA4, MA4B, MA4H, MA5, etc.</li>
+  <li><a name="rusualorder"></a><a style="text-decoration:none" href="#rusualorder">&#x1f517</a>
+  For pieces of the same route, put them in the usual order for the country (i.e., south to north or west to east in the US).<br />
+  ..., PA42, PA43 Chadville, PA43 Brownsville, PA43 Pittsburgh, PA43AltCal, PA44, etc. </li>
+  <li><a name="rbanner"></a><a style="text-decoration:none" href="#rbanner">&#x1f517</a>
+  Bannered routes of a certain number come immediately after the 
+  bannerless route of the same number and before any suffixed routes of 
+  the same number. Bannered routes of the same number but with different 
+  banners go in order of the banners. Bannered routes of the same number 
+  and banner go in the usual order for the country (e.g., south to north 
+  or west to east in the US). <br />
+  ..., PA42, PA42AltCen, PA42AltBlo, PA42TrkEag, PA42A, PA42ABusPit, PA42B, PA43, ...</li>
+  <li><a name="rbannerdouble"></a><a style="text-decoration:none" href="#rbannerdouble">&#x1f517</a>
+  Doubly bannered routes come right after the matching singly 
+  bannered route. The banner immediately after the route number here 
+  matches the banner immediately above the route number as signed in a 
+  shield. <br />
+  US50AltBusDun is the Dunkirk City business route of US50Alt. 
+  US50AltBusDun is signed with a Business banner on top, Alternate banner 
+  in the middle, and the number shield at the bottom on a roadside sign 
+  assembly.<br />
+  ..., US50, US50AltGeo, US50AltBusDun, US50BusFay, US50BusTrkUni, US50ScePin, US50TrkSno, US 51, ...<br /></li>
+</ul>
+</div>
+
+<p class="subheading"><a name="connected"></a><a style="text-decoration:none" href="#connected">&#x1f517</a>
+Connected Routes File (e.g., usai_con.csv) format</p>
 
 <div class="text">
-  <ul>
+<ul>
 <!--<li>This file is initially generated by a script using the completed 
 Chopped Routes File as input.  The Connected Routes File is then about 
 90% correct and needs some manual work to get it 100% correct. As files 
 are added or deleted from the highway system, this file must be updated 
 manually. <font color="#ff0000">FIXME: delete; this part is no longer relevant.</font></li>-->
-<li>The Chopped Routes File lists all the highways in the highway system
- after being chopped at national and sometimes subdivisional (state, 
-province, oblast, etc.) borders.  This Connected Routes File gives the 
-information about which chopped routes should be connected to 
-reconstruct each full route.</li>
-<li>The filename is <i>systemcode</i>_con.csv, with <i>systemcode</i> replaced with the code for the system.</li>
-<li>The first row is a header row and should never contain info about the first connected highway.</li>
-<li>Each subsequent row gives info about the connected routes in the same order as they are given in the Chopped Routes File.</li>
-<li>Columns:
-<ol>
-<li><b>System:</b> system code.</li>
-<li><b>Route:</b> the common Route name, like US52.</li>
-<li><b>Banner:</b> the common Banner, if the route is bannered, or left blank if not.</li>
-<li><b>Name:</b> like the City field of the Chopped Routes File, the 
-Name field is used to distinguish between otherwise identically named 
-routes (same Route and Banner fields) or to give extra info about 
-numberless or bannered/repeatable designations. Like the City field, 
-this field can contain international characters.</li>
-<li><b>Roots:</b> a comma-separated list (no spaces!) of filename roots 
-of the chopped routes that connect to form this connected route.  
-Continuous roots that were chopped at boundaries will have a list of 2+ 
-file roots, while a route that exists entirely in one region will simply
- have one root.  Remove all spaces.</li>
-</ol>
-</li>
-<li>Things to fix manually: <font color="#ff0000">FIXME: Rework this section, as connected route CSV files are no longer generated by script.</font>
-<ol>
-<li><b>Check the roots in each row</b> to make sure that the chopped 
-routes indeed compose a continuous route.  Sometimes border coordinates 
-in the waypoint files do not line up on each side of a border, and this 
-could cause a single connected route to appear in pieces in more than 
-one line.  Merge the rows as necessary to fix this problem, always 
-putting the list of file roots in the Roots field in the correct order.</li>
-<li><b>If there is exactly one row with a certain Route+Banner combination</b>,
- the Name should be blank unless it is a bannered/repeatable route type,
- in which case the Name should be filled in (see below for devising 
-Names).  For example, NY 17 has 3 chopped routes in order NY - PA - NY, 
-so at least one of these has a non-blank City field in the Chopped 
-Routes File that may have been initially copied to the Name field.  But 
-there is only one NY17 route in this system, so the Name should be made 
-blank instead.  </li>
-<li><b>If there are multiple rows with the same Route+Banner combination</b>,
- each row should have a nonblank Name. In short, long, multi-region 
-routes will have Names composed from the region names, while shorter, 
-single-region routes will have Names devised identically to the City 
-field in the Chopped Routes File (usually a city name). Here "region" 
-means the country or the subdivision in a divided country.</li>
-<ul>
-<li><b>If the route is lengthy and within one region</b>, use the region
- name as the Name.  For example, the southern US 9 is entirely in 
-Delaware, so the Name should be "Delaware" (and not "DE").</li>
-<li><b>If the route is lengthy and spans multiple regions</b>, use both 
-region names separated by space-hyphen-space.  Put the region names in 
-the usual order for the system (e.g., region containing the southern or 
-western end first if in the US).  For example, the northern US 9 spans 
-New Jersey and New York in that order, so the Name should be "New Jersey
- - New York".</li>
-<li><b>If applying these rules results in the same region used in different Names for rows with the same Route+Banner</b>,
- add an abbreviated direction (NW., W., C., etc.) to that region name in
- each Name it appears.  For example, the western US 422 would be Named 
-"Ohio - W. Pennsylvania" and the eastern US 422 would be Named "E. 
-Pennsylvania".  Alternatively, if one route is wholly on a large island 
-within the region (of size like that of Crete or larger), use the island
- name along with the region abbreviation.  For example, E25 has a piece 
-"Netherlands - Italy" that includes mainland France, as well as pieces 
-in the large islands of Corsica, France, and Sardinia, Italy.  The three
- piece Names should be "Netherlands - Italy", "Corse, FRA", and 
-"Sardegna, ITA".
-</li><li><b>If a route is more local (shorter), is a full beltway, or is a bannered/repeatable route type</b>
- (mandatory City and Abbrev in the Chopped Routes File), then the Name 
-should be devised in the same way as the City field in the Chopped 
-Routes File (and in most cases, the Name and City fields should be 
-identical).</li> 
-<li><b>If there are two or more discontinuous routes of the same 
-Route+Banner combination, each wholly within the same, single region, 
-and one is significantly longer than the rest</b>, the above rules would
- suggest using the region name for the long piece and city names for the
- short ones.  Since the region name as the Name doesn't distinguish the 
-pieces well, change the Name to either "(Main)" (parentheses included) 
-  or give this piece a city name.  For example, if there are 200-mile and 8-mile
-  disconnected sections of US 47 in the same state, use "(Main)" or a
- city for the long section and a city name for the short section.</li>
+  <li><a name="connchop"></a><a style="text-decoration:none" href="#connchop">&#x1f517</a>
+  The Chopped Routes File lists all the highways in the highway system
+  after being chopped at national and sometimes subdivisional (state, 
+  province, oblast, etc.) borders.  This Connected Routes File gives the 
+  information about which chopped routes should be connected to 
+  reconstruct each full route.</li>
+  <li><a name="connname"></a><a style="text-decoration:none" href="#connname">&#x1f517</a>
+  The filename is <i>systemcode</i>_con.csv, with <i>systemcode</i> replaced with the code for the system.</li>
+  <li><a name="connheader"></a><a style="text-decoration:none" href="#connheader">&#x1f517</a>
+  The first row is a header row and should never contain info about the first connected highway.</li>
+  <li><a name="connorder"></a><a style="text-decoration:none" href="#connorder">&#x1f517</a>
+  Each subsequent row gives info about the connected routes in the same order as they are given in the Chopped Routes File.</li>
+  <li><a name="conncolumns"></a><a style="text-decoration:none" href="#conncolumns">&#x1f517</a>
+  Columns:
+  <ol>
+    <li><a name="conncsystem"></a><a style="text-decoration:none" href="#conncsystem">&#x1f517</a>
+    <b>System:</b> system code.</li>
+    <li><a name="conncroute"></a><a style="text-decoration:none" href="#conncroute">&#x1f517</a>
+    <b>Route:</b> the common Route name, like US52.</li>
+    <li><a name="conncbanner"></a><a style="text-decoration:none" href="#conncbanner">&#x1f517</a>
+    <b>Banner:</b> the common Banner, if the route is bannered, or left blank if not.</li>
+    <li><a name="conncname"></a><a style="text-decoration:none" href="#conncname">&#x1f517</a>
+    <b>Name:</b> like the City field of the Chopped Routes File, the 
+    Name field is used to distinguish between otherwise identically named 
+    routes (same Route and Banner fields) or to give extra info about 
+    numberless or bannered/repeatable designations. Like the City field, 
+    this field can contain international characters.</li>
+    <li><a name="conncroots"></a><a style="text-decoration:none" href="#conncroots">&#x1f517</a>
+    <b>Roots:</b> a comma-separated list (no spaces!) of filename roots 
+    of the chopped routes that connect to form this connected route.  
+    Continuous roots that were chopped at boundaries will have a list of 2+ 
+    file roots, while a route that exists entirely in one region will simply
+    have one root.  Remove all spaces.</li>
+  </ol>
+  </li>
+  <li><a name="connmanually"></a><a style="text-decoration:none" href="#connmanually">&#x1f517</a>
+  Things to fix manually: <font color="#ff0000">FIXME: Rework this section, as connected route CSV files are no longer generated by script.</font>
+  <ol>
+    <i>
+    <li><a name="rework01"></a><a style="text-decoration:none" href="#rework01">&#x1f517</a>
+    <b>Check the roots in each row</b> to make sure that the chopped 
+    routes indeed compose a continuous route.  Sometimes border coordinates 
+    in the waypoint files do not line up on each side of a border, and this 
+    could cause a single connected route to appear in pieces in more than 
+    one line.  Merge the rows as necessary to fix this problem, always 
+    putting the list of file roots in the Roots field in the correct order.</li>
+    <li><a name="rework02"></a><a style="text-decoration:none" href="#rework02">&#x1f517</a>
+    <b>If there is exactly one row with a certain Route+Banner combination</b>,
+    the Name should be blank unless it is a bannered/repeatable route type,
+    in which case the Name should be filled in (see below for devising 
+    Names).  For example, NY 17 has 3 chopped routes in order NY - PA - NY, 
+    so at least one of these has a non-blank City field in the Chopped 
+    Routes File that may have been initially copied to the Name field.  But 
+    there is only one NY17 route in this system, so the Name should be made 
+    blank instead.</li>
+    <li><a name="rework03"></a><a style="text-decoration:none" href="#rework03">&#x1f517</a>
+    <b>If there are multiple rows with the same Route+Banner combination</b>,
+    each row should have a nonblank Name. In short, long, multi-region 
+    routes will have Names composed from the region names, while shorter, 
+    single-region routes will have Names devised identically to the City 
+    field in the Chopped Routes File (usually a city name). Here "region" 
+    means the country or the subdivision in a divided country.</li>
+    <ul>
+      <li><a name="rework13"></a><a style="text-decoration:none" href="#rework13">&#x1f517</a>
+      <b>If the route is lengthy and within one region</b>, use the region
+      name as the Name.  For example, the southern US 9 is entirely in 
+      Delaware, so the Name should be "Delaware" (and not "DE").</li>
+      <li><a name="rework23"></a><a style="text-decoration:none" href="#rework23">&#x1f517</a>
+      <b>If the route is lengthy and spans multiple regions</b>, use both 
+      region names separated by space-hyphen-space.  Put the region names in 
+      the usual order for the system (e.g., region containing the southern or 
+      western end first if in the US).  For example, the northern US 9 spans 
+      New Jersey and New York in that order, so the Name should be "New Jersey
+      - New York".</li>
+      <li><a name="rework33"></a><a style="text-decoration:none" href="#rework33">&#x1f517</a>
+      <b>If applying these rules results in the same region used in different Names for rows with the same Route+Banner</b>,
+      add an abbreviated direction (NW., W., C., etc.) to that region name in
+      each Name it appears.  For example, the western US 422 would be Named 
+      "Ohio - W. Pennsylvania" and the eastern US 422 would be Named "E. 
+      Pennsylvania".  Alternatively, if one route is wholly on a large island 
+      within the region (of size like that of Crete or larger), use the island
+      name along with the region abbreviation.  For example, E25 has a piece 
+      "Netherlands - Italy" that includes mainland France, as well as pieces 
+      in the large islands of Corsica, France, and Sardinia, Italy.  The three
+      piece Names should be "Netherlands - Italy", "Corse, FRA", and 
+      "Sardegna, ITA".</li>
+      <li><a name="rework43"></a><a style="text-decoration:none" href="#rework43">&#x1f517</a>
+      <b>If a route is more local (shorter), is a full beltway, or is a bannered/repeatable route type</b>
+      (mandatory City and Abbrev in the Chopped Routes File), then the Name 
+      should be devised in the same way as the City field in the Chopped 
+      Routes File (and in most cases, the Name and City fields should be 
+      identical).</li> 
+      <li><a name="rework53"></a><a style="text-decoration:none" href="#rework53">&#x1f517</a>
+      <b>If there are two or more discontinuous routes of the same 
+      Route+Banner combination, each wholly within the same, single region, 
+      and one is significantly longer than the rest</b>, the above rules would
+      suggest using the region name for the long piece and city names for the
+      short ones.  Since the region name as the Name doesn't distinguish the 
+      pieces well, change the Name to either "(Main)" (parentheses included) 
+      or give this piece a city name.  For example, if there are 200-mile and 8-mile
+      disconnected sections of US 47 in the same state, use "(Main)" or a
+      city for the long section and a city name for the short section.</li>
+    </ul>
+    </i>
+  </ol>
+  </li>
 </ul>
+</div>
 
-</ol>
-</li>
-      </ul>
-    </div>
-    
-    <p class="subheading">International characters:</p>
+<p class="subheading"><a name="intcharacters"></a><a style="text-decoration:none" href="#intcharacters">&#x1f517</a>
+International characters</p>
 
-    <div class="text">
+<div class="text">
 <ul>
-  <li>The Route, Abbreviation, Banner, and 
-of course the Filename Root must be devoid of international characters 
-since these appear in .list files and as filenames. Pick the closest 
-character without any diacritical marks, e.g., "o" for "ö", if it would 
-appear in the Abbreviation field: "Kol" for Köln.</li>
-  <li> The City and Name fields should use the native language name for a place, and it may
+  <li><a name="intnames"></a><a style="text-decoration:none" href="#intnames">&#x1f517</a>
+  The Route, Abbreviation, Banner, and 
+  of course the Filename Root must be devoid of international characters 
+  since these appear in .list files and as filenames. Pick the closest 
+  character without any diacritical marks, e.g., "o" for "ö", if it would 
+  appear in the Abbreviation field: "Kol" for Köln.</li>
+  <li><a name="intnative"></a><a style="text-decoration:none" href="#intnative">&#x1f517</a>
+  The City and Name fields should use the native language name for a place, and it may
   use international characters. "München", not "Munchen" nor "Munich". </li>
-  <li>International characters must be properly encoded. OpenOffice Calc
- will do this when saving the spreadsheet as a .csv file (see below). 
-Type the international characters into the spreadsheet. Choose "UTF-8" 
-when saving as a .csv file. </li>
-  <li>Excel doesn't cooperate with this, so if using Excel, consider 
-downloading OpenOffice (it's free), or if you insist on using Excel, you
- must manually encode the characters. See the <a href="utfconvert.html">UTF-8 to Latin character table</a>.</li>
-  <li>International characters will appear as weird symbols or question 
-marks on the web site if the encoding isn't properly done. This is bad!</li>
+  <li><a name="intencoded"></a><a style="text-decoration:none" href="#intencoded">&#x1f517</a>
+  International characters must be properly encoded. OpenOffice Calc
+  will do this when saving the spreadsheet as a .csv file (see below). 
+  Type the international characters into the spreadsheet. Choose "UTF-8" 
+  when saving as a .csv file. </li>
+  <li><a name="intlatin"></a><a style="text-decoration:none" href="#intlatin">&#x1f517</a>
+  Excel doesn't cooperate with this, so if using Excel, consider 
+  downloading OpenOffice (it's free), or if you insist on using Excel, you
+  must manually encode the characters.</li>
+  <li><a name="intsymbols"></a><a style="text-decoration:none" href="#intsymbols">&#x1f517</a>
+  International characters will appear as weird symbols or question 
+  marks on the web site if the encoding isn't properly done. This is bad!</li>
 </ul>
-    </div>
+</div>
     
-    <p class="subheading">The .csv file (the file to submit!)</p>
+<p class="subheading"><a name="filetosubmit"></a><a style="text-decoration:none" href="#filetosubmit">&#x1f517</a>
+The .csv file (the file to submit!)</p>
 
-    <div class="text">
+<div class="text">
 <ul>
-  <li>The .csv files generated from the spreadsheet you made are what get placed in the repository.</li>
-  <li>The .csv filenames use the system code: usact.csv and usact_con.csv for the system with system code "usact". </li>
-  <li>Spreadsheet programs can save a sheet of a spreadsheet (but not the whole spreadsheet) as a delimited file. </li>
-  <li>Use a semicolon (not a comma!) as the field delimiter, and don't 
-use any text delimiters (no quotes!). In OpenOffice Calc, the default 
-delimiters are comma and double quotes, but instead you must specify 
-semicolons and none for the two types. <i>Saving in UTF-8 encoding is necessary to ensure that international characters are properly handled. </i></li>
-  <li><strong>In OpenOffice Calc, the three correct options when saving 
-the sheet as a .csv file are: UTF-8 encoding, semicolon delimiter, no 
-text delimiter. </strong></li>
-  <li>Excel will not use semicolon delimiters when saving a .csv file. 
-It will save the file using commas. This is no good. You can do a search
- and replace on the .csv file to turn the commas into semicolons, but 
-beware: sometimes commas are part of the City and Roots fields. Best 
-advice: download and use OpenOffice Calc.</li>
+  <li><a name="csvrepo"></a><a style="text-decoration:none" href="#csvrepo">&#x1f517</a>
+  The .csv files generated from the spreadsheet you made are what get placed in the repository.</li>
+  <li><a name="csvname"></a><a style="text-decoration:none" href="#csvname">&#x1f517</a>
+  The .csv filenames use the system code: usact.csv and usact_con.csv for the system with system code "usact". </li>
+  <li><a name="csvsave"></a><a style="text-decoration:none" href="#csvsave">&#x1f517</a>
+  Spreadsheet programs can save a sheet of a spreadsheet (but not the whole spreadsheet) as a delimited file. </li>
+  <li><a name="csvsemicolon"></a><a style="text-decoration:none" href="#csvsemicolon">&#x1f517</a>
+  Use a semicolon (not a comma!) as the field delimiter, and don't 
+  use any text delimiters (no quotes!). In OpenOffice Calc, the default 
+  delimiters are comma and double quotes, but instead you must specify 
+  semicolons and none for the two types. <i>Saving in UTF-8 encoding is necessary to ensure that international characters are properly handled. </i></li>
+  <li><a name="csvoo"></a><a style="text-decoration:none" href="#csvoo">&#x1f517</a>
+  <strong>In OpenOffice Calc, the three correct options when saving 
+  the sheet as a .csv file are: UTF-8 encoding, semicolon delimiter, no 
+  text delimiter. </strong></li>
+  <li><a name="csvexcel"></a><a style="text-decoration:none" href="#csvexcel">&#x1f517</a>
+  Excel will not use semicolon delimiters when saving a .csv file. 
+  It will save the file using commas. This is no good. You can do a search
+  and replace on the .csv file to turn the commas into semicolons, but 
+  beware: sometimes commas are part of the City and Roots fields. Best 
+  advice: download and use OpenOffice Calc.</li>
 </ul>
-    </div>
-    
-<p class="heading">Example system: Takoma National H Routes (tach)</p>
+</div>
+
+<p class="heading"><a name="examplesystem"></a><a style="text-decoration:none" href="#examplesystem">&#x1f517</a>
+Example system: Takoma National H Routes (tach)</p>
 
 <p class="text">Takoma is the country, and it has 3 states:<br />
 NT - North Takoma<br />
@@ -336,7 +410,8 @@ Britain, and the Int'l E Roads, the rows of the connected routes file
 will vary greatly in the number of file roots listed.</p>
 
 
-<p class="heading">Concurrencies within which not all concurrent routes are signed</p>
+<p class="heading"><a name="concurrencies"></a><a style="text-decoration:none" href="#concurrencies">&#x1f517</a>
+Concurrencies within which not all concurrent routes are signed</p>
 
 <p class="text">This section concerns typically well signed routes
  that whose numbers are signed with trailblazers or are not signed at
@@ -353,7 +428,8 @@ concurrencies of more routes.</p>
 
 <div class="text">
 <ol>
-<li><p><strong>Unsigned but implied multiplexes: Treat as continuous routes.</strong></p>
+  <li><p><a name="impliedmultiplexes"></a><a style="text-decoration:none" href="#impliedmultiplexes">&#x1f517</a>
+  <strong>Unsigned but implied multiplexes: Treat as continuous routes.</strong></p>
 
 This is the case where only one route is signed where another one route 
 merges onto the same road. Usually the unsigned route splits off at 
@@ -381,8 +457,9 @@ and there is bound to be full of concurrencies, and so chopping half the
 The two freeways merge and split. The pieces of A26 could have been 
 given different numbers, but instead they were given the same number, as
  if it should be one long route rather than two.</p>
- </li>
-<li><p><strong>Bypassed, segmented routes: Discontinuous routes.</strong></p>
+  </li>
+  <li><p><a name="discontinuous"></a><a style="text-decoration:none" href="#discontinuous">&#x1f517</a>
+  <strong>Bypassed, segmented routes: Discontinuous routes.</strong></p>
 
 <p>Here some pieces of an old route were bypassed by a new route, but 
 other pieces of the old route were upgraded into the new route. This 
@@ -399,25 +476,23 @@ long, continuous US 40 Business concurrent along sections of US 40.</p>
 <p>US 40/MD 144: 
 There are several pieces of MD 144 along the old alignment of US 40. The
  pieces act like Business or Alternate routes and are never signed to 
-suggest continuity. </p></li>
-
-<li><p><strong>Alternating designation: Discontinuous routes.</strong></p>
-
-<p>A road changes designations back and forth without either route splitting off on its own.</p>
-
-<p>Example:</p>
-Ireland's M/N routes come to mind here. Part of N8 was upgraded to M8, 
-but there is no alternative N8 along that section. However, N8 leads 
-straight into M8 at each end of M8. So if the highway goes N8-M8-N8, 
-we'll have three files for these three routes. 
-</li>
-<li><p><strong>Like designations that aren't concurrent: Discontinuous routes.</strong></p>
-
-<p>By whatever reasoning, two unrelated, distant highways were given the same designation.</p>
-
-<p>Example:</p>
-<p>PA 97 (in NW Pennsylvania) and PA 97 (in southern PA), both part of the state highway system in Pennsylvania.</p>
-</li>
+suggest continuity. </p>
+  </li>
+  <li><p><a name="alternating"></a><a style="text-decoration:none" href="#alternating">&#x1f517</a>
+  <strong>Alternating designation: Discontinuous routes.</strong></p>
+  <p>A road changes designations back and forth without either route splitting off on its own.</p>
+  <p>Example:</p>
+  Ireland's M/N routes come to mind here. Part of N8 was upgraded to M8, 
+  but there is no alternative N8 along that section. However, N8 leads 
+  straight into M8 at each end of M8. So if the highway goes N8-M8-N8, 
+  we'll have three files for these three routes. 
+  </li>
+  <li><p><a name="notconcurrent"></a><a style="text-decoration:none" href="#notconcurrent">&#x1f517</a>
+  <strong>Like designations that aren't concurrent: Discontinuous routes.</strong></p>
+  <p>By whatever reasoning, two unrelated, distant highways were given the same designation.</p>
+  <p>Example:</p>
+  <p>PA 97 (in NW Pennsylvania) and PA 97 (in southern PA), both part of the state highway system in Pennsylvania.</p>
+  </li>
 </ol>
 </div>
 

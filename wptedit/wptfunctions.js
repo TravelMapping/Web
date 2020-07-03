@@ -28,19 +28,26 @@ var intersectionimage = L.icon({
 var mi2km = 1.609344;
 
 // Possible error bits
-var PE_dup_labels = 0x1;
-var PE_dup_coords = 0x2;
-var PE_sharp_angle = 0x4;
-var PE_long_seg = 0x8;
-var PE_invalid_char = 0x10;
-var PE_bad_parentheses = 0x20;
-var PE_bad_suffix_count = 0x40;
-var PE_exit0 = 0x80;
-var PE_exit999 = 0x100;
-var PE_IBus = 0x200;
-var PE_Old = 0x400;
-var PE_SuffixBeforeSlash = 0x800;
-var PE_LongSuffix = 0x1000;
+var DC_DUPLICATE_LABEL = 0x1;
+var DC_DUPLICATE_COORDS = 0x2;
+var DC_SHARP_ANGLE = 0x4;
+var DC_VISIBLE_DISTANCE = 0x8;
+var DC_LABEL_LOOKS_HIDDEN = 0x10;
+var DC_LABEL_PARENS = 0x20;
+var DC_LABEL_UNDERSCORES = 0x40;
+var DC_BAD_ANGLE = 0x80;
+var DC_HIDDEN_TERMINUS = 0x100;
+var DC_BUS_WITH_I = 0x200;
+var DC_LACKS_GENERIC = 0x400;
+var DC_NONTERMINAL_UNDERSCORE = 0x800;
+var DC_LONG_UNDERSCORE = 0x1000;
+var DC_LABEL_INVALID_CHAR = 0x2000;
+var DC_INVALID_FINAL_CHAR = 0x4000;
+var DC_INVALID_FIRST_CHAR = 0x8000;
+var DC_LABEL_SLASHES = 0x10000;
+var DC_LABEL_TOO_LONG = 0x20000;
+var DC_LONG_SEGMENT = 0x40000;
+var DC_OUT_OF_BOUNDS = 0x80000;
 
 var BC_hidden = "#CCCCCC";
 var BC_visible = "#FFFFFF";
@@ -258,7 +265,7 @@ function LoadText(pan)
       wpts[wpts.length] = CopyWaypoint(thiswpt);
     }
   UpdateMap(pan);
-  CheckForErrors();
+  DataCheck();
   document.getElementById("output").innerHTML = WptTable(wpts);
  
   UpdateMessage(wpts.length + " waypoints are loaded.  Cannot be undone.");
@@ -637,7 +644,7 @@ function RelabelWaypoint(i)
 	warning = 'WARNING!!! This label is in use!!!\n\nYou should DEMOTE this label instead of relabeling it!\n\n';
 	var answer = window.alert(warning);
 	return;
-}
+    }
 
   SaveWaypoints();
 
@@ -931,57 +938,122 @@ function MarkerInfo(i, n, wpt)
     return info;
 }
 
-function CheckForErrors()
+function ReduceLabel(label)
 {
-    CheckDupLabels();
-    CheckDupCoords();
-    CheckSharpAngles();
-    CheckLongSeg();
-    CheckParentheses();
-    CheckSuffixCount();
-    CheckExit0();
-    CheckExit999();
-    CheckIBus();
-    CheckOld();
-    CheckSuffixBeforeSlash();
-    CheckLongSuffix();
+    label = label.toLowerCase();
+    label = label.replace('+', '');
+    label = label.replace('*', '');
+    return label;
+}
+
+function FrontTrimLabel(label)
+{
+    label = label.replace('+', '');
+    label = label.replace('*', '');
+    return label;
+}
+
+function DataCheck()
+{
+    BUS_WITH_I();
+    DUPLICATE_COORDS();
+    DUPLICATE_LABEL();
+    HIDDEN_TERMINUS();
+    LABEL_INVALID_CHAR();
+    LABEL_INVALID_ENDS();
+    LABEL_LOOKS_HIDDEN();
+    LABEL_PARENS();
+    LABEL_SLASHES();
+    LABEL_TOO_LONG();
+    LABEL_UNDERSCORES();
+    LACKS_GENERIC();
+    LONG_UNDERSCORE();
+    NONTERMINAL_UNDERSCORE();
+    OUT_OF_BOUNDS();
+    SHARP_ANGLE();
+    VISIBLE_DISTANCE();
 }
 
 function Error2Abbrev(e)
 {
   text = '';
-  if(e & PE_dup_labels)
-    text += '<span title="Duplicated labels">[DL]</span>';
-  if(e & PE_dup_coords)
-    text += '<span title="Duplicated coordinates">[DC]</span>';
-  if(e & PE_sharp_angle)
-    text += '<span title="Sharp Angle (> 135 deg)">[SA]</span>';
-  if(e & PE_long_seg)
-    text += '<span title="Long distance (Vis. Dist. > 10 mi, 16 km) between this and the previous visible point">[VD]</span>';
-  if(e & PE_invalid_char)
-    text += '<span title="Invalid character(s)">[IC]</span>';
-  if(e & PE_bad_parentheses)
-    text += '<span title="Wrong number of parentheses in primary label">[(]</span>';
-  if(e & PE_bad_suffix_count)
-    text += '<span title="Too many underscored suffixes (> 1)">[__]</span>';
-  if(e & PE_exit0)
-    text += '<span title="Label might not refer to Exit 0">[0]</span>';
-  if(e & PE_exit999)
-    text += '<span title="Label might not refer to Exit 999">[9]</span>';
-  if(e & PE_IBus)
-    text += '<span title="Label uses Bus with I- (Interstate)">[IB]</span>';
-  if(e & PE_Old)
-    text += '<span title="Label lacks the generic highway type">[O]</span>';
-  if(e & PE_SuffixBeforeSlash)
-    text += '<span title="Label has underscore suffix before slash">[_/]</span>';
-  if(e & PE_LongSuffix)
-    text += '<span title="Label has long underscore suffix (>4 characters after underscore)">[LS]</span>';
+  if(e & DC_BUS_WITH_I)
+    text += '<span title="Label uses Bus with I- (Interstate)">BUS_WITH_I</span><br>';
+  if(e & DC_BAD_ANGLE)
+    text += '<span title="Consecutive points at same coordinates">BAD_ANGLE</span><br>';
+  if(e & DC_DUPLICATE_COORDS)
+    text += '<span title="Duplicated coordinates">DUPLICATE_COORDS</span><br>';
+  if(e & DC_DUPLICATE_LABEL)
+    text += '<span title="Duplicated labels">DUPLICATE_LABEL</span><br>';
+  if(e & DC_HIDDEN_TERMINUS)
+    text += '<span title="Terminus is not visible">HIDDEN_TERMINUS</span><br>';
+  if(e & DC_INVALID_FINAL_CHAR)
+    text += '<span title="Invalid char at end of label">INVALID_FINAL_CHAR</span><br>';
+  if(e & DC_INVALID_FIRST_CHAR)
+    text += '<span title="Invalid char at beginning of label">INVALID_FIRST_CHAR</span><br>';
+  if(e & DC_LABEL_INVALID_CHAR)
+    text += '<span title="Invalid character(s)">LABEL_INVALID_CHAR</span><br>';
+  if(e & DC_LABEL_LOOKS_HIDDEN)
+    text += '<span title="Looks like a default hidden waypont label without the leading +">LABEL_LOOKS_HIDDEN</span><br>';
+  if(e & DC_LABEL_PARENS)
+    text += '<span title="Reversed or wrong number of parentheses in primary label">LABEL_PARENS</span><br>';
+  if(e & DC_LABEL_SLASHES)
+    text += '<span title="Too many slashes (> 1)">LABEL_SLASHES</span><br>';
+  if(e & DC_LABEL_TOO_LONG)
+    text += '<span title="Label too long to fit in database">LABEL_TOO_LONG</span><br>';
+  if(e & DC_LABEL_UNDERSCORES)
+    text += '<span title="Too many underscored suffixes (> 1)">LABEL_UNDERSCORES</span><br>';
+  if(e & DC_LACKS_GENERIC)
+    text += '<span title="Label lacks the generic highway type">LACKS_GENERIC</span><br>';
+  if(e & DC_LONG_SEGMENT)
+    text += '<span title="single segment > 20 miles">LONG_SEGMENT</span><br>';
+  if(e & DC_LONG_UNDERSCORE)
+    text += '<span title="Label has long underscore suffix">LONG_UNDERSCORE</span><br>';
+  if(e & DC_NONTERMINAL_UNDERSCORE)
+    text += '<span title="Label has underscore suffix before slash">NONTERMINAL_UNDERSCORE</span><br>';
+  if(e & DC_OUT_OF_BOUNDS)
+    text += '<span title="Latitude beyond +/-90 deg or longitude beyiond +/- 180 deg">OUT_OF_BOUNDS</span><br>';
+  if(e & DC_SHARP_ANGLE)
+    text += '<span title="Sharp Angle (> 135 deg)">SHARP_ANGLE</span><br>';
+  if(e & DC_VISIBLE_DISTANCE)
+    text += '<span title="Long distance (Vis. Dist. > 10 mi, 16 km) between this and the previous visible point">VISIBLE_DISTANCE</span><br>';
   
   return text;
   
 }
 
-function CheckDupLabels()
+function BUS_WITH_I()
+{
+    for(var i = 0; i < wpts.length; i++)
+    {
+	if(wpts[i].label.search(/^\*?I\-[0-9]+[EWCNS]?Bus/i) >= 0)
+	{
+	    wpts[i].errors |= DC_BUS_WITH_I;
+	}
+    }
+}
+
+function DUPLICATE_COORDS()
+{
+  for(var i1 = 0; i1 < wpts.length - 1; i1++)
+    {
+      for(var i2 = i1 + 1; i2 < wpts.length; i2++)
+	{
+	  var lat1 = parseFloat(wpts[i1].lat).toFixed(6);
+	  var lon1 = parseFloat(wpts[i1].lon).toFixed(6);
+	  var lat2 = parseFloat(wpts[i2].lat).toFixed(6);
+	  var lon2 = parseFloat(wpts[i2].lon).toFixed(6);
+
+	  if(lat1 == lat2 && lon1 == lon2)
+	    {
+	      wpts[i1].errors |= DC_DUPLICATE_COORDS;
+	      wpts[i2].errors |= DC_DUPLICATE_COORDS;
+	    }
+	}
+    }
+}
+
+function DUPLICATE_LABEL()
 {
 
     // Make array of labels.
@@ -1016,13 +1088,13 @@ function CheckDupLabels()
 	    {
 		if(labels[w][a1] == labels[w][a2])
 		{
-		    wpts[w].errors |= PE_dup_labels;
+		    wpts[w].errors |= DC_DUPLICATE_LABEL;
 		}
 	    }
 	}
     }
 
-    // Check for duplciate labels between waypoints.
+    // Check for duplicate labels between waypoints.
 
     for(var w1 = 0; w1 < wpts.length - 1; w1++)
     {
@@ -1034,8 +1106,8 @@ function CheckDupLabels()
 		{
 		    if(labels[w1][a1] == labels[w2][a2])
 		    {
-			wpts[w1].errors |= PE_dup_labels;
-			wpts[w2].errors |= PE_dup_labels;
+			wpts[w1].errors |= DC_DUPLICATE_LABEL;
+			wpts[w2].errors |= DC_DUPLICATE_LABEL;
 		    }
 		}
 	    }
@@ -1044,7 +1116,7 @@ function CheckDupLabels()
 
 }
 
-function OldCheckDupLabels()
+function OldDUPLICATE_LABEL()
 {
   for(var i1 = 0; i1 < wpts.length; i1++)
     {
@@ -1069,7 +1141,7 @@ function OldCheckDupLabels()
 		if(altlabels1[j1] == altlabels1[j2])
 		{
 		    alert("j1=" + j1 + "\nj2=" + j2 + "\nlabel1=" + altlabels1[j1] + "\nlabel2=" + altlabels1[j2]);
-		    wpts[i1].errors |= PE_dup_labels;
+		    wpts[i1].errors |= DC_DUPLICATE_LABEL;
 		}
 	    }
 	}
@@ -1100,8 +1172,8 @@ function OldCheckDupLabels()
 		    if(altlabels1[j1] == altlabels2[j2])
 		    {
 			alert("j1=" + j1 + "\nj2=" + j2 + "\nlabel1=" + altlabels1[j1] + "\nlabel2=" + altlabels2[j2]);
-			wpts[i1].errors |= PE_dup_labels;
-			wpts[i2].errors |= PE_dup_labels;
+			wpts[i1].errors |= DC_DUPLICATE_LABEL;
+			wpts[i2].errors |= DC_DUPLICATE_LABEL;
 		    }
 		}
 	    }
@@ -1112,50 +1184,202 @@ function OldCheckDupLabels()
     }
 }
 
-function ReduceLabel(label)
+function HIDDEN_TERMINUS()
 {
-    label = label.toLowerCase();
-    label = label.replace('+', '');
-    label = label.replace('*', '');
-    return label;
-}
-
-
-function FrontTrimLabel(label)
-{
-    label = label.replace('+', '');
-    label = label.replace('*', '');
-    return label;
-}
-
-function CheckDupCoords()
-{
-  for(var i1 = 0; i1 < wpts.length - 1; i1++)
+    if (wpts.length > 1)
     {
-      for(var i2 = i1 + 1; i2 < wpts.length; i2++)
+	if(!IsVisible(wpts[0].label))
 	{
-	  var lat1 = parseFloat(wpts[i1].lat).toFixed(6);
-	  var lon1 = parseFloat(wpts[i1].lon).toFixed(6);
-	  var visible1 = IsVisible(wpts[i1].label);
-	  var lat2 = parseFloat(wpts[i2].lat).toFixed(6);
-	  var lon2 = parseFloat(wpts[i2].lon).toFixed(6);
-	  var visible2 = IsVisible(wpts[i2].label);
+	    wpts[0].errors |= DC_HIDDEN_TERMINUS;
+	}
+	if(!IsVisible(wpts[wpts.length-1].label))
+	{
+	    wpts[wpts.length-1].errors |= DC_HIDDEN_TERMINUS;
+	}
+    }
+}
 
-	  if(lat1 == lat2 && lon1 == lon2)
+function LABEL_INVALID_CHAR()
+{
+    for(var i = 0; i < wpts.length; i++)
+    {
+	if(wpts[i].label.search(/^\+?\*?[a-zA-Z0-9()\/_\-\.]+$/) < 0)
+	{
+	    wpts[i].errors |= DC_LABEL_INVALID_CHAR;
+	    continue;
+	}
+	if (wpts[i].altlabelsstring.length > 0)
+	{
+	    var alts = wpts[i].altlabelsstring.split(' ');
+	    for (var a = 0; a < alts.length; a++)
 	    {
-	      wpts[i1].errors |= PE_dup_coords;
-	      wpts[i2].errors |= PE_dup_coords;
+		if(alts[a].search(/^\+?\*?[a-zA-Z0-9()\/_\-\.]+$/) < 0)
+		{
+		    wpts[i].errors |= DC_LABEL_INVALID_CHAR;
+		    break;
+		}
 	    }
 	}
     }
 }
 
-function CheckSharpAngles()
+function LABEL_INVALID_ENDS()
+{
+    for(var i = 0; i < wpts.length; i++)
+    {
+	if(IsVisible(wpts[i].label) && wpts[i].label.search(/[_\/]$/) >= 0)
+	{
+		wpts[i].errors |= DC_INVALID_FINAL_CHAR;
+	}
+	if(wpts[i].label.search(/^\**[_\/(]/) >= 0)
+	{
+		wpts[i].errors |= DC_INVALID_FIRST_CHAR;
+	}
+    }
+}
+
+function LABEL_LOOKS_HIDDEN()
+{
+    for(var i = 0; i < wpts.length; i++)
+    {
+	if (wpts[i].label.search(/^X[0-9]{6}$/) >= 0)
+	{
+		wpts[i].errors |= DC_LABEL_LOOKS_HIDDEN;
+	}
+    }
+}
+
+function LABEL_PARENS()
+{
+    for(var i = 0; i < wpts.length; i++)
+    {
+	if (!IsVisible(wpts[i].label))
+	{
+	    continue;
+	}
+
+	var n_l = wpts[i].label.split('(').length - 1;
+	var n_r = wpts[i].label.split(')').length - 1;
+	
+	if( n_l != n_r || n_l > 1 || (n_l == 1 && wpts[i].label.indexOf('(') > wpts[i].label.indexOf(')')) )
+	{
+	    wpts[i].errors |= DC_LABEL_PARENS;
+	}
+    }
+}
+
+function LABEL_SLASHES()
+{
+    for(var i = 0; i < wpts.length; i++)
+    {
+	if (!IsVisible(wpts[i].label))
+	{
+	    continue;
+	}
+
+	var n_slash = wpts[i].label.split('/').length - 1;
+	
+	if(n_slash > 1)
+	{
+	    wpts[i].errors |= DC_LABEL_SLASHES;
+	}
+    }
+}
+
+function LABEL_TOO_LONG()
+{
+    for(var i = 0; i < wpts.length; i++)
+    {
+	if (wpts[i].label.length > 26)
+	{
+	    wpts[i].errors |= DC_LABEL_TOO_LONG;
+	}
+    }
+}
+
+function LABEL_UNDERSCORES()
+{
+    for(var i = 0; i < wpts.length; i++)
+    {
+	if (!IsVisible(wpts[i].label))
+	{
+	    continue;
+	}
+
+	var n_underscore = wpts[i].label.split('_').length - 1;
+	
+	if(n_underscore > 1)
+	{
+	    wpts[i].errors |= DC_LABEL_UNDERSCORES;
+	}
+    }
+}
+
+function LACKS_GENERIC()
+{
+    for(var i = 0; i < wpts.length; i++)
+    {
+	if(wpts[i].label.search(/^\*?old\d/i) >= 0)
+	{
+	    wpts[i].errors |= DC_LACKS_GENERIC;
+	}
+    }
+}
+
+function LONG_UNDERSCORE()
+{
+    for(var i = 0; i < wpts.length; i++)
+    {
+	var uindex = wpts[i].label.indexOf('_')
+	if(IsVisible(wpts[i].label) && uindex >= 0 && uindex < wpts[i].label.length - 4)
+	{
+	    if(wpts[i].label.charAt(wpts[i].label.length-1) < 'A'
+	    || wpts[i].label.charAt(wpts[i].label.length-1) > 'Z'
+	    || uindex < wpts[i].label.length - 5)
+	    {
+		wpts[i].errors |= DC_LONG_UNDERSCORE;
+	    }
+	}
+    }
+}
+
+function NONTERMINAL_UNDERSCORE()
+{
+    for(var i = 0; i < wpts.length; i++)
+    {
+	if(IsVisible(wpts[i].label) && 
+	    wpts[i].label.search(/_.+\//) >= 0
+	  )
+	{
+	    wpts[i].errors |= DC_NONTERMINAL_UNDERSCORE;
+	}
+    }
+}
+
+function OUT_OF_BOUNDS()
+{
+    for(var i = 0; i < wpts.length; i++)
+    {
+	if(wpts[i].lat > 90 || wpts[i].lat < -90 || wpts[i].lon > 180 || wpts[i].lon < -180)
+	{
+	    wpts[i].errors |= DC_OUT_OF_BOUNDS;
+	}
+    }
+}
+
+function SHARP_ANGLE()
 {
   var deg2rad = Math.PI/180.;
   
   for(var i = 1; i < wpts.length-1; i++)
     {
+      if((wpts[i].lat == wpts[i-1].lat && wpts[i].lon == wpts[i-1].lon)
+      || (wpts[i].lat == wpts[i+1].lat && wpts[i].lon == wpts[i+1].lon))
+      {
+	  wpts[i].errors |= DC_BAD_ANGLE;
+	  return;
+      }
+
       var x0 = Math.cos(wpts[i-1].lon*deg2rad) * Math.cos(wpts[i-1].lat*deg2rad);
       var x1 = Math.cos(wpts[i].lon*deg2rad) * Math.cos(wpts[i].lat*deg2rad);
       var x2 = Math.cos(wpts[i+1].lon*deg2rad) * Math.cos(wpts[i+1].lat*deg2rad);
@@ -1178,141 +1402,30 @@ function CheckSharpAngles()
 		  );
       if(angle > 135)
 	{
-	  wpts[i].errors |= PE_sharp_angle;
+	  wpts[i].errors |= DC_SHARP_ANGLE;
 	}
     }
 }
 
-function CheckLongSeg()
+function VISIBLE_DISTANCE()
 {
   var visdist = 0.;
   var segdist = 0.;
   for(var i = 1; i < wpts.length; i++)
     {
       segdist = SegMileage(wpts[i-1], wpts[i]);
+      if(segdist > 20)
+	{
+	  wpts[i].errors |= DC_LONG_SEGMENT;
+	}
       visdist += segdist;
       if(visdist > 10 && IsVisible(wpts[i].label))
 	{
-	  wpts[i].errors |= PE_long_seg;
+	  wpts[i].errors |= DC_VISIBLE_DISTANCE;
 	}
 
       if(IsVisible(wpts[i].label))
 	visdist = 0;
-    }
-}
-
-
-function CheckParentheses()
-{
-    for(var i = 0; i < wpts.length; i++)
-    {
-	var n_open = wpts[i].label.split('(').length - 1;
-	var n_closed = wpts[i].label.split(')').length - 1;
-	
-	if((n_open > 1 || n_closed > 1 || n_open != n_closed) 
-	   && IsVisible(wpts[i].label))
-	{
-	    wpts[i].errors |= PE_bad_parentheses;
-	}
-    }
-}
-
-
-function CheckSuffixCount()
-{
-    for(var i = 0; i < wpts.length; i++)
-    {
-	var n_underscore = wpts[i].label.split('_').length - 1;
-	
-	if(n_underscore > 1 && IsVisible(wpts[i].label))
-	{
-	    wpts[i].errors |= PE_bad_suffix_count;
-	}
-    }
-}
-
-
-function CheckExit0()
-{
-    for(var i = 0; i < wpts.length; i++)
-    {
-	if(IsVisible(wpts[i].label) && 
-	   ( wpts[i].label.search(/^0/) >= 0
-	     || wpts[i].label.search(/\(0/) >= 0)
-	  )
-	{
-	    wpts[i].errors |= PE_exit0;
-	}
-    }
-}
-
-function CheckExit999()
-{
-    for(var i = 0; i < wpts.length; i++)
-    {
-	if(IsVisible(wpts[i].label) && 
-	   ( wpts[i].label.search(/^999/) >= 0
-	     || wpts[i].label.search(/\(999/) >= 0)
-	  )
-	{
-	    wpts[i].errors |= PE_exit999;
-	}
-    }
-}
-
-function CheckIBus()
-{
-    for(var i = 0; i < wpts.length; i++)
-    {
-	if(IsVisible(wpts[i].label) && 
-	    wpts[i].label.search(/I\-\w+Bus/i) >= 0
-	  )
-	{
-	    wpts[i].errors |= PE_IBus;
-	}
-    }
-}
-
-
-function CheckSuffixBeforeSlash()
-{
-    for(var i = 0; i < wpts.length; i++)
-    {
-	if(IsVisible(wpts[i].label) && 
-	    wpts[i].label.search(/_\w+\//) >= 0
-	  )
-	{
-	    wpts[i].errors |= PE_SuffixBeforeSlash;
-	}
-    }
-}
-
-
-function CheckLongSuffix()
-{
-    for(var i = 0; i < wpts.length; i++)
-    {
-	if(IsVisible(wpts[i].label) && 
-	    wpts[i].label.search(/_.{5,}/) >= 0
-	  )
-	{
-	    wpts[i].errors |= PE_LongSuffix;
-	}
-    }
-}
-
-
-
-function CheckOld()
-{
-    for(var i = 0; i < wpts.length; i++)
-    {
-	if(IsVisible(wpts[i].label) && 
-	    wpts[i].label.search(/^old\d/i) >= 0
-	  )
-	{
-	    wpts[i].errors |= PE_Old;
-	}
     }
 }
 

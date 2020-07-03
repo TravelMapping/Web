@@ -71,7 +71,7 @@ First steps with email submission</p>
       </br>
       
       Break up your travels into traveled sections by region and route (we recommend starting with only
-      <a href="devel_new/manual/sysdef.php#active"><span style="background-color: #CCFFCC;">active</span> systems</a>).
+      <a href="devel/manual/sysdef.php#active"><span style="background-color: #CCFFCC;">active</span> systems</a>).
       For each route section, add one line to your <code>.list</code> file with the following format:</br>
       </br>
       <code>Region Route Waypoint1 Waypoint2</code></br>
@@ -81,7 +81,7 @@ First steps with email submission</p>
       <code>IL I-70 52 MO/IL</code></br>
       </br>
       <ul>
-        <li>The region and route combination is indicated on the left after <code>.list name:</code> in the <a href="/hb/index.php?r=il.i070">Highway Browser</a>.</li>
+        <li>The region and route combination is indicated on the left after <code>.list name:</code> in the <a href="/hb/showroute.php?r=il.i070">Highway Browser</a>.</li>
         <li>Click the start point <code>52</code> of your travel segment on the table
         to center the map at this point.</li>
         <li>Copy the first line of the info window to get the correct name <code>52</code>.</li>
@@ -89,6 +89,9 @@ First steps with email submission</p>
         to open the info window and copy the label name <code>MO/IL</code>.</li>
         <li>The waypoints at the ends of the traveled segment may be listed in either order.</li>
       </ul></br>
+      <font color="#ff0000"><b>NEW</b></font> The <code>.list Tool</code> option helps generating the full <code>.list</code> file line
+      by clicking on the first and last segment of your travel.</br>
+      </br>
       You most likely continued your travel in Missouri. If you left Interstate 70 at Exit 249, you would put the second line in your file:</br>
       </br>
       <code>MO I-70 MO/IL 249</code></br>
@@ -102,6 +105,11 @@ First steps with email submission</p>
         and on exit 249 to get the second waypoint.</br>
         </li>
       </ul>
+      </br>
+      <font color="#ff0000"><b>NEW</b></font> The <a href="#multiregion">multi-region</a> option helps generating a <code>.list</code>
+      file line which covers a travel on connected routes beyond region borders:</br>
+      </br>
+      <code>IL I-70 52 MO I-70 249</code></br>
       </br>
       Continue to complete your travels. <a href="#examples">See below</a> if you need more examples on how to break down your travels into "sections" to enter into the file.</br>
       </br>
@@ -117,7 +125,7 @@ First steps with email submission</p>
       Make sure the following items are correct:</br>
       </br>
       <ul>
-        <li><b>Each line has exactly the four required fields:</b> region, highway, and two waypoint labels.</li>
+        <li><b>Each line has exactly the four or six required fields:</b> <code>Region Route Waypoint1 Waypoint2</code> or <code>Region1 Route1 Waypoint1 Region2 Route2 Waypoint2</code></li>
         <li><b>The fields have only spaces or tabs between them.</b> Other
         delimiters may prevent the mapping script from parsing your file correctly.</li>
         <li><b>The file is saved as plain text with a <code>.list</code> extension.</b> Word processor files (Microsoft Word,
@@ -148,7 +156,7 @@ First steps with email submission</p>
       <a href="devel/updates.php">the updates page</a> for info on what has been changed
       to the route. You should also check the updates page frequently to find highway changes like simple relocations
       that don't break your <code>.list</code> file and cannot be reported in your log file.
-      Changes to <a href="devel_new/manual/sysdef.php#preview">systems in preview state</a> are not notified.
+      Changes to <a href="devel/manual/sysdef.php#preview">systems in preview state</a> are not notified.
     </li>
     </br>
     <li><a name="nextupdate"></a><a style="text-decoration:none" href="#nextupdate">&#x1f517</a>
@@ -230,7 +238,7 @@ Below are several example entries for a user's <code>.list</code> file.</br>
   <b>Highway segment within a single region.</b></br>
   </br>
   For the segment of I-80 between Exits 161 and 224 in Pennsylvania, USA, look up the highway and waypoint
-  labels for those interchanges in the <a href="/hb/index.php?r=pa.i080">Highway Browser</a>. The Highway Browser
+  labels for those interchanges in the <a href="/hb/showroute.php?r=pa.i080">Highway Browser</a>. The Highway Browser
   shows the highway as <code>PA I-80</code> and lists the waypoints as <code>161</code> and <code>224</code>.
   Enter the following line into your <code>.list</code> file:</br>
   <pre>
@@ -245,7 +253,7 @@ PA I-80 161 224
   West Virginia, Maryland, and Pennsylvania, so use waypoints <code>WV/MD</code>, <code>MD/PA</code>, and
   <code>PA/NY</code> for these states. The New York segment begins at the Pennsylvania border and ends at Exit 10,
   so use waypoints <code>PA/NY and 10</code>. All of these waypoints are listed in the Highway Browser. Start with
-  <a href="/hb/index.php?r=va.i081">Virgina</a> and click on the intersecting route links to change the regions
+  <a href="/hb/showroute.php?r=va.i081">Virgina</a> and click on the intersecting route links to change the regions
   till you've reached New York.</br>
   </br>
   Catch up the entries for your <code>.list</code> which should be read as follows for the whole segment:</br>
@@ -255,6 +263,11 @@ WV I-81 VA/WV WV/MD
 MD I-81 WV/MD MD/PA
 PA I-81 MD/PA PA/NY
 NY I-81 PA/NY 10
+  </pre>
+Or add a <a href="#multiregion">multi-region</a> line by specifying the first waypoint in West Virgina and the last waypoint in New York only:
+  </br>
+  <pre>
+VA I-81 300 NY I-81 10
   </pre></li>
   <li><a name="exbeltway"></a><a style="text-decoration:none" href="#exbeltway">&#x1f517</a>
   <b>Beltways (full loop highways) within a single region.</b></br>
@@ -263,7 +276,7 @@ NY I-81 PA/NY 10
   This location is used for both the first and last waypoints of the highway, with a different waypoint label for each end.
   If the segment you wish to enter into your <code>.list</code> file crosses that point, split your segment into two at that point.</br>
   </br>
-  Consider first the segment of the Baltimore Beltway (<a href="/hb/index.php?r=md.i695">MD I-695</a>) between Exits
+  Consider first the segment of the Baltimore Beltway (<a href="/hb/showroute.php?r=md.i695">MD I-695</a>) between Exits
   17 and 31 along the <i>northern</i> side of Baltimore. I-695 begins and ends at a southern waypoint called both 0 and 48.
   Since the waypoints run continuously from 17 to 31 without crossing that southern point (compare to next example),
   treat this segment simply as beginning at waypoint <code>17</code> and ending at waypoint <code>31</code>:</br>
@@ -303,7 +316,7 @@ Advanced features</p>
   <li><a name="mapview"></a><a style="text-decoration:none" href="#mapview">&#x1f517</a>
     Open Highway Browser from a map</br>
     </br>
-    Viewing regions or systems on a map helps to see all your traveled segments. Click on the overlays to open the info window.
+    Viewing regions or systems on a <a href="/user/mapview.php?v">map</a> helps to see all your traveled segments. Click on the overlays to open the info window.
     The link directly opens the route in the Highway Browser so that you can create your <code>.list</code> file line.
     </br>
     </br>
@@ -330,6 +343,24 @@ Advanced features</p>
     Many users break up <code>.list</code> files into chunks by system, region
     or individual travel to make it easier to read or manage.
     You can also use blank lines as desired to enhance readability.
+  </br>
+  </br>
+  </li>
+  <li><a name="multiregion"></a><a style="text-decoration:none" href="#multiregion">&#x1f517</a>
+    <font color="#ff0000"><b>NEW</b></font> Multi-region <code>.list</code> file line</br>
+    </br>
+    In addition to the common <code>.list</code> file line with four fields, it is possible to use six fields to cover a multi-region travel
+    on a connected route.
+    For each route section, add one line to your <code>.list</code> file with the following format:</br>
+      </br>
+      <code>Region1 Route1 Waypoint1 Region2 Route2 Waypoint2</code></br>
+  </br>
+  Click <code>View Connected Route</code> in the <a href="/hb/showroute.php?r=il.i070">Highway Browser</a>
+  to load the <a href="/hb/showroute.php?r=il.i070&cr">connected route</a> for all regions.
+  The first line of the waypoint info window comprises the required region, route and waypoint combination to be copied into your <code>.list</code> file.
+  Put both waypoints into the same line:
+  </br>
+  <code>IL I-70 52 MO I-70 249</code>
   </br>
   </br>
   </li>
@@ -419,15 +450,15 @@ The steps to become a highway data manager are as follows:
     <li><a name="report"></a><a style="text-decoration:none" href="#report">&#x1f517</a>
     Report updates and problems in existing highway systems <a href="https://forum.travelmapping.net/">on the forum</a>.</li>
     <li><a name="manual"></a><a style="text-decoration:none" href="#manual">&#x1f517</a>
-    Read and understand the <a href="devel_new/devel.php#participate">developer manual</a>.</li>
+    Read and understand the <a href="devel/devel.php#participate">developer manual</a>.</li>
     <li><a name="review"></a><a style="text-decoration:none" href="#review">&#x1f517</a>
-    Participate in <a href="devel_new/manual/sysrev.php">peer review</a> of a preview highway system.</li>
+    Participate in <a href="devel/manual/sysrev.php">peer review</a> of a preview highway system.</li>
     <li><a name="structure"></a><a style="text-decoration:none" href="#structure">&#x1f517</a>
     Understand the project structure and how highway data is <a href="https://github.com/TravelMapping/HighwayData/blob/master/README.md">organised on Github</a>.</li>
     <li><a name="develop"></a><a style="text-decoration:none" href="#develop">&#x1f517</a>
-    Develop a <a href="devel_new/manual/sysnew.php">new highway system</a></li>
+    Develop a <a href="devel/manual/sysnew.php">new highway system</a></li>
     <li><a name="maintain"></a><a style="text-decoration:none" href="#maintain">&#x1f517</a>
-    Take <a href="devel_new/manual/maintenance.php">responsibility for updates</a> in an unclaimed region, or by requesting to become the maintainer for a region from someone looking to unload some of theirs</li>
+    Take <a href="devel/manual/maintenance.php">responsibility for updates</a> in an unclaimed region, or by requesting to become the maintainer for a region from someone looking to unload some of theirs</li>
   </ol>
 </div>
 
