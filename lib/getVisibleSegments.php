@@ -1,4 +1,4 @@
-<?
+<?php
 // read information from the TM database about all segments
 // that have at least one waypoint endpoint within the
 // latitude/longitude bounds given, and then information about
