@@ -1,4 +1,4 @@
-<?
+<?php
 // read information from the TM database about the
 // routes for the HB showroutes Route Stats table:
 // waypoints and traveled info for connections
