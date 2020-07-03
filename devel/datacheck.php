@@ -57,6 +57,7 @@
         if (strcmp($row['label3'],"") != 0) {
           echo ",".$row['label3'];
         }
+	echo "</td><td><a style=\"color: ";
 	if ((strcmp($row['code'],"BUS_WITH_I") == 0) ||
 	  (strcmp($row['code'],"INVALID_FINAL_CHAR") == 0) ||
 	  (strcmp($row['code'],"INVALID_FIRST_CHAR") == 0) ||
@@ -72,12 +73,13 @@
 	  (strcmp($row['code'],"US_BANNER") == 0) ||
 	  (strcmp($row['code'],"VISIBLE_HIDDEN_COLOC") == 0) ||
 	  (strcmp($row['code'],"VISIBLE_DISTANCE") == 0)) {
-	  echo "</td><td>".$row['code']."</td><td>";
+	  echo "blue";
 	}
         else {
-	  echo "</td><td style=\"color: red\">".$row['code']."</td><td>";
+	  echo "red";
 
 	}
+	echo "\" href=\"manual/syserr.php#".$row['code']."\">".$row['code']."</a></td><td>";
         if (strcmp($row['value'],"") != 0) {
           echo $row['value'];
         }
