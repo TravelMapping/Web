@@ -345,8 +345,28 @@ Concurrency check</p>
   Highway data managers need to pay attention to check broken concurrencies in their regions. The check can not be done before submitting changes but is currently only possible with the data of the last site update.
   </br>
   </br>
-  The best practise to do this, is as follows:
-  </br>
+  The best practise to do this, is as follows: Load the region graph either with <a href="#concurrencymapview">mapview</a>
+  or with <a href="#concurrencyhdx">HDX</a> and make a manual <a href="#concurrencycheck">check</a>.
+</div>
+
+<p class="subheading"><a name="concurrencymapview"></a><a style="text-decoration:none" href="#concurrencymapview">&#x1f517</a>
+Load graph with mapview</p>
+
+<div class="text">
+  <ul>
+    <li>Open <a href="/user/mapview.php">mapview</a>.</li>
+    <li>Select the region(s) you want to check.</li>
+    <li>Press <code>OK</code>.</li>
+    <li>Select <code>Color by Concurrencies</code> under <code>Visible Routes</code>.</li>
+    <li>Zoom-in where you want to check concurrencies.</li>
+  </ul>
+</div>
+
+
+<p class="subheading"><a name="concurrencyhdx"></a><a style="text-decoration:none" href="#concurrencyhdx">&#x1f517</a>
+Load graph with Highway Data Examiner (HDX)</p>
+
+<div class="text">
   <ul>
     <li>Open the <a href="https://courses.teresco.org/metal/hdx/">Highway Data Examiner</a> (HDX).</li>
     <li>Go to <code>Option 1</code> on the left and enter the name of the region you want to check.</li>
@@ -362,6 +382,14 @@ Concurrency check</p>
     <li>You should see a map of the selected region with <i>funny colors</i> now.</li>
     <li>Select <code>Show Markers</code> again, it was just to show you what happened.</li>
     <li>Zoom-in where you want to check concurrencies.</li>
+  </ul>
+</div>
+
+<p class="subheading"><a name="concurrencycheck"></a><a style="text-decoration:none" href="#concurrencycheck">&#x1f517</a>
+Check for concurrencies</p>
+
+<div class="text">
+  <ul>
     <li>The colors are created by lines connecting the waypoints.</li>
     <ul>
       <li><conn1>Blue line = one route only</conn1></li>
