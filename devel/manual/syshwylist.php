@@ -20,11 +20,11 @@
   <li><a href="#purpose">Purpose of the files</a></li>
   <li><a href="#createfiles">Creating the files</a></li>
   <ul>
-    <li><a href="#chopped">Chopped Routes File (e.g., usai.csv) format</a></li>
+    <li><a href="#chopped">Chopped Routes File (e.g., <code>usai.csv</code>) format</a></li>
     <li><a href="#routeorder">Order of the routes in the file</a></li>
-    <li><a href="#connected">Connected Routes File (e.g., usai_con.csv) format</a></li>
+    <li><a href="#connected">Connected Routes File (e.g., <code>usai_con.csv</code>) format</a></li>
     <li><a href="#intcharacters">International characters</a></li>
-    <li><a href="#filetosubmit">The .csv file (the file to submit!)</a></li>
+    <li><a href="#filetosubmit">The <code>.csv</code> file (the file to submit!)</a></li>
   </ul>
   <li><a href="#examplesystem">Example system: Takoma National H Routes (tach)</a></li>
   <li><a href="#concurrencies">Concurrencies within which not all concurrent routes are signed</a></li>
@@ -34,12 +34,12 @@
 <p class="heading"><a name="purpose"></a><a style="text-decoration:none" href="#purpose">&#x1f517</a>
 Purpose of the files</p>
 
-<p class="text">Each highway system needs to have two .csv files that list basic 
+<p class="text">Each highway system needs to have two <code>.csv</code> files that list basic 
 information about each route that is part of the system. The Chopped 
-Routes File (e.g., <a href="https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/usai.csv">usai.csv</a>)
+Routes File (e.g., <a href="https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/usai.csv"><code>usai.csv</code></a>)
 tells our scripts which files to look for 
 and to load into the web site. The Connected Routes File (e.g., 
-<a href="https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/usai_con.csv">usai_con.csv</a>)
+<a href="https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/usai_con.csv"><code>usai_con.csv</code></a>)
 lists how those chopped routes are connected across boundaries to make
 full-length routes.</p>
 
@@ -48,13 +48,13 @@ Creating the files</p>
 
 <p class="text">
   Make a spreadsheet with all the needed info for each of these 
-files. Then save the spreadsheet as a .csv file as explained below. The 
-.csv file is the one we need. The spreadsheet is to help you get the .csv
+files. Then save the spreadsheet as a <code>.csv</code> file as explained below. The 
+<code>.csv</code> file is the one we need. The spreadsheet is to help you get the <code>.csv</code>
  format correct.
 </p>
 
 <p class="subheading"><a name="chopped"></a><a style="text-decoration:none" href="#chopped">&#x1f517</a>
-Chopped Routes File (e.g., usai.csv) format</p>
+Chopped Routes File (e.g., <code>usai.csv</code>) format</p>
 
 <div class="text">
 <ul>
@@ -62,7 +62,7 @@ Chopped Routes File (e.g., usai.csv) format</p>
   Make a spreadsheet in OpenOffice or a similar spreadsheet program with the name <i>systemcode</i>.xls. Replace <i>systemcode</i>
   with the lowercase system code assigned to your system. E.g., the 
   spreadsheet for the Ohio State Highways is usaoh.xls (system code = 
-  "usaoh"). The .csv file is usaoh.csv. </li>
+  "usaoh"). The <code>.csv</code> file is <code>usaoh.csv</code>. </li>
   <li><a name="header"></a><a style="text-decoration:none" href="#header">&#x1f517</a>
   The spreadsheet must have 8 columns and 1 header row. Use the 
   header row to label the columns, not to enter the first highway. In 
@@ -84,31 +84,35 @@ Chopped Routes File (e.g., usai.csv) format</p>
     e.g. <code>FL</code> for Florida, <code>NT</code> for Northwest Territories,
     <code>DEU-TH</code> for Thuringia, <code>ESP-AR for</code> for Aragon, <code>MEX-BC</code> for Baja California.</li>
     <li><a name="croute"></a><a style="text-decoration:none" href="#croute">&#x1f517</a>
-    <strong>Route</strong>: The name of the highway, ignoring any banners or qualifiers. No spaces! <span class="style19">US34</span> for US 34, <span class="style19">OH17</span> for OH 17, <span class="style19">PA66</span> for Business PA 66, <span class="style19">A7</span>
+    <strong>Route</strong>: The name of the highway, ignoring any banners or qualifiers. No spaces! <code>US34</code> for US 34,
+    <code>OH17</code> for OH 17, <code>PA66</code> for Business PA 66, <code>A7</code>
     for French Autoroute A7. Skip hyphens and slashes unless they separate 
     two numbers (M22-1), the route is a US Interstate or Business Interstate (I-80BL),
     or is a Quebec Autoroute (A-50). </li>
     <li><a name="cbanner"></a><a style="text-decoration:none" href="#cbanner">&#x1f517</a>
-    <strong>Banner</strong>: For bannered routes, put the 3-letter banner abbreviation(s) (<span class="style19">Bus, Alt, Spr</span>, etc.) here only if needed. Otherwise leave it completely blank (no whitespace). Lp for Loop is two letters. No more than six characters (for double-bannered routes) are allowed.</li>
+    <strong>Banner</strong>: For bannered routes, put the 3-letter banner abbreviation(s) (<code>Bus</code>, <code>Alt</code>, <code>Spr</code>, etc.)
+    here only if needed. Otherwise leave it completely blank (no whitespace). <code>Lp</code> for Loop is two letters. No more than six characters
+    (for double-bannered routes) are allowed.</li>
     <li><a name="cabbrev"></a><a style="text-decoration:none" href="#cabbrev">&#x1f517</a>
-    <strong>Abbreviation</strong>: The three-letter city abbreviation if needed for auxiliary highways or for most piecemeal highways. <span class="style19">Pit</span> for Truck US 19 (Pittsburgh). Otherwise leave it blank (no whitespace). </li>
+    <strong>Abbreviation</strong>: The three-letter city abbreviation if needed for auxiliary highways or for most piecemeal highways.
+    <code>Pit</code> for Truck US 19 (Pittsburgh). Otherwise leave it blank (no whitespace).</li>
     <li><a name="ccity"></a><a style="text-decoration:none" href="#ccity">&#x1f517</a>
-    <strong>City</strong>: The spelled-out city name for an auxiliary route or for distinguishing between pieces of the same highway in the same region. <span class="style19">Pittsburgh</span>
-    for Truck US 19 (Pittsburgh). This is the text that will appear below 
+    <strong>City</strong>: The spelled-out city name for an auxiliary route or for distinguishing between pieces of the same highway in the same region.
+    <code>Pittsburgh</code> for Truck US 19 (Pittsburgh). This is the text that will appear below 
     the shield in the highway browser. Usually no text is needed except for 
     auxiliary highways, so leave it blank (no whitespace) in most cases. The
     City should be spelled as the locals spell it and using international 
     characters as needed. </li>
     <li><a name="croot"></a><a style="text-decoration:none" href="#croot">&#x1f517</a>
     <strong>Filename root:</strong> The <a href="hwydata.php#regionroute">name of the .wpt file<a> with the extension omitted.
-    <span class="style19">pa.us019trkpit</span>, <span class="style19">oh.oh007</span>, etc.</li>
+    <code>pa.us019trkpit</code>, <code>oh.oh007</code>, etc.</li>
     <li><a name="caltroute"></a><a style="text-decoration:none" href="#caltroute">&#x1f517</a>
     <strong>Alt Route Names</strong> A comma-separated list of 
     deprecated route names, or blank if none.  This field is blank for most 
     routes and not blank only when necessary to handle route merges or name 
     changes.  While the primary route name is usually split into the Route, 
     Banner, and Abbrev columns, any alt route names have these 3 parts 
-    concatenated. The result should be whatever would be entered in a .list file for the old name of the route, e.g. I-22FutTup.</li>
+    concatenated. The result should be whatever would be entered in a <code>.list</code> file for the old name of the route, e.g. I-22FutTup.</li>
   </ol>
 </ul>
 </div>
@@ -149,7 +153,7 @@ Order of the routes in the file</p>
 </div>
 
 <p class="subheading"><a name="connected"></a><a style="text-decoration:none" href="#connected">&#x1f517</a>
-Connected Routes File (e.g., usai_con.csv) format</p>
+Connected Routes File (e.g., <code>usai_con.csv</code>) format</p>
 
 <div class="text">
 <ul>
@@ -275,7 +279,7 @@ International characters</p>
   <li><a name="intnames"></a><a style="text-decoration:none" href="#intnames">&#x1f517</a>
   The Route, Abbreviation, Banner, and 
   of course the Filename Root must be devoid of international characters 
-  since these appear in .list files and as filenames. Pick the closest 
+  since these appear in <code>.list</code> files and as filenames. Pick the closest 
   character without any diacritical marks, e.g., "o" for "ö", if it would 
   appear in the Abbreviation field: "Kol" for Köln.</li>
   <li><a name="intnative"></a><a style="text-decoration:none" href="#intnative">&#x1f517</a>
@@ -283,9 +287,9 @@ International characters</p>
   use international characters. "München", not "Munchen" nor "Munich". </li>
   <li><a name="intencoded"></a><a style="text-decoration:none" href="#intencoded">&#x1f517</a>
   International characters must be properly encoded. OpenOffice Calc
-  will do this when saving the spreadsheet as a .csv file (see below). 
+  will do this when saving the spreadsheet as a <code>.csv</code> file (see below). 
   Type the international characters into the spreadsheet. Choose "UTF-8" 
-  when saving as a .csv file. </li>
+  when saving as a <code>.csv</code> file. </li>
   <li><a name="intlatin"></a><a style="text-decoration:none" href="#intlatin">&#x1f517</a>
   Excel doesn't cooperate with this, so if using Excel, consider 
   downloading OpenOffice (it's free), or if you insist on using Excel, you
@@ -297,14 +301,14 @@ International characters</p>
 </div>
     
 <p class="subheading"><a name="filetosubmit"></a><a style="text-decoration:none" href="#filetosubmit">&#x1f517</a>
-The .csv file (the file to submit!)</p>
+The <code>.csv</code> file (the file to submit!)</p>
 
 <div class="text">
 <ul>
   <li><a name="csvrepo"></a><a style="text-decoration:none" href="#csvrepo">&#x1f517</a>
-  The .csv files generated from the spreadsheet you made are what get placed in the repository.</li>
+  The <code>.csv</code> files generated from the spreadsheet you made are what get placed in the repository.</li>
   <li><a name="csvname"></a><a style="text-decoration:none" href="#csvname">&#x1f517</a>
-  The .csv filenames use the system code: usact.csv and usact_con.csv for the system with system code "usact". </li>
+  The <code>.csv</code> filenames use the system code: <code>usact.csv</code> and <code>usact_con.csv</code> for the system with system code "usact". </li>
   <li><a name="csvsave"></a><a style="text-decoration:none" href="#csvsave">&#x1f517</a>
   Spreadsheet programs can save a sheet of a spreadsheet (but not the whole spreadsheet) as a delimited file. </li>
   <li><a name="csvsemicolon"></a><a style="text-decoration:none" href="#csvsemicolon">&#x1f517</a>
@@ -314,12 +318,12 @@ The .csv file (the file to submit!)</p>
   semicolons and none for the two types. <i>Saving in UTF-8 encoding is necessary to ensure that international characters are properly handled. </i></li>
   <li><a name="csvoo"></a><a style="text-decoration:none" href="#csvoo">&#x1f517</a>
   <strong>In OpenOffice Calc, the three correct options when saving 
-  the sheet as a .csv file are: UTF-8 encoding, semicolon delimiter, no 
+  the sheet as a <code>.csv</code> file are: UTF-8 encoding, semicolon delimiter, no 
   text delimiter. </strong></li>
   <li><a name="csvexcel"></a><a style="text-decoration:none" href="#csvexcel">&#x1f517</a>
-  Excel will not use semicolon delimiters when saving a .csv file. 
+  Excel will not use semicolon delimiters when saving a <code>.csv</code> file. 
   It will save the file using commas. This is no good. You can do a search
-  and replace on the .csv file to turn the commas into semicolons, but 
+  and replace on the <code>.csv</code> file to turn the commas into semicolons, but 
   beware: sometimes commas are part of the City and Roots fields. Best 
   advice: download and use OpenOffice Calc.</li>
 </ul>
@@ -372,7 +376,7 @@ chopped routes file. It is a short amount of text to distinguish between
 <p class="text">The Region and Abbrev columns do not appear in the 
 connected routes file because my scripts can look up this info from the 
 chopped roots file by connecting the two files via the file roots. So 
-this info is not repeated in the .csv files.</p>
+this info is not repeated in the <code>.csv</code> files.</p>
 
 <p class="text">Since H1 and H2 are unique after being connected across the boundaries, no Name is necessary.</p>
 
