@@ -46,6 +46,11 @@ connerr2 {color: #48C0A0;}
   <li><a href="#datacheck">Highway data check list</a></li>
   <li><a href="#falsepositive">Marking errors false positive (FP)</a></li>
   <li><a href="#concurrency">Concurrency check</a></li>
+  <ul>
+    <li><a href="#concurrencymapview">Load graph with mapview</a></li>
+    <li><a href="#concurrencyhdx">Load graph with Highway Data Examiner (HDX)</a></li>
+    <li><a href="#concurrencycheck">Check for broken concurrencies</a></li>
+  </ul>
   <li><a href="#nearmisspoint">Near-miss points</a></li>
   <li><a href="#nmpfp">Marking NMPs false positive FP</a></li>
 </ul>
@@ -386,7 +391,7 @@ Load graph with Highway Data Examiner (HDX)</p>
 </div>
 
 <p class="subheading"><a name="concurrencycheck"></a><a style="text-decoration:none" href="#concurrencycheck">&#x1f517</a>
-Check for concurrencies</p>
+Check for broken concurrencies</p>
 
 <div class="text">
   <ul>
