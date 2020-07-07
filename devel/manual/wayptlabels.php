@@ -232,7 +232,7 @@ The following list shows the preferred waypoint type in order. Choose the first 
       4(A)<br />
       17(A)</td>
     <td>If there is more than one exit number sequence for a highway and
-      no concurrent route to explain it, ask me what parenthetical 
+      no concurrent route to explain it, suggest a proposal in the forum what parenthetical 
       distinction should be used. All exit numbers in a sequence get the same 
       parenthetical suffix. </td>
   </tr>
