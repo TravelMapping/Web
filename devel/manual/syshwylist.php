@@ -78,9 +78,11 @@ Chopped Routes File (e.g., usai.csv) format</p>
     the filename above.</li>
     <li><a name="cregion"></a><a style="text-decoration:none" href="#cregion">&#x1f517</a>
     <strong>Region</strong>:
-    For undivided countries, this is the uppercase 3-letter country abbreviation in which the highway is located. <span class="style19">IDN</span> for Indonesia, <span class="style19">LUX</span> for Luxembourg, <span class="style19">NZL</span> for New Zealand.
-    In the United States and Canada, it's the uppercase state or province abbreviation. <span class="style19">FL</span> for Florida, <span class="style19">NT</span> for Northwest Territories.
-    For other divided countries (DEU, ESP, MEX, etc.), use the 3-letter country code, followed by a hyphen, followed by the subdivision code (no spaces). <span class="style19">DEU-TH</span> for Thuringia, <span class="style19">ESP-AR for</span> for Aragon, <span class="style19">MEX-BC</span> for Baja California. </li>
+    For undivided countries, this is the uppercase 3-letter country abbreviation in which the highway is located.
+    Country subdivision codes are used instead or in addition for divided countries as <a href="hwydata.php#regionroute">
+    used in the wpt file name</a> but all-uppercase and with hyphen (no spaces),
+    e.g. <code>FL</code> for Florida, <code>NT</code> for Northwest Territories,
+    <code>DEU-TH</code> for Thuringia, <code>ESP-AR for</code> for Aragon, <code>MEX-BC</code> for Baja California.</li>
     <li><a name="croute"></a><a style="text-decoration:none" href="#croute">&#x1f517</a>
     <strong>Route</strong>: The name of the highway, ignoring any banners or qualifiers. No spaces! <span class="style19">US34</span> for US 34, <span class="style19">OH17</span> for OH 17, <span class="style19">PA66</span> for Business PA 66, <span class="style19">A7</span>
     for French Autoroute A7. Skip hyphens and slashes unless they separate 
@@ -98,11 +100,8 @@ Chopped Routes File (e.g., usai.csv) format</p>
     City should be spelled as the locals spell it and using international 
     characters as needed. </li>
     <li><a name="croot"></a><a style="text-decoration:none" href="#croot">&#x1f517</a>
-    <strong>Filename root:</strong> The name of the .wpt file with the extension omitted. <span class="style19">pa.us019trkpit</span>, <span class="style19">oh.oh007</span>,
-    etc. The filename roots are made all-lowercase and follow this formula:
-    (Region without any hyphens) + period (.) + Route (number padded with 
-    zeroes for three digits unless the number is 100+) + Banner (if there is
-    one) + Abbreviation (if there is one). <font color="#ff0000">FIXME: Some systems have 4-digit routes now.</font> </li>
+    <strong>Filename root:</strong> The <a href="hwydata.php#regionroute">name of the .wpt file<a> with the extension omitted.
+    <span class="style19">pa.us019trkpit</span>, <span class="style19">oh.oh007</span>, etc.</li>
     <li><a name="caltroute"></a><a style="text-decoration:none" href="#caltroute">&#x1f517</a>
     <strong>Alt Route Names</strong> A comma-separated list of 
     deprecated route names, or blank if none.  This field is blank for most 
