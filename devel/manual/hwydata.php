@@ -34,7 +34,7 @@ a .wpt extension.</div>
 <div class="text">
 <ul>
   <li><a name="fileborder"></a><a style="text-decoration:none" href="#fileborder">&#x1f517</a>
-  One .wpt file is needed for each highway in each region. Highways 
+  One <code>.wpt</code> file is needed for each highway in each region. Highways 
   crossing into multiple subdivisions of a subdivided country (e.g., 
   states in the USA), or crossing into multiple countries (e.g., 
   UNECE International 'E' Roads in Europe) must be chopped at borders into separate files for
@@ -43,44 +43,54 @@ a .wpt extension.</div>
   Filenames are entirely lowercase and have a .wpt extension.</li>
   <li><a name="fileextension"></a><a style="text-decoration:none" href="#fileextension">&#x1f517</a>
   Be sure you can see file extensions in your operating system. 
-  Windows hides known file extensions by default, so if you see a ".wpt" 
+  Windows hides known file extensions by default, so if you see a "<code>.wpt</code>" 
   extension, the file might actually have something else appended, such as
-  ".wpt.txt". This is no good. In Windows Explorer, you can disable the 
+  "<code>.wpt.txt</code>". This is no good. In Windows Explorer, you can disable the 
   "Hide extensions for known file types" option in Tools menu &gt; Folder 
   Options &gt; View tab. </li>
   <li><a name="regionroute"></a><a style="text-decoration:none" href="#regionroute">&#x1f517</a>
-  <em>region</em>.<em>route</em>.wpt is the format for the filename.
+  <code>region</code> + <code>.</code> + <code>route</code> ( + <code>banner</code> + <code>abbreviation</code> ) + <code>.wpt</code> is the format for the filename.
     <ul>
+      <li><code>Region</code> is the region code without any hyphens:</li>
+      <ul>
       <li><a name="undivided"></a><a style="text-decoration:none" href="#undivided">&#x1f517</a>
-      For undivided countries, the <em>region</em> is the 3-letter
-      ISO alpha-3 country code. See our
-      list <a href="https://github.com/TravelMapping/HighwayData/blob/master/countries.csv">on
+      For undivided countries, the <code>region</code> is the 3-letter ISO 3166-1 alpha-3 country code,
+      e.g. <code>IDN</code> for Indonesia, <code>LUX</code> for Luxembourg, <code>NZL</code> for New Zealand.
+      See our list <a href="https://github.com/TravelMapping/HighwayData/blob/master/countries.csv">on
       GitHub</a>, which is based
       on the <a href="https://www.cia.gov/library/publications/the-world-factbook/appendix/appendix-d.html">CIA
       World Fact Book</a>. </li>
       <li><a name="divided"></a><a style="text-decoration:none" href="#divided">&#x1f517</a>
-      For divided countries (USA, CAN, MEX, GBR, RUS, KAZ),
-      the <em>region</em> is an abbreviation for the subdivision rather
-      than for the country. The USA and CAN use the standard postal
-      codes. GBR (United Kingdom) uses WLS, SCT, ENG, NIR. For other
-      countries, ask about the subdivision codes. Some countries (e.g.,
-      MEX) have the country code prepended to avoid collisions with
-      subdivision codes of other countries (NL = Newfoundland and Labrador
-      in Canada , MEX-NL = Nuevo León in Mexico).  See our
-      list <a href="https://github.com/TravelMapping/HighwayData/blob/master/regions.csv">on
-      GitHub</a>.</li>
-      <li><a name="zeropadded"></a><a style="text-decoration:none" href="#zeropadded">&#x1f517</a>
-      The <em>route</em> is a concatenation of 3-digit zero-padded 
-      number designation (e.g., a005, us042, pa343, la3132), the banner if 
-      applicable (bus, trk), and the 3-letter Abbrev. if applicable (e.g., 
-      cat, pit). </li>
+      For divided countries the <code>region</code> is an abbreviation for the subdivision rather
+      than for the country.</li>
+      <ul>
+        <li>The USA and Canada use the standard postal codes.</li>
+        <li>The United Kingdom uses <code>ENG</code>, <code>NIR</code>, <code>SCT</code> and <code>WLS</code>.</li>
+        <li>Mexico uses the subdivision codes that appear on state route shields with the country code
+        prepended to avoid collisions with subdivision codes of other countries (<code>NL</code> = Newfoundland and
+        Labrador in Canada, <code>MEX-NL</code> = Nuevo León in Mexico).</li>
+        <li>The ISO 3166-2 country subdivision codes with the country code prepended are used for other
+        countries (e.g. <code>AUS-ACT</code>, <code>CHN-AH</code>, <code>DEU-BW</code>, <code>ESP-AN</code>, <code>FRA-ARA</code>, <code>IND-AN</code>).</li>
+        <li>See our list
+        <a href="https://github.com/TravelMapping/HighwayData/blob/master/regions.csv">on GitHub</a>.</li>
+      </ul>
+      <li><a name="route"></a><a style="text-decoration:none" href="#route">&#x1f517</a>
+      The <code>route</code> is the name of the highway (number padded with zeroes as needed), ignoring any banners or qualifiers.
+      No spaces! <code>us034</code> for US 34, <code>oh017</code> for OH 17, <code>pa066</code> for Business PA 66, <code>a007</code> for French Autoroute A7.
+      Skip hyphens and slashes.</li>
+      <li><a name="banner"></a><a style="text-decoration:none" href="#banner">&#x1f517</a>
+      The <code>banner</code> (if needed) is a 3-letter banner abbreviation (<code>bus</code>, <code>alt</code>, <code>spr</code>, <code>trk</code> etc.).
+      <code>lp</code> for Loop is two letters. No more than six characters (for double-bannered routes) are allowed.</li>
+      <li><a name="abbreviation"></a><a style="text-decoration:none" href="#abbreviation">&#x1f517</a>
+      The <code>abbreviation</code> (if needed) is a 3-letter city abbreviation if needed for auxiliary highways
+      or for most piecemeal highways. <code>pit</code> for Truck US 19 (Pittsburgh).</li>
       <li><a name="filenameexample"></a><a style="text-decoration:none" href="#filenameexample">&#x1f517</a>
       Examples:
       <ul>
-        <li>fra.a021.wpt = France A21.</li>
-        <li>pa.pa042trkeag.wpt = Pennsylvania PA 42 Truck (Eagles Mere).</li>
-        <li>  grc.a005.wpt = Greece A5 (main piece).</li>
-        <li>grc.a005art.wpt = Greece A5 Arta section.</li>
+        <li><code>aut.a003.wpt</code> = Austria A3.</li>
+        <li><code>pa.pa042trkeag.wpt</code> = Pennsylvania PA 42 Truck (Eagles Mere).</li>
+        <li><code>grc.a005.wpt</code> = Greece A5 (main piece).</li>
+        <li><code>grc.a005art.wpt</code> = Greece A5 Arta section.</li>
       </ul>
       </li>
     </ul>

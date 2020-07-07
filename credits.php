@@ -474,7 +474,7 @@ following sources of highway information.</p>
 	  </li>
 	  <li><a name="swe"></a><a style="text-decoration:none" href="#swe">&#x1f517</a>Sweden
 	    <ul>
-	      <li><a href="http://trafikinfo.trafikverket.se/LIT/#url=Vagtrafiken/Karta">Maps of Swedisch Infrastructure</a>. Map of current road system of Sweden.</li>
+	      <li><a href="https://nvdb2012.trafikverket.se/SeTransportnatverket">Maps of Swedisch Infrastructure</a>. Map of current road system of Sweden.</li>
 	  </ul>
 	  </li>
 	  <li><a name="che"></a><a style="text-decoration:none" href="#che">&#x1f517</a>Switzerland
