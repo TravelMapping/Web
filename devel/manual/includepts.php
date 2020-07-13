@@ -65,9 +65,7 @@ Required intersections</p>
     </ul>
     </li>
     <li><a name="longsegment"></a><a style="text-decoration:none" href="#longsegment">&#x1f517</a>
-    Intersections to split up long segments of 10+ miles (16+ km).
-    Usually there are some. In some cases there are not (long freeway 
-    sections between interchanges, highways in remote areas). </li>
+    Other intersections to split up long segments of 10+ miles (16+ km), where possible.</li>
   </ul>
 </div>
 
