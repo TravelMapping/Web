@@ -82,8 +82,9 @@ a .wpt extension.</div>
       The <code>banner</code> (if needed) is a 3-letter banner abbreviation (<code>bus</code>, <code>alt</code>, <code>spr</code>, <code>trk</code> etc.).
       <code>lp</code> for Loop is two letters. No more than six characters (for double-bannered routes) are allowed.</li>
       <li><a name="abbreviation"></a><a style="text-decoration:none" href="#abbreviation">&#x1f517</a>
-      The <code>abbreviation</code> (if needed) is a 3-letter city abbreviation if needed for auxiliary highways
-      or for most piecemeal highways. <code>pit</code> for Truck US 19 (Pittsburgh).</li>
+      The <code>abbreviation</code> is a 3-letter abbreviation for auxiliary highways or for most piecemeal highways
+      if needed to distinguish between otherwise identically named routes of the same highway in the same region.
+      <code>pit</code> for Truck US 19 (Pittsburgh).</li>
       <li><a name="filenameexample"></a><a style="text-decoration:none" href="#filenameexample">&#x1f517</a>
       Examples:
       <ul>
