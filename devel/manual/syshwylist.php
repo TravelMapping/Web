@@ -94,14 +94,17 @@ Chopped Routes File (e.g., <code>usai.csv</code>) format</p>
     here only if needed. Otherwise leave it completely blank (no whitespace). <code>Lp</code> for Loop is two letters. No more than six characters
     (for double-bannered routes) are allowed.</li>
     <li><a name="cabbrev"></a><a style="text-decoration:none" href="#cabbrev">&#x1f517</a>
-    <strong>Abbreviation</strong>: The three-letter city abbreviation if needed for auxiliary highways or for most piecemeal highways.
+    <strong>Abbreviation</strong>: The three-letter abbreviation for auxiliary highways or for most piecemeal highways
+    if needed to distinguish between otherwise identically named routes of the same highway in the same region.
     <code>Pit</code> for Truck US 19 (Pittsburgh). Otherwise leave it blank (no whitespace).</li>
     <li><a name="ccity"></a><a style="text-decoration:none" href="#ccity">&#x1f517</a>
-    <strong>City</strong>: The spelled-out city name for an auxiliary route or for distinguishing between pieces of the same highway in the same region.
-    <code>Pittsburgh</code> for Truck US 19 (Pittsburgh). This is the text that will appear below 
+    <strong>City</strong>: Used to distinguish between otherwise identically named routes of the same highway in the same region.
+    <code>Pittsburgh</code> for Truck US 19 (Pittsburgh).
+    Prefer using city names (if applicable) or other common geographical names to distinguish, e.g. island names.
+    This is the text that will appear below 
     the shield in the highway browser. Usually no text is needed except for 
     auxiliary highways, so leave it blank (no whitespace) in most cases. The
-    City should be spelled as the locals spell it and using international 
+    name should be spelled as the locals spell it and using international 
     characters as needed. </li>
     <li><a name="croot"></a><a style="text-decoration:none" href="#croot">&#x1f517</a>
     <strong>Filename root:</strong> The <a href="hwydata.php#regionroute">name of the .wpt file<a> with the extension omitted.
@@ -184,11 +187,11 @@ manually. <font color="#ff0000">FIXME: delete; this part is no longer relevant.<
     <li><a name="conncbanner"></a><a style="text-decoration:none" href="#conncbanner">&#x1f517</a>
     <b>Banner:</b> the common Banner, if the route is bannered, or left blank if not.</li>
     <li><a name="conncname"></a><a style="text-decoration:none" href="#conncname">&#x1f517</a>
-    <b>Name:</b> like the City field of the Chopped Routes File, the 
+    <b>Name:</b> like the <a href="#ccity">City field of the Chopped Routes File</a>, the 
     Name field is used to distinguish between otherwise identically named 
     routes (same Route and Banner fields) or to give extra info about 
-    numberless or bannered/repeatable designations. Like the City field, 
-    this field can contain international characters.</li>
+    numberless or bannered/repeatable designations.
+    Use geographical names, e.g. city names, island names or country names.</li>
     <li><a name="conncroots"></a><a style="text-decoration:none" href="#conncroots">&#x1f517</a>
     <b>Roots:</b> a comma-separated list (no spaces!) of filename roots 
     of the chopped routes that connect to form this connected route.  
