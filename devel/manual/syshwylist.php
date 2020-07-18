@@ -12,46 +12,58 @@
 
 <h1>Travel Mapping Manual: System Highway Lists</h1>
 
+<div class="text">Each highway system needs to have files that list basic 
+information about each route that is part of the system. The Chopped 
+Routes File (e.g., <a href="https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/usai.csv"><code>usai.csv</code></a>)
+tells our scripts which files to look for and to load into the web site. The Connected Routes File (e.g., 
+<a href="https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/usai_con.csv"><code>usai_con.csv</code></a>)
+lists how those chopped routes are connected across boundaries to make full-length routes.</div>
+
 <p class="heading">
   Contents</p>
 
 <div class="text">
 <ul>
-  <li><a href="#purpose">Purpose of the files</a></li>
   <li><a href="#createfiles">Creating the files</a></li>
   <ul>
     <li><a href="#chopped">Chopped Routes File (e.g., <code>usai.csv</code>) format</a></li>
-    <li><a href="#routeorder">Order of the routes in the file</a></li>
     <li><a href="#connected">Connected Routes File (e.g., <code>usai_con.csv</code>) format</a></li>
     <li><a href="#intcharacters">International characters</a></li>
-    <li><a href="#filetosubmit">The <code>.csv</code> file (the file to submit!)</a></li>
   </ul>
   <li><a href="#examplesystem">Example system: Takoma National H Routes (tach)</a></li>
   <li><a href="#concurrencies">Concurrencies within which not all concurrent routes are signed</a></li>
 </ul>
 </div>
 
-<p class="heading"><a name="purpose"></a><a style="text-decoration:none" href="#purpose">&#x1f517</a>
-Purpose of the files</p>
-
-<p class="text">Each highway system needs to have two <code>.csv</code> files that list basic 
-information about each route that is part of the system. The Chopped 
-Routes File (e.g., <a href="https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/usai.csv"><code>usai.csv</code></a>)
-tells our scripts which files to look for 
-and to load into the web site. The Connected Routes File (e.g., 
-<a href="https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/usai_con.csv"><code>usai_con.csv</code></a>)
-lists how those chopped routes are connected across boundaries to make
-full-length routes.</p>
-
 <p class="heading"><a name="createfiles"></a><a style="text-decoration:none" href="#createfiles">&#x1f517</a>
 Creating the files</p>
 
-<p class="text">
-  Make a spreadsheet with all the needed info for each of these 
-files. Then save the spreadsheet as a <code>.csv</code> file as explained below. The 
-<code>.csv</code> file is the one we need. The spreadsheet is to help you get the <code>.csv</code>
- format correct.
-</p>
+<div class="text">
+<ul>
+  <li><a name="csvfile"></a><a style="text-decoration:none" href="#csvfile">&#x1f517</a>
+  Make a text file with comma-separated values containing all the needed info for each of these files.
+  Use a <a href="https://en.wikipedia.org/wiki/Text_editor">text editor</a> or a spreadsheet program such as
+  <a href="https://www.openoffice.org/product/calc.html">OpenOffice Calc</a> (it's free).
+  Then save the file with <a href="https://en.wikipedia.org/wiki/Comma-separated_values"><code>.csv</code></a> filename extention.</li>
+  <li><a name="csvsemicolon"></a><a style="text-decoration:none" href="#csvsemicolon">&#x1f517</a>
+  Use a semicolon (not a comma!) as the field delimiter, and don't 
+  use any text delimiters (no quotes!). In OpenOffice Calc, the default 
+  delimiters are comma and double quotes, but instead you must specify 
+  semicolons and none for the two types. Saving in UTF-8 encoding is necessary to ensure that international characters are properly handled.</li>
+  <ul>
+    <li><a name="csvoo"></a><a style="text-decoration:none" href="#csvoo">&#x1f517</a>
+    <strong>In OpenOffice Calc, the three correct options when saving 
+    the sheet as a <code>.csv</code> file are: UTF-8 encoding, semicolon delimiter, no 
+    text delimiter. </strong></li>
+  </ul>
+  <li><a name="csvexcel"></a><a style="text-decoration:none" href="#csvexcel">&#x1f517</a>
+  Excel will not use semicolon delimiters when saving a <code>.csv</code> file. 
+  It will save the file using commas. This is not good. You could do a search
+  and replace on the <code>.csv</code> file to turn the commas into semicolons, but 
+  beware: sometimes commas are part of the City and Roots fields.</br>
+  <b>Best advice: Don't use Excel but download and use OpenOffice Calc or use a text editor.</b></li>
+</ul>
+</div>
 
 <p class="subheading"><a name="chopped"></a><a style="text-decoration:none" href="#chopped">&#x1f517</a>
 Chopped Routes File (e.g., <code>usai.csv</code>) format</p>
@@ -59,10 +71,9 @@ Chopped Routes File (e.g., <code>usai.csv</code>) format</p>
 <div class="text">
 <ul>
   <li><a name="spreatsheet"></a><a style="text-decoration:none" href="#spreatsheet">&#x1f517</a>
-  Make a spreadsheet in OpenOffice or a similar spreadsheet program with the name <i>systemcode</i>.xls. Replace <i>systemcode</i>
-  with the lowercase system code assigned to your system. E.g., the 
-  spreadsheet for the Ohio State Highways is usaoh.xls (system code = 
-  "usaoh"). The <code>.csv</code> file is <code>usaoh.csv</code>. </li>
+  Make a <code>.csv</code> file with the name <code>systemcode.csv</code>. Replace <code>systemcode</code>
+  with the lowercase <a href="sysnew.php#developsystem">system code assigned to your system</a>. E.g., the 
+  spreadsheet for the Ohio State Highways (system code = <code>usaoh</code>) is <code>usaoh.csv</code>.</li>
   <li><a name="header"></a><a style="text-decoration:none" href="#header">&#x1f517</a>
   The spreadsheet must have 8 columns and 1 header row. Use the 
   header row to label the columns, not to enter the first highway. In 
@@ -117,25 +128,21 @@ Chopped Routes File (e.g., <code>usai.csv</code>) format</p>
     Banner, and Abbrev columns, any alt route names have these 3 parts 
     concatenated. The result should be whatever would be entered in a <code>.list</code> file for the old name of the route, e.g. I-22FutTup.</li>
   </ol>
-</ul>
-</div>
-
-<p class="subheading"><a name="routeorder"></a><a style="text-decoration:none" href="#routeorder">&#x1f517</a>
-Order of the routes in the file</p>
-
-<div class="text">
+  </br>
+  <li><a name="routeorder"></a><a style="text-decoration:none" href="#routeorder">&#x1f517</a>
+  Order of the routes in the file</li>
 <ul>
   <li><a name="rascending"></a><a style="text-decoration:none" href="#rascending">&#x1f517</a>
-  Route numbers are ascending by route number. <br />
+  <b>Route numbers are ascending by route number.</b> <br />
   PA3, PA5, PA8, etc. </li>
   <li><a name="rsuffix"></a><a style="text-decoration:none" href="#rsuffix">&#x1f517</a>
-  For like route numbers, suffixless routes come first, followed by suffixed routes of the same number. <br />
+  <b>For like route numbers</b>, suffixless routes come first, followed by suffixed routes of the same number. <br />
   MA2, MA3, MA3A, MA3B, MA4, MA4B, MA4H, MA5, etc.</li>
   <li><a name="rusualorder"></a><a style="text-decoration:none" href="#rusualorder">&#x1f517</a>
   For pieces of the same route, put them in the usual order for the country (i.e., south to north or west to east in the US).<br />
   ..., PA42, PA43 Chadville, PA43 Brownsville, PA43 Pittsburgh, PA43AltCal, PA44, etc. </li>
   <li><a name="rbanner"></a><a style="text-decoration:none" href="#rbanner">&#x1f517</a>
-  Bannered routes of a certain number come immediately after the 
+  <b>Bannered routes of a certain number</b> come immediately after the 
   bannerless route of the same number and before any suffixed routes of 
   the same number. Bannered routes of the same number but with different 
   banners go in order of the banners. Bannered routes of the same number 
@@ -143,7 +150,7 @@ Order of the routes in the file</p>
   or west to east in the US). <br />
   ..., PA42, PA42AltCen, PA42AltBlo, PA42TrkEag, PA42A, PA42ABusPit, PA42B, PA43, ...</li>
   <li><a name="rbannerdouble"></a><a style="text-decoration:none" href="#rbannerdouble">&#x1f517</a>
-  Doubly bannered routes come right after the matching singly 
+  <b>Doubly bannered routes</b> come right after the matching singly 
   bannered route. The banner immediately after the route number here 
   matches the banner immediately above the route number as signed in a 
   shield. <br />
@@ -153,6 +160,7 @@ Order of the routes in the file</p>
   assembly.<br />
   ..., US50, US50AltGeo, US50AltBusDun, US50BusFay, US50BusTrkUni, US50ScePin, US50TrkSno, US 51, ...<br /></li>
 </ul>
+</ul>
 </div>
 
 <p class="subheading"><a name="connected"></a><a style="text-decoration:none" href="#connected">&#x1f517</a>
@@ -160,11 +168,6 @@ Connected Routes File (e.g., <code>usai_con.csv</code>) format</p>
 
 <div class="text">
 <ul>
-<!--<li>This file is initially generated by a script using the completed 
-Chopped Routes File as input.  The Connected Routes File is then about 
-90% correct and needs some manual work to get it 100% correct. As files 
-are added or deleted from the highway system, this file must be updated 
-manually. <font color="#ff0000">FIXME: delete; this part is no longer relevant.</font></li>-->
   <li><a name="connchop"></a><a style="text-decoration:none" href="#connchop">&#x1f517</a>
   The Chopped Routes File lists all the highways in the highway system
   after being chopped at national and sometimes subdivisional (state, 
@@ -172,13 +175,14 @@ manually. <font color="#ff0000">FIXME: delete; this part is no longer relevant.<
   information about which chopped routes should be connected to 
   reconstruct each full route.</li>
   <li><a name="connname"></a><a style="text-decoration:none" href="#connname">&#x1f517</a>
-  The filename is <i>systemcode</i>_con.csv, with <i>systemcode</i> replaced with the code for the system.</li>
+  The filename is <code>systemcode_con.csv</code>, with <code>systemcode</code> replaced by the <a href="sysnew.php#developsystem">code for the system</a>.</li>
   <li><a name="connheader"></a><a style="text-decoration:none" href="#connheader">&#x1f517</a>
-  The first row is a header row and should never contain info about the first connected highway.</li>
-  <li><a name="connorder"></a><a style="text-decoration:none" href="#connorder">&#x1f517</a>
-  Each subsequent row gives info about the connected routes in the same order as they are given in the Chopped Routes File.</li>
+  The spreadsheet must have 5 columns and 1 header row. Use the 
+  header row to label the columns, not to enter the first highway. In 
+  processing, the first row is always ignored.</li>
+  </br>
   <li><a name="conncolumns"></a><a style="text-decoration:none" href="#conncolumns">&#x1f517</a>
-  Columns:
+  The columns:
   <ol>
     <li><a name="conncsystem"></a><a style="text-decoration:none" href="#conncsystem">&#x1f517</a>
     <b>System:</b> system code.</li>
@@ -192,54 +196,29 @@ manually. <font color="#ff0000">FIXME: delete; this part is no longer relevant.<
     routes (same Route and Banner fields) or to give extra info about 
     numberless or bannered/repeatable designations.
     Use geographical names, e.g. city names, island names or country names.</li>
-    <li><a name="conncroots"></a><a style="text-decoration:none" href="#conncroots">&#x1f517</a>
-    <b>Roots:</b> a comma-separated list (no spaces!) of filename roots 
-    of the chopped routes that connect to form this connected route.  
-    Continuous roots that were chopped at boundaries will have a list of 2+ 
-    file roots, while a route that exists entirely in one region will simply
-    have one root.  Remove all spaces.</li>
-  </ol>
-  </li>
-  <li><a name="connmanually"></a><a style="text-decoration:none" href="#connmanually">&#x1f517</a>
-  Things to fix manually: <font color="#ff0000">FIXME: Rework this section, as connected route CSV files are no longer generated by script.</font>
-  <ol>
-    <i>
-    <li><a name="rework01"></a><a style="text-decoration:none" href="#rework01">&#x1f517</a>
-    <b>Check the roots in each row</b> to make sure that the chopped 
-    routes indeed compose a continuous route.  Sometimes border coordinates 
-    in the waypoint files do not line up on each side of a border, and this 
-    could cause a single connected route to appear in pieces in more than 
-    one line.  Merge the rows as necessary to fix this problem, always 
-    putting the list of file roots in the Roots field in the correct order.</li>
-    <li><a name="rework02"></a><a style="text-decoration:none" href="#rework02">&#x1f517</a>
-    <b>If there is exactly one row with a certain Route+Banner combination</b>,
-    the Name should be blank unless it is a bannered/repeatable route type,
-    in which case the Name should be filled in (see below for devising 
-    Names).  For example, NY 17 has 3 chopped routes in order NY - PA - NY, 
-    so at least one of these has a non-blank City field in the Chopped 
-    Routes File that may have been initially copied to the Name field.  But 
-    there is only one NY17 route in this system, so the Name should be made 
-    blank instead.</li>
-    <li><a name="rework03"></a><a style="text-decoration:none" href="#rework03">&#x1f517</a>
-    <b>If there are multiple rows with the same Route+Banner combination</b>,
-    each row should have a nonblank Name. In short, long, multi-region 
-    routes will have Names composed from the region names, while shorter, 
-    single-region routes will have Names devised identically to the City 
-    field in the Chopped Routes File (usually a city name). Here "region" 
-    means the country or the subdivision in a divided country.</li>
     <ul>
-      <li><a name="rework13"></a><a style="text-decoration:none" href="#rework13">&#x1f517</a>
+      <li><a name="conncname_oneroute"></a><a style="text-decoration:none" href="#conncname_oneroute">&#x1f517</a>
+      <b>If there is exactly one row with a certain Route+Banner combination,</b>
+      the Name should be blank.</li>
+    <li><a name="rework03"></a><a style="text-decoration:none" href="#rework03">&#x1f517</a>
+      <b>If there are multiple rows with the same Route+Banner combination</b>,
+      each row should have a nonblank Name. In short, long, multi-region 
+      routes will have Names composed from the region names, while shorter, 
+      single-region routes will have Names devised identically to the Name
+      field in the Chopped Routes File. Here "region" 
+      means the country or the subdivision in a divided country.</li>
+      <li><a name="conncname_oneregion"></a><a style="text-decoration:none" href="#conncname_oneregion">&#x1f517</a>
       <b>If the route is lengthy and within one region</b>, use the region
       name as the Name.  For example, the southern US 9 is entirely in 
       Delaware, so the Name should be "Delaware" (and not "DE").</li>
-      <li><a name="rework23"></a><a style="text-decoration:none" href="#rework23">&#x1f517</a>
+      <li><a name="conncname_multiregion"></a><a style="text-decoration:none" href="#conncname_multiregion">&#x1f517</a>
       <b>If the route is lengthy and spans multiple regions</b>, use both 
       region names separated by space-hyphen-space.  Put the region names in 
       the usual order for the system (e.g., region containing the southern or 
       western end first if in the US).  For example, the northern US 9 spans 
       New Jersey and New York in that order, so the Name should be "New Jersey
       - New York".</li>
-      <li><a name="rework33"></a><a style="text-decoration:none" href="#rework33">&#x1f517</a>
+      <li><a name="conncname_direction"></a><a style="text-decoration:none" href="#conncname_direction">&#x1f517</a>
       <b>If applying these rules results in the same region used in different Names for rows with the same Route+Banner</b>,
       add an abbreviated direction (NW., W., C., etc.) to that region name in
       each Name it appears.  For example, the western US 422 would be Named 
@@ -251,13 +230,13 @@ manually. <font color="#ff0000">FIXME: delete; this part is no longer relevant.<
       in the large islands of Corsica, France, and Sardinia, Italy.  The three
       piece Names should be "Netherlands - Italy", "Corse, FRA", and 
       "Sardegna, ITA".</li>
-      <li><a name="rework43"></a><a style="text-decoration:none" href="#rework43">&#x1f517</a>
+      <li><a name="conncname_shorter"></a><a style="text-decoration:none" href="#conncname_shorter">&#x1f517</a>
       <b>If a route is more local (shorter), is a full beltway, or is a bannered/repeatable route type</b>
       (mandatory City and Abbrev in the Chopped Routes File), then the Name 
       should be devised in the same way as the City field in the Chopped 
       Routes File (and in most cases, the Name and City fields should be 
       identical).</li> 
-      <li><a name="rework53"></a><a style="text-decoration:none" href="#rework53">&#x1f517</a>
+      <li><a name="conncname_discontinuous"></a><a style="text-decoration:none" href="#conncname_discontinuous">&#x1f517</a>
       <b>If there are two or more discontinuous routes of the same 
       Route+Banner combination, each wholly within the same, single region, 
       and one is significantly longer than the rest</b>, the above rules would
@@ -268,9 +247,18 @@ manually. <font color="#ff0000">FIXME: delete; this part is no longer relevant.<
       disconnected sections of US 47 in the same state, use "(Main)" or a
       city for the long section and a city name for the short section.</li>
     </ul>
-    </i>
+    <li><a name="conncroots"></a><a style="text-decoration:none" href="#conncroots">&#x1f517</a>
+    <b>Roots:</b> a comma-separated list (no spaces!) of filename roots 
+    of the chopped routes that connect to form this connected route.  
+    Continuous roots that were chopped at boundaries will have a list of 2+ 
+    file roots, while a route that exists entirely in one region will simply
+    have one root. Always put the list of file roots in the correct order to make sure
+    that the chopped routes indeed compose a continuous route. Remove all spaces.</li>
   </ol>
   </li>
+  </br>
+  <li><a name="connorder"></a><a style="text-decoration:none" href="#connorder">&#x1f517</a>
+  Each row gives info about the connected routes in the <a href="#routeorder">same order as they are given in the Chopped Routes File</a>.</li>
 </ul>
 </div>
 
@@ -303,35 +291,6 @@ International characters</p>
 </ul>
 </div>
     
-<p class="subheading"><a name="filetosubmit"></a><a style="text-decoration:none" href="#filetosubmit">&#x1f517</a>
-The <code>.csv</code> file (the file to submit!)</p>
-
-<div class="text">
-<ul>
-  <li><a name="csvrepo"></a><a style="text-decoration:none" href="#csvrepo">&#x1f517</a>
-  The <code>.csv</code> files generated from the spreadsheet you made are what get placed in the repository.</li>
-  <li><a name="csvname"></a><a style="text-decoration:none" href="#csvname">&#x1f517</a>
-  The <code>.csv</code> filenames use the system code: <code>usact.csv</code> and <code>usact_con.csv</code> for the system with system code "usact". </li>
-  <li><a name="csvsave"></a><a style="text-decoration:none" href="#csvsave">&#x1f517</a>
-  Spreadsheet programs can save a sheet of a spreadsheet (but not the whole spreadsheet) as a delimited file. </li>
-  <li><a name="csvsemicolon"></a><a style="text-decoration:none" href="#csvsemicolon">&#x1f517</a>
-  Use a semicolon (not a comma!) as the field delimiter, and don't 
-  use any text delimiters (no quotes!). In OpenOffice Calc, the default 
-  delimiters are comma and double quotes, but instead you must specify 
-  semicolons and none for the two types. <i>Saving in UTF-8 encoding is necessary to ensure that international characters are properly handled. </i></li>
-  <li><a name="csvoo"></a><a style="text-decoration:none" href="#csvoo">&#x1f517</a>
-  <strong>In OpenOffice Calc, the three correct options when saving 
-  the sheet as a <code>.csv</code> file are: UTF-8 encoding, semicolon delimiter, no 
-  text delimiter. </strong></li>
-  <li><a name="csvexcel"></a><a style="text-decoration:none" href="#csvexcel">&#x1f517</a>
-  Excel will not use semicolon delimiters when saving a <code>.csv</code> file. 
-  It will save the file using commas. This is no good. You can do a search
-  and replace on the <code>.csv</code> file to turn the commas into semicolons, but 
-  beware: sometimes commas are part of the City and Roots fields. Best 
-  advice: download and use OpenOffice Calc.</li>
-</ul>
-</div>
-
 <p class="heading"><a name="examplesystem"></a><a style="text-decoration:none" href="#examplesystem">&#x1f517</a>
 Example system: Takoma National H Routes (tach)</p>
 
