@@ -57,7 +57,7 @@ Creating the files</p>
     text delimiter. </strong></li>
   </ul>
   <li><a name="csvexcel"></a><a style="text-decoration:none" href="#csvexcel">&#x1f517</a>
-  Excel will not use semicolon delimiters when saving a <code>.csv</code> file. 
+  Excel doesn't cooperate with UTF-8 encoding and will not use semicolon delimiters when saving a <code>.csv</code> file. 
   It will save the file using commas. This is not good. You could do a search
   and replace on the <code>.csv</code> file to turn the commas into semicolons, but 
   beware: sometimes commas are part of the City and Roots fields.</br>
@@ -268,26 +268,20 @@ International characters</p>
 <div class="text">
 <ul>
   <li><a name="intnames"></a><a style="text-decoration:none" href="#intnames">&#x1f517</a>
-  The Route, Abbreviation, Banner, and 
-  of course the Filename Root must be devoid of international characters 
+  The System, Region, Route, Banner, Abbreviation, Filename Root, Alt Route Names and Roots
+  fields must be devoid of international characters 
   since these appear in <code>.list</code> files and as filenames. Pick the closest 
   character without any diacritical marks, e.g., "o" for "ö", if it would 
   appear in the Abbreviation field: "Kol" for Köln.</li>
   <li><a name="intnative"></a><a style="text-decoration:none" href="#intnative">&#x1f517</a>
-  The City and Name fields should use the native language name for a place, and it may
+  The <a href="#ccity">City</a> and the <a href="#conncname">Name</a> fields should use the native language name for a place, and it may
   use international characters. "München", not "Munchen" nor "Munich". </li>
   <li><a name="intencoded"></a><a style="text-decoration:none" href="#intencoded">&#x1f517</a>
-  International characters must be properly encoded. OpenOffice Calc
-  will do this when saving the spreadsheet as a <code>.csv</code> file (see below). 
-  Type the international characters into the spreadsheet. Choose "UTF-8" 
-  when saving as a <code>.csv</code> file. </li>
-  <li><a name="intlatin"></a><a style="text-decoration:none" href="#intlatin">&#x1f517</a>
-  Excel doesn't cooperate with this, so if using Excel, consider 
-  downloading OpenOffice (it's free), or if you insist on using Excel, you
-  must manually encode the characters.</li>
-  <li><a name="intsymbols"></a><a style="text-decoration:none" href="#intsymbols">&#x1f517</a>
   International characters will appear as weird symbols or question 
-  marks on the web site if the encoding isn't properly done. This is bad!</li>
+  marks on the web site if the encoding isn't properly done. OpenOffice Calc
+  will do this properly when saving the spreadsheet as a <code>.csv</code> file.
+  Type the international characters into the spreadsheet. Choose "UTF-8" 
+  when saving as a <code>.csv</code> file, see <a href="#csvoo">above</a>.</li>
 </ul>
 </div>
     
