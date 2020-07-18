@@ -63,46 +63,54 @@ Some interchanges have unusual shapes or are stretched-out versions of normal in
 
     <div class="text">
 <ul>
-  <li>Diamond interchange: where the centerlines cross.
+  <li><a name="diamond"></a><a style="text-decoration:none" href="#diamond">&#x1f517</a>
+  Diamond interchange: where the centerlines cross.
     <!-- img src="staticmap_006.png" -->
     <!-- img src="staticmap_013.png" -->
     <!-- img src="staticmap_011.png" -->
 </li>
-  <li>Double half interchanges: Usually use one central point and treat 
-both halves as a single, full interchange. Exceptions: a clear gap of at
- least  0.5 mi/0.8 km separates the two halves, or each half connects to
- a different highway that we are also mapping.
+  <li><a name="double_half"></a><a style="text-decoration:none" href="#double_half">&#x1f517</a>
+  Double half interchanges: Usually use one central point and treat 
+  both halves as a single, full interchange. Exceptions: a clear gap of at
+  least  0.5 mi/0.8 km separates the two halves, or each half connects to
+  a different highway that we are also mapping.
     <!-- img src="staticmap_009.png" -->
   </li>
-  <li>Partial cloverleaf interchanges: usually where the centerlines cross.
+  <li><a name="partial_cloverleaf"></a><a style="text-decoration:none" href="#partial_cloverleaf">&#x1f517</a>
+  Partial cloverleaf interchanges: usually where the centerlines cross.
       <!-- img src="staticmap_014.png" -->
       <!-- img src="staticmap_002.png" -->
       <!-- img src="staticmap_010.png" -->
   </li>
-  <li>Misbehaving diamond/partial cloverleaf interchanges: some cases 
-are better handled by putting the point where the ramps connect to the 
-freeway. In this case, the points on the freeway and the cross road will
- not line up.
+  <li><a name="misbehaving"></a><a style="text-decoration:none" href="#misbehaving">&#x1f517</a>
+  Misbehaving diamond/partial cloverleaf interchanges: some cases 
+  are better handled by putting the point where the ramps connect to the 
+  freeway. In this case, the points on the freeway and the cross road will
+  not line up.
     <!-- img src="staticmap_012.png" -->
   </li>
-  <li>Cloverleaf interchanges: where the centerlines cross.
+  <li><a name="cloverleaf"></a><a style="text-decoration:none" href="#cloverleaf">&#x1f517</a>
+  Cloverleaf interchanges: where the centerlines cross.
       <!-- img src="staticmap_016.png" -->
       <!-- img src="staticmap_005.png" -->
     </li>
-  <li>Trumpet interchanges: where the access road centerline crosses the
- freeway centerline. Double trumpet interchanges get separate points at 
-    each trumpet.
+  <li><a name="trumpet"></a><a style="text-decoration:none" href="#trumpet">&#x1f517</a>
+  Trumpet interchanges: where the access road centerline crosses the
+  freeway centerline. Double trumpet interchanges get separate points at 
+  each trumpet.
     <!-- img src="staticmap_007.png" -->
     <!-- img src="staticmap_004.png" -->
     <!-- img src="staticmap_008.png" --></li>
   
-  <li>2-way high-speed interchanges: where the centerlines would cross 
-if it were an at-grade intersection with the same shape. Not where the 
-ramps of one road connect to the other.
-        <!-- img src="staticmap_003.png" -->
+  <li><a name="two_way"></a><a style="text-decoration:none" href="#two_way">&#x1f517</a>
+  2-way high-speed interchanges: where the centerlines would cross 
+  if it were an at-grade intersection with the same shape. Not where the 
+  ramps of one road connect to the other.
+    <!-- img src="staticmap_003.png" -->
     </li>
-  <li>3-way high-speed interchanges: in the middle of the central ramp triangle, not necessarily on a ramp.
-      <!-- img src="staticmap.png" -->
+  <li><a name="three_way"></a><a style="text-decoration:none" href="#three_way">&#x1f517</a>
+  3-way high-speed interchanges: in the middle of the central ramp triangle, not necessarily on a ramp.
+    <!-- img src="staticmap.png" -->
     </li>
 </ul>
   </div>
