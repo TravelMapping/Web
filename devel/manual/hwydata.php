@@ -10,26 +10,27 @@
 <body>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 
-<h1>Travel Mapping Manual: Highway Data (.wpt) Files</h1>
+<h1>Travel Mapping Manual: Highway Data (<code>.wpt</code>) Files</h1>
 
 <div class="text">Each route in TM is represented by a highway data
 file, which we often refer to as a "waypoint file".  These files have
-a .wpt extension.</div>
+a <code>.wpt</code> extension.</div>
 
 <p class="heading">
   Contents</p>
 
 <div class="text">
 <ul>
-  <li><a href="#filename">.wpt Filenames</a></li>
-  <li><a href="#format">.wpt Data Format</a></li>
+  <li><a href="#file"><code>.wpt</code> Files</a></li>
+  <li><a href="#filename"><code>.wpt</code> Filenames</a></li>
+  <li><a href="#format"><code>.wpt</code> Data Format</a></li>
 </ul>
 </div>
 
 
 
-<p class="heading"><a name="filename"></a><a style="text-decoration:none" href="#filename">&#x1f517</a>
-.wpt Filenames</p>
+<p class="heading"><a name="file"></a><a style="text-decoration:none" href="#file">&#x1f517</a>
+<code>.wpt</code> File</p>
 
 <div class="text">
 <ul>
@@ -39,8 +40,16 @@ a .wpt extension.</div>
   states in the USA), or crossing into multiple countries (e.g., 
   UNECE International 'E' Roads in Europe) must be chopped at borders into separate files for
   each region. </li>
+</ul>
+</div>
+
+<p class="heading"><a name="filename"></a><a style="text-decoration:none" href="#filename">&#x1f517</a>
+<code>.wpt</code> Filenames</p>
+
+<div class="text">
+<ul>
   <li><a name="lowercase"></a><a style="text-decoration:none" href="#lowercase">&#x1f517</a>
-  Filenames are entirely lowercase and have a .wpt extension.</li>
+  Filenames are entirely lowercase and have a <code>.wpt</code> extension.</li>
   <li><a name="fileextension"></a><a style="text-decoration:none" href="#fileextension">&#x1f517</a>
   Be sure you can see file extensions in your operating system. 
   Windows hides known file extensions by default, so if you see a "<code>.wpt</code>" 
@@ -100,7 +109,7 @@ a .wpt extension.</div>
 </div>
 
 <p class="heading"><a name="format"></a><a style="text-decoration:none" href="#format">&#x1f517</a>
-.wpt Data Format</p>
+<code>.wpt</code> Data Format</p>
 
 <div class="text">
 <ul>
