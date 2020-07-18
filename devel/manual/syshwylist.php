@@ -200,7 +200,7 @@ Connected Routes File (e.g., <code>usai_con.csv</code>) format</p>
       <li><a name="conncname_oneroute"></a><a style="text-decoration:none" href="#conncname_oneroute">&#x1f517</a>
       <b>If there is exactly one row with a certain Route+Banner combination,</b>
       the Name should be blank.</li>
-    <li><a name="rework03"></a><a style="text-decoration:none" href="#rework03">&#x1f517</a>
+    <li><a name="conncname_multirows"></a><a style="text-decoration:none" href="#conncname_multirows">&#x1f517</a>
       <b>If there are multiple rows with the same Route+Banner combination</b>,
       each row should have a nonblank Name. In short, long, multi-region 
       routes will have Names composed from the region names, while shorter, 
