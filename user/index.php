@@ -25,6 +25,10 @@
             text-align: center;
             padding: 10px;
         }
+        #userLinks {
+        	text-align: center;
+    		font-size: 18px;
+        }
         #logLinks {
         	text-align: center;
     		font-size: 14px;
@@ -45,7 +49,7 @@
 <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
     <title>
         <?php
-        echo "Traveler Stats for " . $tmuser;
+        echo "Main user page for " . $tmuser;
         ?>
     </title>
 </head>
@@ -82,21 +86,21 @@ if ( $tmuser == "null") {
     echo "</html>\n";
     exit;
 }
-echo "<h1>Traveler Stats for ".$tmuser."</h1>";
+echo "<h1>Main user page for ".$tmuser."</h1>";
 ?>
 </div>
 <div id="body">
-	<div id="logLinks">
-		<a href="/logs/users/<?php echo $tmuser; ?>.log">Log File</a>, where you can find any errors from processing <?php echo $tmuser; ?>.list, and statistics.
-	</div>
-	<div id="scrollableMapview">
-	New: Browse the travels of <?php echo $tmuser; ?> with <a href="mapview.php?v">Scrollable Mapview</a>.
-	</div>
-	<div id="topstats">
-	New: <a href="topstats.php">Browse the top stats for the travels of <?php echo $tmuser; ?></a>.
-	</div>
+    <h2>User Links</h2>
+    <ul class="text">
+      <li><a href="/logs/users/<?php echo $tmuser; ?>.log">Log File</a>, where you can find any errors from processing <a href="https://github.com/TravelMapping/UserData/blob/master/list_files/<?php echo $tmuser; ?>.list"><?php echo $tmuser; ?>.list</a>, and statistics.</li>
+      <li>Browse the travels of <?php echo $tmuser; ?> with <a href="mapview.php?v">Mapview</a>.</li>
+      <li><a href="topstats.php">Browse the top stats for the travels of <?php echo $tmuser; ?></a>.</li>
+    </ul>
     <div id="overall">
         <h2>Overall Stats</h2>
+	<p class="text">
+	Click on "Routes Traveled" or "Routes Clinched" to see lists of all routes traveled/clinched by <?php echo $tmuser; ?>.
+	</p>
         <table class="gratable" style="width: 60%" id="tierTable">
 	    <thead>
 	    <tr><th /><th>Active Systems</th><th>Active+Preview Systems</th></tr>
@@ -190,7 +194,9 @@ SQL;
         </table>
     </div>
     <h2>Stats by Region</h2>
-    <!-- h3>Legend: A=active systems only, A+P=active and preview systems</h3> -->
+    <p class="text">
+    User <?php echo $tmuser; ?> has travels in <?php echo tm_count_rows("clinchedOverallMileageByRegion", "where traveler='$tmuser'"); ?> regions.  Click in a row to view detailed stats for the region, on the "Map" link to load the region in Mapview, and the "HB" link to get a list of highways in the region.
+    </p>
     <table class="gratable tablesorter" id="regionsTable">
         <thead>
 	<tr><th colspan="2" /><th colspan="3">Active Systems Only</th>
@@ -242,6 +248,9 @@ SQL;
         </tbody>
     </table>
     <h2>Stats by System</h2>
+    <p class="text">
+    User <?php echo $tmuser; ?> has travels in <?php echo tm_count_distinct_rows("clinchedSystemMileageByRegion", "systemName", "where traveler='$tmuser'"); ?> highway systems.  Click in a row to view detailed stats for the system, on the "Map" link to load the system in Mapview, and the "HB" link to get a list of highways in the system.
+    </p>
     <table class="gratable tablesorter" id="systemsTable">
         <thead>
         <tr>
