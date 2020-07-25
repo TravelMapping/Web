@@ -91,7 +91,7 @@ Chopped Routes File (e.g., <code>usai.csv</code>) format</p>
     <strong>Region</strong>:
     For undivided countries, this is the uppercase 3-letter country abbreviation in which the highway is located.
     Country subdivision codes are used instead or in addition for divided countries as <a href="hwydata.php#regionroute">
-    used in the wpt file name</a> but all-uppercase and with hyphen (no spaces),
+    used in the <code>.wpt</code> file name</a> but all-uppercase and with hyphen (no spaces),
     e.g. <code>FL</code> for Florida, <code>NT</code> for Northwest Territories,
     <code>DEU-TH</code> for Thuringia, <code>ESP-AR for</code> for Aragon, <code>MEX-BC</code> for Baja California.</li>
     <li><a name="croute"></a><a style="text-decoration:none" href="#croute">&#x1f517</a>
@@ -118,7 +118,7 @@ Chopped Routes File (e.g., <code>usai.csv</code>) format</p>
     name should be spelled as the locals spell it and using international 
     characters as needed. </li>
     <li><a name="croot"></a><a style="text-decoration:none" href="#croot">&#x1f517</a>
-    <strong>Filename root:</strong> The <a href="hwydata.php#regionroute">name of the .wpt file<a> with the extension omitted.
+    <strong>Filename root:</strong> The <a href="hwydata.php#regionroute">name of the <code>.wpt</code> file<a> with the extension omitted.
     <code>pa.us019trkpit</code>, <code>oh.oh007</code>, etc.</li>
     <li><a name="caltroute"></a><a style="text-decoration:none" href="#caltroute">&#x1f517</a>
     <strong>Alt Route Names</strong> A comma-separated list of 
@@ -182,7 +182,7 @@ Connected Routes File (e.g., <code>usai_con.csv</code>) format</p>
   processing, the first row is always ignored.</li>
   </br>
   <li><a name="conncolumns"></a><a style="text-decoration:none" href="#conncolumns">&#x1f517</a>
-  The columns:
+  The columns:</li>
   <ol>
     <li><a name="conncsystem"></a><a style="text-decoration:none" href="#conncsystem">&#x1f517</a>
     <b>System:</b> system code.</li>
@@ -195,12 +195,12 @@ Connected Routes File (e.g., <code>usai_con.csv</code>) format</p>
     Name field is used to distinguish between otherwise identically named 
     routes (same Route and Banner fields) or to give extra info about 
     numberless or bannered/repeatable designations.
-    Use geographical names, e.g. city names, island names or country names.</li>
+    Use geographical names, e.g. city names, island names or country names.
     <ul>
       <li><a name="conncname_oneroute"></a><a style="text-decoration:none" href="#conncname_oneroute">&#x1f517</a>
       <b>If there is exactly one row with a certain Route+Banner combination,</b>
       the Name should be blank.</li>
-    <li><a name="conncname_multirows"></a><a style="text-decoration:none" href="#conncname_multirows">&#x1f517</a>
+      <li><a name="conncname_multirows"></a><a style="text-decoration:none" href="#conncname_multirows">&#x1f517</a>
       <b>If there are multiple rows with the same Route+Banner combination</b>,
       each row should have a nonblank Name. In short, long, multi-region 
       routes will have Names composed from the region names, while shorter, 
@@ -247,6 +247,7 @@ Connected Routes File (e.g., <code>usai_con.csv</code>) format</p>
       disconnected sections of US 47 in the same state, use "(Main)" or a
       city for the long section and a city name for the short section.</li>
     </ul>
+    </li>
     <li><a name="conncroots"></a><a style="text-decoration:none" href="#conncroots">&#x1f517</a>
     <b>Roots:</b> a comma-separated list (no spaces!) of filename roots 
     of the chopped routes that connect to form this connected route.  
@@ -255,7 +256,6 @@ Connected Routes File (e.g., <code>usai_con.csv</code>) format</p>
     have one root. Always put the list of file roots in the correct order to make sure
     that the chopped routes indeed compose a continuous route. Remove all spaces.</li>
   </ol>
-  </li>
   </br>
   <li><a name="connorder"></a><a style="text-decoration:none" href="#connorder">&#x1f517</a>
   Each row gives info about the connected routes in the <a href="#routeorder">same order as they are given in the Chopped Routes File</a>.</li>
