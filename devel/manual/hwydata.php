@@ -57,7 +57,7 @@ a <code>.wpt</code> extension.</div>
   </br>
   <ol>
     <li><a name="impliedmultiplexes"></a><a style="text-decoration:none" href="#impliedmultiplexes">&#x1f517</a>
-    <strong>Unsigned but implied multiplexes: Treat as continuous routes.</strong></br>
+    <strong>Unsigned but implied multiplexes: Treat as continuous routes with one <code>.wpt</code> file.</strong></br>
     This is the case where only one route is signed where another one route 
     merges onto the same road. Usually the unsigned route splits off at 
     another point, then it's signed beyond the concurrency. Continuity is 
@@ -87,7 +87,7 @@ a <code>.wpt</code> extension.</div>
     </li>
     </br>
     <li><a name="discontinuous"></a><a style="text-decoration:none" href="#discontinuous">&#x1f517</a>
-    <strong>Bypassed, segmented routes: Discontinuous routes.</strong></br>
+    <strong>Bypassed, segmented routes: Discontinuous routes with more than one <code>.wpt</code> file.</strong></br>
     Here some pieces of an old route were bypassed by a new route, but 
     other pieces of the old route were upgraded into the new route. This 
     makes a continuously signed new route with pieces of the old route 
@@ -108,7 +108,7 @@ a <code>.wpt</code> extension.</div>
     </li>
     </br>
     <li><a name="alternating"></a><a style="text-decoration:none" href="#alternating">&#x1f517</a>
-    <strong>Alternating designation: Discontinuous routes.</strong></br>
+    <strong>Alternating designation: Discontinuous routes with more than one <code>.wpt</code> file.</strong></br>
     A road changes designations back and forth without either route splitting off on its own.</br>
     </br>
     Example:</br>
@@ -121,7 +121,7 @@ a <code>.wpt</code> extension.</div>
     </li>
     </br>
     <li><a name="notconcurrent"></a><a style="text-decoration:none" href="#notconcurrent">&#x1f517</a>
-    <strong>Like designations that aren't concurrent: Discontinuous routes.</strong></br>
+    <strong>Like designations that aren't concurrent: Discontinuous routes  with more than one <code>.wpt</code> file.</strong></br>
     By whatever reasoning, two unrelated, distant highways were given the same designation.</br>
     </br>
     Example:</br>
