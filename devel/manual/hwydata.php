@@ -150,7 +150,8 @@ a <code>.wpt</code> extension.</div>
   <li><a name="regionroute"></a><a style="text-decoration:none" href="#regionroute">&#x1f517</a>
   <code>region</code> + <code>.</code> + <code>route</code> ( + <code>banner</code> + <code>abbreviation</code> ) + <code>.wpt</code> is the format for the filename.
     <ul>
-      <li><code>Region</code> is the region code without any hyphens:</li>
+      <li><a name="region"></a><a style="text-decoration:none" href="#region">&#x1f517</a>
+      <code>Region</code> is the region code without any hyphens:</li>
       <ul>
       <li><a name="undivided"></a><a style="text-decoration:none" href="#undivided">&#x1f517</a>
       For undivided countries, the <code>region</code> is the 3-letter ISO 3166-1 alpha-3 country code,
@@ -173,6 +174,7 @@ a <code>.wpt</code> extension.</div>
         <li>See our list
         <a href="https://github.com/TravelMapping/HighwayData/blob/master/regions.csv">on GitHub</a>.</li>
       </ul>
+      </ul>
       <li><a name="route"></a><a style="text-decoration:none" href="#route">&#x1f517</a>
       The <code>route</code> is the name of the highway (number padded with zeroes as needed), ignoring any banners or qualifiers.
       No spaces! <code>us034</code> for US 34, <code>oh017</code> for OH 17, <code>pa066</code> for Business PA 66, <code>a007</code> for French Autoroute A7.
@@ -192,7 +194,6 @@ a <code>.wpt</code> extension.</div>
         <li><code>grc.a005.wpt</code> = Greece A5 (main piece).</li>
         <li><code>grc.a005art.wpt</code> = Greece A5 Arta section.</li>
       </ul>
-      </li>
     </ul>
   </li>
 </ul>
