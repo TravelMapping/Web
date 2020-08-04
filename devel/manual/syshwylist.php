@@ -99,7 +99,7 @@ Chopped Routes File (e.g., <code>usai.csv</code>) format</p>
     <code>OH17</code> for OH 17, <code>PA66</code> for Business PA 66, <code>A7</code>
     for French Autoroute A7. Skip hyphens and slashes unless they separate 
     two numbers (M22-1), or the hyphen is in common usage such as for US Interstates or Business Interstates (I-80BL)
-    and Quebec Autoroute (A-50).</li>
+    and Quebec Autoroutes (A-50).</li>
     <li><a name="cbanner"></a><a style="text-decoration:none" href="#cbanner">&#x1f517</a>
     <strong>Banner</strong>: For bannered routes, put the 3-letter banner abbreviation(s) (<code>Bus</code>, <code>Alt</code>, <code>Spr</code>, etc.)
     here only if needed. Otherwise leave it completely blank (no whitespace). <code>Lp</code> for Loop is two letters. No more than six characters
