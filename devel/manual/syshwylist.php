@@ -30,7 +30,6 @@ lists how those chopped routes are connected across boundaries to make full-leng
     <li><a href="#connected">Connected Routes File (e.g., <code>usai_con.csv</code>) format</a></li>
     <li><a href="#intcharacters">International characters</a></li>
   </ul>
-  <li><a href="#examplesystem">Example system: Takoma National H Routes (tach)</a></li>
   <li><a href="#concurrencies">Concurrencies within which not all concurrent routes are signed</a></li>
 </ul>
 </div>
@@ -145,7 +144,7 @@ Chopped Routes File (e.g., <code>usai.csv</code>) format</p>
   <b>Route numbers are ascending by route number.</b> <br />
   PA3, PA5, PA8, etc. </li>
   <li><a name="rsuffix"></a><a style="text-decoration:none" href="#rsuffix">&#x1f517</a>
-  <b>For like route numbers</b>, suffixless routes come first, followed by suffixed routes of the same number. <br />
+  <b>For identical route numbers</b>, suffixless routes come first, followed by suffixed routes of the same number. <br />
   MA2, MA3, MA3A, MA3B, MA4, MA4B, MA4H, MA5, etc.</li>
   <li><a name="rusualorder"></a><a style="text-decoration:none" href="#rusualorder">&#x1f517</a>
   For pieces of the same route, put them in the usual order for the country (i.e., south to north or west to east in the US).<br />
@@ -282,6 +281,7 @@ International characters</p>
 </ul>
 </div>
     
+<!--
 <p class="heading"><a name="examplesystem"></a><a style="text-decoration:none" href="#examplesystem">&#x1f517</a>
 Example system: Takoma National H Routes (tach)</p>
 
@@ -364,93 +364,7 @@ separated by commas.</p>
 highways in the US, the TCH in Canada, the M and A routes in Great 
 Britain, and the Int'l E Roads, the rows of the connected routes file 
 will vary greatly in the number of file roots listed.</p>
-
-
-<p class="heading"><a name="concurrencies"></a><a style="text-decoration:none" href="#concurrencies">&#x1f517</a>
-Concurrencies within which not all concurrent routes are signed</p>
-
-<p class="text">This section concerns typically well signed routes
- that whose numbers are signed with trailblazers or are not signed at
- all within a section of highway concurrent with other routes.  For
- example, France's A4 and A26 merge and split, but along the merged
- section, A4 is signed and A26 is not, but both routes are signed
- beyond the concurrent section. Should the not-signed routes be
- chopped into its signed pieces or made continuous and concurrent with
- the signed route?</p>
-
-<p class="text">We have 4 cases that are treated differently. The descriptions refer 
-to concurrencies of two routes, but the ideas generalize to 
-concurrencies of more routes.</p>
-
-<div class="text">
-<ol>
-  <li><p><a name="impliedmultiplexes"></a><a style="text-decoration:none" href="#impliedmultiplexes">&#x1f517</a>
-  <strong>Unsigned but implied multiplexes: Treat as continuous routes.</strong></p>
-
-This is the case where only one route is signed where another one route 
-merges onto the same road. Usually the unsigned route splits off at 
-another point, then it's signed beyond the concurrency. Continuity is 
-still implied by the way the routes are numbered even if the signs are 
-simplified to show only one route, so we treat each route as a 
-continuous one. 
-
-<p>Examples:</p>
-<p>USA MD 23/MD 165: 
-MD 23 was continuously signed before a relocation that created the 
-duplex.  In the current state, MD 23 is signed as "TO MD 23" at its 
-approaches to the duplex, and MD 165 is signed continuously. MD 23 
-should continue to be treated as continuous.</p>
-
-<p>ENG A414:
-Follow the length of A414 and you'll see several concurrent routes, 
-sometimes shown as A414 and sometimes as the other route, at least as 
-Google Maps shows it. A system of surface highways with a bypass here 
-and there is bound to be full of concurrencies, and so chopping half the
- routes into pieces around the concurrent parts would create a zillion 
-"extra" files for short pieces of routes.</p>
-
-<p>FRA A4/A26:
-The two freeways merge and split. The pieces of A26 could have been 
-given different numbers, but instead they were given the same number, as
- if it should be one long route rather than two.</p>
-  </li>
-  <li><p><a name="discontinuous"></a><a style="text-decoration:none" href="#discontinuous">&#x1f517</a>
-  <strong>Bypassed, segmented routes: Discontinuous routes.</strong></p>
-
-<p>Here some pieces of an old route were bypassed by a new route, but 
-other pieces of the old route were upgraded into the new route. This 
-makes a continuously signed new route with pieces of the old route 
-beginning and ending at various places along the new route. </p>
-
-<p>Examples:</p>
-
-<p>Bannered highways, like Alternate and Business routes, in the US:
-Many US highways, for example, have many auxiliary routes with the same 
-designation, like US 40 having many US 40 Business routes.  The 
-auxiliary routes are treated discontinuously, rather than having one 
-long, continuous US 40 Business concurrent along sections of US 40.</p>
-<p>US 40/MD 144: 
-There are several pieces of MD 144 along the old alignment of US 40. The
- pieces act like Business or Alternate routes and are never signed to 
-suggest continuity. </p>
-  </li>
-  <li><p><a name="alternating"></a><a style="text-decoration:none" href="#alternating">&#x1f517</a>
-  <strong>Alternating designation: Discontinuous routes.</strong></p>
-  <p>A road changes designations back and forth without either route splitting off on its own.</p>
-  <p>Example:</p>
-  Ireland's M/N routes come to mind here. Part of N8 was upgraded to M8, 
-  but there is no alternative N8 along that section. However, N8 leads 
-  straight into M8 at each end of M8. So if the highway goes N8-M8-N8, 
-  we'll have three files for these three routes. 
-  </li>
-  <li><p><a name="notconcurrent"></a><a style="text-decoration:none" href="#notconcurrent">&#x1f517</a>
-  <strong>Like designations that aren't concurrent: Discontinuous routes.</strong></p>
-  <p>By whatever reasoning, two unrelated, distant highways were given the same designation.</p>
-  <p>Example:</p>
-  <p>PA 97 (in NW Pennsylvania) and PA 97 (in southern PA), both part of the state highway system in Pennsylvania.</p>
-  </li>
-</ol>
-</div>
+-->
 
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
 </body>

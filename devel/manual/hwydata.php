@@ -40,6 +40,96 @@ a <code>.wpt</code> extension.</div>
   states in the USA), or crossing into multiple countries (e.g., 
   UNECE International 'E' Roads in Europe) must be chopped at borders into separate files for
   each region. </li>
+  <li><a name="concurrencies"></a><a style="text-decoration:none" href="#concurrencies">&#x1f517</a>
+  Concurrencies within which not all concurrent routes are signed</br>
+  This section concerns typically well signed routes
+  that whose numbers are signed with trailblazers or are not signed at
+  all within a section of highway concurrent with other routes.  For
+  example, France's A4 and A26 merge and split, but along the merged
+  section, A4 is signed and A26 is not, but both routes are signed
+  beyond the concurrent section. Should the not-signed routes be
+  chopped into its signed pieces or made continuous and concurrent with
+  the signed route?</br>
+  </br>
+  We have 4 cases that are treated differently. The descriptions refer 
+  to concurrencies of two routes, but the ideas generalize to 
+  concurrencies of more routes.</li>
+  </br>
+  <ol>
+    <li><a name="impliedmultiplexes"></a><a style="text-decoration:none" href="#impliedmultiplexes">&#x1f517</a>
+    <strong>Unsigned but implied multiplexes: Treat as continuous routes.</strong></br>
+    This is the case where only one route is signed where another one route 
+    merges onto the same road. Usually the unsigned route splits off at 
+    another point, then it's signed beyond the concurrency. Continuity is 
+    still implied by the way the routes are numbered even if the signs are 
+    simplified to show only one route, so we treat each route as a 
+    continuous one.</br>
+    </br>
+    Examples:</br>
+    <ul>
+      <li>USA MD 23/MD 165:</br>
+      MD 23 was continuously signed before a relocation that created the 
+      duplex.  In the current state, MD 23 is signed as "TO MD 23" at its 
+      approaches to the duplex, and MD 165 is signed continuously. MD 23 
+      should continue to be treated as continuous.</li>
+      <li>ENG A414:</br>
+      Follow the length of A414 and you'll see several concurrent routes, 
+      sometimes shown as A414 and sometimes as the other route, at least as 
+      Google Maps shows it. A system of surface highways with a bypass here 
+      and there is bound to be full of concurrencies, and so chopping half the
+      routes into pieces around the concurrent parts would create a zillion 
+      "extra" files for short pieces of routes.</li>
+      <li>FRA A4/A26:</br>
+      The two freeways merge and split. The pieces of A26 could have been 
+      given different numbers, but instead they were given the same number, as
+      if it should be one long route rather than two.</li>
+    </ul>
+    </li>
+    </br>
+    <li><a name="discontinuous"></a><a style="text-decoration:none" href="#discontinuous">&#x1f517</a>
+    <strong>Bypassed, segmented routes: Discontinuous routes.</strong></br>
+    Here some pieces of an old route were bypassed by a new route, but 
+    other pieces of the old route were upgraded into the new route. This 
+    makes a continuously signed new route with pieces of the old route 
+    beginning and ending at various places along the new route.</br>
+    </br>
+    Examples:</br>
+    <ul>
+      <li>Bannered highways, like Alternate and Business routes, in the US:
+      Many US highways, for example, have many auxiliary routes with the same 
+      designation, like US 40 having many US 40 Business routes.  The 
+      auxiliary routes are treated discontinuously, rather than having one 
+      long, continuous US 40 Business concurrent along sections of US 40.</br>
+      US 40/MD 144:</br>
+      There are several pieces of MD 144 along the old alignment of US 40. The
+      pieces act like Business or Alternate routes and are never signed to 
+      suggest continuity.</li>
+    </ul>
+    </li>
+    </br>
+    <li><a name="alternating"></a><a style="text-decoration:none" href="#alternating">&#x1f517</a>
+    <strong>Alternating designation: Discontinuous routes.</strong></br>
+    A road changes designations back and forth without either route splitting off on its own.</br>
+    </br>
+    Example:</br>
+    <ul>
+      <li>Ireland's M/N routes come to mind here. Part of N8 was upgraded to M8, 
+      but there is no alternative N8 along that section. However, N8 leads 
+      straight into M8 at each end of M8. So if the highway goes N8-M8-N8, 
+      we'll have three files for these three routes.</li>
+    </ul>
+    </li>
+    </br>
+    <li><a name="notconcurrent"></a><a style="text-decoration:none" href="#notconcurrent">&#x1f517</a>
+    <strong>Like designations that aren't concurrent: Discontinuous routes.</strong></br>
+    By whatever reasoning, two unrelated, distant highways were given the same designation.</br>
+    </br>
+    Example:</br>
+    <ul>
+      <li>PA 97 (in NW Pennsylvania) and PA 97 (in southern PA), both part of the state highway system in Pennsylvania.</li>
+    </ul>
+    </li>
+  </ol>
 </ul>
 </div>
 
