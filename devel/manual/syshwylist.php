@@ -30,7 +30,6 @@ lists how those chopped routes are connected across boundaries to make full-leng
     <li><a href="#connected">Connected Routes File (e.g., <code>usai_con.csv</code>) format</a></li>
     <li><a href="#intcharacters">International characters</a></li>
   </ul>
-  <li><a href="#concurrencies">Concurrencies within which not all concurrent routes are signed</a></li>
 </ul>
 </div>
 
