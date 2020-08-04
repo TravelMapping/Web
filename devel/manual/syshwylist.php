@@ -88,7 +88,7 @@ Chopped Routes File (e.g., <code>usai.csv</code>) format</p>
     <li><a name="cregion"></a><a style="text-decoration:none" href="#cregion">&#x1f517</a>
     <strong>Region</strong>:
     For undivided countries, this is the uppercase 3-letter country abbreviation in which the highway is located.
-    Country subdivision codes are used instead or in addition for divided countries as <a href="hwydata.php#regionroute">
+    Country subdivision codes are used instead or in addition for divided countries as <a href="hwydata.php#region">
     used in the <code>.wpt</code> file name</a> but all-uppercase and with hyphen (no spaces),
     e.g. <code>FL</code> for Florida, <code>NT</code> for Northwest Territories,
     <code>DEU-TH</code> for Thuringia, <code>ESP-AR for</code> for Aragon, <code>MEX-BC</code> for Baja California.</li>
@@ -99,7 +99,8 @@ Chopped Routes File (e.g., <code>usai.csv</code>) format</p>
     two numbers (M22-1), or the hyphen is in common usage such as for US Interstates or Business Interstates (I-80BL)
     and Quebec Autoroutes (A-50).</li>
     <li><a name="cbanner"></a><a style="text-decoration:none" href="#cbanner">&#x1f517</a>
-    <strong>Banner</strong>: For bannered routes, put the 3-letter banner abbreviation(s) (<code>Bus</code>, <code>Alt</code>, <code>Spr</code>, etc.)
+    <strong>Banner</strong>: For bannered routes, put the 3-letter banner abbreviation(s) <a href="hwydata.php#banner">
+    used in the <code>.wpt</code> file name but starting with a uppercase letter</a> (<code>Bus</code>, <code>Alt</code>, <code>Spr</code>, etc.)
     here only if needed. Otherwise leave it completely blank (no whitespace). <code>Lp</code> for Loop is two letters. No more than six characters
     (for double-bannered routes) are allowed.</li>
     <li><a name="cabbrev"></a><a style="text-decoration:none" href="#cabbrev">&#x1f517</a>
@@ -192,11 +193,11 @@ Connected Routes File (e.g., <code>usai_con.csv</code>) format</p>
   The columns:</li>
   <ol>
     <li><a name="conncsystem"></a><a style="text-decoration:none" href="#conncsystem">&#x1f517</a>
-    <b>System:</b> system code.</li>
+    <b>System:</b> system code, see <a href="#csystem">chopped file</a>.</li>
     <li><a name="conncroute"></a><a style="text-decoration:none" href="#conncroute">&#x1f517</a>
-    <b>Route:</b> the common Route name, like US52.</li>
+    <b>Route:</b> the common Route name, like US52, see <a href="#croute">chopped file</a>.</li>
     <li><a name="conncbanner"></a><a style="text-decoration:none" href="#conncbanner">&#x1f517</a>
-    <b>Banner:</b> the common Banner, if the route is bannered, or left blank if not.</li>
+    <b>Banner:</b> the common Banner, if the route is bannered, or left blank if not, see <a href="#cbanner">chopped file</a>.</li>
     <li><a name="conncname"></a><a style="text-decoration:none" href="#conncname">&#x1f517</a>
     <b>Name:</b> like the <a href="#ccity">City field of the Chopped Routes File</a>, the 
     Name field is used to distinguish between otherwise identically named 
