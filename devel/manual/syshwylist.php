@@ -117,6 +117,15 @@ Chopped Routes File (e.g., <code>usai.csv</code>) format</p>
     auxiliary highways, so leave it blank (no whitespace) in most cases. The
     name should be spelled as the locals spell it and using international 
     characters as needed. </li>
+    <ul>
+      <li><a name="ccity_discontinuous"></a><a style="text-decoration:none" href="#ccity_discontinuous">&#x1f517</a>
+      <b>If there are two or more discontinuous routes of the same 
+      Route+Banner combination, each wholly within the same, single region</b>, 
+      use either "(Main)" (parentheses included) for the longer route
+      or give this piece a city name.  For example, if there are 200-mile and 8-mile
+      disconnected sections of US 47 in the same state, use "(Main)" or a
+      geographical for the long section and a geographical name for the short section.</li>
+    </ul>
     <li><a name="croot"></a><a style="text-decoration:none" href="#croot">&#x1f517</a>
     <strong>Filename root:</strong> The <a href="hwydata.php#regionroute">name of the <code>.wpt</code> file<a> with the extension omitted.
     <code>pa.us019trkpit</code>, <code>oh.oh007</code>, etc.</li>
@@ -198,28 +207,25 @@ Connected Routes File (e.g., <code>usai_con.csv</code>) format</p>
     Use geographical names, e.g. city names, island names or country names.
     <ul>
       <li><a name="conncname_oneroute"></a><a style="text-decoration:none" href="#conncname_oneroute">&#x1f517</a>
-      <b>If there is exactly one row with a certain Route+Banner combination,</b>
+      <b>If there is exactly one route with a certain Route+Banner combination,</b>
       the Name should be blank.</li>
       <li><a name="conncname_multirows"></a><a style="text-decoration:none" href="#conncname_multirows">&#x1f517</a>
-      <b>If there are multiple rows with the same Route+Banner combination</b>,
-      each row should have a nonblank Name. In short, long, multi-region 
-      routes will have Names composed from the region names, while shorter, 
-      single-region routes will have Names devised identically to the Name
-      field in the Chopped Routes File. Here "region" 
-      means the country or the subdivision in a divided country.</li>
+      <b>If there are multiple routes with the same Route+Banner combination</b>,
+      each route should have a nonblank Name.</li>
+      <ul>
       <li><a name="conncname_oneregion"></a><a style="text-decoration:none" href="#conncname_oneregion">&#x1f517</a>
       <b>If the route is lengthy and within one region</b>, use the region
       name as the Name.  For example, the southern US 9 is entirely in 
       Delaware, so the Name should be "Delaware" (and not "DE").</li>
       <li><a name="conncname_multiregion"></a><a style="text-decoration:none" href="#conncname_multiregion">&#x1f517</a>
-      <b>If the route is lengthy and spans multiple regions</b>, use both 
+      <b>If the route is lengthy and spans multiple regions</b>, use the first and the last
       region names separated by space-hyphen-space.  Put the region names in 
       the usual order for the system (e.g., region containing the southern or 
       western end first if in the US).  For example, the northern US 9 spans 
       New Jersey and New York in that order, so the Name should be "New Jersey
       - New York".</li>
       <li><a name="conncname_direction"></a><a style="text-decoration:none" href="#conncname_direction">&#x1f517</a>
-      <b>If applying these rules results in the same region used in different Names for rows with the same Route+Banner</b>,
+      <b>If the route is in the same region used in different Names for routes with the same Route+Banner</b>,
       add an abbreviated direction (NW., W., C., etc.) to that region name in
       each Name it appears.  For example, the western US 422 would be Named 
       "Ohio - W. Pennsylvania" and the eastern US 422 would be Named "E. 
@@ -228,24 +234,15 @@ Connected Routes File (e.g., <code>usai_con.csv</code>) format</p>
       name along with the region abbreviation.  For example, E25 has a piece 
       "Netherlands - Italy" that includes mainland France, as well as pieces 
       in the large islands of Corsica, France, and Sardinia, Italy.  The three
-      piece Names should be "Netherlands - Italy", "Corse, FRA", and 
-      "Sardegna, ITA".</li>
+      piece Names should be "Netherlands - Italy", <i>blank</i>, and 
+      "Cagliari".</li>
       <li><a name="conncname_shorter"></a><a style="text-decoration:none" href="#conncname_shorter">&#x1f517</a>
       <b>If a route is more local (shorter), is a full beltway, or is a bannered/repeatable route type</b>
-      (mandatory City and Abbrev in the Chopped Routes File), then the Name 
+      (mandatory Name and Abbrev in the Chopped Routes File), then the Name 
       should be devised in the same way as the City field in the Chopped 
       Routes File (and in most cases, the Name and City fields should be 
       identical).</li> 
-      <li><a name="conncname_discontinuous"></a><a style="text-decoration:none" href="#conncname_discontinuous">&#x1f517</a>
-      <b>If there are two or more discontinuous routes of the same 
-      Route+Banner combination, each wholly within the same, single region, 
-      and one is significantly longer than the rest</b>, the above rules would
-      suggest using the region name for the long piece and city names for the
-      short ones.  Since the region name as the Name doesn't distinguish the 
-      pieces well, change the Name to either "(Main)" (parentheses included) 
-      or give this piece a city name.  For example, if there are 200-mile and 8-mile
-      disconnected sections of US 47 in the same state, use "(Main)" or a
-      city for the long section and a city name for the short section.</li>
+      </ul>
     </ul>
     </li>
     <li><a name="conncroots"></a><a style="text-decoration:none" href="#conncroots">&#x1f517</a>
