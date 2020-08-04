@@ -424,7 +424,7 @@ SQL;
             echo "<td ".$style.">" . tm_convert_distance($row['clinchedMileage']) . "</td>";
             echo "<td ".$style.">" . tm_convert_distance($row['totalMileage']) . "</td>";
             echo "<td ".$style.">" . $row['percentage'] . "%</td>";
-            echo "<td class='link'><a href='/hb?rg={$region}&amp;sys={$row['systemName']}'>HB</a></td></tr>";
+            echo "<td class='link'><a href='/hb/showroute.php?rg={$region}&amp;sys={$row['systemName']}'>HB</a></td></tr>";
         }
         $res->free();
         ?>

@@ -394,7 +394,7 @@ HTML;
                 if ($region == "") {
                     $link = "window.open('/user/mapview.php?u=" . $tmuser . "&amp;cr=" . $row['root'] . "')";
                 } else {
-                    $link = "window.open('/hb?u=" . $tmuser . "&amp;r=" . $row['root'] . "')";
+                    $link = "window.open('/hb/showroute.php?u=" . $tmuser . "&amp;r=" . $row['root'] . "')";
                 }
 
 	    	$style = 'style="background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$row['totalMileage']).';"';
