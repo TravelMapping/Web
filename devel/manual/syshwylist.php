@@ -115,7 +115,7 @@ Chopped Routes File (e.g., <code>usai.csv</code>) format</p>
     the shield in the highway browser. Usually no text is needed except for 
     auxiliary highways, so leave it blank (no whitespace) in most cases. The
     name should be spelled as the locals spell it and using international 
-    characters as needed. </li>
+    characters as needed.
     <ul>
       <li><a name="ccity_discontinuous"></a><a style="text-decoration:none" href="#ccity_discontinuous">&#x1f517</a>
       <b>If there are two or more discontinuous routes of the same 
@@ -124,7 +124,7 @@ Chopped Routes File (e.g., <code>usai.csv</code>) format</p>
       or give this piece a city name.  For example, if there are 200-mile and 8-mile
       disconnected sections of US 47 in the same state, use "(Main)" or a
       geographical for the long section and a geographical name for the short section.</li>
-    </ul>
+    </ul></li>
     <li><a name="croot"></a><a style="text-decoration:none" href="#croot">&#x1f517</a>
     <strong>Filename root:</strong> The <a href="hwydata.php#regionroute">name of the <code>.wpt</code> file<a> with the extension omitted.
     <code>pa.us019trkpit</code>, <code>oh.oh007</code>, etc.</li>
@@ -249,7 +249,8 @@ Connected Routes File (e.g., <code>usai_con.csv</code>) format</p>
     of the chopped routes that connect to form this connected route.  
     Continuous roots that were chopped at boundaries will have a list of 2+ 
     file roots, while a route that exists entirely in one region will simply
-    have one root. Always put the list of file roots in the correct order to make sure
+    have one root, the same as specified for <a href="#croot">Filename root in the chopped file</a>.
+    Always put the list of file roots in the correct order to make sure
     that the chopped routes indeed compose a continuous route. Remove all spaces.</li>
   </ol>
   </br>
