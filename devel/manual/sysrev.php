@@ -137,7 +137,7 @@ Check routes with Waypoint File Editor</p>
 
 <div class="text">
 <ul>
-  <li>Load the <a href="hwydata.php">wpt files</a> into the <a href="/wptedit/">Waypoint File Editor</a> and check route by route.
+  <li>Load the <a href="hwydata.php"><code>.wpt</code> files</a> into the <a href="/wptedit/">Waypoint File Editor</a> and check route by route.
   </br>Pay special attention to:</li>
   <ul>
     </br>Check with normal zoom into the map:

@@ -30,8 +30,6 @@ lists how those chopped routes are connected across boundaries to make full-leng
     <li><a href="#connected">Connected Routes File (e.g., <code>usai_con.csv</code>) format</a></li>
     <li><a href="#intcharacters">International characters</a></li>
   </ul>
-  <li><a href="#examplesystem">Example system: Takoma National H Routes (tach)</a></li>
-  <li><a href="#concurrencies">Concurrencies within which not all concurrent routes are signed</a></li>
 </ul>
 </div>
 
@@ -90,18 +88,19 @@ Chopped Routes File (e.g., <code>usai.csv</code>) format</p>
     <li><a name="cregion"></a><a style="text-decoration:none" href="#cregion">&#x1f517</a>
     <strong>Region</strong>:
     For undivided countries, this is the uppercase 3-letter country abbreviation in which the highway is located.
-    Country subdivision codes are used instead or in addition for divided countries as <a href="hwydata.php#regionroute">
-    used in the wpt file name</a> but all-uppercase and with hyphen (no spaces),
+    Country subdivision codes are used instead or in addition for divided countries as <a href="hwydata.php#region">
+    used in the <code>.wpt</code> file name</a> but all-uppercase and with hyphen (no spaces),
     e.g. <code>FL</code> for Florida, <code>NT</code> for Northwest Territories,
     <code>DEU-TH</code> for Thuringia, <code>ESP-AR for</code> for Aragon, <code>MEX-BC</code> for Baja California.</li>
     <li><a name="croute"></a><a style="text-decoration:none" href="#croute">&#x1f517</a>
     <strong>Route</strong>: The name of the highway, ignoring any banners or qualifiers. No spaces! <code>US34</code> for US 34,
     <code>OH17</code> for OH 17, <code>PA66</code> for Business PA 66, <code>A7</code>
     for French Autoroute A7. Skip hyphens and slashes unless they separate 
-    two numbers (M22-1), the route is a US Interstate or Business Interstate (I-80BL),
-    or is a Quebec Autoroute (A-50). </li>
+    two numbers (M22-1), or the hyphen is in common usage such as for US Interstates or Business Interstates (I-80BL)
+    and Quebec Autoroutes (A-50).</li>
     <li><a name="cbanner"></a><a style="text-decoration:none" href="#cbanner">&#x1f517</a>
-    <strong>Banner</strong>: For bannered routes, put the 3-letter banner abbreviation(s) (<code>Bus</code>, <code>Alt</code>, <code>Spr</code>, etc.)
+    <strong>Banner</strong>: For bannered routes, put the 3-letter banner abbreviation(s) <a href="hwydata.php#banner">
+    used in the <code>.wpt</code> file name but starting with a uppercase letter</a> (<code>Bus</code>, <code>Alt</code>, <code>Spr</code>, etc.)
     here only if needed. Otherwise leave it completely blank (no whitespace). <code>Lp</code> for Loop is two letters. No more than six characters
     (for double-bannered routes) are allowed.</li>
     <li><a name="cabbrev"></a><a style="text-decoration:none" href="#cabbrev">&#x1f517</a>
@@ -117,8 +116,17 @@ Chopped Routes File (e.g., <code>usai.csv</code>) format</p>
     auxiliary highways, so leave it blank (no whitespace) in most cases. The
     name should be spelled as the locals spell it and using international 
     characters as needed. </li>
+    <ul>
+      <li><a name="ccity_discontinuous"></a><a style="text-decoration:none" href="#ccity_discontinuous">&#x1f517</a>
+      <b>If there are two or more discontinuous routes of the same 
+      Route+Banner combination, each wholly within the same, single region</b>, 
+      use either "(Main)" (parentheses included) for the longer route
+      or give this piece a city name.  For example, if there are 200-mile and 8-mile
+      disconnected sections of US 47 in the same state, use "(Main)" or a
+      geographical for the long section and a geographical name for the short section.</li>
+    </ul>
     <li><a name="croot"></a><a style="text-decoration:none" href="#croot">&#x1f517</a>
-    <strong>Filename root:</strong> The <a href="hwydata.php#regionroute">name of the .wpt file<a> with the extension omitted.
+    <strong>Filename root:</strong> The <a href="hwydata.php#regionroute">name of the <code>.wpt</code> file<a> with the extension omitted.
     <code>pa.us019trkpit</code>, <code>oh.oh007</code>, etc.</li>
     <li><a name="caltroute"></a><a style="text-decoration:none" href="#caltroute">&#x1f517</a>
     <strong>Alt Route Names</strong> A comma-separated list of 
@@ -136,7 +144,7 @@ Chopped Routes File (e.g., <code>usai.csv</code>) format</p>
   <b>Route numbers are ascending by route number.</b> <br />
   PA3, PA5, PA8, etc. </li>
   <li><a name="rsuffix"></a><a style="text-decoration:none" href="#rsuffix">&#x1f517</a>
-  <b>For like route numbers</b>, suffixless routes come first, followed by suffixed routes of the same number. <br />
+  <b>For identical route numbers</b>, suffixless routes come first, followed by suffixed routes of the same number. <br />
   MA2, MA3, MA3A, MA3B, MA4, MA4B, MA4H, MA5, etc.</li>
   <li><a name="rusualorder"></a><a style="text-decoration:none" href="#rusualorder">&#x1f517</a>
   For pieces of the same route, put them in the usual order for the country (i.e., south to north or west to east in the US).<br />
@@ -182,44 +190,41 @@ Connected Routes File (e.g., <code>usai_con.csv</code>) format</p>
   processing, the first row is always ignored.</li>
   </br>
   <li><a name="conncolumns"></a><a style="text-decoration:none" href="#conncolumns">&#x1f517</a>
-  The columns:
+  The columns:</li>
   <ol>
     <li><a name="conncsystem"></a><a style="text-decoration:none" href="#conncsystem">&#x1f517</a>
-    <b>System:</b> system code.</li>
+    <b>System:</b> system code, see <a href="#csystem">chopped file</a>.</li>
     <li><a name="conncroute"></a><a style="text-decoration:none" href="#conncroute">&#x1f517</a>
-    <b>Route:</b> the common Route name, like US52.</li>
+    <b>Route:</b> the common Route name, like US52, see <a href="#croute">chopped file</a>.</li>
     <li><a name="conncbanner"></a><a style="text-decoration:none" href="#conncbanner">&#x1f517</a>
-    <b>Banner:</b> the common Banner, if the route is bannered, or left blank if not.</li>
+    <b>Banner:</b> the common Banner, if the route is bannered, or left blank if not, see <a href="#cbanner">chopped file</a>.</li>
     <li><a name="conncname"></a><a style="text-decoration:none" href="#conncname">&#x1f517</a>
     <b>Name:</b> like the <a href="#ccity">City field of the Chopped Routes File</a>, the 
     Name field is used to distinguish between otherwise identically named 
     routes (same Route and Banner fields) or to give extra info about 
     numberless or bannered/repeatable designations.
-    Use geographical names, e.g. city names, island names or country names.</li>
+    Use geographical names, e.g. city names, island names or country names.
     <ul>
       <li><a name="conncname_oneroute"></a><a style="text-decoration:none" href="#conncname_oneroute">&#x1f517</a>
-      <b>If there is exactly one row with a certain Route+Banner combination,</b>
+      <b>If there is exactly one route with a certain Route+Banner combination,</b>
       the Name should be blank.</li>
-    <li><a name="conncname_multirows"></a><a style="text-decoration:none" href="#conncname_multirows">&#x1f517</a>
-      <b>If there are multiple rows with the same Route+Banner combination</b>,
-      each row should have a nonblank Name. In short, long, multi-region 
-      routes will have Names composed from the region names, while shorter, 
-      single-region routes will have Names devised identically to the Name
-      field in the Chopped Routes File. Here "region" 
-      means the country or the subdivision in a divided country.</li>
+      <li><a name="conncname_multirows"></a><a style="text-decoration:none" href="#conncname_multirows">&#x1f517</a>
+      <b>If there are multiple routes with the same Route+Banner combination</b>,
+      each route should have a nonblank Name.</li>
+      <ul>
       <li><a name="conncname_oneregion"></a><a style="text-decoration:none" href="#conncname_oneregion">&#x1f517</a>
       <b>If the route is lengthy and within one region</b>, use the region
       name as the Name.  For example, the southern US 9 is entirely in 
       Delaware, so the Name should be "Delaware" (and not "DE").</li>
       <li><a name="conncname_multiregion"></a><a style="text-decoration:none" href="#conncname_multiregion">&#x1f517</a>
-      <b>If the route is lengthy and spans multiple regions</b>, use both 
+      <b>If the route is lengthy and spans multiple regions</b>, use the first and the last
       region names separated by space-hyphen-space.  Put the region names in 
       the usual order for the system (e.g., region containing the southern or 
       western end first if in the US).  For example, the northern US 9 spans 
       New Jersey and New York in that order, so the Name should be "New Jersey
       - New York".</li>
       <li><a name="conncname_direction"></a><a style="text-decoration:none" href="#conncname_direction">&#x1f517</a>
-      <b>If applying these rules results in the same region used in different Names for rows with the same Route+Banner</b>,
+      <b>If the route is in the same region used in different Names for routes with the same Route+Banner</b>,
       add an abbreviated direction (NW., W., C., etc.) to that region name in
       each Name it appears.  For example, the western US 422 would be Named 
       "Ohio - W. Pennsylvania" and the eastern US 422 would be Named "E. 
@@ -228,25 +233,17 @@ Connected Routes File (e.g., <code>usai_con.csv</code>) format</p>
       name along with the region abbreviation.  For example, E25 has a piece 
       "Netherlands - Italy" that includes mainland France, as well as pieces 
       in the large islands of Corsica, France, and Sardinia, Italy.  The three
-      piece Names should be "Netherlands - Italy", "Corse, FRA", and 
-      "Sardegna, ITA".</li>
+      piece Names should be "Netherlands - Italy", <i>blank</i>, and 
+      "Cagliari".</li>
       <li><a name="conncname_shorter"></a><a style="text-decoration:none" href="#conncname_shorter">&#x1f517</a>
       <b>If a route is more local (shorter), is a full beltway, or is a bannered/repeatable route type</b>
-      (mandatory City and Abbrev in the Chopped Routes File), then the Name 
+      (mandatory Name and Abbrev in the Chopped Routes File), then the Name 
       should be devised in the same way as the City field in the Chopped 
       Routes File (and in most cases, the Name and City fields should be 
       identical).</li> 
-      <li><a name="conncname_discontinuous"></a><a style="text-decoration:none" href="#conncname_discontinuous">&#x1f517</a>
-      <b>If there are two or more discontinuous routes of the same 
-      Route+Banner combination, each wholly within the same, single region, 
-      and one is significantly longer than the rest</b>, the above rules would
-      suggest using the region name for the long piece and city names for the
-      short ones.  Since the region name as the Name doesn't distinguish the 
-      pieces well, change the Name to either "(Main)" (parentheses included) 
-      or give this piece a city name.  For example, if there are 200-mile and 8-mile
-      disconnected sections of US 47 in the same state, use "(Main)" or a
-      city for the long section and a city name for the short section.</li>
+      </ul>
     </ul>
+    </li>
     <li><a name="conncroots"></a><a style="text-decoration:none" href="#conncroots">&#x1f517</a>
     <b>Roots:</b> a comma-separated list (no spaces!) of filename roots 
     of the chopped routes that connect to form this connected route.  
@@ -255,7 +252,6 @@ Connected Routes File (e.g., <code>usai_con.csv</code>) format</p>
     have one root. Always put the list of file roots in the correct order to make sure
     that the chopped routes indeed compose a continuous route. Remove all spaces.</li>
   </ol>
-  </li>
   </br>
   <li><a name="connorder"></a><a style="text-decoration:none" href="#connorder">&#x1f517</a>
   Each row gives info about the connected routes in the <a href="#routeorder">same order as they are given in the Chopped Routes File</a>.</li>
@@ -285,6 +281,7 @@ International characters</p>
 </ul>
 </div>
     
+<!--
 <p class="heading"><a name="examplesystem"></a><a style="text-decoration:none" href="#examplesystem">&#x1f517</a>
 Example system: Takoma National H Routes (tach)</p>
 
@@ -367,93 +364,7 @@ separated by commas.</p>
 highways in the US, the TCH in Canada, the M and A routes in Great 
 Britain, and the Int'l E Roads, the rows of the connected routes file 
 will vary greatly in the number of file roots listed.</p>
-
-
-<p class="heading"><a name="concurrencies"></a><a style="text-decoration:none" href="#concurrencies">&#x1f517</a>
-Concurrencies within which not all concurrent routes are signed</p>
-
-<p class="text">This section concerns typically well signed routes
- that whose numbers are signed with trailblazers or are not signed at
- all within a section of highway concurrent with other routes.  For
- example, France's A4 and A26 merge and split, but along the merged
- section, A4 is signed and A26 is not, but both routes are signed
- beyond the concurrent section. Should the not-signed routes be
- chopped into its signed pieces or made continuous and concurrent with
- the signed route?</p>
-
-<p class="text">We have 4 cases that are treated differently. The descriptions refer 
-to concurrencies of two routes, but the ideas generalize to 
-concurrencies of more routes.</p>
-
-<div class="text">
-<ol>
-  <li><p><a name="impliedmultiplexes"></a><a style="text-decoration:none" href="#impliedmultiplexes">&#x1f517</a>
-  <strong>Unsigned but implied multiplexes: Treat as continuous routes.</strong></p>
-
-This is the case where only one route is signed where another one route 
-merges onto the same road. Usually the unsigned route splits off at 
-another point, then it's signed beyond the concurrency. Continuity is 
-still implied by the way the routes are numbered even if the signs are 
-simplified to show only one route, so we treat each route as a 
-continuous one. 
-
-<p>Examples:</p>
-<p>USA MD 23/MD 165: 
-MD 23 was continuously signed before a relocation that created the 
-duplex.  In the current state, MD 23 is signed as "TO MD 23" at its 
-approaches to the duplex, and MD 165 is signed continuously. MD 23 
-should continue to be treated as continuous.</p>
-
-<p>ENG A414:
-Follow the length of A414 and you'll see several concurrent routes, 
-sometimes shown as A414 and sometimes as the other route, at least as 
-Google Maps shows it. A system of surface highways with a bypass here 
-and there is bound to be full of concurrencies, and so chopping half the
- routes into pieces around the concurrent parts would create a zillion 
-"extra" files for short pieces of routes.</p>
-
-<p>FRA A4/A26:
-The two freeways merge and split. The pieces of A26 could have been 
-given different numbers, but instead they were given the same number, as
- if it should be one long route rather than two.</p>
-  </li>
-  <li><p><a name="discontinuous"></a><a style="text-decoration:none" href="#discontinuous">&#x1f517</a>
-  <strong>Bypassed, segmented routes: Discontinuous routes.</strong></p>
-
-<p>Here some pieces of an old route were bypassed by a new route, but 
-other pieces of the old route were upgraded into the new route. This 
-makes a continuously signed new route with pieces of the old route 
-beginning and ending at various places along the new route. </p>
-
-<p>Examples:</p>
-
-<p>Bannered highways, like Alternate and Business routes, in the US:
-Many US highways, for example, have many auxiliary routes with the same 
-designation, like US 40 having many US 40 Business routes.  The 
-auxiliary routes are treated discontinuously, rather than having one 
-long, continuous US 40 Business concurrent along sections of US 40.</p>
-<p>US 40/MD 144: 
-There are several pieces of MD 144 along the old alignment of US 40. The
- pieces act like Business or Alternate routes and are never signed to 
-suggest continuity. </p>
-  </li>
-  <li><p><a name="alternating"></a><a style="text-decoration:none" href="#alternating">&#x1f517</a>
-  <strong>Alternating designation: Discontinuous routes.</strong></p>
-  <p>A road changes designations back and forth without either route splitting off on its own.</p>
-  <p>Example:</p>
-  Ireland's M/N routes come to mind here. Part of N8 was upgraded to M8, 
-  but there is no alternative N8 along that section. However, N8 leads 
-  straight into M8 at each end of M8. So if the highway goes N8-M8-N8, 
-  we'll have three files for these three routes. 
-  </li>
-  <li><p><a name="notconcurrent"></a><a style="text-decoration:none" href="#notconcurrent">&#x1f517</a>
-  <strong>Like designations that aren't concurrent: Discontinuous routes.</strong></p>
-  <p>By whatever reasoning, two unrelated, distant highways were given the same designation.</p>
-  <p>Example:</p>
-  <p>PA 97 (in NW Pennsylvania) and PA 97 (in southern PA), both part of the state highway system in Pennsylvania.</p>
-  </li>
-</ol>
-</div>
+-->
 
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
 </body>

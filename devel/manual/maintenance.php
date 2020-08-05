@@ -84,8 +84,8 @@ Which changes to activated routes are newsworthy?</p>
       Example: Waypoint <code>P1</code> is mislabeled but at the correct location. It should be <code>NewP1</code> instead. <br />
       <br />
       Check the <a href="/logs/pointsinuse.log">points in use log</a> manually or
-      load the corresponding line to the wpt file into the <a href="/wptedit/">Waypoint File Editor</a>.<br />
-      If there is no entry for the .wpt file at all, no label of the route is in use.<br/>
+      load the corresponding line to the <code>.wpt</code> file into the <a href="/wptedit/">Waypoint File Editor</a>.<br />
+      If there is no entry for the <code>.wpt</code> file at all, no label of the route is in use.<br/>
       <br />
       <ul>
         <li><b>If the label is not in use:</b> <br />
@@ -247,7 +247,7 @@ which is  available <a href="/devel/updates.php">on the updates page</a> to help
 The list is ordered by regions. Add a new line at the beginning of the right region.
 Don't let the changes get lost in the forum or elsewhere!</br>
 </br>
-Updates are included in CSV format, so be sure to include all
+Updates are included in <code>.csv</code> format, so be sure to include all
 fields.  The last field is the description, and should be in plain
 English.  Keep them concise but just specific enough for someone to
 understand in the <a href="/hb/">Highway Browser</a> since they can't compare with the old

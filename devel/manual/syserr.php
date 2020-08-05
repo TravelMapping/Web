@@ -65,7 +65,7 @@ Data errors</p>
   After manual changes within the editor field, the data check is done on the next editor action, e.g. when pressing the <code>Load</code> button.
   </br>
   </br>
-  Check the table for errors before saving the wpt file. Fix unintended errors or mark intended errors <a href="#falsepositive">false positive</a>.
+  Check the table for errors before saving the <code>.wpt</code> file. Fix unintended errors or mark intended errors <a href="#falsepositive">false positive</a>.
   </br>
   </br>
   Note: Not all data errors are detected by the WPT file editor, see below: <green>supported</green>,
@@ -423,8 +423,8 @@ Check for broken concurrencies</p>
       </ul>
     </ul>
     <li>When you spot errors, click on the lines or markers to get info about the route and waypoint labels. It is sometimes difficult to click all routes when they are mostly overlapped.</li>
-    <li>Fix the coordinates in the corresponding wpt files.</li>
-    <li>Load the changed wpt files into the <a href="/wptedit/">WPT file editor</a> to avoid causing unintended <a href="#errors">data errors</a>.</li>
+    <li>Fix the coordinates in the corresponding <code>.wpt</code> files.</li>
+    <li>Load the changed <code>.wpt</code> files into the <a href="/wptedit/">WPT file editor</a> to avoid causing unintended <a href="#errors">data errors</a>.</li>
     <li>Broken concurrencies of short segments can hardly be found this way. It is recommended to check <a href="#nearmisspoint"> NMPs</a> to find these errors.</li>
   </ul>
 </div>
@@ -460,8 +460,8 @@ Near-miss points</p>
     </ul>
     <li>Click on the NMP hotspot lines or their endpoints to get info about the involved routes and waypoint labels.</li>
     <li>Since you only see the points but not the whole network graph, you might need to open another HDX instance on load the region graph from <code>Option 1</code> where you can get the whole picture. To figure out which routes should intersect, what's going on there etc. For instance, it's possible that concurrent routes are only broken on a very short segment you don't see (or missed) with the <code>Option 1</code> view style.</li>
-    <li>Fix the coordinates in the corresponding wpt files.</li>
-    <li>Load the changed wpt files into the <a href="/wptedit/">WPT file editor</a> to avoid causing unintended <a href="#errors">data errors</a>.</li>
+    <li>Fix the coordinates in the corresponding <code>.wpt</code> files.</li>
+    <li>Load the changed <code>.wpt</code> files into the <a href="/wptedit/">WPT file editor</a> to avoid causing unintended <a href="#errors">data errors</a>.</li>
   </ul>
 </div>
 
