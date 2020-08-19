@@ -334,23 +334,31 @@ with their abbreviation regardless of a local convention (Michigan State
     <td>FaiRd <br />
       PapMillRd<br />
       <br />
-      MarKingBlvd MLKingBlvd<br />      </td>
+      MarKingBlvd<br/>
+      MLKingBlvd<br />
+      <br/>
+      MLKBlvd<br/>
+      UCSBBlvd
+      </td>
     <td>Abbreviate the generic road type (Rd for Road, Blvd for 
       Boulevard, etc.) if it's one of the very common types. Otherwise, use 
       the <em>first </em>three letters: Uli for Ulica. Skip the final period. <br />
       <br />      
       For up to two other (specifying) words, truncate the word as follows:<br />
       1-4 letters - use whole word<br />
-      5+ letters - use the <em>first</em> 3 letters. Don't use a made-up abbreviation. Fairchild Road becomes FaiRd, not FrchldRd or FchRd or anything else. <br />
+      5+ letters - use the <em>first</em> 3 letters. Don't use a made-up abbreviation.
+      Fairchild Road becomes FaiRd, not FrchldRd or FchRd or anything else. <br />
       <br />
-      If the cross road name has more than 3 words, use one of two options:<br />
+      If the cross road name has more than 3 words, use one of three options:<br />
       1. Pick out the two most important words besides the road type 
       and use only those: Martin Luther King  Boulevard becomes MarKingBlvd. 
       Three words in total are included in shortened form. <br />
       2. Pick out one important word besides the road type and use it 
       and the initials of the other words: Martin Luther King  Boulevard 
       becomes MLKingBlvd. Two words in total are included in shortened form 
-      along with initials of the rest.
+      along with initials of the rest.<br/>
+      3. Use initials only besides the road type: Martin Luther King Boulevard becomes MLKBlvd,
+      University of California Santa Barbara Boulevard becomes UCSBBlvd.
       </td>
   </tr>
   <tr valign="top">
