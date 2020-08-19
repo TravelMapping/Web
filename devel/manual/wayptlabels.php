@@ -122,14 +122,12 @@ The following list shows the preferred waypoint type in order. Choose the first 
     <td><a name="subdiv"></a><a style="text-decoration:none" href="#subdiv">&#x1f517</a></td>
     <td>AL/MS</td>
     <td>Subdivision (state/province/oblast etc.) borders are included 
-      only for countries that we subdivide. As an exception, these subdivision
-      border labels can also be used on the USA/CAN and USA/MEX borders 
-      instead of using the countries in the label. </td>
+      only for countries that we subdivide.</td>
   </tr>
   <tr valign="top">
     <td><a name="skipcountry"></a><a style="text-decoration:none" href="#skipcountry">&#x1f517</a></td>
     <td>CHIH/SON</td>
-    <td>In subdivided countries whose region codes have the country code
+    <td>For subdivision borders in subdivided countries whose region codes have the country code
       prepended, skip the country code. MEX-CHIH/MEX-SON becomes CHIH/SON. </td>
   </tr>
   <tr valign="top">
