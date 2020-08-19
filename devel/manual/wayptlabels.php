@@ -122,14 +122,12 @@ The following list shows the preferred waypoint type in order. Choose the first 
     <td><a name="subdiv"></a><a style="text-decoration:none" href="#subdiv">&#x1f517</a></td>
     <td>AL/MS</td>
     <td>Subdivision (state/province/oblast etc.) borders are included 
-      only for countries that we subdivide. As an exception, these subdivision
-      border labels can also be used on the USA/CAN and USA/MEX borders 
-      instead of using the countries in the label. </td>
+      only for countries that we subdivide.</td>
   </tr>
   <tr valign="top">
     <td><a name="skipcountry"></a><a style="text-decoration:none" href="#skipcountry">&#x1f517</a></td>
     <td>CHIH/SON</td>
-    <td>In subdivided countries whose region codes have the country code
+    <td>For subdivision borders in subdivided countries whose region codes have the country code
       prepended, skip the country code. MEX-CHIH/MEX-SON becomes CHIH/SON. </td>
   </tr>
   <tr valign="top">
@@ -334,23 +332,31 @@ with their abbreviation regardless of a local convention (Michigan State
     <td>FaiRd <br />
       PapMillRd<br />
       <br />
-      MarKingBlvd MLKingBlvd<br />      </td>
+      MarKingBlvd<br/>
+      MLKingBlvd<br />
+      <br/>
+      MLKBlvd<br/>
+      UCSBBlvd
+      </td>
     <td>Abbreviate the generic road type (Rd for Road, Blvd for 
       Boulevard, etc.) if it's one of the very common types. Otherwise, use 
       the <em>first </em>three letters: Uli for Ulica. Skip the final period. <br />
       <br />      
       For up to two other (specifying) words, truncate the word as follows:<br />
       1-4 letters - use whole word<br />
-      5+ letters - use the <em>first</em> 3 letters. Don't use a made-up abbreviation. Fairchild Road becomes FaiRd, not FrchldRd or FchRd or anything else. <br />
+      5+ letters - use the <em>first</em> 3 letters. Don't use a made-up abbreviation.
+      Fairchild Road becomes FaiRd, not FrchldRd or FchRd or anything else. <br />
       <br />
-      If the cross road name has more than 3 words, use one of two options:<br />
+      If the cross road name has more than 3 words, use one of three options:<br />
       1. Pick out the two most important words besides the road type 
       and use only those: Martin Luther King  Boulevard becomes MarKingBlvd. 
       Three words in total are included in shortened form. <br />
       2. Pick out one important word besides the road type and use it 
       and the initials of the other words: Martin Luther King  Boulevard 
       becomes MLKingBlvd. Two words in total are included in shortened form 
-      along with initials of the rest.
+      along with initials of the rest.<br/>
+      3. Use initials only besides the road type: Martin Luther King Boulevard becomes MLKBlvd,
+      University of California Santa Barbara Boulevard becomes UCSBBlvd.
       </td>
   </tr>
   <tr valign="top">
