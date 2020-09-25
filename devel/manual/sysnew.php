@@ -104,7 +104,7 @@ Check existing routes and add waypoints</p>
   <li><a name="existingadd"></a><a style="text-decoration:none" href="#existingadd">&#x1f517</a>
   Add the waypoints which are required for the future highway system to the existing routes.</li>
 </ul>
-The existing wpt files are stored on <a href="https://github.com/TravelMapping/HighwayData">Github</a>. They can be
+The existing <code>.wpt</code> files are stored on <a href="https://github.com/TravelMapping/HighwayData">Github</a>. They can be
 loaded into the <a href="/wptedit/">Waypoint File Editor</a> for modifications. The changed files must be submitted
 to Github with a pull request. Please refer to <a href="#develop">the development instructions</a> for more info about
 how to deal with the files and tools.
@@ -124,7 +124,7 @@ Develop routes in devel status</p>
     <li>Use the <a href="/wptedit/">Waypoint File Editor</a> to find the coordinates for the waypoints:</li>
     <ul>
       <li><a href="includepts.php">Waypoints to include</a></br>
-      It is recommended to start with copying the required waypoint coordinates from existing <code.wpt</code> files for:</li>
+      It is recommended to start with copying the required waypoint coordinates from existing routes for:</li>
       <ul>
         <li>Intersecting routes:</br>
         Waypoint labels must usually be renamed</li>
@@ -157,7 +157,7 @@ Develop routes in devel status</p>
         <li>Evidence is, when they are on the latest official list from the responsible road authority or state institution.</li>
         <li>For some regions, e.g. with poor street view coverage, it is sufficient when the routing is indicated on maps.</li>
       </ul>
-      <li>Notes to exceptions should be clearly described on the forum thread and / or in a README.md file on the Github folder for the wpt files.</li>
+      <li>Notes to exceptions should be clearly described on the forum thread and / or in a README.md file on the Github folder for the <code>.wpt</code> files.</li>
     </ul>
     </br>
     <li>Waypoint order</li>
@@ -173,9 +173,16 @@ Develop routes in devel status</p>
       numbers increasing radially outward and circumferentially in a certain direction.</li>
     </ul>
     </br>
+    <li>Submit the highway data files to our <a href="https://github.com/TravelMapping/HighwayData">HighwayData GitHub repository</a> under:</br>
+    <span style="color: brown;">https://github.com/TravelMapping/HighwayData/tree/master/hwy_data/<i>&lt;uppercase region code&gt;</i>/<i>&lt;lowercase system code&gt;</i></span></li>
+    </br>
   </ul>
   <li><a name="developcsv"></a><a style="text-decoration:none" href="#developcsv">&#x1f517</a>
   Make the <a href="syshwylist.php">highway system lists (<code>.csv</code>)</a></li>
+  </br>
+  <ul>
+    <li>Submit the files to <a href="https://github.com/TravelMapping/HighwayData/tree/master/hwy_data/_systems">the systems directory</a> of the HighwayData GitHub repository.</li>
+  </ul>
   </br>
   <li><a name="developsystem"></a><a style="text-decoration:none" href="#developsystem">&#x1f517</a>
   Promote the system to <a href="sysdef.php#devel"><devel>devel</devel> status</a> when a first batch of routes is available.
@@ -227,7 +234,7 @@ We don't notify the promotion of a highway system to in-development <a href="/de
 on the updates page</a> but on the forum thread only.
 </br>
 <b>When promoting a system to <devel>devel</devel>, the system is processed for the first time.
-If any wpt or csv file has an incorrect format or reference, the site update will fail. Please run
+If any <code>.wpt</code> or <code>.csv</code> file has an incorrect format or reference, the site update will fail. Please run
 <a href="https://github.com/TravelMapping/DataProcessing/blob/master/SETUP.md">data verification</a>
 to find the errors before submitting the files.</b>
 </div>
@@ -284,7 +291,7 @@ a second run must be done <b>before</b> the activation of the system.
   <a href="syserr.php#nearmisspoint">Near-miss point checks</a> can be done when the system is minimum in <preview>preview</preview> state.</li>
   </br>
   <li><a name="unprocessedwpt"></a><a style="text-decoration:none" href="#unprocessedwpt">&#x1f517</a>
-  The <a href="/logs/unprocessedwpts.log">List of unprocessed wpt files</a> helps to identify highway data files (<code>.wpt</code>)
+  The <a href="/logs/unprocessedwpts.log">List of unprocessed <code>.wpt</code> files</a> helps to identify highway data files (<code>.wpt</code>)
   in the repository which are not listed in any highway system list (<code>.csv</code>).</li>
 </ul>
 

@@ -33,21 +33,21 @@ $activedc = tm_count_rows("datacheckErrors", "join routes on datacheckErrors.rou
 <ul>
   <li><a href="/logs/pointsinuse.log">Waypoint labels in use by current TM users</a>
     <br />
-    To be considered if wpt files of active systems are modified to avoid breaking user files, can be loaded to the Waypoint File Editor.</li>
+    To be considered if <code>.wpt</code> files of active systems are modified to avoid breaking user files, can be loaded to the Waypoint File Editor.</li>
   <li><a href="/logs/unusedaltlabels.log">Alternate (i.e., hidden) waypoint labels not in use by current TM users</a>
     <br />
-    These alternate labels can safely be removed from wpt files.</li>
+    These alternate labels can safely be removed from <code>.wpt</code> files.</li>
   </br>
   <li><a href="/logs/listnamesinuse.log">.list name labels in use by current TM users</a>
     <br />
-    To be considered if csv files of active systems are modified to avoid breaking user files.</li>
+    To be considered if <code>.csv</code> files of active systems are modified to avoid breaking user files.</li>
   <li><a href="/logs/unusedaltroutenames.log">Alternate (i.e., hidden) route names not in use by current TM users</a>
     <br />
-    These alternate labels can safely be removed from csv files.</li>
+    These alternate labels can safely be removed from <code>.csv</code> files.</li>
   </br>
-  <li><a href="/logs/unprocessedwpts.log">List of unprocessed wpt files</a>
+  <li><a href="/logs/unprocessedwpts.log">List of unprocessed <code>.wpt</code> files</a>
     <br />
-    Waypoint files in the repository that were not processed because they were not listed in any highway system's csv files</li>
+    Waypoint files in the repository that were not processed because they were not listed in any highway system's <code>.csv</code> files</li>
   </br>
   <li><a href="/graphs/">Travel Mapping Graph Data</a>
     <br />

@@ -46,6 +46,11 @@ connerr2 {color: #48C0A0;}
   <li><a href="#datacheck">Highway data check list</a></li>
   <li><a href="#falsepositive">Marking errors false positive (FP)</a></li>
   <li><a href="#concurrency">Concurrency check</a></li>
+  <ul>
+    <li><a href="#concurrencymapview">Load graph with mapview</a></li>
+    <li><a href="#concurrencyhdx">Load graph with Highway Data Examiner (HDX)</a></li>
+    <li><a href="#concurrencycheck">Check for broken concurrencies</a></li>
+  </ul>
   <li><a href="#nearmisspoint">Near-miss points</a></li>
   <li><a href="#nmpfp">Marking NMPs false positive FP</a></li>
 </ul>
@@ -60,7 +65,7 @@ Data errors</p>
   After manual changes within the editor field, the data check is done on the next editor action, e.g. when pressing the <code>Load</code> button.
   </br>
   </br>
-  Check the table for errors before saving the wpt file. Fix unintended errors or mark intended errors <a href="#falsepositive">false positive</a>.
+  Check the table for errors before saving the <code>.wpt</code> file. Fix unintended errors or mark intended errors <a href="#falsepositive">false positive</a>.
   </br>
   </br>
   Note: Not all data errors are detected by the WPT file editor, see below: <green>supported</green>,
@@ -345,8 +350,29 @@ Concurrency check</p>
   Highway data managers need to pay attention to check broken concurrencies in their regions. The check can not be done before submitting changes but is currently only possible with the data of the last site update.
   </br>
   </br>
-  The best practise to do this, is as follows:
-  </br>
+  The best practise to do this, is as follows: Load the region graph either with <a href="#concurrencymapview">mapview</a>
+  or with <a href="#concurrencyhdx">HDX</a> and make a manual <a href="#concurrencycheck">check</a>.
+</div>
+
+<p class="subheading"><a name="concurrencymapview"></a><a style="text-decoration:none" href="#concurrencymapview">&#x1f517</a>
+Load graph with mapview</p>
+
+<div class="text">
+  <ul>
+    <li>Open <a href="/user/mapview.php">mapview</a>.</li>
+    <li>Select the region(s) you want to check.</li>
+    <li>Press <code>OK</code>.</li>
+    <li>Select <code>Color by Concurrencies</code> under <code>Visible Routes</code>.</li>
+    <li>Select <code>Highlight All</code>.</li>
+    <li>Zoom-in where you want to check concurrencies.</li>
+  </ul>
+</div>
+
+
+<p class="subheading"><a name="concurrencyhdx"></a><a style="text-decoration:none" href="#concurrencyhdx">&#x1f517</a>
+Load graph with Highway Data Examiner (HDX)</p>
+
+<div class="text">
   <ul>
     <li>Open the <a href="https://courses.teresco.org/metal/hdx/">Highway Data Examiner</a> (HDX).</li>
     <li>Go to <code>Option 1</code> on the left and enter the name of the region you want to check.</li>
@@ -362,6 +388,14 @@ Concurrency check</p>
     <li>You should see a map of the selected region with <i>funny colors</i> now.</li>
     <li>Select <code>Show Markers</code> again, it was just to show you what happened.</li>
     <li>Zoom-in where you want to check concurrencies.</li>
+  </ul>
+</div>
+
+<p class="subheading"><a name="concurrencycheck"></a><a style="text-decoration:none" href="#concurrencycheck">&#x1f517</a>
+Check for broken concurrencies</p>
+
+<div class="text">
+  <ul>
     <li>The colors are created by lines connecting the waypoints.</li>
     <ul>
       <li><conn1>Blue line = one route only</conn1></li>
@@ -389,8 +423,8 @@ Concurrency check</p>
       </ul>
     </ul>
     <li>When you spot errors, click on the lines or markers to get info about the route and waypoint labels. It is sometimes difficult to click all routes when they are mostly overlapped.</li>
-    <li>Fix the coordinates in the corresponding wpt files.</li>
-    <li>Load the changed wpt files into the <a href="/wptedit/">WPT file editor</a> to avoid causing unintended <a href="#errors">data errors</a>.</li>
+    <li>Fix the coordinates in the corresponding <code>.wpt</code> files.</li>
+    <li>Load the changed <code>.wpt</code> files into the <a href="/wptedit/">WPT file editor</a> to avoid causing unintended <a href="#errors">data errors</a>.</li>
     <li>Broken concurrencies of short segments can hardly be found this way. It is recommended to check <a href="#nearmisspoint"> NMPs</a> to find these errors.</li>
   </ul>
 </div>
@@ -426,8 +460,8 @@ Near-miss points</p>
     </ul>
     <li>Click on the NMP hotspot lines or their endpoints to get info about the involved routes and waypoint labels.</li>
     <li>Since you only see the points but not the whole network graph, you might need to open another HDX instance on load the region graph from <code>Option 1</code> where you can get the whole picture. To figure out which routes should intersect, what's going on there etc. For instance, it's possible that concurrent routes are only broken on a very short segment you don't see (or missed) with the <code>Option 1</code> view style.</li>
-    <li>Fix the coordinates in the corresponding wpt files.</li>
-    <li>Load the changed wpt files into the <a href="/wptedit/">WPT file editor</a> to avoid causing unintended <a href="#errors">data errors</a>.</li>
+    <li>Fix the coordinates in the corresponding <code>.wpt</code> files.</li>
+    <li>Load the changed <code>.wpt</code> files into the <a href="/wptedit/">WPT file editor</a> to avoid causing unintended <a href="#errors">data errors</a>.</li>
   </ul>
 </div>
 

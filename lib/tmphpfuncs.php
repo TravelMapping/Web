@@ -266,6 +266,18 @@ function tm_count_rows($table, $clause) {
     return $ans;
 }
 
+// function to get a count of distinct rows with entries of the given
+// column name, and matching a "where" clause
+function tm_count_distinct_rows($table, $column, $clause) {
+    global $tmdb;
+    $sql_command = "SELECT COUNT(DISTINCT ".$column.") AS c FROM ".$table." ".$clause.";";
+    $res = tmdb_query($sql_command);
+    $row = $res->fetch_assoc();
+    $ans = $row['c'];
+    $res->free();
+    return $ans;
+}
+
 
 // function to get a sum of a column from a table
 function tm_sum_column($table, $column) {

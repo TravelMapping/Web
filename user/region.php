@@ -424,16 +424,17 @@ SQL;
             echo "<td ".$style.">" . tm_convert_distance($row['clinchedMileage']) . "</td>";
             echo "<td ".$style.">" . tm_convert_distance($row['totalMileage']) . "</td>";
             echo "<td ".$style.">" . $row['percentage'] . "%</td>";
-            echo "<td class='link'><a href='/hb?rg={$region}&amp;sys={$row['systemName']}'>HB</a></td></tr>";
+            echo "<td class='link'><a href='/hb/showroute.php?rg={$region}&amp;sys={$row['systemName']}'>HB</a></td></tr>";
         }
         $res->free();
         ?>
         </tbody>
     </table>
     <table class="gratable" id="routesTable">
+        <caption>Click on a row to see the details and a map of the route.</caption>
         <thead>
-            <tr><th colspan="7">Statistics by Route: (<?php echo "<a href=\"/user/mapview.php?u=".$tmuser."&amp;rg=".$region."\">" ?>Full Map)</a></th></tr>
-            <tr><th class="sortable">Tier</th><th class="nonsortable">Route</th><th class="sortable">#</th><th class="sortable">Clinched (<?php tm_echo_units(); ?>)</th><th class="sortable">Total (<?php tm_echo_units(); ?>)</th><th class="sortable">%</th><th class="nonsortable">Map</th></tr>
+            <tr><th colspan="6">Statistics by Route: (<?php echo "<a href=\"/user/mapview.php?u=".$tmuser."&amp;rg=".$region."\">" ?>Full Map)</a></th></tr>
+            <tr><th class="sortable">Tier</th><th class="nonsortable">Route</th><th class="sortable">#</th><th class="sortable">Clinched (<?php tm_echo_units(); ?>)</th><th class="sortable">Total (<?php tm_echo_units(); ?>)</th><th class="sortable">%</th></tr>
         </thead>
         <tbody>
             <?php
@@ -453,7 +454,7 @@ SQL;
                 $res = tmdb_query($sql_command);
                 while ($row = $res->fetch_assoc()) {
 	    	    $style = 'style="background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$row['totalMileage']).';"';
-                    echo "<tr onClick=\"window.open('/hb?u=".$tmuser."&amp;r=".$row['root']."')\" ".$style.">";
+                    echo "<tr onClick=\"window.open('/hb/showroute.php?u=".$tmuser."&amp;r=".$row['root']."')\" ".$style.">";
                     echo "<td>{$row['tier']}</td>";
                     echo "<td>".$row['route'];
                     if (strlen($row['banner']) > 0) {
@@ -466,8 +467,7 @@ SQL;
                     echo "<td>{$row['systemName']}.{$row['root']}</td>";
                     echo "<td>".tm_convert_distance($row['clinchedMileage'])."</td>";
                     echo "<td>".tm_convert_distance($row['totalMileage'])."</td>";
-                    echo "<td>".$row['percentage']."%</td>";
-                    echo "<td class='link'><a href='/hb?u={$tmuser}&amp;r={$row['root']}'>HB</a></td></tr>\n";
+                    echo "<td>".$row['percentage']."%</td></tr>\n";
                 }
                 $res->free();
             ?>

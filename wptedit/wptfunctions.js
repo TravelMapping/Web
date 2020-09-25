@@ -404,7 +404,7 @@ function WptTable(wpts)
 	html += '<td>' + segdist.toFixed(2) + '</td>';
 	html += '<td>' + visdist.toFixed(2) + '</td>';
 	html += '<td>' + totaldist.toFixed(2) + '</td>';
-	html += '<td>' + Error2Abbrev(wpts[i].errors) + '</td>';
+	html += '<td style="text-align:left">' + Error2Abbrev(wpts[i].errors) + '</td>';
 	html += '</tr>\n';
 	if(i < wpts.length-1)
 	    segdist = SegMileage(wpts[i], wpts[i+1]);
@@ -928,7 +928,9 @@ function MarkerInfo(i, n, wpt)
 
   }
   info += '<a onclick="AddAltlabelWaypoint(' + i + ')" class="button">Add Alt. Label</\a><br>';
-  info += '<br><b>Waypoint ' + (i+1) + ' of ' + n + '<\/b><br><b>Coords.:<\/b> ' + wpt.lat + '&deg;, ' + wpt.lon + '&deg;<\/p>';
+  info += '<br><b>Waypoint ' + (i+1) + ' of ' + n + '<\/b><br><b>';
+  info += '<a target="o" href="http://www.openstreetmap.org/?lat=' + wpt.lat + '&lon=' + wpt.lon + '">';
+  info += 'Coords.:<\/a><\/b> ' + wpt.lat + '&deg;, ' + wpt.lon + '&deg;<\/p>';
 
   if(i == thawindex)
     info += '<p style="color:#990000;font-weight:bold;">This waypoint can be repositioned.</p>';
@@ -978,45 +980,45 @@ function Error2Abbrev(e)
 {
   text = '';
   if(e & DC_BUS_WITH_I)
-    text += '<span title="Label uses Bus with I- (Interstate)">BUS_WITH_I</span><br>';
+    text += '<a  target="dc" href="../devel/manual/syserr.php#BUS_WITH_I"><b>?</b></a>&nbspBUS_WITH_I<br>';
   if(e & DC_BAD_ANGLE)
-    text += '<span title="Consecutive points at same coordinates">BAD_ANGLE</span><br>';
+    text += '<a  target="dc" href="../devel/manual/syserr.php#BAD_ANGLE"><b>?</b></a>&nbspBAD_ANGLE<br>';
   if(e & DC_DUPLICATE_COORDS)
-    text += '<span title="Duplicated coordinates">DUPLICATE_COORDS</span><br>';
+    text += '<a  target="dc" href="../devel/manual/syserr.php#DUPLICATE_COORDS"><b>?</b></a>&nbspDUPLICATE_COORDS<br>';
   if(e & DC_DUPLICATE_LABEL)
-    text += '<span title="Duplicated labels">DUPLICATE_LABEL</span><br>';
+    text += '<a  target="dc" href="../devel/manual/syserr.php#DUPLICATE_LABEL"><b>?</b></a>&nbspDUPLICATE_LABEL<br>';
   if(e & DC_HIDDEN_TERMINUS)
-    text += '<span title="Terminus is not visible">HIDDEN_TERMINUS</span><br>';
+    text += '<a  target="dc" href="../devel/manual/syserr.php#HIDDEN_TERMINUS"><b>?</b></a>&nbspHIDDEN_TERMINUS<br>';
   if(e & DC_INVALID_FINAL_CHAR)
-    text += '<span title="Invalid char at end of label">INVALID_FINAL_CHAR</span><br>';
+    text += '<a  target="dc" href="../devel/manual/syserr.php#INVALID_FINAL_CHAR"><b>?</b></a>&nbspINVALID_FINAL_CHAR<br>';
   if(e & DC_INVALID_FIRST_CHAR)
-    text += '<span title="Invalid char at beginning of label">INVALID_FIRST_CHAR</span><br>';
+    text += '<a  target="dc" href="../devel/manual/syserr.php#INVALID_FIRST_CHAR"><b>?</b></a>&nbspINVALID_FIRST_CHAR<br>';
   if(e & DC_LABEL_INVALID_CHAR)
-    text += '<span title="Invalid character(s)">LABEL_INVALID_CHAR</span><br>';
+    text += '<a  target="dc" href="../devel/manual/syserr.php#LABEL_INVALID_CHAR"><b>?</b></a>&nbspLABEL_INVALID_CHAR<br>';
   if(e & DC_LABEL_LOOKS_HIDDEN)
-    text += '<span title="Looks like a default hidden waypont label without the leading +">LABEL_LOOKS_HIDDEN</span><br>';
+    text += '<a  target="dc" href="../devel/manual/syserr.php#LABEL_LOOKS_HIDDEN"><b>?</b></a>&nbspLABEL_LOOKS_HIDDEN<br>';
   if(e & DC_LABEL_PARENS)
-    text += '<span title="Reversed or wrong number of parentheses in primary label">LABEL_PARENS</span><br>';
+    text += '<a  target="dc" href="../devel/manual/syserr.php#LABEL_PARENS"><b>?</b></a>&nbspLABEL_PARENS<br>';
   if(e & DC_LABEL_SLASHES)
-    text += '<span title="Too many slashes (> 1)">LABEL_SLASHES</span><br>';
+    text += '<a  target="dc" href="../devel/manual/syserr.php#LABEL_SLASHES"><b>?</b></a>&nbspLABEL_SLASHES<br>';
   if(e & DC_LABEL_TOO_LONG)
-    text += '<span title="Label too long to fit in database">LABEL_TOO_LONG</span><br>';
+    text += '<a  target="dc" href="../devel/manual/syserr.php#LABEL_TOO_LONG"><b>?</b></a>&nbspLABEL_TOO_LONG<br>';
   if(e & DC_LABEL_UNDERSCORES)
-    text += '<span title="Too many underscored suffixes (> 1)">LABEL_UNDERSCORES</span><br>';
+    text += '<a  target="dc" href="../devel/manual/syserr.php#LABEL_UNDERSCORES"><b>?</b></a>&nbspLABEL_UNDERSCORES<br>';
   if(e & DC_LACKS_GENERIC)
-    text += '<span title="Label lacks the generic highway type">LACKS_GENERIC</span><br>';
+    text += '<a  target="dc" href="../devel/manual/syserr.php#LACKS_GENERIC"><b>?</b></a>&nbspLACKS_GENERIC<br>';
   if(e & DC_LONG_SEGMENT)
-    text += '<span title="single segment > 20 miles">LONG_SEGMENT</span><br>';
+    text += '<a  target="dc" href="../devel/manual/syserr.php#LONG_SEGMENT"><b>?</b></a>&nbspLONG_SEGMENT<br>';
   if(e & DC_LONG_UNDERSCORE)
-    text += '<span title="Label has long underscore suffix">LONG_UNDERSCORE</span><br>';
+    text += '<a  target="dc" href="../devel/manual/syserr.php#LONG_UNDERSCORE"><b>?</b></a>&nbspLONG_UNDERSCORE<br>';
   if(e & DC_NONTERMINAL_UNDERSCORE)
-    text += '<span title="Label has underscore suffix before slash">NONTERMINAL_UNDERSCORE</span><br>';
+    text += '<a  target="dc" href="../devel/manual/syserr.php#NONTERMINAL_UNDERSCORE"><b>?</b></a>&nbspNONTERMINAL_UNDERSCORE<br>';
   if(e & DC_OUT_OF_BOUNDS)
-    text += '<span title="Latitude beyond +/-90 deg or longitude beyiond +/- 180 deg">OUT_OF_BOUNDS</span><br>';
+    text += '<a  target="dc" href="../devel/manual/syserr.php#OUT_OF_BOUNDS"><b>?</b></a>&nbspOUT_OF_BOUNDS<br>';
   if(e & DC_SHARP_ANGLE)
-    text += '<span title="Sharp Angle (> 135 deg)">SHARP_ANGLE</span><br>';
+    text += '<a  target="dc" href="../devel/manual/syserr.php#SHARP_ANGLE"><b>?</b></a>&nbspSHARP_ANGLE<br>';
   if(e & DC_VISIBLE_DISTANCE)
-    text += '<span title="Long distance (Vis. Dist. > 10 mi, 16 km) between this and the previous visible point">VISIBLE_DISTANCE</span><br>';
+    text += '<a  target="dc" href="../devel/manual/syserr.php#VISIBLE_DISTANCE"><b>?</b></a>&nbspVISIBLE_DISTANCE<br>';
   
   return text;
   
@@ -1441,15 +1443,22 @@ function IsVisible(label)
 
 
 function OSMUrl(lat, lon) {return "http://www.openstreetmap.org/?lat=" + lat.toFixed(6) + "&amp;lon=" + lon.toFixed(6);};
-function YahooUrl(lat, lon) {return "http://maps.yahoo.com/#mvt=m&amp;lat=" + lat.toFixed(6) + "&amp;lon=" + lon.toFixed(6) + "&amp;zoom=16";};
 function GoogleUrl(lat, lon) {return "http://maps.google.com/maps?ll=" + lat.toFixed(6) + "," + lon.toFixed(6) + "&amp;z=15";};
 function BingUrl(lat, lon) {return "http://www.bing.com/maps/?v=2&amp;cp=" + lat.toFixed(6) + "~" + lon.toFixed(6) + "&amp;lvl=15";};
 function GMSVUrl(lat, lon) {return "http://maps.google.com/?ll=" + lat.toFixed(6) + "," + lon.toFixed(6) + "&amp;cbp=12,0,,0,5&amp;cbll=" + lat.toFixed(6) + "," + lon.toFixed(6) + "&amp;layer=c";};
+function AcmeUrl(lat, lon) {return "http://mapper.acme.com/?ll=" + lat.toFixed(6) + "," + lon.toFixed(6) + "&amp;z=15";};
+function HAUrl(lat, lon) {return "https://historicaerials.com/location/" + lat.toFixed(6) + "/" + lon.toFixed(6) + "/map/15";};
 
 function UpdateCoords() 
 {     
   var center = map.getCenter();    
-    document.getElementById("coordbar").innerHTML = '<a onclick="javascript:AddWaypoint();" class="button">Add waypoint</a> ' + OSMUrl(center.lat, center.lng) + "<br>Open location in <a href='" + GMSVUrl(center.lat, center.lng) + "' target='sv' class='button'>Street View</a> <a href='" + OSMUrl(center.lat, center.lng) + "&amp;zoom=15' target='o' class='button'>OSM</a> <a href='" + GoogleUrl(center.lat, center.lng) + "' target='g' class='button'>Google</a> <a href='" + YahooUrl(center.lat, center.lng) + "' target='y' class='button'>Yahoo</a> <a href='" + BingUrl(center.lat, center.lng) + "' target='b' class='button'>Bing</a>";    
+    document.getElementById("coordbar").innerHTML = '<a onclick="javascript:AddWaypoint();" class="button">Add waypoint</a> ' + OSMUrl(center.lat, center.lng) + "<br>Open location in" +
+      " <a href='" + GMSVUrl(center.lat, center.lng) + "' target='sv' class='button'>Street View</a>" +
+      " <a href='" + OSMUrl(center.lat, center.lng) + "&amp;zoom=15' target='o' class='button'>OSM</a>" +
+      " <a href='" + GoogleUrl(center.lat, center.lng) + "' target='g' class='button'>Google</a>" +
+      " <a href='" + BingUrl(center.lat, center.lng) + "' target='b' class='button'>Bing</a>" +
+      " <a href='" + AcmeUrl(center.lat, center.lng) + "' target='a' class='button'>Acme</a>" +
+      " <a href='" + HAUrl(center.lat, center.lng) + "' target='h' class='button'>HA</a>";
 }
 
 function ChangeLineThickness(t)
