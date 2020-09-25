@@ -117,7 +117,8 @@ following sources of highway information.</p>
       <ul>
 																 <li>Alberta, CAN
 	    <ul>
-	      <li><a href="http://www.transportation.alberta.ca/608.htm">Government of Alberta Ministry of Transportation: Maps</a>.</li>
+	      <li><a href="http://www.transportation.alberta.ca/608.htm">Government of Alberta Ministry of Transportation: Maps</a> (Dead link).</li>
+	      <li><a href="ftp://ftp.gov.ab.ca/transportation/Roadway_Geometrics/MAIN/Geometric%20Data/MostRecent_GPS_Alignment/">Roadway Geometric Data</a> from the Alberta Transportation FTP website for shared data.</li>
             </ul>
 	  </li>
 																 <li>British Columbia, CAN
