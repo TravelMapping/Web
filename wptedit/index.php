@@ -143,12 +143,6 @@ var map;
 //var infowindow;
 var trace;
 
-function OSMUrl(lat, lon) {return "http://www.openstreetmap.org/?lat=" + lat.toFixed(6) + "&amp;lon=" + lon.toFixed(6);};
-function YahooUrl(lat, lon) {return "http://maps.yahoo.com/#mvt=m&amp;lat=" + lat.toFixed(6) + "&amp;lon=" + lon.toFixed(6) + "&amp;zoom=16";};
-function GoogleUrl(lat, lon) {return "http://maps.google.com/maps?ll=" + lat.toFixed(6) + "," + lon.toFixed(6) + "&amp;z=15";};
-function BingUrl(lat, lon) {return "http://www.bing.com/maps/?v=2&amp;cp=" + lat.toFixed(6) + "~" + lon.toFixed(6) + "&amp;lvl=15";};
-function GMSVUrl(lat, lon) {return "http://maps.google.com/?ll=" + lat.toFixed(6) + "," + lon.toFixed(6) + "&amp;cbp=12,0,,0,5&amp;cbll=" + lat.toFixed(6) + "," + lon.toFixed(6) + "&amp;layer=c";};
-
 function recenter(ev) {
 
   console.log("dblclick event");
