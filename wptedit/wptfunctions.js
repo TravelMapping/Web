@@ -1443,15 +1443,22 @@ function IsVisible(label)
 
 
 function OSMUrl(lat, lon) {return "http://www.openstreetmap.org/?lat=" + lat.toFixed(6) + "&amp;lon=" + lon.toFixed(6);};
-function YahooUrl(lat, lon) {return "http://maps.yahoo.com/#mvt=m&amp;lat=" + lat.toFixed(6) + "&amp;lon=" + lon.toFixed(6) + "&amp;zoom=16";};
 function GoogleUrl(lat, lon) {return "http://maps.google.com/maps?ll=" + lat.toFixed(6) + "," + lon.toFixed(6) + "&amp;z=15";};
 function BingUrl(lat, lon) {return "http://www.bing.com/maps/?v=2&amp;cp=" + lat.toFixed(6) + "~" + lon.toFixed(6) + "&amp;lvl=15";};
 function GMSVUrl(lat, lon) {return "http://maps.google.com/?ll=" + lat.toFixed(6) + "," + lon.toFixed(6) + "&amp;cbp=12,0,,0,5&amp;cbll=" + lat.toFixed(6) + "," + lon.toFixed(6) + "&amp;layer=c";};
+function AcmeUrl(lat, lon) {return "http://mapper.acme.com/?ll=" + lat.toFixed(6) + "," + lon.toFixed(6) + "&amp;z=15";};
+function HAUrl(lat, lon) {return "https://historicaerials.com/location/" + lat.toFixed(6) + "/" + lon.toFixed(6) + "/map/15";};
 
 function UpdateCoords() 
 {     
   var center = map.getCenter();    
-    document.getElementById("coordbar").innerHTML = '<a onclick="javascript:AddWaypoint();" class="button">Add waypoint</a> ' + OSMUrl(center.lat, center.lng) + "<br>Open location in <a href='" + GMSVUrl(center.lat, center.lng) + "' target='sv' class='button'>Street View</a> <a href='" + OSMUrl(center.lat, center.lng) + "&amp;zoom=15' target='o' class='button'>OSM</a> <a href='" + GoogleUrl(center.lat, center.lng) + "' target='g' class='button'>Google</a> <a href='" + YahooUrl(center.lat, center.lng) + "' target='y' class='button'>Yahoo</a> <a href='" + BingUrl(center.lat, center.lng) + "' target='b' class='button'>Bing</a>";    
+    document.getElementById("coordbar").innerHTML = '<a onclick="javascript:AddWaypoint();" class="button">Add waypoint</a> ' + OSMUrl(center.lat, center.lng) + "<br>Open location in" +
+      " <a href='" + GMSVUrl(center.lat, center.lng) + "' target='sv' class='button'>Street View</a>" +
+      " <a href='" + OSMUrl(center.lat, center.lng) + "&amp;zoom=15' target='o' class='button'>OSM</a>" +
+      " <a href='" + GoogleUrl(center.lat, center.lng) + "' target='g' class='button'>Google</a>" +
+      " <a href='" + BingUrl(center.lat, center.lng) + "' target='b' class='button'>Bing</a>" +
+      " <a href='" + AcmeUrl(center.lat, center.lng) + "' target='a' class='button'>Acme</a>" +
+      " <a href='" + HAUrl(center.lat, center.lng) + "' target='h' class='button'>HA</a>";
 }
 
 function ChangeLineThickness(t)
