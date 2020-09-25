@@ -928,7 +928,9 @@ function MarkerInfo(i, n, wpt)
 
   }
   info += '<a onclick="AddAltlabelWaypoint(' + i + ')" class="button">Add Alt. Label</\a><br>';
-  info += '<br><b>Waypoint ' + (i+1) + ' of ' + n + '<\/b><br><b>Coords.:<\/b> ' + wpt.lat + '&deg;, ' + wpt.lon + '&deg;<\/p>';
+  info += '<br><b>Waypoint ' + (i+1) + ' of ' + n + '<\/b><br><b>';
+  info += '<a target="o" href="http://www.openstreetmap.org/?lat=' + wpt.lat + '&lon=' + wpt.lon + '">';
+  info += 'Coords.:<\/a><\/b> ' + wpt.lat + '&deg;, ' + wpt.lon + '&deg;<\/p>';
 
   if(i == thawindex)
     info += '<p style="color:#990000;font-weight:bold;">This waypoint can be repositioned.</p>';
