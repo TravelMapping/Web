@@ -145,6 +145,13 @@ Data errors</p>
     <td><red>NO</red></td>
   </tr>
   <tr valign="top">
+    <td><a name="INTERSTATE_NO_HYPHEN"></a><a style="text-decoration:none" href="#INTERSTATE_NO_HYPHEN">&#x1f517</a></td>
+    <td>INTERSTATE_NO_HYPHEN</td>
+    <td>Label looks like an Interstate without a hyphen between the <code>I</code> and numerals.</td>
+    <td><red>NO</red></td>
+    <td><red>NO</red></td>
+  </tr>
+  <tr valign="top">
     <td><a name="INVALID_FINAL_CHAR"></a><a style="text-decoration:none" href="#INVALID_FINAL_CHAR">&#x1f517</a></td>
     <td>INVALID_FINAL_CHAR</td>
     <td>Disallowed character at end of label</td>
