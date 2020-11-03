@@ -148,7 +148,7 @@ Data errors</p>
     <td><a name="INTERSTATE_NO_HYPHEN"></a><a style="text-decoration:none" href="#INTERSTATE_NO_HYPHEN">&#x1f517</a></td>
     <td>INTERSTATE_NO_HYPHEN</td>
     <td>Label looks like an Interstate without a hyphen between the <code>I</code> and numerals.</td>
-    <td><red>NO</red></td>
+    <td><yellow>NO</yellow></td>
     <td><red>NO</red></td>
   </tr>
   <tr valign="top">
@@ -299,7 +299,7 @@ Data errors</p>
   <tr valign="top">
     <td><a name="VISIBLE_HIDDEN_COLOC"></a><a style="text-decoration:none" href="#VISIBLE_HIDDEN_COLOC">&#x1f517</a></td>
     <td>VISIBLE_HIDDEN_COLOC</td>
-    <td>The visible waypoint is hidden on concurrent route(s).</td>
+    <td>Visible waypoint is hidden on intersecting/concurrent route(s).</td>
     <td><red>NO</red></td>
     <td><green>YES</green></td>
   </tr>
