@@ -280,15 +280,13 @@ Data errors</p>
     <td><green>YES</green></td>
     <td><green>YES</green></td>
   </tr>
-<!--
   <tr valign="top">
-    <td><a name="US_BANNER"></a><a style="text-decoration:none" href="#US_BANNER">&#x1f517</a></td>
-    <td>US_BANNER</td>
-    <td>Look for USxxxA but not USxxxAlt, B/Bus (others?) Not implemented, commented out.</td>
-    <td><yellow>NO</yellow></td>
-    <td>...</td>
+    <td><a name="US_LETTER"></a><a style="text-decoration:none" href="#US_LETTER">&#x1f517</a></td>
+    <td>US_LETTER</td>
+    <td>Label uses <a href="https://travelmapping.net/devel/manual/wayptlabels.php#bannerafternumber"><code>USxxxA</code> or <code>USxxxB</code> rather than <code>USxxxAlt</code>, <code>USxxxBus</code>, <code>USxxxByp</code>, etc.</td>
+    <td><green>YES</green></td>
+    <td><red>NO</red></td>
   </tr>
--->
   <tr valign="top">
     <td><a name="VISIBLE_DISTANCE"></a><a style="text-decoration:none" href="#VISIBLE_DISTANCE">&#x1f517</a></td>
     <td>VISIBLE_DISTANCE</td>

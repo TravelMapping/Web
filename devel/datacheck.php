@@ -75,7 +75,7 @@
 	  (strcmp($row['code'],"LONG_SEGMENT") == 0) ||
 	  (strcmp($row['code'],"LONG_UNDERSCORE") == 0) ||
 	  (strcmp($row['code'],"NONTERMINAL_UNDERSCORE") == 0) ||
-	  (strcmp($row['code'],"US_BANNER") == 0) ||
+	  (strcmp($row['code'],"US_LETTER") == 0) ||
 	  (strcmp($row['code'],"VISIBLE_HIDDEN_COLOC") == 0) ||
 	  (strcmp($row['code'],"VISIBLE_DISTANCE") == 0)) {
 	  echo "blue";
