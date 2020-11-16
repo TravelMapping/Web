@@ -48,6 +48,7 @@ var DC_LABEL_SLASHES = 0x10000;
 var DC_LABEL_TOO_LONG = 0x20000;
 var DC_LONG_SEGMENT = 0x40000;
 var DC_OUT_OF_BOUNDS = 0x80000;
+var DC_US_LETTER = 0x100000;
 
 var BC_hidden = "#CCCCCC";
 var BC_visible = "#FFFFFF";
@@ -973,6 +974,7 @@ function DataCheck()
     NONTERMINAL_UNDERSCORE();
     OUT_OF_BOUNDS();
     SHARP_ANGLE();
+    US_LETTER();
     VISIBLE_DISTANCE();
 }
 
@@ -1017,6 +1019,8 @@ function Error2Abbrev(e)
     text += '<a  target="dc" href="../devel/manual/syserr.php#OUT_OF_BOUNDS"><b>?</b></a>&nbspOUT_OF_BOUNDS<br>';
   if(e & DC_SHARP_ANGLE)
     text += '<a  target="dc" href="../devel/manual/syserr.php#SHARP_ANGLE"><b>?</b></a>&nbspSHARP_ANGLE<br>';
+  if(e & DC_US_LETTER)
+    text += '<a  target="dc" href="../devel/manual/syserr.php#US_LETTER"><b>?</b></a>&nbspUS_LETTER<br>';
   if(e & DC_VISIBLE_DISTANCE)
     text += '<a  target="dc" href="../devel/manual/syserr.php#VISIBLE_DISTANCE"><b>?</b></a>&nbspVISIBLE_DISTANCE<br>';
   
@@ -1405,6 +1409,17 @@ function SHARP_ANGLE()
       if(angle > 135)
 	{
 	  wpts[i].errors |= DC_SHARP_ANGLE;
+	}
+    }
+}
+
+function US_LETTER()
+{
+    for(var i = 0; i < wpts.length; i++)
+    {
+	if(wpts[i].label.search(/\*?US[0-9]+[AB]$|\*?US[0-9]+[AB][/_(]/) >= 0)
+	{
+	    wpts[i].errors |= DC_US_LETTER;
 	}
     }
 }

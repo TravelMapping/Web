@@ -293,8 +293,8 @@ with their abbreviation regardless of a local convention (Michigan State
       US20Alt</td>
     <td>Add banners after the number.<br />
       <br />
-      For the US Highways, local conventions of using suffixes 
-      instead of banners are ignored. Use banners here. NY US 20A is US20Alt 
+      For the US Highways, local conventions of using letter suffixes 
+      instead of banners are ignored. Use banners; NY US 20A is US20Alt 
       here.
   </tr>
   <tr valign="top">
