@@ -48,6 +48,7 @@ var DC_LABEL_SLASHES = 0x10000;
 var DC_LABEL_TOO_LONG = 0x20000;
 var DC_LONG_SEGMENT = 0x40000;
 var DC_OUT_OF_BOUNDS = 0x80000;
+var DC_US_LETTER = 0x100000;
 
 var BC_hidden = "#CCCCCC";
 var BC_visible = "#FFFFFF";
@@ -928,7 +929,9 @@ function MarkerInfo(i, n, wpt)
 
   }
   info += '<a onclick="AddAltlabelWaypoint(' + i + ')" class="button">Add Alt. Label</\a><br>';
-  info += '<br><b>Waypoint ' + (i+1) + ' of ' + n + '<\/b><br><b>Coords.:<\/b> ' + wpt.lat + '&deg;, ' + wpt.lon + '&deg;<\/p>';
+  info += '<br><b>Waypoint ' + (i+1) + ' of ' + n + '<\/b><br><b>';
+  info += '<a target="o" href="http://www.openstreetmap.org/?lat=' + wpt.lat + '&lon=' + wpt.lon + '">';
+  info += 'Coords.:<\/a><\/b> ' + wpt.lat + '&deg;, ' + wpt.lon + '&deg;<\/p>';
 
   if(i == thawindex)
     info += '<p style="color:#990000;font-weight:bold;">This waypoint can be repositioned.</p>';
@@ -971,6 +974,7 @@ function DataCheck()
     NONTERMINAL_UNDERSCORE();
     OUT_OF_BOUNDS();
     SHARP_ANGLE();
+    US_LETTER();
     VISIBLE_DISTANCE();
 }
 
@@ -1015,6 +1019,8 @@ function Error2Abbrev(e)
     text += '<a  target="dc" href="../devel/manual/syserr.php#OUT_OF_BOUNDS"><b>?</b></a>&nbspOUT_OF_BOUNDS<br>';
   if(e & DC_SHARP_ANGLE)
     text += '<a  target="dc" href="../devel/manual/syserr.php#SHARP_ANGLE"><b>?</b></a>&nbspSHARP_ANGLE<br>';
+  if(e & DC_US_LETTER)
+    text += '<a  target="dc" href="../devel/manual/syserr.php#US_LETTER"><b>?</b></a>&nbspUS_LETTER<br>';
   if(e & DC_VISIBLE_DISTANCE)
     text += '<a  target="dc" href="../devel/manual/syserr.php#VISIBLE_DISTANCE"><b>?</b></a>&nbspVISIBLE_DISTANCE<br>';
   
@@ -1407,6 +1413,17 @@ function SHARP_ANGLE()
     }
 }
 
+function US_LETTER()
+{
+    for(var i = 0; i < wpts.length; i++)
+    {
+	if(wpts[i].label.search(/\*?US[0-9]+[AB]$|\*?US[0-9]+[AB][/_(]/) >= 0)
+	{
+	    wpts[i].errors |= DC_US_LETTER;
+	}
+    }
+}
+
 function VISIBLE_DISTANCE()
 {
   var visdist = 0.;
@@ -1441,15 +1458,22 @@ function IsVisible(label)
 
 
 function OSMUrl(lat, lon) {return "http://www.openstreetmap.org/?lat=" + lat.toFixed(6) + "&amp;lon=" + lon.toFixed(6);};
-function YahooUrl(lat, lon) {return "http://maps.yahoo.com/#mvt=m&amp;lat=" + lat.toFixed(6) + "&amp;lon=" + lon.toFixed(6) + "&amp;zoom=16";};
 function GoogleUrl(lat, lon) {return "http://maps.google.com/maps?ll=" + lat.toFixed(6) + "," + lon.toFixed(6) + "&amp;z=15";};
 function BingUrl(lat, lon) {return "http://www.bing.com/maps/?v=2&amp;cp=" + lat.toFixed(6) + "~" + lon.toFixed(6) + "&amp;lvl=15";};
 function GMSVUrl(lat, lon) {return "http://maps.google.com/?ll=" + lat.toFixed(6) + "," + lon.toFixed(6) + "&amp;cbp=12,0,,0,5&amp;cbll=" + lat.toFixed(6) + "," + lon.toFixed(6) + "&amp;layer=c";};
+function AcmeUrl(lat, lon) {return "http://mapper.acme.com/?ll=" + lat.toFixed(6) + "," + lon.toFixed(6) + "&amp;z=15";};
+function HAUrl(lat, lon) {return "https://historicaerials.com/location/" + lat.toFixed(6) + "/" + lon.toFixed(6) + "/map/15";};
 
 function UpdateCoords() 
 {     
   var center = map.getCenter();    
-    document.getElementById("coordbar").innerHTML = '<a onclick="javascript:AddWaypoint();" class="button">Add waypoint</a> ' + OSMUrl(center.lat, center.lng) + "<br>Open location in <a href='" + GMSVUrl(center.lat, center.lng) + "' target='sv' class='button'>Street View</a> <a href='" + OSMUrl(center.lat, center.lng) + "&amp;zoom=15' target='o' class='button'>OSM</a> <a href='" + GoogleUrl(center.lat, center.lng) + "' target='g' class='button'>Google</a> <a href='" + YahooUrl(center.lat, center.lng) + "' target='y' class='button'>Yahoo</a> <a href='" + BingUrl(center.lat, center.lng) + "' target='b' class='button'>Bing</a>";    
+    document.getElementById("coordbar").innerHTML = '<a onclick="javascript:AddWaypoint();" class="button">Add waypoint</a> ' + OSMUrl(center.lat, center.lng) + "<br>Open location in" +
+      " <a href='" + GMSVUrl(center.lat, center.lng) + "' target='sv' class='button'>Street View</a>" +
+      " <a href='" + OSMUrl(center.lat, center.lng) + "&amp;zoom=15' target='o' class='button'>OSM</a>" +
+      " <a href='" + GoogleUrl(center.lat, center.lng) + "' target='g' class='button'>Google</a>" +
+      " <a href='" + BingUrl(center.lat, center.lng) + "' target='b' class='button'>Bing</a>" +
+      " <a href='" + AcmeUrl(center.lat, center.lng) + "' target='a' class='button'>Acme</a>" +
+      " <a href='" + HAUrl(center.lat, center.lng) + "' target='h' class='button'>HA</a>";
 }
 
 function ChangeLineThickness(t)

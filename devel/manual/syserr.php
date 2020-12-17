@@ -145,6 +145,13 @@ Data errors</p>
     <td><red>NO</red></td>
   </tr>
   <tr valign="top">
+    <td><a name="INTERSTATE_NO_HYPHEN"></a><a style="text-decoration:none" href="#INTERSTATE_NO_HYPHEN">&#x1f517</a></td>
+    <td>INTERSTATE_NO_HYPHEN</td>
+    <td>Label looks like an Interstate without a hyphen between the <code>I</code> and numerals.</td>
+    <td><yellow>NO</yellow></td>
+    <td><red>NO</red></td>
+  </tr>
+  <tr valign="top">
     <td><a name="INVALID_FINAL_CHAR"></a><a style="text-decoration:none" href="#INVALID_FINAL_CHAR">&#x1f517</a></td>
     <td>INVALID_FINAL_CHAR</td>
     <td>Disallowed character at end of label</td>
@@ -273,15 +280,13 @@ Data errors</p>
     <td><green>YES</green></td>
     <td><green>YES</green></td>
   </tr>
-<!--
   <tr valign="top">
-    <td><a name="US_BANNER"></a><a style="text-decoration:none" href="#US_BANNER">&#x1f517</a></td>
-    <td>US_BANNER</td>
-    <td>Look for USxxxA but not USxxxAlt, B/Bus (others?) Not implemented, commented out.</td>
-    <td><yellow>NO</yellow></td>
-    <td>...</td>
+    <td><a name="US_LETTER"></a><a style="text-decoration:none" href="#US_LETTER">&#x1f517</a></td>
+    <td>US_LETTER</td>
+    <td>Label uses <a href="https://travelmapping.net/devel/manual/wayptlabels.php#bannerafternumber"><code>USxxxA</code> or <code>USxxxB</code> rather than <code>USxxxAlt</code>, <code>USxxxBus</code>, <code>USxxxByp</code>, etc.</td>
+    <td><green>YES</green></td>
+    <td><red>NO</red></td>
   </tr>
--->
   <tr valign="top">
     <td><a name="VISIBLE_DISTANCE"></a><a style="text-decoration:none" href="#VISIBLE_DISTANCE">&#x1f517</a></td>
     <td>VISIBLE_DISTANCE</td>
@@ -292,7 +297,7 @@ Data errors</p>
   <tr valign="top">
     <td><a name="VISIBLE_HIDDEN_COLOC"></a><a style="text-decoration:none" href="#VISIBLE_HIDDEN_COLOC">&#x1f517</a></td>
     <td>VISIBLE_HIDDEN_COLOC</td>
-    <td>The visible waypoint is hidden on concurrent route(s).</td>
+    <td>Visible waypoint is hidden on intersecting/concurrent route(s).</td>
     <td><red>NO</red></td>
     <td><green>YES</green></td>
   </tr>
