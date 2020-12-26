@@ -205,7 +205,6 @@ brabr;BRA;Brazil Rodovias Federais;green;4;devel
     <li>The <code>color</code> represents the color which is used on maps to draw the TM graph.</li>
     <ul>
       <li>The color should help to distinguish systems if applicable.</li>
-      <li>The color should represent the color which is used on signs to indicate the routes.</li>
       <li>Available colors are: <span style="color: #0000DC;">blue</span>, <span style="color: #996600;">brown</span>,
       <span style="color: #E00000;">red</span>, <span style="color: #E8B000;">yellow</span>,
       <span style="color: #008CA0;">teal</span>, <span style="color: #00E000;">green</span>,
