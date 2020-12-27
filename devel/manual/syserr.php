@@ -168,7 +168,7 @@ Data errors</p>
   <tr valign="top">
     <td><a name="LABEL_INVALID_CHAR"></a><a style="text-decoration:none" href="#LABEL_INVALID_CHAR">&#x1f517</a></td>
     <td>LABEL_INVALID_CHAR</td>
-    <td>Label contains characters not allowed in labels, e.g. non-ASCII.</td>
+    <td>Label contains at least 1 invalid character. Labels may only contain letters, numerals, parentheses, slashes, underscores, hyphens, or periods, with an optional leading <code>+</code> sign or asterisk.</td>
     <td><green>YES</green></td>
     <td><red>NO</red></td>
   </tr>
