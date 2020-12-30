@@ -27,10 +27,23 @@ END;
 $tmupdating = file_exists($_SERVER['DOCUMENT_ROOT']."/dbupdating");
 if ($tmupdating) {
   echo <<<END
-<p class="errorbar">
+<p id="updatingmsg" class="errorbar">
 Travel Mapping database update in progress.  Some functionality might
 not work.  Please try again in a few minutes if you notice problems.
+END;
+  tm_dismiss_button("updatingmsg");
+  echo <<<END
 </p>
+<script type="text/javascript">
+var tmdbupdating = true;
+</script>
+END;
+}
+else {
+  echo <<<END
+<script type="text/javascript">
+var tmdbupdating = false;
+</script>
 END;
 }
 ?>
