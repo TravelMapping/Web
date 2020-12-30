@@ -157,6 +157,11 @@ User: <?php tm_user_select(); ?>&nbsp;Units: <?php tm_units_select(); ?><br />
 </table>
 </div>
 <div id="topControlPanel">
+  <p id="updatingrow" style="display: none" class="errorbar">
+  Travel Mapping database update in progress.  Some functionality might
+  not work.  Please try again in a few minutes if you notice problems.
+<?php tm_dismiss_button("updatingrow"); ?>
+  </p>
   <table id="topControlPanelTable">
     <tbody>
       <tr>

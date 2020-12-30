@@ -379,14 +379,13 @@ Load graph with Highway Data Examiner (HDX)</p>
 
 <div class="text">
   <ul>
-    <li>Open the <a href="https://courses.teresco.org/metal/hdx/">Highway Data Examiner</a> (HDX).</li>
+    <li>Open the <a href="https://courses.teresco.org/metal/hdx/?noav">Highway Data Examiner</a> (HDX).</li>
     <li>Go to <code>Option 1</code> on the left and enter the name of the region you want to check.</li>
     <li>Press enter.</li>
     <li>Wait. The graph is automatically loaded after a few seconds but it might take longer with large graphs.</li>
     <ul>
       <li>You might open up a small graph first, e.g. the District of Columbia graph, then deselect <code>Show Markers</code> and select whatever region graph you are actually interested in to speed up loading.</li>
     </ul>
-    <li>Press <code>Done</code> on the left to close the AV table.</li>
     <li>Deselect <code>Show Data Tables</code> to close the table to the right.</li>
     <li>You see a map of the selected region with yellow dots.</li>
     <li>If you hardly see anything but only yellow dots, deselect <code>Show Markers</code>.</li>
@@ -452,7 +451,7 @@ Near-miss points</p>
       <li>If it is blank, the region has no NMPs.</li>
     </ul>
     <li>If there are entries, download the file.</li>
-    <li>Open the <a href="https://courses.teresco.org/metal/hdx/">Highway Data Examiner</a> (HDX).</li>
+    <li>Open the <a href="https://courses.teresco.org/metal/hdx/?noav">Highway Data Examiner</a> (HDX).</li>
     <li>Go to <code>Option 3</code> on the left and select the downloaded nmp file.</li>
     <ul>
       <li>You can see your region with some colored dots on the map now. These are NMP hotspots.</li>
