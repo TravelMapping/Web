@@ -5,6 +5,8 @@ Web-facing tool/page development
 
 The server should be running an instance of MySQL server (5.7.30 as of this writing) and the apache web server (2.4.43 as of this writing).  The web server needs to have PHP enabled (version 7.2.30 as of this writing) with the mysqli, ctype, and json extensions, and mod_php72 to get the loadable module.  The remaining instructions assume apache, MySQL, and PHP are all working together properly.  On FreeBSD, this involved installing the correct packages.
 
+Note: the MySQL server needs to override the `group_concat_max_len` parameter to be the maximum length of any comma-separated list of users that might be returned by a `GROUP_CONCAT`.  This is currently set to 10000 on the production server.
+
 ### MySQL database
 
 First, create the users needed for the database.  Connect and authenticate as root to the MySQL server.  Create passwords for an account that will have permission to administer the TM database that will be used for database updates and an account that will have only read permission that will be used by the web front end.  In the example below, these use the TM default names "travmapadmin" and "travmap".
