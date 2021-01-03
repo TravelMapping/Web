@@ -16,6 +16,7 @@
  *  v - show routes/points on the visible portion of the map (optional)
  *  rte - route name to show on the map, all routes with the same "route" will appear (optional)
  *  cr - connected route to show, provide the root of any in-region route as parameter (optional)
+ *  colors - custom color string(s) (optional)
  * (u, [units][lat lon zoom][rg|sys|country|rte|cr][v])
  *
  ***
@@ -128,6 +129,7 @@
 
 <body onload="mapviewStartup(<?php echo $lat.",".$lon.",".$zoom; ?>);">
 <script type="application/javascript">
+<?php tm_generate_custom_colors_array(); ?>
 let scrollableMapviewDialog = `
 <p><b>Set Initial Location and Zoom Level</b></br >
 Find place: <input id="placeinput" name="placeinput" type="text" size="20" maxlength="100" onkeypress="nominatimLookupIfEnter(event);"/>&nbsp;<input id="findbutton" name="findbutton" type="button" value="Press to Search and Set Coords" onclick="nominatimLookup('placeinput');" /><br />
