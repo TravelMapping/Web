@@ -252,7 +252,7 @@ function tm_shield_generate($r, $force_reload = false) {
             }
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;
-   
+	    
         case 'alakt':
         case 'alavt':
         case 'canmbw':
@@ -510,6 +510,8 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'eursf':
         case 'usakyp':
         case 'gbrtr':
+        case 'sctntr':
+        case 'nzltr':
         case 'swemot':
             $lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
             $index = 0;
