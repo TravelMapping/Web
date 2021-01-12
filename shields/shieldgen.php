@@ -510,6 +510,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'eursf':
         case 'usakyp':
         case 'gbrtr':
+        case 'swemot':
             $lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
             $index = 0;
             foreach ($lines as $line) {
