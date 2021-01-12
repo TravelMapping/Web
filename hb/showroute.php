@@ -283,7 +283,7 @@ else if ($routeInfo['level'] == 'devel') {
 // shield and other info, depending on whether we are showing
 // connected or chopped route
 // always have the shield based on the root
-echo "<span class='bigshield'>".generate($rootparam, true)."</span>\n";
+echo "<span class='bigshield'>".tm_shield_generate($rootparam, true)."</span>\n";
 if ($connected) {
     echo "<span style=\"text-align: center;\">" . $connInfo['banner'];
     if (strlen($connInfo['groupName']) > 0) {

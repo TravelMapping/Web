@@ -1,5 +1,5 @@
 <?php
-function generate($r, $force_reload = false)
+function tm_shield_generate($r, $force_reload = false)
 {
     global $tmdb;
     $dir = $_SERVER['DOCUMENT_ROOT']."/shields";
@@ -529,6 +529,6 @@ function generate($r, $force_reload = false)
 }
 
 if(array_key_exists('shield', $_GET)) {
-    echo generate($_GET['shield'], true);
+    echo tm_shield_generate($_GET['shield'], true);
 }
 ?>
