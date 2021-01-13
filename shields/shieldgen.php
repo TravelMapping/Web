@@ -187,6 +187,9 @@ function tm_shield_generate($r, $force_reload = false) {
 
         case 'usaky':
             $routeNum = str_replace("KY", "", $row['route']);
+            if (strlen($routeNum) >= 3) {
+                $svg = file_get_contents("{$dir}/template_usaky_wide.svg");
+            }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
             
