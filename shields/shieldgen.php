@@ -417,6 +417,15 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+        case 'espct':
+            // replace placeholder, add hyphen after prefix, use wide svg files
+            // note that C can be a suffix also, so str_replace doesn't
+            // get it done
+            $routeNum = substr_replace($row['route'], "-", 1, 0);
+            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
         case 'eure':
             // replace placeholder
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
