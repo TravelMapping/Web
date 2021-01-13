@@ -87,14 +87,9 @@ SQL;
         }
         echo "/ {$row['total']})</a></h4>";
         $rootList = explode(",", $row['clinchedRoutes']);
-        $col = 0;
+
         foreach($rootList as $root) {
             echo "<a href='/hb/showroute.php?u=$tmuser&amp;r=$root&amp;cr'><span class='shield'>".tm_shield_generate($root, $_GET['reload'])."</span></a>\n";
-            $col++;
-            if ($col > 20) {
-                echo "<br/>\n";
-                $col = 0;
-            }
         }
     }
     $res->free();
