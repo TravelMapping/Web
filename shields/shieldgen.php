@@ -255,7 +255,7 @@ function tm_shield_generate($r, $force_reload = false) {
             }
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;
-	    
+            
         case 'alakt':
         case 'alavt':
         case 'canmbw':
@@ -426,11 +426,38 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+        case 'espan':
+        case 'espar':
+        case 'espas':
+        case 'espcb':
+        case 'espcl':
+        case 'espcm':
+        case 'espex':
+        case 'espga':
+        case 'espib':
+        case 'espmc':
+        case 'espmd':
+        case 'espnc':
+        case 'esppv':
+        case 'espri':
+        case 'espvc':
+            // replace placeholder, add hyphen after prefix, use wide svg files
+            // note that prefix can be 1 of 2 letters, sometimes within the
+            // same system..
+            $hyphenpos = 2;
+            if (ctype_digit($row['route'][1])) {
+                $hyphenpos = 1;
+            }
+            $routeNum = substr_replace($row['route'], "-", $hyphenpos, 0);
+            $svg = file_get_contents("{$dir}/template_espxx_wide" . strlen($routeNum) . ".svg");
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+            
         case 'eure':
             // replace placeholder
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;
-
+            
         case 'bela':
         case 'belr':
         case 'luxa':
@@ -442,7 +469,7 @@ function tm_shield_generate($r, $force_reload = false) {
             }
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;
-
+            
         case 'nlda':
             // replace placeholder, use wide svg files for 3-/4-digit numbers
             if (strlen($row['route']) > 2) {
@@ -453,7 +480,7 @@ function tm_shield_generate($r, $force_reload = false) {
             }
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;
-
+            
         case 'espa':
             // replace placeholder, use wide svg files for
             // 3-/4-/5-digit numbers (Spain is simplified: national
