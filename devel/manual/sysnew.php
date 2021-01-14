@@ -205,10 +205,10 @@ brabr;BRA;Brazil Rodovias Federais;green;4;devel
     <li>The <code>color</code> represents the color which is used on maps to draw the TM graph.</li>
     <ul>
       <li>The color should help to distinguish systems if applicable.</li>
-      <li>Available colors are: <span style="color: #0000DC;">blue</span>, <span style="color: #996600;">brown</span>,
-      <span style="color: #E00000;">red</span>, <span style="color: #E8B000;">yellow</span>,
-      <span style="color: #008CA0;">teal</span>, <span style="color: #00E000;">green</span>,
-      <span style="color: #D000D0;">magenta</span> and <span style="color: #F09673;">lightsalmon</span>.</li>
+      <li>Available colors are: <span style="color: #0000DC;">TMblue</span>, <span style="color: #996600;">TMbrown</span>,
+      <span style="color: #E00000;">TMred</span>, <span style="color: #E8B000;">TMyellow</span>,
+      <span style="color: #008CA0;">TMteal</span>, <span style="color: #00E000;">TMgreen</span>,
+      <span style="color: #D000D0;">TMmagenta</span> and <span style="color: #F09673;">TMlightsalmon</span>.</li>
       <li>Standard colors are often used for a continent to avoid confusing users.</li>
     </ul>
     <li>The <code>tier</code> index is used to distinguish systems top down.</li>
