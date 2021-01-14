@@ -1,24 +1,24 @@
 <!-- /lib/tmphpfuncs.php: common PHP functionality for Travel Mapping -->
 <?php
 /*
-     PHP to include in any Travel Mapping page that needs to access the DB.
+   PHP to include in any Travel Mapping page that needs to access the DB.
 
-     This parses the dbname= query string parameter to override the
-     default DB (TravelMapping), but no longer stores it in a cookie
-     since this functionality would be used only rarely.  Other DB
-     connection parameters can also be specified with the QS
-     parameters dbuser, dbpasswd, and dbhost.
+   This parses the dbname= query string parameter to override the
+   default DB (TravelMapping), but no longer stores it in a cookie
+   since this functionality would be used only rarely.  Other DB
+   connection parameters can also be specified with the QS
+   parameters dbuser, dbpasswd, and dbhost.
 
-     It then attempts to connect to the mysql DB on localhost with that
-     name using the mysqli interface.  On failure, an error message is
-     displayed.
+   It then attempts to connect to the mysql DB on localhost with that
+   name using the mysqli interface.  On failure, an error message is
+   displayed.
 
-     Also parses other commonly used QS parameters and places the values
-     in PHP variables.
+   Also parses other commonly used QS parameters and places the values
+   in PHP variables.
 
-     This would normally be included at the start of the page, right 
-     around the <title> element.
-*/
+   This would normally be included at the start of the page, right 
+   around the <title> element.
+ */
 
 // always attempt to establish a connection to the db, allow QS parameters
 // to override defaults, which come from the 6 lines of tm.conf (which
@@ -66,7 +66,7 @@ if (array_key_exists("dbhost", $_GET)) {
 $tmsqldebug = FALSE;
 
 if (array_key_exists("sqldebug", $_GET)) { 
-   $tmsqldebug = TRUE;
+    $tmsqldebug = TRUE;
 }
 
 // get other common QS parameters
@@ -83,8 +83,8 @@ try {
     $tmdb = new mysqli($tmdbhost, $tmdbuser, $tmdbpasswd, $tmdbname);
 }
 catch ( Exception $e ) {
-   echo "<h1 style='color: red'>Failed to connect to database ".$tmdbname." on ".$tmdbhost." Please try again later.</h1>";
-   exit;
+    echo "<h1 style='color: red'>Failed to connect to database ".$tmdbname." on ".$tmdbhost." Please try again later.</h1>";
+    exit;
 }
 
 // function to combine a query with a little error check
@@ -153,16 +153,16 @@ function tm_region_select($multiple) {
     while ($row = $res->fetch_assoc()) {
         // see if we're in a new country group
 	if ($lastCountry != $row['ccode']) {
-	   // close old optgroup if in one
-	   if ($inOptGroup) {
-	      echo "</optgroup>";
-	      $inOptGroup = FALSE;
-	   }
-	   // open new optgroup if a multi-region country
-	   if ($row['rcount'] > 1) {
-	      echo "<optgroup label=\"".$row['cname']."\">";
-	      $inOptGroup = TRUE;
-	   }
+	    // close old optgroup if in one
+	    if ($inOptGroup) {
+		echo "</optgroup>";
+		$inOptGroup = FALSE;
+	    }
+	    // open new optgroup if a multi-region country
+	    if ($row['rcount'] > 1) {
+		echo "<optgroup label=\"".$row['cname']."\">";
+		$inOptGroup = TRUE;
+	    }
 	}
 	$lastCountry = $row['ccode'];
         echo "<option value=\"".$row['rcode']."\"";
@@ -351,12 +351,12 @@ function tm_qs_multi_or_comma_to_array($param) {
     $array = array();
     if (array_key_exists($param, $_GET)) {
         if (is_array($_GET[$param])) {
-          foreach ($_GET[$param] as $p) {
-            $array = array_merge($array, explode(',',$p));
-          }
+            foreach ($_GET[$param] as $p) {
+		$array = array_merge($array, explode(',',$p));
+            }
         }
         else {
-          $array = explode(",", $_GET[$param]);
+            $array = explode(",", $_GET[$param]);
         }
     }
     return array_diff($array, array("null"));
@@ -374,8 +374,17 @@ function tm_generate_custom_colors_array() {
         foreach ($customColors as $customColor) {
             $colorEntry = array();
             $colorEntry = explode(':',$customColor);
-            echo "customColorCodes[".$colorNum."] = { name: \"".$colorEntry[0]."\", unclinched: \"".$colorEntry[1]."\", clinched: \"".$colorEntry[2]."\" };\n";
-            $colorNum = $colorNum + 1;
+	    // 3 fields means a CSS specification for clinched and unclinched
+	    // follow the tier or system name, 2 fields means a TM predefined
+	    // color name (from the colorCodes array) follows
+	    if (count($colorEntry) == 3) {
+		echo "customColorCodes[".$colorNum."] = { name: \"".$colorEntry[0]."\", unclinched: \"".$colorEntry[1]."\", clinched: \"".$colorEntry[2]."\" };\n";
+		$colorNum = $colorNum + 1;
+	    }
+	    else if (count($colorEntry) == 2) {
+		echo "customColorCodes[".$colorNum."] = { name: \"".$colorEntry[0]."\", TMcolor: \"".$colorEntry[1]."\" };\n";
+		$colorNum = $colorNum + 1;
+	    }
         }
     }
 }
@@ -465,13 +474,13 @@ function tm_validate_root($root) {
     }
     $array = explode('.', $root);
     if (count($array) != 2) {
-       return "noregion.root";
+	return "noregion.root";
     }
     if (!ctype_alpha($array[0])) {
-       return "badregion.root";
+	return "badregion.root";
     }
     if (!ctype_alnum($array[1])) {
-       return "badroute.root";
+	return "badroute.root";
     }
     return $root;
 }
@@ -480,21 +489,21 @@ function tm_validate_root($root) {
 // TableSorter, etc.
 function tm_common_js() {
 
-  global $tmhereid;
-  global $tmherecode;
-  global $tmtfkey;
-  global $tmmbtoken;
-  
-  echo "<!-- tm_common_js from tmphpfuncs.php START -->\n";
-  echo "<!-- Map API functionality -->\n";
-  echo "<script type=\"text/javascript\">\n";
-  echo "var here_map_id = \"".$tmhereid."\";\n";
-  echo "var here_map_code = \"".$tmherecode."\";\n";
-  echo "var tf_map_key = \"".$tmtfkey."\";\n";
-  echo "var mapbox_token = \"".$tmmbtoken."\";\n";
-  echo "</script>\n";
+    global $tmhereid;
+    global $tmherecode;
+    global $tmtfkey;
+    global $tmmbtoken;
+    
+    echo "<!-- tm_common_js from tmphpfuncs.php START -->\n";
+    echo "<!-- Map API functionality -->\n";
+    echo "<script type=\"text/javascript\">\n";
+    echo "var here_map_id = \"".$tmhereid."\";\n";
+    echo "var here_map_code = \"".$tmherecode."\";\n";
+    echo "var tf_map_key = \"".$tmtfkey."\";\n";
+    echo "var mapbox_token = \"".$tmmbtoken."\";\n";
+    echo "</script>\n";
 
-echo <<<END
+    echo <<<END
   <link rel="stylesheet" href="/leaflet-1.5.1/leaflet.css" />
   <script src="/leaflet-1.5.1/leaflet.js"></script>
   <script src="/leaflet-1.5.1/leaflet-providers.js"></script>
@@ -507,7 +516,7 @@ echo <<<END
   <!-- clipboard.js -->
   <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 END;
-  echo "<!-- tm_common_js from tmphpfuncs.php END -->\n";
+    echo "<!-- tm_common_js from tmphpfuncs.php END -->\n";
 }
 
 // functions from http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php
