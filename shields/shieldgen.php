@@ -481,6 +481,24 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;
             
+        case 'itass':
+	    // get the proper width template
+            if (strlen($row['route']) > 2) {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide3.svg");
+            }
+            if (strlen($row['route']) > 3) {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
+            }
+            if (strlen($row['route']) > 4) {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide5.svg");
+            }
+	    
+	    // space after "SS"
+            $routeNum = substr_replace($row['route'], " ", 2, 0);
+            // replace placeholder
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+            
         case 'espa':
             // replace placeholder, use wide svg files for
             // 3-/4-/5-digit numbers (Spain is simplified: national
