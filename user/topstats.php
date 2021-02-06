@@ -9,268 +9,276 @@
  ***
  -->
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" type="text/css" href="/css/travelMapping.css" />
-    <link rel="shortcut icon" type="image/png" href="/favicon.png">
+    <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link rel="stylesheet" type="text/css" href="/css/travelMapping.css" />
+	<link rel="stylesheet" type="text/css" href="/fonts/roadgeek.css" />
+	<link rel="shortcut icon" type="image/png" href="/favicon.png">
     <?php tm_common_js(); ?>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
     <title>Travel Mapping: Top User Stats</title>
 </head>
 
 <script type="text/javascript">
-var selects = new Object();
-function initUI() {
+ var selects = new Object();
+ function initUI() {
 
-    let controls = document.getElementById("controlbox");
-    let allselects = controls.getElementsByTagName("select");
-    for (let i = 0; i < allselects.length; i++) {
-        selects[allselects[i].name] = allselects[i];
-    }
-    selects['rg'].disabled = true;
-}
+     let controls = document.getElementById("controlbox");
+     let allselects = controls.getElementsByTagName("select");
+     for (let i = 0; i < allselects.length; i++) {
+         selects[allselects[i].name] = allselects[i];
+     }
+     selects['rg'].disabled = true;
+ }
 
-function connectedChanged() {
+ function connectedChanged() {
 
-    selects['rg'].disabled = selects['connected'].value == "connected";
-}
+     selects['rg'].disabled = selects['connected'].value == "connected";
+ }
 
-function updateStats() {
+ function updateStats() {
 
-    distanceUnits = selects['units'].value;
-    setTMCookie("units", distanceUnits);
-    traveler = selects['u'].value;
-    setTMCookie("traveler", traveler);
-    document.getElementById("unitsText").innerHTML = distanceUnits;
-    let params = {
-	traveler: traveler,
-	system: selects['sys'].value,
-        region: selects['rg'].value,
-	preview: selects['preview'].value == "yes",
-	numentries: document.getElementById("numentries").value
-    };
-    
-    let jsonParams = JSON.stringify(params);
-    if (selects['connected'].value == "inregion") {
-        // regular clinched routes (in a single region)
-        $.ajax({
-    	    type: "POST",
-	    url: "/lib/getLongestClinchedRoutes.php",
-	    datatype: "json",
-	    data: { "params" : jsonParams },
-	    success: parseLongestClinchedData
-        });
-        // longest travels on routes (in a single region)
-        $.ajax({
-    	    type: "POST",
- 	    url: "/lib/getLongestTraveledRoutes.php",
-	    datatype: "json",
-	    data: { "params" : jsonParams },
-	    success: parseLongestTraveledData
-        });
-        // shortest unclinched travels on traveled routes (in a single region)
-        $.ajax({
-    	    type: "POST",
- 	    url: "/lib/getClosestToClinchedTraveledRoutes.php",
-	    datatype: "json",
-	    data: { "params" : jsonParams },
-	    success: parseClosestToClinchedTraveledData
-        });
-    }
-    else {
-        // connected clinched routes
-        $.ajax({
-	    type: "POST",
-	    url: "/lib/getLongestClinchedConnectedRoutes.php",
-	    datatype: "json",
-	    data: { "params" : jsonParams },
-	    success: parseLongestClinchedConnectedData
-        });
-        // longest travels on connected routes
-        $.ajax({
-	    type: "POST",
-	    url: "/lib/getLongestTraveledConnectedRoutes.php",
-	    datatype: "json",
-	    data: { "params" : jsonParams },
-	    success: parseLongestTraveledConnectedData
-        });
-        // shortest unclinched travels on traveled connected routes
-        $.ajax({
-    	    type: "POST",
- 	    url: "/lib/getClosestToClinchedConnectedTraveledRoutes.php",
-	    datatype: "json",
-	    data: { "params" : jsonParams },
-	    success: parseClosestToClinchedConnectedTraveledData
-        });
-    }
-}
+     distanceUnits = selects['units'].value;
+     setTMCookie("units", distanceUnits);
+     traveler = selects['u'].value;
+     setTMCookie("traveler", traveler);
+     document.getElementById("unitsText").innerHTML = distanceUnits;
+     let params = {
+	 traveler: traveler,
+	 system: selects['sys'].value,
+         region: selects['rg'].value,
+	 preview: selects['preview'].value == "yes",
+	 numentries: document.getElementById("numentries").value
+     };
+     
+     let jsonParams = JSON.stringify(params);
+     if (selects['connected'].value == "inregion") {
+	 console.log("calling /lib/getLongestClinchedRoutes.php");
+         // regular clinched routes (in a single region)
+         $.ajax({
+    	     type: "POST",
+	     url: "/lib/getLongestClinchedRoutes.php",
+	     datatype: "json",
+	     data: { "params" : jsonParams },
+	     success: parseLongestClinchedData
+         });
+         // longest travels on routes (in a single region)
+         $.ajax({
+    	     type: "POST",
+ 	     url: "/lib/getLongestTraveledRoutes.php",
+	     datatype: "json",
+	     data: { "params" : jsonParams },
+	     success: parseLongestTraveledData
+         });
+         // shortest unclinched travels on traveled routes (in a single region)
+         $.ajax({
+    	     type: "POST",
+ 	     url: "/lib/getClosestToClinchedTraveledRoutes.php",
+	     datatype: "json",
+	     data: { "params" : jsonParams },
+	     success: parseClosestToClinchedTraveledData
+         });
+     }
+     else {
+         // connected clinched routes
+         $.ajax({
+	     type: "POST",
+	     url: "/lib/getLongestClinchedConnectedRoutes.php",
+	     datatype: "json",
+	     data: { "params" : jsonParams },
+	     success: parseLongestClinchedConnectedData
+         });
+         // longest travels on connected routes
+         $.ajax({
+	     type: "POST",
+	     url: "/lib/getLongestTraveledConnectedRoutes.php",
+	     datatype: "json",
+	     data: { "params" : jsonParams },
+	     success: parseLongestTraveledConnectedData
+         });
+         // shortest unclinched travels on traveled connected routes
+         $.ajax({
+    	     type: "POST",
+ 	     url: "/lib/getClosestToClinchedConnectedTraveledRoutes.php",
+	     datatype: "json",
+	     data: { "params" : jsonParams },
+	     success: parseClosestToClinchedConnectedTraveledData
+         });
+     }
+ }
 
-function parseLongestClinchedData(data) {
+ function parseLongestClinchedData(data) {
 
-    let response = $.parseJSON(data);
-    // we have an array in response, each element has fields
-    // root (for link), routeinfo (human-readable), and mileage
-    // build the table of longest clinched from that
-    let tbody = document.getElementById("longestClinchedRoutes");
-    let rows = "";
-    if (response.length == 0) {
-       rows = '<tr><td colspan="2" style="text-align:center">No Routes Clinched</td></tr>';
-    }
-    else {
-        for (let i = 0; i < response.length; i++) {
-	    let link = "/hb/showroute.php?r=" + response[i].root;
-            rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
-	        response[i].routeinfo +
-	        '</td><td style="text-align: right; background-color: ' +
-		colorForAmountTraveled(1,1) + '">' +
-	        convertToCurrentUnits(response[i].mileage).toFixed(2) +
-		"</td></tr>";
-        }
-    }
-    tbody.innerHTML = rows;
-}
+     let response = $.parseJSON(data);
+     // we have an array in response, each element has fields
+     // root (for link), routeinfo (human-readable), and mileage
+     // build the table of longest clinched from that
+     let tbody = document.getElementById("longestClinchedRoutes");
+     let rows = "";
+     if (response.length == 0) {
+	 rows = '<tr><td colspan="2" style="text-align:center">No Routes Clinched</td></tr>';
+     }
+     else {
+         for (let i = 0; i < response.length; i++) {
+	     let link = "/hb/showroute.php?r=" + response[i].root;
+             rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
+		     '<span class="shield">' + response[i].shield + '</span><br />' +
+		     response[i].routeinfo +
+		     '</td><td style="text-align: right; background-color: ' +
+		     colorForAmountTraveled(1,1) + '">' +
+		     convertToCurrentUnits(response[i].mileage).toFixed(2) +
+		     "</td></tr>";
+	 }
+     }
+     tbody.innerHTML = rows;
+ }
 
-function parseLongestClinchedConnectedData(data) {
+ function parseLongestClinchedConnectedData(data) {
 
-    let response = $.parseJSON(data);
-    // we have an array in response, each element has fields
-    // root (for link), routeinfo (human-readable), and mileage
-    // build the table of longest clinched from that
-    let tbody = document.getElementById("longestClinchedRoutes");
-    let rows = "";
-    if (response.length == 0) {
-       rows = '<tr><td colspan="2" style="text-align:center">No Routes Clinched</td></tr>';
-    }
-    else {
-        for (let i = 0; i < response.length; i++) {
-	    let link = "/hb/showroute.php?cr&r=" + response[i].root;
-            rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
-	        response[i].routeinfo +
-	        '</td><td style="text-align: right; background-color: ' +
-		colorForAmountTraveled(1,1) + '">' +
-	        convertToCurrentUnits(response[i].mileage).toFixed(2) +
-		"</td></tr>";
-        }
-    }
-    tbody.innerHTML = rows;
-}
+     let response = $.parseJSON(data);
+     // we have an array in response, each element has fields
+     // root (for link), routeinfo (human-readable), and mileage
+     // build the table of longest clinched from that
+     let tbody = document.getElementById("longestClinchedRoutes");
+     let rows = "";
+     if (response.length == 0) {
+	 rows = '<tr><td colspan="2" style="text-align:center">No Routes Clinched</td></tr>';
+     }
+     else {
+	 for (let i = 0; i < response.length; i++) {
+	     let link = "/hb/showroute.php?cr&r=" + response[i].root;
+	     rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
+		     '<span class="shield">' + response[i].shield + '</span><br />' +
+		     response[i].routeinfo +
+		     '</td><td style="text-align: right; background-color: ' +
+		     colorForAmountTraveled(1,1) + '">' +
+		     convertToCurrentUnits(response[i].mileage).toFixed(2) +
+		     "</td></tr>";
+	 }
+     }
+     tbody.innerHTML = rows;
+ }
 
-function parseLongestTraveledData(data) {
+ function parseLongestTraveledData(data) {
 
-    let response = $.parseJSON(data);
-    // we have an array in response, each element has fields
-    // root (for link), routeinfo (human-readable), traveled (in miles)
-    // and mileage (of route)
-    // build the table of longest traveled from that
-    let tbody = document.getElementById("longestTraveledRoutes");
-    let rows = "";
-    if (response.length == 0) {
-       rows = '<tr><td colspan="3" style="text-align:center">No Routes Traveled</td></tr>';
-    }
-    else {
-        for (let i = 0; i < response.length; i++) {
-	    let link = "/hb/showroute.php?r=" + response[i].root;
-	    let style = "background-color: " + 
-	    	colorForAmountTraveled(response[i].traveled,response[i].mileage);
-            rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
-	        response[i].routeinfo +
-	        '</td><td style="text-align: right; ' + style + '">' +
-	        convertToCurrentUnits(response[i].traveled).toFixed(2) +
-		'</td><td style="text-align: right; ' + style + '">' +
-	        convertToCurrentUnits(response[i].mileage).toFixed(2) +
-		"</td></tr>";
-        }
-    }
-    tbody.innerHTML = rows;
-}
+     let response = $.parseJSON(data);
+     // we have an array in response, each element has fields
+     // root (for link), routeinfo (human-readable), traveled (in miles)
+     // and mileage (of route)
+     // build the table of longest traveled from that
+     let tbody = document.getElementById("longestTraveledRoutes");
+     let rows = "";
+     if (response.length == 0) {
+	 rows = '<tr><td colspan="3" style="text-align:center">No Routes Traveled</td></tr>';
+     }
+     else {
+	 for (let i = 0; i < response.length; i++) {
+	     let link = "/hb/showroute.php?r=" + response[i].root;
+	     let style = "background-color: " + 
+	    		 colorForAmountTraveled(response[i].traveled,response[i].mileage);
+	     rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
+		     '<span class="shield">' + response[i].shield + '</span><br />' +
+		     response[i].routeinfo +
+		     '</td><td style="text-align: right; ' + style + '">' +
+		     convertToCurrentUnits(response[i].traveled).toFixed(2) +
+		     '</td><td style="text-align: right; ' + style + '">' +
+		     convertToCurrentUnits(response[i].mileage).toFixed(2) +
+		     "</td></tr>";
+	 }
+     }
+     tbody.innerHTML = rows;
+ }
 
-function parseLongestTraveledConnectedData(data) {
+ function parseLongestTraveledConnectedData(data) {
 
-    let response = $.parseJSON(data);
-    // we have an array in response, each element has fields
-    // root (for link), routeinfo (human-readable), and mileage
-    // build the table of longest traveled from that
-    let tbody = document.getElementById("longestTraveledRoutes");
-    let rows = "";
-    if (response.length == 0) {
-       rows = '<tr><td colspan="3" style="text-align:center">No Routes Traveled</td></tr>';
-    }
-    else {
-        for (let i = 0; i < response.length; i++) {
-	    let link = "/hb/showroute.php?cr&r=" + response[i].root;
-	    let style = "background-color: " + 
-	    	colorForAmountTraveled(response[i].traveled,response[i].mileage);
-            rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
-	        response[i].routeinfo +
-	        '</td><td style="text-align: right; ' + style + '">' +
-	        convertToCurrentUnits(response[i].traveled).toFixed(2) +
-	        '</td><td style="text-align: right; ' + style + '">' +
-	        convertToCurrentUnits(response[i].mileage).toFixed(2) +
-		"</td></tr>";
-        }
-    }
-    tbody.innerHTML = rows;
-}
+     let response = $.parseJSON(data);
+     // we have an array in response, each element has fields
+     // root (for link), routeinfo (human-readable), and mileage
+     // build the table of longest traveled from that
+     let tbody = document.getElementById("longestTraveledRoutes");
+     let rows = "";
+     if (response.length == 0) {
+	 rows = '<tr><td colspan="3" style="text-align:center">No Routes Traveled</td></tr>';
+     }
+     else {
+	 for (let i = 0; i < response.length; i++) {
+	     let link = "/hb/showroute.php?cr&r=" + response[i].root;
+	     let style = "background-color: " + 
+	    		 colorForAmountTraveled(response[i].traveled,response[i].mileage);
+	     rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
+		     '<span class="shield">' + response[i].shield + '</span><br />' +
+		     response[i].routeinfo +
+		     '</td><td style="text-align: right; ' + style + '">' +
+		     convertToCurrentUnits(response[i].traveled).toFixed(2) +
+		     '</td><td style="text-align: right; ' + style + '">' +
+		     convertToCurrentUnits(response[i].mileage).toFixed(2) +
+		     "</td></tr>";
+	 }
+     }
+     tbody.innerHTML = rows;
+ }
 
-function parseClosestToClinchedTraveledData(data) {
+ function parseClosestToClinchedTraveledData(data) {
 
-    let response = $.parseJSON(data);
-    // we have an array in response, each element has fields
-    // root (for link), routeinfo (human-readable), missing (in miles)
-    // and mileage (of route)
-    // build the table of longest traveled from that
-    let tbody = document.getElementById("closestToClinchedTraveledRoutes");
-    let rows = "";
-    if (response.length == 0) {
-       rows = '<tr><td colspan="3" style="text-align:center">No Unclinched Routes Traveled</td></tr>';
-    }
-    else {
-        for (let i = 0; i < response.length; i++) {
-	    let link = "/hb/showroute.php?r=" + response[i].root;
-	    let style = "background-color: " + 
-	    	colorForAmountTraveled(response[i].mileage-response[i].missing,
-		                       response[i].mileage);
-            rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
-	        response[i].routeinfo +
-	        '</td><td style="text-align: right; ' + style + '">' +
-	        convertToCurrentUnits(response[i].missing).toFixed(2) +
-		'</td><td style="text-align: right; ' + style + '">' +
-	        convertToCurrentUnits(response[i].mileage).toFixed(2) +
-		"</td></tr>";
-        }
-    }
-    tbody.innerHTML = rows;
-}
+     let response = $.parseJSON(data);
+     // we have an array in response, each element has fields
+     // root (for link), routeinfo (human-readable), missing (in miles)
+     // and mileage (of route)
+     // build the table of longest traveled from that
+     let tbody = document.getElementById("closestToClinchedTraveledRoutes");
+     let rows = "";
+     if (response.length == 0) {
+	 rows = '<tr><td colspan="3" style="text-align:center">No Unclinched Routes Traveled</td></tr>';
+     }
+     else {
+	 for (let i = 0; i < response.length; i++) {
+	     let link = "/hb/showroute.php?r=" + response[i].root;
+	     let style = "background-color: " + 
+	    		 colorForAmountTraveled(response[i].mileage-response[i].missing,
+						response[i].mileage);
+	     rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
+		     '<span class="shield">' + response[i].shield + '</span><br />' +
+		     response[i].routeinfo +
+		     '</td><td style="text-align: right; ' + style + '">' +
+		     convertToCurrentUnits(response[i].missing).toFixed(2) +
+		     '</td><td style="text-align: right; ' + style + '">' +
+		     convertToCurrentUnits(response[i].mileage).toFixed(2) +
+		     "</td></tr>";
+	 }
+     }
+     tbody.innerHTML = rows;
+ }
 
-function parseClosestToClinchedConnectedTraveledData(data) {
+ function parseClosestToClinchedConnectedTraveledData(data) {
 
-    let response = $.parseJSON(data);
-    // we have an array in response, each element has fields
-    // root (for link), routeinfo (human-readable), missing (in miles)
-    // and mileage (of route)
-    // build the table of longest traveled from that
-    let tbody = document.getElementById("closestToClinchedTraveledRoutes");
-    let rows = "";
-    if (response.length == 0) {
-       rows = '<tr><td colspan="3" style="text-align:center">No Unclinched Routes Traveled</td></tr>';
-    }
-    else {
-        for (let i = 0; i < response.length; i++) {
-	    let link = "/hb/showroute.php?cr&r=" + response[i].root;
-	    let style = "background-color: " + 
-	    	colorForAmountTraveled(response[i].mileage-response[i].missing,
-		                       response[i].mileage);
-            rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
-	        response[i].routeinfo +
-	        '</td><td style="text-align: right; ' + style + '">' +
-	        convertToCurrentUnits(response[i].missing).toFixed(2) +
-		'</td><td style="text-align: right; ' + style + '">' +
-	        convertToCurrentUnits(response[i].mileage).toFixed(2) +
-		"</td></tr>";
-        }
-    }
-    tbody.innerHTML = rows;
-}
+     let response = $.parseJSON(data);
+     // we have an array in response, each element has fields
+     // root (for link), routeinfo (human-readable), missing (in miles)
+     // and mileage (of route)
+     // build the table of longest traveled from that
+     let tbody = document.getElementById("closestToClinchedTraveledRoutes");
+     let rows = "";
+     if (response.length == 0) {
+	 rows = '<tr><td colspan="3" style="text-align:center">No Unclinched Routes Traveled</td></tr>';
+     }
+     else {
+	 for (let i = 0; i < response.length; i++) {
+	     let link = "/hb/showroute.php?cr&r=" + response[i].root;
+	     let style = "background-color: " + 
+	    		 colorForAmountTraveled(response[i].mileage-response[i].missing,
+						response[i].mileage);
+	     rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
+		     '<span class="shield">' + response[i].shield + '</span><br />' +
+		     response[i].routeinfo +
+		     '</td><td style="text-align: right; ' + style + '">' +
+		     convertToCurrentUnits(response[i].missing).toFixed(2) +
+		     '</td><td style="text-align: right; ' + style + '">' +
+		     convertToCurrentUnits(response[i].mileage).toFixed(2) +
+		     "</td></tr>";
+	 }
+     }
+     tbody.innerHTML = rows;
+ }
 </script>
 
 <body onload="initUI(); updateStats(); ">
