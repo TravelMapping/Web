@@ -53,7 +53,6 @@
      
      let jsonParams = JSON.stringify(params);
      if (selects['connected'].value == "inregion") {
-	 console.log("calling /lib/getLongestClinchedRoutes.php");
          // regular clinched routes (in a single region)
          $.ajax({
     	     type: "POST",
@@ -121,9 +120,10 @@
      else {
          for (let i = 0; i < response.length; i++) {
 	     let link = "/hb/showroute.php?r=" + response[i].root;
-             rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
-		     '<span class="shield">' + response[i].shield + '</span><br />' +
-		     response[i].routeinfo +
+             rows += '<tr onclick="window.open(\'' + link +
+		     '\')"><td style="text-align:center">' +
+		     '<span class="shield">' + response[i].shield +
+		     '</span><br />' + response[i].routeinfo +
 		     '</td><td style="text-align: right; background-color: ' +
 		     colorForAmountTraveled(1,1) + '">' +
 		     convertToCurrentUnits(response[i].mileage).toFixed(2) +
@@ -147,9 +147,10 @@
      else {
 	 for (let i = 0; i < response.length; i++) {
 	     let link = "/hb/showroute.php?cr&r=" + response[i].root;
-	     rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
-		     '<span class="shield">' + response[i].shield + '</span><br />' +
-		     response[i].routeinfo +
+	     rows += '<tr onclick="window.open(\'' + link +
+		     '\')"><td style="text-align:center">' +
+		     '<span class="shield">' + response[i].shield +
+		     '</span><br />' + response[i].routeinfo +
 		     '</td><td style="text-align: right; background-color: ' +
 		     colorForAmountTraveled(1,1) + '">' +
 		     convertToCurrentUnits(response[i].mileage).toFixed(2) +
@@ -176,9 +177,10 @@
 	     let link = "/hb/showroute.php?r=" + response[i].root;
 	     let style = "background-color: " + 
 	    		 colorForAmountTraveled(response[i].traveled,response[i].mileage);
-	     rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
-		     '<span class="shield">' + response[i].shield + '</span><br />' +
-		     response[i].routeinfo +
+	     rows += '<tr onclick="window.open(\'' + link +
+		     '\')"><td style="text-align:center">' +
+		     '<span class="shield">' + response[i].shield +
+		     '</span><br />' + response[i].routeinfo +
 		     '</td><td style="text-align: right; ' + style + '">' +
 		     convertToCurrentUnits(response[i].traveled).toFixed(2) +
 		     '</td><td style="text-align: right; ' + style + '">' +
@@ -205,9 +207,10 @@
 	     let link = "/hb/showroute.php?cr&r=" + response[i].root;
 	     let style = "background-color: " + 
 	    		 colorForAmountTraveled(response[i].traveled,response[i].mileage);
-	     rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
-		     '<span class="shield">' + response[i].shield + '</span><br />' +
-		     response[i].routeinfo +
+	     rows += '<tr onclick="window.open(\'' + link +
+		     '\')"><td style="text-align:center">' +
+		     '<span class="shield">' + response[i].shield +
+		     '</span><br />' + response[i].routeinfo +
 		     '</td><td style="text-align: right; ' + style + '">' +
 		     convertToCurrentUnits(response[i].traveled).toFixed(2) +
 		     '</td><td style="text-align: right; ' + style + '">' +
@@ -236,9 +239,10 @@
 	     let style = "background-color: " + 
 	    		 colorForAmountTraveled(response[i].mileage-response[i].missing,
 						response[i].mileage);
-	     rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
-		     '<span class="shield">' + response[i].shield + '</span><br />' +
-		     response[i].routeinfo +
+	     rows += '<tr onclick="window.open(\'' + link +
+		     '\')"><td style="text-align:center">' +
+		     '<span class="shield">' + response[i].shield +
+		     '</span><br />' + response[i].routeinfo +
 		     '</td><td style="text-align: right; ' + style + '">' +
 		     convertToCurrentUnits(response[i].missing).toFixed(2) +
 		     '</td><td style="text-align: right; ' + style + '">' +
@@ -267,9 +271,10 @@
 	     let style = "background-color: " + 
 	    		 colorForAmountTraveled(response[i].mileage-response[i].missing,
 						response[i].mileage);
-	     rows += '<tr onclick="window.open(\'' + link + '\')"><td>' +
-		     '<span class="shield">' + response[i].shield + '</span><br />' +
-		     response[i].routeinfo +
+	     rows += '<tr onclick="window.open(\'' + link +
+		     '\')"><td style="text-align:center">' +
+		     '<span class="shield">' + response[i].shield +
+		     '</span><br />' + response[i].routeinfo +
 		     '</td><td style="text-align: right; ' + style + '">' +
 		     convertToCurrentUnits(response[i].missing).toFixed(2) +
 		     '</td><td style="text-align: right; ' + style + '">' +
