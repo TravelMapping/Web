@@ -17,6 +17,7 @@
  *  lat - initial latitude at center of map
  *  lon - initial longitude at center of map
  *  zoom - initial zoom level of map
+ *  colors - custom color string(s) (optional)
  *
  * If all three of lat, lon, and zoom are provided, the map will initialize
  * to those coordinates and zoom level.
@@ -265,6 +266,9 @@ $nobigheader = 1;
 echo "<body onload=\"showrouteStartup(".$lat.",".$lon.",".$zoom.");\">\n";
 require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/shields/shieldgen.php";
+echo "<script type=\"text/javascript\">";
+tm_generate_custom_colors_array();
+echo "</script>";
 echo "<div id=\"pointbox\">\n";
 echo "<span class='status-".$routeInfo['level']."' style='text-align:center'><a href='/hb/?sys=".$routeInfo['systemName']."'>".$routeInfo['fullName']." (".$routeInfo['systemName'].")</a></span>\n";
 if ($routeInfo['level'] == 'preview') {
@@ -279,7 +283,7 @@ else if ($routeInfo['level'] == 'devel') {
 // shield and other info, depending on whether we are showing
 // connected or chopped route
 // always have the shield based on the root
-echo "<span class='bigshield'>".generate($rootparam, true)."</span>\n";
+echo "<span class='bigshield'>".tm_shield_generate($rootparam, true)."</span>\n";
 if ($connected) {
     echo "<span style=\"text-align: center;\">" . $connInfo['banner'];
     if (strlen($connInfo['groupName']) > 0) {

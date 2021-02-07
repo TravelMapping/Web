@@ -1,9 +1,9 @@
 <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpuser.php" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!-- 
-	Shows a user's clinched highways within the project
-	URL Params:
-		u - the user.
+        Shows a user's clinched highways within the project
+        URL Params:
+                u - the user.
                 cort - traveled or clinched to display
 -->
 <html>
@@ -43,7 +43,7 @@
         echo "<h1>Clinched Routes for $tmuser: </h1>\n";
     }
 
-if ( $tmuser == "null") {
+if ($tmuser == "null") {
     echo "<h1>Select a User to Continue</h1>\n";
     echo "</div>\n";
     require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php";
@@ -52,7 +52,6 @@ if ( $tmuser == "null") {
     exit;
 }
 ?>
-    <table>
     <?php
     if ($cort == "t") {
        $clinched_clause = "";
@@ -77,29 +76,33 @@ if ( $tmuser == "null") {
 SQL;
     $tmdb->query("SET SESSION  group_concat_max_len = 5555555;");
     $res = tmdb_query($sql);
-    while($row = $res->fetch_assoc()) {
-        echo "<h4><a href='/user/system.php?sys={$row['systemName']}&amp;u={$tmuser}'>{$row['fullName']}\n";
+    while ($row = $res->fetch_assoc()) {
+        echo "<p style='text-align: center; font-size: 14pt; font-weight: bold'><a href='/user/system.php?sys={$row['systemName']}&amp;u={$tmuser}'>{$row['fullName']}\n";
         if ($cort == "c") {
             echo " ({$row['clinched']} ";
         }
         else {
             echo " ({$row['traveled']} ";
         }
-        echo "/ {$row['total']})</a></h4>";
+        echo "/ {$row['total']})</a></p>\n";
         $rootList = explode(",", $row['clinchedRoutes']);
-        $col = 0;
-        foreach($rootList as $root) {
-            echo "<a href='/hb/showroute.php?u=$tmuser&amp;r=$root'><span class='shield'>".generate($root, $_GET['reload'])."</span></a>\n";
-            $col++;
-            if ($col > 20) {
-                echo "<br/>\n";
-                $col = 0;
-            }
+
+        echo "<!-- ".$row['clinchedRoutes']." -->\n";
+        echo "<center>\n";
+        foreach ($rootList as $root) {
+            $res2 = tmdb_query("SELECT banner,groupName FROM connectedRoutes WHERE firstRoot = '" . $root . "';");
+            $routerow = $res2->fetch_assoc();
+            $res2->free();
+            echo "<span><table border='0' style='display: inline; text-align: center'><tr><td>";
+            echo $routerow['banner'];
+            echo "</td></tr><tr><td><a href='/hb/showroute.php?u=$tmuser&amp;r=$root&amp;cr'><span class='shield'>".tm_shield_generate($root, $_GET['reload'])."</span></a></td></tr><tr><td>";
+            echo $routerow['groupName'];
+            echo "</td></tr></table></span>\n";
         }
+        echo "</center>\n";
     }
     $res->free();
     ?>
-    </table>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
 </body>
 <?php
