@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
 <title>Travel Mapping Manual: Deal with data errors</title>
 <link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
 <link rel="shortcut icon" type="image/png" href="favicon.png">
