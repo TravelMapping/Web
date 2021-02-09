@@ -17,6 +17,7 @@ $params = json_decode($_POST['params'], true);
 // some output that breaks the JSON output
 ob_start();
 require "./tmphpfuncs.php";
+require "../shields/shieldgen.php";
 ob_end_clean();
 
 // initialize the array of responses
@@ -53,6 +54,7 @@ while ($row = $result->fetch_assoc()) {
 
     $nextobj = new stdClass();
     $nextobj->root = $row['root'];
+    $nextobj->shield = tm_shield_generate($row['root']);
     $nextobj->routeinfo = $row['region']." ".$row['route'].$row['banner'];
     if ($row['city'] != "") {
         $nextobj->routeinfo .= " (".$row['city'].")";
