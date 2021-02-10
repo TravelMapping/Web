@@ -147,7 +147,7 @@ Entries]
           echo "<tr><td>".$row['date']."</td><td>".$row['region']."</td><td>".$row['route']."</td><td>(NONE)</td><td>".htmlspecialchars($row['description'])."</td></tr>\n";
         }
         else {
-          echo "<tr><td>".$row['date']."</td><td>".$row['region']."</td><td>".$row['route']."</td><td><a href=\"/hb?r=".$row['root']."\">".$row['root']."</a></td><td>".htmlspecialchars($row['description'])."</td></tr>\n";
+          echo "<tr><td>".$row['date']."</td><td>".$row['region']."</td><td>".$row['route']."</td><td><a href=\"/hb/showroute.php?r=".$row['root']."\">".$row['root']."</a></td><td>".htmlspecialchars($row['description'])."</td></tr>\n";
         }
       }
       $res->free();
