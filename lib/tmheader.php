@@ -15,8 +15,13 @@ END;
 ?>
 
 <p class="menubar">
-<a href="/">Home</a> &nbsp;&nbsp;&nbsp;
-<a href="/stat.php">Traveler Stats</a> &nbsp;&nbsp;&nbsp;
+<a href="/">TM Home</a> &nbsp;&nbsp;&nbsp;
+<?php
+if ($tmuser != "null") {
+    echo '<a href="/user">User '.$tmuser.' Page</a> &nbsp;&nbsp;&nbsp;';
+}
+?>
+<a href="/stat.php">Travelers Stats</a> &nbsp;&nbsp;&nbsp;
 <a href="/hb">Highway Browser</a> &nbsp;&nbsp;&nbsp;
 <a href="/participate.php">Get Started!</a> &nbsp;&nbsp;&nbsp;
 <a href="https://forum.travelmapping.net">Project Forum</a> &nbsp;&nbsp;&nbsp;
