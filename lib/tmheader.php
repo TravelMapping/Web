@@ -17,8 +17,8 @@ END;
 <p class="menubar">
 <a href="/">TM Home</a> &nbsp;&nbsp;&nbsp;
 <?php
-if ($tmuser != "null") {
-    echo '<a href="/user">User '.$tmuser.' Page</a> &nbsp;&nbsp;&nbsp;';
+if (isset($_COOKIE['lastuser'])) {
+    echo '<a href="/user">User '.$_COOKIE['lastuser'].' Page</a> &nbsp;&nbsp;&nbsp;';
 }
 ?>
 <a href="/stat.php">Travelers Stats</a> &nbsp;&nbsp;&nbsp;
