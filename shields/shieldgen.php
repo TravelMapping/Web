@@ -180,7 +180,8 @@ function tm_shield_generate($r, $force_reload = false) {
 
         case 'usausb':
             $routeNum = str_replace("US", "", $row['route']);
-            $routeNum .= $row['banner'][0];
+            // let's not put the letter in when it shouldn't be
+	    //$routeNum .= $row['banner'][0];
             if (strlen($routeNum) == 3) {
                 $svg = file_get_contents("{$dir}/template_usausb_wide.svg");
             }
