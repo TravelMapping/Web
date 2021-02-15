@@ -15,29 +15,32 @@ END;
 ?>
 
 <p class="menubar">
-<a href="/">TM Home</a> &nbsp;&nbsp;&nbsp;
-<?php
-if (isset($_COOKIE['lastuser'])) {
-    echo '<a href="/user">'.$_COOKIE['lastuser'].'\'s User Page</a> &nbsp;&nbsp;&nbsp;';
-}
-?>
-<a href="/stat.php">Travelers' Stats</a> &nbsp;&nbsp;&nbsp;
-<a href="/hb">Highway Browser</a> &nbsp;&nbsp;&nbsp;
-<a href="/participate.php">Get Started!</a> &nbsp;&nbsp;&nbsp;
-<a href="https://forum.travelmapping.net">Project Forum</a> &nbsp;&nbsp;&nbsp;
-<a href="/devel/updates.php">Updates</a>
+    <a href="/">TM Home</a> &nbsp;&nbsp;&nbsp;
+    <?php
+    if (isset($_COOKIE['lastuser']) && $_COOKIE['lastuser'] != "null") {
+        echo '<a href="/user">'.$_COOKIE['lastuser'].'\'s User Page</a> &nbsp;&nbsp;&nbsp;';
+    }
+    else if ($tmuser != "null") {
+        echo '<a href="/user">'.$tmuser.'\'s User Page</a> &nbsp;&nbsp;&nbsp;';
+    }
+    ?>
+    <a href="/stat.php">Travelers' Stats</a> &nbsp;&nbsp;&nbsp;
+    <a href="/hb">Highway Browser</a> &nbsp;&nbsp;&nbsp;
+    <a href="/participate.php">Get Started!</a> &nbsp;&nbsp;&nbsp;
+    <a href="https://forum.travelmapping.net">Project Forum</a> &nbsp;&nbsp;&nbsp;
+    <a href="/devel/updates.php">Updates</a>
 </p>
 
 <?php
 $tmupdating = file_exists($_SERVER['DOCUMENT_ROOT']."/dbupdating");
 if ($tmupdating) {
-  echo <<<END
+    echo <<<END
 <p id="updatingmsg" class="errorbar">
 Travel Mapping database update in progress.  Some functionality might
 not work.  Please try again in a few minutes if you notice problems.
 END;
-  tm_dismiss_button("updatingmsg");
-  echo <<<END
+    tm_dismiss_button("updatingmsg");
+    echo <<<END
 </p>
 <script type="text/javascript">
 var tmdbupdating = true;
@@ -45,7 +48,7 @@ var tmdbupdating = true;
 END;
 }
 else {
-  echo <<<END
+    echo <<<END
 <script type="text/javascript">
 var tmdbupdating = false;
 </script>
