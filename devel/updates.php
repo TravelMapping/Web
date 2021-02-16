@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="/css/travelMapping.css" />
 <link rel="shortcut icon" type="image/png" href="/favicon.png">
 <!-- jQuery -->
-<script type="application/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="application/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <!-- TableSorter -->
 <script type="application/javascript" src="/lib/jquery.tablesorter.min.js"></script>
 <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
@@ -89,6 +89,7 @@ Entries]
         if (($row['statusChange'] == "active") || 
             ($row['statusChange'] == "preview")|| 
             ($row['statusChange'] == "extended") || 
+            ($row['statusChange'] == "re-entered") || 
             ($row['statusChange'] == "split")) {
             $syslink = "<a href=\"/hb?sys=".$row['systemName']."\">".$row['systemName']."</a>";
         }
@@ -146,7 +147,7 @@ Entries]
           echo "<tr><td>".$row['date']."</td><td>".$row['region']."</td><td>".$row['route']."</td><td>(NONE)</td><td>".htmlspecialchars($row['description'])."</td></tr>\n";
         }
         else {
-          echo "<tr><td>".$row['date']."</td><td>".$row['region']."</td><td>".$row['route']."</td><td><a href=\"/hb?r=".$row['root']."\">".$row['root']."</a></td><td>".htmlspecialchars($row['description'])."</td></tr>\n";
+          echo "<tr><td>".$row['date']."</td><td>".$row['region']."</td><td>".$row['route']."</td><td><a href=\"/hb/showroute.php?r=".$row['root']."\">".$row['root']."</a></td><td>".htmlspecialchars($row['description'])."</td></tr>\n";
         }
       }
       $res->free();

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg id="svg43960" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+ <metadata id="metadata43965">
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g id="layer1" transform="translate(-554.39 236.83)">
+  <g id="g44799">
+   <rect id="rect44797" rx="37.5" ry="37.5" height="600" width="600" y="-236.83" x="554.39"/>
+   <path id="rect44794" d="m25 25h550l-100 550h-350z" transform="translate(554.39 -236.83)" fill="#fff"/>
+  </g>
+  <text id="text44828" style="word-spacing:0px;letter-spacing:0px;text-anchor:middle;text-align:center" xml:space="preserve" font-size="334.82px" line-height="100%" y="63.171711" x="798.16663" font-family="&apos;Roadgeek 2014 Series C&apos;" fill="#000000"><tspan id="tspan44830" y="63.171711" x="798.16663">***NUMBER***</tspan></text>
+  <text id="text44842" style="word-spacing:0px;letter-spacing:0px;text-anchor:middle;text-align:center" xml:space="preserve" font-size="251.87px" line-height="100%" y="63.172192" x="1007.9865" font-family="&apos;Roadgeek 2014 Series C&apos;" fill="#000000"><tspan id="tspan44844" y="63.172192" x="1007.9865">***LETTER***</tspan></text>
+  <g id="text45180">
+   <path id="path45213" d="m740.19 238.17v-99.702h14.286v86.458h36.458v13.244h-50.744"/>
+   <path id="path45215" d="m805 238.17v-99.702h13.988v99.702h-13.988"/>
+   <path id="path45217" d="m886.13 238.17-30.804-66.815v66.815h-14.286v-99.702h14.286l27.381 59.821v-59.821h14.286v99.702h-10.863"/>
+   <path id="path45219" d="m959.56 238.17-17.56-48.661-9.0774 16.815v31.845h-14.286v-99.702h14.286v39.881l22.768-39.881h16.518l-20.685 34.97 23.065 64.732h-15.03"/>
+  </g>
+ </g>
+</svg>

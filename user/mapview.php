@@ -6,27 +6,42 @@
  * Map viewer page. Displays the routes selected using the url params on a map, as well as on a table to the side.
  * URL Params:
  *  u - user to display highlighting for on map (required)
+ *  units - units to display distances (optional)
+ *  lat - initial latitude at center of map (optional)
+ *  lon - initial longitude at center of map (optional)
+ *  zoom - initial zoom level of map (optional)
  *  rg - region to show routes for on the map (optional)
+ *  country - country to show routes for on the map (optional)
  *  sys - system to show routes for on the map (optional)
- *  rte - route name to show on the map. Supports pattern matching, with _ matching a single character, and % matching 0 or multiple characters.
- * (u, [rg|sys][rte])
+ *  v - show routes/points on the visible portion of the map (optional)
+ *  rte - route name to show on the map, all routes with the same "route" will appear (optional)
+ *  cr - connected route to show, provide the root of any in-region route as parameter (optional)
+ *  colors - custom color string(s) (optional)
+ * (u, [units][lat lon zoom][rg|sys|country|rte|cr][v])
+ *
  ***
  -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="/css/travelMapping.css" />
+    <link rel="stylesheet" type="text/css" href="/css/L.Control.Window.css" />
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <style type="text/css">
-        #controlbox {
+    	#loadingMsg {
+            background-color: white;
             position: absolute;
-            top: 30px;
-            height: 30px;
-            right: 20px;
-            overflow: auto;
-            padding: 5px;
-            font-size: 20px;
-	    width: 25%;
+            top: 100px;
+            left: 150px;
+            z-index: 11000;
+        }
+
+        #topControlPanel {
+            background-color: white;
+            position: absolute;
+            top: 25px;
+            left: 75px;
+            z-index: 11000;
         }
 
         #routesTable .routeName {
@@ -49,22 +64,6 @@
             min-width: 57px;
         }
 
-        #routesTable tr.float th {
-            position: relative;!important;
-            top: -1px;!important;
-            left: -1px;!important;
-            border-left-width: 1px;
-            border-right-width: 1px;
-        }
-
-        #routesTable tr.float th:first-child {
-            border-left-width: 2px;
-        }
-
-        #routesTable tr.float th:last-child {
-            border-right-width: 2px;
-        }
-
         #map {
             position: absolute;
             top: 25px;
@@ -77,211 +76,245 @@
             cursor: crosshair;
         }
 
-	#selected {
+	#routes {
             position: absolute;
+	    z-index: 850; /* above all Leaflet layers except controls */
             right: 10px;
-            top: 60px;
-            bottom: 20px;
+            top: 90px;
+	    max-height: 80%;
             overflow-y: auto;
-            max-width: 420px;
-	    opacity: .95;  /* also forces stacking order */
+            max-width: 40%;
+	    opacity: .75;
         }
 
-        #routes {
-	    display: none;
-	    left: 0px;
-            width: 1px;
-	    height: 1px;
-        }
-
-        #options {
-	    display: none;
-	    left: 0px;
-            width: 1px;
-	    height: 1px;
-        }
-
-        #showHideMenu {
-            position: absolute;
-            right: 10px;
-	    opacity: .75;  /* also forces stacking order */
-        }
+    // from Leaflet https://leafletjs.com/examples/choropleth/
+    .mapviewLegend {
+      padding: 6px 8px;
+      font: 14px/16px Arial, Helvetica, sans-serif;
+      background: rgba(255,255,255,0.8);
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      border-radius: 5px;
+      line-height: 18px;
+    }
+    .mapviewLegend i {
+      width: 18px;
+      height: 18px;
+      float: left;
+      margin-left: 8px;
+      opacity: 0.7;
+    }
     </style>
-    <script
-        src="http://maps.googleapis.com/maps/api/js?key=<?php echo $gmaps_api_key ?>&sensor=false"
-        type="text/javascript"></script>
-
-    <!-- jQuery -->
-    <script type="application/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <!-- TableSorter -->
-    <script type="application/javascript" src="/lib/jquery.tablesorter.js"></script>
-
+    <?php tm_common_js(); ?>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
-    <title>Travel Mapping: Draft Map Overlay Viewer</title>
+    <script src="../lib/mapviewfuncs.js" type="text/javascript"></script>
+    <script src="../lib/L.Control.Window.js" type="text/javascript"></script>
+    <title>Travel Mapping: Mapview</title>
 </head>
 
-<body onload="loadmap(); waypointsFromSQL(); updateMap(); toggleTable();">
+<?php
+    // parse lat, lon, zoom parameters if present
+    $lat = "null";
+    $lon = "null";
+    $zoom = "null";
+    if (array_key_exists("lat", $_GET)) {
+        $lat = floatval($_GET["lat"]);
+    }
+    if (array_key_exists("lon", $_GET)) {
+        $lon = floatval($_GET["lon"]);
+    }
+    if (array_key_exists("zoom", $_GET)) {
+        $zoom = intval($_GET["zoom"]);
+    }
+?>
+
+<body onload="mapviewStartup(<?php echo $lat.",".$lon.",".$zoom; ?>);">
 <script type="application/javascript">
-
-    function toggleTable() {
-        var menu = document.getElementById("showHideMenu");
-        var index = menu.selectedIndex;
-        var value = menu.options[index].value;
-        routes = document.getElementById("routes");
-        options = document.getElementById("options");
-        selected = document.getElementById("selected");
-        // show only table (or no table) based on value
-        if (value == "routetable") {
-            selected.innerHTML = routes.innerHTML;
-        }
-        else if (value == "options") {
-            selected.innerHTML = options.innerHTML;
-        }
-        else {
-            selected.innerHTML = "";
-        }
-    }
-
-    function initFloatingHeaders($table) {
-        var $col = $table.find('tr.float');
-        var $th = $col.find('th');
-        var tag = "<tr style='height: 22px'></tr>";
-        $(tag).insertAfter($col);
-        $th.each(function (index) {
-            var $row = $table.find('tr td:nth-child(' + (index + 1) + ')');
-            if ($row.outerWidth() > $(this).width()) {
-                $(this).width($row.width());
-            } else {
-                $row.width($(this).width());
-            }
-        });
-    }
-
-    $(document).ready(function () {
-            $routesTable = $('#routesTable');
-            $routesTable.tablesorter({
-                sortList: [[1, 0]]
-            });
-            $('td').filter(function() {
-                return this.innerHTML.match(/^[0-9\s\.,%]+$/);
-            }).css('text-align','right');
-            initFloatingHeaders($routesTable);
-        }
-    );
+<?php tm_generate_custom_colors_array(); ?>
+let scrollableMapviewDialog = `
+<p><b>Set Initial Location and Zoom Level</b></br >
+Find place: <input id="placeinput" name="placeinput" type="text" size="20" maxlength="100" onkeypress="nominatimLookupIfEnter(event);"/>&nbsp;<input id="findbutton" name="findbutton" type="button" value="Press to Search and Set Coords" onclick="nominatimLookup('placeinput');" /><br />
+<span style="font-size: smaller">(Geocoding by <a target="_blank" href="https://nominatim.openstreetmap.org/">OSM Nominatim</a>)</span><br />
+or <input id="currentbutton" name="currentbutton" type="button" value="Press to Query Current Location and Set Coords" onclick="getCurrentLocationMapview();" /><br />
+<hr />
+Coords: (<input id="latvalinput" name="latvalinput" type="number" min="-90" max="90" size="15" maxlength="12" step="any" value="` + setlat + `" />,
+<input id="lonvalinput" name="lonvalinput" type="number" min="-180" max="180" size="15" maxlength="12" step="any" value="` + setlon + `" />)<br />
+Zoom level: [Far]<input id="zoomvalinput" name="zoomvalinput" type="range" min="8" max="15" value="` + setzoom + `" step="1" size="2" />[Close]<br />
+<hr />
+<b>OR Select by Region and/or System</b></br >
+<table border="0"><tr><td>Region(s)</td><td>System(s)</td></tr>
+<tr><td><?php tm_region_select(TRUE); ?></td><td><?php tm_system_select(TRUE); ?></td></tr></table>
+<span style="font-size: smaller">Note that if regions and/or systems are selected, the coords and zoom above will be ignored.</span><br />
+<hr />
+User: <?php tm_user_select(); ?>&nbsp;Units: <?php tm_units_select(); ?><br />
+</p>
+`;
 </script>
 <?php $nobigheader = 1; ?>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
-
 <div id="map">
 </div>
-<div id="selected"></div>
-<div id="options">
-    <form id="optionsForm" action="mapview.php">
-    <table id="optionsTable" class="gratable">
-    <thead>
-    <tr><th>Select Map Options</th></tr>
-    </thead>
-    <tbody>
-    <tr><td>
-    <input id="showMarkers" type="checkbox" name="Show Markers" onclick="showMarkersClicked()" />&nbsp;Show Markers
-    </td></tr>
-
-    <tr><td>User: 
-<?php tm_user_select(); ?>
-    </td></tr>
-    
-    <tr><td>Region(s): <br />
-<?php tm_region_select(TRUE); ?>
-    </td></tr>
-    
-    <tr><td>System(s): <br />
-<?php tm_system_select(TRUE); ?>
-    </td></tr>
-
-    <tr><td>
-    <input type="submit" value="Apply Changes" />	
-    </td></tr>
-    </tbody>
-    </table>
-    </form>
+<div id="loadingMsg" style="display: none";>
+<table class="gratable">
+<tr><td style="font-size: 500%;">Loading Data...</td></tr>
+</table>
 </div>
+<div id="topControlPanel">
+  <p id="updatingrow" style="display: none" class="errorbar">
+  Travel Mapping database update in progress.  Some functionality might
+  not work.  Please try again in a few minutes if you notice problems.
+<?php tm_dismiss_button("updatingrow"); ?>
+  </p>
+  <table id="topControlPanelTable">
+    <tbody>
+      <tr>
+      <td>
+          <input id="jumpButton" type="button" value="Jump" onclick="showScrollableMapviewPopup();" />
+      </td>
+      <td>
+	  <input id="showRoutesCheckbox" type="checkbox" name="showRoutes" checked onclick="showHideRouteTable();" />&nbsp;Route Table<br>
+	</td>
+      <td>
+	  <input id="updateCheckbox" type="checkbox" name="updateRoutes" checked onclick="updateCheckboxChanged();" />&nbsp;Always Update Visible Routes<br>
+	</td>
+	<td>
+    <select id="coloring" name="coloring" onchange="updateConnectionColors();" >
+    <option value="system">Highway System Colors</option>
+    <option value="travelers">Color by Traveler Count</option>
+    <option value="concurrent">Color by Concurrencies</option>
+    <option value="plain">Plain</option>
+    </select>
+    </td>
+    <td>
+    <select id="highlighting" name="highlighting" onchange="updateConnectionColors();" >
+    <option value="traveled">Highlight Traveled</option>
+    <option value="untraveled">Highlight Untraveled</option>
+    <option value="all">Highlight All</option>
+    <option value="none">Highlight None</option>
+    </select>
+    </td>
+      <td>
+	  <input id="legendCheckbox" type="checkbox" name="legendCheckbox" checked onclick="legendCheckboxChanged();" />&nbsp;Legend<br>
+      </td>
+      <td>
+        <?php tm_position_checkbox(); ?><br>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <div id="routes">
-    <table id="routesTable" class="gratable tablesorter">
+    <table id="routesTable" class="gratable">
         <thead>
-            <tr class="float" ><th class="sortable routeName">Route</th><th class="sortable systemName">System</th>
-                <th class="sortable clinched">Clinched</th><th class="sortable overall">Overall</th><th class="sortable percent">%</th></tr>
+            <tr><th>No Routes Loaded</th></tr>
         </thead>
         <tbody>
-        <!-- TEMP FIX: dummy table line to account for the fact that the
-	styling places the table header row above on top of the first
-	row of data in the table -->
-        <tr><td class='routeName'>DUMMY</td>
-            <td class='link systemName'>1. syst</td>
-            <td class="clinched">0000</td><td class='overall'>0000</td><td class='percent'>0.00%</td>
-	</tr>
-        <?php
-	// TODO: a toggle to include/exclude devel routes?
-        $sql_command = <<<SQL
-SELECT r.region, r.root, r.route, r.systemName, banner, city, sys.tier, 
-  round(r.mileage, 2) AS total, 
-  round(COALESCE(cr.mileage, 0), 2) as clinched 
-FROM routes AS r 
-  LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = '{$_GET['u']}' 
-  LEFT JOIN systems as sys on r.systemName = sys.systemName
-WHERE  
-SQL;
-        if (array_key_exists('rte', $_GET)) {
-            $sql_command .= "(r.route like '".$_GET['rte']."' or r.route regexp '".$_GET['rte']."[a-z]')";
-            $sql_command = str_replace("*", "%", $sql_command);
-            if (array_key_exists('rg', $_GET) or array_key_exists('sys', $_GET)) $sql_command .= ' AND ';
-        }
-        if (array_key_exists('rg', $_GET) && array_key_exists('sys', $_GET)) {
-            $sql_command .= orClauseBuilder('rg', 'region')." AND ".orClauseBuilder('sys', 'systemName');
-        } elseif (array_key_exists('rg', $_GET)) {
-            $sql_command .= orClauseBuilder('rg', 'region')
-            ;
-        } elseif (array_key_exists('sys', $_GET)) {
-            $sql_command .= orClauseBuilder('sys', 'systemName');
-        } elseif (!array_key_exists('rte', $_GET)) {
-            //Don't show. Too many routes
-            $sql_command .= "r.root IS NULL";
-        }
-        $sql_command .= "ORDER BY sys.tier, r.route;";
-        $res = tmdb_query($sql_command);
-        while($row = $res->fetch_assoc()) {
-            $link = "/hb?u=".$_GET['u']."&amp;r=".$row['root'];
-            echo "<tr onclick=\"window.open('".$link."')\"><td class='routeName'>";
-            //REGION ROUTE BANNER (CITY)
-            echo $row['region'] . " " . $row['route'];
-            if (strlen($row['banner']) > 0) {
-                echo " " . $row['banner'];
-            }
-            if (strlen($row['city']) > 0) {
-                echo " (" . $row['city'] . ")";
-            }
-	    $pct = sprintf("%0.2f",( $row['clinched'] / $row['total'] * 100) );
-            echo <<<HTML
-                </td>
-                <td class='link systemName'>{$row['tier']}. <a href='/user/system.php?u={$_GET['u']}&amp;sys={$row['systemName']}'>{$row['systemName']}</a></td>
-                <td class="clinched">
-HTML
-.$row['clinched']."</td><td class='overall'>".$row['total']."</td><td class='percent'>".$pct."%</td></tr>\n";
-        }
-        ?>
         </tbody>
     </table>
 </div>
-<div id="controlbox">
-    <select id="showHideMenu" onchange="toggleTable();">
-    <option value="maponly">Map Only</option>
-    <option value="options">Show Map Options</option>
-    <option value="routetable" selected="selected">Show Route Table</option>
-    </select>
-</div>
 </body>
 <?php
+    // set up for initial map load
+    echo "<script type=\"application/javascript\">\n";
+
+    // check for user
+    if (array_key_exists('u', $_GET)) {
+        $tmuser = $_GET['u'];
+        echo "traveler = '$tmuser';\n";
+    }
+
+    // check for scrollable mapview
+    if (array_key_exists('v', $_GET)) {
+        echo "showAllInView = true;\n";
+    }
+    else {
+        echo "showAllInView = false;\n";
+    }
+    // check for other QS parameters, put them into this object
+
+    // route patterns, QS param 'rte'
+    echo "var mapviewParams = new Object();\n";
+    if (array_key_exists('rte', $_GET)) {
+        echo "mapviewParams.routePattern = '".$_GET['rte']."';\n";
+    }
+    else {
+        echo "mapviewParams.routePattern = '';\n";
+    }
+
+    // all in connected route given any root, QS param 'cr'
+    echo "mapviewParams.roots = [];\n";
+    if (array_key_exists('cr', $_GET)) {
+        $result = tmdb_query("select firstRoot from connectedRouteRoots where root='".$_GET['cr']."';");
+        $row = $result->fetch_assoc();
+	$firstRoot = "";
+	if ($row == NULL) {
+	    $firstRoot = $_GET['cr'];
+	}
+	else {
+	    $firstRoot = $row['firstRoot'];
+	}
+	$result->free();
+        echo "mapviewParams.roots.push('".$firstRoot."');\n";
+        $result2 = tmdb_query("select root from connectedRouteRoots where firstRoot='".$firstRoot."';");
+	while ($row2 = $result2->fetch_assoc()) {
+            echo "mapviewParams.roots.push('".$row2['root']."');\n";
+        }
+	$result2->free();
+    }
+
+    // regions, QS param 'rg'
+    echo "mapviewParams.regions = [];\n";
+    if (array_key_exists('rg', $_GET)) {
+        $array = array();
+        if (is_array($_GET['rg'])) {
+            foreach ($GET['rg'] as $r) {
+	        $array = array_merge($array, explode(',', $r));
+            }
+        }
+	else {
+	    $array = explode(",", $_GET['rg']);
+	}
+	$array = array_diff($array, array("null"));
+	foreach ($array as $r) {
+	    echo "mapviewParams.regions.push('".$r."');\n";
+	}
+    }
+
+    // country, QS param 'country'
+    if (array_key_exists('country', $_GET)) {
+        $result = tmdb_query("select regions.code from regions where country='".$_GET['country']."';");
+	while ($row = $result->fetch_assoc()) {
+	    echo "mapviewParams.regions.push('".$row['code']."');\n";
+        }
+	$result->free();
+    }
+    
+    // systems, QS param 'sys'
+    echo "mapviewParams.systems = [];\n";
+    if (array_key_exists('sys', $_GET)) {
+        $array = array();
+        if (is_array($_GET['sys'])) {
+            foreach ($GET['sys'] as $s) {
+	        $array = array_merge($array, explode(',', $s));
+            }
+        }
+	else {
+	    $array = explode(",", $_GET['sys']);
+	}
+	$array = array_diff($array, array("null"));
+	foreach ($array as $s) {
+	    echo "mapviewParams.systems.push('".$s."');\n";
+	}
+    }
+
+    // country, QS param 'country'
+    //if (array_key_exists('country', $_GET)) {
+    //    echo "mapviewParams.country = '".$_GET['country']."';\n";
+   // }
+   // else {
+    //    echo "mapviewParams.country = '';\n";
+    //}
     $tmdb->close();
 ?>
-
-<script type="application/javascript" src="../api/waypoints.js.php?<?php echo $_SERVER['QUERY_STRING']?>"></script>
+</script>
 </html>

@@ -1,3 +1,4 @@
+<?php require $_SERVER['DOCUMENT_ROOT'] . "/lib/tmphpuser.php" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
@@ -76,24 +77,27 @@ undergo significant changes without notification.
 <?php
 echo tm_count_rows("systems", "WHERE level='devel'");
 ?>
- more are in development but are not yet complete.  Active system
-encompass 
+ more are in development but are not yet complete.  These "devel"
+ systems are not yet included in stats or plotted on user maps.
+ Active systems encompass 
 <?php
 echo number_format(tm_count_rows("connectedRoutes", "LEFT JOIN systems ON connectedRoutes.systemName = systems.systemName WHERE systems.level = 'active'"));
 ?>
  routes for
 <?php
-echo number_format(tm_sum_column("overallMileageByRegion", "activeMileage"));
+echo tm_convert_distance_wholenum(tm_sum_column("overallMileageByRegion", "activeMileage"))." ";
+tm_echo_units();
 ?>
- miles of "clinchable" highways in active systems, and that total is 
+ of "clinchable" highways, and that expands to
 <?php
 echo number_format(tm_count_rows("connectedRoutes", "LEFT JOIN systems ON connectedRoutes.systemName = systems.systemName WHERE systems.level = 'active' OR systems.level = 'preview'"));
 ?>
  routes for
 <?php
-echo number_format(tm_sum_column("overallMileageByRegion", "activePreviewMileage"));
+echo tm_convert_distance_wholenum(tm_sum_column("overallMileageByRegion", "activePreviewMileage"))." ";
+tm_echo_units();
 ?>
- miles when preview systems are included.
+ when preview systems are included.
 
 </p>
 
@@ -102,8 +106,8 @@ echo number_format(tm_sum_column("overallMileageByRegion", "activePreviewMileage
 <p class="text">
 
 Anyone can submit their travels to be included in the site.  Please
-see the information in <a href="/forum">the project forum</a> for how
-to create and submit your data.
+see the information for <a href="/participate.php">how
+to create and submit your data</a>.
 
 </p>
 
@@ -118,15 +122,9 @@ your travels, both as tabular statistics and plotted on maps.
 </p>
 
 <p class="text">
-
-Some experienced users volunteer to help the project.  If this
-interests you, start by reporting problems with existing highway data.
-Those who have learned the project's structure and highway data rules
-and guidelines can help greatly by providing review of new highway
-systems in development.  Highly experienced users can learn how to
-plot new highway systems under the guidance of experienced
-contributors.  Again, see <a href="/forum">the project forum</a> for
-more information.
+Project news is also posted on the <a
+href="https://twitter.com/TravelMapping">Travel Mapping Twitter feed</a>.
+Follow us!
 </p>
 
 <p class="heading">What's New with Highway Data?</p>

@@ -14,14 +14,47 @@
       global $tmsqldebug;
 
       // select all errors in the DB with the given $fpVal
-      $sql_command = "select datacheckErrors.* from datacheckErrors ".$joins." falsePositive=".$fpVal.";";
+      $sql_command = "select datacheckErrors.* from datacheckErrors ".$joins." falsePositive=".$fpVal;
+      // check for query string parameter for system and region filters
+      if (array_key_exists("sys", $_GET)) {
+          $sql_command .= " AND ".orClauseBuilder('sys', 'systemName', 'routes');
+      }
+      if (array_key_exists("rg", $_GET)) {
+          $sql_command .= " AND ".orClauseBuilder('rg', 'region', 'routes');
+      }
+      if (array_key_exists("show", $_GET)) {
+          $sql_command .= " AND ".orClauseBuilder('show', 'code', 'datacheckErrors');
+      }
+      if (array_key_exists("hide", $_GET)) {
+          $sql_command .= " AND NOT ".orClauseBuilder('hide', 'code', 'datacheckErrors');
+      }
+      $sql_command .= ";";
       if ($tmsqldebug) {
           echo "<!-- SQL: ".$sql_command." -->\n";
       }
       $res = $db->query($sql_command);
 
       while ($row = $res->fetch_assoc()) {
-        echo "<tr><td><a href=\"../hb?r=".$row['route']."\">".$row['route']."</a></td><td>";
+        // find coords of error waypoint for HB link
+        if (strcmp($row['label2'],"") != 0) {
+          $label = $row['label2'];
+        }
+        else {
+          $label = $row['label1'];
+        }
+        $sql_command = "select latitude, longitude from waypoints where pointName = '".$label."' and root = '".$row['route']."';";
+        $res2 = tmdb_query($sql_command);
+        $row2 = $res2->fetch_assoc();
+
+        // write table row
+        echo "<tr><td><a href=\"../hb/showroute.php?r=".$row['route'];
+	if ($row2 != NULL) {
+	  echo "&lat=".$row2['latitude']."&lon=".$row2['longitude']."&zoom=17";
+	}
+	if (strcmp($row['code'],"DISCONNECTED_ROUTE") == 0) {
+	  echo "&cr";
+	}
+	echo "\">".$row['route']."</a></td><td>";
         if (strcmp($row['label1'],"") != 0) {
           echo $row['label1'];
         }
@@ -31,26 +64,61 @@
         if (strcmp($row['label3'],"") != 0) {
           echo ",".$row['label3'];
         }
-	if ((strcmp($row['code'],"VISIBLE_DISTANCE") == 0) ||
-	  (strcmp($row['code'],"LONG_DISTANCE") == 0) ||
-	  (strcmp($row['code'],"SHARP_ANGLE") == 0)) {
-	  echo "</td><td>".$row['code']."</td><td>";
+	echo "</td><td><a style=\"color: ";
+	if ((strcmp($row['code'],"BUS_WITH_I") == 0) ||
+	  (strcmp($row['code'],"INTERSTATE_NO_HYPHEN") == 0) ||
+	  (strcmp($row['code'],"INVALID_FINAL_CHAR") == 0) ||
+	  (strcmp($row['code'],"INVALID_FIRST_CHAR") == 0) ||
+	  (strcmp($row['code'],"LABEL_LOOKS_HIDDEN") == 0) ||
+	  (strcmp($row['code'],"LABEL_PARENS") == 0) ||
+	  (strcmp($row['code'],"LABEL_SELFREF") == 0) ||
+	  (strcmp($row['code'],"LABEL_SLASHES") == 0) ||
+	  (strcmp($row['code'],"LABEL_UNDERSCORES") == 0) ||
+	  (strcmp($row['code'],"LACKS_GENERIC") == 0) ||
+	  (strcmp($row['code'],"LONG_SEGMENT") == 0) ||
+	  (strcmp($row['code'],"LONG_UNDERSCORE") == 0) ||
+	  (strcmp($row['code'],"NONTERMINAL_UNDERSCORE") == 0) ||
+	  (strcmp($row['code'],"US_LETTER") == 0) ||
+	  (strcmp($row['code'],"VISIBLE_HIDDEN_COLOC") == 0) ||
+	  (strcmp($row['code'],"VISIBLE_DISTANCE") == 0)) {
+	  echo "blue";
 	}
         else {
-	  echo "</td><td style=\"color: red\">".$row['code']."</td><td>";
+	  echo "red";
 
 	}
+	echo "\" href=\"manual/syserr.php#".$row['code']."\">".$row['code']."</a></td><td>";
         if (strcmp($row['value'],"") != 0) {
           echo $row['value'];
         }
-        echo "</td><td><tt>".$row['route'].";".$row['label1'].";".$row['label2'].";".$row['label3'].";".$row['code'].";".$row['value']."</tt></td></tr>\n";
+	// If not an error type for which FPs are
+	// allowed, don't print an FP entry.
+	// This list is in descending order by frequency, to reduce
+	// the amount of conditional branching & unnecessary tests
+	if (strcmp($row['code'],"VISIBLE_DISTANCE") &&
+	  strcmp($row['code'],"SHARP_ANGLE") &&
+	  strcmp($row['code'],"LABEL_SELFREF") &&
+	  strcmp($row['code'],"LABEL_LOOKS_HIDDEN") &&
+	  strcmp($row['code'],"DUPLICATE_COORDS") &&
+	  strcmp($row['code'],"LONG_SEGMENT") &&
+	  strcmp($row['code'],"VISIBLE_HIDDEN_COLOC") &&
+	  strcmp($row['code'],"HIDDEN_JUNCTION") &&
+	  strcmp($row['code'],"LACKS_GENERIC") &&
+	  strcmp($row['code'],"BUS_WITH_I") &&
+	  strcmp($row['code'],"LACKS_GENERIC") &&
+	  strcmp($row['code'],"OUT_OF_BOUNDS") &&
+	  strcmp($row['code'],"US_BANNER")) {
+          echo "</td><td style=\"color: gray\"><i>This is always a true error and cannot be marked false positive.</i></td></tr>\n";
+	}
+        else {
+          echo "</td><td><tt>".$row['route'].";".$row['label1'].";".$row['label2'].";".$row['label3'].";".$row['code'].";".$row['value']."</tt></td></tr>\n";
+        }
       }
       $res->free();
   }
 ?>
 
 <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
-
 <title>Travel Mapping Highway Data Datacheck Errors</title>
 </head>
 
@@ -64,25 +132,48 @@ if (array_key_exists("showmarked", $_GET)) {
 }
 ?>
 
+<style>
+active {background-color: #CCFFCC;}
+preview {background-color: #FFFFCC;}
+devel {background-color: #FFCCCC;}
+</style>
+
+
 <p class="heading">Travel Mapping Highway Data Datacheck Errors</p>
 
-<p class="info">Quick links: <a href="#active">[Errors in Active Systems]</a><a href="#preview">[Errors in Preview Systems]</a><a href="#indev">[Errors in In-Dev Systems]</a>
+<?php
+    echo "<form id=\"selectHighways\" name=\"HighwaySearch\" action=\"/devel/datacheck.php\">";
+    echo "<label for=\"sys\">Filter errors by...  System: </label>";
+    tm_system_select(FALSE);
+    echo "<label for=\"rg\"> Region: </label>";
+    tm_region_select(FALSE);
+    echo "<input type=\"checkbox\" name=\"showmarked\"";
+    if ($showmarked) {
+       echo " checked";
+    }
+    echo " />";
+    echo "<label for=\"showmarked\"> Show Marked FPs </label>";
+    echo "<input type=\"submit\" value=\"Apply Filter\" /></form>";
+?>
+<p class="info">Quick links: <a href="#active">[Errors in <active>Active</active> Systems]</a>
+<a href="#preview">[Errors in <preview>Preview</preview> Systems]</a>
+<a href="#indev">[Errors in <devel>In-Dev</devel> Systems]</a>
+<a href="manual/syserr.php">[Manual]</a>
 <?php
 if ($showmarked) {
   echo '<a href="#marked">[Errors Marked as FPs]</a>.';
 }
-else {
-  echo '<a href="?showmarked">[Reload with Marked FPs Included]</a>.';
-}
+//else {
+//  echo '<a href="?showmarked">[Reload with Marked FPs Included]</a>.';
+//}
 ?>
 </p>
 
-<p class="info">See also the <a href="../logs/unmatchedfps.log">[Log
-of Unmatched FPs from datacheckfps.csv]</a> and
-the <a href="../logs/unprocessedwpts.log">[Log of Unprocessed WPTs in
-the Repository]</a>.  Cleaning these up are low priority tasks for the
+<p class="info">See also the <a href="/logs/unmatchedfps.log">[Log
+of Unmatched FPs from datacheckfps.csv]</a>.
+Cleaning these up are low priority tasks for the
 project.  Some of these are likely fixable from the information in
-the <a href="../logs/nearmatchfps.log">[Log of Near-Match FPs from
+the <a href="/logs/nearmatchfps.log">[Log of Near-Match FPs from
 datacheckfps.csv]</a>.</p>
 
 <div id="errors">
@@ -109,10 +200,10 @@ datacheckfps.csv]</a>.</p>
   corrected, or reported as false positives by adding the entry from
   the last column
   to <a href="https://github.com/TravelMapping/HighwayData/blob/master/datacheckfps.csv">the
-  datacheck FP list</a> during the final review process to promote a
-  system from 'preview' to 'active'.  A system should have no entries
+  datacheck FP list</a> during the final review process to promote a highway
+  system from 'preview' to 'active'.  A highway system should have no entries
   here before activation.  Errors shown in <span style="color:
-  red">red</span> should be fixed as soon as possible, while others
+  red">red</span> potentially effect travelers and should be fixed as soon as possible, while others
   can wait until final preparation for system activation.</p>
 
   <table border="1" style="background-color:#ccf"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry to Submit</th></tr>
@@ -127,7 +218,7 @@ datacheckfps.csv]</a>.</p>
   corrected, or reported as false positives by adding the entry from
   the last column
   to <a href="https://github.com/TravelMapping/HighwayData/blob/master/datacheckfps.csv">the
-  datacheck FP list</a> before the system is promoted from 'devel' to
+  datacheck FP list</a> before the highway system is promoted from 'devel' to
   'preview'.  Note: less severe errors, such as distance and angle
   errors can be left until final preparation for promotion to
   'active'.</p>
@@ -151,7 +242,7 @@ if ($showmarked) {
 
   <table border="1" style="background-color:#ccc;font-size:60%"><tr><th>Route</th><th>Waypoints</th><th>Error</th><th>Info</th><th>FP Entry Matched</th></tr>
     <?php
-      writeTable($tmdb, "1", " where ");
+      writeTable($tmdb, "1", "join routes on datacheckErrors.route = routes.root join systems on routes.systemName = systems.systemName where ");
     ?>
   </table>
 <?php
