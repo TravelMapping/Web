@@ -34,6 +34,7 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 		
 		
 		case 'usai': // White text on blue bg
+		case 'usaif':
 		case 'usamn':
 			$textColor = '#fff';
 			$borderColor = '#fff';
