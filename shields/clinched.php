@@ -18,6 +18,7 @@
     <body>
 	<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 	<?php require "shieldgen.php"; ?>
+    	<?php require "bannerGen.php"; ?>
 	<?php
 	if (array_key_exists("cort", $_GET) && ($_GET['cort'] == "traveled")) {
             $cort = "t";
@@ -94,7 +95,30 @@ SQL;
 		$routerow = $res2->fetch_assoc();
 		$res2->free();
 		echo "<span><table border='0' style='display: inline; text-align: center'><tr><td>";
-		echo $routerow['banner'];
+		
+	    	// Print banners if there are any
+		$bannerString = $routerow['banner'];
+		
+		if ($bannerString != '') {
+			
+			// Split into array to account for routes that have multiple banners
+			// For example: 'AltTrk' -> ['Alt', 'Trk']
+		
+			$bannersArray = preg_split('/([[:upper:]][[:lower:]]+)/', $bannerString, null, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
+				
+			// For each banner in the array, generate the banner
+			foreach ($bannersArray as $singleBanner) {
+				$bannerSvg = tm_banner_generate($singleBanner, $row['systemName'], $_GET['reload']);
+				if ( $bannerSvg == 'not external' ) { // System doesn't use external banners so print nothing.
+					break;
+				}
+				elseif ( $bannerSvg == '' ) {
+					echo $singleBanner; // Couldn't generate the specified banner so just print the name.
+				} else {
+					echo "<span class='banner'>". $bannerSvg ."</span>";
+				}
+			}
+		}
 		echo "</td></tr><tr><td><a href='/hb/showroute.php?u=$tmuser&amp;r=$root&amp;cr'><span class='shield'>".tm_shield_generate($root, $_GET['reload'])."</span></a></td></tr><tr><td>";
 		echo $routerow['groupName'];
 		echo "</td></tr></table></span>\n";
