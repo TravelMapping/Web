@@ -1,0 +1,8 @@
+<svg version="1.0" viewBox="0 0 601 301" xmlns="http://www.w3.org/2000/svg">
+	<path d="m38 0.5h525c20.775 0 37.5 16.725 37.5 37.5v225c0 20.775-16.725 37.5-37.5 37.5h-525c-20.775 0-37.5-16.725-37.5-37.5v-225c0-20.775 16.725-37.5 37.5-37.5z" color="black" fill="***FILL_COLOR***" stroke="#000"/>
+	<path d="m38 9.875h525c15.581 0 28.125 12.544 28.125 28.125v225c0 15.581-12.544 28.125-28.125 28.125h-525c-15.581 0-28.125-12.544-28.125-28.125v-225c0-15.581 12.544-28.125 28.125-28.125z" color="***BORDER_COLOR***"/>
+	<path d="m38 25.5h525c6.925 0 12.5 5.575 12.5 12.5v225c0 6.925-5.575 12.5-12.5 12.5h-525c-6.925 0-12.5-5.575-12.5-12.5v-225c0-6.925 5.575-12.5 12.5-12.5z" color="black" fill="***FILL_COLOR***"/>
+	<text x="***X***" y="***Y***" fill="***TEXT_COLOR***" font-family="&apos;Roadgeek 2014 Series ***FONT_SERIES***&apos;" font-size="***TEXT_SIZE***" letter-spacing="0px" stroke-width="1px" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:125%">
+		<tspan x="***X***" y="***Y***">***TEXT***</tspan>
+	</text>
+</svg>
