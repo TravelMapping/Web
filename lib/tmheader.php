@@ -17,11 +17,13 @@ END;
 <p class="menubar">
     <a href="/">TM Home</a> &nbsp;&nbsp;&nbsp;
     <?php
-    if (isset($_COOKIE['lastuser']) && $_COOKIE['lastuser'] != "null") {
-        echo '<a href="/user">'.$_COOKIE['lastuser'].'\'s User Page</a> &nbsp;&nbsp;&nbsp;';
+    if (isset($tmuser)) {
+        if ($tmuser != "null") {
+            echo '<a href="/user">'.$tmuser.'\'s User Page</a> &nbsp;&nbsp;&nbsp;';
+	}
     }
-    else if ($tmuser != "null") {
-        echo '<a href="/user">'.$tmuser.'\'s User Page</a> &nbsp;&nbsp;&nbsp;';
+    else if (isset($_COOKIE['lastuser']) && $_COOKIE['lastuser'] != "null") {
+        echo '<a href="/user">'.$_COOKIE['lastuser'].'\'s User Page</a> &nbsp;&nbsp;&nbsp;';
     }
     ?>
     <a href="/stat.php">Travelers' Stats</a> &nbsp;&nbsp;&nbsp;
