@@ -180,6 +180,8 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 			$fontSeries = 'C';
 			
 			break;
+		case 'Wye':
+			return 'not external';  // usava Wye is a Y in the shield
 		default:
 			return ''; // Return an empty string when $banner is not valid.
 	}
