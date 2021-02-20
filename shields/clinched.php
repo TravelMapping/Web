@@ -97,14 +97,12 @@ SQL;
 		echo "<span><table border='0' style='display: inline; text-align: center'><tr><td>";
 		
 	    	// Print banners if there are any
-		$bannerString = $routerow['banner'];
-		
-		if ($bannerString != '') {
+		if ($routerow['banner'] != '') {
 			
 			// Split into array to account for routes that have multiple banners
 			// For example: 'AltTrk' -> ['Alt', 'Trk']
 		
-			$bannersArray = preg_split('/([[:upper:]][[:lower:]]+)/', $bannerString, null, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
+			$bannersArray = getBannerArray($routerow['banner']);
 				
 			// For each banner in the array, generate the banner
 			foreach ($bannersArray as $singleBanner) {
