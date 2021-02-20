@@ -209,3 +209,17 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 	return $svg;
 	
 }
+
+/*
+	Parse a raw banner string from the database and get an array of one or more banners.
+	
+	Params:
+		String $bannerString - The string containing one or more banners (Bus, Alt, AltTrk, etc...)
+		
+	Returns an array of strings containing a single banner.
+		For example: 'AltTrk' -> ['Alt', 'Trk']
+
+*/
+function getBannerArray ($bannerString) {
+	return preg_split('/([[:upper:]][[:lower:]]+)/', $bannerString, null, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
+}
