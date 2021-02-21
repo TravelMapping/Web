@@ -317,5 +317,5 @@
        d="m 2.0074,2.00063 0.0625,130.90625 c 0.018,22.54936 10.84584,44.2169 26.65625,62.84375 1.96561,1.87094 3.17348,3.30408 4.72119,5.21309 0.86243,1.06375 1.40393,1.52187 2.99756,3.28691 18.44821,18.85182 41.61373,33.8163 62.46875,42.15625 21.11428,-8.44381 44.56734,-23.69075 63.125,-42.875 3.79169,-4.09783 7.24708,-8.63595 11.4375,-13.125 0.0178,-0.023 0.0447,-0.0394 0.0625,-0.0625 13.38372,-17.3582 22.20251,-37.04314 22.21875,-57.4375 l 0.0625,-130.90625 -193.8125,0 z"
        style="fill:none;stroke:#00008b;stroke-width:4.00028229;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
   </g>
-  <text x="0" y="0" font-family="&apos;Roadgeek 2014 Series D&apos;" letter-spacing="0" word-spacing="0" text-align="center" line-height="125%" font-size="300" font-weight="bold" font-style="normal"><tspan x="253" y="420" font-family="&apos;Roadgeek 2014 Series B&apos;" text-anchor="middle" text-align="center" fill="#00008b">***NUMBER***</tspan></text>
+  <text x="0" y="0" font-family="&apos;Roadgeek 2014 Series B&apos;" letter-spacing="0" word-spacing="0" text-align="center" line-height="125%" font-size="300" font-weight="bold" font-style="normal"><tspan x="253" y="420" font-family="&apos;Roadgeek 2014 Series B&apos;" text-anchor="middle" text-align="center" fill="#00008b">***NUMBER***</tspan></text>
 </svg>
