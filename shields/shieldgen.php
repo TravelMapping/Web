@@ -567,7 +567,8 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
-        case 'usasf':
+	case 'chegts':
+	case 'usasf':
         case 'usanp':
         case 'cannf':
         case 'eursf':
