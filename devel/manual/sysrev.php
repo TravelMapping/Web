@@ -102,7 +102,7 @@ Since fixing of these errors is always a risk to break things, it is better to h
     <li>Ignore less important errors like <a href="syserr.php#VISIBLE_DISTANCE">VISIBLE_DISTANCE</a> or <a href="syserr.php#SHARP_ANGLE">SHARP_ANGLE</a>
     but ask the developer to fix more critical errors before you proceed the review.</li>
   </ul>
-  <li>Check <a href="syserr.php#concurrency">concurrencies</a> for the region(s) with HDX</li>
+  <li>Check <a href="syserr.php#concurrency">concurrencies</a> for the region(s) with mapview or HDX</li>
   <li>Check <a href="syserr.php#nearmisspoint">near-miss points</a> for the region(s) with HDX</li>
 </ul>
 You can skip the HDX checks if it is too fancy for your actual skills but please notify it on the forum.
