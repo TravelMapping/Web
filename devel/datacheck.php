@@ -47,7 +47,10 @@
         $row2 = $res2->fetch_assoc();
 
         // write table row
-        echo "<tr><td><a href=\"../hb/showroute.php?r=".$row['route']."&lat=".$row2['latitude']."&lon=".$row2['longitude']."&zoom=17";
+        echo "<tr><td><a href=\"../hb/showroute.php?r=".$row['route'];
+	if ($row2 != NULL) {
+	  echo "&lat=".$row2['latitude']."&lon=".$row2['longitude']."&zoom=17";
+	}
 	if (strcmp($row['code'],"DISCONNECTED_ROUTE") == 0) {
 	  echo "&cr";
 	}

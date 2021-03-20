@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
 <title>Travel Mapping Manual: Deal with data errors</title>
 <link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
 <link rel="shortcut icon" type="image/png" href="favicon.png">
@@ -168,7 +169,8 @@ Data errors</p>
   <tr valign="top">
     <td><a name="LABEL_INVALID_CHAR"></a><a style="text-decoration:none" href="#LABEL_INVALID_CHAR">&#x1f517</a></td>
     <td>LABEL_INVALID_CHAR</td>
-    <td>Label contains characters not allowed in labels, e.g. non-ASCII.</td>
+    <td>Label contains at least 1 invalid character. Labels may only contain letters, numerals, parentheses, slashes, underscores, hyphens, or periods, with an optional leading plus sign or asterisk.<br><br>
+    An <code>Info</code> value of <code>UTF-8 BOM</code> indicates a UTF-8 byte order mark before the first waypoint, and the file should be saved as plain ASCII text.</td>
     <td><green>YES</green></td>
     <td><red>NO</red></td>
   </tr>
