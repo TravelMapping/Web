@@ -43,10 +43,10 @@ What is a highway system?</p>
 </p>
 
 <p class="heading"><a name="tmsys"></a><a style="text-decoration:none" href="#tmsys">&#x1f517</a>
-What are Travelmapping highway systems?</p>
+What are Travel Mapping highway systems?</p>
 
 <p class="text" >
-  The Travelmapping project aims to cover as many highway systems as possible from all over the world. But we want to have a data set with
+  The Travel Mapping project aims to cover as many highway systems as possible from all over the world. But we want to have a data set with
   high quality so that roadgeeks can safely claim having clinched a whole highway systems. We only include highway systems which are signed
   along the routes. Please refer to the <a href="sysnew.php">Create a new highway system</a> for further information to the requirements.
   We sometimes expand the term beyond formally-defined highway systems to include collections of related routes like tourist routes which
@@ -59,8 +59,8 @@ What are <i>Select</i> highway systems?</p>
 
 <p class="text" >
   There are routes with high importance to travelers which do not belong to any highway system. These are routes which are maintained by
-  local authorities, are privately owned, or belong to systems which are extensive and not yet included to the project. Travelmapping
-  categorizes these routes to an own Travelmapping highway system if possible. These systems are called <i>Select</i> because they cannot
+  local authorities, are privately owned, or belong to systems which are extensive and not yet included to the project. Travel Mapping
+  categorizes these routes to an own Travel Mapping highway system if possible. These systems are called <i>Select</i> because they cannot
   be considered being complete. We only include routes which the highway data manager of the region considers being relevant.
 </p>
 
