@@ -279,7 +279,7 @@ following sources of highway information.</p>
 	      </li>
 	      <li>Hesse
 	        <ul>
-	          <li><a href="https://mobil.hessen.de/%C3%BCber-uns/downloads-formulare/netzknotenkarten-hessen">Net node maps.</a> </li>
+	          <li><a href="https://mobil.hessen.de/service/downloads-formulare/netzknotenkarten-hessen">Net node maps.</a> </li>
 	        </ul>
 	      </li>
 	      <li>Lower Saxony
