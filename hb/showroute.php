@@ -121,11 +121,11 @@
             text-align: right;
         }
 	
-	span.bigbanner {
+	#pointbox span.bigbanner {
 	    margin: 0;
 	}
 	
-	span.bigshield {
+	#pointbox span.bigshield {
 	    margin-top: 0;
 	}
 
