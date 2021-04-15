@@ -639,7 +639,26 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $matches['number'], $svg);
             $svg = str_replace("***LETTER***", $matches['letter'], $svg);
             break;
-            
+		
+		case 'cannt':
+		case 'usatxre':
+			$routeNum = preg_replace('/^[A-Z]{2}/', '', $row['route']); // Remove prefixes that are exactly 2 uppercase letters.
+            if (strlen($routeNum) > 3) {
+                if (file_exists("{$dir}/template_" . $row['systemName'] . "_wide4.svg")) {
+		    		$svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
+                }
+                elseif (file_exists("{$dir}/template_" . $row['systemName'] . "_wide.svg")) {
+		    		$svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+                }
+			}
+			elseif (strlen($routeNum) > 2) {
+				if (file_exists("{$dir}/template_" . $row['systemName'] . "_wide.svg")) {
+					$svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+				}
+			}
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+			break;
+			
             //the following cases are meant to fall through to the default
             //TODO: fix this
 
