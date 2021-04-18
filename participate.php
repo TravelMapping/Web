@@ -150,12 +150,16 @@ First steps with email submission</p>
     <li><a name="errorlog"></a><a style="text-decoration:none" href="#errorlog">&#x1f517</a>
       <b>Check the user log file.</b></br>
       </br>
-      Check your <a href="/logs/users/">online log file</a> (also directly linked on your user stats pages).
+      Check your <a href="/logs/users/">online log file</a> (also directly linked on your user stats page).
       If you included a highway or point label that the mapping script does not recognize, it will tell you
-      in your log file. Sometimes highway data is updated, and this may generate a new error. Check
-      <a href="devel/updates.php">the updates page</a> for info on what has been changed
-      to the route. You should also check the updates page frequently to find highway changes like simple relocations
-      that don't break your <code>.list</code> file and cannot be reported in your log file.
+      in the first segment of your log file. Sometimes highway data is updated, and this may generate a new error.
+      You can find a note in the first lines of your log file.
+      Check <a href="devel/updates.php">the updates page</a> for info on what has been changed to the route.</br></br>
+      <font color="#ff0000"><b>NEW</b></font>
+      Relocations or truncations that don't break your <code>.list</code> file are also reported in your log file.
+      Notes to changes since the last update of your <code>.list</code> file are found at the beginning,
+      older changes at the very end of the log file.
+      You should also check the updates page frequently to find added routes or highway systems.
       Changes to <a href="devel/manual/sysdef.php#preview">systems in preview state</a> are not notified.
     </li>
     </br>
