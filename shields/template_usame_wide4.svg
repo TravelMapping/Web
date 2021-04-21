@@ -1,0 +1,7 @@
+<svg version="1.1" viewBox="0 0 751 601" xmlns="http://www.w3.org/2000/svg">
+	<g transform="translate(.5 .5)">
+		<rect width="750" height="600" rx="37.5" ry="37.5" fill="#fff" stroke="#000"/>
+		<path d="m37.5 9.38c-15.6 0-28.1 12.5-28.1 28.1v525c0 15.6 12.5 28.1 28.1 28.1h675c15.6 0 28.1-12.5 28.1-28.1v-525c1-15.1-12-27.6-28-27.6h-675zm0 16.7h675c6.92 0 12.5 5.58 12.5 12.5v525c0 6.92-5.58 12.5-12.5 12.5h-675c-6.92 0-12.5-5.58-12.5-12.5v-525c0-6.92 5.58-12.5 12.5-12.5z"/>
+	</g>
+	<text x="379.75351" y="450.5" fill="#000000" font-family="&apos;Roadgeek 2014 Series C&apos;" font-size="448px" letter-spacing="0px" text-align="center" text-anchor="middle" word-spacing="0px" line-height="125%" xml:space="preserve"><tspan x="379.75354" y="450.5">***NUMBER***</tspan></text>
+</svg>
