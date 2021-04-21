@@ -679,7 +679,7 @@ function tm_shield_generate($r, $force_reload = false) {
                     $system = "NASA";
                     $num = "1";
                 }
-                elseif ($row['root'] == 'tx.lp008') {
+                elseif ($row['root'] == 'tx.lp0008') {
                     $system = "BELTWAY";
                     $num = "8";
                 }
