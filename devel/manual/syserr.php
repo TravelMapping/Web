@@ -370,7 +370,7 @@ Load graph with mapview</p>
     <li>Select the region(s) you want to check.</li>
     <li>Press <code>OK</code>.</li>
     <li>Select <code>Color by Concurrencies</code> under <code>Visible Routes</code>.</li>
-    <li>Select <code>Highlight All</code>.</li>
+    <li>Select <code>Highlight None</code>.</li>
     <li>Zoom-in where you want to check concurrencies.</li>
   </ul>
 </div>
