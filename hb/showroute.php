@@ -120,6 +120,14 @@
         #routeInfo td {
             text-align: right;
         }
+	
+	#pointbox span.bigbanner {
+	    margin: 0;
+	}
+	
+	#pointbox span.bigshield {
+	    margin-top: 0;
+	}
 
 	.status-active {
 	    background-color: #CCFFCC;
@@ -266,6 +274,7 @@ $nobigheader = 1;
 echo "<body onload=\"showrouteStartup(".$lat.",".$lon.",".$zoom.");\">\n";
 require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/shields/shieldgen.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/shields/bannerGen.php";
 echo "<script type=\"text/javascript\">";
 tm_generate_custom_colors_array();
 echo "</script>";
@@ -283,6 +292,20 @@ else if ($routeInfo['level'] == 'devel') {
 // shield and other info, depending on whether we are showing
 // connected or chopped route
 // always have the shield based on the root
+
+// Print svg banners if there are any
+if ($routeInfo['banner'] != '') {
+	$bannersArray = getBannerArray($routeInfo['banner']);
+	
+	foreach ($bannersArray as $singleBanner) {
+		$bannerSvg = tm_banner_generate($singleBanner, $routeInfo['systemName'], true);
+		if ( $bannerSvg == 'not external' || $bannerSvg == '' ) { // System/route doesn't use formal external banners so print nothing.
+			break;
+		} else {
+			echo "<span class='bigbanner'>". $bannerSvg ."</span>";
+		}
+	}
+}
 echo "<span class='bigshield'>".tm_shield_generate($rootparam, true)."</span>\n";
 if ($connected) {
     echo "<span style=\"text-align: center;\">" . $connInfo['banner'];

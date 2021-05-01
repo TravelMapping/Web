@@ -134,6 +134,22 @@ table.gratable tr.float th {
     height: 100px;
 }
 
+.banner {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.banner svg {
+	width: 36px;
+	height: 18px;
+}
+
+.bigbanner svg{
+	width: 100px;
+	height: 50px;
+}
+
 .map-loading * {
     cursor: progress;
     background-color: #999999;

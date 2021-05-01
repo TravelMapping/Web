@@ -567,7 +567,8 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
-        case 'usasf':
+	case 'chegts':
+	case 'usasf':
         case 'usanp':
         case 'cannf':
         case 'eursf':
@@ -638,7 +639,26 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $matches['number'], $svg);
             $svg = str_replace("***LETTER***", $matches['letter'], $svg);
             break;
-            
+		
+		case 'cannt':
+		case 'usatxre':
+			$routeNum = preg_replace('/^[A-Z]{2}/', '', $row['route']); // Remove prefixes that are exactly 2 uppercase letters.
+            if (strlen($routeNum) > 3) {
+                if (file_exists("{$dir}/template_" . $row['systemName'] . "_wide4.svg")) {
+		    		$svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
+                }
+                elseif (file_exists("{$dir}/template_" . $row['systemName'] . "_wide.svg")) {
+		    		$svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+                }
+			}
+			elseif (strlen($routeNum) > 2) {
+				if (file_exists("{$dir}/template_" . $row['systemName'] . "_wide.svg")) {
+					$svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+				}
+			}
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+			break;
+			
             //the following cases are meant to fall through to the default
             //TODO: fix this
 
@@ -659,7 +679,7 @@ function tm_shield_generate($r, $force_reload = false) {
                     $system = "NASA";
                     $num = "1";
                 }
-                elseif ($row['root'] == 'tx.lp008') {
+                elseif ($row['root'] == 'tx.lp0008') {
                     $system = "BELTWAY";
                     $num = "8";
                 }
@@ -683,38 +703,52 @@ function tm_shield_generate($r, $force_reload = false) {
                 break;
             }
 
-        default:
-            $region = strtoupper(explode(".", $r)[0]);
-            $routeNum = str_replace($region, "", $row['route']);
-            if (strlen($routeNum) > 3) {
+	case 'usava':
+	    if ($row['banner'] == 'Wye') {
+		$routeNum = str_replace('VA', "", $row['route']);
+		if (strlen($routeNum) > 2) {
+		    $svg = file_get_contents("${dir}/template_usava_wye_wide.svg");
+		}
+		else {
+		    $svg = file_get_contents("${dir}/template_usava_wye.svg");
+		}
+		$svg = str_replace("***NUMBER***", $routeNum, $svg);
+		break;
+	    }
+	    // also fall through to default if banner was not Wye
+	    
+	default:
+	    $region = strtoupper(explode(".", $r)[0]);
+	    $routeNum = str_replace($region, "", $row['route']);
+	    if (strlen($routeNum) > 3) {
                 if (file_exists("{$dir}/template_" . $row['systemName'] . "_wide4.svg")) {
-                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
+		    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
                 }
                 elseif (file_exists("{$dir}/template_" . $row['systemName'] . "_wide.svg")) {
-                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+		    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
                 }
                 else {
-                    $svg = file_get_contents("{$dir}/generic_wide.svg");
+		    $svg = file_get_contents("{$dir}/generic_wide.svg");
                 }
-            }
-            elseif (strlen($routeNum) > 2) {
+	    }
+	    elseif (strlen($routeNum) > 2) {
                 if (file_exists("{$dir}/template_" . $row['systemName'] . "_wide.svg")) {
-                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+		    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
                 }
                 else {
-                    $svg = file_get_contents("{$dir}/generic_wide.svg");
+		    $svg = file_get_contents("{$dir}/generic_wide.svg");
                 }
-            }
-            $svg = str_replace("***NUMBER***", $routeNum, $svg);
-            $svg = str_replace("***SYS***", $region, $svg);
-            break;
+	    }
+	    $svg = str_replace("***NUMBER***", $routeNum, $svg);
+	    $svg = str_replace("***SYS***", $region, $svg);
+	    break;
     }
-
+    
     // if the cache directory doesn't exist, create it
     if (!file_exists("{$dir}/cache/")) {
-        mkdir("{$dir}/cache/", 0777, true);
+	mkdir("{$dir}/cache/", 0777, true);
     }
-
+    
     // save this shield in the cache before returning
     file_put_contents("{$dir}/cache/shield_{$r}.svg", $svg);
     return $svg;
