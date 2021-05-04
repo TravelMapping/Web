@@ -745,7 +745,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'usaok': // Oklahoma
         case 'usaor': // Oregon
         case 'usapa': // Pennsylvania
-        case 'usapr': // Puerto Rico
+        // case 'usapr': // Puerto Rico
         case 'usari': // Rhode Island
         case 'usasc': // South Carolina
         case 'usasd': // South Dakota
