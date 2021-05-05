@@ -156,7 +156,7 @@ First steps with email submission</p>
       You can find a note in the first lines of your log file.
       Check <a href="devel/updates.php">the updates page</a> for info on what has been changed to the route.</br></br>
       <font color="#ff0000"><b>NEW</b></font>
-      Relocations or truncations that don't break your <code>.list</code> file are also reported in your log file.
+      Route updates that don't break your <code>.list</code> file are also reported in your log file.
       Notes to changes since the last update of your <code>.list</code> file are found at the beginning,
       older changes at the very end of the log file.
       You should also check the updates page frequently to find added routes or highway systems.
