@@ -42,19 +42,31 @@
         else {
           $label = $row['label1'];
         }
-        $sql_command = "select latitude, longitude from waypoints where pointName = '".$label."' and root = '".$row['route']."';";
-        $res2 = tmdb_query($sql_command);
-        $row2 = $res2->fetch_assoc();
 
         // write table row
-        echo "<tr><td><a href=\"../hb/showroute.php?r=".$row['route'];
-	if ($row2 != NULL) {
-	  echo "&lat=".$row2['latitude']."&lon=".$row2['longitude']."&zoom=17";
+	// Route
+	if (strcmp($row['code'],"ABBREV_AS_BANNER") == 0) {
+	  // ABBREV_AS_BANNER links to chopped routes CSV on GitHub
+          $sql_command = "select systemName from routes where root = '".$row['route']."';";
+          $row2 = tmdb_query($sql_command)->fetch_assoc();
+          echo "<tr><td><a href=\"https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/".$row2['systemName'].".csv#L".$row['value'];
 	}
-	if (strcmp($row['code'],"DISCONNECTED_ROUTE") == 0) {
-	  echo "&cr";
+	else {
+	  // all other error codes link to the HB for now
+          $sql_command = "select latitude, longitude from waypoints where pointName = '".$label."' and root = '".$row['route']."';";
+          $row2 = tmdb_query($sql_command)->fetch_assoc();
+          echo "<tr><td><a href=\"../hb/showroute.php?r=".$row['route'];
+	  // successful lookup of waypoint label links to panned & zoomed map
+	  if ($row2 != NULL) {
+	    echo "&lat=".$row2['latitude']."&lon=".$row2['longitude']."&zoom=17";
+	  }
+	  if (strcmp($row['code'],"DISCONNECTED_ROUTE") == 0) {
+	    echo "&cr";
+	  }
 	}
 	echo "\">".$row['route']."</a></td><td>";
+
+	// Waypoints
         if (strcmp($row['label1'],"") != 0) {
           echo $row['label1'];
         }
@@ -64,8 +76,11 @@
         if (strcmp($row['label3'],"") != 0) {
           echo ",".$row['label3'];
         }
+
+	// Error
 	echo "</td><td><a style=\"color: ";
-	if ((strcmp($row['code'],"BUS_WITH_I") == 0) ||
+	if ((strcmp($row['code'],"ABBREV_AS_BANNER") == 0) ||
+	  (strcmp($row['code'],"BUS_WITH_I") == 0) ||
 	  (strcmp($row['code'],"INTERSTATE_NO_HYPHEN") == 0) ||
 	  (strcmp($row['code'],"INVALID_FINAL_CHAR") == 0) ||
 	  (strcmp($row['code'],"INVALID_FIRST_CHAR") == 0) ||
@@ -85,12 +100,15 @@
 	}
         else {
 	  echo "red";
-
 	}
+
+	// Info
 	echo "\" href=\"manual/syserr.php#".$row['code']."\">".$row['code']."</a></td><td>";
         if (strcmp($row['value'],"") != 0) {
           echo $row['value'];
         }
+
+	// FP Entry to Submit
 	// If not an error type for which FPs are
 	// allowed, don't print an FP entry.
 	// This list is in descending order by frequency, to reduce
