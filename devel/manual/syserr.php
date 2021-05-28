@@ -83,6 +83,13 @@ Data errors</p>
     <td width="50"><b>FP possible</b></td>
   </tr>
   <tr valign="top">
+    <td><a name="ABBREV_AS_BANNER"></a><a style="text-decoration:none" href="#ABBREV_AS_BANNER">&#x1f517</a></td>
+    <td>ABBREV_AS_BANNER</td>
+    <td>The route's <a href="syshwylist.php#chopped">chopped routes .csv file</a> entry has the <a href="syshwylist.php#cabbrev">Abbrev</a> erroneously entered into the <a href="syshwylist.php#cbanner">Banner</a> field.</td>
+    <td><red>NO</red></td>
+    <td><red>NO</red></td>
+  </tr>
+  <tr valign="top">
     <td><a name="BAD_ANGLE"></a><a style="text-decoration:none" href="#BAD_ANGLE">&#x1f517</a></td>
     <td>BAD_ANGLE</td>
     <td>Angles cannot be computed for two adjacent points at the same coordinates. Instead, use <code>AltLabels</code> or fix coordinates of one point or both.</td>
