@@ -431,6 +431,7 @@ HTML;
 
     <table class="gratable tablesorter" id="systemTravelersTable" style="width: auto;">
         <thead>
+	    <tr><th colspan="5">Travelers in System <?php echo "$system"; ?></th></tr>
             <tr><th class="sortable">Traveler</th><th class="sortable">Distance Traveled (<?php tm_echo_units(); ?>)</th><th>%</th><th class="sortable">Traveled Routes</th><th class="sortable">Clinched Routes</th></tr>
         </thead>
     <tbody>
