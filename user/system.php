@@ -436,9 +436,11 @@ HTML;
             <tr><th class="sortable">Rank</th><th class="sortable">Traveler</th><th class="sortable">Distance Traveled (<?php tm_echo_units(); ?>)</th><th>%</th><th class="sortable">Traveled Routes</th><th class="sortable">Clinched Routes</th></tr>
         </thead>
     <tbody>
-	  <tr style=><td></td><td>TOTAL CLINCHABLE</td><td><?php echo tm_convert_distance($system_mileage); ?></td><td>100.00%</td><td><?php echo "$totalRoutes"; ?></td><td><?php echo "$totalRoutes"; ?></td></tr>
+	  <tr style=><td></td><td>TOTAL CLINCHABLE</td><td><?php echo tm_convert_distance($system_mileage); ?></td><td>100%</td><td><?php echo "$totalRoutes"; ?></td><td><?php echo "$totalRoutes"; ?></td></tr>
 	  <?php
-	  $rank = 1;
+	  $prev_mileage = 0;
+	  $pre_rank = 1;
+	  $tie_rank = 1;
 	  foreach ($TravelerInfo as $traveler => $stats) {
 	      if ($traveler == "") {
                   continue;  // this happens, but how?!
@@ -448,17 +450,21 @@ HTML;
               } else {
                  $highlight = '';
               }
+	      $tie_rank = ($prev_mileage == $stats['mileage']) ? $tie_rank : $pre_rank;
 	      $mileageStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['mileage'],$system_mileage).';"';
 	      $drivenStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['driven'],$totalRoutes).';"';
 	      $clinchedStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['clinched'],$totalRoutes).';"';
-	      echo "<tr class=\"".$highlight."\" onClick=\"window.document.location='?u=".$traveler."&sys=$system'\">";
-	      echo "<td>".$rank."</td>";
+	      echo "<tr class=\"".$highlight."\" onClick=\"window.document.location='?u=".$traveler."&sys=$system";
+	      if ($region != "") echo "&rg=$region";
+	      echo "'\">";
+	      echo "<td>".$tie_rank."</td>";
 	      echo "<td>".$traveler."</td>";
 	      echo "<td ".$mileageStyle.">".tm_convert_distance($stats['mileage'])."</td>";
 	      echo "<td ".$mileageStyle.">".round($stats['mileage'] / $system_mileage * 100, 2)."%</td>";
 	      echo "<td ".$drivenStyle.">".$stats['driven']."</td>";
 	      echo "<td ".$clinchedStyle.">".$stats['clinched']."</td></tr>\n";//*/
-	      $rank += 1;
+	      $pre_rank += 1;
+	      $prev_mileage = $stats['mileage'];
           }
 	  ?>
     </tbody>
