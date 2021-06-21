@@ -154,7 +154,7 @@ if (( $tmuser == "null") || ( $system == "" )) {
         <div id="controlboxinfo"></div>
         <div id="map"></div>
         <table class="gratable tablesorter" id="overallTable">
-            <thead><tr><th colspan="2">System Statistics for <?php echo "$systemName"; ?></th></tr></thead>
+            <thead><tr><th colspan="2"><a href="#rankings">System Statistics for <?php echo "$systemName"; ?></a></th></tr></thead>
             <tbody>
             <?php
 	    // get overall stats either for entire system or within
@@ -429,14 +429,16 @@ HTML;
             </tbody>
         </table>
 
+    <a name="rankings"></a>
     <table class="gratable tablesorter" id="systemTravelersTable" style="width: auto;">
         <thead>
-	    <tr><th colspan="5">Travelers on <?php echo "$systemName"; ?></th></tr>
-            <tr><th class="sortable">Traveler</th><th class="sortable">Distance Traveled (<?php tm_echo_units(); ?>)</th><th>%</th><th class="sortable">Traveled Routes</th><th class="sortable">Clinched Routes</th></tr>
+	    <tr><th colspan="6">Travelers on <?php echo "$systemName"; ?></th></tr>
+            <tr><th class="sortable">Rank</th><th class="sortable">Traveler</th><th class="sortable">Distance Traveled (<?php tm_echo_units(); ?>)</th><th>%</th><th class="sortable">Traveled Routes</th><th class="sortable">Clinched Routes</th></tr>
         </thead>
     <tbody>
-	  <tr style=><td>TOTAL CLINCHABLE</td><td><?php echo tm_convert_distance($system_mileage); ?></td><td>100.00%</td><td><?php echo "$totalRoutes"; ?></td><td><?php echo "$totalRoutes"; ?></td></tr>
+	  <tr style=><td></td><td>TOTAL CLINCHABLE</td><td><?php echo tm_convert_distance($system_mileage); ?></td><td>100.00%</td><td><?php echo "$totalRoutes"; ?></td><td><?php echo "$totalRoutes"; ?></td></tr>
 	  <?php
+	  $rank = 1;
 	  foreach ($TravelerInfo as $traveler => $stats) {
 	      if ($traveler == "") {
                   continue;  // this happens, but how?!
@@ -450,11 +452,13 @@ HTML;
 	      $drivenStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['driven'],$totalRoutes).';"';
 	      $clinchedStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['clinched'],$totalRoutes).';"';
 	      echo "<tr class=\"".$highlight."\" onClick=\"window.document.location='?u=".$traveler."&sys=$system'\">";
+	      echo "<td>".$rank."</td>";
 	      echo "<td>".$traveler."</td>";
 	      echo "<td ".$mileageStyle.">".tm_convert_distance($stats['mileage'])."</td>";
 	      echo "<td ".$mileageStyle.">".round($stats['mileage'] / $system_mileage * 100, 2)."%</td>";
 	      echo "<td ".$drivenStyle.">".$stats['driven']."</td>";
 	      echo "<td ".$clinchedStyle.">".$stats['clinched']."</td></tr>\n";//*/
+	      $rank += 1;
           }
 	  ?>
     </tbody>
