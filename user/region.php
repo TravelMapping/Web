@@ -126,7 +126,6 @@ if (( $tmuser != "null") || ( $region != "" )) {
 </script>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 <div id="header">
-    <input id="showMarkers" type="checkbox" name="Show Markers" onclick="showMarkersClicked()">&nbsp;Show Markers
     <form id="userselect" action="region.php">
         <label>User: </label>
         <?php tm_user_select(); ?>
@@ -136,10 +135,10 @@ if (( $tmuser != "null") || ( $region != "" )) {
 	<?php tm_units_select(); ?>
         <input type="submit" value="Update Map and Stats" />
     </form>
-    Scroll down to see statistical reports below the map --
-    <a href="/user/index.php">User Page</a>
+    Scroll down to see statistical reports below the map
     <?php
         echo " -- <a href='/user/mapview.php?u={$tmuser}&rg={$region}'>View Larger Map</a>";
+        echo '<input id="showMarkers" type="checkbox" name="Show Markers" onclick="showMarkersClicked()">&nbsp;Show Markers';
         echo "<h1>Traveler Statistics for {$tmuser} in {$region}</h1>";
     ?>
 </div>
