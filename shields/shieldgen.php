@@ -455,7 +455,6 @@ function tm_shield_generate($r, $force_reload = false) {
             else {
                 $svg = str_replace("***NUMBER***", $routeNum, $svg);
                 $svg = str_replace("***SUFFIX***", '', $svg);
-                }
             }
             break;
             
