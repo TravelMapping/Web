@@ -401,16 +401,36 @@ function tm_shield_generate($r, $force_reload = false) {
         // fraxxxdnn
         case preg_match('/fra[a-z]{3}d[0-9]{2}/', $row['systemName']) ? $row['systemName'] : !$row['systemName']:
         case 'fragesd6ae':
-        // case 'fracord': // Corsica Routes Départementales
+        case 'fracord': // Corsica Routes Départementales
         case 'glpd': // Guadaloupe Routes Départementales
         case 'gufd': // French Guiana Routes Départementales
         case 'mtqd': // Martinique Routes Départementales
         case 'mytd': // Mayotte Routes Départementales
         case 'reud': // Reunion Routes Départementales
             // replace placeholder, add blank after prefix, use wide svg files
-            $routeNum = str_replace("D", "D ", $row['route']);
-            $svg = file_get_contents("{$dir}/template_frad_wide" . strlen($routeNum) . ".svg");
-            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            $prefix = substr($row['route'], 0, 1);
+            $routeNum = substr_replace($row['route'], "{$prefix} ", 0, 1); // Use substr_replace here to avoid matching suffixes.
+            
+            if ( strlen($routeNum) > 7 ) {
+                $svg = file_get_contents("{$dir}/template_frad_wide7.svg");
+            } else {
+                $svg = file_get_contents("{$dir}/template_frad_wide" . strlen($routeNum) . ".svg");
+            }
+            
+            $matches = [];
+            if (preg_match('/(?<number>[DN] [0-9]+)(?<suffix>[A-Za-z]+[0-9]?)/', $routeNum, $matches)) {
+                $svg = str_replace("***NUMBER***", $matches['number'], $svg);
+                $svg = str_replace("***SUFFIX***", $matches['suffix'], $svg);
+            }
+            else { // D 1.1 -> D 1^1
+                $numParts = explode('.',  $routeNum);
+                $svg = str_replace("***NUMBER***", $numParts[0], $svg);
+                if ( isset($numParts[1]) ) {
+                    $svg = str_replace("***SUFFIX***", $numParts[1], $svg);
+                } else {
+                    $svg = str_replace("***SUFFIX***", '', $svg);
+                }
+            }
             break;
             
         // fram France Routes Métropolitaines
@@ -421,8 +441,22 @@ function tm_shield_generate($r, $force_reload = false) {
             // replace placeholder, add blank after prefix, use wide svg files
             $routeNum = str_replace("M", "M ", $row['route']);
             // Whitespace after 'T' is purposefully excluded.
-            $svg = file_get_contents("{$dir}/template_fram_wide" . strlen($routeNum) . ".svg");
-            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            if ( strlen($routeNum) > 7 ) {
+                $svg = file_get_contents("{$dir}/template_fram_wide7.svg");
+            } else {
+                $svg = file_get_contents("{$dir}/template_fram_wide" . strlen($routeNum) . ".svg");
+            }
+            
+            $matches = [];
+            if (preg_match('/(?<number>(M |T)[0-9]+)(?<suffix>[A-Za-z]+[0-9]?)/', $routeNum, $matches)) {
+                $svg = str_replace("***NUMBER***", $matches['number'], $svg);
+                $svg = str_replace("***SUFFIX***", $matches['suffix'], $svg);
+            }
+            else {
+                $svg = str_replace("***NUMBER***", $routeNum, $svg);
+                $svg = str_replace("***SUFFIX***", '', $svg);
+                }
+            }
             break;
             
         case 'nclt':
@@ -505,6 +539,8 @@ function tm_shield_generate($r, $force_reload = false) {
             
         case 'gbnb': // Great Britain B Roads
         case 'nirb': // Northern Ireland B Roads
+        case 'imnb': // Isle of Man B Roads
+        case 'jeyc': // Jersey C Roads
             // Replace placeholder, get proper width template
             $svg = file_get_contents("{$dir}/template_gbnb.svg");
             if (strlen($row['route']) > 3) {
@@ -627,7 +663,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'canmb': // Manitoba Trunk Hwys
         case 'canon': // Ontario King's Hwys
         case 'canons': // Ontario Secondary Hwys
-            $routeNum = preg_replace('/^[A-Z]{2}/', '', $row['route']); // Remove prefixes that are exactly 2 uppercase letters.
+            $routeNum = substr_replace($row['route'], '', 0, 2); // Remove prefixes that are exactly 2 characters.
             
             if (strlen($routeNum) > 3) {
                 if (file_exists("{$dir}/template_" . $row['systemName'] . "_wide4.svg")) {
@@ -835,7 +871,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'usawv': // West Virginia
         case 'usawy': // Wyoming
             
-            $routeNum = preg_replace('/^[A-Z]{2}/', '', $row['route']); // Remove prefixes that are exactly 2 uppercase letters.
+            $routeNum = substr_replace($row['route'], '', 0, 2); // Remove prefixes that are exactly 2 characters.
             if (strlen($routeNum) > 3) {
                 if (file_exists("{$dir}/template_" . $row['systemName'] . "_wide4.svg")) {
                     $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
