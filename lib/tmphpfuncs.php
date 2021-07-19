@@ -85,7 +85,7 @@ try {
     $tmdb = new mysqli($tmdbhost, $tmdbuser, $tmdbpasswd, $tmdbname);
 }
 catch ( Exception $e ) {
-    echo "<h1 style='color: red'>Failed to connect to database ".$tmdbname." on ".$tmdbhost." Please try again later.</h1>";
+    echo "<h1 style='color: red'>Failed to connect to database ".$tmdbname." on ".$tmdbhost." Please look <a href=\"https://travelmapping.github.io/\">here</a> for possible updates.</h1>";
     exit;
 }
 
