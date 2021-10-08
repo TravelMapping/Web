@@ -311,6 +311,13 @@ Data errors</p>
     <td><green>YES</green></td>
   </tr>
   <tr valign="top">
+    <td><a name="SINGLE_FIELD_LINE"></a><a style="text-decoration:none" href="#SINGLE_FIELD_LINE">&#x1f517</a></td>
+    <td>SINGLE_FIELD_LINE</td>
+    <td>WPT file line only contains one field. Each line must have a minimum of 2 space-separated fields: A <a href="hwydata.php#format">waypoint label followed by an OpenStreetMap URL</a>. Deprecated <a href="maintenance.php#labelwrong">alternate labels</a> may optionally be included in between.</td>
+    <td><red>NO</green></td>
+    <td><red>NO</green></td>
+  </tr>
+  <tr valign="top">
     <td><a name="US_LETTER"></a><a style="text-decoration:none" href="#US_LETTER">&#x1f517</a></td>
     <td>US_LETTER</td>
     <td>Label uses <a href="https://travelmapping.net/devel/manual/wayptlabels.php#bannerafternumber"><code>USxxxA</code> or <code>USxxxB</code> rather than <code>USxxxAlt</code>, <code>USxxxBus</code>, <code>USxxxByp</code>, etc.</td>
