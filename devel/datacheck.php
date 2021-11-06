@@ -104,9 +104,13 @@
 	// Info
         if (strcmp($row['value'],"") != 0) {
 	  // ABBREV_AS_CHOP_BANNER & ABBREV_AS_CON_BANNER link to system CSVs on GitHub
-	  if ((strcmp($row['code'],"ABBREV_AS_CHOP_BANNER") == 0) ||
-	    (strcmp($row['code'],"ABBREV_AS_CON_BANNER") == 0)) {
+	  if ((strcmp($row['code'],"ABBREV_AS_CHOP_BANNER") == 0)) {
             echo "<a href=\"https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/".$row['value']."\">".$row['value']."</a>";
+	  }
+	  elseif ((strcmp($row['code'],"ABBREV_AS_CON_BANNER") == 0)) {
+	    $acb_info = explode(',', $row['value']);
+            echo "<a href=\"https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/".$acb_info[0].".csv#L".$acb_info[1]."\">".$acb_info[0].".csv#L".$acb_info[1]."</a><br>";
+            echo "<a href=\"https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/".$acb_info[0]."_con.csv#L".$acb_info[2]."\">".$acb_info[0]."_con.csv#L".$acb_info[2]."</a>";
 	  }
 	  else {
             echo $row['value'];
