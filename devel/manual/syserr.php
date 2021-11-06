@@ -94,7 +94,8 @@ Data errors</p>
     <td>ABBREV_AS_CON_BANNER</td>
     <td>The 2 potential underlying causes are:
     <ol>
-      <li>The route's <a href="syshwylist.php#chopped">chopped routes .csv file</a> entry has the <a href="syshwylist.php#cbanner">Banner</a> erroneously entered into the <a href="syshwylist.php#cabbrev">Abbrev</a> field.</li>
+      <li>The route's <a href="syshwylist.php#chopped">chopped routes .csv file</a> entry has the <a href="syshwylist.php#cbanner">Banner</a> erroneously entered into the <a href="syshwylist.php#cabbrev">Abbrev</a> field.
+      If the same route is also flagged as <a href="#MISSING_CITY">MISSING_CITY</a>, this is probably the case.</li>
       <li>The route's <a href="syshwylist.php#connected">connected routes .csv file</a> entry has the chopped route's <a href="syshwylist.php#cabbrev">Abbrev</a> entered as its <a href="syshwylist.php#conncbanner">Banner</a>.</li>
     </ol>
     </td>
@@ -161,6 +162,14 @@ Data errors</p>
     <td>DUPLICATE_LABEL</td>
     <td>Duplicated labels for more than one waypoint. Labels must be unique for each route.</td>
     <td><green>YES</green></td>
+    <td><red>NO</red></td>
+  </tr>
+  <tr valign="top">
+    <td><a name="EXTRANEOUS_ABBREV"></a><a style="text-decoration:none" href="#EXTRANEOUS_ABBREV">&#x1f517</a></td>
+    <td>EXTRANEOUS_ABBREV</td>
+    <td>The route's <a href="syshwylist.php#chopped">chopped routes .csv file</a> entry has an <a href="syshwylist.php#cabbrev">Abbrev</a>, but no <a href="syshwylist.php#ccity">City</a>.
+    The Abbrev should be removed, as the resulting .list name is not in use.</td>
+    <td><red>NO</red></td>
     <td><red>NO</red></td>
   </tr>
   <tr valign="top">
@@ -291,6 +300,14 @@ Data errors</p>
     <td>MALFORMED_URL</td>
     <td>URL is missing <code>lat=</code> and/or <code>lon=</code> argument(s)</td>
     <td><yellow>NO</yellow></td>
+    <td><red>NO</red></td>
+  </tr>
+  <tr valign="top">
+    <td><a name="MISSING_CITY"></a><a style="text-decoration:none" href="#MISSING_CITY">&#x1f517</a></td>
+    <td>MISSING_CITY</td>
+    <td>The route's <a href="syshwylist.php#chopped">chopped routes .csv file</a> entry has an <a href="syshwylist.php#cabbrev">Abbrev</a>, but no <a href="syshwylist.php#ccity">City</a>.
+    The Abbrev cannot be removed because the resulting .list name is already another route's primary name.</td>
+    <td><red>NO</red></td>
     <td><red>NO</red></td>
   </tr>
   <tr valign="top">

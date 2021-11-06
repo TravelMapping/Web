@@ -79,6 +79,7 @@
 	  (strcmp($row['code'],"BUS_WITH_I") == 0) ||
 	  (strcmp($row['code'],"CON_BANNER_MISMATCH") == 0) ||
 	  (strcmp($row['code'],"CON_ROUTE_MISMATCH") == 0) ||
+	  (strcmp($row['code'],"EXTRANEOUS_ABBREV") == 0) ||
 	  (strcmp($row['code'],"INTERSTATE_NO_HYPHEN") == 0) ||
 	  (strcmp($row['code'],"INVALID_FINAL_CHAR") == 0) ||
 	  (strcmp($row['code'],"INVALID_FIRST_CHAR") == 0) ||
@@ -90,6 +91,7 @@
 	  (strcmp($row['code'],"LACKS_GENERIC") == 0) ||
 	  (strcmp($row['code'],"LONG_SEGMENT") == 0) ||
 	  (strcmp($row['code'],"LONG_UNDERSCORE") == 0) ||
+	  (strcmp($row['code'],"MISSING_CITY") == 0) ||
 	  (strcmp($row['code'],"NONTERMINAL_UNDERSCORE") == 0) ||
 	  (strcmp($row['code'],"US_LETTER") == 0) ||
 	  (strcmp($row['code'],"VISIBLE_HIDDEN_COLOC") == 0) ||
@@ -104,7 +106,9 @@
 	// Info
         if (strcmp($row['value'],"") != 0) {
 	  // ABBREV_AS_CHOP_BANNER & ABBREV_AS_CON_BANNER link to system CSVs on GitHub
-	  if ((strcmp($row['code'],"ABBREV_AS_CHOP_BANNER") == 0)) {
+	  if ((strcmp($row['code'],"ABBREV_AS_CHOP_BANNER") == 0) ||
+	    (strcmp($row['code'],"MISSING_CITY") == 0) ||
+	    (strcmp($row['code'],"EXTRANEOUS_ABBREV") == 0)) {
             echo "<a href=\"https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/".$row['value']."\">".$row['value']."</a>";
 	  }
 	  elseif ((strcmp($row['code'],"ABBREV_AS_CON_BANNER") == 0)) {
