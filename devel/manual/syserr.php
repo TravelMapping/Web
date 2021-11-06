@@ -92,7 +92,12 @@ Data errors</p>
   <tr valign="top">
     <td><a name="ABBREV_AS_CON_BANNER"></a><a style="text-decoration:none" href="#ABBREV_AS_CON_BANNER">&#x1f517</a></td>
     <td>ABBREV_AS_CON_BANNER</td>
-    <td>The route's <a href="syshwylist.php#connected">connected routes .csv file</a> entry has the chopped route's <a href="syshwylist.php#cabbrev">Abbrev</a> entered as its <a href="syshwylist.php#conncbanner">Banner</a>.</td>
+    <td>The 2 potential underlying causes are:
+    <ol>
+      <li>The route's <a href="syshwylist.php#chopped">chopped routes .csv file</a> entry has the <a href="syshwylist.php#cbanner">Banner</a> erroneously entered into the <a href="syshwylist.php#cabbrev">Abbrev</a> field.</li>
+      <li>The route's <a href="syshwylist.php#connected">connected routes .csv file</a> entry has the chopped route's <a href="syshwylist.php#cabbrev">Abbrev</a> entered as its <a href="syshwylist.php#conncbanner">Banner</a>.</li>
+    </ol>
+    </td>
     <td><red>NO</red></td>
     <td><red>NO</red></td>
   </tr>
