@@ -81,15 +81,13 @@ Shaping points</p>
     </li>
     <ul>
     <li><a name="exceed"></a><a style="text-decoration:none" href="#exceed">&#x1f517</a>
-    Identify sections of the route that go outside the thick red 
-    line overlaid on the map.
+    Identify sections of the route that go outside the thin red lines on either side of the route trace.
     <!-- This line is the same as the blue line at the 5
          mi/10 km scale zoom level of the Google Maps API. -->
-    Add just enough extra
-    shaping points to your file to re-trace the thick red line so that the 
-    centerline of your route as shown in OpenStreetMap stays within the 
-    line. All waypoints should be positioned on the highway. The highlight 
-    line helps you decide if another shaping point is needed.</li>
+    Add just enough shaping points to re-trace so that the 
+    centerline of your route as shown by OpenStreetMap stays between the 
+    lines. All waypoints should be positioned on the highway. These tolerance 
+    lines help you decide if another shaping point is needed.</li>
     </ul>
     <li><a name="sharpturns"></a><a style="text-decoration:none" href="#sharpturns">&#x1f517</a>
     If the route has sharp turns or switchbacks and adding a few 
