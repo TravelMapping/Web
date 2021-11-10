@@ -94,10 +94,19 @@ Data errors</p>
     <td>ABBREV_AS_CON_BANNER</td>
     <td>The 2 potential underlying causes are:
     <ol>
-      <li>The route's <a href="syshwylist.php#chopped">chopped routes .csv file</a> entry has the <a href="syshwylist.php#cbanner">Banner</a> erroneously entered into the <a href="syshwylist.php#cabbrev">Abbrev</a> field.</li>
+      <li>The route's <a href="syshwylist.php#chopped">chopped routes .csv file</a> entry has the <a href="syshwylist.php#cbanner">Banner</a> erroneously entered into the <a href="syshwylist.php#cabbrev">Abbrev</a> field.
+      If the same route is also flagged as <a href="#ABBREV_NO_CITY">ABBREV_NO_CITY</a>, this is probably the case.</li>
       <li>The route's <a href="syshwylist.php#connected">connected routes .csv file</a> entry has the chopped route's <a href="syshwylist.php#cabbrev">Abbrev</a> entered as its <a href="syshwylist.php#conncbanner">Banner</a>.</li>
     </ol>
     </td>
+    <td><red>NO</red></td>
+    <td><red>NO</red></td>
+  </tr>
+  <tr valign="top">
+    <td><a name="ABBREV_NO_CITY"></a><a style="text-decoration:none" href="#ABBREV_NO_CITY">&#x1f517</a></td>
+    <td>ABBREV_NO_CITY</td>
+    <td>The route's <a href="syshwylist.php#chopped">chopped routes .csv file</a> entry has an <a href="syshwylist.php#cabbrev">Abbrev</a>, but no <a href="syshwylist.php#ccity">City</a>.
+    <br>If the same route is also flagged as <a href="#ABBREV_AS_CON_BANNER">ABBREV_AS_CON_BANNER</a>, the <code>Abbrev</code> data should probably be moved to the <code>Banner</code>.</li>
     <td><red>NO</red></td>
     <td><red>NO</red></td>
   </tr>

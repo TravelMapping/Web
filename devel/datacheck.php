@@ -76,6 +76,7 @@
 	echo "</td><td><a style=\"color: ";
 	if ((strcmp($row['code'],"ABBREV_AS_CHOP_BANNER") == 0) ||
 	  (strcmp($row['code'],"ABBREV_AS_CON_BANNER") == 0) ||
+	  (strcmp($row['code'],"ABBREV_NO_CITY") == 0) ||
 	  (strcmp($row['code'],"BUS_WITH_I") == 0) ||
 	  (strcmp($row['code'],"CON_BANNER_MISMATCH") == 0) ||
 	  (strcmp($row['code'],"CON_ROUTE_MISMATCH") == 0) ||
@@ -103,10 +104,12 @@
 
 	// Info
         if (strcmp($row['value'],"") != 0) {
-	  // ABBREV_AS_CHOP_BANNER & ABBREV_AS_CON_BANNER link to system CSVs on GitHub
-	  if ((strcmp($row['code'],"ABBREV_AS_CHOP_BANNER") == 0)) {
+	  // ABBREV_AS_CHOP_BANNER & ABBREV_NO_CITY link to chopped route CSVs on GitHub
+	  if ((strcmp($row['code'],"ABBREV_AS_CHOP_BANNER") == 0) ||
+	    (strcmp($row['code'],"ABBREV_NO_CITY") == 0)) {
             echo "<a href=\"https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/".$row['value']."\">".$row['value']."</a>";
 	  }
+	  // ABBREV_AS_CON_BANNER links to both system CSVs on GitHub
 	  elseif ((strcmp($row['code'],"ABBREV_AS_CON_BANNER") == 0)) {
 	    $acb_info = explode(',', $row['value']);
             echo "<a href=\"https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/".$acb_info[0].".csv#L".$acb_info[1]."\">".$acb_info[0].".csv#L".$acb_info[1]."</a><br>";
