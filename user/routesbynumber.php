@@ -146,7 +146,14 @@
 <div>
 <center>
 <span style="display: inline-block; vertical-align: top;">
-Missing numbers: <span id="missing"></span>
+    <table class="gratable" style="padding: 10px;">
+        <thead>
+            <tr><th class="routeNum">Missing Numbers</th></tr>
+        </thead>
+        <tbody>
+	<tr><td colspan="2" id="missing">Loading Data...</td></tr>
+        </tbody>
+    </table>
 </span>
 </center>
 </div>
