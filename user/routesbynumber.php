@@ -17,7 +17,7 @@
 	<link rel="shortcut icon" type="image/png" href="/favicon.png">
     <?php tm_common_js(); ?>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
-    <title>Travel Mapping: Top User Stats</title>
+    <title>Travel Mapping: Routes Traveled by Number</title>
 </head>
 
 <script type="text/javascript">
@@ -63,6 +63,7 @@
      }
      else {
          let theRoutes = new Array();
+	 let unnumbered = "";
          for (let i = 0; i < response['routes'].length; i++) {
 	     let route = response['routes'][i];
 	     // parse out the number from the string
@@ -71,19 +72,34 @@
 	         if (route.charAt(j) >= '0' && route.charAt(j) <= '9') {
 		     numberString += route.charAt(j);
 		 }
+		 else if (numberString != "") {
+		     break; // if we hit a non-digit after a digit, we stop
+		 }
              }
-	     let number = 0;
 	     if (numberString.length > 0) {
-                 number = parseInt(numberString, 10);
-             }
+                 let number = parseInt(numberString, 10);
 
-             // add to the list at this index
-	     if (typeof theRoutes[number] === 'undefined') {
-	         theRoutes[number] = "" + route;
-             }
-	     else {
-	         theRoutes[number] += ", " + route;
-             }
+		 // add to the list at this index
+	         if (typeof theRoutes[number] === 'undefined') {
+	             theRoutes[number] = "" + route;
+                 }
+	         else {
+	             theRoutes[number] += ", " + route;
+                 }
+	    }
+	    else {
+	        // unnumbered
+	        if (unnumbered.length == 0) {
+	            unnumbered = route;
+                }
+	        else {
+	            unnumbered += ", " + route;
+                }
+	    }
+	 }
+	 // unnumbered routes first
+	 if (unnumbered.length > 0) {
+	     rows += "<tr><td>Unnumbered</td><td>" + unnumbered + "</td></tr>";
 	 }
 	 for (let i = 0; i < theRoutes.length; i++) {
 	     if (!(typeof theRoutes[i] === 'undefined')) {
@@ -92,7 +108,7 @@
          }
 	 // fill in missing number list
 	 let missingMax = document.getElementById("maxlist").value;
-	 let missingStr = ""
+	 let missingStr = "";
 	 for (let i = 0; i <= missingMax; i++) {
 	     if (typeof theRoutes[i] === 'undefined') {
 	         missingStr += " " + i;
@@ -130,20 +146,21 @@
 <div>
 <center>
 <span style="display: inline-block; vertical-align: top;">
+Missing numbers: <span id="missing"></span>
+</span>
+</center>
+</div>
+<div>
+<center>
+<span style="display: inline-block; vertical-align: top;">
     <table class="gratable" style="padding: 10px;">
         <thead>
-            <tr><th class="routeNum">Number</th><th class="routes">Routes</th></tr>
+            <tr><th class="routeNum">Number</th><th class="routes">Routes Traveled</th></tr>
         </thead>
         <tbody id="traveledRoutes">
 	<tr><td colspan="2">Loading Data...</td></tr>
         </tbody>
     </table>
-</span>
-</center>
-</div>
-<div>
-<span style="display: inline-block; vertical-align: top;">
-Missing numbers: <span id="missing"></span>
 </span>
 </center>
 </div>
