@@ -97,15 +97,15 @@
                 }
 	    }
 	 }
-	 // unnumbered routes first
-	 if (unnumbered.length > 0) {
-	     rows += "<tr><td>Unnumbered</td><td>" + unnumbered + "</td></tr>";
-	 }
 	 for (let i = 0; i < theRoutes.length; i++) {
 	     if (!(typeof theRoutes[i] === 'undefined')) {
 	         rows += '<tr><td>' + i + '</td><td>' + theRoutes[i] + '</td></tr>';
 	     }
          }
+	 // unnumbered routes last
+	 if (unnumbered.length > 0) {
+	     rows += "<tr><td>Unnumbered</td><td>" + unnumbered + "</td></tr>";
+	 }
 	 // fill in missing number list
 	 let missingMax = document.getElementById("maxlist").value;
 	 let missingStr = "";
