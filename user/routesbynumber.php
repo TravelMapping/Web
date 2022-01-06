@@ -149,7 +149,12 @@ Route numbers here are determined by the first sequence of characters
     would count as a "5", and "LA92-1" would count as a "92".  This
     could lead to some numbers that aren't really route numbers being
     detected, such as "MKAD2", which is the "2nd Minsk Motorway Ring",
-    would count as a "2".
+    would count as a "2".  Multiple routes that have the same
+    designation (such as the two I-84 instances) would be listed just
+    once even if you have traveled both.  Also note that things like
+    banners are 
+    ignored: if you have traveled a Business US 41 somewhere, it would
+    be listed here simply as a "US41".
 </p>
 <div>
 <center>
@@ -170,7 +175,7 @@ Route numbers here are determined by the first sequence of characters
 <span style="display: inline-block; vertical-align: top;">
     <table class="gratable" style="padding: 10px;">
         <thead>
-            <tr><th class="routeNum">Number</th><th class="routes">Routes Traveled</th></tr>
+            <tr><th class="routeNum">Number</th><th class="routes">Routes Traveled (see note above)</th></tr>
         </thead>
         <tbody id="traveledRoutes">
 	<tr><td colspan="2">Loading Data...</td></tr>
