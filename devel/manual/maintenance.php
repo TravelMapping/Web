@@ -104,11 +104,11 @@ Which changes to activated routes are newsworthy?</p>
   <li><a name="newroute"></a><a style="text-decoration:none" href="#newroute">&#x1f517</a>
     <span class="postbody"><span style="font-weight: bold;">A new route was added (<span style="background-color: #FFCCCC;">Newsworthy</span>)</span> <br />
       <br />
-      New routes are always reported so that user can check whether they need to add the route.
+      New routes are always reported so that users can check whether they need to add the route.
   </li>
   <br/>
   <li><a name="delroute"></a><a style="text-decoration:none" href="#delroute">&#x1f517</a>
-    <span class="postbody"><span style="font-weight: bold;">A new route was deleted (<span style="background-color: #FFCCCC;">Newsworthy</span>)</span> <br />
+    <span class="postbody"><span style="font-weight: bold;">A route was deleted (<span style="background-color: #FFCCCC;">Newsworthy</span>)</span> <br />
       <br />
       The deletion of a route is always reported even when it was not traveled by any TM user.
   </li>
