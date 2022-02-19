@@ -138,6 +138,7 @@ following sources of highway information.</p>
 	      <li><a href="http://web.archive.org/web/20120211051752/http://the506.com:80/roads/NB/">New Brunswick Roads</a>. Hobbyist site by J. P. Kirby covering the provincial highways of New Brunswick.</li>
 <li><a href="http://www.gnb.ca/0113/maps/Mapbooks/2011-Mapbooks-e.asp">2011 Highway Maps (Map Books)</a>. From New Brunswick Transportation and Infrastructure.</li>
 <li><a href="http://www.gnb.ca/0113/maps/Mapbooks/2016-Mapbooks-e.asp">2016 Highway Maps (Map Books)</a>. From New Brunswick Transportation and Infrastructure.</li>
+<li><a href="http://www.gnb.ca/0113/maps/Mapbooks/2021-Mapbooks-e.asp">2021 Highway Maps (Map Books)</a>. From New Brunswick Transportation and Infrastructure.</li>
             </ul>
 	  </li>
 										<!--						 <li>Newfoundland and Labrador, CAN

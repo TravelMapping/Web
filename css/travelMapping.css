@@ -125,12 +125,12 @@ table.gratable tr.float th {
 }
 
 .shield svg {
-    width: 45px;
+    width: auto;
     height: 36px;
 }
 
 .bigshield svg {
-    width: 400px;
+    width: auto;
     height: 100px;
 }
 

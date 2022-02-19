@@ -101,7 +101,7 @@ Chopped Routes File (e.g., <code>usai.csv</code>) format</p>
     and Quebec Autoroutes (A-50). For routes with names instead of numbered designations, follow the same rules for <a href="wayptlabels.php#truncate">truncating highway names</a> used when labeling waypoints.</li>
     <li><a name="cbanner"></a><a style="text-decoration:none" href="#cbanner">&#x1f517</a>
     <strong>Banner</strong>: For bannered routes, put the 3-letter banner abbreviation(s) <a href="hwydata.php#banner">
-    used in the <code>.wpt</code> file name but starting with a uppercase letter</a> (<code>Bus</code>, <code>Alt</code>, <code>Spr</code>, etc.)
+    used in the <code>.wpt</code> file name but starting with an uppercase letter</a> (<code>Bus</code>, <code>Alt</code>, <code>Spr</code>, etc.)
     here only if needed. Otherwise leave it completely blank (no whitespace). <code>Lp</code> for Loop is two letters. No more than six characters
     (for double-bannered routes) are allowed.</li>
     <li><a name="cabbrev"></a><a style="text-decoration:none" href="#cabbrev">&#x1f517</a>
@@ -124,7 +124,7 @@ Chopped Routes File (e.g., <code>usai.csv</code>) format</p>
       use either "(Main)" (parentheses included) for the longer route
       or give this piece a city name.  For example, if there are 200-mile and 8-mile
       disconnected sections of US 47 in the same state, use "(Main)" or a
-      geographical for the long section and a geographical name for the short section.</li>
+      geographical name for the long section and a geographical name for the short section.</li>
     </ul></li>
     <li><a name="croot"></a><a style="text-decoration:none" href="#croot">&#x1f517</a>
     <strong>Filename root:</strong> The <a href="hwydata.php#regionroute">name of the <code>.wpt</code> file<a> with the extension omitted.

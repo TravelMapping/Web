@@ -104,11 +104,11 @@ Which changes to activated routes are newsworthy?</p>
   <li><a name="newroute"></a><a style="text-decoration:none" href="#newroute">&#x1f517</a>
     <span class="postbody"><span style="font-weight: bold;">A new route was added (<span style="background-color: #FFCCCC;">Newsworthy</span>)</span> <br />
       <br />
-      New routes are always reported so that user can check whether they need to add the route.
+      New routes are always reported so that users can check whether they need to add the route.
   </li>
   <br/>
   <li><a name="delroute"></a><a style="text-decoration:none" href="#delroute">&#x1f517</a>
-    <span class="postbody"><span style="font-weight: bold;">A new route was deleted (<span style="background-color: #FFCCCC;">Newsworthy</span>)</span> <br />
+    <span class="postbody"><span style="font-weight: bold;">A route was deleted (<span style="background-color: #FFCCCC;">Newsworthy</span>)</span> <br />
       <br />
       The deletion of a route is always reported even when it was not traveled by any TM user.
   </li>
@@ -221,17 +221,6 @@ even more often. Users shouldn't have to make frequent changes to
 1000-line files every few weeks when the changes don't reflect real 
 changes to highway alignments or real changes to the extent of their 
 travels.</li> <br />
-<li><a name="order"></a><a style="text-decoration:none" href="#order">&#x1f517</a>
-Q: Is there a preference for the order of hidden/visible pairs of same-location waypoints? <br /> <br />
-A: The visible label should always come first.</li><br />
-<li><a name="delaltlabels"></a><a style="text-decoration:none" href="#delaltlabels">&#x1f517</a>
-Q: Can I delete unused hidden points with a visible companion point? <br /> <br />
-A: If you have verified that a hidden point isn't in use (we
-have <a href="/logs/unusedaltlabels.log">a log
-      file for that</a>) and that there 
-is a visible point at the same location, then you can delete the unused 
-hidden point. Just make sure you don't accidentally remove a shaping 
-point or a used point or a not-duplicated point.</li> <br />
 <li><a name="updatenote"></a><a style="text-decoration:none" href="#updatenote">&#x1f517</a>
 Q: I made a necessary change that will unavoidably break a route for 
 some users. So would you include "Update your .list file if you've 

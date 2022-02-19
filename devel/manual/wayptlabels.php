@@ -188,6 +188,12 @@ The following list shows the preferred waypoint type in order. Choose the first 
       number and different letters, optionally keep the A. </td>
   </tr>
   <tr valign="top">
+    <td><a name="keepletter"></a><a style="text-decoration:none" href="#keepletter">&#x1f517</a></td>
+    <td>4A or 4 </td>
+    <td>If an interchange has a letter-suffixed exit number in one direction
+      only, usually keep the letter. If the letter is A, optionally drop it. </td>
+  </tr>
+  <tr valign="top">
     <td><a name="nextsuffix"></a><a style="text-decoration:none" href="#nextsuffix">&#x1f517</a></td>
     <td>6<br />
       6A</td>

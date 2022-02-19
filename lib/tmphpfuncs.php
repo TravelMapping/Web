@@ -44,6 +44,8 @@ $tmherecode = chop(fgets($tmconffile));
 $tmtfkey = chop(fgets($tmconffile));
 // Mapbox access token
 $tmmbtoken = chop(fgets($tmconffile));
+// Jawg maps token
+$tmjawgtoken = chop(fgets($tmconffile));
 fclose($tmconffile);
 
 if (array_key_exists("dbname", $_GET) && ctype_alpha($_GET['dbname'])) {
@@ -83,7 +85,7 @@ try {
     $tmdb = new mysqli($tmdbhost, $tmdbuser, $tmdbpasswd, $tmdbname);
 }
 catch ( Exception $e ) {
-    echo "<h1 style='color: red'>Failed to connect to database ".$tmdbname." on ".$tmdbhost." Please try again later.</h1>";
+    echo "<h1 style='color: red'>Failed to connect to database ".$tmdbname." on ".$tmdbhost." Please look <a href=\"https://travelmapping.github.io/\">here</a> for possible updates.</h1>";
     exit;
 }
 
@@ -493,6 +495,7 @@ function tm_common_js() {
     global $tmherecode;
     global $tmtfkey;
     global $tmmbtoken;
+    global $tmjawgtoken;
     
     echo "<!-- tm_common_js from tmphpfuncs.php START -->\n";
     echo "<!-- Map API functionality -->\n";
@@ -500,14 +503,19 @@ function tm_common_js() {
     echo "var here_map_id = \"".$tmhereid."\";\n";
     echo "var here_map_code = \"".$tmherecode."\";\n";
     echo "var tf_map_key = \"".$tmtfkey."\";\n";
-    echo "var mapbox_token = \"".$tmmbtoken."\";\n";
+    //echo "var mapbox_token = \"".$tmmbtoken."\";\n";
+    echo "var jawg_map_token = \"".$tmjawgtoken."\";\n";
     echo "</script>\n";
 
     echo <<<END
-  <link rel="stylesheet" href="/leaflet-1.5.1/leaflet.css" />
-  <script src="/leaflet-1.5.1/leaflet.js"></script>
-  <script src="/leaflet-1.5.1/leaflet-providers.js"></script>
-  <script type="text/javascript" src="https://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+  <link rel="stylesheet" href="/leaflet-1.7.1/leaflet.css" />
+  <script src="/leaflet-1.7.1/leaflet.js"></script>
+  <!-- important when updating leaflet-providers: use the version in
+       the fork https://github.com/TravelMapping/leaflet-providers
+       which includes the TMBlank tiles.  Use fetch-upstream there
+       to get the latest and install leaflet-providers.js from the fork -->
+  <script src="/leaflet-1.7.1/leaflet-providers.js"></script>
+  <!-- script type="text/javascript" src="https://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script> -->
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>

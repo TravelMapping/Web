@@ -83,10 +83,52 @@ Data errors</p>
     <td width="50"><b>FP possible</b></td>
   </tr>
   <tr valign="top">
+    <td><a name="ABBREV_AS_CHOP_BANNER"></a><a style="text-decoration:none" href="#ABBREV_AS_CHOP_BANNER">&#x1f517</a></td>
+    <td>ABBREV_AS_CHOP_BANNER</td>
+    <td>The route's <a href="syshwylist.php#chopped">chopped routes .csv file</a> entry has the <a href="syshwylist.php#cabbrev">Abbrev</a> erroneously entered into the <a href="syshwylist.php#cbanner">Banner</a> field.</td>
+    <td><red>NO</red></td>
+    <td><red>NO</red></td>
+  </tr>
+  <tr valign="top">
+    <td><a name="ABBREV_AS_CON_BANNER"></a><a style="text-decoration:none" href="#ABBREV_AS_CON_BANNER">&#x1f517</a></td>
+    <td>ABBREV_AS_CON_BANNER</td>
+    <td>The 2 potential underlying causes are:
+    <ol>
+      <li>The route's <a href="syshwylist.php#chopped">chopped routes .csv file</a> entry has the <a href="syshwylist.php#cbanner">Banner</a> erroneously entered into the <a href="syshwylist.php#cabbrev">Abbrev</a> field.
+      If the same route is also flagged as <a href="#ABBREV_NO_CITY">ABBREV_NO_CITY</a>, this is probably the case.</li>
+      <li>The route's <a href="syshwylist.php#connected">connected routes .csv file</a> entry has the chopped route's <a href="syshwylist.php#cabbrev">Abbrev</a> entered as its <a href="syshwylist.php#conncbanner">Banner</a>.</li>
+    </ol>
+    </td>
+    <td><red>NO</red></td>
+    <td><red>NO</red></td>
+  </tr>
+  <tr valign="top">
+    <td><a name="ABBREV_NO_CITY"></a><a style="text-decoration:none" href="#ABBREV_NO_CITY">&#x1f517</a></td>
+    <td>ABBREV_NO_CITY</td>
+    <td>The route's <a href="syshwylist.php#chopped">chopped routes .csv file</a> entry has an <a href="syshwylist.php#cabbrev">Abbrev</a>, but no <a href="syshwylist.php#ccity">City</a>.
+    <br>If the same route is also flagged as <a href="#ABBREV_AS_CON_BANNER">ABBREV_AS_CON_BANNER</a>, the <code>Abbrev</code> data should probably be moved to the <code>Banner</code>.</li>
+    <td><red>NO</red></td>
+    <td><red>NO</red></td>
+  </tr>
+  <tr valign="top">
     <td><a name="BAD_ANGLE"></a><a style="text-decoration:none" href="#BAD_ANGLE">&#x1f517</a></td>
     <td>BAD_ANGLE</td>
     <td>Angles cannot be computed for two adjacent points at the same coordinates. Instead, use <code>AltLabels</code> or fix coordinates of one point or both.</td>
     <td><green>YES</green></td>
+    <td><red>NO</red></td>
+  </tr>
+  <tr valign="top">
+    <td><a name="CON_BANNER_MISMATCH"></a><a style="text-decoration:none" href="#CON_BANNER_MISMATCH">&#x1f517</a></td>
+    <td>CON_BANNER_MISMATCH</td>
+    <td>The route's <a href="syshwylist.php#cbanner">Banner</a> field in its <a href="syshwylist.php#chopped">chopped routes .csv file</a> mismatches the <a href="syshwylist.php#conncbanner">Banner</a> field in its <a href="syshwylist.php#connected">connected routes .csv file</a>.</td>
+    <td><red>NO</red></td>
+    <td><red>NO</red></td>
+  </tr>
+  <tr valign="top">
+    <td><a name="CON_ROUTE_MISMATCH"></a><a style="text-decoration:none" href="#CON_ROUTE_MISMATCH">&#x1f517</a></td>
+    <td>CON_ROUTE_MISMATCH</td>
+    <td>The route's <a href="syshwylist.php#croute">Route</a> field in its <a href="syshwylist.php#chopped">chopped routes .csv file</a> mismatches the <a href="syshwylist.php#conncroute">Route</a> field in its <a href="syshwylist.php#connected">connected routes .csv file</a>.</td>
+    <td><red>NO</red></td>
     <td><red>NO</red></td>
   </tr>
   <tr valign="top">
@@ -281,6 +323,13 @@ Data errors</p>
     <td>Sharp angle (<code>> 135°</code>) with previous and next waypoint.</td>
     <td><green>YES</green></td>
     <td><green>YES</green></td>
+  </tr>
+  <tr valign="top">
+    <td><a name="SINGLE_FIELD_LINE"></a><a style="text-decoration:none" href="#SINGLE_FIELD_LINE">&#x1f517</a></td>
+    <td>SINGLE_FIELD_LINE</td>
+    <td>WPT file line only contains one field. Each line must have a minimum of 2 space-separated fields: A <a href="hwydata.php#format">waypoint label followed by an OpenStreetMap URL</a>. Deprecated <a href="maintenance.php#labelwrong">alternate labels</a> may optionally be included in between.</td>
+    <td><red>NO</green></td>
+    <td><red>NO</green></td>
   </tr>
   <tr valign="top">
     <td><a name="US_LETTER"></a><a style="text-decoration:none" href="#US_LETTER">&#x1f517</a></td>

@@ -1,12 +1,7 @@
-<svg xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" sodipodi:docname="generic_wide.svg" height="425.2" width="520.7" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" inkscape:version="0.91 r" viewBox="0 0 520.7 425.19685039" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd">
- <sodipodi:namedview bordercolor="#666666" inkscape:pageshadow="2" guidetolerance="10" pagecolor="#ffffff" gridtolerance="10" inkscape:window-maximized="1" inkscape:zoom="0.78493507" objecttolerance="10" borderopacity="1" inkscape:current-layer="svg9882" inkscape:cx="269.99673" inkscape:cy="241.18326" inkscape:window-y="0" inkscape:window-x="0" inkscape:window-width="1920" showgrid="false" inkscape:pageopacity="0" inkscape:window-height="1027"/>
- <rect stroke-linejoin="round" rx="41.659" ry="39.675" height="416.59" width="520.7" stroke="#000" stroke-linecap="square" y="4.303" x="4.303" stroke-width="8.605" fill="#fff"/>
- <g letter-spacing="0" transform="translate(51.841)" style="word-spacing:0;letter-spacing:0;text-anchor:middle;text-align:center" line-height="125%" word-spacing="0" font-size="160px" text-align="center">
-  <text y="149.2" x="212.66" font-family="&apos;Roadgeek 2014 Series D&apos;">
-   <tspan y="149.2" x="212.66">***SYS***</tspan>
-  </text>
-  <text y="355.20001" x="212.66" font-family="&apos;Roadgeek 2014 Series C&apos;">
-   <tspan y="355.20001" x="212.66" font-size="320px">***NUMBER***</tspan>
-  </text>
- </g>
+<svg version="1.1" viewBox="0 0 529.305 425.2" xmlns="http://www.w3.org/2000/svg">
+	<rect x="4.303" y="4.303" width="520.7" height="416.59" rx="41.659" ry="39.675" fill="#fff" stroke="#000" stroke-linecap="square" stroke-linejoin="round" stroke-width="8.605"/>
+	<g transform="translate(51.841)" font-size="160" text-align="center" text-anchor="middle" line-height="125%">
+		<text x="212.66" y="149.2" font-family="&apos;Roadgeek 2014 Series D&apos;">***SYS***</text>
+		<text x="212.66" y="355.20001" font-family="&apos;Roadgeek 2014 Series C&apos;"><tspan font-size="320">***NUMBER***</tspan></text>
+	</g>
 </svg>

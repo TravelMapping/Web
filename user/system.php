@@ -112,7 +112,6 @@ if (( $tmuser != "null") || ( $system != "" )) {
 </script>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 <div id="header">
-    <input id="showMarkers" type="checkbox" name="Show Markers" onclick="showMarkersClicked()">&nbsp;Show Markers
     <form id="userselect" action="system.php">
         <label>User: </label>
         <?php tm_user_select(); ?>
@@ -124,13 +123,14 @@ if (( $tmuser != "null") || ( $system != "" )) {
 	<?php tm_units_select(); ?>
         <input type="submit" value="Update Map and Stats" />
     </form>
-    <a href="/user/index.php">Back to User Page</a>
+    Scroll down to see statistical reports below the map
     <?php
         echo " -- <a href='/user/mapview.php?u={$tmuser}&sys={$system}";
         if ($region != "") {
             echo "&rg={$region}";
         }
         echo "'>View Larger Map</a>";
+        echo '<input id="showMarkers" type="checkbox" name="Show Markers" onclick="showMarkersClicked()">&nbsp;Show Markers';
         echo "<h1>";
         echo "Traveler Statistics for " . $tmuser . " on " . $systemName;
         if ($region != "") {
@@ -154,7 +154,7 @@ if (( $tmuser == "null") || ( $system == "" )) {
         <div id="controlboxinfo"></div>
         <div id="map"></div>
         <table class="gratable tablesorter" id="overallTable">
-            <thead><tr><th colspan="2">System Statistics for <?php echo "$systemName"; ?></th></tr></thead>
+            <thead><tr><th colspan="2"><a href="#rankings">System Statistics for <?php echo "$systemName"; ?></a></th></tr></thead>
             <tbody>
             <?php
 	    // get overall stats either for entire system or within
@@ -189,7 +189,6 @@ SQL;
             }
             $res = tmdb_query($sql_command);
             $row = tm_fetch_user_row_with_rank($res, 'clinchedMileage');
-            $res->free();
 	    $percentage = 0;
 	    if ($system_mileage != 0) {
   	        $percentage = $row['clinchedMileage'] / $system_mileage * 100;
@@ -202,6 +201,15 @@ SQL;
 	    }
 	    $style = 'style="background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$system_mileage).';"';
             echo "<tr><td>Distance Traveled</td><td ".$style.">".tm_convert_distance($row['clinchedMileage'])." of ".tm_convert_distance($system_mileage)." ".$tmunits." (".sprintf('%0.2f',$percentage)."%) Rank: ".$rank."</td></tr>";
+
+	    // build arrays that will form the contents of the travelers
+	    // by region stats for active systems
+	    $TravelerInfo = array();
+	    $res->data_seek(0);
+	    while ($row = $res->fetch_assoc()) {
+		$TravelerInfo[$row['traveler']]['mileage'] = $row['clinchedMileage'];
+            }
+            $res->free();
 
             //Second, fetch routes clinched/driven
             if ($region == "") {
@@ -248,7 +256,6 @@ SQL;
 		    $driven = 0;
 		    $drivenRank = "N/A";
 		}
-		$res->free();
             } else {
                 $totalRoutes = tm_count_rows("routes", "WHERE systemName='".$system."' AND region='".$region."'");
                 $sql_command = <<<SQL
@@ -293,8 +300,15 @@ SQL;
 		    $driven = 0;
 		    $drivenRank = "N/A";
 		}
-		$res->free();
             }
+	    // add to the table of travelers by region stats
+	    $res->data_seek(0);
+	    while ($row = $res->fetch_assoc()) {
+		$TravelerInfo[$row['traveler']]['driven'] = $row['driven'];
+		$TravelerInfo[$row['traveler']]['clinched'] = $row['clinched'];
+            }
+	    $res->free();
+
 	    $style = 'style="background-color: '.tm_color_for_amount_traveled($driven,$totalRoutes).';"';
             echo "<tr onClick=\"" . $link . "\"><td>Routes Traveled</td><td ".$style.">" . $driven   . " of " . $totalRoutes . " (" . round($driven   / $totalRoutes * 100, 2) . "%) Rank: {$drivenRank}</td></tr>\n";
 	    $style = 'style="background-color: '.tm_color_for_amount_traveled($clinched,$totalRoutes).';"';
@@ -414,6 +428,48 @@ HTML;
             ?>
             </tbody>
         </table>
+
+    <a name="rankings"></a>
+    <table class="gratable tablesorter" id="systemTravelersTable" style="width: auto;">
+        <thead>
+	    <tr><th colspan="6">Travelers on <?php echo "$systemName"; ?></th></tr>
+            <tr><th class="sortable">Rank</th><th class="sortable">Traveler</th><th class="sortable">Distance Traveled (<?php tm_echo_units(); ?>)</th><th>%</th><th class="sortable">Traveled Routes</th><th class="sortable">Clinched Routes</th></tr>
+        </thead>
+    <tbody>
+	  <tr style=><td></td><td>TOTAL CLINCHABLE</td><td><?php echo tm_convert_distance($system_mileage); ?></td><td>100%</td><td><?php echo "$totalRoutes"; ?></td><td><?php echo "$totalRoutes"; ?></td></tr>
+	  <?php
+	  $prev_mileage = 0;
+	  $pre_rank = 1;
+	  $tie_rank = 1;
+	  foreach ($TravelerInfo as $traveler => $stats) {
+	      if ($traveler == "") {
+                  continue;  // this happens, but how?!
+              }
+              if ($traveler == $tmuser) {
+                  $highlight = 'user-highlight';
+              } else {
+                 $highlight = '';
+              }
+	      $tie_rank = ($prev_mileage == $stats['mileage']) ? $tie_rank : $pre_rank;
+	      $mileageStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['mileage'],$system_mileage).';"';
+	      $drivenStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['driven'],$totalRoutes).';"';
+	      $clinchedStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['clinched'],$totalRoutes).';"';
+	      echo "<tr class=\"".$highlight."\" onClick=\"window.document.location='?u=".$traveler."&sys=$system";
+	      if ($region != "") echo "&rg=$region";
+	      echo "'\">";
+	      echo "<td>".$tie_rank."</td>";
+	      echo "<td>".$traveler."</td>";
+	      echo "<td ".$mileageStyle.">".tm_convert_distance($stats['mileage'])."</td>";
+	      echo "<td ".$mileageStyle.">".round($stats['mileage'] / $system_mileage * 100, 2)."%</td>";
+	      echo "<td ".$drivenStyle.">".$stats['driven']."</td>";
+	      echo "<td ".$clinchedStyle.">".$stats['clinched']."</td></tr>\n";//*/
+	      $pre_rank += 1;
+	      $prev_mileage = $stats['mileage'];
+          }
+	  ?>
+    </tbody>
+    </table>
+
     </div>
 </div>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>

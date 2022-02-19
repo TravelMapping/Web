@@ -38,14 +38,13 @@ href="https://j.teresco.org/">the author</a>.
 <div class="text">
 
 For each graph, the table below gives a brief
-description, then download links and graph information for the collapsed, traveled, and
+description, then download links and graph information for the default (collapsed), traveled, and
 simple <a
 href="https://courses.teresco.org/metal/graph-formats.shtml">formats</a>.
 <b>Note:</b> larger graphs
 greatly tax the Highway Data Examiner and the Leaflet maps.  They
 should all work, but large graphs require a lot of memory for your
 browser and some patience.
-
 </div>
 
 <div class="text">
@@ -68,7 +67,7 @@ academic use.  Other use by explicit permission only.
 <p class="subheading">All Graphs</p>
 <p />
 <div style="text-align:center;">
-			<p>Filter by number of vertices (collapsed)</p>
+			<p>Filter by number of vertices (in default/collapsed)</p>
 			from
 			<input type="number" min="1" value="1" id="regMin" style="width:6rem;" onchange="tableFilter(event)">
 			to
@@ -81,7 +80,7 @@ academic use.  Other use by explicit permission only.
 			</div>
 			<table class="gratable" id="regTable" border="1">
 			<thead>
-			<tr><th rowspan="2">Graph Description</th><th colspan="3">Collapsed Format Graph</th><th colspan="4">Traveled Format Graph</th><th colspan="3">Simple Format Graph</th></tr>
+			<tr><th rowspan="2">Graph Description</th><th colspan="3">Default (Collapsed) Format Graph</th><th colspan="4">Traveled Format Graph</th><th colspan="3">Simple Format Graph</th></tr>
 			<tr><th>Download Link</th><th>Vertices</th><th>Edges</th><th>Download Link</th><th>Vertices</th><th>Edges</th><th>Travelers</th><th>Download Link</th><th>Vertices</th><th>Edges</th></tr></thead>
 			<tbody id="regBody">
 <?php

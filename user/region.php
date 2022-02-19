@@ -126,7 +126,6 @@ if (( $tmuser != "null") || ( $region != "" )) {
 </script>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 <div id="header">
-    <input id="showMarkers" type="checkbox" name="Show Markers" onclick="showMarkersClicked()">&nbsp;Show Markers
     <form id="userselect" action="region.php">
         <label>User: </label>
         <?php tm_user_select(); ?>
@@ -136,10 +135,10 @@ if (( $tmuser != "null") || ( $region != "" )) {
 	<?php tm_units_select(); ?>
         <input type="submit" value="Update Map and Stats" />
     </form>
-    Scroll down to see statistical reports below the map --
-    <a href="/user/index.php">User Page</a>
+    Scroll down to see statistical reports below the map
     <?php
         echo " -- <a href='/user/mapview.php?u={$tmuser}&rg={$region}'>View Larger Map</a>";
+        echo '<input id="showMarkers" type="checkbox" name="Show Markers" onclick="showMarkersClicked()">&nbsp;Show Markers';
         echo "<h1>Traveler Statistics for {$tmuser} in {$region}</h1>";
     ?>
 </div>
@@ -162,7 +161,7 @@ if (( $tmuser == "null") || ( $region == "" )) {
     </div>
     <table class="gratable" id="overallTable">
         <thead>
-            <tr><th colspan="3">Overall <?php echo "$region"; ?> Region Statistics</th></tr>
+            <tr><th colspan="3"><a href="#rankings">Overall <?php echo "$region"; ?> Region Statistics</a></th></tr>
 	    <tr><th /><th>Active Systems</th><th>Active+Preview Systems</th></tr>
         </thead>
         <tbody>
@@ -475,6 +474,7 @@ SQL;
     </table>
 
 
+    <a name="rankings"></a>
     <table class="travelersTable">
     <thead>
       <tr><th colspan="2">Travelers in Region <?php echo "$region"; ?></th></tr>
@@ -484,11 +484,14 @@ SQL;
     <tr><td>
     <table class="gratable tablesorter" id="activeTravelersTable" style="width: auto;">
         <thead>
-            <tr><th class="sortable">Traveler</th><th class="sortable">Distance Traveled (<?php tm_echo_units(); ?>)</th><th>%</th><th class="sortable">Traveled Routes</th><th class="sortable">Clinched Routes</th></tr>
+            <tr><th class="sortable">Rank</th><th class="sortable">Traveler</th><th class="sortable">Distance Traveled (<?php tm_echo_units(); ?>)</th><th>%</th><th class="sortable">Traveled Routes</th><th class="sortable">Clinched Routes</th></tr>
         </thead>
         <tbody>
-	  <tr style=><td>TOTAL CLINCHABLE</td><td><?php echo tm_convert_distance($activeTotalMileage); ?></td><td>100.00%</td><td><?php echo "$totalActiveRoutes"; ?></td><td><?php echo "$totalActiveRoutes"; ?></td></tr>
+	  <tr style=><td></td><td>TOTAL CLINCHABLE</td><td><?php echo tm_convert_distance($activeTotalMileage); ?></td><td>100%</td><td><?php echo "$totalActiveRoutes"; ?></td><td><?php echo "$totalActiveRoutes"; ?></td></tr>
 	  <?php
+	  $prev_mileage = 0;
+	  $pre_rank = 1;
+	  $tie_rank = 1;
 	  foreach ($activeTravelerInfo as $traveler => $stats) {
 	      if ($traveler == "") {
                   continue;  // this happens, but how?!
@@ -498,10 +501,19 @@ SQL;
               } else {
                  $highlight = '';
               }
+	      $tie_rank = ($prev_mileage == $stats['activeClinched']) ? $tie_rank : $pre_rank;
 	      $mileageStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['activeClinched'],$activeTotalMileage).';"';
 	      $drivenStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['driven'],$totalActiveRoutes).';"';
 	      $clinchedStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['clinched'],$totalActiveRoutes).';"';
-	      echo "<tr class=\"".$highlight."\" onClick=\"window.document.location='?u=".$traveler."&rg=$region'\"><td>".$traveler."</td><td ".$mileageStyle.">".tm_convert_distance($stats['activeClinched'])."</td><td ".$mileageStyle.">".round($stats['activeClinched'] / $activeTotalMileage * 100, 2)."%</td><td ".$drivenStyle.">".$stats['driven']."</td><td ".$clinchedStyle.">".$stats['clinched']."</td></tr>\n";
+	      echo "<tr class=\"".$highlight."\" onClick=\"window.document.location='?u=".$traveler."&rg=$region'\">";
+	      echo "<td>".$tie_rank."</td>";
+	      echo "<td>".$traveler."</td>";
+	      echo "<td ".$mileageStyle.">".tm_convert_distance($stats['activeClinched'])."</td>";
+	      echo "<td ".$mileageStyle.">".round($stats['activeClinched'] / $activeTotalMileage * 100, 2)."%</td>";
+	      echo "<td ".$drivenStyle.">".$stats['driven']."</td>";
+	      echo "<td ".$clinchedStyle.">".$stats['clinched']."</td></tr>\n";
+	      $pre_rank += 1;
+	      $prev_mileage = $stats['activeClinched'];
           }
 	  ?>
 	</tbody>
@@ -509,11 +521,14 @@ SQL;
     </td><td>
     <table class="gratable tablesorter" id="activePreviewTravelersTable" style="width: auto;">
         <thead>
-            <tr><th class="sortable">Traveler</th><th class="sortable">Distance Traveled (<?php tm_echo_units(); ?>)</th><th>%</th><th class="sortable">Traveled Routes</th><th class="sortable">Clinched Routes</th></tr>
+            <tr><th class="sortable">Rank</th><th class="sortable">Traveler</th><th class="sortable">Distance Traveled (<?php tm_echo_units(); ?>)</th><th>%</th><th class="sortable">Traveled Routes</th><th class="sortable">Clinched Routes</th></tr>
         </thead>
         <tbody>
-	  <tr style=><td>TOTAL CLINCHABLE</td><td><?php echo tm_convert_distance($activePreviewTotalMileage); ?></td><td>100.00%</td><td><?php echo "$totalActivePreviewRoutes"; ?></td><td><?php echo "$totalActivePreviewRoutes"; ?></td></tr>
+	  <tr style=><td></td><td>TOTAL CLINCHABLE</td><td><?php echo tm_convert_distance($activePreviewTotalMileage); ?></td><td>100.00%</td><td><?php echo "$totalActivePreviewRoutes"; ?></td><td><?php echo "$totalActivePreviewRoutes"; ?></td></tr>
 	  <?php
+	  $prev_mileage = 0;
+	  $pre_rank = 1;
+	  $tie_rank = 1;
 	  foreach ($activePreviewTravelerInfo as $traveler => $stats) {
 	      if ($traveler == "") {
 	          continue;  // this happens, but how?!
@@ -523,10 +538,19 @@ SQL;
               } else {
                  $highlight = '';
               }
+	      $tie_rank = ($prev_mileage == $stats['activePreviewClinched']) ? $tie_rank : $pre_rank;
 	      $mileageStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['activePreviewClinched'],$activePreviewTotalMileage).';"';
 	      $drivenStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['driven'],$totalActivePreviewRoutes).';"';
 	      $clinchedStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['clinched'],$totalActivePreviewRoutes).';"';
-	      echo "<tr class=\"".$highlight."\" onClick=\"window.document.location='?u=".$traveler."&rg=$region'\"><td>".$traveler."</td><td ".$mileageStyle.">".tm_convert_distance($stats['activePreviewClinched'])."</td><td ".$mileageStyle.">".round($stats['activePreviewClinched'] / $activePreviewTotalMileage * 100, 2)."%</td><td ".$drivenStyle.">".$stats['driven']."</td><td ".$clinchedStyle.">".$stats['clinched']."</td></tr>\n";
+	      echo "<tr class=\"".$highlight."\" onClick=\"window.document.location='?u=".$traveler."&rg=$region'\">";
+	      echo "<td>".$tie_rank."</td>";
+	      echo "<td>".$traveler."</td>";
+	      echo "<td ".$mileageStyle.">".tm_convert_distance($stats['activePreviewClinched'])."</td>";
+	      echo "<td ".$mileageStyle.">".round($stats['activePreviewClinched'] / $activePreviewTotalMileage * 100, 2)."%</td>";
+	      echo "<td ".$drivenStyle.">".$stats['driven']."</td>";
+	      echo "<td ".$clinchedStyle.">".$stats['clinched']."</td></tr>\n";
+	      $pre_rank += 1;
+	      $prev_mileage = $stats['activePreviewClinched'];
           }
 	  ?>
 	</tbody>

@@ -42,19 +42,26 @@
         else {
           $label = $row['label1'];
         }
-        $sql_command = "select latitude, longitude from waypoints where pointName = '".$label."' and root = '".$row['route']."';";
-        $res2 = tmdb_query($sql_command);
-        $row2 = $res2->fetch_assoc();
 
         // write table row
+	// Route
+        $sql_command = "select latitude, longitude from waypoints where pointName = '".$label."' and root = '".$row['route']."';";
+        $row2 = tmdb_query($sql_command)->fetch_assoc();
         echo "<tr><td><a href=\"../hb/showroute.php?r=".$row['route'];
+	// successful lookup of waypoint label links to panned & zoomed map
 	if ($row2 != NULL) {
 	  echo "&lat=".$row2['latitude']."&lon=".$row2['longitude']."&zoom=17";
 	}
-	if (strcmp($row['code'],"DISCONNECTED_ROUTE") == 0) {
+	// the following errors link to a ConnectedRoute
+	if ((strcmp($row['code'],"ABBREV_AS_CON_BANNER") == 0) ||
+	(strcmp($row['code'],"CON_ROUTE_MISMATCH") == 0) ||
+	(strcmp($row['code'],"CON_BANNER_MISMATCH") == 0) ||
+	(strcmp($row['code'],"DISCONNECTED_ROUTE") == 0)) {
 	  echo "&cr";
 	}
 	echo "\">".$row['route']."</a></td><td>";
+
+	// Waypoints
         if (strcmp($row['label1'],"") != 0) {
           echo $row['label1'];
         }
@@ -64,8 +71,15 @@
         if (strcmp($row['label3'],"") != 0) {
           echo ",".$row['label3'];
         }
+
+	// Error
 	echo "</td><td><a style=\"color: ";
-	if ((strcmp($row['code'],"BUS_WITH_I") == 0) ||
+	if ((strcmp($row['code'],"ABBREV_AS_CHOP_BANNER") == 0) ||
+	  (strcmp($row['code'],"ABBREV_AS_CON_BANNER") == 0) ||
+	  (strcmp($row['code'],"ABBREV_NO_CITY") == 0) ||
+	  (strcmp($row['code'],"BUS_WITH_I") == 0) ||
+	  (strcmp($row['code'],"CON_BANNER_MISMATCH") == 0) ||
+	  (strcmp($row['code'],"CON_ROUTE_MISMATCH") == 0) ||
 	  (strcmp($row['code'],"INTERSTATE_NO_HYPHEN") == 0) ||
 	  (strcmp($row['code'],"INVALID_FINAL_CHAR") == 0) ||
 	  (strcmp($row['code'],"INVALID_FIRST_CHAR") == 0) ||
@@ -85,12 +99,28 @@
 	}
         else {
 	  echo "red";
-
 	}
 	echo "\" href=\"manual/syserr.php#".$row['code']."\">".$row['code']."</a></td><td>";
+
+	// Info
         if (strcmp($row['value'],"") != 0) {
-          echo $row['value'];
+	  // ABBREV_AS_CHOP_BANNER & ABBREV_NO_CITY link to chopped route CSVs on GitHub
+	  if ((strcmp($row['code'],"ABBREV_AS_CHOP_BANNER") == 0) ||
+	    (strcmp($row['code'],"ABBREV_NO_CITY") == 0)) {
+            echo "<a href=\"https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/".$row['value']."\">".$row['value']."</a>";
+	  }
+	  // ABBREV_AS_CON_BANNER links to both system CSVs on GitHub
+	  elseif ((strcmp($row['code'],"ABBREV_AS_CON_BANNER") == 0)) {
+	    $acb_info = explode(',', $row['value']);
+            echo "<a href=\"https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/".$acb_info[0].".csv#L".$acb_info[1]."\">".$acb_info[0].".csv#L".$acb_info[1]."</a><br>";
+            echo "<a href=\"https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/".$acb_info[0]."_con.csv#L".$acb_info[2]."\">".$acb_info[0]."_con.csv#L".$acb_info[2]."</a>";
+	  }
+	  else {
+            echo $row['value'];
+	  }
         }
+
+	// FP Entry to Submit
 	// If not an error type for which FPs are
 	// allowed, don't print an FP entry.
 	// This list is in descending order by frequency, to reduce

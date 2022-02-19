@@ -95,6 +95,7 @@ echo "<h1>Main user page for ".$tmuser."</h1>";
       <li><a href="/logs/users/<?php echo $tmuser; ?>.log">Log File</a>, where you can find any errors from processing <a href="https://github.com/TravelMapping/UserData/blob/master/list_files/<?php echo $tmuser; ?>.list"><?php echo $tmuser; ?>.list</a>, and statistics.</li>
       <li>Browse the travels of <?php echo $tmuser; ?> with <a href="mapview.php?v">Mapview</a>.</li>
       <li><a href="topstats.php">Browse the top stats for the travels of <?php echo $tmuser; ?></a>.</li>
+      <li><a href="routesbynumber.php">Table of routes traveled by number for <?php echo $tmuser; ?></a>.</li>
     </ul>
     <div id="overall">
         <h2>Overall Stats</h2>
