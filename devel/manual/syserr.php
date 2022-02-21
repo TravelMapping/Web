@@ -233,7 +233,28 @@ Data errors</p>
   <tr valign="top">
     <td><a name="LABEL_SELFREF"></a><a style="text-decoration:none" href="#LABEL_SELFREF">&#x1f517</a></td>
     <td>LABEL_SELFREF</td>
-    <td>Label appears to reference own route.</td>
+    <td>Label appears to reference own route.
+    <br>This datacheck is designed to flag cases where a line was directly copied from another <code>.wpt</code> file without the label being changed.
+    <br>
+    <br>The site update program looks at intersecting routes in order to eliminate false positives.
+    <br>Several error subtypes are listed in the <code>Info</code> column, with different ways they can be fixed before marking false positive:
+    <ul>
+      <li><a name="NO_COLOC"></a><a style="text-decoration:none" href="#NO_COLOC">&#x1f517</a> <code>NO_COLOC</code>:
+      <br>An intersecting route with an appropriate <a href="syshwylist.php#croute">Route</a>, <a href="syshwylist.php#cbanner">Banner</a>, and/or <a href="syshwylist.php#cabbrev">Abbrev</a>, wasn't found.
+      <br>Ensure this point has the same coordinates as intersecting/concurrent routes if appropriate.
+      </li>
+      <li><a name="NO_SUFFIX"></a><a style="text-decoration:none" href="#NO_SUFFIX">&#x1f517</a> <code>NO_SUFFIX</code>:
+      <br>The route forms a loop, and has two intersections with itself at these coordinates.
+      <br>You'll need <a href="wayptlabels.php#underscore">underscored suffixes</a> to distinguish the two waypoints, unless one or both of the labels <a href="wayptlabels.php#2highways">mentions two routes</a>.</li>
+      <li><a name="NO_ABBREV"></a><a style="text-decoration:none" href="#NO_ABBREV">&#x1f517</a> <code>NO_ABBREV</code>:
+      <br>The route intersects another with the same name/number and same banner, without a city abbreviation in the label.
+      <br>You probably want to <a href="wayptlabels.php#abbrev">add the city abbreviation</a> (without an underscore, in order to match the intersecting route's .list name) for disambiguation purposes.</li>
+      <li><a name="TRUE_ERROR"></a><a style="text-decoration:none" href="#TRUE_ERROR">&#x1f517</a> <code>TRUE_ERROR</code>:
+      <br>The label is an exact match of the route's full .list name, including Banner and Abbrev.
+      <li><a name="FULL_MATCH"></a><a style="text-decoration:none" href="#FULL_MATCH">&#x1f517</a> <code>FULL_MATCH</code>:
+      <br>The label is a full match of the .list name followed by extra characters other than a slash or underscore.
+    </ul>
+    </td>
     <td><yellow>NO</yellow></td>
     <td><green>YES</green></td>
   </tr>
@@ -334,7 +355,7 @@ Data errors</p>
   <tr valign="top">
     <td><a name="US_LETTER"></a><a style="text-decoration:none" href="#US_LETTER">&#x1f517</a></td>
     <td>US_LETTER</td>
-    <td>Label uses <a href="https://travelmapping.net/devel/manual/wayptlabels.php#bannerafternumber"><code>USxxxA</code> or <code>USxxxB</code> rather than <code>USxxxAlt</code>, <code>USxxxBus</code>, <code>USxxxByp</code>, etc.</td>
+    <td>Label uses <a href="wayptlabels.php#bannerafternumber"><code>USxxxA</code> or <code>USxxxB</code> rather than <code>USxxxAlt</code>, <code>USxxxBus</code>, <code>USxxxByp</code>, etc.</td>
     <td><green>YES</green></td>
     <td><red>NO</red></td>
   </tr>
