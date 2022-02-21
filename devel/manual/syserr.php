@@ -240,7 +240,7 @@ Data errors</p>
     <br>Several error subtypes are listed in the <code>Info</code> column, with different ways they can be fixed before marking false positive:
     <ul>
       <li><a name="NO_COLOC"></a><a style="text-decoration:none" href="#NO_COLOC">&#x1f517</a> <code>NO_COLOC</code>:
-      <br>An intersecting route with an appropriate <a href="syshwylist.php#croute">Route</a>, <a href="syshwylist.php#cbanner">Banner</a>, and/or <a href="syshwylist.php#cabbrev">Abbrev</a>, wasn't found.
+      <br>An intersecting route with matching <a href="syshwylist.php#croute">Route</a>, <a href="syshwylist.php#cbanner">Banner</a>, and/or <a href="syshwylist.php#cabbrev">Abbrev</a> wasn't found.
       <br>Ensure this point has the same coordinates as intersecting/concurrent routes if appropriate.
       </li>
       <li><a name="NO_SUFFIX"></a><a style="text-decoration:none" href="#NO_SUFFIX">&#x1f517</a> <code>NO_SUFFIX</code>:
