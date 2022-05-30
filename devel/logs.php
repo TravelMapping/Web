@@ -63,8 +63,7 @@ $activedc = tm_count_rows("datacheckErrors", "join routes on datacheckErrors.rou
 Near-miss points (NMPs) are waypoints very close together and might be candidates to merge. NMP files can be loaded into HDX to visualize their positions on a map.
 <ul>
   <li><a href="/logs/tm-master.nmp">Master NMP file with all near-miss points of the project</a></li>
-  <li><a href="/logs/nmpbyregion/">NMP files filtered by region (individual files)</a></li>
-  <li><a href="/logs/nmpbyregion/nmpbyregion.zip">NMP files filtered by region (zip archive)</a></li>
+  <li><a href="/logs/nmpbyregion/">NMP files indexed by region, sorted by the number of unmarked NMP pairs, and with links to download individual files or view directly in HDX</a></li>
   <li><a href="/logs/nearmisspoints.log">Log of all near-miss point entries for marking false positives (FP)</a></li>
   <li><a href="/logs/nmpfpsunmatched.log">Log of unmatched FP entries from nmpfps.log</a></li>
 </ul>
