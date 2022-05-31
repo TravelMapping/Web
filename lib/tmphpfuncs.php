@@ -523,6 +523,8 @@ function tm_common_js() {
   <script src="/lib/jquery.tablesorter.min.js" type="text/javascript"></script>
   <!-- clipboard.js -->
   <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  <!-- sortable https://github.com/tofsjonas/sortable -->
+  <script src="/lib/sortable.js" type="text/javascript"></script>
 END;
     echo "<!-- tm_common_js from tmphpfuncs.php END -->\n";
 }
