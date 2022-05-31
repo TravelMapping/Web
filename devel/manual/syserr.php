@@ -510,32 +510,23 @@ Near-miss points</p>
 <div class="text">
   Where two or more routes intersect, the routes must have a waypoint. If the coordinates of the waypoints are identical, the graph is connected and the Highway Browser can indicate intersecting routes to ease navigation through the routes when mapping travels. Near-miss points (NMPs) are waypoints very close together. They should be checked whether they are candidates to merge to fix broken intersecting links, and broken concurrencies.
   </br>
-  <a href="../logs.php#nmplogs">NMP files</a> can also be loaded into HDX to visualize their positions on a map. The desired NMP file cannot be selected directly but needs to be downloaded first.
-  </br>
-  </br>
-  The best practise to check NMPs, is as follows:
+  <a href="../logs.php#nmplogs">NMP files</a> can also be loaded into HDX to visualize their positions on a map. It is easiest to view NMPs by region as described below.
   </br>
   <ul>
-    <li>Open the <a href="/logs/nmpbyregion/">NMP files filtered by region</a> directory.</li>
-    <li>Select the nmp file for the region you want to check.</li>
-    <li>Open the file.</li>
-    <ul>
-      <li>If it is blank, the region has no NMPs.</li>
-    </ul>
-    <li>If there are entries, download the file.</li>
-    <li>Open the <a href="https://courses.teresco.org/metal/hdx/?noav">Highway Data Examiner</a> (HDX).</li>
-    <li>Go to <code>Option 3</code> on the left and select the downloaded nmp file.</li>
+    <li>Open the <a href="/logs/nmpbyregion/">NMP files filtered by region</a> index page.</li>
+    <li>See if the region you are checking has any unmarked pairs (second column of the table).</li>
+    <li>If so, select the "HDX" link for the region you want to check.</li>
     <ul>
       <li>You can see your region with some colored dots on the map now. These are NMP hotspots.</li>
     </ul>
-    <li>Zoom-in to investigate the points. Use the table on the right to go through the NMP hotspots.</br>Since all pairs of all involved routes are reported, very often more than just one line of the table on the right corresponds to a NMP hotspot.</li>
+    <li>Zoom-in to investigate the points. Use the table on the left to go through the NMP hotspots.</br>Since all pairs of all involved routes are reported, very often more than just one line of the table on the right corresponds to a NMP hotspot.</li>
     <ul>
       <li><green>Green</green> dots are those which are already marked FP.</li>
-      <li><yellow>Yellow</yellow> dots are off by exactly <code>0.000001°</code>. This is likely intentional to brake concurrencies and the waypoints are candidates to be marked FP.</li>
-      <li><red>Red</red> dots must be checked more detailed. These are most likely broken concurrencies or intersecting routes where the waypoints do not match.</li>
+      <li><yellow>Yellow</yellow> dots are off by exactly <code>0.000001°</code>. This was likely done intentionally to break concurrencies and the waypoints are candidates to be marked FP.</li>
+      <li><red>Red</red> dots must be checked more carefully. These could be legitmate nearby points that need to be separate (very close intersections).  Or these could be broken concurrencies or intersecting routes where the waypoints do not match precisely, but should.</li>
     </ul>
     <li>Click on the NMP hotspot lines or their endpoints to get info about the involved routes and waypoint labels.</li>
-    <li>Since you only see the points but not the whole network graph, you might need to open another HDX instance on load the region graph from <code>Option 1</code> where you can get the whole picture. To figure out which routes should intersect, what's going on there etc. For instance, it's possible that concurrent routes are only broken on a very short segment you don't see (or missed) with the <code>Option 1</code> view style.</li>
+    <li>Since you only see the points but not the whole network graph, you might need to open another HDX instance on load the region graph by choosing "Basic Search" and typing the region name to find the correct graph.  To figure out which routes should intersect, what's going on there etc. For instance, it's possible that concurrent routes are only broken on a very short segment you don't see (or missed) when viewing individual routes.</li>
     <li>Fix the coordinates in the corresponding <code>.wpt</code> files.</li>
     <li>Load the changed <code>.wpt</code> files into the <a href="/wptedit/">WPT file editor</a> to avoid causing unintended <a href="#errors">data errors</a>.</li>
   </ul>
@@ -550,7 +541,7 @@ Marking NMPs false positive FP</p>
   <ul>
     <li>The <code>FP Entry to Submit</code> can only be found in <a href="/logs/nearmisspoints.log">nearmisspoints.log</a> which contains all NMP entries including those which are already marked FP. The list is sorted by region code.
     <ul>
-      <li>Best practise is to use the browser search function to find <code>lat</code> or <code>lon</code> coordinates (or route code) which one can copy from the HDX table.</li>
+      <li>Best practice is to use the browser search function to find <code>lat</code> or <code>lon</code> coordinates (or route code) which one can copy from the HDX table.</li>
       <li>There are minimum two FP entries per hotspot but very often even more, please refer to the issue with multiple lines on the HDX table mentioned above.</li>
     </ul>
     <li>The entry must be added to <a href="https://github.com/TravelMapping/HighwayData/blob/master/nmpfps.log">nmpfps.log</a>.</li>
@@ -560,7 +551,7 @@ Marking NMPs false positive FP</p>
       <li>If not all entries for a NMP hotspot have previously been marked FP, only the missing entries need to be added. Entries ending with <code>[MARKED FP]</code> are already entered as FP.</li>
     </ul>
     </br>
-    <li>Do not forget checking for <a href="/logs/nmpfpsunmatched.log">unmatched NMP FPs</a>. Remove them from <a href="https://github.com/TravelMapping/HighwayData/blob/master/nmpfps.log">nmpfps.log</a>.</li>
+    <li>Do not forget to check for <a href="/logs/nmpfpsunmatched.log">unmatched NMP FPs</a>. Remove them from <a href="https://github.com/TravelMapping/HighwayData/blob/master/nmpfps.log">nmpfps.log</a>.</li>
   </ul>
 </div>
 
