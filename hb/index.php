@@ -90,15 +90,6 @@
     ?>
     <?php tm_common_js(); ?>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
-    <script type="application/javascript">
-        $(document).ready(function () {
-                $("#routes").tablesorter({
-                    sortList: [[0, 0]],
-                    headers: {0: {sorter: false}, 4: {sorter: false}, 5: {sorter: false}}
-                });
-            }
-        );
-    </script>
     <title>Travel Mapping Highway Browser</title>
 </head>
 <?php 
@@ -155,19 +146,7 @@ else {
                 } elseif (($region != "") or ($system != "")) {
                     echo <<<JS
                     routes = $("#routes");
-                    routes.tablesorter({
-                        sortList: [[0, 0], [6, 0]],
-                        headers: {0: {sorter: false}}
-                    });
                     initFloatingHeaders(routes);
-JS;
-                } else {
-                    echo <<<JS
-                    systems = $('#systemsTable');
-                    systems.tablesorter({
-                        sortList: [[0, 0], [4, 0], [3, 0]],
-                        headers: {0: {sorter: false}}
-                    });
 JS;
                 }
             ?>
@@ -203,7 +182,7 @@ elseif (($region != "") or ($system != "")) {  // we have no r=, so we will show
 
     $sql_command .= ";";
     echo "<div id=\"routebox\">\n";
-    echo "<table class=\"gratable tablesorter ws_data_table\" id=\"routes\"><thead><tr><th colspan=\"7\">Select Route to Display (click a header to sort by that column)</th></tr><tr><th class=\"sortable\">Tier</th><th class=\"sortable\">System</th><th class=\"sortable\">Region</th><th class=\"sortable\">Route&nbsp;Name</th><th>.list Name</th><th class=\"sortable\">Level</th><th>Root</th></tr></thead><tbody>\n";
+    echo "<table class=\"sortable gratable ws_data_table\" id=\"routes\"><thead><tr><th colspan=\"7\">Select Route to Display (click a header to sort by that column)</th></tr><tr><th>Tier</th><th>System</th><th>Region</th><th>Route&nbsp;Name</th><th>.list Name</th><th>Level</th><th>Root</th></tr></thead><tbody>\n";
     $res = tmdb_query($sql_command);
     while ($row = $res->fetch_assoc()) {
         echo "<tr class=\"notclickable status-" . $row['level'] . "\"><td>{$row['tier']}</td><td>" . $row['systemName'] . "</td><td>" . $row['region'] . "</td><td>" . $row['route'] . $row['banner'];
@@ -217,11 +196,11 @@ elseif (($region != "") or ($system != "")) {  // we have no r=, so we will show
 } else {
     //We have no filters at all, so display list of systems as a landing page.
     echo <<<HTML
-    <table class="gratable tablesorter" id="systemsTable">
+    <table class="sortable gratable" id="systemsTable">
         <caption>TIP: Click on a column header to sort. Hold SHIFT to sort by multiple columns.</caption>
         <thead>
             <tr><th colspan="5">List of Systems</th></tr>
-            <tr><th class="sortable">Country</th><th class="sortable">System</th><th class="sortable">Code</th><th class="sortable">Status</th><th class="sortable">Level</th></tr>
+            <tr><th>Country</th><th>System</th><th>Code</th><th>Status</th><th>Level</th></tr>
         </thead>
         <tbody>
 HTML;

@@ -97,13 +97,6 @@ if (( $tmuser != "null") || ( $system != "" )) {
 
 <script type="text/javascript">
     $(document).ready(function () {
-            $("#regionsTable").tablesorter({
-                sortList: [[4, 1]]
-            });
-            $("#routeTable").tablesorter({
-                sortList: [[0, 0]],
-                headers: {0: {sorter: false}, 1: {sorter: false}, 3: {sorter: false},}
-            });
             $('td').filter(function() {
                 return this.innerHTML.match(/^[0-9\s\.,%]+$/);
             }).css('text-align','right');
@@ -153,7 +146,7 @@ if (( $tmuser == "null") || ( $system == "" )) {
     <div id="mapholder">
         <div id="controlboxinfo"></div>
         <div id="map"></div>
-        <table class="gratable tablesorter" id="overallTable">
+        <table class="gratable" id="overallTable">
             <thead><tr><th colspan="2"><a href="#rankings">System Statistics for <?php echo "$systemName"; ?></a></th></tr></thead>
             <tbody>
             <?php
@@ -333,15 +326,15 @@ SQL;
             $res = tmdb_query($sql_command);
 	    if ($res->num_rows > 1) {
               echo <<<HTML
-                <table class="gratable tablesorter" id="regionsTable">
-                    <caption>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</caption>
+                <table class="sortable gratable" id="regionsTable">
+                    <caption>TIP: Click on a column head to sort.</caption>
                     <thead>
                     <tr><th colspan="4">Statistics by Region</th></tr>
                     <tr>
-                        <th class="sortable">Region</th>
-                        <th class="sortable">Clinched ({$tmunits})</th>
-                        <th class="sortable">Total ({$tmunits})</th>
-                        <th class="sortable">%</th>
+                        <th>Region</th>
+                        <th>Clinched ({$tmunits})</th>
+                        <th>Total ({$tmunits})</th>
+                        <th>%</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -365,11 +358,11 @@ HTML;
           $res->free();
         }
         ?>
-        <table class="gratable tablesorter" id="routeTable">
+        <table class="sortable gratable" id="routeTable">
 	    <?php
 	    if ($region != "") {
 		echo <<<HTML
-	    <caption>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</caption>
+	    <caption>TIP: Click on a column head to sort.</caption>
 HTML;
 	    }
 	    ?>
@@ -378,17 +371,17 @@ HTML;
                 <th colspan="8">Statistics by Route</th>
             </tr>
             <tr>
-                <th class="nonsortable">Route</th>
-                <th class="sortable">#</th>
-                <th class="nonsortable">Banner</th>
+                <th class="no-sort">Route</th>
+                <th>#</th>
+                <th class="no-sort">Banner</th>
 		<?php if ($region == "") {
-		    echo "<th class=\"nonsortable\">Abbrev</th>";
+		    echo "<th class=\"no-sort\">Abbrev</th>";
 		}
 		?>
-                <th class="nonsortable">Section</th>
-                <th class="sortable">Clinched (<?php tm_echo_units(); ?>)</th>
-                <th class="sortable">Total (<?php tm_echo_units(); ?>)</th>
-                <th class="sortable">%</th>
+                <th class="no-sort">Section</th>
+                <th>Clinched (<?php tm_echo_units(); ?>)</th>
+                <th>Total (<?php tm_echo_units(); ?>)</th>
+                <th>%</th>
             </tr>
             </thead>
             <tbody>
@@ -430,10 +423,10 @@ HTML;
         </table>
 
     <a name="rankings"></a>
-    <table class="gratable tablesorter" id="systemTravelersTable" style="width: auto;">
+    <table class="sortable gratable" id="systemTravelersTable" style="width: auto;">
         <thead>
 	    <tr><th colspan="6">Travelers on <?php echo "$systemName"; ?></th></tr>
-            <tr><th class="sortable">Rank</th><th class="sortable">Traveler</th><th class="sortable">Distance Traveled (<?php tm_echo_units(); ?>)</th><th>%</th><th class="sortable">Traveled Routes</th><th class="sortable">Clinched Routes</th></tr>
+            <tr><th>Rank</th><th>Traveler</th><th>Distance Traveled (<?php tm_echo_units(); ?>)</th><th>%</th><th>Traveled Routes</th><th>Clinched Routes</th></tr>
         </thead>
     <tbody>
 	  <tr style=><td></td><td>TOTAL CLINCHABLE</td><td><?php echo tm_convert_distance($system_mileage); ?></td><td>100%</td><td><?php echo "$totalRoutes"; ?></td><td><?php echo "$totalRoutes"; ?></td></tr>

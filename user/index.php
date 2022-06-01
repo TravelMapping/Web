@@ -51,22 +51,6 @@
     </title>
 </head>
 <body>
-<script type="text/javascript">
-/*    $(document).ready(function () {
-            $("#regionsTable").tablesorter({
-                sortList: [[5,1], [4, 1]],
-                headers: {0: {sorter: false}, 6: {sorter: false}}
-            });
-            $("#systemsTable").tablesorter({
-                sortList: [[7,1], [6, 1]],
-                headers: {0: {sorter: false}, 9: {sorter: false}}
-            });
-            $('td').filter(function() {
-                return this.innerHTML.match(/^[0-9\s\.,%]+$/);
-            }).css('text-align','right');
-        }
-    ); */
-</script>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 <div id="userbox">
 
