@@ -10,10 +10,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="/css/travelMapping.css"/>
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <!-- TableSorter -->
-    <script src="/lib/jquery.tablesorter.min.js"></script>
     <title>Traveler Statistics</title>
     <style type="text/css">
         table.rankingstable {
@@ -32,19 +28,9 @@
         }
     </style>
     <?php require $_SERVER['DOCUMENT_ROOT'] . "/lib/tmphpfuncs.php" ?>
+    <?php tm_common_js(); ?>
 </head>
 <body>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(".rankingstable").tablesorter({
-            sortList: [[0, 0]],
-            headers: {0: {sorter: false}}
-        });
-        $('td').filter(function () {
-            return this.innerHTML.match(/^[0-9\s\.,%]+$/);
-        }).css('text-align', 'right');
-    });
-</script>
 <?php require $_SERVER['DOCUMENT_ROOT'] . "/lib/tmheader.php"; ?>
 <h1>Traveler Statistics</h1>
 <?php tm_user_select_form("\"\""); ?>
@@ -79,7 +65,7 @@ SQL;
         $res = tmdb_query($sql);
         $row = tm_fetch_user_row_with_rank($res, 'clinchedMileage');
         echo "<td>{$row['traveler']}</td>";
-        $style = 'style="background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$totalMileage).';"';
+        $style = 'style="style="text-align: right; background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$totalMileage).';"';
         echo "<td ".$style.">".tm_convert_distance($row['clinchedMileage'])." of ".tm_convert_distance($totalMileage)." ";
 	tm_echo_units();
 	echo " ({$row['percentage']}%)</td>";
@@ -109,16 +95,16 @@ HTML;
     ?>
     <tr>
         <td>
-            <table class="gratable tablesorter rankingstable">
+            <table class="sortable gratable rankingstable">
                 <thead>
                 <tr>
                     <th colspan="5">Travels in Active Systems</th>
                 </tr>
                 <tr>
-                    <th class="sortable">Rank</th>
-                    <th class="sortable">Username</th>
-                    <th class="sortable">Distance Traveled (<?php tm_echo_units(); ?>)</th>
-                    <th class="sortable">%</th>
+                    <th>Rank</th>
+                    <th>Username</th>
+                    <th>Distance Traveled (<?php tm_echo_units(); ?>)</th>
+                    <th>%</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -140,11 +126,11 @@ SQL;
                         $highlight = '';
                     }
 		    $print_distance = tm_convert_distance($row['clinchedMileage']);
-		    $style = 'style="background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$totalMileage).';"';
+		    $style = 'style="text-align: right; background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$totalMileage).';"';
 
                     echo <<<HTML
                 <tr class="$highlight" onClick="window.document.location='/user?u={$row['traveler']}';">
-                <td>{$rank}</td><td>{$row['traveler']}</td><td {$style}>{$print_distance}</td><td {$style}>{$row['percentage']}%</td>
+                <td style="text-align: right;">{$rank}</td><td>{$row['traveler']}</td><td {$style}>{$print_distance}</td><td {$style}>{$row['percentage']}%</td>
                 </tr>
 HTML;
                     $rank++;
@@ -156,16 +142,16 @@ HTML;
             </table>
         </td>
         <td>
-            <table class="gratable tablesorter rankingstable">
+            <table class="sortable gratable rankingstable">
                 <thead>
                 <tr>
                     <th colspan="5">Travels in Active and Preview Systems</th>
                 </tr>
                 <tr>
-                    <th class="sortable">Rank</th>
-                    <th class="sortable">Username</th>
-                    <th class="sortable">Distance Traveled (<?php tm_echo_units(); ?>)</th>
-                    <th class="sortable">%</th>
+                    <th>Rank</th>
+                    <th>Username</th>
+                    <th>Distance Traveled (<?php tm_echo_units(); ?>)</th>
+                    <th>%</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -187,10 +173,10 @@ SQL;
                         $highlight = '';
                     }
 		    $print_distance = tm_convert_distance($row['clinchedMileage']);
-		    $style = 'style="background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$totalPreviewMileage).';"';
+		    $style = 'style="text-align: right; background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$totalPreviewMileage).';"';
                     echo <<<HTML
                 <tr class="$highlight" onClick="window.document.location='/user?u={$row['traveler']}';">
-                <td>{$rank}</td><td>{$row['traveler']}</td><td {$style}>{$print_distance}</td><td {$style}>{$row['percentage']}%</td>
+                <td style="text-align: right;">{$rank}</td><td>{$row['traveler']}</td><td {$style}>{$print_distance}</td><td {$style}>{$row['percentage']}%</td>
                 </tr>
 HTML;
                     $rank++;
