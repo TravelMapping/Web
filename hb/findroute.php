@@ -90,7 +90,7 @@ require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
 <p class="text" id="frIntro">
 Use the table below to find routes from among the
 <?php $r = number_format(tm_count_rows("routes", "")); echo $r; ?>
-routes in TM's database.  You can filter by most categories.  To
+ routes in TM's database.  You can filter by most categories.  To
 filter by route name, type a substring of its name in the box below
 "Route Name" then hit Enter.  Initial loading may take several seconds
 to a few minutes depending on the server and network conditions and
