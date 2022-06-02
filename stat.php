@@ -65,7 +65,7 @@ SQL;
         $res = tmdb_query($sql);
         $row = tm_fetch_user_row_with_rank($res, 'clinchedMileage');
         echo "<td>{$row['traveler']}</td>";
-        $style = 'style="style="text-align: right; background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$totalMileage).';"';
+        $style = 'style="background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$totalMileage).';"';
         echo "<td ".$style.">".tm_convert_distance($row['clinchedMileage'])." of ".tm_convert_distance($totalMileage)." ";
 	tm_echo_units();
 	echo " ({$row['percentage']}%)</td>";
