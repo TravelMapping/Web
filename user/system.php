@@ -349,7 +349,7 @@ HTML;
                     <td>{$row['region']}</td>
                     <td>{$clinched}</td>
                     <td>{$total}</td>
-                    <td>{$row['percentage']}%</td>
+                    <td data-sort="{$row['percentage']}">{$row['percentage']}%</td>
                 </tr>
 HTML;
             }
@@ -415,7 +415,7 @@ HTML;
                 echo "<td>" . $row['city'] . "</td>";
                 echo "<td>" . tm_convert_distance($row['clinchedMileage']) . "</td>";
                 echo "<td>" . tm_convert_distance($row['totalMileage']) . "</td>";
-                echo "<td>" . $row['percentage'] . "%</td></tr>\n";
+                echo "<td data-sort=\"".$row['percentage']."\">" . $row['percentage'] . "%</td></tr>\n";
             }
             $res->free();
             ?>
@@ -453,7 +453,8 @@ HTML;
 	      echo "<td>".$tie_rank."</td>";
 	      echo "<td>".$traveler."</td>";
 	      echo "<td ".$mileageStyle.">".tm_convert_distance($stats['mileage'])."</td>";
-	      echo "<td ".$mileageStyle.">".round($stats['mileage'] / $system_mileage * 100, 2)."%</td>";
+	      $pct = round($stats['mileage'] / $system_mileage * 100, 2);
+	      echo "<td ".$mileageStyle." data-sort=\"".$pct."\">".$pct."%</td>";
 	      echo "<td ".$drivenStyle.">".$stats['driven']."</td>";
 	      echo "<td ".$clinchedStyle.">".$stats['clinched']."</td></tr>\n";//*/
 	      $pre_rank += 1;

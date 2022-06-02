@@ -130,7 +130,7 @@ SQL;
 
                     echo <<<HTML
                 <tr class="$highlight" onClick="window.document.location='/user?u={$row['traveler']}';">
-                <td style="text-align: right;">{$rank}</td><td>{$row['traveler']}</td><td {$style}>{$print_distance}</td><td {$style}>{$row['percentage']}%</td>
+                <td style="text-align: right;">{$rank}</td><td>{$row['traveler']}</td><td {$style}>{$print_distance}</td><td {$style} data-sort="{$row['percentage']}">{$row['percentage']}%</td>
                 </tr>
 HTML;
                     $rank++;
@@ -176,7 +176,7 @@ SQL;
 		    $style = 'style="text-align: right; background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$totalPreviewMileage).';"';
                     echo <<<HTML
                 <tr class="$highlight" onClick="window.document.location='/user?u={$row['traveler']}';">
-                <td style="text-align: right;">{$rank}</td><td>{$row['traveler']}</td><td {$style}>{$print_distance}</td><td {$style}>{$row['percentage']}%</td>
+                <td style="text-align: right;">{$rank}</td><td>{$row['traveler']}</td><td {$style}>{$print_distance}</td><td {$style} data-sort="{$row['percentage']}">{$row['percentage']}%</td>
                 </tr>
 HTML;
                     $rank++;
