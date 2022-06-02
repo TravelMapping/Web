@@ -197,7 +197,7 @@ elseif (($region != "") or ($system != "")) {  // we have no r=, so we will show
     //We have no filters at all, so display list of systems as a landing page.
     echo <<<HTML
     <table class="sortable gratable" id="systemsTable">
-        <caption>TIP: Click on a column header to sort. Hold SHIFT to sort by multiple columns.</caption>
+        <caption>TIP: Click on a column header to sort.</caption>
         <thead>
             <tr><th colspan="5">List of Systems</th></tr>
             <tr><th>Country</th><th>System</th><th>Code</th><th>Status</th><th>Level</th></tr>
