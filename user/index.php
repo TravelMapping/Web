@@ -281,7 +281,7 @@ SQL;
         $res = tmdb_query($sql_command);
         while ($row = $res->fetch_assoc()) {
 	    if ($row['clinchedMileage'] == 0) continue;
-	    $systemStyle = 'text-align: right; style="background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$row['totalMileage']).';"';
+	    $systemStyle = 'style="text-align: right; background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$row['totalMileage']).';"';
             echo "<tr onclick=\"window.document.location='/user/system.php?u=" . $tmuser . "&amp;sys=" . $row['systemName'] . "'\" class=\"status-" . $row['level'] . "\">";
             echo "<td>" . $row['countryCode'] . "</td>";
             echo "<td>" . $row['systemName'] . "</td>";
