@@ -100,11 +100,11 @@ route.
 <?php tm_dismiss_button("frIntro"); ?>
 </p>
 <div id="choppedbox">
-<table class="sortable gratable" id="chopped">
+<table class="gratable" id="chopped">
 <thead>
 <tr><th colspan="8">Select Route to Display, Select Filters,
 <input type="button" onclick="clearChoppedFilters();" value="Clear Filters" />
-, or Click on a Column Header to Sort</th></tr>
+, or <span id="sortmsg"><input type="button" onclick="enableColumnSorting();" value="Enable Column Sorting" /> (memory intensive)</span></th></tr>
 <tr><th colspan="8" style="color:red; text-align:center;" id="chopmessage">Loading Route Data...</th></tr>
 <tr><th>Tier</th><th>Continent</th><th>Country</th><th>Region</th><th>System</th><th>Route&nbsp;Name</th><th>.list Name</th><th>Level</th></tr>
 <tr id="chopselectrow" style="display: none"><th>
