@@ -47,7 +47,6 @@
 <script type="text/javascript">
     $(document).ready(function () {
             $("#clinchedheader").click();
-            });
             $("#sortsecond").click();
             });
 </script>
@@ -228,8 +227,8 @@ SQL;
             }
             $activePreviewPercent = round($row['clinchedActivePreviewMileage'] / $row['totalActivePreviewMileage'] * 100.0, 2);
 	    $activePreviewPercent = sprintf('%0.2f', $activePreviewPercent);
-	    $activeStyle = 'style="background-color: '.tm_color_for_amount_traveled($row['clinchedActiveMileage'],$row['totalActiveMileage']).';"';
-	    $activePreviewStyle = 'style="background-color: '.tm_color_for_amount_traveled($row['clinchedActivePreviewMileage'],$row['totalActivePreviewMileage']).';"';
+	    $activeStyle = 'style="text-align: right; background-color: '.tm_color_for_amount_traveled($row['clinchedActiveMileage'],$row['totalActiveMileage']).';"';
+	    $activePreviewStyle = 'style="text-align: right; background-color: '.tm_color_for_amount_traveled($row['clinchedActivePreviewMileage'],$row['totalActivePreviewMileage']).';"';
             echo "<tr onclick=\"window.document.location='/user/region.php?u=" . $tmuser . "&amp;rg=" . $row['code'] . "'\"><td>" . $row['country'] . "</td><td>" . $row['name'] . '</td><td '.$activeStyle.'>' . tm_convert_distance($row['clinchedActiveMileage']) . "</td><td ".$activeStyle.">" . tm_convert_distance($row['totalActiveMileage']) . "</td><td ".$activeStyle." data-sort=\"".$activePercent."\">" . $activePercent . "%</td><td ".$activePreviewStyle.">" . tm_convert_distance($row['clinchedActivePreviewMileage']) . "</td><td ".$activePreviewStyle.">" . tm_convert_distance($row['totalActivePreviewMileage']) . "</td><td ".$activePreviewStyle." data-sort=\"".$activePreviewPercent."\">" . $activePreviewPercent . "%</td><td class='link'><a href=\"/user/mapview.php?u=" . $tmuser . "&amp;rg=" . $row['code'] . "\">Map</a></td><td class='link'><a href='/hb?rg={$row['code']}'>HB</a></td></tr>";
         }
         $res->free();
@@ -282,7 +281,7 @@ SQL;
         $res = tmdb_query($sql_command);
         while ($row = $res->fetch_assoc()) {
 	    if ($row['clinchedMileage'] == 0) continue;
-	    $systemStyle = 'style="background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$row['totalMileage']).';"';
+	    $systemStyle = 'text-align: right; style="background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$row['totalMileage']).';"';
             echo "<tr onclick=\"window.document.location='/user/system.php?u=" . $tmuser . "&amp;sys=" . $row['systemName'] . "'\" class=\"status-" . $row['level'] . "\">";
             echo "<td>" . $row['countryCode'] . "</td>";
             echo "<td>" . $row['systemName'] . "</td>";
