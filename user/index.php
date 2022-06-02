@@ -44,7 +44,14 @@
     </style>
 <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
     <?php tm_common_js(); ?>
-    <title>
+<script type="text/javascript">
+    $(document).ready(function () {
+            $("#clinchedheader").click();
+            });
+            $("#sortsecond").click();
+            });
+</script>
+<title>
         <?php
         echo "Main user page for " . $tmuser;
         ?>
@@ -186,7 +193,7 @@ SQL;
         <tr>
             <th>Country</th>
             <th>Region</th>
-            <th>Clinched (<?php tm_echo_units(); ?>)</th>
+            <th id="clinchedheader">Clinched (<?php tm_echo_units(); ?>)</th>
             <th>Overall (<?php tm_echo_units(); ?>)</th>
             <th>%</th>
             <th>Clinched (<?php tm_echo_units(); ?>)</th>
@@ -243,7 +250,7 @@ SQL;
             <th>Status</th>
             <th>Clinched (<?php tm_echo_units(); ?>)</th>
             <th>Total (<?php tm_echo_units(); ?>)</th>
-            <th>% Clinched</th>
+            <th id="sortsecond">% Clinched</th>
             <th colspan="2">Map</th>
         </tr>
         </thead>
