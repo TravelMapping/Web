@@ -149,6 +149,10 @@ else {
                     initFloatingHeaders(routes);
 JS;
                 }
+		else {
+		    echo '$("#countryheader").click();';
+		    echo '$("#countryheader").click();';
+		}
             ?>
         }
     );
@@ -200,7 +204,7 @@ elseif (($region != "") or ($system != "")) {  // we have no r=, so we will show
         <caption>TIP: Click on a column header to sort.</caption>
         <thead>
             <tr><th colspan="5">List of Systems</th></tr>
-            <tr><th>Country</th><th>System</th><th>Code</th><th>Status</th><th>Level</th></tr>
+            <tr><th id="countryheader">Country</th><th>System</th><th>Code</th><th>Status</th><th>Level</th></tr>
         </thead>
         <tbody>
 HTML;
@@ -211,9 +215,9 @@ HTML;
         $linkJS = "window.open('/hb/index.php?sys={$row['systemName']}&u={$tmuser}')";
         echo "<tr class='status-" . $row['level'] . "' onClick=\"$linkJS\">";
         if (strlen($row['name']) > 15) {
-            echo "<td>{$row['code']}</td>";
+            echo "<td data-sort=\"{$row['code']}{$row['tier']}{$row['systemName']}\">{$row['code']}</td>";
         } else {
-            echo "<td>{$row['name']}</td>";
+            echo "<td data-sort=\"{$row['name']}{$row['tier']}{$row['systemName']}\">{$row['name']}</td>";
         }
 
         echo "<td>{$row['fullName']}</td><td>{$row['systemName']}</td><td>{$row['level']}</td><td>Tier {$row['tier']}</td></tr>\n";
