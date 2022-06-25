@@ -630,7 +630,11 @@ function tm_shield_generate($r, $force_reload = false) {
             $routeNum = str_replace("A", "甲", $routeNum); //suffix - hope there's no unicode issues
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
-         
+        
+        case 'jpne':
+            // might need to have a wide version of the template
+            $svg = str_replace("***NUMBER***", $row['route'], $svg);
+            break;
         case 'jpnh':
             $routeNum = str_replace("N", "", $row['route']);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
