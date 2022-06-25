@@ -6,6 +6,7 @@
    version="1.0"
    width="455"
    height="435"
+   viewbox="0 0 455 435" 
    id="svg2">
   <defs
      id="defs4" />
@@ -13,7 +14,7 @@
      d="M 226.99991,425.39429 C 252.11645,425.39429 275.26756,415.76966 293.19578,399.78937 C 362.13553,330.75326 413.14928,244.91516 439.46426,150.46104 C 442.20297,142.16307 443.99982,131.7287 443.99982,120.87729 C 443.99982,76.02669 413.30428,38.28204 369.9794,27.07436 C 323.9411,15.75291 277.71818,9.99998 226.99992,9.99998 C 176.28166,9.99998 130.05873,15.75291 84.02044,27.07436 C 40.69555,38.28204 10.00001,76.02669 10.00001,120.87729 C 10.00001,131.7287 11.79686,142.16307 14.53557,150.46104 C 40.85055,244.91516 91.86431,330.75326 160.80406,399.78937 C 178.73227,415.76966 201.88339,425.39429 226.99991,425.39429 z"
      id="plate"
      style="fill:#0140ff;fill-opacity:1;stroke:#ffffff;stroke-width:15.99999905;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-  <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="188px" font-weight="normal" line-height="125%" y="0" x="0" font-family="helvetica" fill="#ffffff">
+  <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="188px" font-weight="normal" line-height="125%" y="0" x="0" font-family="&apos;Roadgeek 2014 Series D&apos;" fill="#ffffff">
       <tspan x="228" y="264">***NUMBER***</tspan>
   </text>
   <text
