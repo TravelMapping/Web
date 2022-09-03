@@ -161,6 +161,15 @@ Develop routes in devel status</p>
       <li>Notes to exceptions should be clearly described on the forum thread and / or in a README.md file on the Github folder for the <code>.wpt</code> files.</li>
     </ul>
     </br>
+    <li>Ferries</li>
+    <ul>
+      <li>If the route contains any segments that use a ferry
+      crossing, the portion carried by the ferry must not be included,
+      and the route must be split into separate segments.  Exception:
+      if the crossing uses an ice bridge during the winter, the route
+      may include that ice bridge and not have to be split.</li>
+    </ul>
+    </br>
     <li>Waypoint order</li>
     <ul>
       <li>In general, put the waypoints in the order normally used by the 
