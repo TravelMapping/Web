@@ -1,34 +1,4 @@
-<?php
-if (array_key_exists("u", $_GET)) {
-    $user = $_GET['u'];
-    setcookie("lastuser", $user, time() + (86400 * 30), "/");
-} else if (isset($_COOKIE['lastuser'])) {
-    $user = $_COOKIE['lastuser'];
-}
-
-$dbname = "TravelMapping";
-if (isset($_COOKIE['currentdb'])) {
-    $dbname = $_COOKIE['currentdb'];
-}
-
-if (array_key_exists("db", $_GET)) {
-    $dbname = $_GET['db'];
-    setcookie("currentdb", $dbname, time() + (86400 * 30), "/");
-}
-
-if (array_key_exists("rg", $_GET) && strlen($_GET["rg"]) > 0) {
-    $region = $_GET['rg'];
-}
-if (array_key_exists("sys", $_GET)) {
-    $system = $_GET['sys'];
-}
-
-if (is_null($user) || is_null($system)) {
-    header('HTTP/ 400 Missing user (u=) or system(sys=) params');
-    echo "<h1>ERROR: 400 Missing user (u=) or system (sys=) params</h1>";
-    exit();
-}
-?>
+<?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpuser.php" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!-- 
 	Shows a user's stats for a particular system, whether overall or limited to a single region.  
@@ -36,13 +6,13 @@ if (is_null($user) || is_null($system)) {
 		u - the user.
         sys - The system being viewed on this page
         rg - The region to study this system
-		db - the database being used. Use 'TravelMappingDev' for in-development systems.
-		(u, sys, [rg], [db])
+		(u, sys, [rg])
 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
+    <link rel="stylesheet" type="text/css" href="/css/travelMapping.css" />
+    <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <style type="text/css">
         table.gratable {
             max-width: 50%;
@@ -54,7 +24,7 @@ if (is_null($user) || is_null($system)) {
         #mapholder {
             position: relative;
             margin: auto;
-            width: 800px;
+            width: 90%;
         }
 
         #map {
@@ -76,290 +46,188 @@ if (is_null($user) || is_null($system)) {
             left: 0px;
             top: 80px;
             bottom: 0px;
-            width: 100%;
             overflow: auto;
             padding: 20px;
         }
     </style>
+    <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
     <?php
-    // establish connection to db: mysql_ interface is deprecated, should learn new options
-    $db = mysql_connect("localhost", "travmap", "clinch") or die("Failed to connect to database");
-    mysql_select_db($dbname, $db);
-
-    if (!is_null($region)) {
-        $sql_command = "SELECT * FROM regions where code = '".$region."'";
-        echo "<!--".$sql_command."-->";
-        $regionInfo = mysql_fetch_array(mysql_query($sql_command));
+    $regions = tm_qs_multi_or_comma_to_array("rg");
+    if (count($regions) > 0) {
+        $region = $regions[0];
+        $regionName = tm_region_code_to_name($region);
+    }
+    else {
+        $region = "";
+        $regionName = "No Region Specified";
     }
 
-    $sql_command = "SELECT * FROM systems where systemName = '".$system."'";
-    echo "<!--".$sql_command."-->";
-    $systemInfo = mysql_fetch_array(mysql_query($sql_command));
-
-
-    # functions from http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php
-    function startsWith($haystack, $needle)
-    {
-        // search backwards starting from haystack length characters from the end
-        return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;
+    $systems = tm_qs_multi_or_comma_to_array("sys");
+    if (count($systems) > 0) {
+        $system = $systems[0];
+        $systemName = tm_system_code_to_name($system);
     }
-
-    function endsWith($haystack, $needle)
-    {
-        // search forward starting from end minus needle length characters
-        return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== FALSE);
+    else {
+        $system = "";
+        $systemName = "No System Specified";
+        $redir_url = "/user/region.php?u={$tmuser}&rg={$_GET['rg']}";
+        echo "<script>window.location = '{$redir_url}';</script>";
+        echo "Please go to <a href='$redir_url'>{$redir_url}</a> if you are not automatically redirected.";
+        exit();
     }
-
-    function fetchWithRank($res, $rankBy)
-    {
-        global $user;
-        $nextRank = 1;
-        $rank = 1;
-        $score = 0;
-        $row = array();
-        while($row['traveler'] != $user && $row = mysql_fetch_array($res)) {
-            if ($score != $row[$rankBy]) {
-                $score = $row[$rankBy];
-                $rank = $nextRank;
-            }
-
-            $nextRank++;
-            error_log("($rank, {$row['traveler']}, {$row[$rankBy]})");
-        }
-        $row['rank'] = $rank;
-        return $row;
-    }
-
 
     ?>
     <title><?php
-        if (!is_null($region)) {
-            echo $system;
+        echo $systemName." (".$system.")";
+        if ($region != "") {
             echo " in " . $region;
-        } else {
-            echo $systemInfo['fullName'];
         }
-        echo " - ".$user;
+        echo " - ".$tmuser;
         ?></title>
-    <script
-        src="http://maps.googleapis.com/maps/api/js?sensor=false"
-        type="text/javascript"></script>
+    <?php tm_common_js(); ?>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
-    <!-- jQuery -->
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <!-- TableSorter -->
-    <script src="/lib/jquery.tablesorter.min.js"></script>
-    <script>
-        function waypointsFromSQL() {
-            <?php
-              $regions = array();
-              if (array_key_exists("rg",$_GET) && strlen($region) > 0) {
-                $regions[0] = $region;
-              }
-
-              // restrict to waypoints matching routes whose region is given in the "rg=" query string parameter
-              // build strings needed for later queries
-              $select_regions = "";
-              $where_regions = "";
-              $num_regions = 0;
-              foreach ($regions as $aregion) {
-                if ($num_regions == 0) {
-                  $select_regions = " and (routes.region='".$aregion."'";
-                  $where_regions = " where (region='".$aregion."'";
-                }
-                else {
-                  $select_regions = $select_regions." or routes.region='".$aregion."'";
-                  $where_regions = $where_regions." or region='".$aregion."'";
-                }
-                $num_regions = $num_regions + 1;
-              }
-              if ($num_regions > 0) {
-                $select_regions = $select_regions.")";
-                $where_regions = $where_regions.")";
-              }
-
-              // select based on system?
-              $systems = array();
-              if (array_key_exists("sys",$_GET)) {
-                $systems = explode(',',$_GET['sys']);
-              }
-
-              // restrict to waypoints matching routes whose system is given in the "sys=" query string parameter
-              $select_systems = "";
-              $where_systems = "";
-              $num_systems = 0;
-              foreach ($systems as $system) {
-                if ($num_systems == 0) {
-                  $select_systems = " and (routes.systemName='".$system."'";
-                  $where_systems = " where (routes.systemName='".$system."'";
-                }
-                else {
-                  $select_systems = $select_systems." or routes.systemName='".$system."'";
-                  $where_systems = $where_systems." or routes.systemName='".$system."'";
-                }
-                $num_systems = $num_systems + 1;
-              }
-              if ($num_systems > 0) {
-                $select_systems = $select_systems.")";
-                $where_systems = $where_systems.")";
-              }
-
-              // make sure we have selected some region or system
-              if (($num_systems == 0) && ($num_regions == 0)) {
-                 // for now, put in a default to usai, do something better later
-                 $select_systems = " and (routes.systemName='usai')";
-                 $where_systems = " where (routes.systemName='usai')";
-              }
-
-              $sql_command = "SELECT waypoints.pointName, waypoints.latitude, waypoints.longitude, waypoints.root, systems.tier, systems.color, systems.systemname FROM waypoints JOIN routes ON routes.root = waypoints.root".$select_regions.$select_systems." JOIN systems ON routes.systemname = systems.systemname ORDER BY root, waypoints.pointId;";
-              echo "// SQL: ".$sql_command."\n";
-              $res = mysql_query($sql_command);
-
-              $routenum = 0;
-              $pointnum = 0;
-              $lastRoute = "";
-              while ($row = mysql_fetch_array($res)) {
-                if (!($row[3] == $lastRoute)) {
-                   echo "newRouteIndices[".$routenum."] = ".$pointnum.";\n";
-                   echo "routeTier[".$routenum."] = ".$row[4].";\n";
-                   echo "routeColor[".$routenum."] = '".$row[5]."';\n";
-                   echo "routeSystem[".$routenum."] = '".$row[6]."';\n";
-                   $lastRoute = $row[3];
-                   $routenum = $routenum + 1;
-                }
-                echo "waypoints[".$pointnum."] = new Waypoint(\"".$row[0]."\",".$row[1].",".$row[2]."); // Route = ".$row[3]." (".$row[5].")\n";
-                $pointnum = $pointnum + 1;
-              }
-
-              // check for query string parameter for traveler clinched mapping of route
-              if (array_key_exists("u",$_GET)) {
-                 echo "traveler = '".$_GET['u']."';\n";
-                 // retrieve list of segments for this region or regions
-                 $sql_command = "SELECT segments.segmentId, segments.root FROM segments JOIN routes ON routes.root = segments.root JOIN systems ON routes.systemname = systems.systemname".$where_regions.$select_systems." ORDER BY root, segments.segmentId;";
-                 echo "// SQL: ".$sql_command."\n";
-                 $res = mysql_query($sql_command);
-                 $segmentIndex = 0;
-                 while ($row = mysql_fetch_array($res)) {
-                   echo "segments[".$segmentIndex."] = ".$row[0]."; // route=".$row[1]."\n";
-                   $segmentIndex = $segmentIndex + 1;
-                 }
-                 $sql_command = "SELECT segments.segmentId, segments.root FROM segments RIGHT JOIN clinched ON segments.segmentId = clinched.segmentId JOIN routes ON routes.root = segments.root JOIN systems ON routes.systemname = systems.systemname".$where_regions.$select_systems." AND clinched.traveler='".$_GET['u']."' ORDER BY root, segments.segmentId;";
-                 echo "// SQL: " .$sql_command."\n";
-                 $res = mysql_query($sql_command);
-                 $segmentIndex = 0;
-                 while ($row = mysql_fetch_array($res)) {
-                   echo "clinched[".$segmentIndex."] = ".$row[0]."; // route=".$row[1]."\n";
-                   $segmentIndex = $segmentIndex + 1;
-                 }
-               echo "mapClinched = true;\n";
-              }
-
-              // check for custom colors query string parameters
-              $customColors = array();
-              if (array_key_exists("colors",$_GET)) {
-                 $customColors = explode(';',$_GET['colors']);
-                 $colorNum = 0;
-                 foreach ($customColors as $customColor) {
-                    $colorEntry = array();
-                    $colorEntry = explode(':',$customColor);
-                    echo "customColorCodes[".$colorNum."] = { name: \"".$colorEntry[0]."\", unclinched: \"".$colorEntry[1]."\", clinched: \"".$colorEntry[2]."\" };\n";
-                    $colorNum = $colorNum + 1;
-                 }
-              }
-
-            ?>
-            genEdges = true;
-        }
-    </script>
 </head>
-<body onload="<?php if (!$_GET['renderMap'] || !array_key_exists('renderMap', $_GET)) echo "loadmap();" ?>">
+<body 
+<?php
+if (( $tmuser != "null") || ( $system != "" )) {
+  echo "onload=\"loadmap(); waypointsFromSQL(); updateMap(null,null,null);\"";
+}
+?>
+>
+
 <script type="text/javascript">
     $(document).ready(function () {
-            $("#routeTable").tablesorter({
-                sortList: [[0, 0]],
-                headers: {0: {sorter: false}, 1: {sorter: false}, 3: {sorter: false},}
-            });
             $('td').filter(function() {
                 return this.innerHTML.match(/^[0-9\s\.,%]+$/);
             }).css('text-align','right');
         }
     );
 </script>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 <div id="header">
-    <a href="/user?u=<?php echo $user ?>"><?php echo $user ?></a> -
-    <a href="/">Home</a> -
-    <a href="/hbtest">Highway Browser</a>
-    <?php
-        if(!is_null($region)) {
-            echo " - <a href='system.php?u=".$user."&sys=".$system."'> ".$system."</a>";
-            echo " - <a href='region.php?u=".$user."&rg=".$region."'> ".$region."</a>";
-        }
-    ?>
-    <form id="userselect">
+    <form id="userselect" action="system.php">
         <label>User: </label>
-        <input type="text" name="u" form="userselect" value="<?php echo $user ?>" required>
+        <?php tm_user_select(); ?>
         <label>System: </label>
-        <input type="text" name="sys" form="userselect" value="<?php echo $system ?>" required>
+	<?php tm_system_select(FALSE); ?>
         <label>Region: </label>
-        <input type="text" name="rg" form="userselect" value="<?php echo $region ?>">
-        <input type="submit">
+	<?php tm_region_select(FALSE); ?>
+	<label>Units: </label>
+	<?php tm_units_select(); ?>
+        <input type="submit" value="Update Map and Stats" />
     </form>
-    <h1><?php
-        echo "Traveler Stats for " . $user . " on " . $systemInfo['fullName'];
-        if (!is_null($region)) {
-            echo " in " . $regionInfo['name'];
+    Scroll down to see statistical reports below the map
+    <?php
+        echo " -- <a href='/user/mapview.php?u={$tmuser}&sys={$system}";
+        if ($region != "") {
+            echo "&rg={$region}";
         }
-        ?>:</h1>
+        echo "'>View Larger Map</a>";
+        echo '<input id="showMarkers" type="checkbox" name="Show Markers" onclick="showMarkersClicked()">&nbsp;Show Markers';
+        echo "<h1>";
+        echo "Traveler Statistics for " . $tmuser . " on " . $systemName;
+        if ($region != "") {
+            echo " in " . $regionName;
+        }
+        echo "</h1>";
+    ?>
 </div>
+<?php
+if (( $tmuser == "null") || ( $system == "" )) {
+    echo "<h1>Select a User and System to Continue</h1>\n";
+    echo "</div>\n";
+    require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php";
+    echo "</body>\n";
+    echo "</html>\n";
+    exit;
+}
+?>
 <div id="body">
     <div id="mapholder">
-        <input id="showMarkers" type="checkbox" name="Show Markers" onclick="showMarkersClicked()">&nbsp;Show Markers
         <div id="controlboxinfo"></div>
         <div id="map"></div>
-        <table class="gratable tablesorter" id="overallTable">
-            <thead><tr><th colspan="5">System Stats</th></tr></thead>
+        <table class="gratable" id="overallTable">
+            <thead><tr><th colspan="2"><a href="#rankings">System Statistics for <?php echo "$systemName"; ?></a></th></tr></thead>
             <tbody>
             <?php
-            //First fetch overall mileage
-            if(is_null($region)) {
-                //$mileage = mysql_fetch_array(mysql_query("SELECT SUM() as t FROM routes LEFT JOIN systems on routes.systemName = systems.systemName WHERE region = '$region' AND systems.active = 1"))['t'] - 1;
+	    // get overall stats either for entire system or within
+	    // our selected region
+            if ($region == "") {
+	        // overall mileage across all systems
+                $system_mileage = tm_sum_column_where("systemMileageByRegion", "mileage", "systemName = '".$system."'");
+
+		// clinched mileage across all systems
+                $sql_command = <<<SQL
+                SELECT
+                    traveler, SUM(mileage) as clinchedMileage
+                FROM clinchedSystemMileageByRegion
+                WHERE systemName = '$system'
+		GROUP BY traveler
+                ORDER BY clinchedMileage DESC;
+SQL;
+            } 
+	    else {
+	        // mileage for one system in one region
+                $system_mileage = tm_sum_column_where("systemMileageByRegion", "mileage", "systemName = '".$system."' AND region = '".$region."'");
+
+		// clinched mileage across all systems
+                $sql_command = <<<SQL
+                SELECT
+                    traveler, mileage as clinchedMileage
+                FROM clinchedSystemMileageByRegion
+                WHERE systemName = '$system'
+		AND region = '$region'
+                ORDER BY clinchedMileage DESC;
+SQL;
+            }
+            $res = tmdb_query($sql_command);
+            $row = tm_fetch_user_row_with_rank($res, 'clinchedMileage');
+	    $percentage = 0;
+	    if ($system_mileage != 0) {
+  	        $percentage = $row['clinchedMileage'] / $system_mileage * 100;
+	    }
+            $link = "window.open('/shields/clinched.php?u=" . $tmuser . "&amp;sys=" . $system . "')";
+	    if ($row['traveler'] != "") {
+		$rank = $row['rank'];
+	    } else {
+		$rank = "N/A";
+	    }
+	    $style = 'style="background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$system_mileage).';"';
+            echo "<tr><td>Distance Traveled</td><td ".$style.">".tm_convert_distance($row['clinchedMileage'])." of ".tm_convert_distance($system_mileage)." ".$tmunits." (".sprintf('%0.2f',$percentage)."%) Rank: ".$rank."</td></tr>";
+
+	    // build arrays that will form the contents of the travelers
+	    // by region stats for active systems
+	    $TravelerInfo = array();
+	    $res->data_seek(0);
+	    while ($row = $res->fetch_assoc()) {
+		$TravelerInfo[$row['traveler']]['mileage'] = $row['clinchedMileage'];
+            }
+            $res->free();
+
+            //Second, fetch routes clinched/driven
+            if ($region == "") {
+                $totalRoutes = tm_count_rows("connectedRoutes", "WHERE systemName='".$system."'");
                 $sql_command = <<<SQL
                 SELECT
                     ccr.traveler,
-                    round(sum(coalesce(cr.mileage, 0)), 2) as overall,
-                    round(sum(coalesce(ccr.mileage, 0)), 2) as clinched,
-                    round(sum(coalesce(ccr.mileage, 0)), 2) / round(sum(coalesce(cr.mileage, 0)), 2) * 100 AS percentage
+                    sum(ccr.clinched) as clinched
                 FROM connectedRoutes as cr
                 LEFT JOIN clinchedConnectedRoutes as ccr
                 ON cr.firstRoot = ccr.route
                 WHERE cr.systemName = '$system'
-                GROUP BY ccr.traveler
-                ORDER BY percentage DESC ;
+                GROUP BY traveler
+		ORDER BY clinched DESC;
 SQL;
-            } else {
-                $sql_command = <<<SQL
-                SELECT
-                    cr.traveler,
-                    round(sum(coalesce(r.mileage, 0)), 2) as overall,
-                    round(sum(coalesce(cr.mileage, 0)), 2) as clinched,
-                    round(sum(coalesce(cr.mileage, 0)), 2) / round(sum(coalesce(r.mileage, 0)), 2) * 100 AS percentage
-                FROM routes as r
-                LEFT JOIN clinchedRoutes as cr
-                ON r.root = cr.route
-                WHERE r.region = '$region' AND r.systemName = '$system'
-                GROUP BY cr.traveler
-                ORDER BY percentage DESC ;
-SQL;
-            }
-            echo "<!--".$sql_command."-->";
-            $res = mysql_query($sql_command);
-            $row = fetchWithRank($res, 'percentage');
-            $link = "window.open('/hbtest/mapview.php?u=" . $user . "&sys=" . $system . "')";
-            echo "<tr style=\"background-color:#EEEEFF\"><td>Overall</td><td colspan='2'>Miles Driven: ".$row['clinched']." mi (".$row['percentage']."%)</td><td>Total: ".$row['overall']." mi</td><td>Rank: {$row['rank']}</td></tr>";
-
-            //Second, fetch routes clinched/driven
-            if (is_null($region)) {
-                $totalRoutes = mysql_fetch_array(mysql_query("SELECT COUNT(*) as t FROM connectedRoutes WHERE systemName='$system'"))['t'];
+		$res = tmdb_query($sql_command);
+		$row = tm_fetch_user_row_with_rank($res, 'clinched');
+		if ($row['traveler'] != "") {
+		    $clinched = $row['clinched'];
+		    $clinchedRank = $row['rank'];
+		} else {
+		    $clinched = 0;
+		    $clinchedRank = "N/A";
+		}
+		$res->free();
                 $sql_command = <<<SQL
                 SELECT
                     ccr.traveler,
@@ -370,10 +238,40 @@ SQL;
                 ON cr.firstRoot = ccr.route
                 WHERE cr.systemName = '$system'
                 GROUP BY traveler
-                ORDER BY clinched DESC;
+		ORDER BY driven DESC;
 SQL;
+		$res = tmdb_query($sql_command);
+		$row = tm_fetch_user_row_with_rank($res, 'driven');
+		if ($row['traveler'] != "") {
+		    $driven = $row['driven'];
+		    $drivenRank = $row['rank'];
+		} else {
+		    $driven = 0;
+		    $drivenRank = "N/A";
+		}
             } else {
-                $totalRoutes = mysql_fetch_array(mysql_query("SELECT COUNT(*) as t FROM routes WHERE systemName='$system' AND region='$region' "))['t'];
+                $totalRoutes = tm_count_rows("routes", "WHERE systemName='".$system."' AND region='".$region."'");
+                $sql_command = <<<SQL
+                SELECT
+                    ccr.traveler,
+                    sum(ccr.clinched) as clinched
+                FROM routes as cr
+                LEFT JOIN clinchedRoutes as ccr
+                ON cr.root = ccr.route
+                WHERE cr.region = '$region' AND cr.systemName = '$system'
+                GROUP BY ccr.traveler
+		ORDER BY clinched DESC;
+SQL;
+		$res = tmdb_query($sql_command);
+		$row = tm_fetch_user_row_with_rank($res, 'clinched');
+		if ($row['traveler'] != "") {
+		    $clinched = $row['clinched'];
+		    $clinchedRank = $row['rank'];
+		} else {
+		    $clinched = 0;
+		    $clinchedRank = "N/A";
+		}
+		$res->free();
                 $sql_command = <<<SQL
                 SELECT
                     ccr.traveler,
@@ -384,67 +282,194 @@ SQL;
                 ON cr.root = ccr.route
                 WHERE cr.region = '$region' AND cr.systemName = '$system'
                 GROUP BY ccr.traveler
-                ORDER BY clinched DESC
+		ORDER BY driven DESC;
 SQL;
+		$res = tmdb_query($sql_command);
+		$row = tm_fetch_user_row_with_rank($res, 'driven');
+		if ($row['traveler'] != "") {
+		    $driven = $row['driven'];
+		    $drivenRank = $row['rank'];
+		} else {
+		    $driven = 0;
+		    $drivenRank = "N/A";
+		}
             }
-            echo "<!--".$sql_command."-->";
-            $res = mysql_query($sql_command);
-            $row = fetchWithRank($res, 'clinched');
-            echo "<tr onClick=\"" . $link . "\"><td>Routes</td><td>Driven: " . $row['driven'] . " (" . round($row['driven'] / $totalRoutes * 100, 2) .
-                "%)</td><td>Clinched: " . $row['clinched'] . " (" . round($row['clinched'] / $totalRoutes * 100, 2) . "%)</td><td>Total: " . $totalRoutes .
-                "</td><td>Rank: {$row['rank']}</td></tr>\n";
+	    // add to the table of travelers by region stats
+	    $res->data_seek(0);
+	    while ($row = $res->fetch_assoc()) {
+		$TravelerInfo[$row['traveler']]['driven'] = $row['driven'];
+		$TravelerInfo[$row['traveler']]['clinched'] = $row['clinched'];
+            }
+	    $res->free();
+
+	    $style = 'style="background-color: '.tm_color_for_amount_traveled($driven,$totalRoutes).';"';
+            echo "<tr onClick=\"" . $link . "\"><td>Routes Traveled</td><td ".$style.">" . $driven   . " of " . $totalRoutes . " (" . round($driven   / $totalRoutes * 100, 2) . "%) Rank: {$drivenRank}</td></tr>\n";
+	    $style = 'style="background-color: '.tm_color_for_amount_traveled($clinched,$totalRoutes).';"';
+	    echo "<tr onClick=\"" . $link . "\"><td>Routes Clinched</td><td ".$style.">" . $clinched . " of " . $totalRoutes . " (" . round($clinched / $totalRoutes * 100, 2) . "%) Rank: {$clinchedRank}</td></tr>\n";
             ?>
             </tbody>
         </table>
-        <table class="gratable tablesorter" id="routeTable">
-            <caption>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</caption>
+        <?php
+        if($region == "") {
+            $sql_command = <<<SQL
+            SELECT
+              miByRegion.region,
+              ROUND(IFNULL(clinchedByRegion.mileage, 0), 2) as clinchedMileage,
+              ROUND(miByRegion.mileage, 2) as totalMileage,
+              ROUND(IFNULL(clinchedByRegion.mileage, 0) / miByRegion.mileage * 100, 2) as percentage
+            FROM systemMileageByRegion as miByRegion
+            LEFT JOIN clinchedSystemMileageByRegion as clinchedByRegion 
+                ON clinchedByRegion.region = miByRegion.region AND clinchedByRegion.systemName = '{$system}' AND clinchedByRegion.traveler='$tmuser'
+            WHERE miByRegion.systemName = '{$system}'
+            ORDER BY percentage DESC ;
+SQL;
+            $res = tmdb_query($sql_command);
+	    if ($res->num_rows > 1) {
+              echo <<<HTML
+                <table class="sortable gratable" id="regionsTable">
+                    <caption>TIP: Click on a column head to sort.</caption>
+                    <thead>
+                    <tr><th colspan="4">Statistics by Region</th></tr>
+                    <tr>
+                        <th>Region</th>
+                        <th>Clinched ({$tmunits})</th>
+                        <th>Total ({$tmunits})</th>
+                        <th>%</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+HTML;
+              while ($row = $res->fetch_assoc()) {
+		$clinched = tm_convert_distance($row['clinchedMileage']);
+		$total = tm_convert_distance($row['totalMileage']);
+	    	$style = 'style="background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$row['totalMileage']).';"';
+		
+                echo <<<HTML
+                <tr onclick='window.open("/user/system.php?u={$tmuser}&sys={$system}&rg={$row['region']}")' {$style}>
+                    <td>{$row['region']}</td>
+                    <td>{$clinched}</td>
+                    <td>{$total}</td>
+                    <td data-sort="{$row['percentage']}">{$row['percentage']}%</td>
+                </tr>
+HTML;
+            }
+            echo "</tbody></table>";
+	  }
+          $res->free();
+        }
+        ?>
+        <table class="sortable gratable" id="routeTable">
+	    <?php
+	    if ($region != "") {
+		echo <<<HTML
+	    <caption>TIP: Click on a column head to sort.</caption>
+HTML;
+	    }
+	    ?>
             <thead>
             <tr>
-                <th colspan="7">Statistics per Route</th>
+                <th colspan="8">Statistics by Route</th>
             </tr>
             <tr>
-                <th class="nonsortable">Route</th>
-                <th class="sortable">#</th>
-                <th class="nonsortable">Section</th>
-                <th class="sortable">Clinched Mileage</th>
-                <th class="sortable">Total Mileage</th>
-                <th class="sortable">Percentage</th>
+                <th class="no-sort">Route</th>
+                <th>#</th>
+                <th class="no-sort">Banner</th>
+		<?php if ($region == "") {
+		    echo "<th class=\"no-sort\">Abbrev</th>";
+		}
+		?>
+                <th class="no-sort">Section</th>
+                <th>Clinched (<?php tm_echo_units(); ?>)</th>
+                <th>Total (<?php tm_echo_units(); ?>)</th>
+                <th>%</th>
             </tr>
             </thead>
             <tbody>
             <?php
             $sql_command = "";
-            if (!is_null($region)) {
-                $sql_command = "SELECT r.route, r.root, r.city, ROUND((COALESCE(r.mileage, 0)),2) AS totalMileage, ROUND((COALESCE(cr.mileage, 0)),2) AS clinchedMileage, ROUND((COALESCE(cr.mileage,0)) / (COALESCE(r.mileage, 0)) * 100,2) AS percentage, SUBSTRING(root, LOCATE('.', root)) AS routeNum FROM routes AS r LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = 'xxxxxxxxxxxxxxxxx' WHERE systemName = 'yyyyyyyyyyyyyyyyy' AND region = '" . $region . "' ORDER BY routeNum;";
+            if ($region != "") {
+                $sql_command = "SELECT r.banner, r.abbrev, r.route, r.root, r.city, ROUND((COALESCE(r.mileage, 0)),2) AS totalMileage, ROUND((COALESCE(cr.mileage, 0)),2) AS clinchedMileage, ROUND((COALESCE(cr.mileage,0)) / (COALESCE(r.mileage, 0)) * 100,2) AS percentage, SUBSTRING(root, LOCATE('.', root)) AS routeNum FROM routes AS r LEFT JOIN clinchedRoutes AS cr ON r.root = cr.route AND traveler = 'xxxxxxxxxxxxxxxxx' WHERE systemName = 'yyyyyyyyyyyyyyyyy' AND region = '" . $region . "' ORDER BY r.csvOrder;";
             } else {
-                $sql_command = "SELECT r.route, r.groupName AS city, r.firstRoot AS root, ROUND((COALESCE(r.mileage, 0)),2) AS totalMileage, ROUND((COALESCE(cr.mileage, 0)),2) AS clinchedMileage, ROUND((COALESCE(cr.mileage,0)) / (COALESCE(r.mileage, 0)) * 100,2) AS percentage, SUBSTRING(firstRoot, LOCATE('.', firstRoot)) AS routeNum FROM connectedRoutes AS r LEFT JOIN clinchedConnectedRoutes AS cr ON r.firstRoot = cr.route AND traveler = 'xxxxxxxxxxxxxxxxx' WHERE systemName = 'yyyyyyyyyyyyyyyyy' " . $regionClause . " ORDER BY routeNum;";
+                $sql_command = "SELECT r.banner, r.route, r.groupName AS city, r.firstRoot AS root, ROUND((COALESCE(r.mileage, 0)),2) AS totalMileage, ROUND((COALESCE(cr.mileage, 0)),2) AS clinchedMileage, ROUND((COALESCE(cr.mileage,0)) / (COALESCE(r.mileage, 0)) * 100,2) AS percentage, SUBSTRING(firstRoot, LOCATE('.', firstRoot)) AS routeNum FROM connectedRoutes AS r LEFT JOIN clinchedConnectedRoutes AS cr ON r.firstRoot = cr.route AND traveler = 'xxxxxxxxxxxxxxxxx' WHERE systemName = 'yyyyyyyyyyyyyyyyy' ORDER BY r.csvOrder;";
             }
 
-            $sql_command = str_replace("xxxxxxxxxxxxxxxxx", $user, $sql_command);
+            $sql_command = str_replace("xxxxxxxxxxxxxxxxx", $tmuser, $sql_command);
             $sql_command = str_replace("yyyyyyyyyyyyyyyyy", $system, $sql_command);
-            echo "<!--" . $sql_command . "-->";
+            $res = tmdb_query($sql_command);
 
-            $res = mysql_query($sql_command);
-
-            while ($row = mysql_fetch_array($res)) {
-                if (is_null($region)) {
-                    $link = "window.open('/hbtest/mapview.php?u=" . $user . "&rte=" . $row['route'] . "')";
+            while ($row = $res->fetch_assoc()) {
+                if ($region == "") {
+                    $link = "window.open('/user/mapview.php?u=" . $tmuser . "&amp;cr=" . $row['root'] . "')";
                 } else {
-                    $link = "window.open('/devel/hb.php?u=" . $user . "&r=" . $row['root'] . "')";
+                    $link = "window.open('/hb/showroute.php?u=" . $tmuser . "&amp;r=" . $row['root'] . "')";
                 }
 
-                echo "<tr onClick=\"" . $link . "\">";
+	    	$style = 'style="background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$row['totalMileage']).';"';
+                echo "<tr onClick=\"" . $link . "\" ".$style.">";
                 echo "<td>" . $row['route'] . "</td>";
                 echo "<td width='0'>" . $row['routeNum'] . "</td>";
+                echo "<td>" . $row['banner'] . "</td>";
+		if ($region == "") {
+                    echo "<td>" . $row['abbrev'] . "</td>";
+		}
                 echo "<td>" . $row['city'] . "</td>";
-                echo "<td>" . $row['clinchedMileage'] . "</td>";
-                echo "<td>" . $row['totalMileage'] . "</td>";
-                echo "<td>" . $row['percentage'] . "%</td></tr>";
+                echo "<td>" . tm_convert_distance($row['clinchedMileage']) . "</td>";
+                echo "<td>" . tm_convert_distance($row['totalMileage']) . "</td>";
+                echo "<td data-sort=\"".$row['percentage']."\">" . $row['percentage'] . "%</td></tr>\n";
             }
+            $res->free();
             ?>
             </tbody>
         </table>
+
+    <a name="rankings"></a>
+    <table class="sortable gratable" id="systemTravelersTable" style="width: auto;">
+        <thead>
+	    <tr><th colspan="6">Travelers on <?php echo "$systemName"; ?></th></tr>
+            <tr><th>Rank</th><th>Traveler</th><th>Distance Traveled (<?php tm_echo_units(); ?>)</th><th>%</th><th>Traveled Routes</th><th>Clinched Routes</th></tr>
+	  <tr style=><td></td><td>TOTAL CLINCHABLE</td><td><?php echo tm_convert_distance($system_mileage); ?></td><td>100%</td><td><?php echo "$totalRoutes"; ?></td><td><?php echo "$totalRoutes"; ?></td></tr>
+        </thead>
+    <tbody>
+	  <?php
+	  $prev_mileage = 0;
+	  $pre_rank = 1;
+	  $tie_rank = 1;
+	  foreach ($TravelerInfo as $traveler => $stats) {
+	      if ($traveler == "") {
+                  continue;  // this happens, but how?!
+              }
+              if ($traveler == $tmuser) {
+                  $highlight = 'user-highlight';
+              } else {
+                 $highlight = '';
+              }
+	      $tie_rank = ($prev_mileage == $stats['mileage']) ? $tie_rank : $pre_rank;
+	      $mileageStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['mileage'],$system_mileage).';"';
+	      $drivenStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['driven'],$totalRoutes).';"';
+	      $clinchedStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['clinched'],$totalRoutes).';"';
+	      echo "<tr class=\"".$highlight."\" onClick=\"window.document.location='?u=".$traveler."&sys=$system";
+	      if ($region != "") echo "&rg=$region";
+	      echo "'\">";
+	      echo "<td>".$tie_rank."</td>";
+	      echo "<td>".$traveler."</td>";
+	      echo "<td ".$mileageStyle.">".tm_convert_distance($stats['mileage'])."</td>";
+	      $pct = round($stats['mileage'] / $system_mileage * 100, 2);
+	      echo "<td ".$mileageStyle." data-sort=\"".$pct."\">".$pct."%</td>";
+	      echo "<td ".$drivenStyle.">".$stats['driven']."</td>";
+	      echo "<td ".$clinchedStyle.">".$stats['clinched']."</td></tr>\n";//*/
+	      $pre_rank += 1;
+	      $prev_mileage = $stats['mileage'];
+          }
+	  ?>
+    </tbody>
+    </table>
+
     </div>
 </div>
+<?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
 </body>
+<?php
+    $tmdb->close();
+?>
+<script type="application/javascript" src="../lib/waypoints.js.php?<?php echo $_SERVER['QUERY_STRING']?>"></script>
 </html>

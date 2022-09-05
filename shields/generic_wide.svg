@@ -1,1 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="425.2" height="425.2" viewBox="0 0 425.19685039 425.19685039"><g fill="none" stroke="#000" stroke-width=".354"><rect width="416.59" height="416.59" x="4.303" y="4.303" rx="41.659" ry="39.675" fill="#fff" stroke="#000" stroke-linejoin="round" stroke-linecap="square" stroke-width="8.605"/><g fill="#000" text-anchor="middle" text-align="center" stroke="none" word-spacing="0" line-height="125%" letter-spacing="0" font-size="160"><text x="212.66" y="149.2" font-family="&apos;Roadgeek 2014 Series D&apos;"><tspan x="212.66" y="149.2">***SYS***</tspan></text><text x="212.66" y="355.2" font-family="&apos;Roadgeek 2014 Series C&apos;"><tspan x="212.66" y="355.2" font-size="320">***NUMBER***</tspan></text></g></g></svg>
+<svg version="1.1" viewBox="0 0 529.305 425.2" xmlns="http://www.w3.org/2000/svg">
+	<rect x="4.303" y="4.303" width="520.7" height="416.59" rx="41.659" ry="39.675" fill="#fff" stroke="#000" stroke-linecap="square" stroke-linejoin="round" stroke-width="8.605"/>
+	<g transform="translate(51.841)" font-size="160" text-align="center" text-anchor="middle" line-height="125%">
+		<text x="212.66" y="149.2" font-family="&apos;Roadgeek 2014 Series D&apos;">***SYS***</text>
+		<text x="212.66" y="355.20001" font-family="&apos;Roadgeek 2014 Series C&apos;"><tspan font-size="320">***NUMBER***</tspan></text>
+	</g>
+</svg>
