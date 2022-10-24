@@ -124,7 +124,7 @@ following sources of highway information.</p>
 																 <li>British Columbia, CAN
 	    	    <ul>
 	      <li><a href="http://www.gov.bc.ca/tran/">British Columbia Ministry of Transportation and Infrastructure</a>. Official government site covering transportation in British Columbia, Canada.</li>
-	      <li><a href="http://www2.gov.bc.ca/gov/content/transportation/transportation-reports-and-reference/numbered-routes">Official Numbered Routes in British Columbia</a>. List of numbered routes in British Columbia from the Ministry of Transportation and Infrastructure.</li>
+	      <li><a href="https://www2.gov.bc.ca/gov/content/transportation/transportation-reports-and-reference/reference-information/numbered-routes">Official Numbered Routes in British Columbia</a>. List of numbered routes in British Columbia from the Ministry of Transportation and Infrastructure.</li>
               <li><a href="http://www2.gov.bc.ca/gov/content/transportation/transportation-infrastructure/engineering-standards-guidelines/landmark-kilometre-inventory">Landmark Kilometre Inventory</a>. Route logs for provincial highways, from the Ministry of Transportation and Infrastructure.</li>
             </ul>
 	  </li>
