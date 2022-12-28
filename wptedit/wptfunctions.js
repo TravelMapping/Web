@@ -49,6 +49,8 @@ var DC_LABEL_TOO_LONG = 0x20000;
 var DC_LONG_SEGMENT = 0x40000;
 var DC_OUT_OF_BOUNDS = 0x80000;
 var DC_US_LETTER = 0x100000;
+var DC_LABEL_LOWERCASE = 0x200000;
+var DC_LOWERCASE_SUFFIX = 0x400000;
 
 var BC_hidden = "#CCCCCC";
 var BC_visible = "#FFFFFF";
@@ -968,9 +970,11 @@ function DataCheck()
     LABEL_PARENS();
     LABEL_SLASHES();
     LABEL_TOO_LONG();
+    LABEL_LOWERCASE();
     LABEL_UNDERSCORES();
     LACKS_GENERIC();
     LONG_UNDERSCORE();
+    LOWERCASE_SUFFIX();
     NONTERMINAL_UNDERSCORE();
     OUT_OF_BOUNDS();
     SHARP_ANGLE();
@@ -999,6 +1003,8 @@ function Error2Abbrev(e)
     text += '<a  target="dc" href="../devel/manual/syserr.php#LABEL_INVALID_CHAR"><b>?</b></a>&nbspLABEL_INVALID_CHAR<br>';
   if(e & DC_LABEL_LOOKS_HIDDEN)
     text += '<a  target="dc" href="../devel/manual/syserr.php#LABEL_LOOKS_HIDDEN"><b>?</b></a>&nbspLABEL_LOOKS_HIDDEN<br>';
+  if(e & DC_LABEL_LOWERCASE)
+    text += '<a  target="dc" href="../devel/manual/syserr.php#LABEL_LOWERCASE"><b>?</b></a>&nbspLABEL_LOWERCASE<br>';
   if(e & DC_LABEL_PARENS)
     text += '<a  target="dc" href="../devel/manual/syserr.php#LABEL_PARENS"><b>?</b></a>&nbspLABEL_PARENS<br>';
   if(e & DC_LABEL_SLASHES)
@@ -1013,6 +1019,8 @@ function Error2Abbrev(e)
     text += '<a  target="dc" href="../devel/manual/syserr.php#LONG_SEGMENT"><b>?</b></a>&nbspLONG_SEGMENT<br>';
   if(e & DC_LONG_UNDERSCORE)
     text += '<a  target="dc" href="../devel/manual/syserr.php#LONG_UNDERSCORE"><b>?</b></a>&nbspLONG_UNDERSCORE<br>';
+  if(e & DC_LOWERCASE_SUFFIX)
+    text += '<a  target="dc" href="../devel/manual/syserr.php#LOWERCASE_SUFFIX"><b>?</b></a>&nbspLOWERCASE_SUFFIX<br>';
   if(e & DC_NONTERMINAL_UNDERSCORE)
     text += '<a  target="dc" href="../devel/manual/syserr.php#NONTERMINAL_UNDERSCORE"><b>?</b></a>&nbspNONTERMINAL_UNDERSCORE<br>';
   if(e & DC_OUT_OF_BOUNDS)
@@ -1255,6 +1263,18 @@ function LABEL_LOOKS_HIDDEN()
     }
 }
 
+function LABEL_LOWERCASE()
+{
+    for(var i = 0; i < wpts.length; i++)
+    {
+	var c = wpts[i].label[0] == '*' ? 1 : 0;
+	if(wpts[i].label[c] >= 'a' && wpts[i].label[c] <= 'z')
+	{
+		wpts[i].errors |= DC_LABEL_LOWERCASE;
+	}
+    }
+}
+
 function LABEL_PARENS()
 {
     for(var i = 0; i < wpts.length; i++)
@@ -1344,6 +1364,21 @@ function LONG_UNDERSCORE()
 	    || uindex < wpts[i].label.length - 5)
 	    {
 		wpts[i].errors |= DC_LONG_UNDERSCORE;
+	    }
+	}
+    }
+}
+
+function LOWERCASE_SUFFIX()
+{
+    for(var i = 0; i < wpts.length; i++)
+    {
+	if(IsVisible(wpts[i].label))
+	{
+	    var uindex = wpts[i].label.indexOf('_');
+	    if (uindex >= 0 && wpts[i].label[uindex+1] >= 'a' && wpts[i].label[uindex+1] <= 'z')
+	    {
+		wpts[i].errors |= DC_LOWERCASE_SUFFIX;
 	    }
 	}
     }
