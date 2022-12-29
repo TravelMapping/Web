@@ -224,6 +224,13 @@ Data errors</p>
     <td><green>YES</green></td>
   </tr>
   <tr valign="top">
+    <td><a name="LABEL_LOWERCASE"></a><a style="text-decoration:none" href="#LABEL_LOWERCASE">&#x1f517</a></td>
+    <td>LABEL_LOWERCASE</td>
+    <td>Label starts with a lowercase letter. </td>
+    <td><green>YES</green></td>
+    <td><red>NO</no></td>
+  </tr>
+  <tr valign="top">
     <td><a name="LABEL_PARENS"></a><a style="text-decoration:none" href="#LABEL_PARENS">&#x1f517</a></td>
     <td>LABEL_PARENS</td>
     <td>Number of parentheses do not match. Opened <code>(</code> must be closed with <code>)</code>.</td>
@@ -301,6 +308,13 @@ Data errors</p>
     or <code>4</code> characters not ending in a capital letter.</td>
     <td><green>YES</green></td>
     <td><red>NO</red></td>
+  </tr>
+  <tr valign="top">
+    <td><a name="LOWERCASE_SUFFIX"></a><a style="text-decoration:none" href="#LOWERCASE_SUFFIX">&#x1f517</a></td>
+    <td>LOWERCASE_SUFFIX</td>
+    <td>Underscored suffix starts with a lowercase letter. </td>
+    <td><green>YES</green></td>
+    <td><red>NO</no></td>
   </tr>
   <tr valign="top">
     <td><a name="MALFORMED_LAT"></a><a style="text-decoration:none" href="#MALFORMED_LAT">&#x1f517</a></td>
