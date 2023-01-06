@@ -46,9 +46,6 @@ $activedc = tm_count_rows("datacheckErrors", "join routes on datacheckErrors.rou
   <li><a href="/logs/unprocessedwpts.log">List of unprocessed <code>.wpt</code> files</a>
     <br />
     Waypoint files in the repository that were not processed because they were not listed in any highway system's <code>.csv</code> files</li>
-  <li><a href="/logs/flippedroutes.log">List of flipped <code>.wpt</code> files</a>
-    <br />
-    Waypoint files in the repository that are flagged as reversed for processing connected routes in multi-region lines of user files (check <code>.wpt</code> file and <a href="manual/syshwylist.php#conncroots">connected routes file order</a>)</li>
   </br>
   <li><a href="/graphs/">Travel Mapping Graph Data</a>
     <br />
