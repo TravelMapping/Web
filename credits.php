@@ -434,7 +434,7 @@ following sources of highway information.</p>
 	  </li>
 	  <li><a name="nor"></a><a style="text-decoration:none" href="#nor">&#x1f517</a>Norway
         <ul>
-	      <li><a href="https://vegkart.atlas.vegvesen.no/">Road Network Map</a>. Official site of the Norwegian Public Roads Administration.</li>
+	      <li><a href="https://www.vegvesen.no/trafikk/#/kart">Road Network Map</a>. Official site of the Norwegian Public Roads Administration.</li>
 	    </ul>
 	  </li>
 	  <li><a name="pol"></a><a style="text-decoration:none" href="#pol">&#x1f517</a>Poland
