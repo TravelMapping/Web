@@ -4,32 +4,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css" href="/css/travelMapping.css" />
 <link rel="shortcut icon" type="image/png" href="/favicon.png">
-<!-- jQuery -->
-<script type="application/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-<!-- TableSorter -->
-<script type="application/javascript" src="/lib/jquery.tablesorter.min.js"></script>
 <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
+<?php tm_common_js(); ?>
 <title>Travel Mapping Highway Data Updates</title>
 </head>
 
 <body onload="populate_dbarrays()">
-<script type="application/javascript">
-    $(document).ready(function () {
-            $("#sysupdates").tablesorter({
-                headers: {1: {sorter: false}, 3: {sorter: false}}
-            });
-            $("#updates").tablesorter({
-                headers: {2: {sorter: false}, 4: {sorter: false}}
-            });
-            $('td').filter(function() {
-                return this.innerHTML.match(/^[0-9\s\.,%]+$/);
-            }).css('text-align','right');
-        }
-    );
-</script>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 <h1>Travel Mapping Highway Data Updates</h1>
-
 
 <p class="info">Quick links: <a href="#sysupdates">[Highway System Status Changes]</a><a href="#updates">[Updates to Highway Data in Active Systems]</a>.</p>
 
@@ -73,7 +55,11 @@ if (array_key_exists("updatecount", $_GET)) {
 Entries]
 </h3>
 <div id="sysupdates">
-  <table class="tablesorter" border="1"><tr><th class="sortable">Date</th><th class="sortable">Country/Region</th><th class="sortable">System Code</th><th class="nonsortable">System Description</th><th class="sortable">New Status</th></tr>
+  <table class="sortable" border="1">
+    <thead>
+      <tr><th>Date</th><th>Country/Region</th><th>System Code</th><th class="no-sort">System Description</th><th>New Status</th></tr>
+    </thead>
+    <tbody>
   <?php
       if ($syscount == 0) {
         // select all updates in the DB
@@ -101,6 +87,7 @@ Entries]
       }
       $res->free();
     ?>
+  </tbody>
   </table>
 </div>
 
@@ -130,7 +117,11 @@ Entries]
 </h3>
 
 <div id="updates">
-  <table class="tablesorter" border="1"><tr><th class="sortable">Date</th><th class="sortable">Region</th><th class="nonsortable">Route</th><th class="sortable">File Root</th><th class="nonsortable">Description</th></tr>
+  <table class="sortable" border="1">
+    <thead>
+      <tr><th>Date</th><th>Region</th><th class="no-sort">Route</th><th>File Root</th><th class="no-sort">Description</th></tr>
+    </thead>
+    <tbody>
   <?php
       if ($updatecount == 0) {
         // select all updates in the DB
@@ -152,6 +143,7 @@ Entries]
       }
       $res->free();
     ?>
+    </tbody>
   </table>
 </div>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>

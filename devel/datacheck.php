@@ -84,6 +84,7 @@
 	  (strcmp($row['code'],"INVALID_FINAL_CHAR") == 0) ||
 	  (strcmp($row['code'],"INVALID_FIRST_CHAR") == 0) ||
 	  (strcmp($row['code'],"LABEL_LOOKS_HIDDEN") == 0) ||
+	  (strcmp($row['code'],"LABEL_LOWERCASE") == 0) ||
 	  (strcmp($row['code'],"LABEL_PARENS") == 0) ||
 	  (strcmp($row['code'],"LABEL_SELFREF") == 0) ||
 	  (strcmp($row['code'],"LABEL_SLASHES") == 0) ||
@@ -91,6 +92,7 @@
 	  (strcmp($row['code'],"LACKS_GENERIC") == 0) ||
 	  (strcmp($row['code'],"LONG_SEGMENT") == 0) ||
 	  (strcmp($row['code'],"LONG_UNDERSCORE") == 0) ||
+	  (strcmp($row['code'],"LOWERCASE_SUFFIX") == 0) ||
 	  (strcmp($row['code'],"NONTERMINAL_UNDERSCORE") == 0) ||
 	  (strcmp($row['code'],"US_LETTER") == 0) ||
 	  (strcmp($row['code'],"VISIBLE_HIDDEN_COLOC") == 0) ||
@@ -104,16 +106,20 @@
 
 	// Info
         if (strcmp($row['value'],"") != 0) {
-	  // ABBREV_AS_CHOP_BANNER & ABBREV_NO_CITY link to chopped route CSVs on GitHub
-	  if ((strcmp($row['code'],"ABBREV_AS_CHOP_BANNER") == 0) ||
-	    (strcmp($row['code'],"ABBREV_NO_CITY") == 0)) {
-            echo "<a href=\"https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/".$row['value']."\">".$row['value']."</a>";
+	  // LABEL_SELFREF links to syserr.php
+	  if ((strcmp($row['code'],"LABEL_SELFREF") == 0)) {
+            echo "<a href=\"manual/syserr.php#".$row['value']."\">".$row['value']."</a>";
 	  }
 	  // ABBREV_AS_CON_BANNER links to both system CSVs on GitHub
 	  elseif ((strcmp($row['code'],"ABBREV_AS_CON_BANNER") == 0)) {
 	    $acb_info = explode(',', $row['value']);
             echo "<a href=\"https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/".$acb_info[0].".csv#L".$acb_info[1]."\">".$acb_info[0].".csv#L".$acb_info[1]."</a><br>";
             echo "<a href=\"https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/".$acb_info[0]."_con.csv#L".$acb_info[2]."\">".$acb_info[0]."_con.csv#L".$acb_info[2]."</a>";
+	  }
+	  // ABBREV_AS_CHOP_BANNER & ABBREV_NO_CITY link to chopped route CSVs on GitHub
+	  elseif ((strcmp($row['code'],"ABBREV_NO_CITY") == 0) ||
+	    (strcmp($row['code'],"ABBREV_AS_CHOP_BANNER") == 0)) {
+            echo "<a href=\"https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/".$row['value']."\">".$row['value']."</a>";
 	  }
 	  else {
             echo $row['value'];
@@ -135,10 +141,12 @@
 	  strcmp($row['code'],"HIDDEN_JUNCTION") &&
 	  strcmp($row['code'],"LACKS_GENERIC") &&
 	  strcmp($row['code'],"BUS_WITH_I") &&
-	  strcmp($row['code'],"LACKS_GENERIC") &&
-	  strcmp($row['code'],"OUT_OF_BOUNDS") &&
-	  strcmp($row['code'],"US_BANNER")) {
+	  strcmp($row['code'],"OUT_OF_BOUNDS")) {
+
           echo "</td><td style=\"color: gray\"><i>This is always a true error and cannot be marked false positive.</i></td></tr>\n";
+	}
+	elseif (strcmp($row['value'],"TRUE_ERROR") == 0) {
+	  echo "</td><td></td></tr>\n";
 	}
         else {
           echo "</td><td><tt>".$row['route'].";".$row['label1'].";".$row['label2'].";".$row['label3'].";".$row['code'].";".$row['value']."</tt></td></tr>\n";

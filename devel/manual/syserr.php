@@ -224,6 +224,13 @@ Data errors</p>
     <td><green>YES</green></td>
   </tr>
   <tr valign="top">
+    <td><a name="LABEL_LOWERCASE"></a><a style="text-decoration:none" href="#LABEL_LOWERCASE">&#x1f517</a></td>
+    <td>LABEL_LOWERCASE</td>
+    <td>Label starts with a lowercase letter. </td>
+    <td><green>YES</green></td>
+    <td><red>NO</no></td>
+  </tr>
+  <tr valign="top">
     <td><a name="LABEL_PARENS"></a><a style="text-decoration:none" href="#LABEL_PARENS">&#x1f517</a></td>
     <td>LABEL_PARENS</td>
     <td>Number of parentheses do not match. Opened <code>(</code> must be closed with <code>)</code>.</td>
@@ -233,7 +240,28 @@ Data errors</p>
   <tr valign="top">
     <td><a name="LABEL_SELFREF"></a><a style="text-decoration:none" href="#LABEL_SELFREF">&#x1f517</a></td>
     <td>LABEL_SELFREF</td>
-    <td>Label appears to reference own route.</td>
+    <td>Label appears to reference own route.
+    <br>This datacheck is designed to flag cases where a line was directly copied from another <code>.wpt</code> file without the label being changed.
+    <br>
+    <br>The site update program looks at intersecting routes in order to eliminate false positives.
+    <br>Several error subtypes are listed in the <code>Info</code> column, with different ways they can be fixed before marking false positive:
+    <ul>
+      <li><a name="NO_COLOC"></a><a style="text-decoration:none" href="#NO_COLOC">&#x1f517</a> <code>NO_COLOC</code>:
+      <br>An intersecting route with matching <a href="syshwylist.php#croute">Route</a>, <a href="syshwylist.php#cbanner">Banner</a>, and/or <a href="syshwylist.php#cabbrev">Abbrev</a> wasn't found.
+      <br>Ensure this point has the same coordinates as intersecting/concurrent routes if appropriate.
+      </li>
+      <li><a name="NO_SUFFIX"></a><a style="text-decoration:none" href="#NO_SUFFIX">&#x1f517</a> <code>NO_SUFFIX</code>:
+      <br>The route forms a loop, and has two intersections with itself at these coordinates.
+      <br>You'll need <a href="wayptlabels.php#underscore">underscored suffixes</a> to distinguish the two waypoints, unless one or both of the labels <a href="wayptlabels.php#2highways">mentions two routes</a>.</li>
+      <li><a name="NO_ABBREV"></a><a style="text-decoration:none" href="#NO_ABBREV">&#x1f517</a> <code>NO_ABBREV</code>:
+      <br>The route intersects another with the same name/number and same banner, without a city abbreviation in the label.
+      <br>You probably want to <a href="wayptlabels.php#abbrev">add the city abbreviation</a> (without an underscore, in order to match the intersecting route's .list name) for disambiguation purposes.</li>
+      <li><a name="TRUE_ERROR"></a><a style="text-decoration:none" href="#TRUE_ERROR">&#x1f517</a> <code>TRUE_ERROR</code>:
+      <br>The label is an exact match of the route's full .list name, including Banner and Abbrev.
+      <li><a name="FULL_MATCH"></a><a style="text-decoration:none" href="#FULL_MATCH">&#x1f517</a> <code>FULL_MATCH</code>:
+      <br>The label is a full match of the .list name followed by extra characters other than a slash or underscore.
+    </ul>
+    </td>
     <td><yellow>NO</yellow></td>
     <td><green>YES</green></td>
   </tr>
@@ -280,6 +308,13 @@ Data errors</p>
     or <code>4</code> characters not ending in a capital letter.</td>
     <td><green>YES</green></td>
     <td><red>NO</red></td>
+  </tr>
+  <tr valign="top">
+    <td><a name="LOWERCASE_SUFFIX"></a><a style="text-decoration:none" href="#LOWERCASE_SUFFIX">&#x1f517</a></td>
+    <td>LOWERCASE_SUFFIX</td>
+    <td>Underscored suffix starts with a lowercase letter. </td>
+    <td><green>YES</green></td>
+    <td><red>NO</no></td>
   </tr>
   <tr valign="top">
     <td><a name="MALFORMED_LAT"></a><a style="text-decoration:none" href="#MALFORMED_LAT">&#x1f517</a></td>
@@ -334,7 +369,7 @@ Data errors</p>
   <tr valign="top">
     <td><a name="US_LETTER"></a><a style="text-decoration:none" href="#US_LETTER">&#x1f517</a></td>
     <td>US_LETTER</td>
-    <td>Label uses <a href="https://travelmapping.net/devel/manual/wayptlabels.php#bannerafternumber"><code>USxxxA</code> or <code>USxxxB</code> rather than <code>USxxxAlt</code>, <code>USxxxBus</code>, <code>USxxxByp</code>, etc.</td>
+    <td>Label uses <a href="wayptlabels.php#bannerafternumber"><code>USxxxA</code> or <code>USxxxB</code> rather than <code>USxxxAlt</code>, <code>USxxxBus</code>, <code>USxxxByp</code>, etc.</td>
     <td><green>YES</green></td>
     <td><red>NO</red></td>
   </tr>
@@ -489,32 +524,23 @@ Near-miss points</p>
 <div class="text">
   Where two or more routes intersect, the routes must have a waypoint. If the coordinates of the waypoints are identical, the graph is connected and the Highway Browser can indicate intersecting routes to ease navigation through the routes when mapping travels. Near-miss points (NMPs) are waypoints very close together. They should be checked whether they are candidates to merge to fix broken intersecting links, and broken concurrencies.
   </br>
-  <a href="../logs.php#nmplogs">NMP files</a> can also be loaded into HDX to visualize their positions on a map. The desired NMP file cannot be selected directly but needs to be downloaded first.
-  </br>
-  </br>
-  The best practise to check NMPs, is as follows:
+  <a href="../logs.php#nmplogs">NMP files</a> can also be loaded into HDX to visualize their positions on a map. It is easiest to view NMPs by region as described below.
   </br>
   <ul>
-    <li>Open the <a href="/logs/nmpbyregion/">NMP files filtered by region</a> directory.</li>
-    <li>Select the nmp file for the region you want to check.</li>
-    <li>Open the file.</li>
-    <ul>
-      <li>If it is blank, the region has no NMPs.</li>
-    </ul>
-    <li>If there are entries, download the file.</li>
-    <li>Open the <a href="https://courses.teresco.org/metal/hdx/?noav">Highway Data Examiner</a> (HDX).</li>
-    <li>Go to <code>Option 3</code> on the left and select the downloaded nmp file.</li>
+    <li>Open the <a href="/logs/nmpbyregion/">NMP files filtered by region</a> index page.</li>
+    <li>See if the region you are checking has any unmarked pairs (second column of the table).</li>
+    <li>If so, select the "HDX" link for the region you want to check.</li>
     <ul>
       <li>You can see your region with some colored dots on the map now. These are NMP hotspots.</li>
     </ul>
-    <li>Zoom-in to investigate the points. Use the table on the right to go through the NMP hotspots.</br>Since all pairs of all involved routes are reported, very often more than just one line of the table on the right corresponds to a NMP hotspot.</li>
+    <li>Zoom-in to investigate the points. Use the table on the left to go through the NMP hotspots.</br>Since all pairs of all involved routes are reported, very often more than just one line of the table on the right corresponds to a NMP hotspot.</li>
     <ul>
       <li><green>Green</green> dots are those which are already marked FP.</li>
-      <li><yellow>Yellow</yellow> dots are off by exactly <code>0.000001°</code>. This is likely intentional to brake concurrencies and the waypoints are candidates to be marked FP.</li>
-      <li><red>Red</red> dots must be checked more detailed. These are most likely broken concurrencies or intersecting routes where the waypoints do not match.</li>
+      <li><yellow>Yellow</yellow> dots are off by exactly <code>0.000001°</code>. This was likely done intentionally to break concurrencies and the waypoints are candidates to be marked FP.</li>
+      <li><red>Red</red> dots must be checked more carefully. These could be legitmate nearby points that need to be separate (very close intersections).  Or these could be broken concurrencies or intersecting routes where the waypoints do not match precisely, but should.</li>
     </ul>
     <li>Click on the NMP hotspot lines or their endpoints to get info about the involved routes and waypoint labels.</li>
-    <li>Since you only see the points but not the whole network graph, you might need to open another HDX instance on load the region graph from <code>Option 1</code> where you can get the whole picture. To figure out which routes should intersect, what's going on there etc. For instance, it's possible that concurrent routes are only broken on a very short segment you don't see (or missed) with the <code>Option 1</code> view style.</li>
+    <li>Since you only see the points but not the whole network graph, you might need to open another HDX instance on load the region graph by choosing "Basic Search" and typing the region name to find the correct graph.  To figure out which routes should intersect, what's going on there etc. For instance, it's possible that concurrent routes are only broken on a very short segment you don't see (or missed) when viewing individual routes.</li>
     <li>Fix the coordinates in the corresponding <code>.wpt</code> files.</li>
     <li>Load the changed <code>.wpt</code> files into the <a href="/wptedit/">WPT file editor</a> to avoid causing unintended <a href="#errors">data errors</a>.</li>
   </ul>
@@ -529,7 +555,7 @@ Marking NMPs false positive FP</p>
   <ul>
     <li>The <code>FP Entry to Submit</code> can only be found in <a href="/logs/nearmisspoints.log">nearmisspoints.log</a> which contains all NMP entries including those which are already marked FP. The list is sorted by region code.
     <ul>
-      <li>Best practise is to use the browser search function to find <code>lat</code> or <code>lon</code> coordinates (or route code) which one can copy from the HDX table.</li>
+      <li>Best practice is to use the browser search function to find <code>lat</code> or <code>lon</code> coordinates (or route code) which one can copy from the HDX table.</li>
       <li>There are minimum two FP entries per hotspot but very often even more, please refer to the issue with multiple lines on the HDX table mentioned above.</li>
     </ul>
     <li>The entry must be added to <a href="https://github.com/TravelMapping/HighwayData/blob/master/nmpfps.log">nmpfps.log</a>.</li>
@@ -539,7 +565,7 @@ Marking NMPs false positive FP</p>
       <li>If not all entries for a NMP hotspot have previously been marked FP, only the missing entries need to be added. Entries ending with <code>[MARKED FP]</code> are already entered as FP.</li>
     </ul>
     </br>
-    <li>Do not forget checking for <a href="/logs/nmpfpsunmatched.log">unmatched NMP FPs</a>. Remove them from <a href="https://github.com/TravelMapping/HighwayData/blob/master/nmpfps.log">nmpfps.log</a>.</li>
+    <li>Do not forget to check for <a href="/logs/nmpfpsunmatched.log">unmatched NMP FPs</a>. Remove them from <a href="https://github.com/TravelMapping/HighwayData/blob/master/nmpfps.log">nmpfps.log</a>.</li>
   </ul>
 </div>
 

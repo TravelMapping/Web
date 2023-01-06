@@ -42,34 +42,21 @@
     		font-size: 24px;
         }
     </style>
-    <!-- jQuery -->
-    <script type="application/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <!-- TableSorter -->
-    <script type="application/javascript" src="/lib/jquery.tablesorter.min.js"></script>
 <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
-    <title>
+    <?php tm_common_js(); ?>
+<script type="text/javascript">
+    $(document).ready(function () {
+            $("#clinchedheader").click();
+            $("#sortsecond").click();
+            });
+</script>
+<title>
         <?php
         echo "Main user page for " . $tmuser;
         ?>
     </title>
 </head>
 <body>
-<script type="text/javascript">
-    $(document).ready(function () {
-            $("#regionsTable").tablesorter({
-                sortList: [[5,1], [4, 1]],
-                headers: {0: {sorter: false}, 6: {sorter: false}}
-            });
-            $("#systemsTable").tablesorter({
-                sortList: [[7,1], [6, 1]],
-                headers: {0: {sorter: false}, 9: {sorter: false}}
-            });
-            $('td').filter(function() {
-                return this.innerHTML.match(/^[0-9\s\.,%]+$/);
-            }).css('text-align','right');
-        }
-    );
-</script>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
 <div id="userbox">
 
@@ -198,20 +185,20 @@ SQL;
     <p class="text">
     User <?php echo $tmuser; ?> has travels in <?php echo tm_count_rows("clinchedOverallMileageByRegion", "where traveler='$tmuser'"); ?> regions.  Click in a row to view detailed stats for the region, on the "Map" link to load the region in Mapview, and the "HB" link to get a list of highways in the region.
     </p>
-    <table class="gratable tablesorter" id="regionsTable">
+    <table class="sortable gratable" id="regionsTable">
         <thead>
 	<tr><th colspan="2" /><th colspan="3">Active Systems Only</th>
 	    <th colspan="3">Active+Preview Systems</th><th colspan="2" /></tr>
         <tr>
-            <th class="sortable">Country</th>
-            <th class="sortable">Region</th>
-            <th class="sortable">Clinched (<?php tm_echo_units(); ?>)</th>
-            <th class="sortable">Overall (<?php tm_echo_units(); ?>)</th>
-            <th class="sortable">%</th>
-            <th class="sortable">Clinched (<?php tm_echo_units(); ?>)</th>
-            <th class="sortable">Overall (<?php tm_echo_units(); ?>)</th>
-            <th class="sortable">%</th>
-            <th colspan="2">Map</th>
+            <th>Country</th>
+            <th>Region</th>
+            <th id="clinchedheader">Clinched (<?php tm_echo_units(); ?>)</th>
+            <th>Overall (<?php tm_echo_units(); ?>)</th>
+            <th>%</th>
+            <th>Clinched (<?php tm_echo_units(); ?>)</th>
+            <th>Overall (<?php tm_echo_units(); ?>)</th>
+            <th>%</th>
+            <th colspan="2" class="no-sort">Map</th>
         </tr>
         </thead>
         <tbody>
@@ -240,9 +227,9 @@ SQL;
             }
             $activePreviewPercent = round($row['clinchedActivePreviewMileage'] / $row['totalActivePreviewMileage'] * 100.0, 2);
 	    $activePreviewPercent = sprintf('%0.2f', $activePreviewPercent);
-	    $activeStyle = 'style="background-color: '.tm_color_for_amount_traveled($row['clinchedActiveMileage'],$row['totalActiveMileage']).';"';
-	    $activePreviewStyle = 'style="background-color: '.tm_color_for_amount_traveled($row['clinchedActivePreviewMileage'],$row['totalActivePreviewMileage']).';"';
-            echo "<tr onclick=\"window.document.location='/user/region.php?u=" . $tmuser . "&amp;rg=" . $row['code'] . "'\"><td>" . $row['country'] . "</td><td>" . $row['name'] . '</td><td '.$activeStyle.'>' . tm_convert_distance($row['clinchedActiveMileage']) . "</td><td ".$activeStyle.">" . tm_convert_distance($row['totalActiveMileage']) . "</td><td ".$activeStyle.">" . $activePercent . "%</td><td ".$activePreviewStyle.">" . tm_convert_distance($row['clinchedActivePreviewMileage']) . "</td><td ".$activePreviewStyle.">" . tm_convert_distance($row['totalActivePreviewMileage']) . "</td><td ".$activePreviewStyle.">" . $activePreviewPercent . "%</td><td class='link'><a href=\"/user/mapview.php?u=" . $tmuser . "&amp;rg=" . $row['code'] . "\">Map</a></td><td class='link'><a href='/hb?rg={$row['code']}'>HB</a></td></tr>";
+	    $activeStyle = 'style="text-align: right; background-color: '.tm_color_for_amount_traveled($row['clinchedActiveMileage'],$row['totalActiveMileage']).';"';
+	    $activePreviewStyle = 'style="text-align: right; background-color: '.tm_color_for_amount_traveled($row['clinchedActivePreviewMileage'],$row['totalActivePreviewMileage']).';"';
+            echo "<tr onclick=\"window.document.location='/user/region.php?u=" . $tmuser . "&amp;rg=" . $row['code'] . "'\"><td>" . $row['country'] . "</td><td>" . $row['name'] . '</td><td '.$activeStyle.'>' . tm_convert_distance($row['clinchedActiveMileage']) . "</td><td ".$activeStyle.">" . tm_convert_distance($row['totalActiveMileage']) . "</td><td ".$activeStyle." data-sort=\"".$activePercent."\">" . $activePercent . "%</td><td ".$activePreviewStyle.">" . tm_convert_distance($row['clinchedActivePreviewMileage']) . "</td><td ".$activePreviewStyle.">" . tm_convert_distance($row['totalActivePreviewMileage']) . "</td><td ".$activePreviewStyle." data-sort=\"".$activePreviewPercent."\">" . $activePreviewPercent . "%</td><td class='link'><a href=\"/user/mapview.php?u=" . $tmuser . "&amp;rg=" . $row['code'] . "\">Map</a></td><td class='link'><a href='/hb?rg={$row['code']}'>HB</a></td></tr>";
         }
         $res->free();
         ?>
@@ -252,17 +239,17 @@ SQL;
     <p class="text">
     User <?php echo $tmuser; ?> has travels in <?php echo tm_count_distinct_rows("clinchedSystemMileageByRegion", "systemName", "where traveler='$tmuser'"); ?> highway systems.  Click in a row to view detailed stats for the system, on the "Map" link to load the system in Mapview, and the "HB" link to get a list of highways in the system.
     </p>
-    <table class="gratable tablesorter" id="systemsTable">
+    <table class="gratable sortable" id="systemsTable">
         <thead>
         <tr>
-            <th class="sortable">Country</th>
-            <th class="sortable">System Code</th>
-            <th class="sortable">System Name</th>
-            <th class="sortable">Tier</th>
-            <th class="sortable">Status</th>
-            <th class="sortable">Clinched (<?php tm_echo_units(); ?>)</th>
-            <th class="sortable">Total (<?php tm_echo_units(); ?>)</th>
-            <th class="sortable">% Clinched</th>
+            <th>Country</th>
+            <th>System Code</th>
+            <th>System Name</th>
+            <th>Tier</th>
+            <th>Status</th>
+            <th>Clinched (<?php tm_echo_units(); ?>)</th>
+            <th>Total (<?php tm_echo_units(); ?>)</th>
+            <th id="sortsecond">% Clinched</th>
             <th colspan="2">Map</th>
         </tr>
         </thead>
@@ -294,7 +281,7 @@ SQL;
         $res = tmdb_query($sql_command);
         while ($row = $res->fetch_assoc()) {
 	    if ($row['clinchedMileage'] == 0) continue;
-	    $systemStyle = 'style="background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$row['totalMileage']).';"';
+	    $systemStyle = 'style="text-align: right; background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$row['totalMileage']).';"';
             echo "<tr onclick=\"window.document.location='/user/system.php?u=" . $tmuser . "&amp;sys=" . $row['systemName'] . "'\" class=\"status-" . $row['level'] . "\">";
             echo "<td>" . $row['countryCode'] . "</td>";
             echo "<td>" . $row['systemName'] . "</td>";
@@ -303,7 +290,7 @@ SQL;
             echo "<td>" . $row['level'] . "</td>";
             echo "<td ".$systemStyle.">" . tm_convert_distance($row['clinchedMileage']) . "</td>";
             echo "<td ".$systemStyle.">" . tm_convert_distance($row['totalMileage']) . "</td>";
-            echo "<td ".$systemStyle.">" . $row['percentage'] . "%</td>";
+            echo "<td ".$systemStyle." data-sort=\"".$row['percentage']."\">" . $row['percentage'] . "%</td>";
             echo "<td class='link'><a href=\"/user/mapview.php?u={$tmuser}&amp;sys={$row['systemName']}\">Map</a></td>";
             echo "<td class='link'><a href='/hb?sys={$row['systemName']}'>HB</a></td></tr>";
         }

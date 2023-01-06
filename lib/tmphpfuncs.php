@@ -519,10 +519,10 @@ function tm_common_js() {
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-  <!-- TableSorter -->
-  <script src="/lib/jquery.tablesorter.min.js" type="text/javascript"></script>
   <!-- clipboard.js -->
   <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  <!-- sortable https://github.com/tofsjonas/sortable -->
+  <script src="/lib/sortable.js" type="text/javascript"></script>
 END;
     echo "<!-- tm_common_js from tmphpfuncs.php END -->\n";
 }

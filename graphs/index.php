@@ -187,7 +187,7 @@ function tableFilter(event){
           tRow.classList.add("hideNumS");
         }
         else {
-          rRow.classList.remove("hideNumS");
+          tRow.classList.remove("hideNumS");
         }
       }
       hideRow(tRow);      

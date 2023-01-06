@@ -18,9 +18,14 @@
 define("TM_NO_USER", "null");
 $tmuser = TM_NO_USER;
 
+// from	https://stackoverflow.com/questions/10010430/strange-thing-with-ctype-alnum to	replace	problematic ctype_alnum
+function ctype_alnum_portable($text) {
+    return (preg_match('~^[0-9a-z]*$~iu', $text) > 0);
+}
+
 if (array_key_exists("u", $_GET)) {
     $tmusertemp = str_replace("_", "", $_GET['u']);
-    if (ctype_alnum($tmusertemp)) {
+    if (ctype_alnum_portable($tmusertemp)) {
         $tmuser = $_GET['u'];
         setcookie("lastuser", $tmuser, time() + (86400 * 30), "/", null, true);
     }

@@ -110,10 +110,6 @@ if (( $tmuser != "null") || ( $region != "" )) {
 >
 <script type="text/javascript">
     $(document).ready(function () {
-            $("table.tablesorter").tablesorter({
-                sortList: [[0,0],[2,0]],
-                headers: {0: {sorter: false}}
-            });
             $('td').filter(function() {
                 return this.innerHTML.match(/^[0-9\s\.,%]+$/);
             }).css('text-align','right');
@@ -380,19 +376,19 @@ SQL;
             ?>
         </tbody>
     </table>
-    <table class="gratable tablesorter" id="systemsTable">
-        <caption>TIP: Click on a column head to sort. Hold SHIFT in order to sort by multiple columns.</caption>
+    <table class="sortable gratable" id="systemsTable">
+        <caption>TIP: Click on a column head to sort</caption>
         <thead>
         <tr>
             <th colspan="6">Statistics by System</th>
         </tr>
         <tr>
-            <th class="sortable">System Code</th>
-            <th class="sortable">System Name</th>
-            <th class="sortable">Clinched (<?php tm_echo_units(); ?>)</th>
-            <th class="sortable">Total (<?php tm_echo_units(); ?>)</th>
-            <th class="sortable">%</th>
-            <th class="nonsortable">Map</th>
+            <th>System Code</th>
+            <th>System Name</th>
+            <th>Clinched (<?php tm_echo_units(); ?>)</th>
+            <th>Total (<?php tm_echo_units(); ?>)</th>
+            <th>%</th>
+            <th class="no-sort">Map</th>
         </tr>
         </thead>
         <tbody>
@@ -422,18 +418,18 @@ SQL;
             echo "<td>" . $row['fullName'] . "</td>";
             echo "<td ".$style.">" . tm_convert_distance($row['clinchedMileage']) . "</td>";
             echo "<td ".$style.">" . tm_convert_distance($row['totalMileage']) . "</td>";
-            echo "<td ".$style.">" . $row['percentage'] . "%</td>";
+            echo "<td ".$style." data-sort=\"".$row['percentage']."\">" . $row['percentage'] . "%</td>";
             echo "<td class='link'><a href='/hb/showroute.php?rg={$region}&amp;sys={$row['systemName']}'>HB</a></td></tr>";
         }
         $res->free();
         ?>
         </tbody>
     </table>
-    <table class="gratable" id="routesTable">
-        <caption>Click on a row to see the details and a map of the route.</caption>
+    <table class="sortable gratable" id="routesTable">
+        <caption>Click on a column head to sort. Click on a row to see the details and a map of the route.</caption>
         <thead>
             <tr><th colspan="6">Statistics by Route: (<?php echo "<a href=\"/user/mapview.php?u=".$tmuser."&amp;rg=".$region."\">" ?>Full Map)</a></th></tr>
-            <tr><th class="sortable">Tier</th><th class="nonsortable">Route</th><th class="sortable">#</th><th class="sortable">Clinched (<?php tm_echo_units(); ?>)</th><th class="sortable">Total (<?php tm_echo_units(); ?>)</th><th class="sortable">%</th></tr>
+            <tr><th>Tier</th><th class="no-sort">Route</th><th class="sortable">#</th><th>Clinched (<?php tm_echo_units(); ?>)</th><th>Total (<?php tm_echo_units(); ?>)</th><th>%</th></tr>
         </thead>
         <tbody>
             <?php
@@ -466,7 +462,7 @@ SQL;
                     echo "<td>{$row['systemName']}.{$row['root']}</td>";
                     echo "<td>".tm_convert_distance($row['clinchedMileage'])."</td>";
                     echo "<td>".tm_convert_distance($row['totalMileage'])."</td>";
-                    echo "<td>".$row['percentage']."%</td></tr>\n";
+                    echo "<td data-sort=\"".$row['percentage']."\">".$row['percentage']."%</td></tr>\n";
                 }
                 $res->free();
             ?>
@@ -482,12 +478,12 @@ SQL;
     </thead>
     <tbody>
     <tr><td>
-    <table class="gratable tablesorter" id="activeTravelersTable" style="width: auto;">
+    <table class="sortable gratable" id="activeTravelersTable" style="width: auto;">
         <thead>
-            <tr><th class="sortable">Rank</th><th class="sortable">Traveler</th><th class="sortable">Distance Traveled (<?php tm_echo_units(); ?>)</th><th>%</th><th class="sortable">Traveled Routes</th><th class="sortable">Clinched Routes</th></tr>
+            <tr><th>Rank</th><th>Traveler</th><th>Distance Traveled (<?php tm_echo_units(); ?>)</th><th>%</th><th>Traveled Routes</th><th>Clinched Routes</th></tr>
+	  <tr style=><td></td><td>TOTAL CLINCHABLE</td><td><?php echo tm_convert_distance($activeTotalMileage); ?></td><td>100%</td><td><?php echo "$totalActiveRoutes"; ?></td><td><?php echo "$totalActiveRoutes"; ?></td></tr>
         </thead>
         <tbody>
-	  <tr style=><td></td><td>TOTAL CLINCHABLE</td><td><?php echo tm_convert_distance($activeTotalMileage); ?></td><td>100%</td><td><?php echo "$totalActiveRoutes"; ?></td><td><?php echo "$totalActiveRoutes"; ?></td></tr>
 	  <?php
 	  $prev_mileage = 0;
 	  $pre_rank = 1;
@@ -509,7 +505,8 @@ SQL;
 	      echo "<td>".$tie_rank."</td>";
 	      echo "<td>".$traveler."</td>";
 	      echo "<td ".$mileageStyle.">".tm_convert_distance($stats['activeClinched'])."</td>";
-	      echo "<td ".$mileageStyle.">".round($stats['activeClinched'] / $activeTotalMileage * 100, 2)."%</td>";
+	      $pct = round($stats['activeClinched'] / $activeTotalMileage * 100, 2);
+	      echo "<td ".$mileageStyle." data-sort=\"".$pct."\">".$pct."%</td>";
 	      echo "<td ".$drivenStyle.">".$stats['driven']."</td>";
 	      echo "<td ".$clinchedStyle.">".$stats['clinched']."</td></tr>\n";
 	      $pre_rank += 1;
@@ -519,12 +516,12 @@ SQL;
 	</tbody>
 	</table>
     </td><td>
-    <table class="gratable tablesorter" id="activePreviewTravelersTable" style="width: auto;">
+    <table class="sortable gratable" id="activePreviewTravelersTable" style="width: auto;">
         <thead>
-            <tr><th class="sortable">Rank</th><th class="sortable">Traveler</th><th class="sortable">Distance Traveled (<?php tm_echo_units(); ?>)</th><th>%</th><th class="sortable">Traveled Routes</th><th class="sortable">Clinched Routes</th></tr>
+            <tr><th>Rank</th><th class="sortable">Traveler</th><th>Distance Traveled (<?php tm_echo_units(); ?>)</th><th>%</th><th>Traveled Routes</th><th>Clinched Routes</th></tr>
+	  <tr style=><td></td><td>TOTAL CLINCHABLE</td><td><?php echo tm_convert_distance($activePreviewTotalMileage); ?></td><td>100.00%</td><td><?php echo "$totalActivePreviewRoutes"; ?></td><td><?php echo "$totalActivePreviewRoutes"; ?></td></tr>
         </thead>
         <tbody>
-	  <tr style=><td></td><td>TOTAL CLINCHABLE</td><td><?php echo tm_convert_distance($activePreviewTotalMileage); ?></td><td>100.00%</td><td><?php echo "$totalActivePreviewRoutes"; ?></td><td><?php echo "$totalActivePreviewRoutes"; ?></td></tr>
 	  <?php
 	  $prev_mileage = 0;
 	  $pre_rank = 1;
@@ -546,7 +543,8 @@ SQL;
 	      echo "<td>".$tie_rank."</td>";
 	      echo "<td>".$traveler."</td>";
 	      echo "<td ".$mileageStyle.">".tm_convert_distance($stats['activePreviewClinched'])."</td>";
-	      echo "<td ".$mileageStyle.">".round($stats['activePreviewClinched'] / $activePreviewTotalMileage * 100, 2)."%</td>";
+	      $pct = round($stats['activePreviewClinched'] / $activePreviewTotalMileage * 100, 2);
+	      echo "<td ".$mileageStyle." data-sort=\"".$pct."\">".$pct."%</td>";
 	      echo "<td ".$drivenStyle.">".$stats['driven']."</td>";
 	      echo "<td ".$clinchedStyle.">".$stats['clinched']."</td></tr>\n";
 	      $pre_rank += 1;

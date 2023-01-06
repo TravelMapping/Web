@@ -89,22 +89,23 @@ require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
 <h1>Travel Mapping Route Finder</h1>
 <p class="text" id="frIntro">
 Use the table below to find routes from among the
-<?php $r = number_format(tm_count_rows("routes", "")); echo $r; ?> routes in TM's database.
-You can filter by most categories.  To filter by route name, type a
-substring of its name in the box below "Route Name" then hit Enter.
-Initial loading may take several seconds to a few minutes depending on
-the server and network conditions and your browser's capabilities.
-Table updates after changing the filters can also take a few seconds.
-Links under ".list Name" will take you to the map and other details of that
-route.
+<?php $r = number_format(tm_count_rows("routes", "")); echo $r; ?>
+ routes in TM's database.  You can filter by most categories.  To
+filter by route name, type a substring of its name in the box below
+"Route Name" then hit Enter.  Initial loading may take several seconds
+to a few minutes depending on the server and network conditions and
+your browser's capabilities.  Table updates after changing the filters
+can also take a few seconds.  If enabled, column sorting can be memory
+intensive and sorting can take a few seconds.  Links under ".list
+Name" will take you to the map and other details of that route.
 <?php tm_dismiss_button("frIntro"); ?>
 </p>
 <div id="choppedbox">
 <table class="gratable" id="chopped">
 <thead>
-<tr><th colspan="8">Select Route to Display, Select Filters, or
+<tr><th colspan="8">Select Route to Display, Select Filters,
 <input type="button" onclick="clearChoppedFilters();" value="Clear Filters" />
-</th></tr>
+, or <span id="sortmsg"><input type="button" onclick="enableColumnSorting();" value="Enable Column Sorting" /> (memory intensive)</span></th></tr>
 <tr><th colspan="8" style="color:red; text-align:center;" id="chopmessage">Loading Route Data...</th></tr>
 <tr><th>Tier</th><th>Continent</th><th>Country</th><th>Region</th><th>System</th><th>Route&nbsp;Name</th><th>.list Name</th><th>Level</th></tr>
 <tr id="chopselectrow" style="display: none"><th>

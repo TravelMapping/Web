@@ -75,15 +75,6 @@ table.gratable tr[onclick]:hover td, table.gratable tr.user-highlight td {
     cursor: pointer;
 }
 
-table.tablesorter th.nonsortable {
-    background-color: #DDDDDD;
-}
-
-table.tablesorter th.sortable:hover {
-    background-color: #CCCCFF !important;
-    cursor: pointer;
-}
-
 table tr.status-active td, table tr td.status-active {
     background-color: #CCFFCC;
 }
@@ -94,14 +85,6 @@ table tr.status-preview td, table tr td.status-preview {
 
 table tr.status-devel td, table tr td.status-devel {
     background-color: #FFCCCC;
-}
-
-table.tablesorter th.headerSortUp {
-    background-color: #DDFFDD !important;
-}
-
-table.tablesorter th.headerSortDown {
-    background-color: #FFDDDD !important;
 }
 
 table.gratable td.link {

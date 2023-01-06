@@ -8,8 +8,6 @@
 
 <!-- jQuery -->
 <script type="application/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-<!-- TableSorter -->
-<script type="application/javascript" src="/lib/jquery.tablesorter.min.js"></script>
 <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
 <title>Travel Mapping Developer Logs</title>
 </head>
@@ -66,8 +64,7 @@ $activedc = tm_count_rows("datacheckErrors", "join routes on datacheckErrors.rou
 Near-miss points (NMPs) are waypoints very close together and might be candidates to merge. NMP files can be loaded into HDX to visualize their positions on a map.
 <ul>
   <li><a href="/logs/tm-master.nmp">Master NMP file with all near-miss points of the project</a></li>
-  <li><a href="/logs/nmpbyregion/">NMP files filtered by region (individual files)</a></li>
-  <li><a href="/logs/nmpbyregion/nmpbyregion.zip">NMP files filtered by region (zip archive)</a></li>
+  <li><a href="/logs/nmpbyregion/">NMP files indexed by region, sorted by the number of unmarked NMP pairs, and with links to download individual files or view directly in HDX</a></li>
   <li><a href="/logs/nearmisspoints.log">Log of all near-miss point entries for marking false positives (FP)</a></li>
   <li><a href="/logs/nmpfpsunmatched.log">Log of unmatched FP entries from nmpfps.log</a></li>
 </ul>
@@ -81,6 +78,7 @@ Near-miss points (NMPs) are waypoints very close together and might be candidate
 <li><a href="/logs/siteupdate.log">Complete output log from the site update process</a></li>
 <li><a href="/logs/highwaydatastats.log">Log of highway data stats, useful to verify web code</a></li>
 <li><a href="/logs/concurrencies.log">List of highway concurrencies detected</a></li>
+<li><a href="/logs/flippedroutes.log">List of routes flagged as reversed for processing multi-region .list entries</a></li>
 </ul>
 </div>
 
