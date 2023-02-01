@@ -4,21 +4,35 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
+<?php tm_common_js(); ?>
+<script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
+<script src="../lib/graphindexfuncs.js" type="text/javascript"></script>
 <?php
 $archiveSet = "";
 if (array_key_exists("gv", $_GET)) {
     $archiveSet = strtolower($_GET['gv']);
 }
 
+// build info about graph types
+$result = $tmdb->query("SELECT * FROM graphTypes");
+$graphTypeValues = array();
+$graphTypeDescrs = array();
+while ($row = $result->fetch_array()) {	
+	array_push($graphTypeValues, $row['category']);
+	array_push($graphTypeDescrs, $row['descr']);
+}
+$result->free();
+
 // build info about graph archive sets
 $result = tmdb_query("SELECT * from graphArchiveSets");
 $currIndex = 0;
 $matchIndex = -1;
 $graphPath = "../graphdata/";
-$archiveSets = array('setName'=>array(), 'descr'=>array());
+$archiveSetNames = array();
+$archiveSetDescrs = array();
 while ($row = $result->fetch_array()) {
-    array_push($archiveSets['setName'], $row['setName']);
-    array_push($archiveSets['descr'], $row['descr']);
+    array_push($archiveSetNames, $row['setName']);
+    array_push($archiveSetDescrs, $row['descr']);
     if ($row['setName'] == $archiveSet) {
         $matchIndex = $currIndex;
 	$graphPath = "../grapharchives/".$archiveSet."/";
@@ -99,24 +113,30 @@ academic use.  Other use is by written permission only.
       echo "Most Recent Graphs";
   }
   else {
-      echo $archiveSets['descr'][$matchIndex]." Graphs";
+      echo $archiveSetDescrs[$matchIndex]." Graphs";
   }
   ?>
 </p>
 <p />
-<div style="text-align:center;">
-  <p>Filter by number of vertices (in default/collapsed)</p>
+<div class="text">
+  <p>Filter by number of vertices (in default/collapsed) 
   from
-  <input type="number" min="1" value="1" id="regMin" style="width:6rem;" onchange="tableFilter(event)">
+  <input type="number" min="1" value="1" id="minSize" style="width:6rem;" onchange="graphTableFilterSizeChanged(event)">
     to
-    <input type="number" min="1" value="30000" id="regMax" style="width:6rem;" onchange="tableFilter(event)">
+    <input type="number" min="1" value="2000000" id="maxSize" style="width:6rem;" onchange="graphTableFilterSizeChanged(event)">
       vertices
-      <p>Filter by graph type</p>
-      <select id="regFil" onchange="selFilter(event)">
+      <p>Filter by graph type 
+      <select id="graphTypes" onchange="graphTypeFilterChanged(event)">
 	<option value="all">All</option>
       </select>
+      </p>
+      <p>Switch to graph set
+	<select id="graphSet" onchange="graphSetChanged(event)">
+	  <option value="current">Most Recent Graphs</option>
+	</select>
+      </p>
     </div>
-    <table class="gratable" id="regTable" border="1">
+    <table class="gratable" id="graphTable" border="1">
       <thead>
 	<tr>
 	  <th rowspan="2">Graph Description</th>
@@ -139,7 +159,7 @@ academic use.  Other use is by written permission only.
 	  <th>Download Link</th><th>Vertices</th><th>Edges</th>
 	</tr>
       </thead>
-      <tbody id="regBody">
+      <tbody id="graphTableBody">
 	<?php
 	if ($archiveSet == "") {
 	   $result = $tmdb->query("SELECT * FROM graphs ORDER BY descr, format");
@@ -192,102 +212,31 @@ academic use.  Other use is by written permission only.
 	   <td>".$srow['edges']."</td>
            </tr>\n";
 	  }
-$values = array();
-$descr = array();
-$result = $tmdb->query("SELECT * FROM graphTypes");
-while ($row = $result->fetch_array()) {	
-	array_push($values, $row[0]);
-	array_push($descr, $row[1]);
-}
 ?>
-</tbody>
-</table>
-
-<script>
-$("#regTable").DataTable(
-	{paging: false,
-	info: false
-});
-
-// populate graph types menu
-var vals = <?php echo '["' . implode('", "', $values) . '"]' ?>;
-var inner = <?php echo '["' . implode('", "', $descr) . '"]' ?>;
-for (var i=0; i<vals.length; i++) {
-  var op = document.createElement("option");
-  op.value = vals[i];
-  op.innerHTML = vals[i] + ": " + inner[i];
-  document.getElementById("regFil").appendChild(op);
-}
-
-// filter for min/max number of vertices
-function tableFilter(event){
-  if (event.target.value > 0) {
-    let tbody = document.getElementById("regBody");
-    // loop over each table row, where the cell at index 2
-    // has the size as its className prepended with a 'c'
-    // mark each row with a class indicating if should be hidden
-    // for exceeding the max or falling below the min
-    for (var i=0; i<tbody.rows.length; i++) {
-      let tRow = tbody.rows[i];
-      let numV = parseInt(tRow.cells[2].className.substring(1));
-      if (event.target.id == "regMax") {
-        if (numV > event.target.value) {
-          tRow.classList.add("hideNumL");
-        }
-        else {
-          tRow.classList.remove("hideNumL");
-        }
-      }
-      else {
-        if (numV < event.target.value) {
-          tRow.classList.add("hideNumS");
-        }
-        else {
-          tRow.classList.remove("hideNumS");
-        }
-      }
-      hideRow(tRow);      
-    }
-  }
-}
-
-// filter based on graph categories
-function selFilter(event) {  
-  let tbody = document.getElementById("regBody");
-
-  // loop over each row, if selection is anything but "all" we filter
-  // based on the category, which is stored as the class of each row
-  for (var i=0; i<tbody.rows.length; i++) {
-    if (document.getElementById("regFil").value != "all" &&
-        tbody.rows[i].className.indexOf(document.getElementById("regFil").value) == -1) {
-      tbody.rows[i].classList.add("hideType");
-    }
-    else {
-      tbody.rows[i].classList.remove("hideType");
-    }
-    hideRow(tbody.rows[i]);  
-  }
-}
-
-// do the actual hide/show based on the existence of any of the
-// classes that would hide it based on one of those categories
-function hideRow(elem) {
-  if (elem.classList.contains("hideType") ||
-      elem.classList.contains("hideNumL") ||
-      elem.classList.contains("hideNumS")) {
-    elem.style.display = "none";
-  }
-  else {
-    elem.style.display = "";
-  }
-}
-</script>
+      </tbody>
+    </table>
+    
 <p class="text">
 The most recent site update including graph generation completed at <?php echo tm_update_time(); ?> US/Eastern.
 </p>
 
+  <script type="text/javascript">
+
+    $("#graphTable").DataTable(
+    {paging: false,
+    info: false
+    });
+    
+    let graphTypeVals = <?php echo '["'.implode('", "', $graphTypeValues).'"]' ?>;
+    let graphTypeDescrs = <?php echo '["'.implode('", "', $graphTypeDescrs).'"]' ?>;
+    let graphArchiveNames = <?php echo '["'.implode('", "', $archiveSetNames).'"]' ?>;
+    let graphArchiveDescrs = <?php echo '["'.implode('", "', $archiveSetDescrs).'"]' ?>;
+    let currentArchiveSet = <?php echo '"'.$archiveSet.'"' ?>;
+    populateGraphIndexMenus(graphTypeVals, graphTypeDescrs,
+        graphArchiveNames, graphArchiveDescrs, currentArchiveSet);
+  </script>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmfooter.php"; ?>
-</body>
+  </body>
 <?php
     $tmdb->close();
 ?>
