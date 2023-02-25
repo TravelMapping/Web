@@ -200,7 +200,7 @@ following sources of highway information.</p>
 	    <ul>
 	      <li><a href="https://www.hac.hr/">Croatian Motorways Ltd.</a>. Official site of the motorway network in Croatia.</li>
 	      <li><a href="https://www.hrvatske-ceste.hr/">Croatian Roads</a>. State highway list from Croatian Roads d. o. o.</li>
-	      <li><a href="https://narodne-novine.nn.hr/clanci/sluzbeni/2018_11_103_2021.html">List of dedicated routes</a>. Classification of public roads</li>
+	      <li><a href="https://narodne-novine.nn.hr/clanci/sluzbeni/2022_04_41_510.html">List of dedicated routes</a>. Classification of public roads</li>
 	    </ul>
 	  </li>
 	  <li><a name="cze"></a><a style="text-decoration:none" href="#cze">&#x1f517</a>Czechia
@@ -238,6 +238,7 @@ following sources of highway information.</p>
 	    <ul>
           <li><a href="https://routes.fandom.com/">WikiSARA</a>. Hobbyist web site.</li>
           <li><a href="http://saratlas.free.fr/">SARAtlas</a>. Motorway maps and exit guides site.</li>
+          <li><a href="https://www.data.gouv.fr">data.gouv.fr</a>. French public open data platform.</li>
 	    </ul>
 	  </li>
 	  <li><a name="geo"></a><a style="text-decoration:none" href="#geo">&#x1f517</a>Georgia
@@ -444,7 +445,8 @@ following sources of highway information.</p>
 	  </li>
 	  <li><a name="prt"></a><a style="text-decoration:none" href="#prt">&#x1f517</a>Portugal
 	    <ul>
-	      <li><a href="http://www.brisa.pt/PresentationLayer/homepageclientes.aspx?idiomax=2&amp;menuid=108">Brisa - Portugal</a>. Traffic and motorway site for Brisa in Portugal.</li>
+	      <li><a href="https://www.brisa.pt/pt/autoestradas/rede/">Brisa - Portugal</a>. Traffic and motorway site for Brisa in Portugal.</li>
+	      <li><a href="https://www.infraestruturasdeportugal.pt/">Infraestruturas de Portugal</a>. Official site of the road authority.</li>
 	    </ul>
 	  </li>
 	  <li><a name="rou"></a><a style="text-decoration:none" href="#rou">&#x1f517</a>Romania
