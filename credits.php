@@ -447,6 +447,7 @@ following sources of highway information.</p>
 	    <ul>
 	      <li><a href="https://www.brisa.pt/pt/autoestradas/rede/">Brisa - Portugal</a>. Traffic and motorway site for Brisa in Portugal.</li>
 	      <li><a href="https://www.infraestruturasdeportugal.pt/">Infraestruturas de Portugal</a>. Official site of the road authority.</li>
+	      <li><a href="https://www.google.com/maps/d/u/0/edit?mid=12fQksxWIRwoQN8fZ21JxzH7i2J4gBfyF">Estradas de Portugal - mapa - PRN 2000</a>. Hobbyist map based on official national plan but with higher resolution.</li>
 	    </ul>
 	  </li>
 	  <li><a name="rou"></a><a style="text-decoration:none" href="#rou">&#x1f517</a>Romania
