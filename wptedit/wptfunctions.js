@@ -1471,7 +1471,7 @@ function VISIBLE_DISTANCE()
 	  wpts[i].errors |= DC_LONG_SEGMENT;
 	}
       visdist += segdist;
-      if(visdist > 10 && IsVisible(wpts[i].label))
+      if(visdist > 10 && (IsVisible(wpts[i].label)) || i == wpts.length-1)
 	{
 	  wpts[i].errors |= DC_VISIBLE_DISTANCE;
 	}
