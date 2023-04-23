@@ -80,6 +80,7 @@ following sources of highway information.</p>
 	  <li><a name="aut"></a><a style="text-decoration:none" href="#aut">&#x1f517</a>Austria
 	    <ul>
         <li><a href="https://www.asfinag.at/">ASFINAG: Motorways and Expressways Road Concessionaire</a>. Official site of the motorway/expressway network in Austria.</li>
+        <li><a href="https://www.ris.bka.gv.at/">Legal Information System of the Republic of Austria</a>. Platform and data base providing information on Austrian law.</li>
 	    </ul>
 	  </li>
 	  <li><a name="aze"></a><a style="text-decoration:none" href="#aze">&#x1f517</a>Azerbaijan
