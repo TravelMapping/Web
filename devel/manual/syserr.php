@@ -522,7 +522,7 @@ Check for broken concurrencies</p>
 <p class="heading"><a name="nearmisspoint"></a><a style="text-decoration:none" href="#nearmisspoint">&#x1f517</a>
 Near-miss points</p>
 <div class="text">
-  Where two or more routes intersect, the routes must have a waypoint. If the coordinates of the waypoints are identical, the graph is connected and the Highway Browser can indicate intersecting routes to ease navigation through the routes when mapping travels. Near-miss points (NMPs) are waypoints very close together. They should be checked whether they are candidates to merge to fix broken intersecting links, and broken concurrencies.
+  Where two or more routes intersect, the routes must have a waypoint. If the coordinates of the waypoints are identical, the graph is connected and <i>showroute</i> can indicate intersecting routes to ease navigation through the routes when mapping travels. Near-miss points (NMPs) are waypoints very close together. They should be checked whether they are candidates to merge to fix broken intersecting links, and broken concurrencies.
   </br>
   <a href="../logs.php#nmplogs">NMP files</a> can also be loaded into HDX to visualize their positions on a map. It is easiest to view NMPs by region as described below.
   </br>

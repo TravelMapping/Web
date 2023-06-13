@@ -46,7 +46,7 @@ Steps to review a preview highway system</p>
   <li><a href="#generalcheck">General mapview or HDX check</a></li>
   <li><a href="#names">Check route names in Highway Browser route list</a></li>
   <li><a href="#wpteditor">Check routes with Waypoint File Editor</a></li>
-  <li><a href="#hb">Check routes with Highway Browser</a></li>
+  <li><a href="#hb">Check routes with <i>showroute</i></a></li>
   <li><a href="#questions">Check forum for questions</a></li>
   <li><a href="#finalcheck">Final general check</a></li>
 </ol>
@@ -83,7 +83,7 @@ Check the highway system for completeness</p>
     <li>Ask on the forum's thread for sources if they are not indicated.</li>
     <li>Find additional sources if required.</li>
   </ul>
-  <li>Check that all routes from the sources are available in the <a href="/hb/">Highway Browser</a>.</li>
+  <li>Check that all routes from the sources are available in the <a href="/hb/">Highway Browser</a> and Route Finder.</li>
   <ul>
     <li>If a route is missing and there is no notification why it is missing, report it on the forum.</li>
   </ul>
@@ -147,17 +147,17 @@ Check routes with Waypoint File Editor</p>
     <li><a href="sysnew.php#developwpt">Signed endpoints for the route and correct routing</a>.</li>
     </br>Check with deep zoom into the map:
     <li><a href="points.php">Position of the waypoints</a>.
-    <li><a href="wayptlabels.php">Label names</a> of waypoints which do <b>not</b> refer to other TM routes in Highway Browser.</li>
+    <li><a href="wayptlabels.php">Label names</a> of waypoints which do <b>not</b> refer to other routes in TM's database.</li>
   </ul>
 </ul>
 </div>
 
 <p class="subheading"><a name="hb"></a><a style="text-decoration:none" href="#hb">&#x1f517</a>
-Check routes with Highway Browser</p>
+Check routes with <i>showroute</i></p>
 
 <div class="text">
 <ul>
-  <li>Open the <a href="/hb/">Highway Browser</a> and check route by route.
+  <li>Open the <a href="/hb/">Highway Browser</a> and check each route in <i>showroute</i>.
   </br>Pay special attention to:</li>
   <ul>
     <li>Label names of intersecting TM routes.
