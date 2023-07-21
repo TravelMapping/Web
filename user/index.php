@@ -52,7 +52,7 @@
 </script>
 <title>
         <?php
-        echo "Main user page for " . $tmuser;
+        echo "Main Travel Mapping - ".$tmMode_p." User Page for " . $tmuser;
         ?>
     </title>
 </head>
@@ -73,16 +73,19 @@ if ( $tmuser == "null") {
     echo "</html>\n";
     exit;
 }
-echo "<h1>Main user page for ".$tmuser."</h1>";
+echo "<h1>Main Travel Mapping - ".$tmMode_p." User Page for ".$tmuser."</h1>";
 ?>
 </div>
 <div id="body">
     <h2>User Links</h2>
     <ul class="text">
-      <li><a href="/logs/users/<?php echo $tmuser; ?>.log">Log File</a>, where you can find any errors from processing <a href="https://github.com/TravelMapping/UserData/blob/master/list_files/<?php echo $tmuser; ?>.list"><?php echo $tmuser; ?>.list</a>, and statistics.</li>
-      <li>Browse the travels of <?php echo $tmuser; ?> with <a href="mapview.php?v">Mapview</a>.</li>
-      <li><a href="topstats.php">Browse the top stats for the travels of <?php echo $tmuser; ?></a>.</li>
-      <li><a href="routesbynumber.php">Table of routes traveled by number for <?php echo $tmuser; ?></a>.</li>
+      <li><a href="/logs/users/<?php echo $tmuser; ?>.log">Log File</a>, where you can find any errors from processing <a href="https://github.com/TravelMapping/UserData/blob/master/<?php echo $tmlistdir."/".$tmuser; ?>.list"><?php echo $tmuser; ?>.list</a>, and statistics.</li>
+      <li>Browse the <?php echo $tmmode_s;?> travels of <?php echo $tmuser; ?> with <a href="mapview.php?v">Mapview</a>.</li>
+      <li><a href="topstats.php">Browse the top stats for the <?php echo $tmmode_s;?> travels of <?php echo $tmuser; ?></a>.</li>
+      <?php
+       if ($tmmode_s == "highway") {
+          echo '<li><a href="routesbynumber.php">Table of routes traveled by number for '.$tmuser.'</a>.</li>';
+      } ?>
     </ul>
     <div id="overall">
         <h2>Overall Stats</h2>
@@ -183,7 +186,7 @@ SQL;
     </div>
     <h2>Stats by Region</h2>
     <p class="text">
-    User <?php echo $tmuser; ?> has travels in <?php echo tm_count_rows("clinchedOverallMileageByRegion", "where traveler='$tmuser'"); ?> regions.  Click in a row to view detailed stats for the region, on the "Map" link to load the region in Mapview, and the "HB" link to get a list of highways in the region.
+    User <?php echo $tmuser; ?> has <?php echo $tmmode_s;?> travels in <?php echo tm_count_rows("clinchedOverallMileageByRegion", "where traveler='$tmuser'"); ?> regions.  Click in a row to view detailed stats for the region, on the "Map" link to load the region in Mapview, and the "HB" link to get a list of <?php echo $tmmode_p;?> in the region.
     </p>
     <table class="sortable gratable" id="regionsTable">
         <thead>
@@ -237,7 +240,7 @@ SQL;
     </table>
     <h2>Stats by System</h2>
     <p class="text">
-    User <?php echo $tmuser; ?> has travels in <?php echo tm_count_distinct_rows("clinchedSystemMileageByRegion", "systemName", "where traveler='$tmuser'"); ?> highway systems.  Click in a row to view detailed stats for the system, on the "Map" link to load the system in Mapview, and the "HB" link to get a list of highways in the system.
+    User <?php echo $tmuser.' has '.$tmmode_s;?> travels in <?php echo tm_count_distinct_rows("clinchedSystemMileageByRegion", "systemName", "where traveler='$tmuser'").' '.$tmmode_s ?> systems.  Click in a row to view detailed stats for the system, on the "Map" link to load the system in Mapview, and the "HB" link to get a list of <?php echo $tmmode_p;?> in the system.
     </p>
     <table class="gratable sortable" id="systemsTable">
         <thead>

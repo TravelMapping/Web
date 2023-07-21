@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
  ***
- * Highway Browser Main Page.
+ * Highway/Other Mode Browser Main Page.
  * If a root is supplied, this page will redirect to showroute.php
  * Otherwise, it will show a list of routes that the user can select from, with filters by region and system availible.
  * URL Params:
@@ -13,6 +13,7 @@
  *  ([r [u]] [rg] [sys])
  ***
  -->
+<?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -43,7 +44,6 @@
 	}
 
     </style>
-    <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
     <?php
     // check for region and/or system parameters
     $regions = tm_qs_multi_or_comma_to_array("rg");
@@ -90,7 +90,7 @@
     ?>
     <?php tm_common_js(); ?>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
-    <title>Travel Mapping Highway Browser</title>
+    <title>Travel Mapping <?php echo $tmMode_s; ?> Browser</title>
 </head>
 <?php 
 $nobigheader = 1;
@@ -98,10 +98,11 @@ $nobigheader = 1;
 if ($routeparam == "") {
     echo "<body>\n";
     require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php";
-    echo <<<END
-<h1>Travel Mapping Highway Browser</h1>
-<p class="text" id="hbIntro">
-In addition to the Highway Browser functionality here to search for
+    echo "<h1>Travel Mapping ".$tmMode_s." Browser</h1>";
+    echo '<p class="text" id="hbIntro">'."\n";
+    echo "In addition to the ".$tmMode_s;
+echo <<<END
+ Browser functionality here to search for
 routes by system and region, TM's <a href="/hb/findroute.php">Route
 Finder</a> can help search for routes by other criteria.
 END;

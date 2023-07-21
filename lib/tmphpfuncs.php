@@ -21,7 +21,7 @@
  */
 
 // always attempt to establish a connection to the db, allow QS parameters
-// to override defaults, which come from the 6 lines of tm.conf (which
+// to override defaults, which come from the 7 lines of tm.conf (which
 // is not in source code control to protect the information there)
 //
 // IMPORTANT: this file should also not be accessible through the 
@@ -33,6 +33,7 @@
 
 
 $tmconffile = fopen($_SERVER['DOCUMENT_ROOT']."/lib/tm.conf", "r");
+$tmmode_p = chop(fgets($tmconffile));
 $tmdbname = chop(fgets($tmconffile));
 $tmdbuser = chop(fgets($tmconffile));
 $tmdbpasswd = chop(fgets($tmconffile));
@@ -69,6 +70,17 @@ $tmsqldebug = FALSE;
 
 if (array_key_exists("sqldebug", $_GET)) { 
     $tmsqldebug = TRUE;
+}
+
+// capitalized/singular versions of mode
+$tmMode_p = ucfirst($tmmode_p);
+$tmmode_s = substr($tmmode_p, 0, -1);
+$tmMode_s = ucfirst($tmmode_s);
+
+// list file repo directory name
+$tmlistdir = "list_files";
+if ($tmmode_s == "railway") {
+   $tmlistdir = "rlist_files";
 }
 
 // get other common QS parameters
