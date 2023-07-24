@@ -29,6 +29,10 @@ while (( "$#" )); do
 	rootdir=tmrail
     fi
 
+    if [ "$1" == "--ski" ]; then
+	rootdir=tmski
+    fi
+
     if [ "$1" == "--shields" ]; then
 	shieldsdir=shields
     fi

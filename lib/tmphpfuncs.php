@@ -73,14 +73,17 @@ if (array_key_exists("sqldebug", $_GET)) {
 }
 
 // capitalized/singular versions of mode
-$tmMode_p = ucfirst($tmmode_p);
+$tmMode_p = ucwords($tmmode_p);
 $tmmode_s = substr($tmmode_p, 0, -1);
-$tmMode_s = ucfirst($tmmode_s);
+$tmMode_s = ucwords($tmmode_s);
 
 // list file repo directory name
 $tmlistdir = "list_files";
 if ($tmmode_s == "railway") {
    $tmlistdir = "rlist_files";
+}
+else if ($tmmode_s == "ski trails") {
+   $tmlistdir = "slist_files";
 }
 
 // get other common QS parameters

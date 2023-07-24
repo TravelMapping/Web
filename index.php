@@ -79,7 +79,7 @@ echo tm_count_rows("systems", "WHERE level='active'");
 
 "active" systems.  Active systems are those which we believe are
 accurate and complete, and for which any changes that affect users
-will be noted in the <a href="/devel/updates.php#updates">highway data
+will be noted in the <a href="/devel/updates.php#updates"><?php echo $tmmode_s; ?> data
 updates table</a>.  An additional
 
 <?php
@@ -104,7 +104,7 @@ echo number_format(tm_count_rows("connectedRoutes", "LEFT JOIN systems ON connec
 echo tm_convert_distance_wholenum(tm_sum_column("overallMileageByRegion", "activeMileage"))." ";
 tm_echo_units();
 ?>
- of "clinchable" highways, and that expands to
+ of "clinchable" <?php echo $tmmode_p; ?>, and that expands to
 <?php
 echo number_format(tm_count_rows("connectedRoutes", "LEFT JOIN systems ON connectedRoutes.systemName = systems.systemName WHERE systems.level = 'active' OR systems.level = 'preview'"));
 ?>
