@@ -15,7 +15,7 @@ END;
 ?>
 
 <p class="menubar">
-    <a href="/">TM Home</a> &nbsp;&nbsp;&nbsp;
+    <a href="/">TM <?php echo $tmMode_p;?> Home</a> &nbsp;&nbsp;&nbsp;
     <?php
     if (isset($tmuser)) {
         if ($tmuser != "null") {
