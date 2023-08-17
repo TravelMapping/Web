@@ -482,6 +482,16 @@ function tm_convert_distance_wholenum($mileage) {
     return number_format($mileage * $tm_supported_units[$tmunits], 0, '.', ',');
 }
 
+// return a string representation of a percentage to 2 digits of precision
+// with a check for divide by 0
+function tm_percent($num, $den) {
+
+   if ($den == 0) {
+      return "-.--";
+   }
+   return "".round($num/$den*100, 2);
+}
+
 // validate a string as a possible "root": must be letters, followed by
 // a period, followed by some number of letters and numbers.  No other
 // characters allowed, and no longer than 32 total characters in length.

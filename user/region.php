@@ -225,13 +225,11 @@ SQL;
             echo "<tr class='notclickable'><td>Distance Traveled</td>";
 	    $style = 'style="background-color: '.tm_color_for_amount_traveled($activeClinchedMileage,$activeTotalMileage).';"';
 	    echo "<td ".$style.">" . tm_convert_distance($activeClinchedMileage);
-	    echo " of " . tm_convert_distance($activeTotalMileage) . " " . $tmunits . " (";
-	    echo round($activeClinchedMileage / $activeTotalMileage * 100, 2) . "%) ";
+	    echo " of " . tm_convert_distance($activeTotalMileage) . " " . $tmunits . " (" . tm_percent($activeClinchedMileage, $activeTotalMileage) . "%) ";
 	    echo "Rank: " . $activeMileageRank . "</td>";
 	    $style = 'style="background-color: '.tm_color_for_amount_traveled($activePreviewClinchedMileage,$activePreviewTotalMileage).';"';
 	    echo "<td ".$style.">" . tm_convert_distance($activePreviewClinchedMileage);
-	    echo " of " . tm_convert_distance($activePreviewTotalMileage) . " " .$tmunits . " (";
-	    echo round($activePreviewClinchedMileage / $activePreviewTotalMileage * 100, 2) . "%) ";
+	    echo " of " . tm_convert_distance($activePreviewTotalMileage) . " " .$tmunits . " (" . tm_percent($activePreviewClinchedMileage, $activePreviewTotalMileage) . "%) ";
 	    echo "Rank: " . $activePreviewMileageRank . "</td>";
 	    echo "</tr>";
 
@@ -360,17 +358,17 @@ SQL;
             echo "<tr onClick=\"window.open('/shields/clinched.php?u={$tmuser}')\">";
 	    echo "<td>Routes Traveled</td>";
 	    $style = 'style="background-color: '.tm_color_for_amount_traveled($drivenActiveRoutes,$totalActiveRoutes).';"';
-	    echo "<td ".$style.">".$drivenActiveRoutes." of " . $totalActiveRoutes . " (" . round($drivenActiveRoutes/$totalActiveRoutes*100, 2) . "%) Rank: ".$drivenActiveRoutesRank."</td>";
+	    echo "<td ".$style.">".$drivenActiveRoutes." of " . $totalActiveRoutes . " (". tm_percent($drivenActiveRoutes, $totalActiveRoutes) . "%) Rank: ".$drivenActiveRoutesRank."</td>";
 	    $style = 'style="background-color: '.tm_color_for_amount_traveled($drivenActivePreviewRoutes,$totalActivePreviewRoutes).';"';
-	    echo "<td ".$style.">".$drivenActivePreviewRoutes." of " . $totalActivePreviewRoutes . " (" . round($drivenActivePreviewRoutes/$totalActivePreviewRoutes*100, 2) . "%) Rank: ".$drivenActivePreviewRoutesRank."</td>";
+	    echo "<td ".$style.">".$drivenActivePreviewRoutes." of " . $totalActivePreviewRoutes . " (" . tm_percent($drivenActivePreviewRoutes, $totalActivePreviewRoutes, 2) . "%) Rank: ".$drivenActivePreviewRoutesRank."</td>";
 	    echo "</tr>";
 
             echo "<tr onClick=\"window.open('/shields/clinched.php?u={$tmuser}')\">";
 	    echo "<td>Routes Clinched</td>";
 	    $style = 'style="background-color: '.tm_color_for_amount_traveled($clinchedActiveRoutes,$totalActiveRoutes).';"';
-	    echo "<td ".$style.">".$clinchedActiveRoutes." of " . $totalActiveRoutes . " (" . round($clinchedActiveRoutes/$totalActiveRoutes*100, 2) . "%) Rank: ". $clinchedActiveRoutesRank."</td>";
+	    echo "<td ".$style.">".$clinchedActiveRoutes." of " . $totalActiveRoutes . " (" . tm_percent($clinchedActiveRoutes, $totalActiveRoutes) . "%) Rank: ". $clinchedActiveRoutesRank."</td>";
 	    $style = 'style="background-color: '.tm_color_for_amount_traveled($clinchedActivePreviewRoutes,$totalActivePreviewRoutes).';"';
-	    echo "<td ".$style.">".$clinchedActivePreviewRoutes." of " . $totalActivePreviewRoutes . " (" . round($clinchedActivePreviewRoutes/$totalActivePreviewRoutes*100, 2) . "%) Rank: ". $clinchedActivePreviewRoutesRank."</td>";
+	    echo "<td ".$style.">".$clinchedActivePreviewRoutes." of " . $totalActivePreviewRoutes . " (" . tm_percent($clinchedActivePreviewRoutes, $totalActivePreviewRoutes) . "%) Rank: ". $clinchedActivePreviewRoutesRank."</td>";
 	    echo "</tr>";
 
             ?>
