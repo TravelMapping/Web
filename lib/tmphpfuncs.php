@@ -534,13 +534,13 @@ function tm_common_js() {
     echo "</script>\n";
 
     echo <<<END
-  <link rel="stylesheet" href="/leaflet-1.7.1/leaflet.css" />
-  <script src="/leaflet-1.7.1/leaflet.js"></script>
+  <link rel="stylesheet" href="/leaflet-1.9.4/leaflet.css" />
+  <script src="/leaflet-1.9.4/leaflet.js"></script>
   <!-- important when updating leaflet-providers: use the version in
        the fork https://github.com/TravelMapping/leaflet-providers
        which includes the TMBlank tiles.  Use fetch-upstream there
        to get the latest and install leaflet-providers.js from the fork -->
-  <script src="/leaflet-1.7.1/leaflet-providers.js"></script>
+  <script src="/leaflet-1.9.4/leaflet-providers.js"></script>
   <!-- script type="text/javascript" src="https://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script> -->
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
