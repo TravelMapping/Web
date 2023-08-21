@@ -195,10 +195,10 @@ SQL;
         <tr>
             <th>Country</th>
             <th>Region</th>
-            <th id="clinchedheader">Clinched (<?php tm_echo_units(); ?>)</th>
+            <th>Clinched (<?php tm_echo_units(); ?>)</th>
             <th>Overall (<?php tm_echo_units(); ?>)</th>
             <th>%</th>
-            <th>Clinched (<?php tm_echo_units(); ?>)</th>
+            <th id="clinchedheader">Clinched (<?php tm_echo_units(); ?>)</th>
             <th>Overall (<?php tm_echo_units(); ?>)</th>
             <th>%</th>
             <th colspan="2" class="no-sort">Map</th>
@@ -252,8 +252,8 @@ SQL;
             <th>Status</th>
             <th>Clinched (<?php tm_echo_units(); ?>)</th>
             <th>Total (<?php tm_echo_units(); ?>)</th>
-            <th id="sortsecond">% Clinched</th>
-            <th colspan="2">Map</th>
+            <th id="sortsecond" data-sort-tbr="6">% Clinched</th>
+            <th colspan="2" class="no-sort">Map</th>
         </tr>
         </thead>
         <tbody>
