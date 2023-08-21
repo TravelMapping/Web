@@ -757,6 +757,18 @@ with their abbreviation regardless of a local convention (Michigan State
       routes) and add direction suffixes.</td>
   </tr>
   <tr valign="top">
+    <td><a name="parentexitnumbers"></a><a style="text-decoration:none" href="#parentexitnumbers">&#x1f517</a></td>
+    <td>US12BusBar:<br />
+      US12(212)<br />
+      ...<br />
+      US12(219)</td>
+    <td>For auxiliary routes connecting to the parent route at both
+    ends at interchanges that have posted exit numbers, using labels
+    that include said exit numbers instead of direction suffixes will
+    be allowed, as long as both ends have them (and as long as the
+    exit numbers are for the parent route).</td>
+  </tr>
+  <tr valign="top">
     <td><a name="parentonly"></a><a style="text-decoration:none" href="#parentonly">&#x1f517</a></td>
     <td>US61SprLit:<br />
       US61<br />
