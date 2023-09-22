@@ -73,8 +73,8 @@ Near-miss points (NMPs) are waypoints very close together and might be candidate
 <div class="text">
 <ul>
 <li><a href="/logs/siteupdate.log">Complete output log from the site update process</a></li>
-<li><a href="/logs/highwaydatastats.log">Log of highway data stats, useful to verify web code</a></li>
-<li><a href="/logs/concurrencies.log">List of highway concurrencies detected</a></li>
+<li><a href="/logs/routedatastats.log">Log of route data stats, useful to verify web code</a></li>
+<li><a href="/logs/concurrencies.log">List of route concurrencies detected</a></li>
 <li><a href="/logs/flippedroutes.log">List of routes flagged as reversed for processing multi-region .list entries</a></li>
 </ul>
 </div>
