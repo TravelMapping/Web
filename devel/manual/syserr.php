@@ -383,7 +383,15 @@ Data errors</p>
   <tr valign="top">
     <td><a name="VISIBLE_HIDDEN_COLOC"></a><a style="text-decoration:none" href="#VISIBLE_HIDDEN_COLOC">&#x1f517</a></td>
     <td>VISIBLE_HIDDEN_COLOC</td>
-    <td>Visible waypoint is hidden on intersecting/concurrent route(s).</td>
+    <td>Visible waypoint is hidden on intersecting/concurrent route(s).
+    <br>
+    <br>The <code>Info</code> column lists only the first hidden point at the same location.
+    <br>Best practice is to check this location on <i>all</i> intersecting/concurrent routes and ensure:
+    <ul>
+      <li>Everything that should be visible is visible.</li>
+      <li>Everything that should be hidden is hidden.</li>
+    </ul>
+    </td>
     <td><red>NO</red></td>
     <td><green>YES</green></td>
   </tr>
