@@ -3,7 +3,7 @@ Web-facing tool/page development
 
 ## Setting up an instance of TM's databases and web front end
 
-The server should be running an instance of MySQL server (5.7.38 as of this writing) and the apache web server (2.4.54 as of this writing).  The web server needs to have PHP enabled (version 7.4.30 as of this writing) with the mysqli, ctype, and json extensions, and `mod_php74` to get the loadable module.  The remaining instructions assume apache, MySQL, and PHP are all working together properly.  On FreeBSD, this involved installing the correct packages.
+The server should be running an instance of a MariaDB server (10.11.7 as of this writing) and the apache web server (2.4.59 as of this writing).  The web server needs to have PHP enabled (version 7.4.30 as of this writing) with the mysqli, ctype, and json extensions, and `mod_php74` to get the loadable module.  The remaining instructions assume apache, MariaDB, and PHP are all working together properly.  On FreeBSD, this involved installing the correct packages.
 
 Note: the MySQL server needs to override the `group_concat_max_len` parameter to be the maximum length of any comma-separated list of users that might be returned by a `GROUP_CONCAT`.  This is currently set to 10000 on the production server.
 
@@ -28,7 +28,7 @@ Be sure the permissions are 600, so only readable by the user.
 Next, we create the database and give these users needed permissions.
 
 ```
-CREATE DATABASE TravelMapping;
+CREATE DATABASE TravelMapping CHARACTER SET = 'utf8mb4';
 GRANT SELECT ON `TravelMapping`.* TO 'travmap'@'localhost';
 GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, REFERENCES ON `TravelMapping`.* TO 'travmapadmin'@'localhost';
 ```
@@ -53,7 +53,7 @@ In addition to the files in the repository, the file `lib/tm.conf` needs to be c
 Line 1: DB name (likely TravelMapping)
 Line 2: DB read-only user (likely travmap)
 Line 3: DB read-only user password
-Line 4: DB hostname (likely localhost)
+Line 4: DB hostname (likely localhost or 127.0.0.1)
 Line 5: HERE map id
 Line 6: HERE map code
 Line 7: ThunderForest map key
