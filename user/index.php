@@ -100,15 +100,20 @@ echo "<h1>Main Travel Mapping - ".$tmMode_p." User Page for ".$tmuser."</h1>";
             <?php
             //First fetch mileage driven, both active and active+preview
             $sql_command = <<<SQL
-SELECT
-round(sum(o.activeMileage), 2) as totalActiveMileage,
-round(sum(coalesce(co.activeMileage, 0)), 2) as clinchedActiveMileage,
-round(sum(coalesce(co.activeMileage, 0)) / sum(o.activeMileage) * 100, 2) AS activePercentage,
-round(sum(o.activePreviewMileage), 2) as totalActivePreviewMileage,
-round(sum(coalesce(co.activePreviewMileage, 0)), 2) as clinchedActivePreviewMileage,
-round(sum(coalesce(co.activePreviewMileage, 0)) / sum(o.activePreviewMileage) * 100, 2) AS activePreviewPercentage
-FROM overallMileageByRegion o
-LEFT JOIN clinchedOverallMileageByRegion co ON co.region = o.region AND traveler = '$tmuser'
+WITH RankedMileage AS (
+  SELECT traveler,
+  ROUND(SUM(o.activeMileage), 2) AS totalActiveMileage,
+  RANK() OVER (ORDER BY SUM(o.activeMileage) DESC) AS rankActiveMileage,
+  ROUND(SUM(COALESCE(co.activeMileage, 0)), 2) AS clinchedActiveMileage,
+  ROUND(SUM(COALESCE(co.activeMileage, 0)) / SUM(o.activeMileage) * 100, 2) AS activePercentage,
+  ROUND(SUM(o.activePreviewMileage), 2) AS totalActivePreviewMileage,
+  RANK() OVER (ORDER BY SUM(o.activePreviewMileage) DESC) AS rankActivePreviewMileage,
+  ROUND(SUM(COALESCE(co.activePreviewMileage, 0)), 2) AS clinchedActivePreviewMileage,
+  ROUND(SUM(COALESCE(co.activePreviewMileage, 0)) / SUM(o.activePreviewMileage) * 100, 2) AS activePreviewPercentage
+  FROM overallMileageByRegion o
+  LEFT JOIN clinchedOverallMileageByRegion co ON co.region = o.region
+  GROUP BY traveler )
+  SELECT * FROM RankedMileage WHERE traveler = '$tmuser';
 SQL;
             $res = tmdb_query($sql_command);
             $row = $res->fetch_assoc();
@@ -119,13 +124,13 @@ SQL;
 	    echo ';">' . tm_convert_distance($row['clinchedActiveMileage']);
 	    echo "/" . tm_convert_distance($row['totalActiveMileage']) . " ";
 	    tm_echo_units();
-	    echo " (" . $row['activePercentage'] . "%) Rank: TBD</td>";
+	    echo " (" . $row['activePercentage'] . "%) Rank: ".$row['rankActiveMileage']."</td>";
 	    echo '<td style="background-color: ';
 	    echo tm_color_for_amount_traveled($row['clinchedActivePreviewMileage'],$row['totalActivePreviewMileage']);
 	    echo ';">' . tm_convert_distance($row['clinchedActivePreviewMileage']);
 	    echo "/" . tm_convert_distance($row['totalActivePreviewMileage']) . " ";
 	    tm_echo_units();
-	    echo " (" . $row['activePreviewPercentage'] . "%) Rank: TBD</td>";
+	    echo " (" . $row['activePreviewPercentage'] . "%) Rank: ".$row['rankActivePreviewMileage']."</td>";
 	    echo "</tr>";
 
 
