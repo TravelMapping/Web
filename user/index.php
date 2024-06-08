@@ -118,55 +118,11 @@ echo "<h1>Main Travel Mapping - ".$tmMode_p." User Page for ".$tmuser."</h1>";
 	    echo " (" . $row['activePreviewPercentage'] . "%) Rank: ".$row['rankActivePreviewMileage']."</td>";
 	    echo "</tr>";
 
-
-            //Second, fetch routes driven/clinched active only
-	    $sql_command = "SELECT COUNT(cr.route) AS total FROM connectedRoutes AS cr LEFT JOIN systems ON cr.systemName = systems.systemName WHERE (systems.level = 'active');";
+            // Second, fetch routes driven/clinched active only
+	    $sql_command = "SELECT * FROM clinchedActiveStats WHERE traveler = '$tmuser';";
             $res = tmdb_query($sql_command);
             $row = $res->fetch_assoc();
-	    $activeRoutes = $row['total'];
-	    $res->free();
-
-	    $sql_command = <<<SQL
-WITH TravelerStats AS (
-    SELECT
-        ccr.traveler,
-        COUNT(ccr.route) AS driven,
-        SUM(ccr.clinched) AS clinched,
-        ROUND(COUNT(ccr.route) / ".$activeRoutes." * 100, 2) AS drivenPercent,
-        ROUND(SUM(ccr.clinched) / ".$activeRoutes." * 100, 2) AS clinchedPercent
-    FROM
-        connectedRoutes AS cr
-    LEFT JOIN
-        clinchedConnectedRoutes AS ccr ON cr.firstRoot = ccr.route
-    LEFT JOIN
-        routes ON ccr.route = routes.root
-    LEFT JOIN
-        systems ON routes.systemName = systems.systemName
-    WHERE
-        systems.level = 'active'
-    GROUP BY
-        ccr.traveler
-)
-SELECT *
-FROM (
-    SELECT
-        traveler,
-        driven,
-        clinched,
-        drivenPercent,
-        clinchedPercent,
-        RANK() OVER (ORDER BY driven DESC) AS drivenRank,
-        RANK() OVER (ORDER BY clinched DESC) AS clinchedRank
-    FROM
-        TravelerStats
-) AS RankedStats
-WHERE
-    traveler = '$tmuser'
-ORDER BY
-    traveler;
-SQL;
-            $res = tmdb_query($sql_command);
-            $row = $res->fetch_assoc();
+	    $activeRoutes = $row['activeRoutes'];
 	    $activeDriven = $row['driven'];
 	    $activeDrivenPct = $row['drivenPercent'];
 	    $activeDrivenRank = $row['drivenRank'];
@@ -175,54 +131,11 @@ SQL;
 	    $activeClinchedRank = $row['clinchedRank'];
 	    $res->free();
 
-	    // and active+preview
-	    $sql_command = "SELECT COUNT(cr.route) AS total FROM connectedRoutes AS cr LEFT JOIN systems ON cr.systemName = systems.systemName WHERE (systems.level = 'active' OR systems.level = 'preview');";
+            // Thurd, fetch routes driven/clinched active+preview
+	    $sql_command = "SELECT * FROM clinchedActivePreviewStats WHERE traveler = '$tmuser';";
             $res = tmdb_query($sql_command);
             $row = $res->fetch_assoc();
-	    $activePreviewRoutes = $row['total'];
-	    $res->free();
-
-	    $sql_command = <<<SQL
-WITH TravelerStats AS (
-    SELECT
-        ccr.traveler,
-        COUNT(ccr.route) AS driven,
-        SUM(ccr.clinched) AS clinched,
-        ROUND(COUNT(ccr.route) / ".$activePreviewRoutes." * 100, 2) AS drivenPercent,
-        ROUND(SUM(ccr.clinched) / ".$activePreviewRoutes." * 100, 2) AS clinchedPercent
-    FROM
-        connectedRoutes AS cr
-    LEFT JOIN
-        clinchedConnectedRoutes AS ccr ON cr.firstRoot = ccr.route
-    LEFT JOIN
-        routes ON ccr.route = routes.root
-    LEFT JOIN
-        systems ON routes.systemName = systems.systemName
-    WHERE
-        systems.level = 'active' OR systems.level = 'preview'
-    GROUP BY
-        ccr.traveler
-)
-SELECT *
-FROM (
-    SELECT
-        traveler,
-        driven,
-        clinched,
-        drivenPercent,
-        clinchedPercent,
-        RANK() OVER (ORDER BY driven DESC) AS drivenRank,
-        RANK() OVER (ORDER BY clinched DESC) AS clinchedRank
-    FROM
-        TravelerStats
-) AS RankedStats
-WHERE
-    traveler = '$tmuser'
-ORDER BY
-    traveler;
-SQL;
-            $res = tmdb_query($sql_command);
-            $row = $res->fetch_assoc();
+	    $activePreviewRoutes = $row['activePreviewRoutes'];
 	    $activePreviewDriven = $row['driven'];
 	    $activePreviewDrivenPct = $row['drivenPercent'];
 	    $activePreviewDrivenRank = $row['drivenRank'];
