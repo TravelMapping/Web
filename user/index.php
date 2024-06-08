@@ -99,22 +99,7 @@ echo "<h1>Main Travel Mapping - ".$tmMode_p." User Page for ".$tmuser."</h1>";
             <tbody>
             <?php
             //First fetch mileage driven, both active and active+preview
-            $sql_command = <<<SQL
-WITH RankedMileage AS (
-  SELECT traveler,
-  ROUND(SUM(o.activeMileage), 2) AS totalActiveMileage,
-  RANK() OVER (ORDER BY SUM(o.activeMileage) DESC) AS rankActiveMileage,
-  ROUND(SUM(COALESCE(co.activeMileage, 0)), 2) AS clinchedActiveMileage,
-  ROUND(SUM(COALESCE(co.activeMileage, 0)) / SUM(o.activeMileage) * 100, 2) AS activePercentage,
-  ROUND(SUM(o.activePreviewMileage), 2) AS totalActivePreviewMileage,
-  RANK() OVER (ORDER BY SUM(o.activePreviewMileage) DESC) AS rankActivePreviewMileage,
-  ROUND(SUM(COALESCE(co.activePreviewMileage, 0)), 2) AS clinchedActivePreviewMileage,
-  ROUND(SUM(COALESCE(co.activePreviewMileage, 0)) / SUM(o.activePreviewMileage) * 100, 2) AS activePreviewPercentage
-  FROM overallMileageByRegion o
-  LEFT JOIN clinchedOverallMileageByRegion co ON co.region = o.region
-  GROUP BY traveler )
-  SELECT * FROM RankedMileage WHERE traveler = '$tmuser';
-SQL;
+            $sql_command = "SELECT * FROM travelerMileageStats WHERE traveler = '$tmuser';";
             $res = tmdb_query($sql_command);
             $row = $res->fetch_assoc();
             $res->free();
