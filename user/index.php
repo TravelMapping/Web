@@ -119,7 +119,54 @@ echo "<h1>Main Travel Mapping - ".$tmMode_p." User Page for ".$tmuser."</h1>";
 	    echo "</tr>";
 
             // Second, fetch routes driven/clinched active only
-	    $sql_command = "SELECT * FROM clinchedActiveStats WHERE traveler = '$tmuser';";
+	    $sql_command = <<<SQL
+WITH FilteredRanks AS (
+    SELECT
+        cas.traveler,
+        cas.clinchedPercent,
+        cas.drivenPercent,
+        RANK() OVER (ORDER BY cas.clinchedPercent DESC) AS clinchedRank,
+        RANK() OVER (ORDER BY cas.drivenPercent DESC) AS drivenRank
+    FROM 
+        clinchedActiveStats cas
+    JOIN 
+        listEntries le ON cas.traveler = le.traveler
+    WHERE 
+        le.includeInRanks = 1
+),
+RankedTravelers AS (
+    SELECT
+        cas.traveler,
+        cas.driven,
+        cas.clinched,
+        cas.activeRoutes,
+        cas.drivenPercent,
+        cas.clinchedPercent,
+        le.includeInRanks,
+        COALESCE(fr.clinchedRank, -1) AS clinchedRank,
+        COALESCE(fr.drivenRank, -1) AS drivenRank
+    FROM 
+        clinchedActiveStats cas
+    JOIN 
+        listEntries le ON cas.traveler = le.traveler
+    LEFT JOIN 
+        FilteredRanks fr ON cas.traveler = fr.traveler
+)
+SELECT 
+    traveler,
+    driven,
+    clinched,
+    activeRoutes,
+    drivenPercent,
+    clinchedPercent,
+    includeInRanks,
+    clinchedRank,
+    drivenRank
+FROM 
+    RankedTravelers
+WHERE 
+    traveler = '$tmuser';
+SQL;	    
             $res = tmdb_query($sql_command);
             $row = $res->fetch_assoc();
 	    $activeRoutes = $row['activeRoutes'];
@@ -131,8 +178,55 @@ echo "<h1>Main Travel Mapping - ".$tmMode_p." User Page for ".$tmuser."</h1>";
 	    $activeClinchedRank = $row['clinchedRank'];
 	    $res->free();
 
-            // Thurd, fetch routes driven/clinched active+preview
-	    $sql_command = "SELECT * FROM clinchedActivePreviewStats WHERE traveler = '$tmuser';";
+            // Third, fetch routes driven/clinched active+preview
+	    $sql_command = <<<SQL
+WITH FilteredRanks AS (
+    SELECT
+        cas.traveler,
+        cas.clinchedPercent,
+        cas.drivenPercent,
+        RANK() OVER (ORDER BY cas.clinchedPercent DESC) AS clinchedRank,
+        RANK() OVER (ORDER BY cas.drivenPercent DESC) AS drivenRank
+    FROM 
+        clinchedActivePreviewStats cas
+    JOIN 
+        listEntries le ON cas.traveler = le.traveler
+    WHERE 
+        le.includeInRanks = 1
+),
+RankedTravelers AS (
+    SELECT
+        cas.traveler,
+        cas.driven,
+        cas.clinched,
+        cas.activePreviewRoutes,
+        cas.drivenPercent,
+        cas.clinchedPercent,
+        le.includeInRanks,
+        COALESCE(fr.clinchedRank, -1) AS clinchedRank,
+        COALESCE(fr.drivenRank, -1) AS drivenRank
+    FROM 
+        clinchedActivePreviewStats cas
+    JOIN 
+        listEntries le ON cas.traveler = le.traveler
+    LEFT JOIN 
+        FilteredRanks fr ON cas.traveler = fr.traveler
+)
+SELECT 
+    traveler,
+    driven,
+    clinched,
+    activePreviewRoutes,
+    drivenPercent,
+    clinchedPercent,
+    includeInRanks,
+    clinchedRank,
+    drivenRank
+FROM 
+    RankedTravelers
+WHERE 
+    traveler = '$tmuser';
+SQL;	    
             $res = tmdb_query($sql_command);
             $row = $res->fetch_assoc();
 	    $activePreviewRoutes = $row['activePreviewRoutes'];
