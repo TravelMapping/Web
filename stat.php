@@ -76,7 +76,12 @@ SQL;
         echo "<td ".$style.">".tm_convert_distance($row['clinchedMileage'])." of ".tm_convert_distance($totalMileage)." ";
 	tm_echo_units();
 	echo " ({$row['percentage']}%)</td>";
-        echo "<td>{$row['rank']}</td>";
+	if ($row['includeInRanks'] == "1") {
+	    echo "<td>{$row['rank']}</td>";
+	}
+	else {
+	    echo "<td>NR</td>";
+	}
 
         $sql = <<<SQL
 SELECT
@@ -99,7 +104,12 @@ SQL;
         echo "<td ".$style.">".tm_convert_distance($row['clinchedMileage'])." of ".tm_convert_distance($totalPreviewMileage)." ";
 	tm_echo_units();
 	echo " ({$row['percentage']}%)</td>";
-        echo "<td>{$row['rank']}</td>";
+	if ($row['includeInRanks'] == "1") {
+	    echo "<td>{$row['rank']}</td>";
+	}
+	else {
+	    echo "<td>NR</td>";
+	}
         echo <<<HTML
                     </tr>
                     </tbody></table>
