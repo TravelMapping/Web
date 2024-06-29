@@ -178,16 +178,16 @@ if (( $tmuser == "null") || ( $region == "" )) {
 	    JOIN listEntries le ON co.traveler = le.traveler
             WHERE co.region = '$region' AND co.activeMileage > 0
 	    GROUP BY co.traveler, le.includeInRanks
-            ORDER BY activeClinched DESC;
+            ORDER BY activeClinched DESC, le.includeInRanks DESC;
 SQL;
             $activeClinchedRes = tmdb_query($sql_command);
             $row = tm_fetch_user_row_with_rank($activeClinchedRes, 'activeClinched');
 //            $link = "redirect('/user/mapview.php?u=" . $tmuser . "&amp;rg=" . $region . "')";
 	    $activeClinchedMileage = $row['activeClinched'];
 	    if ($row['traveler'] != "" && $row['includeInRanks'] == "1") {
-		$activeMileageRank = $row['rank'];
+		$activeMileageRank = "Rank: ".$row['rank'];
 	    } else {
-		$activeMileageRank = "N/A";
+		$activeMileageRank = "";
 	    }
 
 	    // build arrays that will form the contents of the travelers
@@ -196,6 +196,7 @@ SQL;
 	    $activeClinchedRes->data_seek(0);
 	    while ($row = $activeClinchedRes->fetch_assoc()) {
 		$activeTravelerInfo[$row['traveler']]['activeClinched'] = $row['activeClinched'];
+		$activeTravelerInfo[$row['traveler']]['includeInRanks'] = $row['includeInRanks'];
             }
 
 	    // and active+preview
@@ -208,16 +209,16 @@ SQL;
 	    JOIN listEntries le ON co.traveler = le.traveler
             WHERE co.region = '$region' AND co.activePreviewMileage > 0
 	    GROUP BY co.traveler, le.includeInRanks
-            ORDER BY activePreviewClinched DESC;
+            ORDER BY activePreviewClinched DESC, le.includeInRanks DESC;
 SQL;
             $activePreviewClinchedRes = tmdb_query($sql_command);
             $row = tm_fetch_user_row_with_rank($activePreviewClinchedRes, 'activePreviewClinched');
 //            $link = "redirect('/user/mapview.php?u=" . $tmuser . "&amp;rg=" . $region . "')";
 	    $activePreviewClinchedMileage = $row['activePreviewClinched'];
 	    if ($row['traveler'] != "" && $row['includeInRanks'] == "1") {
-		$activePreviewMileageRank = $row['rank'];
+		$activePreviewMileageRank = "Rank: ".$row['rank'];
 	    } else {
-		$activePreviewMileageRank = "N/A";
+		$activePreviewMileageRank = "";
 	    }
 
 	    // build arrays that will form the contents of the travelers
@@ -226,17 +227,18 @@ SQL;
 	    $activePreviewClinchedRes->data_seek(0);
 	    while ($row = $activePreviewClinchedRes->fetch_assoc()) {
 		$activePreviewTravelerInfo[$row['traveler']]['activePreviewClinched'] = $row['activePreviewClinched'];
+		$activePreviewTravelerInfo[$row['traveler']]['includeInRanks'] = $row['includeInRanks'];
             }
 
             echo "<tr class='notclickable'><td>Distance Traveled</td>";
 	    $style = 'style="background-color: '.tm_color_for_amount_traveled($activeClinchedMileage,$activeTotalMileage).';"';
 	    echo "<td ".$style.">" . tm_convert_distance($activeClinchedMileage);
 	    echo " of " . tm_convert_distance($activeTotalMileage) . " " . $tmunits . " (" . tm_percent($activeClinchedMileage, $activeTotalMileage) . "%) ";
-	    echo "Rank: " . $activeMileageRank . "</td>";
+	    echo $activeMileageRank . "</td>";
 	    $style = 'style="background-color: '.tm_color_for_amount_traveled($activePreviewClinchedMileage,$activePreviewTotalMileage).';"';
 	    echo "<td ".$style.">" . tm_convert_distance($activePreviewClinchedMileage);
 	    echo " of " . tm_convert_distance($activePreviewTotalMileage) . " " .$tmunits . " (" . tm_percent($activePreviewClinchedMileage, $activePreviewTotalMileage) . "%) ";
-	    echo "Rank: " . $activePreviewMileageRank . "</td>";
+	    echo $activePreviewMileageRank . "</td>";
 	    echo "</tr>";
 
             // Second, fetch routes clinched/driven
@@ -309,10 +311,10 @@ SQL;
 	    $row = tm_fetch_user_row_with_rank($activeClinchedRes, 'clinched');
 	    if ($row['traveler'] != "" && $row['includeInRanks'] == "1") {
 		$clinchedActiveRoutes = $row['clinched'];
-		$clinchedActiveRoutesRank = $row['rank'];
+		$clinchedActiveRoutesRank = "Rank: ".$row['rank'];
 	    } else {
 		$clinchedActiveRoutes = 0;
-		$clinchedActiveRoutesRank = "N/A";
+		$clinchedActiveRoutesRank = "";
 	    }
 
 	    // Active only, driven
@@ -378,10 +380,10 @@ SQL;
 	    $row = tm_fetch_user_row_with_rank($activeDrivenRes, 'driven');
 	    if ($row['traveler'] != "" && $row['includeInRanks'] == "1") {
 		$drivenActiveRoutes = $row['driven'];
-		$drivenActiveRoutesRank = $row['rank'];
+		$drivenActiveRoutesRank = "Rank: ".$row['rank'];
 	    } else {
 		$drivenActiveRoutes = 0;
-		$drivenActiveRoutesRank = "N/A";
+		$drivenActiveRoutesRank = "";
 	    }
 
 	    // add to the table of travelers by region stats
@@ -457,10 +459,10 @@ SQL;
 	    $row = tm_fetch_user_row_with_rank($activePreviewClinchedRes, 'clinched');
 	    if ($row['traveler'] != "" && $row['includeInRanks'] == "1") {
 		$clinchedActivePreviewRoutes = $row['clinched'];
-		$clinchedActivePreviewRoutesRank = $row['rank'];
+		$clinchedActivePreviewRoutesRank = "Rank: ".$row['rank'];
 	    } else {
 		$clinchedActivePreviewRoutes = 0;
-		$clinchedActivePreviewRoutesRank = "N/A";
+		$clinchedActivePreviewRoutesRank = "";
 	    }
 
 	    // Active+Preview, driven
@@ -526,10 +528,10 @@ SQL;
 	    $row = tm_fetch_user_row_with_rank($activePreviewDrivenRes, 'driven');
 	    if ($row['traveler'] != "") {
 		$drivenActivePreviewRoutes = $row['driven'];
-		$drivenActivePreviewRoutesRank = $row['rank'];
+		$drivenActivePreviewRoutesRank = "Rank: ".$row['rank'];
 	    } else {
 		$drivenActivePreviewRoutes = 0;
-		$drivenActivePreviewRoutesRank = "N/A";
+		$drivenActivePreviewRoutesRank = "";
 	    }
 
 	    // add to the table of travelers by region stats
@@ -544,17 +546,17 @@ SQL;
             echo "<tr onClick=\"window.open('/shields/clinched.php?u={$tmuser}')\">";
 	    echo "<td>Routes Traveled</td>";
 	    $style = 'style="background-color: '.tm_color_for_amount_traveled($drivenActiveRoutes,$totalActiveRoutes).';"';
-	    echo "<td ".$style.">".$drivenActiveRoutes." of " . $totalActiveRoutes . " (". tm_percent($drivenActiveRoutes, $totalActiveRoutes) . "%) Rank: ".$drivenActiveRoutesRank."</td>";
+	    echo "<td ".$style.">".$drivenActiveRoutes." of " . $totalActiveRoutes . " (". tm_percent($drivenActiveRoutes, $totalActiveRoutes) . "%) ".$drivenActiveRoutesRank."</td>";
 	    $style = 'style="background-color: '.tm_color_for_amount_traveled($drivenActivePreviewRoutes,$totalActivePreviewRoutes).';"';
-	    echo "<td ".$style.">".$drivenActivePreviewRoutes." of " . $totalActivePreviewRoutes . " (" . tm_percent($drivenActivePreviewRoutes, $totalActivePreviewRoutes, 2) . "%) Rank: ".$drivenActivePreviewRoutesRank."</td>";
+	    echo "<td ".$style.">".$drivenActivePreviewRoutes." of " . $totalActivePreviewRoutes . " (" . tm_percent($drivenActivePreviewRoutes, $totalActivePreviewRoutes, 2) . "%) ".$drivenActivePreviewRoutesRank."</td>";
 	    echo "</tr>";
 
             echo "<tr onClick=\"window.open('/shields/clinched.php?u={$tmuser}')\">";
 	    echo "<td>Routes Clinched</td>";
 	    $style = 'style="background-color: '.tm_color_for_amount_traveled($clinchedActiveRoutes,$totalActiveRoutes).';"';
-	    echo "<td ".$style.">".$clinchedActiveRoutes." of " . $totalActiveRoutes . " (" . tm_percent($clinchedActiveRoutes, $totalActiveRoutes) . "%) Rank: ". $clinchedActiveRoutesRank."</td>";
+	    echo "<td ".$style.">".$clinchedActiveRoutes." of " . $totalActiveRoutes . " (" . tm_percent($clinchedActiveRoutes, $totalActiveRoutes) . "%) ". $clinchedActiveRoutesRank."</td>";
 	    $style = 'style="background-color: '.tm_color_for_amount_traveled($clinchedActivePreviewRoutes,$totalActivePreviewRoutes).';"';
-	    echo "<td ".$style.">".$clinchedActivePreviewRoutes." of " . $totalActivePreviewRoutes . " (" . tm_percent($clinchedActivePreviewRoutes, $totalActivePreviewRoutes) . "%) Rank: ". $clinchedActivePreviewRoutesRank."</td>";
+	    echo "<td ".$style.">".$clinchedActivePreviewRoutes." of " . $totalActivePreviewRoutes . " (" . tm_percent($clinchedActivePreviewRoutes, $totalActivePreviewRoutes) . "%) ". $clinchedActivePreviewRoutesRank."</td>";
 	    echo "</tr>";
 
             ?>
@@ -669,6 +671,7 @@ SQL;
         </thead>
         <tbody>
 	  <?php
+	  $skipped = 0;
 	  $prev_mileage = 0;
 	  $pre_rank = 1;
 	  $tie_rank = 1;
@@ -682,11 +685,18 @@ SQL;
                  $highlight = '';
               }
 	      $tie_rank = ($prev_mileage == $stats['activeClinched']) ? $tie_rank : $pre_rank;
+	      if ($stats['includeInRanks'] == "1") {
+	          $show_rank = $tie_rank - $skipped;
+	      }
+	      else {
+	          $show_rank = "";
+		  $skipped++;
+              }
 	      $mileageStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['activeClinched'],$activeTotalMileage).';"';
 	      $drivenStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['driven'],$totalActiveRoutes).';"';
 	      $clinchedStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['clinched'],$totalActiveRoutes).';"';
 	      echo "<tr class=\"".$highlight."\" onClick=\"window.document.location='?u=".$traveler."&rg=$region'\">";
-	      echo "<td>".$tie_rank."</td>";
+	      echo "<td>".$show_rank."</td>";
 	      echo "<td>".$traveler."</td>";
 	      echo "<td ".$mileageStyle.">".tm_convert_distance($stats['activeClinched'])."</td>";
 	      $pct = round($stats['activeClinched'] / $activeTotalMileage * 100, 2);
@@ -707,6 +717,7 @@ SQL;
         </thead>
         <tbody>
 	  <?php
+	  $skipped = 0;
 	  $prev_mileage = 0;
 	  $pre_rank = 1;
 	  $tie_rank = 1;
@@ -720,11 +731,18 @@ SQL;
                  $highlight = '';
               }
 	      $tie_rank = ($prev_mileage == $stats['activePreviewClinched']) ? $tie_rank : $pre_rank;
+	      if ($stats['includeInRanks'] == "1") {
+	          $show_rank = $tie_rank - $skipped;
+	      }
+	      else {
+	          $show_rank = "";
+		  $skipped++;
+	      }
 	      $mileageStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['activePreviewClinched'],$activePreviewTotalMileage).';"';
 	      $drivenStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['driven'],$totalActivePreviewRoutes).';"';
 	      $clinchedStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['clinched'],$totalActivePreviewRoutes).';"';
 	      echo "<tr class=\"".$highlight."\" onClick=\"window.document.location='?u=".$traveler."&rg=$region'\">";
-	      echo "<td>".$tie_rank."</td>";
+	      echo "<td>".$show_rank."</td>";
 	      echo "<td>".$traveler."</td>";
 	      echo "<td ".$mileageStyle.">".tm_convert_distance($stats['activePreviewClinched'])."</td>";
 	      $pct = round($stats['activePreviewClinched'] / $activePreviewTotalMileage * 100, 2);
