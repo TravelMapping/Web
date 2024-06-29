@@ -171,17 +171,20 @@ if (( $tmuser == "null") || ( $region == "" )) {
 	    // active only
             $sql_command = <<<SQL
             SELECT
-		traveler,
-		activeMileage as activeClinched
-            FROM clinchedOverallMileageByRegion
-            WHERE region = '$region' AND activeMileage > 0
+		co.traveler,
+		co.activeMileage as activeClinched,
+		le.includeInRanks
+            FROM clinchedOverallMileageByRegion AS co
+	    JOIN listEntries le ON co.traveler = le.traveler
+            WHERE co.region = '$region' AND co.activeMileage > 0
+	    GROUP BY co.traveler, le.includeInRanks
             ORDER BY activeClinched DESC;
 SQL;
             $activeClinchedRes = tmdb_query($sql_command);
             $row = tm_fetch_user_row_with_rank($activeClinchedRes, 'activeClinched');
 //            $link = "redirect('/user/mapview.php?u=" . $tmuser . "&amp;rg=" . $region . "')";
 	    $activeClinchedMileage = $row['activeClinched'];
-	    if ($row['traveler'] != "") {
+	    if ($row['traveler'] != "" && $row['includeInRanks'] == "1") {
 		$activeMileageRank = $row['rank'];
 	    } else {
 		$activeMileageRank = "N/A";
@@ -198,17 +201,20 @@ SQL;
 	    // and active+preview
             $sql_command = <<<SQL
             SELECT
-		traveler,
-		activePreviewMileage as activePreviewClinched
-            FROM clinchedOverallMileageByRegion
-            WHERE region = '$region' AND activePreviewMileage > 0
+		co.traveler,
+		co.activePreviewMileage as activePreviewClinched,
+		le.includeInRanks
+            FROM clinchedOverallMileageByRegion AS co
+	    JOIN listEntries le ON co.traveler = le.traveler
+            WHERE co.region = '$region' AND co.activePreviewMileage > 0
+	    GROUP BY co.traveler, le.includeInRanks
             ORDER BY activePreviewClinched DESC;
 SQL;
             $activePreviewClinchedRes = tmdb_query($sql_command);
             $row = tm_fetch_user_row_with_rank($activePreviewClinchedRes, 'activePreviewClinched');
 //            $link = "redirect('/user/mapview.php?u=" . $tmuser . "&amp;rg=" . $region . "')";
 	    $activePreviewClinchedMileage = $row['activePreviewClinched'];
-	    if ($row['traveler'] != "") {
+	    if ($row['traveler'] != "" && $row['includeInRanks'] == "1") {
 		$activePreviewMileageRank = $row['rank'];
 	    } else {
 		$activePreviewMileageRank = "N/A";
