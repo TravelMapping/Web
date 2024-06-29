@@ -245,22 +245,69 @@ SQL;
 
 	    // Active only, clinched
             $sql_command = <<<SQL
-            SELECT
-              traveler,
-              SUM(cr.clinched) AS clinched
-            FROM routes AS r
-              LEFT JOIN clinchedRoutes AS cr
-                ON cr.route = r.root
-              LEFT JOIN systems
-                ON r.systemName = systems.systemName
-            WHERE (r.region = '$region' AND 
-                systems.level = 'active')
-            GROUP BY traveler
-	    ORDER BY clinched DESC;
+-- Step 1: Calculate the total clinched mileage per traveler with includeInRanks = 1 and assign ranks
+WITH TravelerClinched AS (
+    SELECT
+        cr.traveler,
+        SUM(cr.clinched) AS clinched
+    FROM 
+        routes AS r
+    LEFT JOIN 
+        clinchedRoutes AS cr ON cr.route = r.root
+    LEFT JOIN 
+        systems ON r.systemName = systems.systemName
+    JOIN 
+        listEntries le ON cr.traveler = le.traveler
+    WHERE 
+        r.region = '$region'
+        AND systems.level = 'active'
+        AND le.includeInRanks = 1
+    GROUP BY 
+        cr.traveler
+),
+RankedClinched AS (
+    SELECT
+        traveler,
+        clinched,
+        RANK() OVER (ORDER BY clinched DESC) AS rankClinched
+    FROM 
+        TravelerClinched
+),
+FinalResult AS (
+    SELECT
+        cr.traveler,
+        SUM(cr.clinched) AS clinched,
+        le.includeInRanks,
+        COALESCE(rc.rankClinched, -1) AS rankClinched
+    FROM 
+        routes AS r
+    LEFT JOIN 
+        clinchedRoutes AS cr ON cr.route = r.root
+    LEFT JOIN 
+        systems ON r.systemName = systems.systemName
+    LEFT JOIN 
+        RankedClinched rc ON cr.traveler = rc.traveler
+    JOIN 
+        listEntries le ON cr.traveler = le.traveler
+    WHERE 
+        r.region = '$region'
+        AND systems.level = 'active'
+    GROUP BY 
+        cr.traveler, le.includeInRanks, rc.rankClinched
+)
+SELECT 
+    traveler,
+    clinched,
+    includeInRanks,
+    rankClinched
+FROM 
+    FinalResult
+ORDER BY 
+    clinched DESC;
 SQL;
             $activeClinchedRes = tmdb_query($sql_command);
 	    $row = tm_fetch_user_row_with_rank($activeClinchedRes, 'clinched');
-	    if ($row['traveler'] != "") {
+	    if ($row['traveler'] != "" && $row['includeInRanks'] == "1") {
 		$clinchedActiveRoutes = $row['clinched'];
 		$clinchedActiveRoutesRank = $row['rank'];
 	    } else {
@@ -270,23 +317,66 @@ SQL;
 
 	    // Active only, driven
             $sql_command = <<<SQL
-            SELECT
-              traveler,
-              COUNT(cr.route) AS driven,
-              SUM(cr.clinched) AS clinched
-            FROM routes AS r
-              LEFT JOIN clinchedRoutes AS cr
-                ON cr.route = r.root
-              LEFT JOIN systems
-                ON r.systemName = systems.systemName
-            WHERE (r.region = '$region' AND 
-                systems.level = 'active')
-            GROUP BY traveler
-	    ORDER BY driven DESC;
+WITH TravelerStats AS (
+    SELECT
+        cr.traveler,
+        COUNT(cr.route) AS driven,
+        SUM(cr.clinched) AS clinched
+    FROM 
+        routes AS r
+    LEFT JOIN 
+        clinchedRoutes AS cr ON cr.route = r.root
+    LEFT JOIN 
+        systems ON r.systemName = systems.systemName
+    JOIN 
+        listEntries le ON cr.traveler = le.traveler
+    WHERE 
+        r.region = '$region'
+        AND systems.level = 'active'
+    GROUP BY 
+        cr.traveler
+),
+FilteredRanks AS (
+    SELECT
+        ts.traveler,
+        ts.driven,
+        ts.clinched,
+        RANK() OVER (ORDER BY ts.driven DESC) AS rankDriven
+    FROM 
+        TravelerStats ts
+    JOIN 
+        listEntries le ON ts.traveler = le.traveler
+    WHERE 
+        le.includeInRanks = 1
+),
+RankedTravelers AS (
+    SELECT
+        ts.traveler,
+        ts.driven,
+        ts.clinched,
+        le.includeInRanks,
+        COALESCE(fr.rankDriven, -1) AS rankDriven
+    FROM 
+        TravelerStats ts
+    LEFT JOIN 
+        FilteredRanks fr ON ts.traveler = fr.traveler
+    JOIN 
+        listEntries le ON ts.traveler = le.traveler
+)
+SELECT 
+    traveler,
+    driven,
+    clinched,
+    includeInRanks,
+    rankDriven
+FROM 
+    RankedTravelers
+ORDER BY 
+    driven DESC;
 SQL;
             $activeDrivenRes = tmdb_query($sql_command);
 	    $row = tm_fetch_user_row_with_rank($activeDrivenRes, 'driven');
-	    if ($row['traveler'] != "") {
+	    if ($row['traveler'] != "" && $row['includeInRanks'] == "1") {
 		$drivenActiveRoutes = $row['driven'];
 		$drivenActiveRoutesRank = $row['rank'];
 	    } else {
@@ -303,22 +393,69 @@ SQL;
 
 	    // Active+Preview, clinched
             $sql_command = <<<SQL
-            SELECT
-              traveler,
-              SUM(cr.clinched) AS clinched
-            FROM routes AS r
-              LEFT JOIN clinchedRoutes AS cr
-                ON cr.route = r.root
-              LEFT JOIN systems
-                ON r.systemName = systems.systemName
-            WHERE (r.region = '$region' AND 
-                (systems.level='preview' OR systems.level='active'))
-            GROUP BY traveler
-	    ORDER BY clinched DESC;
+-- Step 1: Calculate the total clinched mileage per traveler with includeInRanks = 1 and assign ranks
+WITH TravelerClinched AS (
+    SELECT
+        cr.traveler,
+        SUM(cr.clinched) AS clinched
+    FROM 
+        routes AS r
+    LEFT JOIN 
+        clinchedRoutes AS cr ON cr.route = r.root
+    LEFT JOIN 
+        systems ON r.systemName = systems.systemName
+    JOIN 
+        listEntries le ON cr.traveler = le.traveler
+    WHERE 
+        r.region = '$region'
+        AND systems.level = 'active'
+        AND le.includeInRanks = 1
+    GROUP BY 
+        cr.traveler
+),
+RankedClinched AS (
+    SELECT
+        traveler,
+        clinched,
+        RANK() OVER (ORDER BY clinched DESC) AS rankClinched
+    FROM 
+        TravelerClinched
+),
+FinalResult AS (
+    SELECT
+        cr.traveler,
+        SUM(cr.clinched) AS clinched,
+        le.includeInRanks,
+        COALESCE(rc.rankClinched, -1) AS rankClinched
+    FROM 
+        routes AS r
+    LEFT JOIN 
+        clinchedRoutes AS cr ON cr.route = r.root
+    LEFT JOIN 
+        systems ON r.systemName = systems.systemName
+    LEFT JOIN 
+        RankedClinched rc ON cr.traveler = rc.traveler
+    JOIN 
+        listEntries le ON cr.traveler = le.traveler
+    WHERE 
+        r.region = '$region'
+        AND (systems.level = 'active' OR systems.level = 'preview')
+    GROUP BY 
+        cr.traveler, le.includeInRanks, rc.rankClinched
+)
+SELECT 
+    traveler,
+    clinched,
+    includeInRanks,
+    rankClinched
+FROM 
+    FinalResult
+ORDER BY 
+    clinched DESC;
 SQL;
             $activePreviewClinchedRes = tmdb_query($sql_command);
 	    $row = tm_fetch_user_row_with_rank($activePreviewClinchedRes, 'clinched');
-	    if ($row['traveler'] != "") {
+	    if ($row['traveler'] != "" && $row['includeInRanks'] == "1") {
 		$clinchedActivePreviewRoutes = $row['clinched'];
 		$clinchedActivePreviewRoutesRank = $row['rank'];
 	    } else {
@@ -328,19 +465,62 @@ SQL;
 
 	    // Active+Preview, driven
             $sql_command = <<<SQL
-            SELECT
-              traveler,
-              COUNT(cr.route) AS driven,
-              SUM(cr.clinched) AS clinched
-            FROM routes AS r
-              LEFT JOIN clinchedRoutes AS cr
-                ON cr.route = r.root
-              LEFT JOIN systems
-                ON r.systemName = systems.systemName
-            WHERE (r.region = '$region' AND 
-                (systems.level='preview' OR systems.level='active'))
-            GROUP BY traveler
-	    ORDER BY driven DESC;
+WITH TravelerStats AS (
+    SELECT
+        cr.traveler,
+        COUNT(cr.route) AS driven,
+        SUM(cr.clinched) AS clinched
+    FROM 
+        routes AS r
+    LEFT JOIN 
+        clinchedRoutes AS cr ON cr.route = r.root
+    LEFT JOIN 
+        systems ON r.systemName = systems.systemName
+    JOIN 
+        listEntries le ON cr.traveler = le.traveler
+    WHERE 
+        r.region = '$region'
+        AND (systems.level = 'active' OR systems.level = 'preview')
+    GROUP BY 
+        cr.traveler
+),
+FilteredRanks AS (
+    SELECT
+        ts.traveler,
+        ts.driven,
+        ts.clinched,
+        RANK() OVER (ORDER BY ts.driven DESC) AS rankDriven
+    FROM 
+        TravelerStats ts
+    JOIN 
+        listEntries le ON ts.traveler = le.traveler
+    WHERE 
+        le.includeInRanks = 1
+),
+RankedTravelers AS (
+    SELECT
+        ts.traveler,
+        ts.driven,
+        ts.clinched,
+        le.includeInRanks,
+        COALESCE(fr.rankDriven, -1) AS rankDriven
+    FROM 
+        TravelerStats ts
+    LEFT JOIN 
+        FilteredRanks fr ON ts.traveler = fr.traveler
+    JOIN 
+        listEntries le ON ts.traveler = le.traveler
+)
+SELECT 
+    traveler,
+    driven,
+    clinched,
+    includeInRanks,
+    rankDriven
+FROM 
+    RankedTravelers
+ORDER BY 
+    driven DESC;
 SQL;
             $activePreviewDrivenRes = tmdb_query($sql_command);
 	    $row = tm_fetch_user_row_with_rank($activePreviewDrivenRes, 'driven');
