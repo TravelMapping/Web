@@ -309,11 +309,14 @@ ORDER BY
 SQL;
             $activeClinchedRes = tmdb_query($sql_command);
 	    $row = tm_fetch_user_row_with_rank($activeClinchedRes, 'clinched');
-	    if ($row['traveler'] != "" && $row['includeInRanks'] == "1") {
+	    if ($row['traveler'] != "") {
 		$clinchedActiveRoutes = $row['clinched'];
-		$clinchedActiveRoutesRank = "Rank: ".$row['rank'];
 	    } else {
 		$clinchedActiveRoutes = 0;
+	    }
+	    if ($row['includeInRanks'] == "1") {
+		$clinchedActiveRoutesRank = "Rank: ".$row['rank'];
+	    } else {
 		$clinchedActiveRoutesRank = "";
 	    }
 
@@ -378,11 +381,14 @@ ORDER BY
 SQL;
             $activeDrivenRes = tmdb_query($sql_command);
 	    $row = tm_fetch_user_row_with_rank($activeDrivenRes, 'driven');
-	    if ($row['traveler'] != "" && $row['includeInRanks'] == "1") {
+	    if ($row['traveler'] != "") {
 		$drivenActiveRoutes = $row['driven'];
-		$drivenActiveRoutesRank = "Rank: ".$row['rank'];
 	    } else {
 		$drivenActiveRoutes = 0;
+	    }
+	    if ($row['includeInRanks'] == "1") {
+		$drivenActiveRoutesRank = "Rank: ".$row['rank'];
+	    } else {
 		$drivenActiveRoutesRank = "";
 	    }
 
@@ -457,11 +463,14 @@ ORDER BY
 SQL;
             $activePreviewClinchedRes = tmdb_query($sql_command);
 	    $row = tm_fetch_user_row_with_rank($activePreviewClinchedRes, 'clinched');
-	    if ($row['traveler'] != "" && $row['includeInRanks'] == "1") {
+	    if ($row['traveler'] != "") {
 		$clinchedActivePreviewRoutes = $row['clinched'];
-		$clinchedActivePreviewRoutesRank = "Rank: ".$row['rank'];
 	    } else {
 		$clinchedActivePreviewRoutes = 0;
+	    }
+	    if ($row['includeInRanks'] == "1") {
+		$clinchedActivePreviewRoutesRank = "Rank: ".$row['rank'];
+	    } else {
 		$clinchedActivePreviewRoutesRank = "";
 	    }
 
@@ -528,9 +537,12 @@ SQL;
 	    $row = tm_fetch_user_row_with_rank($activePreviewDrivenRes, 'driven');
 	    if ($row['traveler'] != "") {
 		$drivenActivePreviewRoutes = $row['driven'];
-		$drivenActivePreviewRoutesRank = "Rank: ".$row['rank'];
 	    } else {
 		$drivenActivePreviewRoutes = 0;
+	    }
+	    if ($row['includeInRanks'] == "1") {
+		$drivenActivePreviewRoutesRank = "Rank: ".$row['rank'];
+	    } else {
 		$drivenActivePreviewRoutesRank = "";
 	    }
 
