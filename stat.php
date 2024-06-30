@@ -154,9 +154,11 @@ SQL;
 		    if ($row['includeInRanks'] == "1") {
 		        $rank++;
 			$shownRank = $rank;
+			$ttip = "";
 	            }
 		    else {
-		    	$shownRank = "";
+		    	$shownRank = "&nbsp;&nbsp;&nbsp;&nbsp;";
+			$ttip = "title='".$row['traveler']." is specified as an unranked user'";
 	            }
                     if ($row['traveler'] == $tmuser) {
                         $highlight = 'user-highlight';
@@ -166,7 +168,7 @@ SQL;
 		    $print_distance = tm_convert_distance($row['clinchedMileage']);
 		    $style = 'style="text-align: right; background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$totalMileage).';"';
                     echo <<<HTML
-                <tr class="$highlight" onClick="window.document.location='/user?u={$row['traveler']}';">
+                <tr ${ttip} class="$highlight" onClick="window.document.location='/user?u={$row['traveler']}';">
                 <td style="text-align: right;">{$shownRank}</td><td>{$row['traveler']}</td><td {$style}>{$print_distance}</td><td {$style} data-sort="{$row['percentage']}">{$row['percentage']}%</td>
                 </tr>
 HTML;
@@ -213,9 +215,11 @@ SQL;
 		    if ($row['includeInRanks'] == "1") {
 		        $rank++;
 			$shownRank = $rank;
+			$ttip = "";
 	            }
 		    else {
-		    	$shownRank = "";
+		    	$shownRank = "&nbsp;&nbsp;&nbsp;&nbsp;";
+			$ttip = "title='".$row['traveler']." is specified as an unranked user'";
 	            }
                     if ($row['traveler'] == $tmuser) {
                         $highlight = 'user-highlight';
@@ -225,7 +229,7 @@ SQL;
 		    $print_distance = tm_convert_distance($row['clinchedMileage']);
 		    $style = 'style="text-align: right; background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$totalPreviewMileage).';"';
                     echo <<<HTML
-                <tr class="$highlight" onClick="window.document.location='/user?u={$row['traveler']}';">
+                <tr {$ttip} class="$highlight" onClick="window.document.location='/user?u={$row['traveler']}';">
                 <td style="text-align: right;">{$shownRank}</td><td>{$row['traveler']}</td><td {$style}>{$print_distance}</td><td {$style} data-sort="{$row['percentage']}">{$row['percentage']}%</td>
                 </tr>
 HTML;
