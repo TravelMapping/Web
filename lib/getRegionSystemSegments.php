@@ -41,7 +41,7 @@ $response = array('roots'=>array(),
 
 // make DB query for all segments within the given region(s)/system(s) based on
 // the provided clause
-$result = tmdb_query("select segments.root, segments.segmentId, count(acl.segmentId) as travelers, if (cl.segmentId is null, false, true) as clinched, w1.pointName as w1name, w1.latitude as w1lat, w1.longitude as w1lng, w2.pointName as w2name, w2.latitude as w2lat, w2.longitude as w2lng from segments join waypoints as w1 on segments.waypoint1=w1.pointId join waypoints as w2 on segments.waypoint2=w2.pointId join routes on routes.root=segments.root left join clinched as cl on (cl.segmentId=segments.segmentId and cl.traveler='".$params['traveler']."') left join clinched as acl on acl.segmentId=segments.segmentId ".$params['clause']." group by segments.segmentId order by segments.segmentId, segments.root;");
+$result = tmdb_query("select segments.root, segments.segmentId, COUNT(CASE WHEN le.includeInRanks = 1 THEN acl.segmentId ELSE NULL END) AS travelers, if (cl.segmentId is null, false, true) as clinched, w1.pointName as w1name, w1.latitude as w1lat, w1.longitude as w1lng, w2.pointName as w2name, w2.latitude as w2lat, w2.longitude as w2lng from segments join waypoints as w1 on segments.waypoint1=w1.pointId join waypoints as w2 on segments.waypoint2=w2.pointId join routes on routes.root=segments.root left join clinched as cl on (cl.segmentId=segments.segmentId and cl.traveler='".$params['traveler']."') left join clinched as acl on acl.segmentId=segments.segmentId LEFT JOIN listEntries AS le ON acl.traveler = le.traveler ".$params['clause']." group by segments.segmentId order by segments.segmentId, segments.root;");
 
 // parse results into the response array
 while ($row = $result->fetch_assoc()) {
