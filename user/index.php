@@ -109,13 +109,21 @@ echo "<h1>Main Travel Mapping - ".$tmMode_p." User Page for ".$tmuser."</h1>";
 	    echo ';">' . tm_convert_distance($row['clinchedActiveMileage']);
 	    echo "/" . tm_convert_distance($row['totalActiveMileage']) . " ";
 	    tm_echo_units();
-	    echo " (" . $row['activePercentage'] . "%) Rank: ".$row['rankActiveMileage']."</td>";
+	    echo " (" . $row['activePercentage'] . "%) ";
+	    if ($row['rankActiveMileage'] != -1) {
+	        echo "Rank: ".$row['rankActiveMileage'];
+	    }
+	    echo "</td>";
 	    echo '<td style="background-color: ';
 	    echo tm_color_for_amount_traveled($row['clinchedActivePreviewMileage'],$row['totalActivePreviewMileage']);
 	    echo ';">' . tm_convert_distance($row['clinchedActivePreviewMileage']);
 	    echo "/" . tm_convert_distance($row['totalActivePreviewMileage']) . " ";
 	    tm_echo_units();
-	    echo " (" . $row['activePreviewPercentage'] . "%) Rank: ".$row['rankActivePreviewMileage']."</td>";
+	    echo " (" . $row['activePreviewPercentage'] . "%) ";
+	    if ($row['rankActivePreviewMileage'] != -1) {
+	        echo "Rank: ".$row['rankActivePreviewMileage'];
+	    }
+	    echo "</td>";
 	    echo "</tr>";
 
             // Second, fetch routes driven/clinched active only
@@ -242,20 +250,36 @@ SQL;
 	    echo "<td>Routes Traveled</td>";
 	    echo '<td style="background-color: ';
 	    echo tm_color_for_amount_traveled($activeDriven,$activeRoutes);
-	    echo ';">'.$activeDriven." of " . $activeRoutes . " (" . $activeDrivenPct . "%) Rank: ".$activeDrivenRank."</td>";
+	    echo ';">'.$activeDriven." of " . $activeRoutes . " (" . $activeDrivenPct . "%) ";
+	    if ($activeDrivenRank != -1) {
+	        echo "Rank: ".$activeDrivenRank;
+	    }
+	    echo "</td>";
 	    echo '<td style="background-color: ';
 	    echo tm_color_for_amount_traveled($activePreviewDriven,$activePreviewRoutes);
-	    echo ';">'.$activePreviewDriven." of " . $activePreviewRoutes . " (" . $activePreviewDrivenPct . "%) Rank: ".$activePreviewDrivenRank."</td>";
+	    echo ';">'.$activePreviewDriven." of " . $activePreviewRoutes . " (" . $activePreviewDrivenPct . "%) ";
+	    if ($activePreviewDrivenRank != -1) {
+	        echo "Rank: ".$activePreviewDrivenRank;
+	    }
+	    echo "</td>";
 	    echo "</tr>";
 
             echo "<tr onclick=\"window.open('/shields/clinched.php?u={$tmuser}')\">";
 	    echo "<td>Routes Clinched</td>";
 	    echo '<td style="background-color: ';
 	    echo tm_color_for_amount_traveled($activeClinched,$activeRoutes);
-	    echo ';">'.$activeClinched." of " . $activeRoutes . " (" . $activeClinchedPct . "%) Rank: ".$activeClinchedRank."</td>";
+	    echo ';">'.$activeClinched." of " . $activeRoutes . " (" . $activeClinchedPct . "%) ";
+	    if ($activeClinchedRank != -1) {
+	        echo "Rank: ".$activeClinchedRank;
+	    }
+	    echo "</td>";
 	    echo '<td style="background-color: ';
 	    echo tm_color_for_amount_traveled($activePreviewClinched,$activePreviewRoutes);
-	    echo ';">'.$activePreviewClinched." of " . $activePreviewRoutes . " (" . $activePreviewClinchedPct . "%) Rank: ".$activePreviewClinchedRank."</td>";
+	    echo ';">'.$activePreviewClinched." of " . $activePreviewRoutes . " (" . $activePreviewClinchedPct . "%) ";
+	    if ($activePreviewClinchedRank != -1) {
+	        echo "Rank: ".$activePreviewClinchedRank;
+	    }
+	    echo "</td>";
 	    echo "</tr>";
             ?>
             </tbody>
