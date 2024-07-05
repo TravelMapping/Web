@@ -574,7 +574,7 @@ Lines in the file have three semicolon-separated fields:
 listname;description;includeInRanks
 </pre>
 
-The <tt>listname</tt> is the TM username, <tt>description</tt> is a brief description of the meaning of the file (e.g., your actual name, or what subset of your travels the file contains, etc.), and <tt>includeInRanks</tt> is 1 for normal users and 0 for users that should be excluded from rankings on the site because it does not represent the actual lifetime travels of an individual.  All list files that do not represent actual lifetime travels of an individual should be given an entry.  An entry to specify a description can optionally be added for any user.  These can be added by email request to <code>travmap@teresco.org</code> or by submitting a pull request in the repository.
+The <tt>listname</tt> is the TM username (case sensitive), <tt>description</tt> is a brief description of the meaning of the file (e.g., your actual name, or what subset of your travels the file contains, etc.), and <tt>includeInRanks</tt> is 1 for normal users and 0 for users that should be excluded from rankings on the site because it does not represent the actual lifetime travels of an individual.  All list files that do not represent actual lifetime travels of an individual should be given an entry.  An entry to specify a description can optionally be added for any user.  These can be added by email request to <code>travmap@teresco.org</code> or by submitting a pull request in the repository.
 
 </div>
 
