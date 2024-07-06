@@ -137,7 +137,7 @@ HTML;
 SELECT
     co.traveler,
     ROUND(SUM(COALESCE(co.activeMileage, 0)), 2) AS clinchedMileage,
-    ROUND(SUM(COALESCE(co.activeMileage, 0)) / 1237146.28 * 100, 2) AS percentage,
+    ROUND(SUM(COALESCE(co.activeMileage, 0)) / $totalMileage * 100, 2) AS percentage,
     le.includeInRanks
 FROM 
     clinchedOverallMileageByRegion co
@@ -198,7 +198,7 @@ HTML;
 SELECT
     co.traveler,
     ROUND(SUM(COALESCE(co.activePreviewMileage, 0)), 2) AS clinchedMileage,
-    ROUND(SUM(COALESCE(co.activePreviewMileage, 0)) / 1237146.28 * 100, 2) AS percentage,
+    ROUND(SUM(COALESCE(co.activePreviewMileage, 0)) / $totalPreviewMileage * 100, 2) AS percentage,
     le.includeInRanks
 FROM 
     clinchedOverallMileageByRegion co
