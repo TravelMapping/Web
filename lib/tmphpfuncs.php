@@ -79,8 +79,10 @@ $tmMode_s = ucwords($tmmode_s);
 
 // list file repo directory name
 $tmlistdir = "list_files";
+$tmlistext = "list";
 if ($tmmode_s == "railway") {
    $tmlistdir = "rlist_files";
+   $tmlistext = "rlist";
 }
 else if ($tmmode_s == "ski trails") {
    $tmlistdir = "slist_files";

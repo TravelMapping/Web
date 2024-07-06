@@ -79,7 +79,7 @@ echo "<h1>Main Travel Mapping - ".$tmMode_p." User Page for ".$tmuser."</h1>";
 <div id="body">
     <h2>User Links</h2>
     <ul class="text">
-      <li><a href="/logs/users/<?php echo $tmuser; ?>.log">Log File</a>, where you can find any errors from processing <a href="https://github.com/TravelMapping/UserData/blob/master/<?php echo $tmlistdir."/".$tmuser; ?>.list"><?php echo $tmuser; ?>.list</a>, and statistics.</li>
+      <li><a href="/logs/users/<?php echo $tmuser; ?>.log">Log File</a>, where you can find any errors from processing <a href="https://github.com/TravelMapping/UserData/blob/master/<?php echo $tmlistdir."/".$tmuser.".".$tmlistext."\">".$tmuser.".".$tmlistext; ?></a>, and statistics.</li>
       <li>Browse the <?php echo $tmmode_s;?> travels of <?php echo $tmuser; ?> with <a href="mapview.php?v">Mapview</a>.</li>
       <li><a href="topstats.php">Browse the top stats for the <?php echo $tmmode_s;?> travels of <?php echo $tmuser; ?></a>.</li>
       <?php
