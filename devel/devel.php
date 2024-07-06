@@ -14,6 +14,11 @@
 
 <body>
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
+<?php
+if ($tmmode_s == "railway") {
+  echo "<p class='errorbar'>The TM Manual has not yet been updated with information specific to TM Railways!</p>";
+}
+?>
 <h1>Travel Mapping Developer Tools and Links</h1>
 
 <style>
