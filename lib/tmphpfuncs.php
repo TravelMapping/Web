@@ -21,7 +21,7 @@
  */
 
 // always attempt to establish a connection to the db, allow QS parameters
-// to override defaults, which come from the 6 lines of tm.conf (which
+// to override defaults, which come from the 7 lines of tm.conf (which
 // is not in source code control to protect the information there)
 //
 // IMPORTANT: this file should also not be accessible through the 
@@ -33,6 +33,7 @@
 
 
 $tmconffile = fopen($_SERVER['DOCUMENT_ROOT']."/lib/tm.conf", "r");
+$tmmode_p = chop(fgets($tmconffile));
 $tmdbname = chop(fgets($tmconffile));
 $tmdbuser = chop(fgets($tmconffile));
 $tmdbpasswd = chop(fgets($tmconffile));
@@ -71,6 +72,22 @@ if (array_key_exists("sqldebug", $_GET)) {
     $tmsqldebug = TRUE;
 }
 
+// capitalized/singular versions of mode
+$tmMode_p = ucwords($tmmode_p);
+$tmmode_s = substr($tmmode_p, 0, -1);
+$tmMode_s = ucwords($tmmode_s);
+
+// list file repo directory name
+$tmlistdir = "list_files";
+$tmlistext = "list";
+if ($tmmode_s == "railway") {
+   $tmlistdir = "rlist_files";
+   $tmlistext = "rlist";
+}
+else if ($tmmode_s == "ski trails") {
+   $tmlistdir = "slist_files";
+}
+
 // get other common QS parameters
 
 // Note: u= is the user, stored in $tmuser variable, but this
@@ -83,6 +100,7 @@ echo "<!-- mysqli connecting to database ".$tmdbname." on ".$tmdbhost." -->\n";
 mysqli_report(MYSQLI_REPORT_STRICT);
 try {
     $tmdb = new mysqli($tmdbhost, $tmdbuser, $tmdbpasswd, $tmdbname);
+    $tmdb->set_charset('utf8');
 }
 catch ( Exception $e ) {
     echo "<h1 style='color: red'>Failed to connect to database ".$tmdbname." on ".$tmdbhost." Please look <a href=\"https://travelmapping.github.io/\">here</a> for possible updates.</h1>";
@@ -424,8 +442,8 @@ function tm_update_time() {
 // associative array) as the value associated with a new key 'rank'.
 function tm_fetch_user_row_with_rank($res, $rankBy) {
     global $tmuser;
-    $nextRank = 1;
-    $rank = 1;
+    $nextRank = 0;
+    $rank = 0;
     $score = 0;
     $row = array();
     $row['traveler'] = NULL;
@@ -434,10 +452,12 @@ function tm_fetch_user_row_with_rank($res, $rankBy) {
             $score = $row[$rankBy];
             $rank = $nextRank;
         }
-        $nextRank++;
+	if ($row['includeInRanks'] == "1") {
+            $nextRank++;
+	}
         //error_log("($rank, {$row['traveler']}, {$row[$rankBy]})");
     }
-    $row['rank'] = $rank;
+    $row['rank'] = ($rank+1);
     return $row;
 }
 
@@ -464,6 +484,16 @@ function tm_convert_distance_wholenum($mileage) {
     global $tmunits;
     global $tm_supported_units;
     return number_format($mileage * $tm_supported_units[$tmunits], 0, '.', ',');
+}
+
+// return a string representation of a percentage to 2 digits of precision
+// with a check for divide by 0
+function tm_percent($num, $den) {
+
+   if ($den == 0) {
+      return "-.--";
+   }
+   return "".round($num/$den*100, 2);
 }
 
 // validate a string as a possible "root": must be letters, followed by
@@ -508,13 +538,13 @@ function tm_common_js() {
     echo "</script>\n";
 
     echo <<<END
-  <link rel="stylesheet" href="/leaflet-1.7.1/leaflet.css" />
-  <script src="/leaflet-1.7.1/leaflet.js"></script>
+  <link rel="stylesheet" href="/leaflet-1.9.4/leaflet.css" />
+  <script src="/leaflet-1.9.4/leaflet.js"></script>
   <!-- important when updating leaflet-providers: use the version in
        the fork https://github.com/TravelMapping/leaflet-providers
        which includes the TMBlank tiles.  Use fetch-upstream there
        to get the latest and install leaflet-providers.js from the fork -->
-  <script src="/leaflet-1.7.1/leaflet-providers.js"></script>
+  <script src="/leaflet-1.9.4/leaflet-providers.js"></script>
   <!-- script type="text/javascript" src="https://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script> -->
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

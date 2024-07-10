@@ -158,12 +158,54 @@ if (( $tmuser == "null") || ( $system == "" )) {
 
 		// clinched mileage across all systems
                 $sql_command = <<<SQL
-                SELECT
-                    traveler, SUM(mileage) as clinchedMileage
-                FROM clinchedSystemMileageByRegion
-                WHERE systemName = '$system'
-		GROUP BY traveler
-                ORDER BY clinchedMileage DESC;
+WITH TravelerMileage AS (
+    SELECT
+        csm.traveler,
+        SUM(csm.mileage) AS clinchedMileage
+    FROM 
+        clinchedSystemMileageByRegion csm
+    JOIN 
+        listEntries le ON csm.traveler = le.traveler
+    WHERE 
+        csm.systemName = '$system'
+    GROUP BY 
+        csm.traveler
+),
+FilteredRanks AS (
+    SELECT
+        tm.traveler,
+        tm.clinchedMileage,
+        RANK() OVER (ORDER BY tm.clinchedMileage DESC, le.includeInRanks DESC) AS rankClinchedMileage
+    FROM 
+        TravelerMileage tm
+    JOIN 
+        listEntries le ON tm.traveler = le.traveler
+    WHERE 
+        le.includeInRanks = 1
+),
+RankedTravelers AS (
+    SELECT
+        tm.traveler,
+        tm.clinchedMileage,
+        le.includeInRanks,
+        COALESCE(fr.rankClinchedMileage, -1) AS rankClinchedMileage
+    FROM 
+        TravelerMileage tm
+    LEFT JOIN 
+        FilteredRanks fr ON tm.traveler = fr.traveler
+    JOIN 
+        listEntries le ON tm.traveler = le.traveler
+)
+SELECT 
+    traveler,
+    clinchedMileage,
+    includeInRanks,
+    rankClinchedMileage
+FROM 
+    RankedTravelers
+ORDER BY 
+    clinchedMileage DESC,
+    includeInRanks DESC;
 SQL;
             } 
 	    else {
@@ -172,12 +214,53 @@ SQL;
 
 		// clinched mileage across all systems
                 $sql_command = <<<SQL
-                SELECT
-                    traveler, mileage as clinchedMileage
-                FROM clinchedSystemMileageByRegion
-                WHERE systemName = '$system'
-		AND region = '$region'
-                ORDER BY clinchedMileage DESC;
+WITH TravelerMileage AS (
+    SELECT
+        csm.traveler,
+        csm.mileage AS clinchedMileage
+    FROM 
+        clinchedSystemMileageByRegion csm
+    JOIN 
+        listEntries le ON csm.traveler = le.traveler
+    WHERE 
+        csm.systemName = '$system'
+        AND csm.region = '$region'
+),
+FilteredRanks AS (
+    SELECT
+        tm.traveler,
+        tm.clinchedMileage,
+        RANK() OVER (ORDER BY tm.clinchedMileage DESC, le.includeInRanks DESC) AS rankClinchedMileage
+    FROM 
+        TravelerMileage tm
+    JOIN 
+        listEntries le ON tm.traveler = le.traveler
+    WHERE 
+        le.includeInRanks = 1
+),
+RankedTravelers AS (
+    SELECT
+        tm.traveler,
+        tm.clinchedMileage,
+        le.includeInRanks,
+        COALESCE(fr.rankClinchedMileage, -1) AS rankClinchedMileage
+    FROM 
+        TravelerMileage tm
+    LEFT JOIN 
+        FilteredRanks fr ON tm.traveler = fr.traveler
+    JOIN 
+        listEntries le ON tm.traveler = le.traveler
+)
+SELECT 
+    traveler,
+    clinchedMileage,
+    includeInRanks,
+    rankClinchedMileage
+FROM 
+    RankedTravelers
+ORDER BY 
+    clinchedMileage DESC,
+    includeInRanks DESC;
 SQL;
             }
             $res = tmdb_query($sql_command);
@@ -187,13 +270,13 @@ SQL;
   	        $percentage = $row['clinchedMileage'] / $system_mileage * 100;
 	    }
             $link = "window.open('/shields/clinched.php?u=" . $tmuser . "&amp;sys=" . $system . "')";
-	    if ($row['traveler'] != "") {
-		$rank = $row['rank'];
+	    if ($row['traveler'] != "" && $row['includeInRanks'] == "1") {
+		$rank = "Rank: ".$row['rank'];
 	    } else {
-		$rank = "N/A";
+		$rank = "";
 	    }
 	    $style = 'style="background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$system_mileage).';"';
-            echo "<tr><td>Distance Traveled</td><td ".$style.">".tm_convert_distance($row['clinchedMileage'])." of ".tm_convert_distance($system_mileage)." ".$tmunits." (".sprintf('%0.2f',$percentage)."%) Rank: ".$rank."</td></tr>";
+            echo "<tr><td>Distance Traveled</td><td ".$style.">".tm_convert_distance($row['clinchedMileage'])." of ".tm_convert_distance($system_mileage)." ".$tmunits." (".sprintf('%0.2f',$percentage)."%) ".$rank."</td></tr>";
 
 	    // build arrays that will form the contents of the travelers
 	    // by region stats for active systems
@@ -208,90 +291,280 @@ SQL;
             if ($region == "") {
                 $totalRoutes = tm_count_rows("connectedRoutes", "WHERE systemName='".$system."'");
                 $sql_command = <<<SQL
-                SELECT
-                    ccr.traveler,
-                    sum(ccr.clinched) as clinched
-                FROM connectedRoutes as cr
-                LEFT JOIN clinchedConnectedRoutes as ccr
-                ON cr.firstRoot = ccr.route
-                WHERE cr.systemName = '$system'
-                GROUP BY traveler
-		ORDER BY clinched DESC;
+WITH TravelerMileage AS (
+    SELECT
+        ccr.traveler,
+        SUM(ccr.clinched) AS clinched
+    FROM 
+        connectedRoutes AS cr
+    LEFT JOIN 
+        clinchedConnectedRoutes AS ccr ON cr.firstRoot = ccr.route
+    JOIN 
+        listEntries le ON ccr.traveler = le.traveler
+    WHERE 
+        cr.systemName = '$system'
+    GROUP BY 
+        ccr.traveler
+),
+FilteredRanks AS (
+    SELECT
+        tm.traveler,
+        tm.clinched,
+        RANK() OVER (ORDER BY tm.clinched DESC, le.includeInRanks DESC) AS rankClinched
+    FROM 
+        TravelerMileage tm
+    JOIN 
+        listEntries le ON tm.traveler = le.traveler
+    WHERE 
+        le.includeInRanks = 1
+),
+RankedTravelers AS (
+    SELECT
+        tm.traveler,
+        tm.clinched,
+        le.includeInRanks,
+        COALESCE(fr.rankClinched, -1) AS rankClinched
+    FROM 
+        TravelerMileage tm
+    LEFT JOIN 
+        FilteredRanks fr ON tm.traveler = fr.traveler
+    JOIN 
+        listEntries le ON tm.traveler = le.traveler
+)
+SELECT 
+    traveler,
+    clinched,
+    includeInRanks,
+    rankClinched
+FROM 
+    RankedTravelers
+ORDER BY 
+    clinched DESC,
+    includeInRanks DESC;
 SQL;
 		$res = tmdb_query($sql_command);
 		$row = tm_fetch_user_row_with_rank($res, 'clinched');
 		if ($row['traveler'] != "") {
 		    $clinched = $row['clinched'];
-		    $clinchedRank = $row['rank'];
-		} else {
+		}
+		else {
 		    $clinched = 0;
-		    $clinchedRank = "N/A";
+		}
+		if ($row['includeInRanks'] == "1") {
+		    $clinchedRank = "Rank: ".$row['rank'];
+		}
+		else {
+		    $clinchedRank = "";
 		}
 		$res->free();
                 $sql_command = <<<SQL
-                SELECT
-                    ccr.traveler,
-                    count(ccr.route) as driven,
-                    sum(ccr.clinched) as clinched
-                FROM connectedRoutes as cr
-                LEFT JOIN clinchedConnectedRoutes as ccr
-                ON cr.firstRoot = ccr.route
-                WHERE cr.systemName = '$system'
-                GROUP BY traveler
-		ORDER BY driven DESC;
+WITH TravelerMileage AS (
+    SELECT
+        ccr.traveler,
+        COUNT(ccr.route) AS driven,
+        SUM(ccr.clinched) AS clinched
+    FROM 
+        connectedRoutes AS cr
+    LEFT JOIN 
+        clinchedConnectedRoutes AS ccr ON cr.firstRoot = ccr.route
+    JOIN 
+        listEntries le ON ccr.traveler = le.traveler
+    WHERE 
+        cr.systemName = '$system'
+    GROUP BY 
+        ccr.traveler
+),
+FilteredRanks AS (
+    SELECT
+        tm.traveler,
+        tm.driven,
+        RANK() OVER (ORDER BY tm.driven DESC, le.includeInRanks DESC) AS rankDriven
+    FROM 
+        TravelerMileage tm
+    JOIN 
+        listEntries le ON tm.traveler = le.traveler
+    WHERE 
+        le.includeInRanks = 1
+),
+RankedTravelers AS (
+    SELECT
+        tm.traveler,
+        tm.driven,
+        tm.clinched,
+        le.includeInRanks,
+        COALESCE(fr.rankDriven, -1) AS rankDriven
+    FROM 
+        TravelerMileage tm
+    LEFT JOIN 
+        FilteredRanks fr ON tm.traveler = fr.traveler
+    JOIN 
+        listEntries le ON tm.traveler = le.traveler
+)
+SELECT 
+    traveler,
+    driven,
+    clinched,
+    includeInRanks,
+    rankDriven
+FROM 
+    RankedTravelers
+ORDER BY 
+    driven DESC,
+    includeInRanks DESC;
 SQL;
 		$res = tmdb_query($sql_command);
 		$row = tm_fetch_user_row_with_rank($res, 'driven');
 		if ($row['traveler'] != "") {
 		    $driven = $row['driven'];
-		    $drivenRank = $row['rank'];
-		} else {
+		}
+		else {
 		    $driven = 0;
-		    $drivenRank = "N/A";
+		}
+		if ($row['includeInRanks'] == "1") {
+		    $drivenRank = "Rank: ".$row['rank'];
+		}
+		else {
+		    $drivenRank = "";
 		}
             } else {
                 $totalRoutes = tm_count_rows("routes", "WHERE systemName='".$system."' AND region='".$region."'");
                 $sql_command = <<<SQL
-                SELECT
-                    ccr.traveler,
-                    sum(ccr.clinched) as clinched
-                FROM routes as cr
-                LEFT JOIN clinchedRoutes as ccr
-                ON cr.root = ccr.route
-                WHERE cr.region = '$region' AND cr.systemName = '$system'
-                GROUP BY ccr.traveler
-		ORDER BY clinched DESC;
+WITH TravelerMileage AS (
+    SELECT
+        ccr.traveler,
+        SUM(ccr.clinched) AS clinched
+    FROM 
+        routes AS cr
+    LEFT JOIN 
+        clinchedRoutes AS ccr ON cr.root = ccr.route
+    JOIN 
+        listEntries le ON ccr.traveler = le.traveler
+    WHERE 
+        cr.region = '$region' 
+        AND cr.systemName = '$system'
+    GROUP BY 
+        ccr.traveler
+),
+FilteredRanks AS (
+    SELECT
+        tm.traveler,
+        tm.clinched,
+        RANK() OVER (ORDER BY tm.clinched DESC, le.includeInRanks DESC) AS rankClinched
+    FROM 
+        TravelerMileage tm
+    JOIN 
+        listEntries le ON tm.traveler = le.traveler
+    WHERE 
+        le.includeInRanks = 1
+),
+RankedTravelers AS (
+    SELECT
+        tm.traveler,
+        tm.clinched,
+        le.includeInRanks,
+        COALESCE(fr.rankClinched, -1) AS rankClinched
+    FROM 
+        TravelerMileage tm
+    LEFT JOIN 
+        FilteredRanks fr ON tm.traveler = fr.traveler
+    JOIN 
+        listEntries le ON tm.traveler = le.traveler
+)
+SELECT 
+    traveler,
+    clinched,
+    includeInRanks,
+    rankClinched
+FROM 
+    RankedTravelers
+ORDER BY 
+    clinched DESC,
+    includeInRanks DESC;
 SQL;
 		$res = tmdb_query($sql_command);
 		$row = tm_fetch_user_row_with_rank($res, 'clinched');
 		if ($row['traveler'] != "") {
 		    $clinched = $row['clinched'];
-		    $clinchedRank = $row['rank'];
-		} else {
+		}
+		else {
 		    $clinched = 0;
-		    $clinchedRank = "N/A";
+		}
+		if ($row['includeInRanks'] == "1") {
+		    $clinchedRank = "Rank: ".$row['rank'];
+		}
+		else {
+		    $clinchedRank = "";
 		}
 		$res->free();
                 $sql_command = <<<SQL
-                SELECT
-                    ccr.traveler,
-                    count(ccr.route) as driven,
-                    sum(ccr.clinched) as clinched
-                FROM routes as cr
-                LEFT JOIN clinchedRoutes as ccr
-                ON cr.root = ccr.route
-                WHERE cr.region = '$region' AND cr.systemName = '$system'
-                GROUP BY ccr.traveler
-		ORDER BY driven DESC;
+WITH TravelerMileage AS (
+    SELECT
+        ccr.traveler,
+        COUNT(ccr.route) AS driven,
+        SUM(ccr.clinched) AS clinched
+    FROM 
+        routes AS cr
+    LEFT JOIN 
+        clinchedRoutes AS ccr ON cr.root = ccr.route
+    JOIN 
+        listEntries le ON ccr.traveler = le.traveler
+    WHERE 
+        cr.region = '$region' 
+        AND cr.systemName = '$system'
+    GROUP BY 
+        ccr.traveler
+),
+FilteredRanks AS (
+    SELECT
+        tm.traveler,
+        tm.driven,
+        RANK() OVER (ORDER BY tm.driven DESC, le.includeInRanks DESC) AS rankDriven
+    FROM 
+        TravelerMileage tm
+    JOIN 
+        listEntries le ON tm.traveler = le.traveler
+    WHERE 
+        le.includeInRanks = 1
+),
+RankedTravelers AS (
+    SELECT
+        tm.traveler,
+        tm.driven,
+        tm.clinched,
+        le.includeInRanks,
+        COALESCE(fr.rankDriven, -1) AS rankDriven
+    FROM 
+        TravelerMileage tm
+    LEFT JOIN 
+        FilteredRanks fr ON tm.traveler = fr.traveler
+    JOIN 
+        listEntries le ON tm.traveler = le.traveler
+)
+SELECT 
+    traveler,
+    driven,
+    clinched,
+    includeInRanks,
+    rankDriven
+FROM 
+    RankedTravelers
+ORDER BY 
+    driven DESC,
+    includeInRanks DESC;
 SQL;
 		$res = tmdb_query($sql_command);
 		$row = tm_fetch_user_row_with_rank($res, 'driven');
 		if ($row['traveler'] != "") {
 		    $driven = $row['driven'];
-		    $drivenRank = $row['rank'];
-		} else {
+		}
+		else {
 		    $driven = 0;
-		    $drivenRank = "N/A";
+		}
+		if ($row['includeInRanks'] == "1") {
+		    $drivenRank = "Rank: ".$row['rank'];
+		}
+		else {
+		    $drivenRank = "";
 		}
             }
 	    // add to the table of travelers by region stats
@@ -299,13 +572,14 @@ SQL;
 	    while ($row = $res->fetch_assoc()) {
 		$TravelerInfo[$row['traveler']]['driven'] = $row['driven'];
 		$TravelerInfo[$row['traveler']]['clinched'] = $row['clinched'];
+		$TravelerInfo[$row['traveler']]['includeInRanks'] = $row['includeInRanks'];
             }
 	    $res->free();
 
 	    $style = 'style="background-color: '.tm_color_for_amount_traveled($driven,$totalRoutes).';"';
-            echo "<tr onClick=\"" . $link . "\"><td>Routes Traveled</td><td ".$style.">" . $driven   . " of " . $totalRoutes . " (" . round($driven   / $totalRoutes * 100, 2) . "%) Rank: {$drivenRank}</td></tr>\n";
+            echo "<tr onClick=\"" . $link . "\"><td>Routes Traveled</td><td ".$style.">" . $driven   . " of " . $totalRoutes . " (" . round($driven   / $totalRoutes * 100, 2) . "%) {$drivenRank}</td></tr>\n";
 	    $style = 'style="background-color: '.tm_color_for_amount_traveled($clinched,$totalRoutes).';"';
-	    echo "<tr onClick=\"" . $link . "\"><td>Routes Clinched</td><td ".$style.">" . $clinched . " of " . $totalRoutes . " (" . round($clinched / $totalRoutes * 100, 2) . "%) Rank: {$clinchedRank}</td></tr>\n";
+	    echo "<tr onClick=\"" . $link . "\"><td>Routes Clinched</td><td ".$style.">" . $clinched . " of " . $totalRoutes . " (" . round($clinched / $totalRoutes * 100, 2) . "%) {$clinchedRank}</td></tr>\n";
             ?>
             </tbody>
         </table>
@@ -431,6 +705,7 @@ HTML;
         </thead>
     <tbody>
 	  <?php
+	  $skipped = 0;
 	  $prev_mileage = 0;
 	  $pre_rank = 1;
 	  $tie_rank = 1;
@@ -440,17 +715,25 @@ HTML;
               }
               if ($traveler == $tmuser) {
                   $highlight = 'user-highlight';
-              } else {
+              }
+	      else {
                  $highlight = '';
               }
 	      $tie_rank = ($prev_mileage == $stats['mileage']) ? $tie_rank : $pre_rank;
+	      if ($stats['includeInRanks'] == "1") {
+	          $show_rank = $tie_rank - $skipped;
+	      }
+	      else {
+	          $show_rank = "";
+		  $skipped++;
+              }
 	      $mileageStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['mileage'],$system_mileage).';"';
 	      $drivenStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['driven'],$totalRoutes).';"';
 	      $clinchedStyle = 'style="background-color: '.tm_color_for_amount_traveled($stats['clinched'],$totalRoutes).';"';
 	      echo "<tr class=\"".$highlight."\" onClick=\"window.document.location='?u=".$traveler."&sys=$system";
 	      if ($region != "") echo "&rg=$region";
 	      echo "'\">";
-	      echo "<td>".$tie_rank."</td>";
+	      echo "<td>".$show_rank."</td>";
 	      echo "<td>".$traveler."</td>";
 	      echo "<td ".$mileageStyle.">".tm_convert_distance($stats['mileage'])."</td>";
 	      $pct = round($stats['mileage'] / $system_mileage * 100, 2);

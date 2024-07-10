@@ -267,7 +267,7 @@
     <?php tm_common_js(); ?>
     <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
     <script src="../lib/showroutefuncs.js" type="text/javascript"></script>
-    <title><?php echo $titleRoute; ?> - TM Highway Browser</title>
+    <title><?php echo $titleRoute; ?> - TM <?php echo $tmMode_s;?> Browser</title>
 </head>
 <?php 
 $nobigheader = 1;
@@ -285,7 +285,7 @@ if ($routeInfo['level'] == 'preview') {
     echo "<span class='status-preview' style='text-align:center' title='".$msg."'>Warning: ".$routeInfo['systemName']." is a preview system. <span onclick='alert(\"".$msg."\");'>(?)</span></span>\n";
 }
 else if ($routeInfo['level'] == 'devel') {
-    $msg = 'Devel systems are a work in progress. Routes in these systems are not yet available for mapping and inclusion in user stats, and are shown in the Highway Browser primarily for the benefit of the highway data managers who are developing the system. Once the system is substantially complete it will be upgraded to preview status, at which time users can begin to plot their travels in the system.';
+    $msg = 'Devel systems are a work in progress. Routes in these systems are not yet available for mapping and inclusion in user stats, and are shown in the '.$tmMode_s.' Browser primarily for the benefit of the '.$tmmode_s.' data managers who are developing the system. Once the system is substantially complete it will be upgraded to preview status, at which time users can begin to plot their travels in the system.';
     echo "<span class='status-devel' style='text-align:center' title='".$msg."'>Warning: ".$routeInfo['systemName']." is an in-development system. <span onclick='alert(\"".$msg."\");'>(?)</span></span>\n";
 }
 

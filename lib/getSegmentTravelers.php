@@ -19,7 +19,7 @@ ob_end_clean();
 $response = array();
 
 // make the specified DB query 
-$result = tmdb_query("select segments.segmentId, clinched.traveler from segments left join clinched on clinched.segmentId=segments.segmentId where segments.segmentId='".$params['segmentid']."';");
+$result = tmdb_query("select segments.segmentId, clinched.traveler from segments left join clinched on clinched.segmentId=segments.segmentId LEFT JOIN listEntries AS le ON clinched.traveler = le.traveler where segments.segmentId='".$params['segmentid']."' and le.includeInRanks = 1;");
 
 // parse results into the response array
 while ($row = $result->fetch_assoc()) {

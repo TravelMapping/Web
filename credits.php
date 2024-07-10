@@ -80,6 +80,7 @@ following sources of highway information.</p>
 	  <li><a name="aut"></a><a style="text-decoration:none" href="#aut">&#x1f517</a>Austria
 	    <ul>
         <li><a href="https://www.asfinag.at/">ASFINAG: Motorways and Expressways Road Concessionaire</a>. Official site of the motorway/expressway network in Austria.</li>
+        <li><a href="https://www.ris.bka.gv.at/">Legal Information System of the Republic of Austria</a>. Platform and data base providing information on Austrian law.</li>
 	    </ul>
 	  </li>
 	  <li><a name="aze"></a><a style="text-decoration:none" href="#aze">&#x1f517</a>Azerbaijan
@@ -124,7 +125,7 @@ following sources of highway information.</p>
 																 <li>British Columbia, CAN
 	    	    <ul>
 	      <li><a href="http://www.gov.bc.ca/tran/">British Columbia Ministry of Transportation and Infrastructure</a>. Official government site covering transportation in British Columbia, Canada.</li>
-	      <li><a href="http://www2.gov.bc.ca/gov/content/transportation/transportation-reports-and-reference/numbered-routes">Official Numbered Routes in British Columbia</a>. List of numbered routes in British Columbia from the Ministry of Transportation and Infrastructure.</li>
+	      <li><a href="https://www2.gov.bc.ca/gov/content/transportation/transportation-reports-and-reference/reference-information/numbered-routes">Official Numbered Routes in British Columbia</a>. List of numbered routes in British Columbia from the Ministry of Transportation and Infrastructure.</li>
               <li><a href="http://www2.gov.bc.ca/gov/content/transportation/transportation-infrastructure/engineering-standards-guidelines/landmark-kilometre-inventory">Landmark Kilometre Inventory</a>. Route logs for provincial highways, from the Ministry of Transportation and Infrastructure.</li>
             </ul>
 	  </li>
@@ -148,9 +149,9 @@ following sources of highway information.</p>
 	  </li> -->
           <li>Northwest Territories, CAN
 	    <ul>
-<li><a href="http://www.dot.gov.nt.ca/">Ministry of Transportation</a>. Official website of territorial Ministry of Transportation</li>
+<li><a href="https://www.inf.gov.nt.ca/en/">Ministry of Infrastructure</a>. Official website of territorial Ministry of Infrastructure</li>
 <li><a href="https://www.justice.gov.nt.ca/en/files/legislation/public-highways/public-highways.r1.pdf">Highway Designation and Classification Regulations</a>. Official list and definitions of territorial highways</li>
-<li><a href="http://www.dot.gov.nt.ca/Highways/Highway_System">Northwest Territories Highway System</a>. Official highway map</li>
+<li><a href="https://www.inf.gov.nt.ca/sites/inf/files/resources/transportation_system_overview_december_2021_1.pdf">Northwest Territories Highway System</a>. Official highway map</li>
  </ul>
 	  </li>
 																 <li>Nova Scotia, CAN
@@ -200,7 +201,7 @@ following sources of highway information.</p>
 	    <ul>
 	      <li><a href="https://www.hac.hr/">Croatian Motorways Ltd.</a>. Official site of the motorway network in Croatia.</li>
 	      <li><a href="https://www.hrvatske-ceste.hr/">Croatian Roads</a>. State highway list from Croatian Roads d. o. o.</li>
-	      <li><a href="https://narodne-novine.nn.hr/clanci/sluzbeni/2018_11_103_2021.html">List of dedicated routes</a>. Classification of public roads</li>
+	      <li><a href="https://narodne-novine.nn.hr/clanci/sluzbeni/2022_04_41_510.html">List of dedicated routes</a>. Classification of public roads</li>
 	    </ul>
 	  </li>
 	  <li><a name="cze"></a><a style="text-decoration:none" href="#cze">&#x1f517</a>Czechia
@@ -238,6 +239,7 @@ following sources of highway information.</p>
 	    <ul>
           <li><a href="https://routes.fandom.com/">WikiSARA</a>. Hobbyist web site.</li>
           <li><a href="http://saratlas.free.fr/">SARAtlas</a>. Motorway maps and exit guides site.</li>
+          <li><a href="https://www.data.gouv.fr">data.gouv.fr</a>. French public open data platform.</li>
 	    </ul>
 	  </li>
 	  <li><a name="geo"></a><a style="text-decoration:none" href="#geo">&#x1f517</a>Georgia
@@ -434,7 +436,7 @@ following sources of highway information.</p>
 	  </li>
 	  <li><a name="nor"></a><a style="text-decoration:none" href="#nor">&#x1f517</a>Norway
         <ul>
-	      <li><a href="https://vegkart.atlas.vegvesen.no/">Road Network Map</a>. Official site of the Norwegian Public Roads Administration.</li>
+	      <li><a href="https://www.vegvesen.no/trafikk/#/kart">Road Network Map</a>. Official site of the Norwegian Public Roads Administration.</li>
 	    </ul>
 	  </li>
 	  <li><a name="pol"></a><a style="text-decoration:none" href="#pol">&#x1f517</a>Poland
@@ -444,7 +446,9 @@ following sources of highway information.</p>
 	  </li>
 	  <li><a name="prt"></a><a style="text-decoration:none" href="#prt">&#x1f517</a>Portugal
 	    <ul>
-	      <li><a href="http://www.brisa.pt/PresentationLayer/homepageclientes.aspx?idiomax=2&amp;menuid=108">Brisa - Portugal</a>. Traffic and motorway site for Brisa in Portugal.</li>
+	      <li><a href="https://www.brisa.pt/pt/autoestradas/rede/">Brisa - Portugal</a>. Traffic and motorway site for Brisa in Portugal.</li>
+	      <li><a href="https://www.infraestruturasdeportugal.pt/">Infraestruturas de Portugal</a>. Official site of the road authority.</li>
+	      <li><a href="https://www.google.com/maps/d/u/0/edit?mid=12fQksxWIRwoQN8fZ21JxzH7i2J4gBfyF">Estradas de Portugal - mapa - PRN 2000</a>. Hobbyist map based on official national plan but with higher resolution.</li>
 	    </ul>
 	  </li>
 	  <li><a name="rou"></a><a style="text-decoration:none" href="#rou">&#x1f517</a>Romania

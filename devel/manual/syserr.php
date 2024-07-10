@@ -224,6 +224,13 @@ Data errors</p>
     <td><green>YES</green></td>
   </tr>
   <tr valign="top">
+    <td><a name="LABEL_LOWERCASE"></a><a style="text-decoration:none" href="#LABEL_LOWERCASE">&#x1f517</a></td>
+    <td>LABEL_LOWERCASE</td>
+    <td>Label starts with a lowercase letter. </td>
+    <td><green>YES</green></td>
+    <td><red>NO</no></td>
+  </tr>
+  <tr valign="top">
     <td><a name="LABEL_PARENS"></a><a style="text-decoration:none" href="#LABEL_PARENS">&#x1f517</a></td>
     <td>LABEL_PARENS</td>
     <td>Number of parentheses do not match. Opened <code>(</code> must be closed with <code>)</code>.</td>
@@ -303,6 +310,13 @@ Data errors</p>
     <td><red>NO</red></td>
   </tr>
   <tr valign="top">
+    <td><a name="LOWERCASE_SUFFIX"></a><a style="text-decoration:none" href="#LOWERCASE_SUFFIX">&#x1f517</a></td>
+    <td>LOWERCASE_SUFFIX</td>
+    <td>Underscored suffix starts with a lowercase letter. </td>
+    <td><green>YES</green></td>
+    <td><red>NO</no></td>
+  </tr>
+  <tr valign="top">
     <td><a name="MALFORMED_LAT"></a><a style="text-decoration:none" href="#MALFORMED_LAT">&#x1f517</a></td>
     <td>MALFORMED_LAT</td>
     <td>Invalid argument after <code>lat=</code> in URL which cannot be converted to a numeric value</td>
@@ -369,7 +383,15 @@ Data errors</p>
   <tr valign="top">
     <td><a name="VISIBLE_HIDDEN_COLOC"></a><a style="text-decoration:none" href="#VISIBLE_HIDDEN_COLOC">&#x1f517</a></td>
     <td>VISIBLE_HIDDEN_COLOC</td>
-    <td>Visible waypoint is hidden on intersecting/concurrent route(s).</td>
+    <td>Visible waypoint is hidden on intersecting/concurrent route(s).
+    <br>
+    <br>The <code>Info</code> column lists only the first hidden point at the same location.
+    <br>Best practice is to check this location on <i>all</i> intersecting/concurrent routes and ensure:
+    <ul>
+      <li>Everything that should be visible is visible.</li>
+      <li>Everything that should be hidden is hidden.</li>
+    </ul>
+    </td>
     <td><red>NO</red></td>
     <td><green>YES</green></td>
   </tr>
@@ -508,7 +530,7 @@ Check for broken concurrencies</p>
 <p class="heading"><a name="nearmisspoint"></a><a style="text-decoration:none" href="#nearmisspoint">&#x1f517</a>
 Near-miss points</p>
 <div class="text">
-  Where two or more routes intersect, the routes must have a waypoint. If the coordinates of the waypoints are identical, the graph is connected and the Highway Browser can indicate intersecting routes to ease navigation through the routes when mapping travels. Near-miss points (NMPs) are waypoints very close together. They should be checked whether they are candidates to merge to fix broken intersecting links, and broken concurrencies.
+  Where two or more routes intersect, the routes must have a waypoint. If the coordinates of the waypoints are identical, the graph is connected and <i>showroute</i> can indicate intersecting routes to ease navigation through the routes when mapping travels. Near-miss points (NMPs) are waypoints very close together. They should be checked whether they are candidates to merge to fix broken intersecting links, and broken concurrencies.
   </br>
   <a href="../logs.php#nmplogs">NMP files</a> can also be loaded into HDX to visualize their positions on a map. It is easiest to view NMPs by region as described below.
   </br>

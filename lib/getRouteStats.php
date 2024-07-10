@@ -49,14 +49,19 @@ foreach ($roots as $root) {
     $result->free();
 
     $sql_command = <<<SQL
-      SELECT
-          COUNT(*) as numDrivers,
-          IFNULL(SUM(clinched), 0) as numClinched,
-          GROUP_CONCAT(traveler SEPARATOR ',') as drivers,
-          GROUP_CONCAT(IF(clinched = 1, traveler, null) separator ',') as clinchers,
-          ROUND(AVG(mileage),4) as avgMileage
-        FROM clinchedRoutes
-        WHERE route = '$root'
+SELECT
+    COUNT(*) as numDrivers,
+    IFNULL(SUM(cr.clinched), 0) as numClinched,
+    GROUP_CONCAT(cr.traveler SEPARATOR ',') as drivers,
+    GROUP_CONCAT(IF(cr.clinched = 1, cr.traveler, null) SEPARATOR ',') as clinchers,
+    ROUND(AVG(cr.mileage), 4) as avgMileage
+FROM 
+    clinchedRoutes cr
+LEFT JOIN 
+    listEntries le ON cr.traveler = le.traveler
+WHERE 
+    cr.route = '$root'
+    AND le.includeInRanks = 1;
 SQL;
     $result = tmdb_query($sql_command);
     $row = $result->fetch_assoc();

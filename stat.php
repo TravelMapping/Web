@@ -55,12 +55,19 @@
 HTML;
         echo "<tr onClick=\"window.document.location='/user?u={$tmuser}';\">";
         $sql = <<<SQL
-                            SELECT
-                              traveler,
-                              ROUND(SUM(COALESCE(co.activeMileage, 0)), 2) AS clinchedMileage,
-                              round(SUM(coalesce(co.activeMileage, 0)) / $totalMileage * 100, 2) AS percentage
-                            FROM clinchedOverallMileageByRegion co
-                            GROUP BY co.traveler ORDER BY clinchedMileage DESC;
+SELECT
+    co.traveler,
+    ROUND(SUM(COALESCE(co.activeMileage, 0)), 2) AS clinchedMileage,
+    ROUND(SUM(COALESCE(co.activeMileage, 0)) / $totalMileage * 100, 2) AS percentage,
+    le.includeInRanks
+FROM 
+    clinchedOverallMileageByRegion co
+JOIN 
+    listEntries le ON co.traveler = le.traveler
+GROUP BY 
+    co.traveler, le.includeInRanks
+ORDER BY 
+    clinchedMileage DESC;
 SQL;
         $res = tmdb_query($sql);
         $row = tm_fetch_user_row_with_rank($res, 'clinchedMileage');
@@ -69,15 +76,27 @@ SQL;
         echo "<td ".$style.">".tm_convert_distance($row['clinchedMileage'])." of ".tm_convert_distance($totalMileage)." ";
 	tm_echo_units();
 	echo " ({$row['percentage']}%)</td>";
-        echo "<td>{$row['rank']}</td>";
+	if ($row['includeInRanks'] == "1") {
+	    echo "<td>{$row['rank']}</td>";
+	}
+	else {
+	    echo "<td>NR</td>";
+	}
 
         $sql = <<<SQL
-                            SELECT
-                              traveler,
-                              ROUND(SUM(COALESCE(co.activePreviewMileage, 0)), 2) AS clinchedMileage,
-                              round(SUM(coalesce(co.activePreviewMileage, 0)) / $totalPreviewMileage * 100, 2) AS percentage
-                            FROM clinchedOverallMileageByRegion co
-                            GROUP BY co.traveler ORDER BY clinchedMileage DESC;
+SELECT
+    co.traveler,
+    ROUND(SUM(COALESCE(co.activePreviewMileage, 0)), 2) AS clinchedMileage,
+    ROUND(SUM(COALESCE(co.activePreviewMileage, 0)) / $totalPreviewMileage * 100, 2) AS percentage,
+    le.includeInRanks
+FROM 
+    clinchedOverallMileageByRegion co
+JOIN 
+    listEntries le ON co.traveler = le.traveler
+GROUP BY 
+    co.traveler, le.includeInRanks
+ORDER BY 
+    clinchedMileage DESC;
 SQL;
         $res = tmdb_query($sql);
         $row = tm_fetch_user_row_with_rank($res, 'clinchedMileage');
@@ -85,7 +104,12 @@ SQL;
         echo "<td ".$style.">".tm_convert_distance($row['clinchedMileage'])." of ".tm_convert_distance($totalPreviewMileage)." ";
 	tm_echo_units();
 	echo " ({$row['percentage']}%)</td>";
-        echo "<td>{$row['rank']}</td>";
+	if ($row['includeInRanks'] == "1") {
+	    echo "<td>{$row['rank']}</td>";
+	}
+	else {
+	    echo "<td>NR</td>";
+	}
         echo <<<HTML
                     </tr>
                     </tbody></table>
@@ -110,16 +134,32 @@ HTML;
                 <tbody>
                 <?php
                 $sql = <<<SQL
-            SELECT
-              traveler,
-              ROUND(SUM(COALESCE(co.activeMileage, 0)), 2) AS clinchedMileage,
-              round(SUM(coalesce(co.activeMileage, 0)) / $totalMileage * 100, 2) AS percentage
-            FROM clinchedOverallMileageByRegion co
-            GROUP BY co.traveler ORDER BY clinchedMileage DESC;
+SELECT
+    co.traveler,
+    ROUND(SUM(COALESCE(co.activeMileage, 0)), 2) AS clinchedMileage,
+    ROUND(SUM(COALESCE(co.activeMileage, 0)) / $totalMileage * 100, 2) AS percentage,
+    le.includeInRanks
+FROM 
+    clinchedOverallMileageByRegion co
+JOIN 
+    listEntries le ON co.traveler = le.traveler
+GROUP BY 
+    co.traveler, le.includeInRanks
+ORDER BY 
+    clinchedMileage DESC;
 SQL;
                 $res = tmdb_query($sql);
-                $rank = 1;
+                $rank = 0;
                 while ($row = $res->fetch_assoc()) {
+		    if ($row['includeInRanks'] == "1") {
+		        $rank++;
+			$shownRank = $rank;
+			$ttip = "";
+	            }
+		    else {
+		    	$shownRank = "&nbsp;&nbsp;&nbsp;&nbsp;";
+			$ttip = "title='".$row['traveler']." is specified as an unranked user'";
+	            }
                     if ($row['traveler'] == $tmuser) {
                         $highlight = 'user-highlight';
                     } else {
@@ -127,13 +167,11 @@ SQL;
                     }
 		    $print_distance = tm_convert_distance($row['clinchedMileage']);
 		    $style = 'style="text-align: right; background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$totalMileage).';"';
-
                     echo <<<HTML
-                <tr class="$highlight" onClick="window.document.location='/user?u={$row['traveler']}';">
-                <td style="text-align: right;">{$rank}</td><td>{$row['traveler']}</td><td {$style}>{$print_distance}</td><td {$style} data-sort="{$row['percentage']}">{$row['percentage']}%</td>
+                <tr ${ttip} class="$highlight" onClick="window.document.location='/user?u={$row['traveler']}';">
+                <td style="text-align: right;">{$shownRank}</td><td>{$row['traveler']}</td><td {$style}>{$print_distance}</td><td {$style} data-sort="{$row['percentage']}">{$row['percentage']}%</td>
                 </tr>
 HTML;
-                    $rank++;
                 }
                 $res->free();
 
@@ -157,16 +195,32 @@ HTML;
                 <tbody>
                 <?php
                 $sql = <<<SQL
-            SELECT
-              traveler,
-              ROUND(SUM(COALESCE(co.activePreviewMileage, 0)), 2) AS clinchedMileage,
-              round(SUM(coalesce(co.activePreviewMileage, 0)) / $totalPreviewMileage * 100, 2) AS percentage
-            FROM clinchedOverallMileageByRegion co
-            GROUP BY co.traveler ORDER BY clinchedMileage DESC;
+SELECT
+    co.traveler,
+    ROUND(SUM(COALESCE(co.activePreviewMileage, 0)), 2) AS clinchedMileage,
+    ROUND(SUM(COALESCE(co.activePreviewMileage, 0)) / $totalPreviewMileage * 100, 2) AS percentage,
+    le.includeInRanks
+FROM 
+    clinchedOverallMileageByRegion co
+JOIN 
+    listEntries le ON co.traveler = le.traveler
+GROUP BY 
+    co.traveler, le.includeInRanks
+ORDER BY 
+    clinchedMileage DESC;
 SQL;
                 $res = tmdb_query($sql);
-                $rank = 1;
+                $rank = 0;
                 while ($row = $res->fetch_assoc()) {
+		    if ($row['includeInRanks'] == "1") {
+		        $rank++;
+			$shownRank = $rank;
+			$ttip = "";
+	            }
+		    else {
+		    	$shownRank = "&nbsp;&nbsp;&nbsp;&nbsp;";
+			$ttip = "title='".$row['traveler']." is specified as an unranked user'";
+	            }
                     if ($row['traveler'] == $tmuser) {
                         $highlight = 'user-highlight';
                     } else {
@@ -175,11 +229,10 @@ SQL;
 		    $print_distance = tm_convert_distance($row['clinchedMileage']);
 		    $style = 'style="text-align: right; background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$totalPreviewMileage).';"';
                     echo <<<HTML
-                <tr class="$highlight" onClick="window.document.location='/user?u={$row['traveler']}';">
-                <td style="text-align: right;">{$rank}</td><td>{$row['traveler']}</td><td {$style}>{$print_distance}</td><td {$style} data-sort="{$row['percentage']}">{$row['percentage']}%</td>
+                <tr {$ttip} class="$highlight" onClick="window.document.location='/user?u={$row['traveler']}';">
+                <td style="text-align: right;">{$shownRank}</td><td>{$row['traveler']}</td><td {$style}>{$print_distance}</td><td {$style} data-sort="{$row['percentage']}">{$row['percentage']}%</td>
                 </tr>
 HTML;
-                    $rank++;
                 }
                 $res->free();
 

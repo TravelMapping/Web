@@ -240,7 +240,7 @@ Don't let the changes get lost in the forum or elsewhere!</br>
 Updates are included in <code>.csv</code> format, so be sure to include all
 fields.  The last field is the description, and should be in plain
 English.  Keep them concise but just specific enough for someone to
-understand in the <a href="/hb/">Highway Browser</a> since they can't compare with the old
+understand in <i>showroute</i> since they can't compare with the old
 route.</br></br></div>
 
 

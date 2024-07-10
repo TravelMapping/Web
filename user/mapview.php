@@ -178,7 +178,7 @@ User: <?php tm_user_select(); ?>&nbsp;Units: <?php tm_units_select(); ?><br />
 	</td>
 	<td>
     <select id="coloring" name="coloring" onchange="updateConnectionColors();" >
-    <option value="system">Highway System Colors</option>
+    <option value="system">System Colors</option>
     <option value="travelers">Color by Traveler Count</option>
     <option value="concurrent">Color by Concurrencies</option>
     <option value="plain">Plain</option>

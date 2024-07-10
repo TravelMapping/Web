@@ -96,7 +96,7 @@ System Status</p>
     </br>
     <li><a name="devel"></a><a style="text-decoration:none" href="#devel">&#x1f517</a>
     <b><devel>In-Development systems</devel></b> are a work in progress. Routes in these systems are not yet available for mapping
-    and inclusion in user stats, and are shown in the Highway Browser primarily for the benefit of the highway data managers who are
+    and inclusion in user stats, and are shown in the Highway Browser and Route Finder primarily for the benefit of the highway data managers who are
     developing the system. Once the system is substantially complete it will be upgraded to preview status, at which time users can begin
     to plot their travels in the system. It is also logged in the <a href="https://github.com/TravelMapping/HighwayData/blob/master/systemupdates.csv">
     system updates list</a>, and notified <a href="/devel/updates.php">on the updates page</a>.

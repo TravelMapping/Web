@@ -52,7 +52,7 @@
 </script>
 <title>
         <?php
-        echo "Main user page for " . $tmuser;
+        echo "Main Travel Mapping - ".$tmMode_p." User Page for " . $tmuser;
         ?>
     </title>
 </head>
@@ -73,16 +73,19 @@ if ( $tmuser == "null") {
     echo "</html>\n";
     exit;
 }
-echo "<h1>Main user page for ".$tmuser."</h1>";
+echo "<h1>Main Travel Mapping - ".$tmMode_p." User Page for ".$tmuser."</h1>";
 ?>
 </div>
 <div id="body">
     <h2>User Links</h2>
     <ul class="text">
-      <li><a href="/logs/users/<?php echo $tmuser; ?>.log">Log File</a>, where you can find any errors from processing <a href="https://github.com/TravelMapping/UserData/blob/master/list_files/<?php echo $tmuser; ?>.list"><?php echo $tmuser; ?>.list</a>, and statistics.</li>
-      <li>Browse the travels of <?php echo $tmuser; ?> with <a href="mapview.php?v">Mapview</a>.</li>
-      <li><a href="topstats.php">Browse the top stats for the travels of <?php echo $tmuser; ?></a>.</li>
-      <li><a href="routesbynumber.php">Table of routes traveled by number for <?php echo $tmuser; ?></a>.</li>
+      <li><a href="/logs/users/<?php echo $tmuser; ?>.log">Log File</a>, where you can find any errors from processing <a href="https://github.com/TravelMapping/UserData/blob/master/<?php echo $tmlistdir."/".$tmuser.".".$tmlistext."\">".$tmuser.".".$tmlistext; ?></a>, and statistics.</li>
+      <li>Browse the <?php echo $tmmode_s;?> travels of <?php echo $tmuser; ?> with <a href="mapview.php?v">Mapview</a>.</li>
+      <li><a href="topstats.php">Browse the top stats for the <?php echo $tmmode_s;?> travels of <?php echo $tmuser; ?></a>.</li>
+      <?php
+       if ($tmmode_s == "highway") {
+          echo '<li><a href="routesbynumber.php">Table of routes traveled by number for '.$tmuser.'</a>.</li>';
+      } ?>
     </ul>
     <div id="overall">
         <h2>Overall Stats</h2>
@@ -96,17 +99,7 @@ echo "<h1>Main user page for ".$tmuser."</h1>";
             <tbody>
             <?php
             //First fetch mileage driven, both active and active+preview
-            $sql_command = <<<SQL
-SELECT
-round(sum(o.activeMileage), 2) as totalActiveMileage,
-round(sum(coalesce(co.activeMileage, 0)), 2) as clinchedActiveMileage,
-round(sum(coalesce(co.activeMileage, 0)) / sum(o.activeMileage) * 100, 2) AS activePercentage,
-round(sum(o.activePreviewMileage), 2) as totalActivePreviewMileage,
-round(sum(coalesce(co.activePreviewMileage, 0)), 2) as clinchedActivePreviewMileage,
-round(sum(coalesce(co.activePreviewMileage, 0)) / sum(o.activePreviewMileage) * 100, 2) AS activePreviewPercentage
-FROM overallMileageByRegion o
-LEFT JOIN clinchedOverallMileageByRegion co ON co.region = o.region AND traveler = '$tmuser'
-SQL;
+            $sql_command = "SELECT * FROM travelerMileageStats WHERE traveler = '$tmuser';";
             $res = tmdb_query($sql_command);
             $row = $res->fetch_assoc();
             $res->free();
@@ -116,66 +109,177 @@ SQL;
 	    echo ';">' . tm_convert_distance($row['clinchedActiveMileage']);
 	    echo "/" . tm_convert_distance($row['totalActiveMileage']) . " ";
 	    tm_echo_units();
-	    echo " (" . $row['activePercentage'] . "%) Rank: TBD</td>";
+	    echo " (" . $row['activePercentage'] . "%) ";
+	    if ($row['rankActiveMileage'] != -1) {
+	        echo "Rank: ".$row['rankActiveMileage'];
+	    }
+	    echo "</td>";
 	    echo '<td style="background-color: ';
 	    echo tm_color_for_amount_traveled($row['clinchedActivePreviewMileage'],$row['totalActivePreviewMileage']);
 	    echo ';">' . tm_convert_distance($row['clinchedActivePreviewMileage']);
 	    echo "/" . tm_convert_distance($row['totalActivePreviewMileage']) . " ";
 	    tm_echo_units();
-	    echo " (" . $row['activePreviewPercentage'] . "%) Rank: TBD</td>";
+	    echo " (" . $row['activePreviewPercentage'] . "%) ";
+	    if ($row['rankActivePreviewMileage'] != -1) {
+	        echo "Rank: ".$row['rankActivePreviewMileage'];
+	    }
+	    echo "</td>";
 	    echo "</tr>";
 
-
-            //Second, fetch routes driven/clinched active only
-	    $sql_command = "SELECT COUNT(cr.route) AS total FROM connectedRoutes AS cr LEFT JOIN systems ON cr.systemName = systems.systemName WHERE (systems.level = 'active');";
+            // Second, fetch routes driven/clinched active only
+	    $sql_command = <<<SQL
+WITH FilteredRanks AS (
+    SELECT
+        cas.traveler,
+        cas.clinchedPercent,
+        cas.drivenPercent,
+        RANK() OVER (ORDER BY cas.clinchedPercent DESC) AS clinchedRank,
+        RANK() OVER (ORDER BY cas.drivenPercent DESC) AS drivenRank
+    FROM 
+        clinchedActiveStats cas
+    JOIN 
+        listEntries le ON cas.traveler = le.traveler
+    WHERE 
+        le.includeInRanks = 1
+),
+RankedTravelers AS (
+    SELECT
+        cas.traveler,
+        cas.driven,
+        cas.clinched,
+        cas.activeRoutes,
+        cas.drivenPercent,
+        cas.clinchedPercent,
+        le.includeInRanks,
+        COALESCE(fr.clinchedRank, -1) AS clinchedRank,
+        COALESCE(fr.drivenRank, -1) AS drivenRank
+    FROM 
+        clinchedActiveStats cas
+    JOIN 
+        listEntries le ON cas.traveler = le.traveler
+    LEFT JOIN 
+        FilteredRanks fr ON cas.traveler = fr.traveler
+)
+SELECT 
+    traveler,
+    driven,
+    clinched,
+    activeRoutes,
+    drivenPercent,
+    clinchedPercent,
+    includeInRanks,
+    clinchedRank,
+    drivenRank
+FROM 
+    RankedTravelers
+WHERE 
+    traveler = '$tmuser';
+SQL;	    
             $res = tmdb_query($sql_command);
             $row = $res->fetch_assoc();
-	    $activeRoutes = $row['total'];
-	    $res->free();
-
-            $sql_command = "SELECT COUNT(ccr.route) AS driven, SUM(ccr.clinched) AS clinched, ROUND(COUNT(ccr.route) / ".$activeRoutes." * 100,2) AS drivenPercent, ROUND(SUM(ccr.clinched) / ".$activeRoutes." * 100,2) AS clinchedPercent FROM connectedRoutes AS cr LEFT JOIN clinchedConnectedRoutes AS ccr ON cr.firstRoot = ccr.route AND traveler = '" . $tmuser . "' LEFT JOIN routes ON ccr.route = routes.root LEFT JOIN systems ON routes.systemName = systems.systemName WHERE systems.level = 'active';";
-            $res = tmdb_query($sql_command);
-            $row = $res->fetch_assoc();
+	    $activeRoutes = $row['activeRoutes'];
 	    $activeDriven = $row['driven'];
 	    $activeDrivenPct = $row['drivenPercent'];
+	    $activeDrivenRank = $row['drivenRank'];
 	    $activeClinched = $row['clinched'];
 	    $activeClinchedPct = $row['clinchedPercent'];
+	    $activeClinchedRank = $row['clinchedRank'];
 	    $res->free();
 
-	    // and active+preview
-	    $sql_command = "SELECT COUNT(cr.route) AS total FROM connectedRoutes AS cr LEFT JOIN systems ON cr.systemName = systems.systemName WHERE (systems.level = 'active' OR systems.level = 'preview');";
+            // Third, fetch routes driven/clinched active+preview
+	    $sql_command = <<<SQL
+WITH FilteredRanks AS (
+    SELECT
+        cas.traveler,
+        cas.clinchedPercent,
+        cas.drivenPercent,
+        RANK() OVER (ORDER BY cas.clinchedPercent DESC) AS clinchedRank,
+        RANK() OVER (ORDER BY cas.drivenPercent DESC) AS drivenRank
+    FROM 
+        clinchedActivePreviewStats cas
+    JOIN 
+        listEntries le ON cas.traveler = le.traveler
+    WHERE 
+        le.includeInRanks = 1
+),
+RankedTravelers AS (
+    SELECT
+        cas.traveler,
+        cas.driven,
+        cas.clinched,
+        cas.activePreviewRoutes,
+        cas.drivenPercent,
+        cas.clinchedPercent,
+        le.includeInRanks,
+        COALESCE(fr.clinchedRank, -1) AS clinchedRank,
+        COALESCE(fr.drivenRank, -1) AS drivenRank
+    FROM 
+        clinchedActivePreviewStats cas
+    JOIN 
+        listEntries le ON cas.traveler = le.traveler
+    LEFT JOIN 
+        FilteredRanks fr ON cas.traveler = fr.traveler
+)
+SELECT 
+    traveler,
+    driven,
+    clinched,
+    activePreviewRoutes,
+    drivenPercent,
+    clinchedPercent,
+    includeInRanks,
+    clinchedRank,
+    drivenRank
+FROM 
+    RankedTravelers
+WHERE 
+    traveler = '$tmuser';
+SQL;	    
             $res = tmdb_query($sql_command);
             $row = $res->fetch_assoc();
-	    $activePreviewRoutes = $row['total'];
-	    $res->free();
-
-            $sql_command = "SELECT COUNT(ccr.route) AS driven, SUM(ccr.clinched) AS clinched, ROUND(COUNT(ccr.route) / ".$activePreviewRoutes." * 100,2) AS drivenPercent, ROUND(SUM(ccr.clinched) / ".$activePreviewRoutes." * 100,2) AS clinchedPercent FROM connectedRoutes AS cr LEFT JOIN clinchedConnectedRoutes AS ccr ON cr.firstRoot = ccr.route AND traveler = '" . $tmuser . "' LEFT JOIN routes ON ccr.route = routes.root LEFT JOIN systems ON routes.systemName = systems.systemName WHERE (systems.level = 'active' OR systems.level = 'preview');";
-            $res = tmdb_query($sql_command);
-            $row = $res->fetch_assoc();
+	    $activePreviewRoutes = $row['activePreviewRoutes'];
 	    $activePreviewDriven = $row['driven'];
 	    $activePreviewDrivenPct = $row['drivenPercent'];
+	    $activePreviewDrivenRank = $row['drivenRank'];
 	    $activePreviewClinched = $row['clinched'];
 	    $activePreviewClinchedPct = $row['clinchedPercent'];
+	    $activePreviewClinchedRank = $row['clinchedRank'];
 	    $res->free();
 
             echo "<tr onclick=\"window.open('/shields/clinched.php?u={$tmuser}&amp;cort=traveled')\">";
 	    echo "<td>Routes Traveled</td>";
 	    echo '<td style="background-color: ';
 	    echo tm_color_for_amount_traveled($activeDriven,$activeRoutes);
-	    echo ';">'.$activeDriven." of " . $activeRoutes . " (" . $activeDrivenPct . "%) Rank: TBD</td>";
+	    echo ';">'.$activeDriven." of " . $activeRoutes . " (" . $activeDrivenPct . "%) ";
+	    if ($activeDrivenRank != -1) {
+	        echo "Rank: ".$activeDrivenRank;
+	    }
+	    echo "</td>";
 	    echo '<td style="background-color: ';
 	    echo tm_color_for_amount_traveled($activePreviewDriven,$activePreviewRoutes);
-	    echo ';">'.$activePreviewDriven." of " . $activePreviewRoutes . " (" . $activePreviewDrivenPct . "%) Rank: TBD</td>";
+	    echo ';">'.$activePreviewDriven." of " . $activePreviewRoutes . " (" . $activePreviewDrivenPct . "%) ";
+	    if ($activePreviewDrivenRank != -1) {
+	        echo "Rank: ".$activePreviewDrivenRank;
+	    }
+	    echo "</td>";
 	    echo "</tr>";
 
             echo "<tr onclick=\"window.open('/shields/clinched.php?u={$tmuser}')\">";
 	    echo "<td>Routes Clinched</td>";
 	    echo '<td style="background-color: ';
 	    echo tm_color_for_amount_traveled($activeClinched,$activeRoutes);
-	    echo ';">'.$activeClinched." of " . $activeRoutes . " (" . $activeClinchedPct . "%) Rank: TBD</td>";
+	    echo ';">'.$activeClinched." of " . $activeRoutes . " (" . $activeClinchedPct . "%) ";
+	    if ($activeClinchedRank != -1) {
+	        echo "Rank: ".$activeClinchedRank;
+	    }
+	    echo "</td>";
 	    echo '<td style="background-color: ';
 	    echo tm_color_for_amount_traveled($activePreviewClinched,$activePreviewRoutes);
-	    echo ';">'.$activePreviewClinched." of " . $activePreviewRoutes . " (" . $activePreviewClinchedPct . "%) Rank: TBD</td>";
+	    echo ';">'.$activePreviewClinched." of " . $activePreviewRoutes . " (" . $activePreviewClinchedPct . "%) ";
+	    if ($activePreviewClinchedRank != -1) {
+	        echo "Rank: ".$activePreviewClinchedRank;
+	    }
+	    echo "</td>";
 	    echo "</tr>";
             ?>
             </tbody>
@@ -183,7 +287,7 @@ SQL;
     </div>
     <h2>Stats by Region</h2>
     <p class="text">
-    User <?php echo $tmuser; ?> has travels in <?php echo tm_count_rows("clinchedOverallMileageByRegion", "where traveler='$tmuser'"); ?> regions.  Click in a row to view detailed stats for the region, on the "Map" link to load the region in Mapview, and the "HB" link to get a list of highways in the region.
+    User <?php echo $tmuser; ?> has <?php echo $tmmode_s;?> travels in <?php echo tm_count_rows("clinchedOverallMileageByRegion", "where traveler='$tmuser'"); ?> regions.  Click in a row to view detailed stats for the region, on the "Map" link to load the region in Mapview, and the "HB" link to get a list of <?php echo $tmmode_p;?> in the region.
     </p>
     <table class="sortable gratable" id="regionsTable">
         <thead>
@@ -192,10 +296,10 @@ SQL;
         <tr>
             <th>Country</th>
             <th>Region</th>
-            <th id="clinchedheader">Clinched (<?php tm_echo_units(); ?>)</th>
+            <th>Clinched (<?php tm_echo_units(); ?>)</th>
             <th>Overall (<?php tm_echo_units(); ?>)</th>
             <th>%</th>
-            <th>Clinched (<?php tm_echo_units(); ?>)</th>
+            <th id="clinchedheader">Clinched (<?php tm_echo_units(); ?>)</th>
             <th>Overall (<?php tm_echo_units(); ?>)</th>
             <th>%</th>
             <th colspan="2" class="no-sort">Map</th>
@@ -237,7 +341,7 @@ SQL;
     </table>
     <h2>Stats by System</h2>
     <p class="text">
-    User <?php echo $tmuser; ?> has travels in <?php echo tm_count_distinct_rows("clinchedSystemMileageByRegion", "systemName", "where traveler='$tmuser'"); ?> highway systems.  Click in a row to view detailed stats for the system, on the "Map" link to load the system in Mapview, and the "HB" link to get a list of highways in the system.
+    User <?php echo $tmuser.' has '.$tmmode_s;?> travels in <?php echo tm_count_distinct_rows("clinchedSystemMileageByRegion", "systemName", "where traveler='$tmuser'").' '.$tmmode_s ?> systems.  Click in a row to view detailed stats for the system, on the "Map" link to load the system in Mapview, and the "HB" link to get a list of <?php echo $tmmode_p;?> in the system.
     </p>
     <table class="gratable sortable" id="systemsTable">
         <thead>
@@ -249,8 +353,8 @@ SQL;
             <th>Status</th>
             <th>Clinched (<?php tm_echo_units(); ?>)</th>
             <th>Total (<?php tm_echo_units(); ?>)</th>
-            <th id="sortsecond">% Clinched</th>
-            <th colspan="2">Map</th>
+            <th id="sortsecond" data-sort-tbr="6">% Clinched</th>
+            <th colspan="2" class="no-sort">Map</th>
         </tr>
         </thead>
         <tbody>

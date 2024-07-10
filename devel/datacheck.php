@@ -84,6 +84,7 @@
 	  (strcmp($row['code'],"INVALID_FINAL_CHAR") == 0) ||
 	  (strcmp($row['code'],"INVALID_FIRST_CHAR") == 0) ||
 	  (strcmp($row['code'],"LABEL_LOOKS_HIDDEN") == 0) ||
+	  (strcmp($row['code'],"LABEL_LOWERCASE") == 0) ||
 	  (strcmp($row['code'],"LABEL_PARENS") == 0) ||
 	  (strcmp($row['code'],"LABEL_SELFREF") == 0) ||
 	  (strcmp($row['code'],"LABEL_SLASHES") == 0) ||
@@ -91,6 +92,7 @@
 	  (strcmp($row['code'],"LACKS_GENERIC") == 0) ||
 	  (strcmp($row['code'],"LONG_SEGMENT") == 0) ||
 	  (strcmp($row['code'],"LONG_UNDERSCORE") == 0) ||
+	  (strcmp($row['code'],"LOWERCASE_SUFFIX") == 0) ||
 	  (strcmp($row['code'],"NONTERMINAL_UNDERSCORE") == 0) ||
 	  (strcmp($row['code'],"US_LETTER") == 0) ||
 	  (strcmp($row['code'],"VISIBLE_HIDDEN_COLOC") == 0) ||
@@ -139,9 +141,8 @@
 	  strcmp($row['code'],"HIDDEN_JUNCTION") &&
 	  strcmp($row['code'],"LACKS_GENERIC") &&
 	  strcmp($row['code'],"BUS_WITH_I") &&
-	  strcmp($row['code'],"LACKS_GENERIC") &&
-	  strcmp($row['code'],"OUT_OF_BOUNDS") &&
-	  strcmp($row['code'],"US_BANNER")) {
+	  strcmp($row['code'],"OUT_OF_BOUNDS")) {
+
           echo "</td><td style=\"color: gray\"><i>This is always a true error and cannot be marked false positive.</i></td></tr>\n";
 	}
 	elseif (strcmp($row['value'],"TRUE_ERROR") == 0) {

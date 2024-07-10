@@ -6,14 +6,14 @@
 <link rel="shortcut icon" type="image/png" href="/favicon.png">
 <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
 <?php tm_common_js(); ?>
-<title>Travel Mapping Highway Data Updates</title>
+<title>Travel Mapping <?php echo $tmMode_s; ?> Data Updates</title>
 </head>
 
 <body onload="populate_dbarrays()">
 <?php require  $_SERVER['DOCUMENT_ROOT']."/lib/tmheader.php"; ?>
-<h1>Travel Mapping Highway Data Updates</h1>
+<h1>Travel Mapping <?php echo $tmMode_s; ?> Data Updates</h1>
 
-<p class="info">Quick links: <a href="#sysupdates">[Highway System Status Changes]</a><a href="#updates">[Updates to Highway Data in Active Systems]</a>.</p>
+<p class="info">Quick links: <a href="#sysupdates">[<?php echo $tmMode_s; ?> System Status Changes]</a><a href="#updates">[Updates to <?php echo $tmMode_s; ?> Data in Active Systems]</a>.</p>
 
 <?php
 $syscount = 10;
@@ -31,7 +31,7 @@ if (array_key_exists("updatecount", $_GET)) {
   }
 }
 ?>
-<h3><a name="sysupdates">Highway System Status Changes</a>
+<h3><a name="sysupdates"><?php echo $tmMode_s; ?> System Status Changes</a>
 
 [Show <select onchange="javascript: document.location.href = 'updates.php?syscount=' + document.getElementById('syscount').value + '&updatecount=' + document.getElementById('updatecount').value;" name="syscount" id="syscount">
 <?php
@@ -91,7 +91,7 @@ Entries]
   </table>
 </div>
 
-<h3><a name="updates">Updates to Highway Data in Active Systems</a>
+<h3><a name="updates">Updates to <?php echo $tmMode_s; ?> Data in Active Systems</a>
 
 
 [Show <select onchange="javascript: document.location.href = 'updates.php?syscount=' + document.getElementById('syscount').value + '&updatecount=' + document.getElementById('updatecount').value;" name="updatecount" id="updatecount">

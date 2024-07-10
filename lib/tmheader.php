@@ -15,7 +15,7 @@ END;
 ?>
 
 <p class="menubar">
-    <a href="/">TM Home</a> &nbsp;&nbsp;&nbsp;
+    <a href="/">TM <?php echo $tmMode_p;?> Home</a> &nbsp;&nbsp;&nbsp;
     <?php
     if (isset($tmuser)) {
         if ($tmuser != "null") {
@@ -26,8 +26,8 @@ END;
         echo '<a href="/user">'.$_COOKIE['lastuser'].'\'s User Page</a> &nbsp;&nbsp;&nbsp;';
     }
     ?>
-    <a href="/stat.php">Travelers' Stats</a> &nbsp;&nbsp;&nbsp;
-    <a href="/hb">Highway Browser</a> &nbsp;&nbsp;&nbsp;
+    <a href="/stat.php"><?php echo $tmMode_s;?> Travelers' Stats</a> &nbsp;&nbsp;&nbsp;
+    <a href="/hb"><?php echo $tmMode_s;?> Browser</a> &nbsp;&nbsp;&nbsp;
     <a href="/participate.php">Get Started!</a> &nbsp;&nbsp;&nbsp;
     <a href="https://forum.travelmapping.net">Project Forum</a> &nbsp;&nbsp;&nbsp;
     <a href="/devel/updates.php">Updates</a>
@@ -38,7 +38,7 @@ $tmupdating = file_exists($_SERVER['DOCUMENT_ROOT']."/dbupdating");
 if ($tmupdating) {
     echo <<<END
 <p id="updatingmsg" class="errorbar">
-Travel Mapping database update in progress.  Some functionality might
+Travel Mapping <?php echo $tmMode_s;?> database update in progress.  Some functionality might
 not work.  Please try again in a few minutes if you notice problems.
 END;
     tm_dismiss_button("updatingmsg");

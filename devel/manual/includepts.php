@@ -101,8 +101,8 @@ Shaping points</p>
     <li><a name="hiddenwpt"></a><a style="text-decoration:none" href="#hiddenwpt">&#x1f517</a>
     Shaping points that do not coincide with intersections should 
     be added as hidden points beginning with <code>+X</code> and followed by a number, 
-    i.e., <code>+X1, +X2, +X3</code> etc. The plus <code>+</code> hides the point in the Highway 
-    Browser.  The number does not matter but must make the label unique for 
+    i.e., <code>+X1, +X2, +X3</code> etc. The plus <code>+</code> hides the point in <i>showroute</i>.
+  The number does not matter but must make the label unique for 
     the highway.  The Waypoint Editor uses random 6-digit numbers, like 
     <code>+X845202</code>.</li>
     <li><a name="nottoomany"></a><a style="text-decoration:none" href="#nottoomany">&#x1f517</a>
