@@ -720,7 +720,8 @@ following sources of highway information.</p>
 <li><a href="http://dot.state.nm.us/">NMDOT website</a>. Official New Mexico Department of Transportation website.</li>
 <li><a href="http://dot.state.nm.us/content/dam/nmdot/Data_Management/POSTED%20ROUTE-NM_Routes.pdf">NMDOT Posted Routes for New Mexico Routes</a>. Official New Mexico Department of Transportation posted route legal descriptions.</li>
 <li><a href="http://dot.state.nm.us/content/dam/nmdot/Data_Management/NM_AADT_Listing.pdf">NMDOT AADT Listing</a>. Official New Mexico Department of Transportation TIMS road segments by posted route/point with AADT info.</li>
-<li><a href="http://www.steve-riner.com/nmhighways/NMHome.htm">The Unofficial New Mexico Highways Page</a>. Hobbyist site by Steve Riner, describing current and historical New Mexico state routes.</li>
+<li><a href="https://nmdot.maps.arcgis.com/apps/webappviewer/index.html?id=f2fc877d107b4e338deb789f70a8779e">NMDOT Roadway Functional Class map</a>. Shows official route designations and other route information.</li>
+		    <li><a href="http://www.steve-riner.com/nmhighways/NMHome.htm">The Unofficial New Mexico Highways Page</a>. Hobbyist site by Steve Riner, describing current and historical New Mexico state routes.</li>
 </ul>
 	  </li> 
 	  <li>New York, USA
