@@ -460,6 +460,7 @@ following sources of highway information.</p>
 	  <li><a name="srb"></a><a style="text-decoration:none" href="#srb">&#x1f517</a>Serbia
 	    <ul>
 <li><a href="http://www.putevi-srbije.rs/pdf/serbia_main_and_regional_road.pdf">Road Network Map</a>. PDF map of the road network of Serbia and Kosovo from Road of Serbia.</li>
+<li><a href="https://www.paragraf.rs/propisi/uredba-kategorizaciji-drzavnih-puteva.html">Regulation on the Categorization of State Roads.</a> List of roads, with descriptions, from April 2024.</li>
 	    </ul>
 	  </li>
 	  <li><a name="svk"></a><a style="text-decoration:none" href="#svk">&#x1f517</a>Slovakia
