@@ -118,6 +118,13 @@ Data errors</p>
     <td><red>NO</red></td>
   </tr>
   <tr valign="top">
+    <td><a name="BUS_WITH_I"></a><a style="text-decoration:none" href="#BUS_WITH_I">&#x1f517</a></td>
+    <td>BUS_WITH_I</td>
+    <td>Label looks like an Interstate with <code>Bus</code> banner instead of <code>BL</code> or <code>BS</code>.</td>
+    <td><green>YES</green></td>
+    <td><green>YES</green></td>
+  </tr>
+  <tr valign="top">
     <td><a name="CON_BANNER_MISMATCH"></a><a style="text-decoration:none" href="#CON_BANNER_MISMATCH">&#x1f517</a></td>
     <td>CON_BANNER_MISMATCH</td>
     <td>The route's <a href="syshwylist.php#cbanner">Banner</a> field in its <a href="syshwylist.php#chopped">chopped routes .csv file</a> mismatches the <a href="syshwylist.php#conncbanner">Banner</a> field in its <a href="syshwylist.php#connected">connected routes .csv file</a>.</td>
@@ -130,13 +137,6 @@ Data errors</p>
     <td>The route's <a href="syshwylist.php#croute">Route</a> field in its <a href="syshwylist.php#chopped">chopped routes .csv file</a> mismatches the <a href="syshwylist.php#conncroute">Route</a> field in its <a href="syshwylist.php#connected">connected routes .csv file</a>.</td>
     <td><red>NO</red></td>
     <td><red>NO</red></td>
-  </tr>
-  <tr valign="top">
-    <td><a name="BUS_WITH_I"></a><a style="text-decoration:none" href="#BUS_WITH_I">&#x1f517</a></td>
-    <td>BUS_WITH_I</td>
-    <td>Label looks like an Interstate with <code>Bus</code> banner instead of <code>BL</code> or <code>BS</code>.</td>
-    <td><green>YES</green></td>
-    <td><green>YES</green></td>
   </tr>
   <tr valign="top">
     <td><a name="DISCONNECTED_ROUTE"></a><a style="text-decoration:none" href="#DISCONNECTED_ROUTE">&#x1f517</a></td>
@@ -280,19 +280,19 @@ Data errors</p>
     <td><red>NO</red></td>
   </tr>
   <tr valign="top">
+    <td><a name="LABEL_UNDERSCORES"></a><a style="text-decoration:none" href="#LABEL_UNDERSCORES">&#x1f517</a></td>
+    <td>LABEL_UNDERSCORES</td>
+    <td>Too many underscored suffixes (<code>> 1</code>)</td>
+    <td><green>YES</green></td>
+    <td><red>NO</red></td>
+  </tr>
+  <tr valign="top">
     <td><a name="LACKS_GENERIC"></a><a style="text-decoration:none" href="#LACKS_GENERIC">&#x1f517</a></td>
     <td>LACKS_GENERIC</td>
     <td>Label begins with <a href="wayptlabels.php#genericnumbred"><code>Old</code> followed immediately by a number without a
     preceding generic designation type</a> such as <code>US</code>, <code>E</code>, <code>A</code>, <code>Hwy</code>, <code>Rte</code>, etc.</td>
     <td><green>YES</green></td>
     <td><green>YES</green></td>
-  </tr>
-  <tr valign="top">
-    <td><a name="LABEL_UNDERSCORES"></a><a style="text-decoration:none" href="#LABEL_UNDERSCORES">&#x1f517</a></td>
-    <td>LABEL_UNDERSCORES</td>
-    <td>Too many underscored suffixes (<code>> 1</code>)</td>
-    <td><green>YES</green></td>
-    <td><red>NO</red></td>
   </tr>
   <tr valign="top">
     <td><a name="LONG_SEGMENT"></a><a style="text-decoration:none" href="#LONG_SEGMENT">&#x1f517</a></td>
