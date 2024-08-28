@@ -135,7 +135,11 @@ Chopped Routes File (e.g., <code>usai.csv</code>) format</p>
     routes and not blank only when necessary to handle route merges or name 
     changes.  While the primary route name is usually split into the Route, 
     Banner, and Abbrev columns, any alt route names have these 3 parts 
-    concatenated. The result should be whatever would be entered in a <code>.list</code> file for the old name of the route, e.g. I-22FutTup.</li>
+    concatenated. The result should be whatever would be entered in a <code>.list</code> file for the old name of the route, e.g. I-22FutTup.
+    <br>If an entire chopped route is moved from one region to a single other
+    region, e.g. from <code>DEU</code> to <code>DEU-BY</code>, add the region
+    as would be entered in a <code>.list</code> for the old name, e.g. DEU A95.
+    <br>In normal cases though, the region should be left out.</li>
   </ol>
   </br>
   <li><a name="routeorder"></a><a style="text-decoration:none" href="#routeorder">&#x1f517</a>
