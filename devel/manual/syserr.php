@@ -211,8 +211,8 @@ Data errors</p>
   <tr valign="top">
     <td><a name="LABEL_INVALID_CHAR"></a><a style="text-decoration:none" href="#LABEL_INVALID_CHAR">&#x1f517</a></td>
     <td>LABEL_INVALID_CHAR</td>
-    <td>Label contains at least 1 invalid character. Labels may only contain letters, numerals, parentheses, slashes, underscores, hyphens, or periods, with an optional leading plus sign or asterisk.<br><br>
-    An <code>Info</code> value of <code>UTF-8 BOM</code> indicates a UTF-8 byte order mark before the first waypoint, and the file should be saved as plain ASCII text.</td>
+    <td>Label contains at least 1 invalid character, or no valid characters other than <code>*</code> or <code>+</code>.
+    <br>Labels may only contain letters, numerals, parentheses, slashes, underscores, hyphens, or periods, with an optional leading plus sign or asterisk.</td>
     <td><green>YES</green></td>
     <td><red>NO</red></td>
   </tr>
@@ -333,7 +333,7 @@ Data errors</p>
   <tr valign="top">
     <td><a name="MALFORMED_URL"></a><a style="text-decoration:none" href="#MALFORMED_URL">&#x1f517</a></td>
     <td>MALFORMED_URL</td>
-    <td>URL is missing <code>lat=</code> and/or <code>lon=</code> argument(s)</td>
+    <td>URL (last field in WPT line) is missing <code>lat=</code> and/or <code>lon=</code> argument(s)</td>
     <td><yellow>NO</yellow></td>
     <td><red>NO</red></td>
   </tr>
