@@ -338,6 +338,13 @@ Data errors</p>
     <td><red>NO</red></td>
   </tr>
   <tr valign="top">
+    <td><a name="MULTI_REGION_OVERLAP"></a><a style="text-decoration:none" href="#MULTI_REGION_OVERLAP">&#x1f517</a></td>
+    <td>MULTI_REGION_OVERLAP</td>
+    <td>Routes in two or more different regions are concurrent.</td>
+    <td><red>NO</red></td>
+    <td><red>NO</red></td>
+  </tr>
+  <tr valign="top">
     <td><a name="NONTERMINAL_UNDERSCORE"></a><a style="text-decoration:none" href="#NONTERMINAL_UNDERSCORE">&#x1f517</a></td>
     <td>NONTERMINAL_UNDERSCORE</td>
     <td>Label has underscore suffix before slash</td>
