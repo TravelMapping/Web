@@ -250,13 +250,13 @@ following sources of highway information.</p>
 	  <li><a name="deu"></a><a style="text-decoration:none" href="#deu">&#x1f517</a>Germany
 	    <ul>
 	      <li><a href="http://www.autobahnatlas-online.de/index_e.html">Autobahn-Atlas</a>. Hobbyist site by Patrick Scholl covering the detailed routings and plans for German motorways.</li>
-	      <li><a href="http://www.bmvi.de/DE/Themen/Mobilitaet/Infrastrukturplanung-Investitionen/Bundesverkehrswegeplan-2030/bundesverkehrswegeplan-2030.html">Road Construction</a>. German motorway construction plans and maps from the Federal Minsitry of Transport, Building and Urban Development.</li>	    
-	      <li><a href="http://bast.opus.hbz-nrw.de/volltexte/2016/1755/pdf/V273_AVERZ_Internet_PDF.pdf">Autobahn directory</a>. List of German federal motorways (2016 version)</li>
-	      <li><a href="http://www.mauttabelle.de/">Mauttabelle</a>. List of tolled roads (frequently updated motorway list)</li>
-	      <li><a href="http://www.bast.de/DE/Verkehrstechnik/Fachthemen/v1-beverz/v1-berverz.html">Bundesstraßen directory</a>. List of German federal non-motorway roads (2009 version)</li>
+	      <li><a href="https://bmdv.bund.de/DE/Themen/Mobilitaet/Infrastrukturplanung-Investitionen/Bundesverkehrswegeplan-2030/bundesverkehrswegeplan-2030.html">Road Construction</a>. German motorway construction plans and maps from the Federal Minsitry of Transport, Building and Urban Development.</li>	    
+	      <li><a href="https://bast.opus.hbz-nrw.de/volltexte/2016/1755/pdf/V273_AVERZ_Internet_PDF.pdf">Autobahn directory</a>. List of German federal motorways (2016 version)</li>
+	      <li><a href="https://www.mauttabelle.de/">Mauttabelle</a>. List of tolled roads (frequently updated list of federal roads)</li>
+	      <li><a href="http://www.bast.de/DE/Verkehrstechnik/Fachthemen/v1-beverz/v1-berverz.html">Bundesstraßen directory</a>. List of German federal non-motorway roads (2009 version, link broken)</li>
 	      <li>Baden-Württemberg
 	        <ul>
-	          <li><a href="http://www.svz-bw.de/verkehrszaehlung.html">Traffic monitoring</a>. Road map.</li>
+	          <li><a href="https://mobidata-bw.de/">Traffic monitoring</a>. Road map.</li>
 	          <li><a href="https://www.geoportal-bw.de/">Geo portal BW</a>. Road map.</li>
 	        </ul>
 	      </li>
@@ -267,28 +267,28 @@ following sources of highway information.</p>
 	      </li>
 	      <li>Berlin
 	        <ul>
-	          <li><a href="http://fbinter.stadt-berlin.de/fb/index.jsp?loginkey=showMap&mapId=k_vms_detailnetz_wms_spatial@senstadt">Detail net</a>. Road map.</li>
+	          <li><a href="https://fbinter.stadt-berlin.de/fb/index.jsp?loginkey=showMap&mapId=k_vms_detailnetz_wms_spatial@senstadt">Detailed net</a>. Road map.</li>
 	        </ul>
 	      </li>
 	      <li>Brandenburg
 	        <ul>
-	          <li><a href="http://bb-viewer.geobasis-bb.de/strassennetz/">Brandenburg viewer</a>. Road map viewer.</li>
-		  <li><a href="http://www.ls.brandenburg.de/cms/detail.php/bb1.c.260097.de">Net node maps</a>.</li>
+	          <li><a href="https://bb-viewer.geobasis-bb.de/">Brandenburg viewer</a>. Road map viewer.</li>
+		  <li><a href="https://www.ls.brandenburg.de/ls/de/verwalten/karten/netzknotenkarten/">Net node maps</a>.</li>
 	        </ul>
 	      </li>
 	      <li>Hamburg
 	        <ul>
-	          <li><a href="http://www.hamburg.de/bwvi/start-hauptverkehrsstrassennetz/">HVS</a>. Road map.</li>
+	          <li><a href="https://www.hamburg.de/politik-und-verwaltung/behoerden/bvm/hauptverkehrsstrassen-193350">HVS</a>. Road map.</li>
 	        </ul>
 	      </li>
 	      <li>Hesse
 	        <ul>
-	          <li><a href="https://mobil.hessen.de/service/downloads-formulare/netzknotenkarten-hessen">Net node maps.</a> </li>
+	          <li><a href="https://mobil.hessen.de/service/downloads-und-formulare/netzknotenkarten-hessen">Net node maps.</a> </li>
 	        </ul>
 	      </li>
 	      <li>Lower Saxony
 	        <ul>
-	          <li><a href="http://www.nwsib-niedersachsen.de/">Road map</a>. Road information database.</li>
+	          <li><a href="https://www.nwsib-niedersachsen.de/">Road map</a>. Road information database.</li>
 	        </ul>
 	      </li>
 	      <li>Mecklenburg-Western Pomerania
@@ -298,38 +298,38 @@ following sources of highway information.</p>
 	      </li>
 	      <li>North Rhine-Westphalia
 	        <ul>
-	          <li><a href="http://www.nwsib-online.nrw.de/">Road map</a>. Road information database.</li>
+	          <li><a href="https://www.nwsib-online.nrw.de/">Road map</a>. Road information database.</li>
 	        </ul>
 	      </li>
 	      <li>Rhineland-Palatinate
 	        <ul>
-	          <li><a href="https://lbm.rlp.de/de/service/informationsmaterial/strassenkarte-rheinland-pfalz/">Road map</a>.</li>
-	          <li><a href="http://www.geoportal.rlp.de/portal/karten.html">Geo portal RLP</a>.</li>
+	          <li><a href="https://lbm.rlp.de/themen/strassendaten/strassenkarte">Road map</a>.</li>
+	          <li><a href="https://www.geoportal.rlp.de/portal/karten.html">Geo portal RLP</a>.</li>
 	        </ul>
 	      </li>
 	      <li>Saarland
 	        <ul>
-	          <li><a href="http://geoportal.saarland.de/mapbender/geoportal/mod_index.php">Geo portal</a>.  Road map.</li>
+	          <li><a href="https://geoportal.saarland.de">Geo portal</a>.  Road map.</li>
 	        </ul>
 	      </li>
 	      <li>Saxony
 	        <ul>
-	          <li><a href="http://geoportal.sachsen.de/cps/karte.html?showmap=true">Geo portal "Sachsenatlas"</a>.  Road map.</li>
+	          <li><a href="https://geoportal.sachsen.de/cps/karte.html?showmap=true">Geo portal "Sachsenatlas"</a>.  Road map.</li>
 	        </ul>
 	      </li>
 	      <li>Saxony-Anhalt
 	        <ul>
-	          <li><a href="http://www.lvermgeo.sachsen-anhalt.de/de/geoservice/viewer/main2.htm">Sachsen-Anhalt viewer</a>.  Road map.</li>
+	          <li><a href="https://www.geodatenportal.sachsen-anhalt.de/mapapps/resources/apps/viewer_v40/index.html">Sachsen-Anhalt viewer</a>.  Road map.</li>
 	        </ul>
 	      </li>
 	      <li>Schleswig-Holstein
 	        <ul>
-	          <li><a href="http://danord.gdi-sh.de/viewer/resources/apps/Anonym/index.html">Digital Atlas</a>.  Road map.</li>
+	          <li><a href="https://danord.gdi-sh.de/viewer/resources/apps/Anonym/index.html">Digital Atlas</a>.  Road map.</li>
 	        </ul>
 	      </li>
 	      <li>Thuringia
 	        <ul>
-	          <li><a href="http://www.thueringen.de/th9/tlbv/service/strassenkarte/">Road map</a>. </li>
+	          <li><a href="https://bau-verkehr.thueringen.de/service/karten-und-statistiken/strassenkarten">Road map</a>. </li>
 	        </ul>
 	      </li>
 	    </ul>
