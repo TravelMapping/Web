@@ -125,6 +125,13 @@ Data errors</p>
     <td><green>YES</green></td>
   </tr>
   <tr valign="top">
+    <td><a name="COMBINE_CON_ROUTES"></a><a style="text-decoration:none" href="#COMBINE_CON_ROUTES">&#x1f517</a></td>
+    <td>COMBINE_CON_ROUTES</td>
+    <td>Two separate ConnectedRoutes could potentially be combined into one.</td>
+    <td><red>NO</red></td>
+    <td><green>YES</green></td>
+  </tr>
+  <tr valign="top">
     <td><a name="CON_BANNER_MISMATCH"></a><a style="text-decoration:none" href="#CON_BANNER_MISMATCH">&#x1f517</a></td>
     <td>CON_BANNER_MISMATCH</td>
     <td>The route's <a href="syshwylist.php#cbanner">Banner</a> field in its <a href="syshwylist.php#chopped">chopped routes .csv file</a> mismatches the <a href="syshwylist.php#conncbanner">Banner</a> field in its <a href="syshwylist.php#connected">connected routes .csv file</a>.</td>
