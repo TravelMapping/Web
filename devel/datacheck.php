@@ -50,13 +50,20 @@
         echo "<tr><td><a href=\"../hb/showroute.php?r=".$row['route'];
 	// successful lookup of waypoint label links to panned & zoomed map
 	if ($row2 != NULL) {
-	  echo "&lat=".$row2['latitude']."&lon=".$row2['longitude']."&zoom=17";
+	  echo "&lat=".$row2['latitude']."&lon=".$row2['longitude']."&zoom=";
+	  if (strcmp($row['code'],"COMBINE_CON_ROUTES") == 0) {
+	    echo "10";
+	  }
+	  else {
+	    echo "17";
+	  }
 	}
 	// the following errors link to a ConnectedRoute
 	if ((strcmp($row['code'],"ABBREV_AS_CON_BANNER") == 0) ||
-	(strcmp($row['code'],"CON_ROUTE_MISMATCH") == 0) ||
-	(strcmp($row['code'],"CON_BANNER_MISMATCH") == 0) ||
-	(strcmp($row['code'],"DISCONNECTED_ROUTE") == 0)) {
+	  (strcmp($row['code'],"COMBINE_CON_ROUTES") == 0) ||
+	  (strcmp($row['code'],"CON_ROUTE_MISMATCH") == 0) ||
+	  (strcmp($row['code'],"CON_BANNER_MISMATCH") == 0) ||
+	  (strcmp($row['code'],"DISCONNECTED_ROUTE") == 0)) {
 	  echo "&cr";
 	}
 	echo "\">".$row['route']."</a></td><td>";
@@ -121,6 +128,13 @@
 	    (strcmp($row['code'],"ABBREV_AS_CHOP_BANNER") == 0)) {
             echo "<a href=\"https://github.com/TravelMapping/HighwayData/blob/master/hwy_data/_systems/".$row['value']."\">".$row['value']."</a>";
 	  }
+	  // COMBINE_CON_ROUTES links to 2nd ConnectedRoute
+	  elseif (strcmp($row['code'],"COMBINE_CON_ROUTES") == 0) {
+	    $r_at_l = explode('@', $row['value']);
+	    $sql_command = "select latitude, longitude from waypoints where pointName = '".$r_at_l[1]."' and root = '".$row['route']."';";
+	    $row2 = tmdb_query($sql_command)->fetch_assoc();
+            echo "<a href=\"../hb/showroute.php?cr&r=".$r_at_l[0]."&lat=".$row2['latitude']."&lon=".$row2['longitude']."&zoom=10\">".$row['value']."</a>";
+	  }
 	  else {
             echo $row['value'];
 	  }
@@ -140,6 +154,7 @@
 	  strcmp($row['code'],"VISIBLE_HIDDEN_COLOC") &&
 	  strcmp($row['code'],"HIDDEN_JUNCTION") &&
 	  strcmp($row['code'],"LACKS_GENERIC") &&
+	  strcmp($row['code'],"COMBINE_CON_ROUTES") &&
 	  strcmp($row['code'],"BUS_WITH_I") &&
 	  strcmp($row['code'],"OUT_OF_BOUNDS")) {
 
