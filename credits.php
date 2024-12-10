@@ -704,7 +704,13 @@ following sources of highway information.</p>
 	  </li>
 	  <li>New Hampshire, USA
 	    <ul>
-	    <li><a href="ftp://ftp.granit.sr.unh.edu/pub/GRANIT_Data/Vector_Data/Transportation_Networks/d-roads/">NH Public Roads</a>. GIS shapefiles from GRANIT covering New Hampshire public roads.</li>
+	    <li><a href="https://ftp.granit.unh.edu/GRANIT_Data/Vector_Data/Transportation_Networks/d-roads/">NH Public Roads</a>. GIS shapefiles from GRANIT covering New Hampshire public roads.</li>
+	    <li><a href="https://www.dot.nh.gov/about-nh-dot/divisions-bureaus-districts/planning-community-assistance/gis-data-catalog">GIS Data Catalog</a>. Links to Data, Maps, Reports and Guides, from NH DOT.</li>
+	    <li><a href="https://mm.nh.gov/files/uploads/dot/remote-docs/route-system2023.pdf">Route System Map</a>.</li>
+	    <li><a href="https://www.dot.nh.gov/sites/g/files/ehbemt811/files/inline-documents/turnpikes-map-2021.pdf">Turnpike Road Map</a>.</li>
+	    <li><a href="https://new-hampshire-geodata-portal-1-nhgranit.hub.arcgis.com/">New Hampshire Geodata Portal</a>. Administered by NH GRANIT.</li>
+	    <li><a href="https://www.arcgis.com/apps/webappviewer/index.html?id=1d83377ccf4d4236bb11f3de2b82eab5">NH Tiers</a>. NH Tiered Roadway Mapping Application.</li>
+	    <li><a href="https://granitweb.sr.unh.edu/Geocortex/WebViewer/?app=9ec207d1970d4ddab771dce0d57f82aa">NH DOT Roads and Projects</a>.</li>
 	    </ul>
 	  </li>
 	  <li>New Jersey, USA
