@@ -330,6 +330,7 @@ following sources of highway information.</p>
 	      <li>Thuringia
 	        <ul>
 	          <li><a href="https://bau-verkehr.thueringen.de/service/karten-und-statistiken/strassenkarten">Road map</a>. </li>
+	          <li><a href="https://baustelleninfo.thueringen.de/sperr-app-bis/de.novasib.sperr.gwt.app.Bis/Bis.jsp">Online road map for traffic info</a>. </li>
 	        </ul>
 	      </li>
 	    </ul>
