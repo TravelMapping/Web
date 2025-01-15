@@ -250,7 +250,7 @@ following sources of highway information.</p>
 	  <li><a name="deu"></a><a style="text-decoration:none" href="#deu">&#x1f517</a>Germany
 	    <ul>
 	      <li><a href="http://www.autobahnatlas-online.de/index_e.html">Autobahn-Atlas</a>. Hobbyist site by Patrick Scholl covering the detailed routings and plans for German motorways.</li>
-	      <li><a href="https://bmdv.bund.de/DE/Themen/Mobilitaet/Infrastrukturplanung-Investitionen/Bundesverkehrswegeplan-2030/bundesverkehrswegeplan-2030.html">Road Construction</a>. German motorway construction plans and maps from the Federal Minsitry of Transport, Building and Urban Development.</li>	    
+	      <li><a href="https://www.fba.bund.de/DE/Themen/Strassenkarten/Strassenkarten_node.html">Road Map</a>. Federal trunk road map from the Federal Trunk Road Authority.</li>	    
 	      <li><a href="https://bast.opus.hbz-nrw.de/volltexte/2016/1755/pdf/V273_AVERZ_Internet_PDF.pdf">Autobahn directory</a>. List of German federal motorways (2016 version)</li>
 	      <li><a href="https://www.mauttabelle.de/">Mauttabelle</a>. List of tolled roads (frequently updated list of federal roads)</li>
 	      <li><a href="http://www.bast.de/DE/Verkehrstechnik/Fachthemen/v1-beverz/v1-berverz.html">Bundesstraßen directory</a>. List of German federal non-motorway roads (2009 version, link broken)</li>
