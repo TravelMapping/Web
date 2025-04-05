@@ -639,6 +639,11 @@ function tm_shield_generate($r, $force_reload = false) {
             $routeNum = str_replace("N", "", $row['route']);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
+       
+       case 'hkgrt':
+             $routeNum = substr_replace($row['route'], '', 0, 2); // Strip "RT"
+             $svg = str_replace("***NUMBER***", $routeNum, $svg);
+             break;
 
         case 'chegts':
         case 'usasf':
