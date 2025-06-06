@@ -314,6 +314,14 @@ User: <?php tm_user_select(); ?>&nbsp;Units: <?php tm_units_select(); ?><br />
    // else {
     //    echo "mapviewParams.country = '';\n";
     //}
+
+    // find largest tier number in the current data
+    $sql_command = "SELECT MAX(tier) AS mt FROM systems;";
+    $res = tmdb_query($sql_command);
+    $row = $res->fetch_assoc();
+    echo "mapviewParams.maxTier = ".$row['mt'].";\n";
+    $res->free();
+    
     $tmdb->close();
 ?>
 </script>
