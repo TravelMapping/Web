@@ -131,10 +131,10 @@ echo "<h1>Main Travel Mapping - ".$tmMode_p." User Page for ".$tmuser."</h1>";
 WITH FilteredRanks AS (
     SELECT
         cas.traveler,
-        cas.clinchedPercent,
-        cas.drivenPercent,
-        RANK() OVER (ORDER BY cas.clinchedPercent DESC) AS clinchedRank,
-        RANK() OVER (ORDER BY cas.drivenPercent DESC) AS drivenRank
+        cas.clinched,
+        cas.driven,
+        RANK() OVER (ORDER BY cas.clinched DESC) AS clinchedRank,
+        RANK() OVER (ORDER BY cas.driven DESC) AS drivenRank
     FROM 
         clinchedActiveStats cas
     JOIN 
@@ -191,10 +191,10 @@ SQL;
 WITH FilteredRanks AS (
     SELECT
         cas.traveler,
-        cas.clinchedPercent,
-        cas.drivenPercent,
-        RANK() OVER (ORDER BY cas.clinchedPercent DESC) AS clinchedRank,
-        RANK() OVER (ORDER BY cas.drivenPercent DESC) AS drivenRank
+        cas.clinched,
+        cas.driven,
+        RANK() OVER (ORDER BY cas.clinched DESC) AS clinchedRank,
+        RANK() OVER (ORDER BY cas.driven DESC) AS drivenRank
     FROM 
         clinchedActivePreviewStats cas
     JOIN 
