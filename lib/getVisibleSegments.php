@@ -40,7 +40,10 @@ $response = array('roots'=>array(),
 		  );
 
 // first DB query to get all waypoints in the bounding area
-$result = tmdb_query("select pointId from waypoints where latitude>".$params['minLat']." and latitude<".$params['maxLat']." and longitude<".$params['maxLng']." and longitude>".$params['minLng']);
+$result = tmdb_query("SELECT pointId
+FROM waypoints
+WHERE latitude BETWEEN {$params['minLat']} AND {$params['maxLat']}
+  AND longitude BETWEEN {$params['minLng']} AND {$params['maxLng']};");
 
 $waypoints = array();
 while ($row = $result->fetch_assoc()) {
@@ -57,16 +60,60 @@ if (count($waypoints) == 0) {
 }
 
 // make DB query for all segments with at least one waypoint in
-// the bounding area
-// if the number of waypoints is reasonably small, we will use it to restrict segments,
-// otherwise we will search segments for endpoint coordinates
-// NOTE: should do some experiments to see what this threshold should be
-if (count($waypoints) < 500) {
-    $result = tmdb_query("select segments.root, segments.segmentId, COUNT(CASE WHEN le.includeInRanks = 1 THEN acl.segmentId ELSE NULL END) AS travelers, if (cl.segmentId is null, false, true) as clinched, w1.pointName as w1name, w1.latitude as w1lat, w1.longitude as w1lng, w2.pointName as w2name, w2.latitude as w2lat, w2.longitude as w2lng from segments join waypoints as w1 on segments.waypoint1=w1.pointId join waypoints as w2 on segments.waypoint2=w2.pointId left join clinched as cl on (cl.segmentId=segments.segmentId and cl.traveler='".$params['traveler']."') left join clinched as acl on acl.segmentId=segments.segmentId LEFT JOIN listEntries AS le ON acl.traveler = le.traveler where ((w1.pointId in ('".implode("','",$waypoints)."')) or (w2.pointId in ('".implode("','",$waypoints)."'))) group by segments.segmentId order by segments.segmentId, segments.root;");
-}
-else {
-    $result = tmdb_query("select segments.root, segments.segmentId, COUNT(CASE WHEN le.includeInRanks = 1 THEN acl.segmentId ELSE NULL END) AS travelers, if (cl.segmentId is null, false, true) as clinched, w1.pointName as w1name, w1.latitude as w1lat, w1.longitude as w1lng, w2.pointName as w2name, w2.latitude as w2lat, w2.longitude as w2lng from segments join waypoints as w1 on segments.waypoint1=w1.pointId join waypoints as w2 on segments.waypoint2=w2.pointId left join clinched as cl on (cl.segmentId=segments.segmentId and cl.traveler='".$params['traveler']."') left join clinched as acl on acl.segmentId=segments.segmentId LEFT JOIN listEntries AS le ON acl.traveler = le.traveler where ((w1.latitude>".$params['minLat']." and w1.latitude<".$params['maxLat']." and w1.longitude<".$params['maxLng']." and w1.longitude>".$params['minLng'].") or (w2.latitude>".$params['minLat']." and w2.latitude<".$params['maxLat']." and w2.longitude<".$params['maxLng']." and w2.longitude>".$params['minLng'].")) group by segments.segmentId order by segments.segmentId, segments.root;");
-}
+// the bounding area, with efficiency improved with ChatGPT input
+$sql_command = <<<SQL
+WITH
+filtered_w1 AS (
+  SELECT pointId, pointName, latitude, longitude
+  FROM waypoints
+  WHERE latitude BETWEEN {$params['minLat']} AND {$params['maxLat']}
+    AND longitude BETWEEN {$params['minLng']} AND {$params['maxLng']}
+),
+filtered_w2 AS (
+  SELECT pointId, pointName, latitude, longitude
+  FROM waypoints
+  WHERE latitude BETWEEN {$params['minLat']} AND {$params['maxLat']}
+    AND longitude BETWEEN {$params['minLng']} AND {$params['maxLng']}
+)
+
+-- First half: w1 in bounding box
+SELECT
+  segments.root,
+  segments.segmentId,
+  COUNT(CASE WHEN le.includeInRanks = 1 THEN acl.segmentId ELSE NULL END) AS travelers,
+  IF(cl.segmentId IS NULL, false, true) AS clinched,
+  w1.pointName AS w1name, w1.latitude AS w1lat, w1.longitude AS w1lng,
+  w2.pointName AS w2name, w2.latitude AS w2lat, w2.longitude AS w2lng
+FROM segments
+JOIN filtered_w1 w1 ON segments.waypoint1 = w1.pointId
+JOIN waypoints w2 ON segments.waypoint2 = w2.pointId
+LEFT JOIN clinched cl ON cl.segmentId = segments.segmentId AND cl.traveler = '{$params['traveler']}'
+LEFT JOIN clinched acl ON acl.segmentId = segments.segmentId
+LEFT JOIN listEntries le ON acl.traveler = le.traveler
+GROUP BY segments.segmentId
+
+UNION
+
+-- Second half: w2 in bounding box
+SELECT
+  segments.root,
+  segments.segmentId,
+  COUNT(CASE WHEN le.includeInRanks = 1 THEN acl.segmentId ELSE NULL END) AS travelers,
+  IF(cl.segmentId IS NULL, false, true) AS clinched,
+  w1.pointName AS w1name, w1.latitude AS w1lat, w1.longitude AS w1lng,
+  w2.pointName AS w2name, w2.latitude AS w2lat, w2.longitude AS w2lng
+FROM segments
+JOIN waypoints w1 ON segments.waypoint1 = w1.pointId
+JOIN filtered_w2 w2 ON segments.waypoint2 = w2.pointId
+LEFT JOIN clinched cl ON cl.segmentId = segments.segmentId AND cl.traveler = '{$params['traveler']}'
+LEFT JOIN clinched acl ON acl.segmentId = segments.segmentId
+LEFT JOIN listEntries le ON acl.traveler = le.traveler
+GROUP BY segments.segmentId
+
+ORDER BY segmentId, root;
+SQL;
+
+$result = tmdb_query($sql_command);
 
 // parse results into the response array
 while ($row = $result->fetch_assoc()) {
