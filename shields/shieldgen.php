@@ -802,10 +802,10 @@ function tm_shield_generate($r, $force_reload = false) {
             if ($row['banner'] === 'Wye') {
                 $routeNum = str_replace('VA', "", $row['route']);
                 if (strlen($routeNum) > 2) {
-                    $svg = file_get_contents("${dir}/template_usava_wye_wide.svg");
+                    $svg = file_get_contents("{$dir}/template_usava_wye_wide.svg");
                 }
                 else {
-                    $svg = file_get_contents("${dir}/template_usava_wye.svg");
+                    $svg = file_get_contents("{$dir}/template_usava_wye.svg");
                 }
                 $svg = str_replace("***NUMBER***", $routeNum, $svg);
                 break;
