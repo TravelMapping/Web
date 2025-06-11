@@ -177,13 +177,13 @@ WHERE
 SQL;	    
             $res = tmdb_query($sql_command);
             $row = $res->fetch_assoc();
-	    $activeRoutes = $row['activeRoutes'];
-	    $activeDriven = $row['driven'];
-	    $activeDrivenPct = $row['drivenPercent'];
-	    $activeDrivenRank = $row['drivenRank'];
-	    $activeClinched = $row['clinched'];
-	    $activeClinchedPct = $row['clinchedPercent'];
-	    $activeClinchedRank = $row['clinchedRank'];
+	    $activeRoutes = $row['activeRoutes'] ?? 0;
+	    $activeDriven = $row['driven'] ?? 0;
+	    $activeDrivenPct = $row['drivenPercent'] ?? "N/A";
+	    $activeDrivenRank = $row['drivenRank'] ?? "N/A";
+	    $activeClinched = $row['clinched'] ?? 0;
+	    $activeClinchedPct = $row['clinchedPercent'] ?? "N/A";
+	    $activeClinchedRank = $row['clinchedRank'] ?? "N/A";
 	    $res->free();
 
             // Third, fetch routes driven/clinched active+preview

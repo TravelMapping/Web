@@ -106,7 +106,7 @@ SQL;
 				
 			// For each banner in the array, generate the banner
 			foreach ($bannersArray as $singleBanner) {
-				$bannerSvg = tm_banner_generate($singleBanner, $row['systemName'], $_GET['reload']);
+				$bannerSvg = tm_banner_generate($singleBanner, $row['systemName'], $_GET['reload'] ?? false);
 				if ( $bannerSvg == 'not external' ) { // System doesn't use external banners so print nothing.
 					break;
 				}
@@ -117,7 +117,7 @@ SQL;
 				}
 			}
 		}
-		echo "</td></tr><tr><td><a href='/hb/showroute.php?u=$tmuser&amp;r=$root&amp;cr'><span class='shield'>".tm_shield_generate($root, $_GET['reload'])."</span></a></td></tr><tr><td>";
+		echo "</td></tr><tr><td><a href='/hb/showroute.php?u=$tmuser&amp;r=$root&amp;cr'><span class='shield'>".tm_shield_generate($root, $_GET['reload'] ?? false)."</span></a></td></tr><tr><td>";
 		echo $routerow['groupName'];
 		echo "</td></tr></table></span>\n";
             }

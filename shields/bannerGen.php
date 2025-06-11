@@ -221,5 +221,5 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 
 */
 function getBannerArray ($bannerString) {
-	return preg_split('/([[:upper:]][[:lower:]]+)/', $bannerString, null, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
+	return preg_split('/([[:upper:]][[:lower:]]+)/', $bannerString, 0, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
 }

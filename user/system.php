@@ -684,7 +684,7 @@ HTML;
                 echo "<td width='0'>" . $row['routeNum'] . "</td>";
                 echo "<td>" . $row['banner'] . "</td>";
 		if ($region == "") {
-                    echo "<td>" . $row['abbrev'] . "</td>";
+                    echo "<td>" . ($row['abbrev'] ?? '') . "</td>";
 		}
                 echo "<td>" . $row['city'] . "</td>";
                 echo "<td>" . tm_convert_distance($row['clinchedMileage']) . "</td>";
