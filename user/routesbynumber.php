@@ -34,7 +34,7 @@
  function updateList() {
 
      traveler = selects['u'].value;
-     setTMCookie("traveler", traveler);
+     setTMCookie("lastuser", traveler);
      let params = {
 	 traveler: traveler,
      };

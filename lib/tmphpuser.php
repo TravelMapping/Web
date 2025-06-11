@@ -27,7 +27,13 @@ if (array_key_exists("u", $_GET)) {
     $tmusertemp = str_replace("_", "", $_GET['u']);
     if (ctype_alnum_portable($tmusertemp)) {
         $tmuser = $_GET['u'];
-        setcookie("lastuser", $tmuser, time() + (86400 * 30));
+	setcookie("lastuser", $tmuser, [
+	    'expires' => time() + (86400 * 30),
+    	    'path' => '/',	      
+    	    'secure' => false,
+    	    'httponly' => false,
+    	    'samesite' => 'Lax'
+	    ]);
     }
 } else if (isset($_COOKIE['lastuser'])) {
     header("Location: ?u=" . $_COOKIE['lastuser'] . "&" . parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY)); /* Redirect browser */
@@ -51,12 +57,24 @@ if (array_key_exists("units", $_GET)) {
    $unitsparam = strtolower($_GET['units']);
    if (array_key_exists($unitsparam, $tm_supported_units)) {
       $tmunits = $unitsparam;
-      setcookie("units", $unitsparam, time() + (86400 * 30));
+      setcookie("units", $unitsparam, [
+      	    'expires' => time() + (86400 * 30),
+    	    'path' => '/',	      
+    	    'secure' => false,
+    	    'httponly' => false,
+    	    'samesite' => 'Lax'
+	    ]);
    }
    else {
       // default to miles for unknown units
       $tmunits = "miles";
-      setcookie("units", "miles", time() + (86400 * 30));
+      setcookie("units", "miles", [
+      	    'expires' => time() + (86400 * 30),
+    	    'path' => '/',	      
+    	    'secure' => false,
+    	    'httponly' => false,
+    	    'samesite' => 'Lax'
+	    ]);
    }
 }
 else if (isset($_COOKIE['units'])) {
