@@ -167,7 +167,7 @@ function tm_region_select($multiple) {
     $regions = tm_qs_multi_or_comma_to_array("rg");
     echo "<option value=\"null\">[None Selected]</option>\n";
     $lastCountry = "None Yet";
-    $inOptgroup = FALSE;
+    $inOptGroup = FALSE;
     //$res = tmdb_query("SELECT * FROM regions WHERE code IN (SELECT region FROM routes) ORDER BY country;");
     $res = tmdb_query("select regions.code as rcode, regions.name as rname, regions.country as ccode, c.name as cname, counts.rcount from regions join (select  regions.country, count(regions.country) as rcount from regions left join countries as c on regions.country = c.code where regions.code in (select region from routes)  group by regions.country) as counts left join countries as c on regions.country = c.code where regions.code in (select region from routes) and regions.country = counts.country order by c.name, regions.name;");
     while ($row = $res->fetch_assoc()) {
