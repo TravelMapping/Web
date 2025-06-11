@@ -38,10 +38,7 @@
 
  function updateStats() {
 
-     distanceUnits = selects['units'].value;
-     setTMCookie("units", distanceUnits);
-     traveler = selects['u'].value;
-     setTMCookie("lastuser", traveler);
+     setUserUnitsCookiesAndHeader();
      document.getElementById("unitsText").innerHTML = distanceUnits;
      let params = {
 	 traveler: traveler,

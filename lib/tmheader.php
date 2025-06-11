@@ -19,13 +19,14 @@ END;
     <?php
     if (isset($tmuser)) {
         if ($tmuser != "null") {
-            echo '<a href="/user">'.$tmuser.'\'s User Page</a> &nbsp;&nbsp;&nbsp;';
+            echo '<a href="/user"><span id="tmusertext">'.$tmuser.'</span>\'s User Page</a> &nbsp;&nbsp;&nbsp;';
 	}
     }
     else if (isset($_COOKIE['lastuser']) && $_COOKIE['lastuser'] != "null") {
-        echo '<a href="/user">'.$_COOKIE['lastuser'].'\'s User Page</a> &nbsp;&nbsp;&nbsp;';
+        echo '<a href="/user"><span id="tmusertext">'.$_COOKIE['lastuser'].'</span>\'s User Page</a> &nbsp;&nbsp;&nbsp;';
     }
     ?>
+    
     <a href="/stat.php"><?php echo $tmMode_s;?> Travelers' Stats</a> &nbsp;&nbsp;&nbsp;
     <a href="/hb"><?php echo $tmMode_s;?> Browser</a> &nbsp;&nbsp;&nbsp;
     <a href="/participate.php">Get Started!</a> &nbsp;&nbsp;&nbsp;
