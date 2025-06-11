@@ -1,7 +1,7 @@
 <!-- /lib/tmheader.php: Main title and menu bar for Travel Mapping -->
 
 <?php
-if ($nobigheader != 1) {
+if (!isset($nobigheader)) {
     echo <<<END
 <p class="title">
 <a href="/">Travel Mapping</a>

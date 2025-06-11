@@ -38,13 +38,7 @@
     <?php
     $totalMileage = round(tm_sum_column("overallMileageByRegion", "activeMileage"), 2);
     $totalPreviewMileage = round(tm_sum_column("overallMileageByRegion", "activePreviewMileage"), 2);
-//    if ($tmuser == TM_NO_USER) {
-//        echo "<form id=\"userselect\" action=\"\"><p>\n";
-//        echo "<label>Current User: </label>\n";
-//        tm_user_select();
-//        echo "<input type=\"submit\" value=\"Select User\" />\n";
-//        echo "</p></form>\n";
-//    }else{
+    if ($tmuser != TM_NO_USER) {
         echo <<<HTML
             <tr><td colspan="2">
                 <table class="gratable" id="usertable">
@@ -115,7 +109,7 @@ SQL;
                     </tbody></table>
             </td></tr>
 HTML;
-//    }
+    }
     ?>
     <tr>
         <td>
@@ -168,7 +162,7 @@ SQL;
 		    $print_distance = tm_convert_distance($row['clinchedMileage']);
 		    $style = 'style="text-align: right; background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$totalMileage).';"';
                     echo <<<HTML
-                <tr ${ttip} class="$highlight" onClick="window.document.location='/user?u={$row['traveler']}';">
+                <tr {$ttip} class="$highlight" onClick="window.document.location='/user?u={$row['traveler']}';">
                 <td style="text-align: right;">{$shownRank}</td><td>{$row['traveler']}</td><td {$style}>{$print_distance}</td><td {$style} data-sort="{$row['percentage']}">{$row['percentage']}%</td>
                 </tr>
 HTML;
