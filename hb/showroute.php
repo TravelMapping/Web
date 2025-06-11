@@ -373,7 +373,7 @@ else {
 </td><td>
 <input id="showToolbox" type="checkbox" name=".list Tool" onclick="hideShowToolbox()" />&nbsp;.list Tool&nbsp;
 </td><td>
-<form id="userForm" action="/hb/showroute.php" method="get" onsubmit="setUserUnitsCookiesAndHeader();">
+<form id="userForm" action="/hb/showroute.php" method="get" onsubmit="setUserUnitsCookiesAndText();">
 User: 
 <?php tm_user_select(); ?>
 <label>Units: </label>

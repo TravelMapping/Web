@@ -19,11 +19,11 @@ END;
     <?php
     if (isset($tmuser)) {
         if ($tmuser != "null") {
-            echo '<a href="/user"><span id="tmusertext">'.$tmuser.'</span>\'s User Page</a> &nbsp;&nbsp;&nbsp;';
+            echo '<a href="/user">'.tm_echo_tmuser().'\'s User Page</a> &nbsp;&nbsp;&nbsp;';
 	}
     }
     else if (isset($_COOKIE['lastuser']) && $_COOKIE['lastuser'] != "null") {
-        echo '<a href="/user"><span id="tmusertext">'.$_COOKIE['lastuser'].'</span>\'s User Page</a> &nbsp;&nbsp;&nbsp;';
+        echo '<a href="/user"><span class="TMuserText">'.$_COOKIE['lastuser'].'</span>\'s User Page</a> &nbsp;&nbsp;&nbsp;';
     }
     ?>
     

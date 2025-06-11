@@ -38,8 +38,8 @@
 
  function updateStats() {
 
-     setUserUnitsCookiesAndHeader();
-     document.getElementById("unitsText").innerHTML = distanceUnits;
+     setUserUnitsCookiesAndText();
+     
      let params = {
 	 traveler: traveler,
 	 system: selects['sys'].value,
@@ -330,7 +330,7 @@
         <thead>
             <tr><th colspan="2" class="routeName">Longest Clinched Routes</th></tr>
             <tr><th class="routeName">Route</th>
-                <th class="clinched">Length (<span id="unitsText"><?php tm_echo_units(); ?></span>)</th>
+                <th class="clinched">Length (<span class="unitsText"><?php tm_echo_units(); ?></span>)</th>
         </thead>
         <tbody id="longestClinchedRoutes">
         </tbody>
@@ -340,8 +340,8 @@
         <thead>
             <tr><th colspan="3" class="routeName">Most Traveled Routes</th></tr>
             <tr><th class="routeName">Route</th>
-                <th class="clinched">Traveled (<span id="unitsText"><?php tm_echo_units(); ?></span>)</th>
-                <th class="clinched">Length (<span id="unitsText"><?php tm_echo_units(); ?></span>)</th>
+                <th class="clinched">Traveled (<span class="unitsText"><?php tm_echo_units(); ?></span>)</th>
+                <th class="clinched">Length (<span class="unitsText"><?php tm_echo_units(); ?></span>)</th>
         </thead>
         <tbody id="longestTraveledRoutes">
         </tbody>
@@ -351,8 +351,8 @@
         <thead>
             <tr><th colspan="3" class="routeName">Unclinched Traveled Routes Closest to Clinched</th></tr>
             <tr><th class="routeName">Route</th>
-                <th class="clinched">Untraveled (<span id="unitsText"><?php tm_echo_units(); ?></span>)</th>
-                <th class="clinched">Length (<span id="unitsText"><?php tm_echo_units(); ?></span>)</th>
+                <th class="clinched">Untraveled (<span class="unitsText"><?php tm_echo_units(); ?></span>)</th>
+                <th class="clinched">Length (<span class="unitsText"><?php tm_echo_units(); ?></span>)</th>
         </thead>
         <tbody id="closestToClinchedTraveledRoutes">
         </tbody>

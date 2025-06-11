@@ -461,12 +461,22 @@ function tm_fetch_user_row_with_rank($res, $rankBy) {
     return $row;
 }
 
+// simply return the current traveler inside a span with the
+// class TMuserText so it can automatically update when user is
+// changed
+function tm_echo_tmuser() {
+    global $tmuser;
+    echo '<span class="TMuserText">'.$tmuser.'</span>';
+}
+
 // additional metric/non-metric units support functions
 
-// simply return the string representation
+// simply return the string representation of the currently-selected
+// units inside a span with the class TMunitsText so it can
+// automatically update when units are changed
 function tm_echo_units() {
     global $tmunits;
-    echo $tmunits;
+    echo '<span class="TMunitsText">'.$tmunits.'</span>';
 }
 
 // convert to the currently-selected units
