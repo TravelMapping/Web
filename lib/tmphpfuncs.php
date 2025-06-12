@@ -452,13 +452,25 @@ function tm_fetch_user_row_with_rank($res, $rankBy) {
             $score = $row[$rankBy];
             $rank = $nextRank;
         }
-	if ($row['includeInRanks'] == "1") {
+        if ($row['includeInRanks'] == "1") {
             $nextRank++;
-	}
+        }
         //error_log("($rank, {$row['traveler']}, {$row[$rankBy]})");
     }
-    $row['rank'] = ($rank+1);
-    return $row;
+    if ($row) {
+        $row['rank'] = ($rank+1);
+        return $row;
+    }
+    else {
+        $row = array();
+        $row['traveler'] = $tmuser;
+        $row[$rankBy] = 0;
+	// this is a bit of a hack, as the user might be a "ranked" user
+	// but we don't want to show rankings for users with 0 in the
+	// "rankBy" statistic
+        $row['includeInRanks'] = "0";
+        return $row;
+    }
 }
 
 // simply return the current traveler inside a span with the
