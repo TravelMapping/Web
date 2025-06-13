@@ -3,7 +3,7 @@ Web-facing tool/page development
 
 ## Setting up an instance of TM's databases and web front end
 
-The server should be running an instance of a MariaDB server (10.11.7 as of this writing) and the apache web server (2.4.59 as of this writing).  The web server needs to have PHP enabled (version 7.4.30 as of this writing) with the mysqli, ctype, and json extensions, and `mod_php74` to get the loadable module.  The remaining instructions assume apache, MariaDB, and PHP are all working together properly.  On FreeBSD, this involved installing the correct packages.
+The server should be running an instance of a MariaDB server (10.11.11 as of this writing) and the apache web server (2.4.63 as of this writing).  The web server needs to have PHP enabled (version 8.4.7 as of this writing) with the mysqli, ctype, and json extensions, and `mod_php84` to get the loadable module.  The remaining instructions assume apache, MariaDB, and PHP are all working together properly.  On FreeBSD, this involved installing the correct packages.
 
 Note: the MySQL server needs to override the `group_concat_max_len` parameter to be the maximum length of any comma-separated list of users that might be returned by a `GROUP_CONCAT`.  This is currently set to 10000 on the production server.
 
