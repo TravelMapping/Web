@@ -25,6 +25,7 @@ function ctype_alnum_portable($text) {
 
 if (array_key_exists("u", $_GET)) {
     $tmusertemp = str_replace("_", "", $_GET['u']);
+    $tmusertemp = str_replace("-", "", $tmusertemp);
     if (ctype_alnum_portable($tmusertemp)) {
         $tmuser = $_GET['u'];
 	setcookie("lastuser", $tmuser, [
