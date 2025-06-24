@@ -481,6 +481,25 @@ function tm_echo_tmuser() {
     echo '<span class="TMuserText">'.$tmuser.'</span>';
 }
 
+
+// Function to echo the description from the listEntries table
+// corresponding to the current user
+function tm_echo_user_description($center = false) {
+    global $tmdb;
+    global $tmuser;
+    $res = tmdb_query("SELECT description FROM listEntries WHERE traveler='".$tmuser."';");
+    $row = $res->fetch_assoc();
+    $ans = $row['description'];
+    $res->free();
+    if ($ans) {
+        echo "<div class=\"text\"";
+	if ($center) {
+	   echo " style=\"text-align:center\"";
+	}
+	echo ">User description: ".$ans."</div>\n";
+    }
+}
+
 // additional metric/non-metric units support functions
 
 // simply return the string representation of the currently-selected

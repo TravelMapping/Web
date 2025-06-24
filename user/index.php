@@ -73,10 +73,15 @@ if ( $tmuser == "null") {
     echo "</html>\n";
     exit;
 }
-echo "<h1>Main Travel Mapping - ".$tmMode_p." User Page for ".$tmuser."</h1>";
+
+echo "<h1>Main Travel Mapping - ".$tmMode_p." User Page for ".$tmuser."</h1>\n";
 ?>
 </div>
 <div id="body">
+<?php
+// show traveler description if there is one
+$descr = tm_echo_user_description();
+?>
     <h2>User Links</h2>
     <ul class="text">
       <li><a href="/logs/users/<?php echo $tmuser; ?>.log">Log File</a>, where you can find any errors from processing <a href="https://github.com/TravelMapping/UserData/blob/master/<?php echo $tmlistdir."/".$tmuser.".".$tmlistext."\">".$tmuser.".".$tmlistext; ?></a>, and statistics.</li>
