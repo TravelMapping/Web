@@ -567,6 +567,7 @@ function tm_common_js() {
        which includes the TMBlank tiles.  Use fetch-upstream there
        to get the latest and install leaflet-providers.js from the fork -->
   <script src="/leaflet-1.9.4/leaflet-providers.js"></script>
+  <script src="https://unpkg.com/leaflet.vectorgrid@1.3.0/dist/Leaflet.VectorGrid.min.js"></script>
   <!-- script type="text/javascript" src="https://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script> -->
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
