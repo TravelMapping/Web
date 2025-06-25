@@ -132,7 +132,8 @@ SELECT
     co.traveler,
     ROUND(SUM(COALESCE(co.activeMileage, 0)), 2) AS clinchedMileage,
     ROUND(SUM(COALESCE(co.activeMileage, 0)) / $totalMileage * 100, 2) AS percentage,
-    le.includeInRanks
+    le.includeInRanks,
+    le.description
 FROM 
     clinchedOverallMileageByRegion co
 JOIN 
@@ -145,25 +146,27 @@ SQL;
                 $res = tmdb_query($sql);
                 $rank = 0;
                 while ($row = $res->fetch_assoc()) {
-		    if ($row['includeInRanks'] == "1") {
-		        $rank++;
-			$shownRank = $rank;
-			$ttip = "";
-	            }
-		    else {
-		    	$shownRank = "&nbsp;&nbsp;&nbsp;&nbsp;";
-			$ttip = "title='".$row['traveler']." is specified as an unranked user'";
-	            }
+                    if ($row['includeInRanks'] == "1") {
+                        $rank++;
+                        $ranktd = "<td>".$rank."</td>";
+                    }
+                    else {
+                        $ranktd = "<td title=\"user ".$row['traveler']." specified as unranked\">&nbsp;</td>";
+                    }
                     if ($row['traveler'] == $tmuser) {
                         $highlight = 'user-highlight';
                     } else {
                         $highlight = '';
                     }
-		    $print_distance = tm_convert_distance($row['clinchedMileage']);
-		    $style = 'style="text-align: right; background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$totalMileage).';"';
+                    $travttip = "";
+                    if ($row['description']) {
+                       $travttip = " title=\"".$row['description']."\"";
+                    }
+                    $print_distance = tm_convert_distance($row['clinchedMileage']);
+                    $style = 'style="text-align: right; background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$totalMileage).';"';
                     echo <<<HTML
-                <tr {$ttip} class="$highlight" onClick="window.document.location='/user?u={$row['traveler']}';">
-                <td style="text-align: right;">{$shownRank}</td><td>{$row['traveler']}</td><td {$style}>{$print_distance}</td><td {$style} data-sort="{$row['percentage']}">{$row['percentage']}%</td>
+                <tr class="$highlight" onClick="window.document.location='/user?u={$row['traveler']}';">
+                {$ranktd}<td {$travttip}>{$row['traveler']}</td><td {$style}>{$print_distance}</td><td {$style} data-sort="{$row['percentage']}">{$row['percentage']}%</td>
                 </tr>
 HTML;
                 }
@@ -193,7 +196,8 @@ SELECT
     co.traveler,
     ROUND(SUM(COALESCE(co.activePreviewMileage, 0)), 2) AS clinchedMileage,
     ROUND(SUM(COALESCE(co.activePreviewMileage, 0)) / $totalPreviewMileage * 100, 2) AS percentage,
-    le.includeInRanks
+    le.includeInRanks,
+    le.description
 FROM 
     clinchedOverallMileageByRegion co
 JOIN 
@@ -206,25 +210,27 @@ SQL;
                 $res = tmdb_query($sql);
                 $rank = 0;
                 while ($row = $res->fetch_assoc()) {
-		    if ($row['includeInRanks'] == "1") {
-		        $rank++;
-			$shownRank = $rank;
-			$ttip = "";
-	            }
-		    else {
-		    	$shownRank = "&nbsp;&nbsp;&nbsp;&nbsp;";
-			$ttip = "title='".$row['traveler']." is specified as an unranked user'";
-	            }
+                    if ($row['includeInRanks'] == "1") {
+                        $rank++;
+                        $ranktd = "<td>".$rank."</td>";
+                    }
+                    else {
+                        $ranktd = "<td title=\"user ".$row['traveler']." specified as unranked\">&nbsp;</td>";
+                    }
                     if ($row['traveler'] == $tmuser) {
                         $highlight = 'user-highlight';
                     } else {
                         $highlight = '';
                     }
-		    $print_distance = tm_convert_distance($row['clinchedMileage']);
-		    $style = 'style="text-align: right; background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$totalPreviewMileage).';"';
+                    $travttip = "";
+                    if ($row['description']) {
+                       $travttip = " title=\"".$row['description']."\"";
+                    }
+                    $print_distance = tm_convert_distance($row['clinchedMileage']);
+                    $style = 'style="text-align: right; background-color: '.tm_color_for_amount_traveled($row['clinchedMileage'],$totalPreviewMileage).';"';
                     echo <<<HTML
-                <tr {$ttip} class="$highlight" onClick="window.document.location='/user?u={$row['traveler']}';">
-                <td style="text-align: right;">{$shownRank}</td><td>{$row['traveler']}</td><td {$style}>{$print_distance}</td><td {$style} data-sort="{$row['percentage']}">{$row['percentage']}%</td>
+                <tr class="$highlight" onClick="window.document.location='/user?u={$row['traveler']}';">
+                {$ranktd}<td {$travttip}>{$row['traveler']}</td><td {$style}>{$print_distance}</td><td {$style} data-sort="{$row['percentage']}">{$row['percentage']}%</td>
                 </tr>
 HTML;
                 }
