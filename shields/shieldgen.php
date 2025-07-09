@@ -773,10 +773,6 @@ function tm_shield_generate($r, $force_reload = false) {
                     $system = "NASA";
                     $num = "1";
                 }
-                elseif ($row['root'] === 'tx.lp0008') {
-                    $system = "BELTWAY";
-                    $num = "8";
-                }
                 else {
                     $matches = [];
                     preg_match('/(TX|)(?<system>[A-Za-z]+)(?<number>[0-9]+)/', $row['route'], $matches);
