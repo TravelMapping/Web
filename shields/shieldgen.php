@@ -651,6 +651,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'cansf':
         case 'eursf':
         case 'usakyp':
+        case 'usanyp':
         case 'gbrtr':
         case 'sctntr':
         case 'nzltr':
