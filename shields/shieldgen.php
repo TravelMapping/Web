@@ -651,6 +651,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'cansf':
         case 'eursf':
         case 'usakyp':
+        case 'usanyp':
         case 'gbrtr':
         case 'sctntr':
         case 'nzltr':
@@ -772,10 +773,6 @@ function tm_shield_generate($r, $force_reload = false) {
                 if ($row['root'] === 'tx.nasa1') {
                     $system = "NASA";
                     $num = "1";
-                }
-                elseif ($row['root'] === 'tx.lp0008') {
-                    $system = "BELTWAY";
-                    $num = "8";
                 }
                 else {
                     $matches = [];
