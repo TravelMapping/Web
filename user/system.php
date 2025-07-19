@@ -145,7 +145,7 @@ if (( $tmuser == "null") || ( $system == "" )) {
 <div id="body">
     <div id="mapholder">
         <div id="controlboxinfo"></div>
-        <?php tm_echo_user_description(true); ?>
+        <?php tm_echo_user_description(); ?>
         <div id="map"></div>
         <table class="gratable" id="overallTable">
             <thead><tr><th colspan="2"><a href="#rankings">System Statistics for <?php echo "$systemName"; ?></a></th></tr></thead>

@@ -150,7 +150,7 @@ if (( $tmuser == "null") || ( $region == "" )) {
 ?>
 <div id="body">
     <div id="mapholder">
-        <?php tm_echo_user_description(true); ?>
+        <?php tm_echo_user_description(); ?>
         <div id="colorBox">
 
         </div>
