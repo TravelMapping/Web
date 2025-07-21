@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600" version="1.0">
+  <defs
+     id="defs3884" />
+  <g
+     id="g2480">
+    <path
+       d="M 37.499975,-2e-12 L 562.49999,-2e-12 C 583.27507,-2e-12 600.00005,16.724987 600.00005,37.499972 L 600.00005,562.49997 C 600.00005,583.27497 583.27507,599.99995 562.49999,599.99995 L 37.499975,599.99995 C 16.724974,599.99995 0,583.27497 0,562.49997 L 0,37.499972 C 0,16.724987 16.724974,-2e-12 37.499975,-2e-12 z"
+       id="rect1873"
+       style="fill:#ffffff" />
+    <g
+       transform="matrix(0.277778,0,0,0.277778,-619.88596,2.9629065)"
+       id="g2448">
+      <path
+         d="M 3311.5869,101.83257 C 3097.0554,101.83257 2984.8848,145.58308 2850.998,244.15739 C 2706.7787,350.33899 2540.6385,418.07141 2344.0869,418.41436 L 2344.0869,1559.4099 C 2344.0869,1660.764 2344.2308,1660.7821 2396.2385,1712.043 C 2487.1109,1801.6108 3311.5869,2036.8326 3311.5869,2036.8326 C 3311.5869,2036.8326 4136.0629,1801.6108 4226.9353,1712.043 C 4278.943,1660.7821 4279.0869,1660.764 4279.0869,1559.4099 L 4279.0869,418.41438 C 4082.5353,418.07143 3914.951,352.50396 3772.1758,244.15741 C 3644.7748,147.47774 3526.1184,101.83257 3311.5869,101.83257 z"
+         id="path2452"
+         style="fill:#006b54;fill-opacity:1;stroke:none;stroke-width:22.5;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:2;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    </g>
+  </g>
+<text x="300" y="300" fill="#ffffff" font-family="&apos;Roadgeek 2014 Series C&apos;" font-size="175px" letter-spacing="0px" stroke-width="1px" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:100%" xml:space="preserve"><tspan x="300" y="275">LASALLE</tspan></text>  
+<text x="300" y="300" fill="#ffffff" font-family="&apos;Roadgeek 2014 Series C&apos;" font-size="175px" letter-spacing="0px" stroke-width="1px" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:100%" xml:space="preserve"><tspan x="300" y="450">EXPY</tspan></text>
+</svg>
