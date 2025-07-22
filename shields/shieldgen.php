@@ -642,6 +642,21 @@ function tm_shield_generate($r, $force_reload = false) {
        
        case 'hkgrt':
              $routeNum = substr_replace($row['route'], '', 0, 2); // Strip "RT"
+                   
+            if (strlen($routeNum) > 1) {
+                if (file_exists("{$dir}/template_" . $row['systemName'] . "_wide.svg")) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+                }
+                // Fall back on a smaller template if one to handle larger numbers doesn't exist.
+                elseif (file_exists("{$dir}/template_" . $row['systemName'])) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName']);
+                }
+            }
+            elseif (strlen($routeNum) > 0) {
+                if (file_exists("{$dir}/template_" . $row['systemName'])) {
+                    $svg = file_get_contents("{$dir}/template_" . $row['systemName']);
+                }
+            }
              $svg = str_replace("***NUMBER***", $routeNum, $svg);
              break;
 
