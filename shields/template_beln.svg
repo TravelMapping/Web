@@ -8,6 +8,6 @@
   <polygon points="37.5 24.5 37.5 54.8 33.7 54.8 25.6 34 25.6 55.1 22.1 55.1 22.1 24.5 26.6 24.5 33.8 43.9 33.8 24.5" fill="#fff" transform="translate(7.53)"/>
   <g fill="#fff" transform="translate(4.63)"/>
   <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="60px" line-height="100%" y="0" x="0" font-family="&apos;Roadgeek 2005 Mittelschrift&apos;" fill="#fff">
-    <tspan y="55" x="90">***NUMBER***</tspan>
+    <tspan y="55" x="65">***NUMBER***</tspan>
   </text>
 </svg>
