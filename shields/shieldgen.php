@@ -234,11 +234,21 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
 
         case 'andcg':
-            // replace placeholder, use wide svg file for 4-digit numbers
+            $routeNum = str_replace("CG", "CG ", $routeNum);
             if (strlen($row['route']) > 3) {
                 $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
             }
-            $svg = str_replace("***NUMBER***", $row['route'], $svg);
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
+        case 'andcs':
+            $routeNum = str_replace("CS", "CS ", $row['route']);
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
+        case 'pakm':
+            $routeNum = str_replace("M", "M-", $row['route']);
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
         case 'itaa':
@@ -267,6 +277,9 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'finkt':
         case 'hunf':
         case 'islth':
+        case 'isrf':
+        case 'isrh':
+        case 'isrr':
         case 'ltuk':
         case 'poldk':
         case 'poldw':
@@ -281,10 +294,12 @@ function tm_shield_generate($r, $force_reload = false) {
             $routeNum = str_replace("DW", "", $routeNum);
             $routeNum = str_replace("D", "", $routeNum);
             $routeNum = str_replace("F", "", $routeNum);
+            $routeNum = str_replace("H", "", $routeNum);
             $routeNum = str_replace("I", "", $routeNum);
             $routeNum = str_replace("Kt", "", $routeNum);
             $routeNum = str_replace("K", "", $routeNum);
             $routeNum = str_replace("L", "", $routeNum);
+            $routeNum = str_replace("R", "", $routeNum);
             $routeNum = str_replace("Rte", "", $routeNum);
             $routeNum = str_replace("SR", "", $routeNum);
             $routeNum = str_replace("TH", "", $routeNum);
