@@ -217,6 +217,8 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
 
         case 'belb':
+        case 'cypa':
+        case 'cypb':
         case 'hunm':
         case 'irlr': // Ireland Regional
         case 'lvaa':
