@@ -6,6 +6,6 @@
   <path fill="#fff" d="m8.44 5.33h69.5c3.29 0 3.99 1.26 3.99 4.91v48.2c0 3.65-1.52 4.55-4.8 4.55h-67.8c-3.29 0-4.8-1.2-4.8-4.79v-49.1c0-3.59 0.708-3.77 3.94-3.77z"/>
   <path d="m8.44 5.33h69.5c3.29 0 3.99 1.26 3.99 4.91v48.2c0 3.65-1.52 4.55-4.8 4.55h-67.8c-3.29 0-4.8-1.2-4.8-4.79v-49.1c0-3.59 0.708-3.77 3.94-3.77z" stroke-miterlimit="3.86" stroke-width="0" fill="none"/>
   <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="60px" line-height="100%" y="0" x="0" font-family="&apos;Roadgeek 2005 Engschrift&apos;" fill="#000">
-     <tspan y="55" x="60">***NUMBER***</tspan>
+     <tspan y="55" x="43.2">***NUMBER***</tspan>
   </text>
 </svg>

@@ -2,10 +2,10 @@
 <svg version="1.1" id="Layer_1"
      xmlns="http://www.w3.org/2000/svg"
      xmlns:xlink="http://www.w3.org/1999/xlink"
-     width="699.187" height="700"
-     viewBox="0 0 699.187 700"
+     width="700" height="700"
+     viewBox="0 0 700 700"
      overflow="visible"
-     enable-background="new 0 0 699.187 700"
+     enable-background="new 0 0 700 700"
      xml:space="preserve">
 
   <g>
@@ -13,10 +13,9 @@
     <path fill="#F7B146" d="M0,0v278.811C28.978,627.479,349.58,700,349.58,700s320.644-72.521,349.607-421.189V0H0z"/>
     
     <!-- Canon-style text formatting -->
-    <text x="349.5935" y="455"
-          font-family="Highway Gothic,Arial,sans-serif"
-          font-size="300"
-          font-weight="bold"
+    <text x="350" y="550"
+          font-family="&apos;Roadgeek 2005 Transport Heavy&apos;"
+          font-size="700"
           fill="#000"
           text-anchor="middle">
       ***NUMBER***
