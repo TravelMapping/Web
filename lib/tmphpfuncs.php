@@ -567,6 +567,7 @@ function tm_common_js() {
     global $tmtfkey;
     global $tmmbtoken;
     global $tmjawgtoken;
+    global $tmdbname;
     
     echo "<!-- tm_common_js from tmphpfuncs.php START -->\n";
     echo "<!-- Map API functionality -->\n";
@@ -576,6 +577,7 @@ function tm_common_js() {
     echo "var tf_map_key = \"".$tmtfkey."\";\n";
     //echo "var mapbox_token = \"".$tmmbtoken."\";\n";
     echo "var jawg_map_token = \"".$tmjawgtoken."\";\n";
+    echo "var tmdbname = \"".$tmdbname."\";\n";
     echo "</script>\n";
 
     echo <<<END
