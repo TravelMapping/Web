@@ -49,7 +49,7 @@ $tmmbtoken = chop(fgets($tmconffile));
 $tmjawgtoken = chop(fgets($tmconffile));
 fclose($tmconffile);
 
-if (array_key_exists("dbname", $_GET) && ctype_alpha($_GET['dbname'])) {
+if (array_key_exists("dbname", $_GET) && ctype_alnum($_GET['dbname'])) {
     $tmdbname = $_GET['dbname'];
 }
 
