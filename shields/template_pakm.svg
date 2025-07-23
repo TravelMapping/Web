@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   width="549.54535"
+   height="308.89023"
+   viewBox="270 0 10 310"
+   id="svg2815"
+   sodipodi:docname="Pakistan_M-16.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview14"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="0.76402546"
+     inkscape:cx="274.85995"
+     inkscape:cy="154.44511"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2817" />
+  <g
+     transform="translate(0.20036794,-745.21654)"
+     id="layer1">
+    <g
+       transform="matrix(0.90045895,0,0,1.0000013,0.04196617,-0.00140722)"
+       id="g4131">
+      <g
+         transform="translate(-97.02541,171.36096)"
+         id="g4115">
+        <path
+           d="m 477.14285,275.21933 a 260,260 0 1 1 -519.999997,-1e-5"
+           transform="matrix(1.1516336,0,0,1.149421,152.28814,262.80889)"
+           id="path2827"
+           style="fill:#26762d;fill-opacity:1;stroke:#ffffff;stroke-width:8.69167042;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        <path
+           d="m 102.02541,578.60064 599.02046,1.01015"
+           id="path2831"
+           style="fill:none;stroke:#ffffff;stroke-width:10;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      </g>
+      <g
+         transform="translate(-4.4999998,4.4999941)"
+         id="g4127">
+        <path
+           d="m 477.14285,275.21933 a 260,260 0 1 1 -519.999997,-1e-5"
+           transform="matrix(1.1688854,0,0,1.1666397,56.02317,422.94658)"
+           id="path4121"
+           style="fill:none;stroke:#000000;stroke-width:0.86916709;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        <path
+           d="m 5.00749,743.46899 607.99398,1.02528"
+           id="path4123"
+           style="fill:none;stroke:#000000;stroke-width:1.01498032;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      </g>
+    </g>
+    <text
+       x="273.75507"
+       y="924.10675"
+       id="text4139"
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:173.913px;line-height:125%;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none"><tspan
+         x="273.75507"
+         y="924.10675"
+         id="tspan4141">***NUMBER***</tspan></text>
+  </g>
+</svg>
