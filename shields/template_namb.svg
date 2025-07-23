@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="722.38"
+   height="602"
+   viewBox="0 0 722 602"
+   id="svg2"
+   sodipodi:docname="NAM_road_B14_orig.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="715"
+     id="namedview10"
+     showgrid="false"
+     inkscape:zoom="0.5544093"
+     inkscape:cx="159.93455"
+     inkscape:cy="261.77607"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs4" />
+  <path
+     d="M 0,240.592 361.19,0 722.38,240.592 601.911,602 120.469,602 z"
+     id="background"
+     style="fill:#007b30;stroke:none;fill-opacity:1" />
+  <path
+     d="M 13.092,245.084 361.19,13.019 709.288,245.084 593.982,591 128.398,591 z"
+     id="border"
+     style="fill:none;stroke:#ffffff;stroke-width:20;stroke-linejoin:miter" />
+  <g
+     aria-label="B"
+     transform="scale(1.000002,0.99999803)"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:157.4306488px;line-height:1.25;font-family:'DIN 1451 Mittelschrift';-inkscape-font-specification:'DIN 1451 Mittelschrift';letter-spacing:0px;word-spacing:0px;fill:#ffe200;fill-opacity:1;stroke:none;stroke-width:1.00061846"
+     id="text3725">
+    <path
+       d="M 320.79538,206.00042 V 94.000202 h 43.4318 q 16.3734,0 24.75227,8.455748 8.45575,8.37888 8.45575,21.60059 0,6.91834 -3.3823,13.29859 -3.3823,6.38024 -13.14484,10.76186 v 0.30748 q 9.22445,2.15237 13.75981,9.76254 4.53535,7.53331 4.53535,16.06592 0,14.52852 -9.30132,23.13801 -9.22445,8.60948 -21.8312,8.60948 z m 43.12431,-49.73517 h -26.13594 v 33.74612 h 26.13594 q 9.45507,0 13.83668,-5.07345 4.45849,-5.15031 4.45849,-11.76117 0,-6.61086 -4.45849,-11.76118 -4.38161,-5.15032 -13.83668,-5.15032 z m -1.53741,-47.19844 h -24.59853 v 32.13184 h 24.59853 q 9.14759,0 13.60607,-4.6891 4.45849,-4.68909 4.45849,-11.37682 0,-6.45712 -4.45849,-11.22309 -4.45848,-4.84283 -13.60607,-4.84283 z"
+       style="fill:#ffe200;fill-opacity:1;stroke-width:1.00061846"
+       id="path16" />
+  </g>
+  <g
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:'DIN 1451 Mittelschrift';-inkscape-font-specification:'DIN 1451 Mittelschrift';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     id="flowRoot3727" />
+  <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="400px" line-height="100%" y="0" x="0" font-family="&apos;Roadgeek 2005 Mittelschrift&apos;" fill="#ffe200">
+     <tspan y="540" x="350">***NUMBER***</tspan></text>
+</svg>
