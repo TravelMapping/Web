@@ -221,6 +221,8 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'cypb':
         case 'hunm':
         case 'irlr': // Ireland Regional
+        case 'jamt':
+        case 'jama':
         case 'lvaa':
         case 'lvap':
         case 'nldp':
@@ -281,6 +283,8 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'isrh':
         case 'isrr':
         case 'ltuk':
+        case 'nama':
+        case 'namb':
         case 'poldk':
         case 'poldw':
         case 'svki':
@@ -406,6 +410,8 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'mara':
         case 'tuna':
         case 'mtqn':
+        case 'sena':
+        case 'senn':
             // replace placeholder, add blank after prefix, use wide svg files
             $routeNum = str_replace("A", "A ", $row['route']);
             $routeNum = str_replace("N", "N ", $routeNum);
