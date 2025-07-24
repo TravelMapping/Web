@@ -212,6 +212,7 @@
     echo "showrouteParams.tier = '".$routeInfo['tier']."';\n";
     echo "showrouteParams.system = '".$routeInfo['systemName']."';\n";
     echo "showrouteParams.color = '".$routeInfo['color']."';\n";
+    echo "showrouteParams.dbname = '".$tmdbname."';\n";
     echo "showrouteParams.roots = [];\n";
     
     // is the entire connected route requested?
