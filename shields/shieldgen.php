@@ -225,6 +225,7 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
 
         case 'belb':
+        case 'bgra':
         case 'cypa':
         case 'cypb':
         case 'hunm':
@@ -233,6 +234,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'jama':
         case 'lvaa':
         case 'lvap':
+        case 'myse':
         case 'nldp':
         case 'nldr':
         case 'phle':
@@ -288,6 +290,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'isrh':
         case 'isrr':
         case 'ltuk':
+        case 'mysjp':
         case 'nama':
         case 'namb':
         case 'phlp':
@@ -303,6 +306,7 @@ function tm_shield_generate($r, $force_reload = false) {
             $routeNum = str_replace("DK", "", $routeNum);
             $routeNum = str_replace("DW", "", $routeNum);
             $routeNum = str_replace("D", "", $routeNum);
+            $routeNum = str_replace("FT", "", $routeNum);
             $routeNum = str_replace("F", "", $routeNum);
             $routeNum = str_replace("H", "", $routeNum);
             $routeNum = str_replace("I", "", $routeNum);
@@ -397,17 +401,25 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
 
         case 'andcs':
+        case 'biha':
+        case 'hrva':
         case 'norr':
         case 'prta':
         case 'prtip':
         case 'prtic':
         case 'prtve':
+        case 'rksr':
+        case 'srba':
+        case 'svna':
+        case 'svnh':
             // replace placeholder, add blank after prefix
             $routeNum = str_replace("A", "A ", $row['route']);
             $routeNum = str_replace("CS", "CS ", $routeNum);
+            $routeNum = str_replace("H", "H ", $routeNum);
             $routeNum = str_replace("IC", "IC ", $routeNum);
             $routeNum = str_replace("IP", "IP ", $routeNum);
             $routeNum = str_replace("Ring", "Ring ", $routeNum);
+            $routeNum = str_replace("R", "R ", $routeNum);
             $routeNum = str_replace("VE", "VE ", $routeNum);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
@@ -716,6 +728,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'swemot':
         case 'tursf':
         case 'nzlmot':
+        case 'index':
             $lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
             $index = 0;
             foreach ($lines as $line) {
