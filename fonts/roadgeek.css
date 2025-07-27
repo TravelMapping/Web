@@ -160,3 +160,13 @@
     font-style: normal;
 
 }
+
+@font-face {
+    font-family: 'LLMNARRO';
+    src: url('llmnarro-webfont.woff2') format('woff2'),
+         url('llmnarro-webfont.woff') format('woff'),
+         url('LLMNARRO.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
