@@ -68,7 +68,7 @@
        style="opacity:0.999883;fill:#ffdb00;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.5;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
        d="m 20.368988,60.606472 c 1.501779,0 183.003102,-42.735849 183.003102,-42.735849 l 182.28807,42.735849 c 2.92427,0.68557 5.42158,2.418025 5.42158,5.421582 V 236.52286 c 0,3.00355 -3.9198,5.42158 -5.42158,5.42158 -1.50178,0 -182.30874,41.31132 -182.30874,41.31132 L 20.368988,241.94444 c -2.929818,-0.66145 -5.421582,-2.41803 -5.421582,-5.42158 V 66.028054 c 0,-3.003557 3.919804,-5.421582 5.421582,-5.421582 z"
        sodipodi:nodetypes="zcssszcsssz" />
-  <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="250px" line-height="100%" y="0" x="0" font-family="LLMNARRO" fill="#000000">
+  <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="250px" line-height="100%" y="0" x="0" font-family="&apos;LLMNARRO&apos;" fill="#000000">
      <tspan y="235" x="203.5">***NUMBER***</tspan>
     </text>
   </g>
