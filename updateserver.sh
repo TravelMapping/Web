@@ -52,5 +52,5 @@ echo "Updating to $server:$basedir$rootdir, directories . $otherdirs $shieldsdir
 scp *.php favicon.* $server:$basedir$rootdir
 for dir in $otherdirs $shieldsdir $wpteditdir $fontsdir; do
     ssh $server mkdir -p $basedir$rootdir/$dir
-    scp $dir/*.{php,js,svg,css,png,gif} $server:$basedir$rootdir/$dir
+    scp $dir/*.{php,js,svg,css,png,gif,ttf,woff,woff2,html,eot,txt} $server:$basedir$rootdir/$dir
 done
