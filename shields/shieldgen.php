@@ -228,7 +228,6 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'bgra':
         case 'cypa':
         case 'cypb':
-        case 'grca':
         case 'hunm':
         case 'irlr': // Ireland Regional
         case 'islf':
@@ -439,7 +438,14 @@ function tm_shield_generate($r, $force_reload = false) {
             $routeNum = str_replace("VE", "VE ", $routeNum);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
-
+	    
+        case 'turo':
+            // replace placeholder, add blank after prefix, use wide svg files
+            $routeNum = str_replace("O", "O ", $row['route']);
+            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+	    
         case 'fraa':
         case 'fran':
         case 'frht':
@@ -455,11 +461,9 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'senn':
         case 'gaba':
         case 'gabn':
-        case 'turo':
             // replace placeholder, add blank after prefix, use wide svg files
             $routeNum = str_replace("A", "A ", $row['route']);
             $routeNum = str_replace("N", "N ", $routeNum);
-            $routeNum = str_replace("O", "O ", $routeNum);
             //$routeNum = str_replace("T", "T", $routeNum); //no blank required!
             $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
@@ -632,7 +636,15 @@ function tm_shield_generate($r, $force_reload = false) {
             }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
-       
+	    
+        case 'grca':
+            $routeNum = $row['route'];
+            if (strlen($routeNum) > 3) {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+	    
         case 'itass':
         // get the proper width template
             if (strlen($row['route']) > 2) {
@@ -743,16 +755,16 @@ function tm_shield_generate($r, $force_reload = false) {
              break;
        
         case 'idnt':
-            if (strlen($row['route']) > 2) {
-           	   $routeNum = $row['route'];
-               $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_text.svg");
+            if (str_starts_with($row['route'], 'JT') {
+           	$routeNum = $row['route'];
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_text.svg");
             	$svg = str_replace("***NUMBER***", $routeNum, $svg);
-		         break;
+		break;
             }
             else {
             	$routeNum = str_replace("T", "", $row['route']);
-               $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . ".svg");
-		         $svg = str_replace("***NUMBER***", $routeNum, $svg);
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . ".svg");
+		$svg = str_replace("***NUMBER***", $routeNum, $svg);
             	break;
 	     }
 
