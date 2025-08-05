@@ -832,7 +832,7 @@ function tm_shield_generate($r, $force_reload = false) {
             $matches = [];
             $routeNum = str_replace("AR", "", $row['route']);
 	         if ($routeNum == 980) {
-		         $svg = file_get_contents(“{$dir}/template_usaar_980.svg”)
+		         $svg = file_get_contents("{$dir}/template_usaar_980.svg");
 	            break;
             }
             elseif (preg_match('/(?<number>[0-9]+)(?<letter>[A-Za-z]+)/', $routeNum, $matches)) {
