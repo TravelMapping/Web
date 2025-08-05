@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="200"
+   height="188"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="Mashreq road 30.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="30.476432"
+     inkscape:cy="56.594908"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="667"
+     inkscape:window-height="690"
+     inkscape:window-x="683"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-864.36218)">
+    <g
+       id="g4625"
+       transform="translate(37.370541,-4476.8571)">
+      <rect
+         y="5341.2192"
+         x="-37.370541"
+         height="188"
+         width="200"
+         id="rect3001-11-60-5"
+         style="fill:#0e518d;fill-opacity:1;stroke:none" />
+      <path
+         sodipodi:nodetypes="ccccccccc"
+         inkscape:connector-curvature="0"
+         id="path3005-3-6-4"
+         d="m 62.62946,5519.1578 c -36.726624,2.0881 -71.7163564,-22.3558 -72.999999,-80 0.07359,-26.1927 -8.278217,-33.7485 -16.000001,-45 l 16.000001,-43 72.999999,0 73,0 16,43 c -11.32675,12.1796 -16.11629,27.4355 -16,45 -3.43809,49.1212 -24.49161,79.3125 -73,80 z"
+         style="fill:#f7fbf5;fill-opacity:1;stroke:none" />
+      <g
+         id="text3812-87-6-2"
+         style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#0e518d;fill-opacity:1;stroke:none;font-family:Sans">
+        <path
+           id="path4351"
+           style="font-size:56px;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#0e518d;font-family:Anwb Ee VL;-inkscape-font-specification:Anwb Ee VL Bold"
+           d="m 74.33942,5448.0447 7.591309,0 0,41.1745 -7.798096,0 0,-25.04 -11.494629,24.7717 -11.457031,-24.7717 0,25.04 -7.852783,0 0,-41.1745 7.637451,0 11.674072,24.7187 z"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+  </g>
+    <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="100px" line-height="100%" y="0" x="0" font-family="&apos;Roadgeek 2014 Series E&apos;" fill="#0e518d">
+     <tspan y="85" x="100">***NUMBER***</tspan></text>
+</svg>

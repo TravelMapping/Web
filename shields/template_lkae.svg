@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="661"
+   height="301"
+   id="svg2">
+  <defs
+     id="defs4" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     d="M 40.499999,0.5 620.5,0.5 c 22.16,0 40,17.84 40,40 l 0,220 c 0,22.16 -17.84,40 -40,40 l -580.000001,0 C 18.34,300.5 0.5,282.66 0.5,260.5 l 0,-220 c 0,-22.16 17.84,-40 39.999999,-40 z"
+     id="rect2985"
+     style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-opacity:1" />
+  <path
+     d="M 40.499999,20.5 620.5,20.5 c 11.08,0 20,8.92 20,20 l 0,220 c 0,11.08 -8.92,20 -20,20 l -580.000001,0 C 29.419999,280.5 20.5,271.58 20.5,260.5 l 0,-220 c 0,-11.08 8.919999,-20 19.999999,-20 z"
+     id="rect3757"
+     style="fill:#0079c1;fill-opacity:1;stroke:none" />
+  <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="275px" line-height="100%" y="0" x="0" font-family="&apos;Roadgeek 2005 Series 5W&apos;" fill="#ffffff">
+     <tspan y="245" x="330">***NUMBER***</tspan></text>
+</svg>
