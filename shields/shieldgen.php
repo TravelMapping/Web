@@ -646,20 +646,9 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
 	    
         case 'itass':
-        // get the proper width template
-            if (strlen($row['route']) > 2) {
-                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide3.svg");
-            }
-            if (strlen($row['route']) > 3) {
-                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
-            }
-            if (strlen($row['route']) > 4) {
-                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide5.svg");
-            }
-        
-        // space after "SS"
-            $routeNum = substr_replace($row['route'], " ", 2, 0);
-            // replace placeholder
+            // replace placeholder, add blank after prefix, use wide svg files
+            $routeNum = str_replace("SS", "SS ", $row['route']);
+            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
             
