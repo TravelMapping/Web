@@ -4,7 +4,7 @@
     <rect rx="0" ry="0" width="380" height="135" x="0" y="0" fill="rgb(0, 64, 139)"/>
     <rect rx="10" ry="10" width="372" height="127" x="4.25" y="4.25" fill="#ffffff"/>
     <rect rx="10" ry="10" width="360" height="115" x="10.25" y="10.25" fill="rgb(0, 64, 139)"/>
-    <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="120px" line-height="100%" x="0" y="0" font-family="&apos;Roadgeek 2005 Transport Heavy&apos;" fill="#ffffff">
+    <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="120px" line-height="100%" x="0" y="0" font-family="&apos;LLMNARRO&apos;" fill="#ffffff">
       <tspan y="106" x="190">***NUMBER***</tspan>
     </text>
   </g>
