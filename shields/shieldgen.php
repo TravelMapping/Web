@@ -755,7 +755,7 @@ function tm_shield_generate($r, $force_reload = false) {
              break;
        
         case 'idnt':
-            if (str_starts_with($row['route'], 'JT') {
+            if (str_starts_with($row['route'], 'JT')) {
            	$routeNum = $row['route'];
                 $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_text.svg");
             	$svg = str_replace("***NUMBER***", $routeNum, $svg);
