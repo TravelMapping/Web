@@ -24,6 +24,7 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 	$textColor = '#000';
 	$svgNameSuffix = '';
 	$useFillTemplate = false;
+	$usamsScenic = false;
 	
 	// Identify system, color scheme, and template type
 	switch ($system) {
@@ -43,7 +44,12 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 			$useFillTemplate = true;
 			
 			break;
-	
+		
+		case 'usams':
+			$usamsScenic = true;
+			
+			break;	
+		
 		case 'usaca': // White text on green bg
 			$textColor = '#fff';
 			$borderColor = '#fff';
@@ -94,7 +100,12 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 	if ($useFillTemplate) {
 		// Select the filled background template 
 		$svg = file_get_contents("{$dir}/banner_template_fill.svg");
-	} else {
+	} 
+	elseif ($usamsScenic) {
+		// Select the blue Scenic Route banner
+		$svg = file_get_contents("{$dir}/banner_usams_scenic.svg");
+	} 
+	else {
 		// Select the default background template
 		$svg = file_get_contents("{$dir}/banner_template.svg");
 	}
