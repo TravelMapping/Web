@@ -414,7 +414,6 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'andcs':
         case 'biha':
         case 'hrva':
-        case 'norr':
         case 'prta':
         case 'prtip':
         case 'prtic':
@@ -433,12 +432,16 @@ function tm_shield_generate($r, $force_reload = false) {
             $routeNum = str_replace("H", "H ", $routeNum);
             $routeNum = str_replace("IC", "IC ", $routeNum);
             $routeNum = str_replace("IP", "IP ", $routeNum);
-            $routeNum = str_replace("Ring", "Ring ", $routeNum);
             $routeNum = str_replace("R", "R ", $routeNum);
             $routeNum = str_replace("VE", "VE ", $routeNum);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
-	    
+
+	 	case 'norr':
+		    $routeNum = str_replace("Ring", "Ring ", $row['route']);
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+			break;
+		
         case 'turo':
             // replace placeholder, add blank after prefix, use wide svg files
             $routeNum = str_replace("O", "O ", $row['route']);
