@@ -47,6 +47,7 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 		
 		case 'usams':
 			$usamsScenic = true;
+			$svgNameSuffix = '_sr';
 			
 			break;	
 		
