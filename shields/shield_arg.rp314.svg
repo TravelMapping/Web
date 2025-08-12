@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="502" height="403" viewBox="0 0 501 400">
+<rect fill="#FFF" stroke="#000" x=".5" y=".5" width="500" height="400" rx="30"/>
+<rect x="16" y="16" width="469" height="369" rx="12"/>
+<path fill="#FFF" d="m30,30h441v341H30"/>
+<text font-size="350" fill="#000" text-anchor="middle" font-family="&apos;Roadgeek 2014 Series C&apos;" x="250" y="300">314</text>
+</svg>

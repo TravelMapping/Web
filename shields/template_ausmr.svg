@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" width="502.5" height="502.5" viewBox="0 0 502.5 502.5" id="svg4523">
+  <defs id="defs4525"/>
+  <metadata id="metadata4528">
+    <rdf:RDF>
+      <cc:Work rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <dc:title/>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g transform="translate(-531.25381,-88.034894)" id="layer1">
+    <g id="g5257">
+      <g transform="matrix(2.9410554,0,0,-2.9410554,781.79497,588.56576)" id="g3933" style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.34001401;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none">
+        <path d="m 0,0 -85.004,42.538 0,85.003 L 0,170.007 85.004,127.541 85.004,42.538 0,0" id="path3935" style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.34001401;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"/>
+      </g>
+      <g transform="matrix(2.9410554,0,0,-2.9410554,781.79497,566.12553)" id="g3929" style="fill:#174f90;fill-opacity:1">
+        <path d="m 0,0 78.238,39.083 0,76.654 L 0,154.82 l -78.238,-39.083 0,-76.654 L 0,0" id="path3931" style="fill:#174f90;fill-opacity:1;fill-rule:evenodd;stroke:none"/>
+      </g>
+      <path d="m 991.99808,438.9043 0,-200.88879 -210.20311,-104.99568 -210.2031,104.99568 0,200.88879 210.2031,104.99568 210.20311,-104.99568" id="path3939" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none"/>
+    </g>
+    <text x="783.80292" y="438.56577" id="text5264" xml:space="preserve" style="font-size:350px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:100%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#174f90;fill-opacity:1;stroke:none;font-family:Roadgeek 2005 Series C;-inkscape-font-specification:Roadgeek 2005 Series C"><tspan x="781.5" y="438.5" id="tspan5266" style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#174f90;fill-opacity:1;stroke:none;font-family:&apos;Roadgeek 2014 Series D&apos;">***NUMBER***</tspan></text>
+  </g>
+</svg>
