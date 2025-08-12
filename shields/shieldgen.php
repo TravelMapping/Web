@@ -53,6 +53,65 @@ function tm_shield_generate($r, $force_reload = false) {
 
     // special modifications for various systems
     switch ($row['systemName']) {
+		
+		case 'ausm':
+		case 'ausa':
+		case 'ausr';
+		case 'ausnswb':
+		case 'ausntb':
+		case 'aussab':
+		case 'austasb':
+		case 'ausvicb':
+		case 'ausntc':
+		case 'austasc':
+		case 'ausvicc':
+            // Australia M, R, A, B & C Routes
+            $routeNum = $row['route'];
+            $svg = file_get_contents("{$dir}/template_ausx_wide" . strlen($routeNum) . ".svg");
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+			    
+		case 'ausnt':
+		case 'ausqld':
+		case 'auswa':	
+			// Australian State Routes
+			$routeNum = str_replace("NT", "", $row['route']);
+			$routeNum = str_replace("QLD", "", $routeNum);
+			$routeNum = str_replace("WA", "", $routeNum);
+			if (strlen($routeNum) > 2) {
+				$svg = file_get_contents("{$dir}/template_auss_wide.svg");	
+			}
+			else {
+				$svg = file_get_contents("{$dir}/template_auss.svg");
+			}
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+			break;
+				
+		case 'ausab':
+            $routeNum = $row['route'];
+			$bannerType = strtoupper($row['banner']);
+			$svg = file_get_contents("{$dir}/template_ausab.svg");
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+			$svg = str_replace("***BANNER***", $bannerType, $svg);
+			break;
+			
+		case 'ausqldmr';
+		case 'ausvicmr';
+			// Australian Metroads
+			$routeNum = str_replace("MR", "", $row['route']);
+			$svg = file_get_contents("{$dir}/template_ausmr.svg");
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+			break;
+			       
+		case 'ausstr':	
+			// Australian Strategic Touring Routes
+			$routeNum = $row['route'];
+			if (strlen($routeNum) > 2) {
+				$svg = file_get_contents("{$dir}/template_ausstr_wide.svg");	
+			}
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+			break;
+		
         case 'canab':
         case 'canqca':
             // these use different shields for 1, 2, 3 digits
@@ -783,6 +842,12 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'nzlmot':
         case 'index':
         case 'ngae':
+		case 'argsf':
+		case 'aussf':
+		case 'dnkmot':
+		case 'finmt':
+		case 'normot':
+		case 'zaff':
             $lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
             $index = 0;
             foreach ($lines as $line) {
