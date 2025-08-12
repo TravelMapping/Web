@@ -365,6 +365,8 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'poldw':
         case 'svki':
         case 'swel':
+		case 'zafn':
+		case 'zafr':
             // replace placeholder, remove prefix
             // NOTE: seems a little silly to have all of these
             // str_replace calls done in this one common case
