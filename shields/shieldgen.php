@@ -356,6 +356,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'isrf':
         case 'isrh':
         case 'isrr':
+		case 'korex':
         case 'ltuk':
         case 'mysjp':
         case 'nama':
@@ -375,6 +376,7 @@ function tm_shield_generate($r, $force_reload = false) {
             $routeNum = str_replace("DK", "", $routeNum);
             $routeNum = str_replace("DW", "", $routeNum);
             $routeNum = str_replace("D", "", $routeNum);
+			$routeNum = str_replace("Ex", "", $routeNum);
             $routeNum = str_replace("FT", "", $routeNum);
             $routeNum = str_replace("F", "", $routeNum);
             $routeNum = str_replace("H", "", $routeNum);
