@@ -53,6 +53,14 @@ function tm_shield_generate($r, $force_reload = false) {
 
     // special modifications for various systems
     switch ($row['systemName']) {
+        
+		case 'argrn':
+            $routeNum = str_replace("RN", "", $row['route']);
+            if (strlen($routeNum) > 3) {
+                $svg = file_get_contents("{$dir}/template_argrn_wide.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
 		
 		case 'ausm':
 		case 'ausa':
