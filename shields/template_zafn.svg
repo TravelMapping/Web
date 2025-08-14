@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="721" height="601" version="1.1" viewBox="0 0 721 601" xmlns="http://www.w3.org/2000/svg">
+	<g transform="translate(48.88,-167.6)">
+		<path d="m-48.41 408.1 359.91-240 360.1 240-120.1 360h-479.98l-119.93-360" fill="#f6f6f6" stroke="#000" stroke-linejoin="round" stroke-miterlimit="1.414"/>
+		<path d="m536.8 748.4h-451.31l-110.62-331.8 336.23-224.3 336.3 224.3-110.6 331.8" fill="#005eb8" stroke-linejoin="round" stroke-miterlimit="1.414" stroke-width=".78316"/>
+		<g fill="#ffcd00" stroke-width="9.8315" aria-label="N">
+			<path d="m269.6 373.9h17v-79.6h0.3l50.7 79.6h16v-112h-17v79.6h-0.3l-50.7-79.6h-16z"/>
+		</g>
+	</g>
+    <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="400px" line-height="100%" y="0" x="0" font-family="&apos;Roadgeek 2005 Mittelschrift&apos;" fill="#ffcd00">
+     <tspan y="530" x="360">***NUMBER***</tspan></text>
+</svg>

@@ -53,6 +53,79 @@ function tm_shield_generate($r, $force_reload = false) {
 
     // special modifications for various systems
     switch ($row['systemName']) {
+        
+		case 'argrn':
+            $routeNum = str_replace("RN", "", $row['route']);
+            if (strlen($routeNum) > 3) {
+                $svg = file_get_contents("{$dir}/template_argrn_wide.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
+		case 'asiah':
+            $routeNum = $row['route'];
+            $svg = file_get_contents("{$dir}/template_asiah_wide" . strlen($routeNum) . ".svg");
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+		
+		case 'ausm':
+		case 'ausa':
+		case 'ausr';
+		case 'ausnswb':
+		case 'ausntb':
+		case 'aussab':
+		case 'austasb':
+		case 'ausvicb':
+		case 'ausntc':
+		case 'austasc':
+		case 'ausvicc':
+            // Australia M, R, A, B & C Routes
+            $routeNum = $row['route'];
+            $svg = file_get_contents("{$dir}/template_ausx_wide" . strlen($routeNum) . ".svg");
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+			    
+		case 'ausnt':
+		case 'ausqld':
+		case 'auswa':	
+			// Australian State Routes
+			$routeNum = str_replace("NT", "", $row['route']);
+			$routeNum = str_replace("QLD", "", $routeNum);
+			$routeNum = str_replace("WA", "", $routeNum);
+			if (strlen($routeNum) > 2) {
+				$svg = file_get_contents("{$dir}/template_auss_wide.svg");	
+			}
+			else {
+				$svg = file_get_contents("{$dir}/template_auss.svg");
+			}
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+			break;
+				
+		case 'ausab':
+            $routeNum = $row['route'];
+			$bannerType = strtoupper($row['banner']);
+			$svg = file_get_contents("{$dir}/template_ausab.svg");
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+			$svg = str_replace("***BANNER***", $bannerType, $svg);
+			break;
+			
+		case 'ausqldmr';
+		case 'ausvicmr';
+			// Australian Metroads
+			$routeNum = str_replace("MR", "", $row['route']);
+			$svg = file_get_contents("{$dir}/template_ausmr.svg");
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+			break;
+			       
+		case 'ausstr':	
+			// Australian Strategic Touring Routes
+			$routeNum = $row['route'];
+			if (strlen($routeNum) > 2) {
+				$svg = file_get_contents("{$dir}/template_ausstr_wide.svg");	
+			}
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+			break;
+		
         case 'canab':
         case 'canqca':
             // these use different shields for 1, 2, 3 digits
@@ -297,6 +370,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'isrf':
         case 'isrh':
         case 'isrr':
+		case 'korex':
         case 'ltuk':
         case 'mysjp':
         case 'nama':
@@ -306,6 +380,8 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'poldw':
         case 'svki':
         case 'swel':
+		case 'zafn':
+		case 'zafr':
             // replace placeholder, remove prefix
             // NOTE: seems a little silly to have all of these
             // str_replace calls done in this one common case
@@ -314,6 +390,7 @@ function tm_shield_generate($r, $force_reload = false) {
             $routeNum = str_replace("DK", "", $routeNum);
             $routeNum = str_replace("DW", "", $routeNum);
             $routeNum = str_replace("D", "", $routeNum);
+			$routeNum = str_replace("Ex", "", $routeNum);
             $routeNum = str_replace("FT", "", $routeNum);
             $routeNum = str_replace("F", "", $routeNum);
             $routeNum = str_replace("H", "", $routeNum);
@@ -538,6 +615,33 @@ function tm_shield_generate($r, $force_reload = false) {
             }
             break;
             
+		case 'frapdlm44':
+            // replace placeholder, add blank after prefix, use wide svg files
+            $prefix = substr($row['route'], 0, 1);
+            $routeNum = substr_replace($row['route'], "{$prefix} ", 0, 1); // Use substr_replace here to avoid matching suffixes.
+            
+            if ( strlen($routeNum) > 7 ) {
+                $svg = file_get_contents("{$dir}/template_frapdlm44_wide7.svg");
+            } else {
+                $svg = file_get_contents("{$dir}/template_frapdlm44_wide" . strlen($routeNum) . ".svg");
+            }
+            
+            $matches = [];
+            if (preg_match('/(?<number>[DN] [0-9]+)(?<suffix>[A-Za-z]+[0-9]?)/', $routeNum, $matches)) {
+                $svg = str_replace("***NUMBER***", $matches['number'], $svg);
+                $svg = str_replace("***SUFFIX***", $matches['suffix'], $svg);
+            }
+            else { // M 1.1 -> M 1^1
+                $numParts = explode('.',  $routeNum);
+                $svg = str_replace("***NUMBER***", $numParts[0], $svg);
+                if ( isset($numParts[1]) ) {
+                    $svg = str_replace("***SUFFIX***", $numParts[1], $svg);
+                } else {
+                    $svg = str_replace("***SUFFIX***", '', $svg);
+                }
+            }
+            break; 
+		
         case 'nclt':
             // replace placeholder, add blank after prefix, use wide svg files
             $routeNum = str_replace("T", "RT ", $row['route']);
@@ -783,6 +887,12 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'nzlmot':
         case 'index':
         case 'ngae':
+		case 'argsf':
+		case 'aussf':
+		case 'dnkmot':
+		case 'finmt':
+		case 'normot':
+		case 'zaff':
             $lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
             $index = 0;
             foreach ($lines as $line) {
@@ -1033,7 +1143,18 @@ function tm_shield_generate($r, $force_reload = false) {
         default:
             $region = strtoupper(explode(".", $r)[0]);
             $routeNum = str_replace($region, "", $row['route']);
-            if (strlen($routeNum) > 3) {
+            if (strlen($routeNum) > 4) {
+                    if (file_exists("{$dir}/template_" . $row['systemName'] . "_wide4.svg")) {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
+                    }
+                    elseif (file_exists("{$dir}/template_" . $row['systemName'] . "_wide.svg")) {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+                    }
+                    else {
+                $svg = file_get_contents("{$dir}/generic_extrawide.svg");
+                    }
+            }
+            elseif (strlen($routeNum) > 3) {
                     if (file_exists("{$dir}/template_" . $row['systemName'] . "_wide4.svg")) {
                 $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
                     }

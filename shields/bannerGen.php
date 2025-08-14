@@ -30,6 +30,7 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 	switch ($system) {
 		case 'usaib': // Return a 'not external' string for systems that don't generally use external banners
 		case 'usatx':
+		case 'ausab':
 		// usaga will go here eventually
 			return 'not external';
 		
@@ -45,8 +46,18 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 			
 			break;
 		
+		case 'auswa': // White text on slightly different blue bg
+			$textColor = '#fff';
+			$borderColor = '#fff';
+			$fillColor = '#174f90';
+			$svgNameSuffix = '_auswa';
+			$useFillTemplate = true;
+			
+			break;
+		
 		case 'usams':
 			$usamsScenic = true;
+			$svgNameSuffix = '_sr';
 			
 			break;	
 		
