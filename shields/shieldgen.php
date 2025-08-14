@@ -61,6 +61,12 @@ function tm_shield_generate($r, $force_reload = false) {
             }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
+
+		case 'asiah':
+            $routeNum = $row['route'];
+            $svg = file_get_contents("{$dir}/template_asiah_wide" . strlen($routeNum) . ".svg");
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
 		
 		case 'ausm':
 		case 'ausa':
