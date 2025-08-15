@@ -113,7 +113,7 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'ausvicmr';
 			// Australian Metroads
 			$routeNum = str_replace("MR", "", $row['route']);
-			$svg = file_get_contents("{$dir}/template_ausmr.svg");
+			$svg = file_get_contents("{$dir}/template_" . $row['systemName'] . ".svg");
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
 			break;
 			       
