@@ -162,6 +162,19 @@
 }
 
 @font-face {
+    font-family: 'LLMNORMA';
+    src: url('llmnormal_c-webfont.eot');
+    src: url('llmnormal_c-webfont.eot?#iefix') format('embedded-opentype'),
+         url('llmnormal_c-webfont.woff2') format('woff2'),
+         url('llmnormal_c-webfont.woff') format('woff'),
+         url('llmnormal_c-webfont.ttf') format('truetype'),
+         url('llmnormal_c-webfont.svg#llmnormaregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
     font-family: 'LLMNARRO';
     src: url('llmnarro-webfont.woff2') format('woff2'),
          url('llmnarro-webfont.woff') format('woff'),
@@ -335,6 +348,32 @@
          url('clearview1b-webfont.woff') format('woff'),
          url('clearview1b.ttf') format('truetype'),
          url('clearview1b-webfont.svg#roadgeek_2005_series_1bRg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'RutaCL';
+    src: url('rutacl_regular-webfont.eot');
+    src: url('rutacl_regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('rutacl_regular-webfont.woff2') format('woff2'),
+         url('rutacl_regular-webfont.woff') format('woff'),
+         url('rutacl_regular-webfont.ttf') format('truetype'),
+         url('rutacl_regular-webfont.svg#rutaclregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'RutaCL Condensed';
+    src: url('rutacl_condensada-webfont.eot');
+    src: url('rutacl_condensada-webfont.eot?#iefix') format('embedded-opentype'),
+         url('rutacl_condensada-webfont.woff2') format('woff2'),
+         url('rutacl_condensada-webfont.woff') format('woff'),
+         url('rutacl_condensada-webfont.ttf') format('truetype'),
+         url('rutacl_condensada-webfont.svg#rutacl_condensedregular') format('svg');
     font-weight: normal;
     font-style: normal;
 
