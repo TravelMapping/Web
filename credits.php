@@ -933,8 +933,8 @@ following sources of highway information.</p>
     include <a href="https://jquery.com/">jQuery</a>, and code adapted
     from <a href="http://moutjs.com/">MOUT</a>, <a href="https://clipboardjs.com/>clipboard.js</a>, and <a href="https://github.com/mapshakers/leaflet-control-window">leaflet-control-window</a>.</li>
   <li>The shield generator
-  uses <a href="https://github.com/sammdot/roadgeek-fonts/releases">Roadgeek Fonts</a> and 
-  <a href=https://www.llm.gov.my/publication/lettering>LLM Narrow</a>.</li>
+  uses <a href="https://github.com/sammdot/roadgeek-fonts/releases">Roadgeek Fonts</a>, 
+  <a href=https://www.llm.gov.my/publication/lettering>LLM Fonts</a>, and <a href=https://www.conaset.cl/manualsenalizacion/construye.html>RutaCL fonts</a>.</li>
 </ul>
 
 <p class="heading"><a name="contributors">Project Contributors</a></p>
