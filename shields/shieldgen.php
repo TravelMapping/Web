@@ -309,7 +309,6 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'lkaa':
         case 'lkae':
         case 'lvaa':
-        case 'lvap':
         case 'myse':
         case 'nldp':
         case 'nldr':
@@ -333,6 +332,7 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
 
         case 'pakm':
+		case 'azem':
             $routeNum = str_replace("M", "M-", $row['route']);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
@@ -351,6 +351,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'alakt':
         case 'alavt':
         case 'asim':
+		case 'bgri':
         case 'canmbw':
         case 'chea':
         case 'czed':
@@ -394,6 +395,7 @@ function tm_shield_generate($r, $force_reload = false) {
             $routeNum = str_replace("FT", "", $routeNum);
             $routeNum = str_replace("F", "", $routeNum);
             $routeNum = str_replace("H", "", $routeNum);
+		    $routeNum = str_replace("II", "", $routeNum);
             $routeNum = str_replace("I", "", $routeNum);
             $routeNum = str_replace("Kt", "", $routeNum);
             $routeNum = str_replace("K", "", $routeNum);
@@ -490,6 +492,7 @@ function tm_shield_generate($r, $force_reload = false) {
 
         case 'andcs':
         case 'biha':
+		case 'cypd':
         case 'hrva':
         case 'prta':
         case 'prtip':
@@ -541,6 +544,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'senn':
         case 'gaba':
         case 'gabn':
+		case 'cmra':
             // replace placeholder, add blank after prefix, use wide svg files
             $routeNum = str_replace("A", "A ", $row['route']);
             $routeNum = str_replace("N", "N ", $routeNum);
@@ -745,6 +749,7 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
 	    
         case 'grca':
+		case 'lvap':
             $routeNum = $row['route'];
             if (strlen($routeNum) > 3) {
                 $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
@@ -829,6 +834,25 @@ function tm_shield_generate($r, $force_reload = false) {
             $routeNum = str_replace("N", "", $row['route']);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
+
+        case 'chnbjs':
+		case 'chngds':
+		case 'chnhis':
+		case 'chnjjjs':
+		case 'chnnxs':
+		case 'chnsf':
+		case 'chnshs':
+		case 'chntjs':
+		case 'chnxzs':
+            $routeNum = $row['route'];
+            if (strlen($routeNum) > 3) {
+                $svg = file_get_contents("{$dir}/template_chns_wide.svg");
+            }
+			else {
+				$svg = file_get_contents("{$dir}/template_chns.svg");
+			}
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;		
        
        case 'hkgrt':
              $routeNum = substr_replace($row['route'], '', 0, 2); // Strip "RT"
