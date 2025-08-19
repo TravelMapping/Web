@@ -62,6 +62,21 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+		case 'chlrn':
+			$routeNum = str_replace("R", "", $row['route']);
+			if (str_ends_with($routeNum, 'CH')) {
+				$routeNum = str_replace("CH", "", $routeNum);
+				$svg = file_get_contents("{$dir}/template_chlrn_ch.svg");
+			}
+			elseif (strlen ($routeNum > 2)) {
+				$svg = file_get_contents("{$dir}/template_chlrn_wide.svg");
+			}
+			else {
+				$svg = file_get_contents("{$dir}/template_chlrn.svg");
+			}
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+			break;
+		
 		case 'asiah':
             $routeNum = $row['route'];
             $svg = file_get_contents("{$dir}/template_asiah_wide" . strlen($routeNum) . ".svg");
@@ -352,6 +367,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'alavt':
         case 'asim':
 		case 'bgri':
+		case 'bolf':
         case 'canmbw':
         case 'chea':
         case 'czed':
@@ -367,12 +383,14 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'frolv':
         case 'hunf':
         case 'idnn':
+		case 'irnf':
         case 'islth':
         case 'isrf':
         case 'isrh':
         case 'isrr':
 		case 'korex':
         case 'ltuk':
+		case 'mltt':
         case 'mysjp':
         case 'nama':
         case 'namb':
@@ -455,17 +473,35 @@ function tm_shield_generate($r, $force_reload = false) {
 
         case 'beln':
             // replace placeholder, remove prefix, use wide svg files
-            // for 2-/3-digit numbers
             $routeNum = str_replace("N", "", $row['route']);
-            $svg = file_get_contents("{$dir}/template_beln.svg");
-            if (strlen($routeNum) > 1) {
-                $svg = file_get_contents("{$dir}/template_beln_wide.svg");
-            }
-            if (strlen($routeNum) > 2) {
-                $svg = file_get_contents("{$dir}/template_beln_wide3.svg");
-            }
+            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
+
+        case 'autl3':
+		case 'autl4':
+		case 'autl5':
+		case 'autl6':
+		case 'autl7':
+            // replace placeholder, remove prefix
+            $routeNum = str_replace("L", "", $row['route']);
+            $svg = file_get_contents("{$dir}/template_autl.svg");
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
+		case 'bihm':
+			$routeNum = str_replace("M", "M-", $row['route']);
+			if (strlen($routeNum > 5)) {
+				$svg = file_get_contents("{$dir}/template_bihm_wide6.svg");
+			}
+			elseif (strlen ($routeNum > 4)) {
+				$svg = file_get_contents("{$dir}/template_bihm_wide5.svg");
+			}
+			else {
+				$svg = file_get_contents("{$dir}/template_bihm.svg");
+			}
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+			break;
 
         case 'norfv':
             // replace placeholder, remove prefix, use wide svg files
@@ -649,6 +685,13 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'nclt':
             // replace placeholder, add blank after prefix, use wide svg files
             $routeNum = str_replace("T", "RT ", $row['route']);
+            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
+		case 'albsh':
+            // replace placeholder, add blank after prefix, use wide svg files
+            $routeNum = str_replace("SH", "SH ", $row['route']);
             $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
@@ -917,6 +960,8 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'finmt':
 		case 'normot':
 		case 'zaff':
+		case 'albsf':
+		case 'chlsf':
             $lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
             $index = 0;
             foreach ($lines as $line) {

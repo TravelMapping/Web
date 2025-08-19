@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   width="310"
+   height="143"
+   viewBox="0 0 310 144"
+   id="svg26787"
+   inkscape:version="1.0.2 (1.0.2+r75+1)"
+   sodipodi:docname="L5185-AT.svg">
+  <metadata
+     id="metadata13">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     id="namedview11"
+     showgrid="false"
+     inkscape:zoom="1.1476306"
+     inkscape:cx="151.09222"
+     inkscape:cy="56.881501"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg26787"
+     inkscape:document-rotation="0" />
+  <defs
+     id="defs26789">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 71.468269 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="309.78891 : 71.468269 : 1"
+       inkscape:persp3d-origin="154.89445 : 47.645513 : 1"
+       id="perspective3384" />
+  </defs>
+  <path
+     inkscape:connector-curvature="0"
+     id="path26411"
+     style="fill:#ffffff;stroke:#000000;stroke-width:7.13097;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4"
+     d="m 234.31311,139.37106 c 39.7146,0 71.91028,-30.40145 71.91028,-67.902778 0,-37.501332 -32.19568,-67.9027814 -71.91028,-67.9027814 H 75.475728 c -39.714594,0 -71.9102826,30.4014494 -71.9102826,67.9027814 0,37.501328 32.1956886,67.902778 71.9102826,67.902778 z" />
+  <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="140px" line-height="100%" y="0" x="0" font-family="&apos;Roadgeek 2005 Engschrift&apos;" fill="#000000">
+     <tspan y="118" x="155">***NUMBER***</tspan></text>
+</svg>
