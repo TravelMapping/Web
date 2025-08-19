@@ -581,6 +581,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'gaba':
         case 'gabn':
 		case 'cmra':
+		case 'codn':
             // replace placeholder, add blank after prefix, use wide svg files
             $routeNum = str_replace("A", "A ", $row['route']);
             $routeNum = str_replace("N", "N ", $routeNum);
@@ -689,6 +690,12 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+		case 'cogn':
+            $routeNum = str_replace("N", "RN ", $routeNum);
+            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] .svg");
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+		
 		case 'albsh':
             // replace placeholder, add blank after prefix, use wide svg files
             $routeNum = str_replace("SH", "SH ", $row['route']);
@@ -873,11 +880,23 @@ function tm_shield_generate($r, $force_reload = false) {
             // might need to have a wide version of the template
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;
+		
         case 'jpnh':
             $routeNum = str_replace("N", "", $row['route']);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+		case 'chng':
+            $routeNum = $row['route'];
+            if (strlen($routeNum) > 3) {
+                $svg = file_get_contents("{$dir}/template_chng_wide.svg");
+            }
+			else {
+				$svg = file_get_contents("{$dir}/template_chng.svg");
+			}
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;	
+		
         case 'chnbjs':
 		case 'chngds':
 		case 'chnhis':
