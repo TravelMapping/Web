@@ -692,7 +692,7 @@ function tm_shield_generate($r, $force_reload = false) {
 
 		case 'cogn':
             $routeNum = str_replace("N", "RN ", $routeNum);
-            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] .svg");
+            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] ".svg");
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 		
