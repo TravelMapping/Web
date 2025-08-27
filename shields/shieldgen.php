@@ -1052,7 +1052,7 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
 
 		case 'gtmsf':
-			if ($row['route'] == VAS) {
+			if ($row['route'] == "VAS") {
 				$svg = file_get_contents("{$dir}/template_gtmsf_vas.svg");
 			}
 			break;
