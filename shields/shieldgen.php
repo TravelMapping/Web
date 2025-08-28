@@ -623,6 +623,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'gufn':
         case 'reun':
         case 'mara':
+		case 'marn':
         case 'tuna':
         case 'mtqn':
         case 'sena':
@@ -1037,6 +1038,11 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'grcsf':
 		case 'itasf':
 		case 'nldsf':
+		case 'ecusf':
+		case 'kensf':
+		case 'myssf':
+		case 'thaexat':
+		case 'thasf':
             $lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
             $index = 0;
             foreach ($lines as $line) {
