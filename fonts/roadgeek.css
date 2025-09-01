@@ -378,3 +378,30 @@
     font-style: normal;
 
 }
+
+@font-face {
+    font-family: 'TratexSvart';
+    src: url('trats___-webfont.eot');
+    src: url('trats___-webfont.eot?#iefix') format('embedded-opentype'),
+         url('trats___-webfont.woff2') format('woff2'),
+         url('trats___-webfont.woff') format('woff'),
+         url('trats___-webfont.ttf') format('truetype'),
+         url('trats___-webfont.svg#tratexsvartregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+@font-face {
+    font-family: 'TratexVit';
+    src: url('tratv___-webfont.eot');
+    src: url('tratv___-webfont.eot?#iefix') format('embedded-opentype'),
+         url('tratv___-webfont.woff2') format('woff2'),
+         url('tratv___-webfont.woff') format('woff'),
+         url('tratv___-webfont.ttf') format('truetype'),
+         url('tratv___-webfont.svg#tratexvitregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
