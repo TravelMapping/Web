@@ -1021,6 +1021,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'sctntr':
         case 'nzltr':
         case 'swemot':
+		case 'swesf':
         case 'tursf':
         case 'nzlmot':
         case 'index':
