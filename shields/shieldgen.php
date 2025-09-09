@@ -166,6 +166,28 @@ function tm_shield_generate($r, $force_reload = false) {
 			}
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
 			break;
+
+		case 'ausnswtd':
+		case 'aussatd':
+		case 'ausvictd':
+		case 'auswatd':
+			// Australian Tourist Drives
+			$routeNum = str_replace("TD", "", $row['route']);
+			if (strlen($routeNum < 4)) {
+				$svg = file_get_contents("{$dir}/template_austd_wide" . strlen($routeNum) . ".svg");
+				$svg = str_replace("***NUMBER***", $routeNum, $svg);
+			}
+			break;
+			
+		case 'ausqldtd':
+		// Queensland Tourist Drives
+		$routeNum = $row['route'];
+		if (str_starts_with($routeNum, 'TD')) {
+			$routeNum = str_replace("TD", "", $routeNum);
+			$svg = file_get_contents("{$dir}/template_austd_wide" . strlen($routeNum) . ".svg");
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+		}
+		break;
 		
         case 'canab':
         case 'canqca':
@@ -263,6 +285,14 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+		case 'mexnlm':
+			$routeNum = str_replace("M", "", $row['route']);
+            if (strlen($routeNum) > 2) {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+		
         case 'usai':
         case 'usaif':
             $routeNum = explode("-", $row['route'])[1];
@@ -395,6 +425,7 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'alakt':
         case 'alavt':
         case 'asim':
+		case 'bdirn':
 		case 'bgri':
 		case 'bolf':
         case 'canmbw':
@@ -454,6 +485,7 @@ function tm_shield_generate($r, $force_reload = false) {
             $routeNum = str_replace("N", "", $routeNum);
             $routeNum = str_replace("Rte", "", $routeNum);
 			$routeNum = str_replace("Rt", "", $routeNum);
+			$routeNum = str_replace("RN", "", $routeNum);
             $routeNum = str_replace("R", "", $routeNum);
             $routeNum = str_replace("SR", "", $routeNum);
             $routeNum = str_replace("St", "", $routeNum);
@@ -465,11 +497,9 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
 
         case 'autb':
-        case 'luxn':
             // replace placeholder, remove prefix, use wide svg file for 3-digit numbers
             $routeNum = str_replace("B", "", $row['route']);
             $routeNum = str_replace("L", "", $routeNum);
-            $routeNum = str_replace("N", "", $routeNum);
             if (strlen($routeNum) > 2) {
                 $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
             }
@@ -590,7 +620,6 @@ function tm_shield_generate($r, $force_reload = false) {
 			break;
 
         case 'nldp':
-		case 'swzmr':
             $routeNum = $row['route'];
             if (strlen($routeNum) > 4) {
                 $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
@@ -623,7 +652,6 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'gufn':
         case 'reun':
         case 'mara':
-		case 'marn':
         case 'tuna':
         case 'mtqn':
         case 'sena':
@@ -641,7 +669,14 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
-       
+
+		case 'marn':
+            // replace placeholder, add blank after prefix, use wide svg files
+            $routeNum = str_replace("N", "N ", $row['route']);
+            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+		
         case 'ncle':
             $routeNum = str_replace("E", "VE ", $row['route']);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
@@ -747,6 +782,28 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . ".svg");
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
+
+		case 'tunrn':
+            $routeNum = str_replace("RN", "RN ", $row['route']);
+            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . ".svg");
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
+		case 'lsoa':
+		case 'mozn':
+		case 'mwim':
+		case 'rwanr':
+		case 'swzmr':
+		case 'tzat':
+		case 'zmbm':
+		case 'zmbt':
+		case 'zwep':
+		case 'zwer':
+			// SADC with no space
+            $routeNum = $row['route'];
+            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
 		
 		case 'albsh':
             // replace placeholder, add blank after prefix, use wide svg files
@@ -814,7 +871,15 @@ function tm_shield_generate($r, $force_reload = false) {
             }
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;
-            
+
+		case 'luxn':
+			$routeNum = str_replace("N", "", $row['route']);
+            if (strlen($routeNum) > 2) {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+		
         case 'nlda':
             // replace placeholder, use wide svg files for 3-/4-digit numbers
             if (strlen($row['route']) > 2) {
@@ -1014,7 +1079,6 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'usasf':
         case 'usanp':
         case 'cansf':
-        case 'eursf':
         case 'usakyp':
         case 'usanyp':
         case 'gbrtr':
@@ -1044,6 +1108,9 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'myssf':
 		case 'thaexat':
 		case 'thasf':
+		case 'pansf':
+		case 'persf':
+		case 'ttoh':
             $lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
             $index = 0;
             foreach ($lines as $line) {
@@ -1063,6 +1130,30 @@ function tm_shield_generate($r, $force_reload = false) {
 				$svg = file_get_contents("{$dir}/template_gtmsf_vas.svg");
 			}
 			break;
+
+		case 'eursf':
+			$lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
+            $index = 0;
+			if ($row['region'] == "BIH") {
+				$svg = file_get_contents("{$dir}/template_bihsf.svg");
+			}
+			elseif ($row['region'] == "ENG") {
+				$svg = file_get_contents("{$dir}/template_engsf.svg");
+			}
+			else {
+				$svg = file_get_contents("{$dir}/template_eursf.svg");
+			}
+            foreach ($lines as $line) {
+                if (strlen($line) > 0) {
+                    $svg = str_replace("***NUMBER".($index + 1)."***", $line, $svg);
+                    $index++;
+                }
+            }
+            while ($index < 3) {
+                $svg = str_replace("***NUMBER".($index + 1)."***", "", $svg);
+                $index++;
+            }
+            break;
 		
         // CAN suffixes
         // XX50A -> 50^A
