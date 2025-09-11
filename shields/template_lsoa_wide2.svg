@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:xlink="http://www.w3.org/1999/xlink"
    version="1.1"
-   width="320"
+   width="180"
    height="151"
-   viewBox="0 0 320 150"
+   viewBox="0 0 180 150"
    id="svg3782">
   <defs
      id="defs3784">
@@ -51,7 +51,7 @@
      transform="translate(1334.7443,269.52274)"
      id="layer1">
     <rect
-       width="300"
+       width="160"
        height="131"
        ry="11.621135"
        x="10"
@@ -65,7 +65,7 @@
        id="text2991"
        xml:space="preserve"
        style="font-size:125px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffcd00;fill-opacity:1;stroke:none;font-family:&apos;Roadgeek 2005 Mittelschrift&apos;"><tspan
-         x="-1175"
+         x="-1245"
          y="-152.5"
          id="tspan2993">***NUMBER***</tspan></text>
   </g>
