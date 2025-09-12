@@ -168,26 +168,34 @@ function tm_shield_generate($r, $force_reload = false) {
 			break;
 
 		case 'ausnswtd':
+		case 'ausqldtd':
 		case 'aussatd':
 		case 'ausvictd':
 		case 'auswatd':
-			// Australian Tourist Drives
-			$routeNum = str_replace("TD", "", $row['route']);
-			if (strlen($routeNum) < 4) {
+			// Australia Tourist Drives
+			$routeNum = $row['route'];
+			if (str_starts_with($routeNum, 'TD')) {
+				$routeNum = str_replace("TD", "", $routeNum);
 				$svg = file_get_contents("{$dir}/template_austd_wide" . strlen($routeNum) . ".svg");
 				$svg = str_replace("***NUMBER***", $routeNum, $svg);
 				break;
 			}
-			
-		case 'ausqldtd':
-		// Queensland Tourist Drives
-		$routeNum = $row['route'];
-		if (str_starts_with($routeNum, 'TD')) {
-			$routeNum = str_replace("TD", "", $routeNum);
-			$svg = file_get_contents("{$dir}/template_austd_wide" . strlen($routeNum) . ".svg");
-			$svg = str_replace("***NUMBER***", $routeNum, $svg);
-			break;
-		}
+			else {
+				$lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
+            	$index = 0;
+				$svg = file_get_contents("{$dir}/template_austd_text.svg");
+            	foreach ($lines as $line) {
+                	if (strlen($line) > 0) {
+                    	$svg = str_replace("***NUMBER".($index + 1)."***", $line, $svg);
+                    	$index++;
+                	}
+            	}
+            	while ($index < 3) {
+                	$svg = str_replace("***NUMBER".($index + 1)."***", "", $svg);
+                	$index++;
+            	}
+            	break;
+			}
 		
         case 'canab':
         case 'canqca':
