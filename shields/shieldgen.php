@@ -173,11 +173,11 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'auswatd':
 			// Australian Tourist Drives
 			$routeNum = str_replace("TD", "", $row['route']);
-			if (strlen($routeNum < 4)) {
+			if (strlen($routeNum) < 4) {
 				$svg = file_get_contents("{$dir}/template_austd_wide" . strlen($routeNum) . ".svg");
 				$svg = str_replace("***NUMBER***", $routeNum, $svg);
+				break;
 			}
-			break;
 			
 		case 'ausqldtd':
 		// Queensland Tourist Drives
@@ -186,8 +186,8 @@ function tm_shield_generate($r, $force_reload = false) {
 			$routeNum = str_replace("TD", "", $routeNum);
 			$svg = file_get_contents("{$dir}/template_austd_wide" . strlen($routeNum) . ".svg");
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+			break;
 		}
-		break;
 		
         case 'canab':
         case 'canqca':
