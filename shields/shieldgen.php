@@ -785,7 +785,7 @@ function tm_shield_generate($r, $force_reload = false) {
 
 		case 'tunrn':
             $routeNum = str_replace("RN", "RN ", $row['route']);
-            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . ".svg");
+            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
