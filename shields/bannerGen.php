@@ -31,6 +31,7 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 		case 'usaib': // Return a 'not external' string for systems that don't generally use external banners
 		case 'usatx':
 		case 'ausab':
+		case 'ausnb':
 		case 'ausqld':
 		// usaga will go here eventually
 			return 'not external';
