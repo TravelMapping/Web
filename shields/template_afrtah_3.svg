@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="105"
+   height="105"
+   viewBox="0 0 105 105"
+   id="svg3825"
+   version="1.1"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="Schild TAH2.svg">
+  <defs
+     id="defs3827">
+    <inkscape:perspective
+       id="perspective4049"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4189"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="-52.297533"
+     inkscape:cy="81.993911"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1680"
+     inkscape:window-height="994"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata3830">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-144.64286,-311.2908)">
+    <path
+       id="path3667-1-9"
+       d="m 248.39287,363.7908 c 0,28.3046 -22.94542,51.25 -51.25002,51.25 -28.3046,0 -51.25,-22.9454 -51.25,-51.25 0,-28.3046 22.9454,-51.25 51.25,-51.25 28.1226,0 50.99191,22.6621 51.24789,50.7835"
+       style="fill:#658f5d;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0" />
+    <path
+       id="path3665-7-4"
+       d="m 242.14286,363.7909 c 0,24.8527 -20.1472,44.9999 -45,44.9999 -24.85282,0 -45,-20.1472 -45,-44.9999 0,-24.8529 20.14718,-45.0001 45,-45.0001 24.69299,0 44.77336,19.8985 44.99813,44.5904"
+       style="fill:#800080;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0" />
+    <g
+       transform="translate(-340.87772,-1234.5289)"
+       id="text3669-4-8"
+       style="font-size:69.56521606px;font-style:normal;font-weight:normal;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans">
+      <path
+         id="path4027"
+         d="m 521.71624,1609.7327 6.11413,-0.8152 c 0.70198,3.4646 1.8965,5.9612 3.58356,7.4898 1.68703,1.5285 3.74206,2.2928 6.16508,2.2928 2.87589,0 5.30455,-0.9964 7.28601,-2.9892 1.9814,-1.9927 2.97211,-4.461 2.97214,-7.4049 -3e-5,-2.8079 -0.91714,-5.1234 -2.75136,-6.9463 -1.83426,-1.8229 -4.16668,-2.7343 -6.99728,-2.7344 -1.15491,10e-5 -2.59286,0.2265 -4.31386,0.6794 l 0.67935,-5.3669 c 0.40759,0.045 0.73594,0.068 0.98506,0.068 2.60414,0 4.94789,-0.6793 7.03125,-2.0381 2.0833,-1.3586 3.12497,-3.4533 3.125,-6.2839 -3e-5,-2.2418 -0.75864,-4.0987 -2.27582,-5.5707 -1.51723,-1.4719 -3.47602,-2.2078 -5.87636,-2.2079 -2.37773,10e-5 -4.35916,0.7474 -5.94429,2.2419 -1.58516,1.4946 -2.60418,3.7364 -3.05707,6.7255 l -6.11413,-1.0869 c 0.74728,-4.0987 2.44565,-7.2747 5.09511,-9.5279 2.64945,-2.2531 5.94428,-3.3797 9.88451,-3.3797 2.71737,0 5.21963,0.5831 7.5068,1.7493 2.2871,1.1662 4.03642,2.757 5.24796,4.7724 1.21147,2.0154 1.81722,4.1554 1.81725,6.4198 -3e-5,2.1513 -0.57748,4.1101 -1.73233,5.8764 -1.15493,1.7663 -2.86462,3.1703 -5.12908,4.2119 2.94381,0.6794 5.23095,2.0891 6.86141,4.229 1.6304,2.1399 2.44562,4.8177 2.44565,8.0333 -3e-5,4.3478 -1.58517,8.0333 -4.75543,11.0564 -3.17032,3.0231 -7.17847,4.5346 -12.02446,4.5346 -4.37048,0 -7.99933,-1.3021 -10.88655,-3.9062 -2.88723,-2.6042 -4.53465,-5.9783 -4.94225,-10.1223 z" />
+    </g>
+  </g>
+</svg>

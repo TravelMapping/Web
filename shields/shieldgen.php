@@ -53,7 +53,14 @@ function tm_shield_generate($r, $force_reload = false) {
 
     // special modifications for various systems
     switch ($row['systemName']) {
-        
+
+		case 'afrtah':
+            $routeNum = str_replace("TAH", "", $row['route']);
+            if (file_exists("{$dir}/template_afrtah_" . $routeNum . ".svg")) {
+                $svg = file_get_contents("{$dir}/template_afrtah_" . $routeNum . ".svg");
+            } 
+            break;
+		
 		case 'argrn':
             $routeNum = str_replace("RN", "", $row['route']);
             if (strlen($routeNum) > 3) {
@@ -102,6 +109,14 @@ function tm_shield_generate($r, $force_reload = false) {
 			}
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
 			break;
+
+		case 'uryrn':
+            $routeNum = str_replace("RN", "", $row['route']);
+            if (strlen($routeNum) > 2) {
+                $svg = file_get_contents("{$dir}/template_uryrn_wide.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
 		
 		case 'asiah':
             $routeNum = $row['route'];
@@ -210,30 +225,6 @@ function tm_shield_generate($r, $force_reload = false) {
                 $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide3.svg");
             }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
-            break;
-
-        case 'cansph':
-            $region = explode(".", $r)[0];
-            $routeNum = str_replace(strtoupper($region), "", $row['route']);
-            if (strlen($routeNum) > 2) {
-                if (file_exists("{$dir}/template_can" . $region . "_wide.svg")) {
-                    $svg = file_get_contents("{$dir}/template_can" . $region . "_wide.svg");
-                }
-                else {
-                    $svg = file_get_contents("{$dir}/generic_wide.svg");
-                }
-            }
-            else {
-                if (file_exists("{$dir}/template_can" . $region . ".svg")) {
-                    $svg = file_get_contents("{$dir}/template_can" . $region . ".svg");
-                }
-                else {
-                    $svg = file_get_contents("{$dir}/generic.svg");
-                }
-            }
-            $region = strtoupper($region);
-            $svg = str_replace("***NUMBER***", $routeNum, $svg);
-            $svg = str_replace("***SYS***", $region, $svg);
             break;
             
         case 'cantch': //do nothing
@@ -376,6 +367,13 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***LETTER***", "", $svg); //hack to kill off the suffix for usaar
             break;
 
+		case 'usanht':
+            $routeNum = strtolower($row['route']);
+            if (file_exists("{$dir}/template_usanht_" . $routeNum . ".svg")) {
+                $svg = file_get_contents("{$dir}/template_usanht_" . $routeNum . ".svg");
+            } 
+            break;
+
         case 'belb':
         case 'bgra':
         case 'cypa':
@@ -459,6 +457,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'isrh':
         case 'isrr':
 		case 'korex':
+		case 'kwtr':
         case 'ltuk':
 		case 'mltt':
         case 'mysjp':
@@ -797,8 +796,13 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+		case 'kena':
+		case 'kenb':
 		case 'lsoa':
 		case 'mozn':
+		case 'musa':
+		case 'musb':
+		case 'musm':
 		case 'mwim':
 		case 'rwanr':
 		case 'swzmr':
@@ -870,6 +874,7 @@ function tm_shield_generate($r, $force_reload = false) {
             
         case 'bela':
         case 'belr':
+		case 'gbnmkgr':
         case 'luxa':
         case 'luxb':
         case 'roua':
@@ -1008,6 +1013,16 @@ function tm_shield_generate($r, $force_reload = false) {
 		
         case 'jpnh':
             $routeNum = str_replace("N", "", $row['route']);
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
+		case 'jpntk':
+            $routeNum = str_replace("FE", "", $row['route']);
+			$routeNum = str_replace("HE", "", $routeNum);
+			$routeNum = str_replace("HiE", "", $routeNum);
+			$routeNum = str_replace("KE", "", $routeNum);
+			$routeNum = str_replace("NE", "", $routeNum);
+			$routeNum = str_replace("SE", "", $routeNum);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 

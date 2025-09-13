@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.0"
+   width="920"
+   height="920"
+   viewBox="0 0 920 920"
+   id="svg2">
+  <defs
+     id="defs4" />
+  <path
+     d="M 103.11114,19.999796 C 57.233811,19.999796 20.000005,57.233582 20.000005,103.11093 L 20.000005,459.9999 C 20.000004,702.87994 217.12005,900 460.00011,900 C 702.88016,899.99998 900.00018,702.87998 900.00021,459.9999 L 900.00021,103.11093 C 900.00021,57.233573 862.76642,19.999798 816.88908,19.999796 L 460.00011,19.999796 L 103.11114,19.999796 z "
+     style="fill:#007f1f;fill-opacity:1;stroke:white;stroke-width:20.00000572;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="plate" />
+  <text
+     x="445.39316"
+     y="654.29944"
+     transform="scale(1.03862,0.962816)"
+     style="font-size:639.40692139px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:white;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial"
+     id="number"
+     xml:space="preserve"><tspan
+       x="445.39316"
+       y="654.29944"
+       style="font-size:620px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;font-family:Arial"
+       id="number-tspan">***NUMBER***</tspan></text>
+  <path
+     d="M 96.622261,11.999595 C 49.910794,11.999595 12.000001,49.910368 12.000001,96.621857 L 12.000001,459.9998 C 12,707.2959 212.70409,908 460.0002,908 C 707.29631,907.99998 908.00037,707.29594 908.0004,459.9998 L 908.0004,96.621857 C 908.0004,49.910358 870.08963,11.999597 823.37814,11.999595 L 460.0002,11.999595 L 96.622261,11.999595 z "
+     style="fill:none;fill-opacity:1;stroke:#7f7f7f;stroke-width:4.00000191;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="plate-shadow" />
+</svg>
