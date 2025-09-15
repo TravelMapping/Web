@@ -140,7 +140,13 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = file_get_contents("{$dir}/template_ausx_wide" . strlen($routeNum) . ".svg");
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
-			    
+
+		case 'ausn':
+			// Australian National Highways
+			$routeNum = str_replace("N", "", $row['route']);
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+			break;
+		
 		case 'ausnt':
 		case 'ausqld':
 		case 'auswa':	
