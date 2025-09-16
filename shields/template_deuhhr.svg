@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xml:space="preserve"
+   id="svg2"
+   viewBox="0 0 300 450"
+   height="450"
+   width="300"
+   version="1.1"><metadata
+     id="metadata127"><rdf:RDF><cc:Work
+         rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+     id="defs125" /><g
+     id="layer1"><path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.9762;stroke-miterlimit:10"
+       id="path3"
+       d="m 285.2,1.138 -270.32,0 C 6.927,1.138 0.4484,7.787 0.4484,16.07 l 0,417.83 c 0,8.3 6.4776,15 14.4316,15 l 270.32,0 c 7.9,0 14.4,-6.7 14.4,-15 l 0,-417.83 c 0,-8.284 -6.5,-14.933 -14.4,-14.933 z" /><path
+       id="path121"
+       d="m 284.5,445.1 -269.3,0 c -6.242,0 -11.196,-5.2 -11.196,-11.5 l 0,-417.31 C 4.004,10.06 8.958,4.944 15.2,4.944 l 269.3,0 c 6.3,0 11.5,5.116 11.5,11.346 l 0,417.31 c 0,6.3 -5.2,11.5 -11.5,11.5 z M 15.2,10.86 c -3.02,0 -5.343,2.44 -5.343,5.43 l 0,417.31 c 0,3 2.323,5.5 5.343,5.5 l 269.3,0 c 3,0 5.5,-2.5 5.5,-5.5 l 0,-417.31 c 0,-2.99 -2.5,-5.43 -5.5,-5.43 l -269.3,0 z"
+       style="" /><g
+       id="text3446"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:90px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-indent:0;text-align:center;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:middle;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;enable-background:accumulate" /><path
+       d="M 28.3,147.4 C 28.81,80.36 83.45,26.36 150.5,26.63 c 67,0.28 121.2,54.66 121.2,121.67 L 247.3,148 c 0,-50.33 -45,-98.41 -98.6,-98.59 C 95.14,49.2 53.14,96.97 52.75,147.3 Z m 122.1,132.6 -42.2,41 0,20 33.4,-33 0,99.4 16.7,0 0,-100 33.5,34.2 0,-20 -41,-41.6 -0.2,0.2 -0.2,-0.2 z"
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;enable-background:accumulate"
+       id="path3465" /></g>
+    <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="90px" line-height="100%" y="0" x="0" font-family="Arial" fill="#000">
+     <tspan y="230" x="150">***NUMBER***</tspan></text>
+</svg>

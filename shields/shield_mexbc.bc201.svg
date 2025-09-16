@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg version="1.1" viewBox="0 0 1064 1418.3" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g transform="translate(.5 365.46)">
+  <path d="m0-364.96v708.66c0 254.53 128.87 479 324.94 611.66v-0.0313c62.67 42.409 132.21 75.391 206.59 97.031 74.367-21.636 143.91-54.605 206.56-97v-0.0313c196.04-132.66 324.91-357.11 324.91-611.62v-708.66h-1063z" fill="#fff" stroke="#000"/>
+  <path transform="translate(0 -364.96)" d="m35.438 35.438v673.22c0 233.63 114.03 440.62 289.47 568.37 61.975 45.129 131.61 80.377 206.59 103.41 74.968-23.026 144.6-58.258 206.56-103.38 175.46-127.75 289.5-334.76 289.5-568.41v-673.22zm35.438 35.438h921.25v283.45h-921.25zm0 318.89h921.25v318.89c0 212.47-99.32 401.75-254.06 523.94v0.031c-61.114 48.257-130.86 86.032-206.56 110.66-75.715-24.629-145.47-62.418-206.59-110.69v-0.031c-154.72-122.19-254.03-311.45-254.03-523.91z"/>
+  <text x="539.65814" y="-63.780907" fill="#000000" font-family="&apos;Roadgeek 2014 Series C&apos;" font-size="264.43px" letter-spacing="0px" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:125%" xml:space="preserve"><tspan x="539.65814" y="-63.780907" font-family="Roadgeek 2005 Series C">BC</tspan></text>
+  <text x="531.58252" y="662.59705" fill="#000000" font-family="&apos;Roadgeek 2014 Series B&apos;" font-size="790.92px" letter-spacing="0px" text-align="center" text-anchor="middle" word-spacing="0px" style="line-height:125%" xml:space="preserve"><tspan x="531.58252" y="662.59705">201</tspan></text>
+ </g>
+</svg>
