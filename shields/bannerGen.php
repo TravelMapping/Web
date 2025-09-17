@@ -81,6 +81,7 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 			if ($banner == "Sce") {
 				$usamsScenic = true;
 				$svgNameSuffix = '_sr';
+				break;
 			}
 			else {
 				break;
