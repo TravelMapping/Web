@@ -1281,6 +1281,7 @@ function tm_shield_generate($r, $force_reload = false) {
 					$svg = file_get_contents("{$dir}/template_usamd.svg");
 					$svg = str_replace("***NUMBER***", $routeNum, $svg);
 					break;
+				}
 			}
 
 		case 'usamn':
@@ -1300,8 +1301,8 @@ function tm_shield_generate($r, $force_reload = false) {
 					$svg = file_get_contents("{$dir}/template_usamn.svg");
 					$svg = str_replace("***NUMBER***", $routeNum, $svg);
 					break;
+				}
 			}
-
 
         case 'usanh': // New Hampshire
             $matches = [];
