@@ -110,6 +110,11 @@ function tm_shield_generate($r, $force_reload = false) {
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
 			break;
 
+		case 'slvrn':
+            $routeNum = str_replace("RN", "", $row['route']);
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
 		case 'uryrn':
             $routeNum = str_replace("RN", "", $row['route']);
             if (strlen($routeNum) > 2) {
@@ -222,6 +227,7 @@ function tm_shield_generate($r, $force_reload = false) {
 			$routeNum = str_replace("H", "Hwy ", $row['route']);
 			$svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+			break;
 		
         case 'canab':
         case 'canqca':
@@ -404,6 +410,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'myse':
         case 'nldr':
 		case 'nlds':
+		case 'nplh':
         case 'phle':
         case 'pola':
         case 'pols':
@@ -480,7 +487,6 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'phlp':
         case 'poldk':
         case 'poldw':
-		case 'slvrn':
         case 'svki':
         case 'swel':
 		case 'zafn':
