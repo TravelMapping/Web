@@ -29,6 +29,6 @@
      d="M 96.622261,11.999595 C 49.910794,11.999595 12.000001,49.910368 12.000001,96.621857 L 12.000001,459.9998 C 12,707.2959 212.70409,908 460.0002,908 C 707.29631,907.99998 908.00037,707.29594 908.0004,459.9998 L 908.0004,96.621857 C 908.0004,49.910358 870.08963,11.999597 823.37814,11.999595 L 460.0002,11.999595 L 96.622261,11.999595 z "
      style="fill:none;fill-opacity:1;stroke:#7f7f7f;stroke-width:4.00000191;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
      id="plate-shadow" />
-  <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="300px" line-height="100%" y="0" x="0" font-family="Arial;" font-weight="bold" fill="#fff">
+  <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="300px" line-height="100%" y="0" x="0" font-family="Arial" font-weight="bold" fill="#fff">
      <tspan y="300" x="460">LOOP</tspan></text>
 </svg>
