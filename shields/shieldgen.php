@@ -217,6 +217,11 @@ function tm_shield_generate($r, $force_reload = false) {
             	}
             	break;
 			}
+
+		case 'brbh':
+			$routeNum = str_replace("H", "Hwy ", $row['route']);
+			$svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
 		
         case 'canab':
         case 'canqca':
@@ -290,8 +295,12 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+		case 'mexemex':
 		case 'mexnlm':
-			$routeNum = str_replace("M", "", $row['route']);
+		case 'mexqro':
+			$routeNum = str_replace("EMEX", "", $row['route']);
+			$routeNum = str_replace("M", "", $routeNum);
+			$routeNum = str_replace("QRO", "", $routeNum);
             if (strlen($routeNum) > 2) {
                 $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
             }
@@ -446,7 +455,6 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'czei':
         case 'czeii':
         case 'deua':
-        case 'dnksr':
         case 'deub':
         case 'estp':
         case 'estt':
@@ -472,6 +480,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'phlp':
         case 'poldk':
         case 'poldw':
+		case 'slvrn':
         case 'svki':
         case 'swel':
 		case 'zafn':
@@ -500,7 +509,6 @@ function tm_shield_generate($r, $force_reload = false) {
 			$routeNum = str_replace("Rt", "", $routeNum);
 			$routeNum = str_replace("RN", "", $routeNum);
             $routeNum = str_replace("R", "", $routeNum);
-            $routeNum = str_replace("SR", "", $routeNum);
             $routeNum = str_replace("St", "", $routeNum);
             $routeNum = str_replace("TH", "", $routeNum);
             $routeNum = str_replace("T", "", $routeNum);
@@ -544,6 +552,11 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'dnkmr':
 			$svg = file_get_contents("{$dir}/template_dnkmr.svg");
 			break;
+
+		case 'dnksr':
+			$routeNum = str_replace("SR", "", $row['route']);
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
 		
         case 'beln':
             // replace placeholder, remove prefix, use wide svg files
@@ -627,7 +640,8 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
-	 	case 'norr':
+		case 'deuhhr':
+		case 'norr':
 		    $routeNum = str_replace("Ring", "Ring ", $row['route']);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
 			break;
@@ -802,6 +816,7 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+		case 'bwaa':
 		case 'kena':
 		case 'kenb':
 		case 'lsoa':
@@ -1140,6 +1155,11 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'pansf':
 		case 'persf':
 		case 'ttoh':
+		case 'chesf':
+		case 'czesf':
+		case 'slvsf':
+		case 'ttomr':
+		case 'mexsf':
             $lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
             $index = 0;
             foreach ($lines as $line) {
@@ -1236,6 +1256,52 @@ function tm_shield_generate($r, $force_reload = false) {
                $svg = str_replace("***LETTER***", "", $svg);
                break;
             }
+
+		case 'usamd':
+			$routeNum = str_replace("MD", "", $row['route']);
+			if ($row['banner'] == "Bus") {
+				if (strlen($routeNum) > 2) {
+					$svg = file_get_contents("{$dir}/template_usamd_bus_wide.svg");
+					$svg = str_replace("***NUMBER***", $routeNum, $svg);
+					break;
+				}
+				else {
+					$svg = file_get_contents("{$dir}/template_usamd_bus.svg");
+					$svg = str_replace("***NUMBER***", $routeNum, $svg);
+					break;
+				}
+			}
+			else {
+				if (strlen($routeNum) > 2) {
+					$svg = file_get_contents("{$dir}/template_usamd_wide.svg");
+					$svg = str_replace("***NUMBER***", $routeNum, $svg);
+					break;
+				}
+				else {
+					$svg = file_get_contents("{$dir}/template_usamd.svg");
+					$svg = str_replace("***NUMBER***", $routeNum, $svg);
+					break;
+			}
+
+		case 'usamn':
+			$routeNum = str_replace("MN", "", $row['route']);
+			if ($row['banner'] == "Bus") {
+				$svg = file_get_contents("{$dir}/template_usamn_bus.svg");
+				$svg = str_replace("***NUMBER***", $routeNum, $svg);
+				break;
+			}
+			else {
+				if (strlen($routeNum) > 2) {
+					$svg = file_get_contents("{$dir}/template_usamn_wide.svg");
+					$svg = str_replace("***NUMBER***", $routeNum, $svg);
+					break;
+				}
+				else {
+					$svg = file_get_contents("{$dir}/template_usamn.svg");
+					$svg = str_replace("***NUMBER***", $routeNum, $svg);
+					break;
+			}
+
 
         case 'usanh': // New Hampshire
             $matches = [];
@@ -1364,10 +1430,8 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'usaky': // Kentucky
         case 'usala': // Louisiana
         case 'usama': // Massachusetts
-        case 'usamd': // Maryland
         case 'usame': // Maine
         case 'usami': // Michigan
-        case 'usamn': // Minnesota
         case 'usamo': // Missouri
         case 'usamp': // Northern Mariana Islands
         case 'usamt': // Montana
