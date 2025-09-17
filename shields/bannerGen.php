@@ -57,7 +57,7 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 			break;
 
 		case 'usamd': // No banner for Bus, regular otherwise
-			if ($row['banner'] == "Bus") {
+			if ($banner == "Bus") {
 				return 'not external';
 			}
 			else {
@@ -65,7 +65,7 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 			}
 
 		case 'usamn': // No banner for Bus, regular otherwise
-			if ($row['banner'] == "Bus") {
+			if ($banner == "Bus") {
 				return 'not external';
 			}
 			else {
@@ -78,7 +78,7 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 			}
 
 		case 'usams': // Special banner for Sce, regular otherwise
-			if ($row['banner'] == "Sce") {
+			if ($banner == "Sce") {
 				$usamsScenic = true;
 				$svgNameSuffix = '_sr';
 			}
