@@ -39,7 +39,6 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 		
 		case 'usai': // White text on blue bg
 		case 'usaif':
-		case 'usamn':
 			$textColor = '#fff';
 			$borderColor = '#fff';
 			$fillColor = '#003f87';
@@ -56,12 +55,36 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 			$useFillTemplate = true;
 			
 			break;
-		
-		case 'usams':
-			$usamsScenic = true;
-			$svgNameSuffix = '_sr';
-			
-			break;	
+
+		case 'usamd': // No banner for Bus, regular otherwise
+			if ($row['banner'] == "Bus") {
+				return 'not external';
+			}
+			else {
+				break;
+			}
+
+		case 'usamn': // No banner for Bus, regular otherwise
+			if ($row['banner'] == "Bus") {
+				return 'not external';
+			}
+			else {
+				$textColor = '#fff';
+				$borderColor = '#fff';
+				$fillColor = '#003f87';
+				$svgNameSuffix = '_wb';
+				$useFillTemplate = true;
+				break;
+			}
+
+		case 'usams': // Special banner for Sce, regular otherwise
+			if ($row['banner'] == "Sce") {
+				$usamsScenic = true;
+				$svgNameSuffix = '_sr';
+			}
+			else {
+				break;
+			}
 		
 		case 'usaca': // White text on green bg
 			$textColor = '#fff';
