@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   version="1.1"
+   id="Oznaka"
+   x="0px"
+   y="0px"
+   width="265"
+   height="110"
+   viewBox="0 0 265 110"
+   enable-background="new 0 0 219 109.5"
+   xml:space="preserve"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   sodipodi:docname="N22-3 RKS.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"><metadata
+   id="metadata23"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs21" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1920"
+   inkscape:window-height="1017"
+   id="namedview19"
+   showgrid="false"
+   inkscape:zoom="1.8468725"
+   inkscape:cx="268.56213"
+   inkscape:cy="65.516164"
+   inkscape:window-x="-8"
+   inkscape:window-y="-8"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Oznaka"
+   fit-margin-top="0"
+   fit-margin-left="0"
+   fit-margin-right="0"
+   fit-margin-bottom="0"
+   inkscape:showpageshadow="2"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1" /><g
+   id="Border"
+   transform="scale(1.2100457,1)"><path
+     d="M 12,109 C 5.659,109 0.5,103.841 0.5,97.5 V 12 C 0.5,5.658 5.659,0.5 12,0.5 h 195 c 6.341,0 11.5,5.159 11.5,11.5 v 85.5 c 0,6.341 -5.159,11.5 -11.5,11.5 H 12 z"
+     id="path4"
+     inkscape:connector-curvature="0"
+     style="fill:#ffffff" /><path
+     d="m 207,1 c 6.064,0 11,4.935 11,11 v 85.5 c 0,6.064 -4.936,11 -11,11 H 12 c -6.065,0 -11,-4.936 -11,-11 V 12 C 1,5.934 5.935,1 12,1 h 195 m 0,-1 H 12 C 5.373,0 0,5.373 0,12 v 85.5 c 0,6.627 5.373,12 12,12 h 195 c 6.628,0 12,-5.373 12,-12 V 12 C 219,5.373 213.628,0 207,0 l 0,0 z"
+     id="path6"
+     inkscape:connector-curvature="0"
+     style="fill:#0066cc;fill-opacity:1" /></g><path
+   id="Bg"
+   d="m 258.00231,96.717 c 0,3.866 -3.79228,7 -8.47033,7 H 15.466804 c -4.678037,0 -8.4703199,-3.134 -8.4703199,-7 V 12.783 c 0,-3.866 3.7922829,-7 8.4703199,-7 H 249.53198 c 4.67805,0 8.47033,3.134 8.47033,7 v 83.934 z"
+   inkscape:connector-curvature="0"
+   style="fill:#0066cc;fill-opacity:1" />
+  <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="100px" line-height="100%" y="0" x="0" font-family="&apos;Roadgeek 2005 Mittelschrift&apos;" fill="#fff">
+     <tspan y="90" x="132.5">***NUMBER***</tspan></text>
+</svg>

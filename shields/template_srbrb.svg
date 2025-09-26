@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="500"
+   height="300"
+   viewBox="0 0 500 300"
+   id="svg2">
+  <defs
+     id="defs13" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-97.143 -172.36)"
+     id="g2992">
+    <rect
+       fill="#ffce35"
+       x="97.143"
+       y="172.36"
+       width="500"
+       height="300"
+       ry="37.5"
+       rx="37.5"
+       id="rect2985" />
+    <path
+       d="m134.66 179.88c-16.62 0-30 13.38-30 30v225c0 16.62 13.38 30 30 30h425c16.62 0 30-13.38 30-30v-225c0-16.62-13.38-30-30-30h-425zm-1.0312 10c0.34182-0.0172 0.685 0 1.0312 0h425c11.08 0 20 8.92 20 20v225c0 11.08-8.92 20-20 20h-425c-11.08 0-20-8.92-20-20v-225c0-10.734 8.3722-19.466 18.969-20z"
+       id="rect2987" />
+  </g>
+
+  <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="275px" line-height="100%" y="0" x="0" font-family="&apos;Roadgeek 2005 Mittelschrift&apos;" fill="#000">
+     <tspan y="240" x="250">***NUMBER***</tspan></text>
+</svg>

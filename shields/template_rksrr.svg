@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="487"
+   height="237"
+   viewBox="0 0 487 237"
+   id="svg3447"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="R-209-Kosovo.svg">
+  <defs
+     id="defs3449" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="492.0361"
+     inkscape:cy="498.59792"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata3452">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(117.0357,-794.7726)">
+    <g
+       transform="translate(1043.9018,-7666.1024)"
+       id="g4723">
+      <path
+         style="fill:#ffffff;stroke:#000000;stroke-width:9.01101398;stroke-miterlimit:10"
+         inkscape:connector-curvature="0"
+         stroke-miterlimit="10"
+         d="m -1138.5378,8465.3916 h 441.72533 c 9.8491,0 17.9089,8.2741 17.9089,18.3997 v 190.3693 c 0,10.1189 -8.0598,18.3952 -17.9089,18.3952 h -441.72533 c -9.8491,0 -17.9067,-8.2763 -17.9067,-18.3952 V 8483.789 c 0,-10.1233 8.0576,-18.3974 17.9067,-18.3974 z"
+         id="path3541" />
+    </g>
+  </g>
+  <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="175px" line-height="100%" y="0" x="0" font-family="&apos;Roadgeek 2005 Mittelschrift&apos;" fill="#000">
+     <tspan y="180" x="243.5">***NUMBER***</tspan></text>
+</svg>

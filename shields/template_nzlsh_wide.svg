@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="586"
+   height="587.15625"
+   id="svg2989">
+  <defs
+     id="defs2991" />
+  <metadata
+     id="metadata2994">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(0.5,-465.70598)"
+     id="layer1">
+    <path
+       d="m 61.75,466.20598 c -39.994391,62.14486 -61.7500020107428,134.958 -61.75,210 3.8812684e-6,144.85103 79.372282,271.1634 197,337.81252 29.62567,16.7862 61.67843,29.7839 95.5,38.3437 33.82157,-8.5598 65.87433,-21.5575 95.5,-38.3437 117.62772,-66.64912 197,-192.96149 197,-337.81252 0,-75.042 -21.75561,-147.85514 -61.75,-210 -1.67366,0.55915 -461.5,0 -461.5,0 z"
+       id="path2997"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-opacity:1" />
+    <path
+       d="M 73.34375,489.20598 C 40.653385,544.8113 22.999998,608.60173 23,674.20598 c 4e-6,131.56276 69.605194,246.86378 174,311.09375 29.34604,18.05547 61.42936,32.07127 95.5,41.28127 34.07064,-9.21 66.15396,-23.2258 95.5,-41.28127 104.39481,-64.22997 174,-179.53099 174,-311.09375 0,-65.60425 -17.65339,-129.39468 -50.34375,-185 -0.41102,1.06019 -438.3125,0 -438.3125,0 z"
+       id="path3808"
+       style="fill:#ba312b;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+    <text
+       x="293.1998"
+       y="866.20624"
+       id="text3817"
+       xml:space="preserve"
+       style="font-size:450px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Roadgeek 2005 Series C;-inkscape-font-specification:Roadgeek 2005 Series C"><tspan
+         x="293.1998"
+         y="830"
+         id="tspan3819"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:&apos;Roadgeek 2014 Series D&apos;">***NUMBER***</tspan></text>
+    <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="200px" line-height="100%" y="0" x="0" font-family="&apos;Roadgeek 2014 Series D&apos;" fill="#fff">
+     <tspan y="980" x="293.1998">***LETTER***</tspan></text>
+  </g>
+</svg>
