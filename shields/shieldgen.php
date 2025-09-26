@@ -89,12 +89,7 @@ function tm_shield_generate($r, $force_reload = false) {
 
 		case 'bradf':
 			$routeNum = str_replace("DF", "", $row['route']);
-			if (strlen($routeNum) > 2) {
-                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
-            }
-			else {
-                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . ".svg");
-            }
+            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . ".svg");
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 		
