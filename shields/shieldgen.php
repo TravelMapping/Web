@@ -69,6 +69,30 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+		case 'brabr':
+            $routeNum = str_replace("BR", "", $row['route']);
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
+		case 'brasp':
+            $routeNum = str_replace("SP00", "", $row['route']);
+			$routeNum = str_replace("SP0", "", $routeNum);
+			$routeNum = str_replace("SP", "", $routeNum);
+			if (strlen($routeNum) > 2) {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+            }
+			else {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . ".svg");
+            }
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
+		case 'bradf':
+			$routeNum = str_replace("DF", "", $row['route']);
+            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . ".svg");
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+		
 		case 'chlrn':
 			$routeNum = str_replace("R", "", $row['route']);
 			if (str_ends_with($routeNum, 'CH')) {
@@ -109,6 +133,19 @@ function tm_shield_generate($r, $force_reload = false) {
 			}
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
 			break;
+
+		case 'nicnic':
+			$routeNum = str_replace("NIC", "NIC-", $row['route']);
+			$svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+			break;
+		
+		case 'perpe':
+		case 'prypy':
+            $routeNum = str_replace("PE", "", $row['route']);
+			$routeNum = str_replace("PY", "", $routeNum);
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
 
 		case 'slvrn':
             $routeNum = str_replace("RN", "", $row['route']);
@@ -223,6 +260,37 @@ function tm_shield_generate($r, $force_reload = false) {
             	break;
 			}
 
+		case 'nzlsh':
+			$matches = [];
+			$routeNum = str_replace("SH", "", $row['route']);
+			if (preg_match('/(?<number>[0-9]+)(?<letter>[A-Za-z]+)/', $routeNum, $matches)) {
+               if ($matches['number'] > 1) {
+					$svg = file_get_contents("{$dir}/template_nzlsh_wide.svg");
+			   }
+			   else {
+					$svg = file_get_contents("{$dir}/template_nzlsh.svg");
+			   }
+			   $svg = str_replace("***NUMBER***", $matches['number'], $svg);
+               $svg = str_replace("***LETTER***", $matches['letter'], $svg);
+               break;
+            }
+            else {
+               if ($matches['number'] > 1) {
+					$svg = file_get_contents("{$dir}/template_nzlsh_wide.svg");
+			   }
+			   else {
+					$svg = file_get_contents("{$dir}/template_nzlsh.svg");
+			   }
+			   $svg = str_replace("***NUMBER***", $routeNum, $svg);
+               $svg = str_replace("***LETTER***", "", $svg);
+               break;
+            }
+
+		case 'nzlrr':
+			$routeNum = str_replace("RR", "", $row['route']);
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+		
 		case 'brbh':
 			$routeNum = str_replace("H", "Hwy ", $row['route']);
 			$svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
@@ -414,6 +482,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'phle':
         case 'pola':
         case 'pols':
+		case 'rksn':
         case 'sgpex':
         case 'svkd':
         case 'svkr':
@@ -438,6 +507,27 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+		case 'mnea':
+		case 'mnem':
+		case 'mner':
+			$routeNum = str_replace("A", "A-", $row['route']);
+            $routeNum = str_replace("M", "M-", $routeNum);
+            $routeNum = str_replace("R", "R-", $routeNum);
+			if (strlen($routeNum) > 3) {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+            }
+			else {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . ".svg");
+            }
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+			break;
+
+		case 'mkdr':
+		case 'rksrr':
+		    $routeNum = str_replace("R", "R-", $row['route']);
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+			break;
+		
         case 'itaa':
             // replace placeholder, use wide svg file for 5-/7-digit numbers
             if (strlen($row['route']) > 4) {
@@ -460,7 +550,6 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'chea':
         case 'czed':
         case 'czei':
-        case 'czeii':
         case 'deua':
         case 'deub':
         case 'estp':
@@ -484,10 +573,17 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'mysjp':
         case 'nama':
         case 'namb':
+		case 'pancn':
         case 'phlp':
         case 'poldk':
         case 'poldw':
+		case 'srbm':
+		case 'srbb':
+		case 'srbr':
+		case 'srbrb':
         case 'svki':
+		case 'svng':
+		case 'svnr':
         case 'swel':
 		case 'zafn':
 		case 'zafr':
@@ -496,14 +592,15 @@ function tm_shield_generate($r, $force_reload = false) {
             // str_replace calls done in this one common case
             $routeNum = str_replace("A", "", $row['route']);
             $routeNum = str_replace("B", "", $routeNum);
+			$routeNum = str_replace("C", "", $routeNum);
             $routeNum = str_replace("DK", "", $routeNum);
             $routeNum = str_replace("DW", "", $routeNum);
             $routeNum = str_replace("D", "", $routeNum);
 			$routeNum = str_replace("Ex", "", $routeNum);
             $routeNum = str_replace("FT", "", $routeNum);
             $routeNum = str_replace("F", "", $routeNum);
+			$routeNum = str_replace("G", "", $routeNum);
             $routeNum = str_replace("H", "", $routeNum);
-		    $routeNum = str_replace("II", "", $routeNum);
             $routeNum = str_replace("I", "", $routeNum);
             $routeNum = str_replace("Kt", "", $routeNum);
             $routeNum = str_replace("K", "", $routeNum);
@@ -523,6 +620,11 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+		case 'czeii':
+			$routeNum = str_replace("II", "", $row['route']);
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+			break;
+		
         case 'autb':
             // replace placeholder, remove prefix, use wide svg file for 3-digit numbers
             $routeNum = str_replace("B", "", $row['route']);
@@ -623,10 +725,12 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'biha':
 		case 'cypd':
         case 'hrva':
-        case 'prta':
+		case 'mkda':
         case 'prtip':
         case 'prtic':
-        case 'prtve':
+		case 'prtn':
+		case 'prtve':
+        case 'prtvr':
         case 'rksr':
         case 'srba':
         case 'svna':
@@ -641,11 +745,19 @@ function tm_shield_generate($r, $force_reload = false) {
             $routeNum = str_replace("H", "H ", $routeNum);
             $routeNum = str_replace("IC", "IC ", $routeNum);
             $routeNum = str_replace("IP", "IP ", $routeNum);
+			$routeNum = str_replace("N", "N ", $routeNum);
             $routeNum = str_replace("R", "R ", $routeNum);
             $routeNum = str_replace("VE", "VE ", $routeNum);
+			$routeNum = str_replace("VR", "VR ", $routeNum);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+		case 'prta':
+            // replace placeholder, add blank after prefix
+            $routeNum = str_replace("A", "A ", $row['route']);
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+			break;
+		
 		case 'deuhhr':
 		case 'norr':
 		    $routeNum = str_replace("Ring", "Ring ", $row['route']);
@@ -851,9 +963,13 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
-        case 'espn':
+        case 'espcg':
+		case 'espn':
+		case 'espvg':
             // replace placeholder, add hyphen after prefix, use wide svg files
             $routeNum = str_replace("N", "N-", $row['route']);
+			$routeNum = str_replace("CG", "CG-", $routeNum);
+			$routeNum = str_replace("VG", "VG-", $routeNum);
             $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
@@ -1105,7 +1221,7 @@ function tm_shield_generate($r, $force_reload = false) {
        
         case 'idnt':
             if (str_starts_with($row['route'], 'J')) {
-           	$routeNum = $row['route'];
+           		$routeNum = $row['route'];
                 $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_text.svg");
             	$svg = str_replace("***NUMBER***", $routeNum, $svg);
 		break;
@@ -1113,7 +1229,7 @@ function tm_shield_generate($r, $force_reload = false) {
             else {
             	$routeNum = str_replace("T", "", $row['route']);
                 $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . ".svg");
-		$svg = str_replace("***NUMBER***", $routeNum, $svg);
+				$svg = str_replace("***NUMBER***", $routeNum, $svg);
             	break;
 	     }
 
@@ -1124,6 +1240,12 @@ function tm_shield_generate($r, $force_reload = false) {
             }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
+
+		case 'thatp':
+			$routeNum = str_replace("Thl", "", $row['route']);
+			$svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+			break;
        
         case 'chegts':
         case 'usasf':
@@ -1166,6 +1288,7 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'slvsf':
 		case 'ttomr':
 		case 'mexsf':
+		case 'mkdap':
             $lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
             $index = 0;
             foreach ($lines as $line) {
