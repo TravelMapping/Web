@@ -264,7 +264,7 @@ function tm_shield_generate($r, $force_reload = false) {
 			$matches = [];
 			$routeNum = str_replace("SH", "", $row['route']);
 			if (preg_match('/(?<number>[0-9]+)(?<letter>[A-Za-z]+)/', $routeNum, $matches)) {
-               if ($matches['number'] > 1) {
+               if (strlen($matches['number']) > 1) {
 					$svg = file_get_contents("{$dir}/template_nzlsh_wide.svg");
 			   }
 			   else {
@@ -275,7 +275,7 @@ function tm_shield_generate($r, $force_reload = false) {
                break;
             }
             else {
-               if ($matches['number'] > 1) {
+               if (strlen($routeNum) > 1) {
 					$svg = file_get_contents("{$dir}/template_nzlsh_wide.svg");
 			   }
 			   else {
