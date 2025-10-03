@@ -585,6 +585,7 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'svng':
 		case 'svnr':
         case 'swel':
+		case 'vent':
 		case 'zafn':
 		case 'zafr':
             // replace placeholder, remove prefix
@@ -863,59 +864,42 @@ function tm_shield_generate($r, $force_reload = false) {
             }
             break;
             
-        // fram France Routes Métropolitaines
-        // fraxxxmnn
-        case preg_match('/fra[a-z]{3}m[0-9]{2}/', $row['systemName']) ? $row['systemName'] : !$row['systemName']:
-        case 'fragesm6ae':
-        case 'fracort': // Corsica Routes Territoriales
-            // replace placeholder, add blank after prefix, use wide svg files
-            $routeNum = str_replace("M", "M ", $row['route']);
-            // Whitespace after 'T' is purposefully excluded.
-            if ( strlen($routeNum) > 7 ) {
-                $svg = file_get_contents("{$dir}/template_fram_wide7.svg");
-            } else {
-                $svg = file_get_contents("{$dir}/template_fram_wide" . strlen($routeNum) . ".svg");
-            }
-            
-            $matches = [];
-            if (preg_match('/(?<number>(M |T)[0-9]+)(?<suffix>[A-Za-z]+[0-9]?)/', $routeNum, $matches)) {
-                $svg = str_replace("***NUMBER***", $matches['number'], $svg);
-                $svg = str_replace("***SUFFIX***", $matches['suffix'], $svg);
-            }
-            else {
-                $svg = str_replace("***NUMBER***", $routeNum, $svg);
-                $svg = str_replace("***SUFFIX***", '', $svg);
-            }
-            break;
-            
-		case 'frapdlm44':
-            // replace placeholder, add blank after prefix, use wide svg files
-            $prefix = substr($row['route'], 0, 1);
-            $routeNum = substr_replace($row['route'], "{$prefix} ", 0, 1); // Use substr_replace here to avoid matching suffixes.
-            
-            if ( strlen($routeNum) > 7 ) {
-                $svg = file_get_contents("{$dir}/template_frapdlm44_wide7.svg");
-            } else {
-                $svg = file_get_contents("{$dir}/template_frapdlm44_wide" . strlen($routeNum) . ".svg");
-            }
-            
-            $matches = [];
-            if (preg_match('/(?<number>[DN] [0-9]+)(?<suffix>[A-Za-z]+[0-9]?)/', $routeNum, $matches)) {
-                $svg = str_replace("***NUMBER***", $matches['number'], $svg);
-                $svg = str_replace("***SUFFIX***", $matches['suffix'], $svg);
-            }
-            else { // M 1.1 -> M 1^1
-                $numParts = explode('.',  $routeNum);
-                $svg = str_replace("***NUMBER***", $numParts[0], $svg);
-                if ( isset($numParts[1]) ) {
-                    $svg = str_replace("***SUFFIX***", $numParts[1], $svg);
-                } else {
-                    $svg = str_replace("***SUFFIX***", '', $svg);
-                }
-            }
-            break; 
+		// fram France Routes Métropolitaines
+		// fraxxxmnn
+		case preg_match('/fra[a-z]{3}m[0-9]{2}/', $row['systemName']) ? $row['systemName'] : !$row['systemName']:
+		case 'fragesm6ae':
+		case 'fracort': // Corsica Routes Territoriales
+			// replace placeholder, add blank after prefix, use wide svg files
+			$routeNum = str_replace("M", "M ", $row['route']);
+			// Whitespace after 'T' is purposefully excluded.
+			if ($row['systemName'] == "frapdlm44") {
+				if ( strlen($routeNum) > 7 ) {
+					$svg = file_get_contents("{$dir}/template_frapdlm44_wide7.svg");
+				} else {
+					$svg = file_get_contents("{$dir}/template_frapdlm44_wide" . strlen($routeNum) . ".svg");
+				}
+			}
+			else {
+				if ( strlen($routeNum) > 7 ) {
+					$svg = file_get_contents("{$dir}/template_fram_wide7.svg");
+				} else {
+					$svg = file_get_contents("{$dir}/template_fram_wide" . strlen($routeNum) . ".svg");
+				}
+			}
+
+			$matches = [];
+			if (preg_match('/(?<number>(M |T)[0-9]+)(?<suffix>[A-Za-z]+[0-9]?)/', $routeNum, $matches)) {
+				$svg = str_replace("***NUMBER***", $matches['number'], $svg);
+				$svg = str_replace("***SUFFIX***", $matches['suffix'], $svg);
+			}
+			else {
+				$svg = str_replace("***NUMBER***", $routeNum, $svg);
+				$svg = str_replace("***SUFFIX***", '', $svg);
+			}
+			break; 
 		
         case 'nclt':
+		case 'pyft':
             // replace placeholder, add blank after prefix, use wide svg files
             $routeNum = str_replace("T", "RT ", $row['route']);
             $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
@@ -1289,6 +1273,8 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'ttomr':
 		case 'mexsf':
 		case 'mkdap':
+		case 'brasf':
+		case 'vena':
             $lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
             $index = 0;
             foreach ($lines as $line) {

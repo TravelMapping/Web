@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 289 286" enable-background="new 0 0 289 286" xml:space="preserve">
+<g id="FONDO">
+	<g>
+		<path d="M263,274H25c-6.6,0-12-5.4-12-12V24c0-6.6,5.4-12,12-12h238c6.6,0,12,5.4,12,12v238C275,268.6,269.6,274,263,274z"/>
+	</g>
+</g>
+<g id="ESCUDO">
+	<g id="Borde">
+		<path fill="#FFFFFF" d="M23,42.347c0,0,10.632,15.41,18.039,20.493c8.492,5.828,8.492,37.108,8.492,41.818
+			c0,47.623,0,115.342,0,115.342s0,14.67,4.995,19.166C59.764,243.88,73,244.161,73,244.161h56c0,0,7.696,0.925,10,3.839
+			c2.872,3.633,4.444,9.818,4.444,9.818h0.112c0,0,1.572-6.184,4.444-9.818c2.304-2.914,9-3.839,9-3.839h56
+			c0,0,10.415,0.365,17-7.161c7-8,6.691-16,6.691-16s0-68.719,0-116.342c0-4.995-0.36-34.353,8.881-41.818
+			C252.56,57.195,264,42.347,264,42.347H23z"/>
+	</g>
+</g>
+<text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="167.5px" line-height="100%" y="0" x="0" font-weight="bold" font-family="&apos;Arial&apos;" fill="#000">
+     <tspan y="200" x="144.5">***NUMBER***</tspan></text>
+</svg>
