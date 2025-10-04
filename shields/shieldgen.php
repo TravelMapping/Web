@@ -1097,7 +1097,7 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
 
 		case 'grceo':
-			$routeNum = $row['route']
+			$routeNum = $row['route'];
 			if (strlen($routeNum) > 6) {
 				$svg = file_get_contents("{$dir}/template_grceo_text.svg");
 				$lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
