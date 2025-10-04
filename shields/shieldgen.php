@@ -117,6 +117,38 @@ function tm_shield_generate($r, $force_reload = false) {
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+		case 'ecue':
+			$routeNum = str_replace("E", "", $row['route']);
+			if (preg_match('/(?<number>[0-9]+)(?<letter>[A-Za-z]+)/', $routeNum, $matches)) {
+				if ($matches['number'] % 5 == 0) {
+					$svg = file_get_contents("{$dir}/template_ecue_blue_wide.svg");
+				}
+				elseif (strlen($matches['number']) > 2) {
+					$svg = file_get_contents("{$dir}/template_ecue_green_wide5.svg");
+				}
+				else {
+					$svg = file_get_contents("{$dir}/template_ecue_green_wide4.svg");
+				}
+				$routeNum = $matches['number'] . $matches['letter'];
+				$routeNum = substr_replace($routeNum, "E", 0, 0);
+				$svg = str_replace("***NUMBER***", $routeNum, $svg);
+				break;
+            }
+            else {
+				if (strlen($routeNum) > 2) {
+					$svg = file_get_contents("{$dir}/template_ecue_green_wide4.svg");
+				}
+				elseif ($routeNum % 5 == 0) {
+					$svg = file_get_contents("{$dir}/template_ecue_blue.svg");
+				}
+				else {
+					$svg = file_get_contents("{$dir}/template_ecue_green.svg");
+				}
+				$routeNum = substr_replace($routeNum, "E", 0, 0);
+				$svg = str_replace("***NUMBER***", $routeNum, $svg);
+				break;
+            }
+		
 		case 'hndrnp':
 			$routeNum = str_replace("NAC0", "NAC-", $row['route']);
 			$svg = file_get_contents("{$dir}/template_hndrn.svg");
@@ -1063,6 +1095,31 @@ function tm_shield_generate($r, $force_reload = false) {
             }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
+
+		case 'grceo':
+			$routeNum = $row['route']
+			if (strlen($routeNum) > 6) {
+				$svg = file_get_contents("{$dir}/template_grceo_text.svg");
+				$lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
+				$index = 0;
+				foreach ($lines as $line) {
+					if (strlen($line) > 0) {
+						$svg = str_replace("***NUMBER".($index + 1)."***", $line, $svg);
+						$index++;
+					}
+				}
+				while ($index < 3) {
+					$svg = str_replace("***NUMBER".($index + 1)."***", "", $svg);
+					$index++;
+				}
+				break;
+			}
+			else {
+				$routeNum = str_replace("EO", "", $row['route']);
+				$svg = file_get_contents("{$dir}/template_grceo.svg");
+				$svg = str_replace("***NUMBER***", $routeNum, $svg);
+				break;
+			}
 	    
         case 'itass':
             // replace placeholder, add blank after prefix, use wide svg files
