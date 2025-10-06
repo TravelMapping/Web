@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   viewBox="0 0 980 721.5"
+   height="721.5"
+   width="980"
+   xml:space="preserve"
+   id="svg4269"
+   version="1.1"><metadata
+     id="metadata4275"><rdf:RDF><cc:Work
+         rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+     id="defs4273"><clipPath
+       id="clipPath4285"
+       clipPathUnits="userSpaceOnUse"><path
+         id="path4283"
+         d="M 0,10 H 10200 V 13200 H 0 V 10" /></clipPath></defs><g
+     transform="matrix(0,-0.08,-0.08,0,1056,760.6)"
+     id="g4277"><path
+       id="path4287"
+       style="fill:#f6f6f6;stroke-width:11.1444;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+       d="M 5011,950 H 9508 V 13200 H 5011 c -925,0 -1775,-510 -2209,-1330 L 692.8,7895 C 420.2,7382 420.2,6767 692.8,6254 L 2803,2278 C 3237,1461 4087,949.1 5012,949.1" /><path
+       id="path4293"
+       style="fill:#0044aa;stroke-width:11.1444;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+       d="M 9131,12830 H 5011 c -787,0 -1508,-440 -1877,-1130 L 1024,7718 C 810.3,7316 810.3,6833 1024,6430 L 3135,2454 C 3503,1759 4225,1324 5012,1324 h 4119 z" /><g
+       style="font-weight:bold;font-size:6564.10000000000036380px;font-family:SnvDRegCon;-inkscape-font-specification:'SnvDRegCon Bold';letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#f6f6f6;stroke-width:164.103"
+       id="text4976"
+       transform="matrix(0,-1,-1,0,0,-257)"
+       aria-label="105P"></g></g>
+  <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="525px" line-height="100%" y="0" x="0" font-family="&apos;Roadgeek 2005 Engschrift&apos;" fill="#fff">
+     <tspan y="475" x="490">***NUMBER***</tspan></text>         
+</svg>
