@@ -172,7 +172,7 @@ function tm_shield_generate($r, $force_reload = false) {
                 $svg = file_get_contents("{$dir}/template_naca_gtm_wide.svg");
             }
 			else {
-				$svg = file_get_contents("{$dir}/template_naca_" . $row['region'] . ".svg");
+				$svg = file_get_contents("{$dir}/template_naca_" . strtolower($row['region']) . ".svg");
 			}
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
 			break;
