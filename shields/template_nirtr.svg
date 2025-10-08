@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   width="600"
+   width="640"
    height="360"
-   viewBox="0 0 600 360"
+   viewBox="0 0 640 360"
    version="1.1"
    id="svg29"
    sodipodi:docname="od24ro4qummdlvy4zf.svg"
@@ -20,9 +20,9 @@
      transform="scale(-1-1)"
      id="g6">
     <rect
-       width="600"
+       width="640"
        height="360"
-       x="-600"
+       x="-640"
        y="-360"
        rx="30"
        fill="#713907"
@@ -31,9 +31,9 @@
        ry="26.13"
        rx="26.26"
        y="-353.2"
-       x="-592.56"
+       x="-632.56"
        height="346.4"
-       width="585.12"
+       width="625.12"
        fill="none"
        stroke="#fff"
        stroke-linejoin="round"
@@ -53,12 +53,12 @@
      line-height="100%"
      font-size="160"
      id="text18"><tspan
-       x="300"
+       x="320"
        y="152.87"
        id="tspan10"><tspan
          line-height="84%"
          id="tspan8">***NUMBER1***</tspan></tspan><tspan
-       x="300"
+       x="320"
        y="302.87"
        line-height="84%"
        id="tspan12">***NUMBER2***</tspan></text>
