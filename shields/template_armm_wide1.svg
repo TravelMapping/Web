@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="157"
+   height="76"
+   viewBox="0 0 157 76"
+   id="svg3919"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   sodipodi:docname="M00 ARM.svg">
+  <metadata
+     id="metadata3024">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     id="namedview3022"
+     showgrid="false"
+     inkscape:zoom="2.1369689"
+     inkscape:cx="-60.344624"
+     inkscape:cy="-86.528006"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0" />
+  <defs
+     id="defs3921" />
+  <g
+     transform="translate(-39.029469,-305.73312)"
+     id="layer1">
+    <rect
+       width="155.29614"
+       height="74.769226"
+       rx="5.521337"
+       ry="5.2912302"
+       x="39.529469"
+       y="306.23312"
+       id="rect3943"
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;enable-background:accumulate" />
+    <rect
+       width="150.97258"
+       height="70.703354"
+       rx="3.5915337"
+       ry="3.3901298"
+       x="41.800575"
+       y="308.35443"
+       id="rect4455"
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:none;stroke-width:1;marker:none;enable-background:accumulate" />
+    <path
+       style="fill:#00a500;fill-opacity:1"
+       d=""
+       id="path3111"
+       inkscape:connector-curvature="0"
+       transform="translate(39.029469,305.73312)" />
+    <path
+       style="fill:#16549e;fill-opacity:1"
+       d="M 5.2341225,73.065165 C 4.2277249,72.705717 3.4430024,71.978889 3.0526416,71.044624 2.8891451,70.653321 2.8689848,67.002787 2.870028,37.977857 L 2.8712008,5.3509514 3.1518859,4.7481959 C 3.5156456,3.9670426 4.0860242,3.4060258 4.9089411,3.01998 L 5.5699357,2.709895 H 78.259011 150.94809 l 0.66099,0.310085 c 0.82901,0.3889047 1.39964,0.9536369 1.76088,1.742671 l 0.28092,0.6136411 -0.0309,32.7604379 -0.0309,32.76044 -0.32778,0.557575 c -0.36695,0.624214 -0.84595,1.066805 -1.579,1.458967 l -0.49418,0.26437 -72.749097,0.02495 C 17.457232,73.223945 5.6162477,73.201645 5.2341225,73.065165 Z"
+       id="path3113"
+       inkscape:connector-curvature="0"
+       transform="translate(39.029469,305.73312)"
+       sodipodi:nodetypes="ssscsscccsscccsscss" />
+    <path
+       style="fill:#00a500;fill-opacity:1"
+       d=""
+       id="path3167"
+       inkscape:connector-curvature="0"
+       transform="translate(39.029469,305.73312)" />
+    <path
+       style="fill:#00a500;fill-opacity:1"
+       d=""
+       id="path3175"
+       inkscape:connector-curvature="0"
+       transform="translate(39.029469,305.73312)" />
+    <path
+       id="path2634"
+       d="m 104.28849,328.86217 h -6.00046 v 22.40902 c 0,3.83933 -1.32522,6.82142 -3.97594,8.93906 -2.65098,2.1179 -6.15894,3.16938 -10.538289,3.16938 -4.408432,0 -7.930801,-1.07309 -10.559905,-3.22701 -2.636307,-2.14645 -3.954594,-5.2294 -3.954594,-9.22721 v -28.07063 h 7.015923 v 28.41641 c 0,2.27611 0.720375,3.91137 2.153656,4.89828 1.426343,0.98665 3.212607,1.4765 5.34492,1.4765 2.103229,0 3.875355,-0.48265 5.323039,-1.45489 1.44796,-0.9653 2.17527,-2.60776 2.17527,-4.91989 v -28.41641 h 13.01638 z"
+       stroke="none"
+       fill-rule="evenodd"
+       fill="#000000"
+       transform="translate(12.5,0)"
+       style="fill:#ffffff;fill-opacity:1;stroke-width:0.266806" />
+  </g>
+  <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="72px" line-height="100%" y="0" x="0" font-family="&apos;Russian Road Sign&apos;" fill="#fff">
+     <tspan y="57.5" x="102.5">***NUMBER***</tspan></text>
+</svg>

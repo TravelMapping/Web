@@ -8,11 +8,11 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    id="svg3919"
-   height="194"
+   height="193.91196"
    width="400"
-   viewBox="0 0 400 194"
+   viewBox="0 0 400 195"
    version="1.1"
-   sodipodi:docname="RB03.svg"
+   sodipodi:docname="A34 KZ.svg"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)">
   <sodipodi:namedview
      pagecolor="#ffffff"
@@ -31,9 +31,9 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:zoom="1.6920311"
-     inkscape:cx="136.76812"
-     inkscape:cy="156.08574"
+     inkscape:zoom="1.1964467"
+     inkscape:cx="-48.661107"
+     inkscape:cy="37.884603"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -69,7 +69,7 @@
      x="7.091939"
      y="6.7085772"
      id="rect4455"
-     style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#ff2a2a;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2.55924416;marker:none;enable-background:accumulate" />
-  <text letter-spacing="0px" text-anchor="middle" word-spacing="-60px" text-align="center" font-size="180px" line-height="100%" y="0" x="0" font-family="&apos;Russian Road Sign&apos;" fill="#fff">
+     style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#0d69e1;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2.55924416;marker:none;enable-background:accumulate" />
+  <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="180px" line-height="100%" y="0" x="0" font-family="&apos;Russian Road Sign&apos;" fill="#fff">
      <tspan y="147.5" x="200">***NUMBER***</tspan></text>
 </svg>

@@ -1,0 +1,6 @@
+<!-- sample rectangle -->
+<svg width="600" height="200" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="200" x="0" y="0" rx="20" ry="20" fill="#00008b" />
+  <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="225px" line-height="100%" y="0" x="0" font-family="&apos;Russian Road sign&apos;" fill="#fff">
+     <tspan y="160" x="300">***NUMBER***</tspan></text>
+</svg>
