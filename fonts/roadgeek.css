@@ -405,3 +405,16 @@
     font-style: normal;
 
 }
+
+@font-face {
+    font-family: 'Russian Road Sign';
+    src: url('russianroadsign-medium-webfont.eot');
+    src: url('russianroadsign-medium-webfont.eot?#iefix') format('embedded-opentype'),
+         url('russianroadsign-medium-webfont.woff2') format('woff2'),
+         url('russianroadsign-medium-webfont.woff') format('woff'),
+         url('russianroadsign-medium-webfont.ttf') format('truetype'),
+         url('russianroadsign-medium-webfont.svg#russian_road_signmedium') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
