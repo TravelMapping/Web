@@ -934,7 +934,7 @@ following sources of highway information.</p>
     from <a href="http://moutjs.com/">MOUT</a>, <a href="https://clipboardjs.com/>clipboard.js</a>, and <a href="https://github.com/mapshakers/leaflet-control-window">leaflet-control-window</a>.</li>
   <li>The shield generator
   uses <a href="https://github.com/sammdot/roadgeek-fonts/releases">Roadgeek Fonts</a>, 
-  <a href=https://www.llm.gov.my/publication/lettering>LLM Fonts</a>, <a href=https://www.conaset.cl/manualsenalizacion/construye.html>RutaCL Fonts</a>, and <a href=https://www.transportstyrelsen.se/sv/vagtrafik/trafikregler-och-vagmarken/trafikregler/om-vagmarken/teckensnitt/>Tratex Fonts</a>.</li>
+  <a href=https://www.llm.gov.my/publication/lettering>LLM Fonts</a>, <a href=https://www.conaset.cl/manualsenalizacion/construye.html>RutaCL Fonts</a>, <a href=https://www.transportstyrelsen.se/sv/vagtrafik/trafikregler-och-vagmarken/trafikregler/om-vagmarken/teckensnitt/>Tratex Fonts</a>, and <a href=https://github.com/shoorick/russian-road-sign-font>Russian Road Sign Font</a>.</li>
 </ul>
 
 <p class="heading"><a name="contributors">Project Contributors</a></p>

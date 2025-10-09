@@ -2,8 +2,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="150" height="100" viewBox="0 0 150 100" version="1.1">
   <g fill-rule="evenodd">
     <rect rx="5" ry="5" height="100" width="150" y="0" x="0" fill="#da251d"/>
-    <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="80px" line-height="100%" y="60" x="100" font-family="&apos;Roadgeek 2005 Mittelschrift&apos;" fill="#fff">
-      <tspan y="74" x="75">***NUMBER***</tspan>
+    <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="120px" line-height="100%" y="60" x="100" font-family="&apos;Russian Road Sign&apos;" fill="#fff">
+      <tspan y="82.5" x="75">***NUMBER***</tspan>
     </text>
   </g>
 </svg>
