@@ -1389,6 +1389,12 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+		case 'tham':
+			$routeNum = str_replace("M", "", $row['route']);
+			$svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+			break;
+		
 		case 'thatp':
 			$routeNum = str_replace("Thl", "", $row['route']);
 			$svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
