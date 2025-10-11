@@ -74,6 +74,24 @@ function tm_shield_generate($r, $force_reload = false) {
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+		case 'brabac':
+		case 'braesc':
+		case 'bramgc':
+		case 'braprc':
+		case 'brarsc':
+		case 'brascc':
+			$routeNum = str_replace("BA", "BR-", $row['route']);
+			$routeNum = str_replace("ES", "BR-", $routeNum);
+			$routeNum = str_replace("MGC", "BR-", $routeNum);
+			$routeNum = str_replace("PRC", "BR-", $routeNum);
+			$routeNum = str_replace("RSC", "BR-", $routeNum);
+			$routeNum = str_replace("SC", "BR-", $routeNum);
+			$region = str_replace("BRA-", "", $row['region']);
+			$svg = file_get_contents("{$dir}/template_braxxc.svg");
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+			$svg = str_replace("***REGION***", $region, $svg);
+			break;
+
 		case 'brasp':
             $routeNum = str_replace("SP00", "", $row['route']);
 			$routeNum = str_replace("SP0", "", $routeNum);
@@ -1000,6 +1018,7 @@ function tm_shield_generate($r, $force_reload = false) {
 		
         case 'nclt':
 		case 'pyft':
+		case 'wlft':
             // replace placeholder, add blank after prefix, use wide svg files
             $routeNum = str_replace("T", "RT ", $row['route']);
             $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
@@ -1423,6 +1442,8 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'nirtr':
 		case 'ltuaut':
 		case 'ukra':
+		case 'espsf':
+		case 'norntv':
             $lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
             $index = 0;
             foreach ($lines as $line) {
@@ -1461,6 +1482,21 @@ function tm_shield_generate($r, $force_reload = false) {
 			else {
 				$svg = file_get_contents("{$dir}/template_eursf.svg");
 			}
+            foreach ($lines as $line) {
+                if (strlen($line) > 0) {
+                    $svg = str_replace("***NUMBER".($index + 1)."***", $line, $svg);
+                    $index++;
+                }
+            }
+            while ($index < 3) {
+                $svg = str_replace("***NUMBER".($index + 1)."***", "", $svg);
+                $index++;
+            }
+            break;
+
+		case 'frasf':
+            $lines = strtoupper(explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route'])));
+            $index = 0;
             foreach ($lines as $line) {
                 if (strlen($line) > 0) {
                     $svg = str_replace("***NUMBER".($index + 1)."***", $line, $svg);
