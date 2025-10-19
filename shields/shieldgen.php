@@ -1501,7 +1501,8 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
 
 		case 'frasf':
-            $lines = strtoupper(explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route'])));
+            $lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
+			$lines = array_map('strtoupper', $lines);
             $index = 0;
             foreach ($lines as $line) {
                 if (strlen($line) > 0) {
