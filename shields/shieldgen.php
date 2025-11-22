@@ -1569,7 +1569,29 @@ function tm_shield_generate($r, $force_reload = false) {
                break;
             }
 
-		case 'usamd':
+        case 'usaga': // Georgia
+            $routeNum = str_replace($row['route'], 'GA', '');
+            $system = "";
+            $sys_map['Alt'] = "ALT";
+            $sys_map['Bus'] = "BUS";
+            $sys_map['Byp'] = "BYP";
+            $sys_map['Con'] = "CONN";
+            $sys_map['Lp'] = "LOOP";
+            $sys_map['Spr'] = "SPUR";
+            $sys_map['Trk'] = "";
+            $sys_map[''] = "";
+            $system = $sys_map[$row['banner']];
+            if (strlen($routeNum) > 2) {
+                $svg = file_get_contents("{$dir}/template_usaga_wide.svg");
+            }
+            else {
+                $svg = file_get_contents("{$dir}/template_usaga.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            $svg = str_replace("***SYS***", $system, $svg);
+            break;
+		
+		case 'usamd': // Maryland
 			$routeNum = str_replace("MD", "", $row['route']);
 			if ($row['banner'] == "Bus") {
 				if (strlen($routeNum) > 2) {
@@ -1596,7 +1618,7 @@ function tm_shield_generate($r, $force_reload = false) {
 				}
 			}
 
-		case 'usamn':
+		case 'usamn': // Minnesota
 			$routeNum = str_replace("MN", "", $row['route']);
 			if ($row['banner'] == "Bus") {
 				$svg = file_get_contents("{$dir}/template_usamn_bus.svg");
@@ -1650,47 +1672,108 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $matches['number'], $svg);
             $svg = str_replace("***LETTER***", $matches['letter'], $svg);
             break;
-        
-        //the following cases are meant to fall through to the default
-        //TODO: fix this
 
-        case 'usatx': // Texas
-        case 'usatxl': // Texas Loops
-        case 'usatxs': // Texas Spurs
-            if ($row['root'] === 'tx.nasa1' or $row['systemName'] !== 'usatx' or $row['banner'] !== "") {
-                $system = "";
-                $num = "";
-                $svg_path = "{$dir}/template_usatx_aux.svg";
-
-                $sys_map['Lp'] = "LOOP";
-                $sys_map['Spr'] = "SPUR";
-                $sys_map['Bus'] = "BUS";
-                $sys_map['Trk'] = "TRUCK";
-
-                if ($row['root'] === 'tx.nasa1') {
-                    $system = "NASA";
-                    $num = "1";
+        case 'usany': // New York
+            $matches = [];
+            $routeNum = str_replace("NY", "", $row['route']);
+			if (strlen($routeNum) > 3) {
+                $svg = file_get_contents("{$dir}/template_usany_wide4.svg");
+            }
+			elseif (strlen($routeNum) > 2) {
+                $svg = file_get_contents("{$dir}/template_usany_wide.svg");
+            }
+            else {
+                $svg = file_get_contents("{$dir}/template_usany.svg");
+            }
+            if (preg_match('/(?<number>[0-9]+)(?<letter>[A-Za-z]+)/', $routeNum, $matches)) {
+               $svg = str_replace("***NUMBER***", $matches['number'], $svg);
+               $svg = str_replace("***LETTER***", $matches['letter'], $svg);
+               break;
+            }
+            else {
+               $svg = str_replace("***NUMBER***", $routeNum, $svg);
+               $svg = str_replace("***LETTER***", "", $svg);
+               break;
+            }
+			
+        case 'usaok': // Oklahoma
+            $matches = [];
+            $routeNum = str_replace("OK", "", $row['route']);
+			if (strlen($routeNum) > 2) {
+                $svg = file_get_contents("{$dir}/template_usaok_wide.svg");
+            }
+            else {
+                $svg = file_get_contents("{$dir}/template_usaok.svg");
+            }
+            if (preg_match('/(?<number>[0-9]+)(?<letter>[A-Za-z]+)/', $routeNum, $matches)) {
+               $svg = str_replace("***NUMBER***", $matches['number'], $svg);
+               $svg = str_replace("***LETTER***", $matches['letter'], $svg);
+               break;
+            }
+            else {
+               $svg = str_replace("***NUMBER***", $routeNum, $svg);
+               $svg = str_replace("***LETTER***", "", $svg);
+               break;
+            }
+		
+        case 'usapr': // Puerto Rico
+            $routeNum = str_replace($row['route'], 'PR', '');
+			$numOnly = str_replace($routeNum, 'R', '');
+            if ($numOnly < 100) {
+                if (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_usapr1_wide.svg");
                 }
                 else {
-                    $matches = [];
-                    preg_match('/(TX|)(?<system>[A-Za-z]+)(?<number>[0-9]+)/', $row['route'], $matches);
-                    
-                    if (array_key_exists($matches['system'], $sys_map)) $system = $sys_map[$matches['system']];
-                    else $system = $sys_map[$row['banner']];
-
-                    $num = $matches['number'];
-
-                    if (strlen($num) >= 3) {
-                        $svg_path = "{$dir}/template_usatx_aux_wide.svg";
-                    }
+                    $svg = file_get_contents("{$dir}/template_usapr1.svg");
                 }
-
-                $svg = file_get_contents($svg_path);
-                $svg = str_replace("***NUMBER***", $num, $svg);
-                $svg = str_replace("***SYS***", $system, $svg);
-                break;
             }
+            elseif ($numOnly < 250) {
+                if (strlen($routeNum) > 3) {
+                    $svg = file_get_contents("{$dir}/template_usapr2_wide4.svg");
+                }
+                elseif (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_usapr2_wide.svg");
+                }
+                else {
+                    $svg = file_get_contents("{$dir}/template_usapr2.svg");
+                }
+            }
+            else {
+                if (strlen($routeNum) > 3) {
+                    $svg = file_get_contents("{$dir}/template_usapr3_wide4.svg");
+                }
+                elseif (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_usapr3_wide.svg");
+                }
+                else {
+                    $svg = file_get_contents("{$dir}/template_usapr3.svg");
+                }
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+		
+        case 'usatxl': // Texas Loops
+            $routeNum = str_replace($row['route'], 'TXLp', '');
+            if (strlen($routeNum) > 2) {
+                $svg = file_get_contents("{$dir}/template_usatxl_wide.svg");
+            }
+            else {
+                $svg = file_get_contents("{$dir}/template_usatxl.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
 
+        case 'usatxs': // Texas Spurs
+            $routeNum = str_replace($row['route'], 'TXSpr', '');
+            if (strlen($routeNum) > 2) {
+                $svg = file_get_contents("{$dir}/template_usatxs_wide.svg");
+            }
+            else {
+                $svg = file_get_contents("{$dir}/template_usatxs.svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;		
+		
         // Virginia Wyes: also fall through to default if banner was not Wye
         case 'usava': 
             if ($row['banner'] === 'Wye') {
@@ -1732,7 +1815,6 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'usadc': // District of Columbia
         case 'usade': // Delaware
         case 'usafl': // Florida
-        case 'usaga': // Georgia
         case 'usagu': // Guam
         case 'usahi': // Hawaii
         case 'usaia': // Iowa
@@ -1755,17 +1837,14 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'usanj': // New Jersey
         case 'usanm': // New Mexico
         case 'usanv': // Nevada
-        case 'usany': // New York
         case 'usaoh': // Ohio
-        case 'usaok': // Oklahoma
         case 'usaor': // Oregon
         case 'usapa': // Pennsylvania
-        // case 'usapr': // Puerto Rico
         case 'usari': // Rhode Island
         case 'usasc': // South Carolina
         case 'usasd': // South Dakota
         case 'usatn': // Tennessee
-        // usatx Texas generic case falls through to here
+        case 'usatx': // Texas
         case 'usatxre': // Texas Recreation Roads
         case 'usaut': // Utah
         // usava Virginia generic case falls through to here
