@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="601"
+   height="601"
+   viewBox="0 0 601 601"
+   id="svg2">
+  <defs
+     id="defs4">
+    <clipPath
+       id="clipPath3627">
+      <rect
+         width="500"
+         height="500"
+         x="50"
+         y="502.36218"
+         id="rect3629"
+         style="fill:#003478;fill-opacity:1;stroke:none" />
+    </clipPath>
+    <clipPath
+       id="clipPath3631">
+      <rect
+         width="500"
+         height="500"
+         x="50"
+         y="51.000004"
+         id="rect3633"
+         style="fill:#003478;fill-opacity:1;stroke:none" />
+    </clipPath>
+  </defs>
+  <g
+     transform="translate(0,-451.36218)"
+     id="layer1">
+    <rect
+       width="600"
+       height="600"
+       rx="37.5"
+       ry="37.5"
+       x="0.5"
+       y="451.86218"
+       id="rect2816"
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-opacity:1" />
+    <path
+       d="M 300,-66 C 224.48222,-50.667664 158.85724,-8.1010697 113.8125,51 L 50,51 50,240.25 C 50,391.43071 157.36584,517.54106 300,546.5 442.63416,517.54106 550,391.43071 550,240.25 L 550,51 486.1875,51 C 441.14276,-8.1010697 375.51778,-50.667664 300,-66 z"
+       transform="translate(0,451.36218)"
+       clip-path="url(#clipPath3631)"
+       id="path3590"
+       style="fill:#003478;fill-opacity:1;stroke:none" />
+  </g>
+  <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="430px" line-height="100%" y="0" x="0" font-family="&apos;Roadgeek 2014 Series D&apos;" fill="#fff">
+     <tspan y="380" x="300.5">***NUMBER***</tspan></text>
+</svg>

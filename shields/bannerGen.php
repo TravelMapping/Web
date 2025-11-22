@@ -29,11 +29,9 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 	// Identify system, color scheme, and template type
 	switch ($system) {
 		case 'usaib': // Return a 'not external' string for systems that don't generally use external banners
-		case 'usatx':
 		case 'ausab':
 		case 'ausnb':
 		case 'ausqld':
-		// usaga will go here eventually
 			return 'not external';
 		
 		
@@ -55,6 +53,14 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 			$useFillTemplate = true;
 			
 			break;
+
+		case 'usaga': // Banner for Truck, no banner otherwise
+			if ($banner == "Trk") {
+				break;
+			}
+			else {
+				return 'not external';
+			}
 
 		case 'usamd': // No banner for Bus, regular otherwise
 			if ($banner == "Bus") {
