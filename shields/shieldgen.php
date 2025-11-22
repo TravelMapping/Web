@@ -1570,7 +1570,7 @@ function tm_shield_generate($r, $force_reload = false) {
             }
 
         case 'usaga': // Georgia
-            $routeNum = str_replace($row['route'], 'GA', '');
+            $routeNum = str_replace("GA", "", $row['route']);
             $system = "";
             $sys_map['Alt'] = "ALT";
             $sys_map['Bus'] = "BUS";
@@ -1717,7 +1717,7 @@ function tm_shield_generate($r, $force_reload = false) {
             }
 		
         case 'usapr': // Puerto Rico
-            $routeNum = str_replace($row['route'], 'PR', '');
+            $routeNum = str_replace("PR", "", $row['route']);
 			$numOnly = str_replace($routeNum, 'R', '');
             if ($numOnly < 100) {
                 if (strlen($routeNum) > 2) {
@@ -1753,7 +1753,7 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
 		
         case 'usatxl': // Texas Loops
-            $routeNum = str_replace($row['route'], 'TXLp', '');
+            $routeNum = str_replace("TXLp", "", $row['route']);
             if (strlen($routeNum) > 2) {
                 $svg = file_get_contents("{$dir}/template_usatxl_wide.svg");
             }
@@ -1764,7 +1764,7 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
 
         case 'usatxs': // Texas Spurs
-            $routeNum = str_replace($row['route'], 'TXSpr', '');
+            $routeNum = str_replace("TXSpr", "", $row['route']);
             if (strlen($routeNum) > 2) {
                 $svg = file_get_contents("{$dir}/template_usatxs_wide.svg");
             }
