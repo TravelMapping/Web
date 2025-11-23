@@ -1718,7 +1718,7 @@ function tm_shield_generate($r, $force_reload = false) {
 		
         case 'usapr': // Puerto Rico
             $routeNum = str_replace("PR", "", $row['route']);
-			$numOnly = str_replace($routeNum, 'R', '');
+			$numOnly = str_replace("R", "", $routeNum);
             if ($numOnly < 100) {
                 if (strlen($routeNum) > 2) {
                     $svg = file_get_contents("{$dir}/template_usapr1_wide.svg");
