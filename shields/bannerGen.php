@@ -210,6 +210,15 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 			$fontSeries = 'D';
 			
 			break;
+
+		case 'Old':
+			$text = 'OLD';
+			$x = '300.5';
+			$y = '224.75';
+			$fontSize = '260px';
+			$fontSeries = 'D';
+		
+			break;
 		case 'Sce':
 			$text = 'SCENIC';
 			$x = '302.6';
