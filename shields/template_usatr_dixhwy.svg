@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="204px" height="328px" viewBox="0 0 204 328" enable-background="new 0 0 204 328" xml:space="preserve">
+<g id="White_Stripes">
+	<rect x="1" y="1" fill="#FFFFFF" width="202" height="326"/>
+</g>
+<g id="Center_Red_Stripe">
+	<rect x="2" y="108" fill="#FF0000" width="200" height="112"/>
+</g>
+<g id="Black_outline">
+	<rect x="1" y="1" fill="none" stroke="#000000" stroke-width="2" width="202" height="326"/>
+</g>
+<g id="D">
+	<g>
+		<path fill="#FFFFFF" d="M32.023,118.903h27.228c6.883,0,12.077,0.769,15.579,2.307c3.504,1.538,6.73,4.133,9.682,7.783
+			c2.949,3.651,5.265,8.388,6.945,14.212c1.68,5.825,2.52,13.064,2.52,21.718c0,7.793-0.881,14.571-2.643,20.334
+			c-1.763,5.763-3.996,10.326-6.699,13.688c-2.705,3.363-5.973,5.896-9.803,7.599c-3.832,1.702-8.759,2.554-14.782,2.554H32.023
+			V118.903z M46.912,134.161v59.678h11.197c4.799,0,8.275-0.45,10.428-1.353c2.153-0.901,3.916-2.264,5.291-4.088
+			c1.373-1.821,2.512-4.7,3.414-8.635c0.902-3.934,1.354-9.115,1.354-15.549c0-6.679-0.461-11.944-1.384-15.796
+			c-0.923-3.851-2.358-6.883-4.307-9.096c-1.949-2.213-4.317-3.667-7.106-4.364c-2.092-0.533-6.132-0.799-12.12-0.799
+			L46.912,134.161L46.912,134.161z"/>
+	</g>
+</g>
+<g id="H">
+	<g>
+		<path fill="#FFFFFF" d="M111.438,209.098v-90.194h14.89v35.499h29.348v-35.499h14.89v90.194h-14.89V169.66h-29.348v39.438H111.438
+			z"/>
+	</g>
+</g>
+</svg>
