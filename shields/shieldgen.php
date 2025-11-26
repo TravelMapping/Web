@@ -524,6 +524,13 @@ function tm_shield_generate($r, $force_reload = false) {
             } 
             break;
 
+		case 'usatr':
+            $routeNum = strtolower($row['route']);
+            if (file_exists("{$dir}/template_usatr_" . $routeNum . ".svg")) {
+                $svg = file_get_contents("{$dir}/template_usatr_" . $routeNum . ".svg");
+            } 
+            break;
+
         case 'belb':
         case 'bgra':
 		case 'cisa':
@@ -535,6 +542,8 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'islf':
         case 'jamt':
         case 'jama':
+		case 'kazkaz':
+		case 'kazkz':
         case 'lkaa':
         case 'lkae':
         case 'lvaa':
@@ -574,11 +583,6 @@ function tm_shield_generate($r, $force_reload = false) {
             }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
-
-		case 'kaza':
-			$routeNum = str_replace("A", "A-", $row['route']);
-            $svg = str_replace("***NUMBER***", $routeNum, $svg);
-			break;
 		
         case 'azem':
 		case 'gtmrn':
@@ -610,15 +614,38 @@ function tm_shield_generate($r, $force_reload = false) {
 			break;
 		
         case 'itaa':
-            // replace placeholder, use wide svg file for 5-/7-digit numbers
-            if (strlen($row['route']) > 4) {
-                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide5.svg");
-            }
-            if (strlen($row['route']) > 6) {
-                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide7.svg");
-            }
-            $svg = str_replace("***NUMBER***", $row['route'], $svg);
-            break;
+			$routeNum = $row['route'];
+			if (strlen($routeNum) > 5) {
+				$svg = file_get_contents("{$dir}/template_itasf.svg");
+				$lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
+				$index = 0;
+				foreach ($lines as $line) {
+					if (strlen($line) > 0) {
+						$svg = str_replace("***NUMBER".($index + 1)."***", $line, $svg);
+						$index++;
+					}
+				}
+				while ($index < 3) {
+					$svg = str_replace("***NUMBER".($index + 1)."***", "", $svg);
+					$index++;
+				}
+				break;
+			}
+			elseif(strlen($routeNum) > 4) {
+				$svg = file_get_contents("{$dir}/template_itaa_wide5.svg");
+				$svg = str_replace("***NUMBER***", $routeNum, $svg);
+				break;
+			}
+			elseif(strlen($routeNum) > 3) {
+				$svg = file_get_contents("{$dir}/template_itaa_wide.svg");
+				$svg = str_replace("***NUMBER***", $routeNum, $svg);
+				break;
+			}
+			else {
+				$svg = file_get_contents("{$dir}/template_itaa.svg");
+				$svg = str_replace("***NUMBER***", $routeNum, $svg);
+				break;
+			}
             
         case 'abwrt':
 		case 'alakt':
@@ -1515,6 +1542,30 @@ function tm_shield_generate($r, $force_reload = false) {
                 $index++;
             }
             break;
+
+		case 'indne':
+		case 'indnh':
+		case 'indka':
+		case 'indkl':
+		case 'indmh':
+		case 'indtg':
+		case 'indup':
+		case 'indwb':
+            $routeNum = substr_replace($row['route'], '', 0, 2); // Remove prefixes that are exactly 2 characters.
+            if (strlen($routeNum) > 4) {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide5.svg");
+			}
+            elseif (strlen($routeNum) > 3) {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
+            }
+            elseif (strlen($routeNum) > 2) {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+            }
+			else {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . ".svg");
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
 		
         // CAN suffixes
         // XX50A -> 50^A
@@ -1787,7 +1838,30 @@ function tm_shield_generate($r, $force_reload = false) {
                 $svg = str_replace("***NUMBER***", $routeNum, $svg);
                 break;
             }
-        
+
+		case 'usavt': // Vermont
+            $matches = [];
+            $routeNum = str_replace("VT", "", $row['route']);
+			if (strlen($routeNum) > 3) {
+                $svg = file_get_contents("{$dir}/template_usavt_wide4.svg");
+            }
+			elseif (strlen($routeNum) > 2) {
+                $svg = file_get_contents("{$dir}/template_usavt_wide.svg");
+            }
+            else {
+                $svg = file_get_contents("{$dir}/template_usavt.svg");
+            }
+            if (preg_match('/(?<number>[0-9]+)(?<letter>[A-Za-z]+)/', $routeNum, $matches)) {
+               $svg = str_replace("***NUMBER***", $matches['number'], $svg);
+               $svg = str_replace("***LETTER***", $matches['letter'], $svg);
+               break;
+            }
+            else {
+               $svg = str_replace("***NUMBER***", $routeNum, $svg);
+               $svg = str_replace("***LETTER***", "", $svg);
+               break;
+            }
+		
         // Generic case for CAN/USA regional systems.
         // Removes exactly 2 uppercase letter prefixes: XX101 -> 101
         
@@ -1849,7 +1923,6 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'usaut': // Utah
         // usava Virginia generic case falls through to here
         case 'usavi': // US Virgin Islands
-        case 'usavt': // Vermont
         case 'usawa': // Washington State
         case 'usawi': // Wisconsin
         case 'usawv': // West Virginia
