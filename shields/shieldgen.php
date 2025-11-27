@@ -518,18 +518,14 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
 
 		case 'usanht':
-            $routeNum = strtolower($row['route']);
-            if (file_exists("{$dir}/template_usanht_" . $routeNum . ".svg")) {
-                $svg = file_get_contents("{$dir}/template_usanht_" . $routeNum . ".svg");
+            if (file_exists("{$dir}/template_usanht_" . strtolower($row['route']) . ".svg")) {
+                $svg = file_get_contents("{$dir}/template_usanht_" . strtolower($row['route']) . ".svg");
             } 
-            break;
 
 		case 'usatr':
-            $routeNum = strtolower($row['route']);
-            if (file_exists("{$dir}/template_usatr_" . $routeNum . ".svg")) {
-                $svg = file_get_contents("{$dir}/template_usatr_" . $routeNum . ".svg");
+            if (file_exists("{$dir}/template_usatr_" . strtolower($row['route']) . ".svg")) {
+                $svg = file_get_contents("{$dir}/template_usatr_" . strtolower($row['route']) . ".svg");
             } 
-            break;
 
         case 'belb':
         case 'bgra':
