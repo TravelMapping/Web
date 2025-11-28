@@ -517,16 +517,6 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***LETTER***", "", $svg); //hack to kill off the suffix for usaar
             break;
 
-		case 'usanht':
-            if (file_exists("{$dir}/template_usanht_" . strtolower($row['route']) . ".svg")) {
-                $svg = file_get_contents("{$dir}/template_usanht_" . strtolower($row['route']) . ".svg");
-            } 
-
-		case 'usatr':
-            if (file_exists("{$dir}/template_usatr_" . strtolower($row['route']) . ".svg")) {
-                $svg = file_get_contents("{$dir}/template_usatr_" . strtolower($row['route']) . ".svg");
-            } 
-
         case 'belb':
         case 'bgra':
 		case 'cisa':
@@ -1820,20 +1810,6 @@ function tm_shield_generate($r, $force_reload = false) {
             }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;		
-		
-        // Virginia Wyes: also fall through to default if banner was not Wye
-        case 'usava': 
-            if ($row['banner'] === 'Wye') {
-                $routeNum = str_replace('VA', "", $row['route']);
-                if (strlen($routeNum) > 2) {
-                    $svg = file_get_contents("{$dir}/template_usava_wye_wide.svg");
-                }
-                else {
-                    $svg = file_get_contents("{$dir}/template_usava_wye.svg");
-                }
-                $svg = str_replace("***NUMBER***", $routeNum, $svg);
-                break;
-            }
 
 		case 'usavt': // Vermont
             $matches = [];
@@ -1857,6 +1833,30 @@ function tm_shield_generate($r, $force_reload = false) {
                $svg = str_replace("***LETTER***", "", $svg);
                break;
             }
+		
+        // Virginia Wyes: also fall through to default if banner was not Wye
+        case 'usava': 
+            if ($row['banner'] === 'Wye') {
+                $routeNum = str_replace('VA', "", $row['route']);
+                if (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_usava_wye_wide.svg");
+                }
+                else {
+                    $svg = file_get_contents("{$dir}/template_usava_wye.svg");
+                }
+                $svg = str_replace("***NUMBER***", $routeNum, $svg);
+                break;
+            }
+
+		case 'usanht':
+            if (file_exists("{$dir}/template_usanht_" . strtolower($row['route']) . ".svg")) {
+                $svg = file_get_contents("{$dir}/template_usanht_" . strtolower($row['route']) . ".svg");
+            } 
+
+		case 'usatr':
+            if (file_exists("{$dir}/template_usatr_" . strtolower($row['route']) . ".svg")) {
+                $svg = file_get_contents("{$dir}/template_usatr_" . strtolower($row['route']) . ".svg");
+            } 
 		
         // Generic case for CAN/USA regional systems.
         // Removes exactly 2 uppercase letter prefixes: XX101 -> 101
