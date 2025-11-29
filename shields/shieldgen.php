@@ -1846,16 +1846,6 @@ function tm_shield_generate($r, $force_reload = false) {
                 }
                 $svg = str_replace("***NUMBER***", $routeNum, $svg);
                 break;
-            }
-
-		case 'usanht':
-            if (file_exists("{$dir}/template_usanht_" . strtolower($row['route']) . ".svg")) {
-                $svg = file_get_contents("{$dir}/template_usanht_" . strtolower($row['route']) . ".svg");
-            } 
-
-		case 'usatr':
-            if (file_exists("{$dir}/template_usatr_" . strtolower($row['route']) . ".svg")) {
-                $svg = file_get_contents("{$dir}/template_usatr_" . strtolower($row['route']) . ".svg");
             } 
 		
         // Generic case for CAN/USA regional systems.
@@ -1941,6 +1931,16 @@ function tm_shield_generate($r, $force_reload = false) {
             }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
+
+		case 'usanht':
+            if (file_exists("{$dir}/template_usanht_" . strtolower($row['route']) . ".svg")) {
+                $svg = file_get_contents("{$dir}/template_usanht_" . strtolower($row['route']) . ".svg");
+            } 
+
+		case 'usatr':
+            if (file_exists("{$dir}/template_usatr_" . strtolower($row['route']) . ".svg")) {
+                $svg = file_get_contents("{$dir}/template_usatr_" . strtolower($row['route']) . ".svg");
+            }
         
         default:
             $region = strtoupper(explode(".", $r)[0]);
