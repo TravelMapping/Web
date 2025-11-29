@@ -1935,11 +1935,13 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'usanht':
             if (file_exists("{$dir}/template_usanht_" . strtolower($row['route']) . ".svg")) {
                 $svg = file_get_contents("{$dir}/template_usanht_" . strtolower($row['route']) . ".svg");
+				break;
             } 
 
 		case 'usatr':
             if (file_exists("{$dir}/template_usatr_" . strtolower($row['route']) . ".svg")) {
                 $svg = file_get_contents("{$dir}/template_usatr_" . strtolower($row['route']) . ".svg");
+				break;
             }
         
         default:
