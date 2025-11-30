@@ -441,6 +441,27 @@ function tm_shield_generate($r, $force_reload = false) {
             }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
+
+		case 'mexdfeje':
+			$routeNum = str_replace("Eje", "", $row['route']);
+			if (str_contains($routeNum, "Nte")) {
+				$svg = file_get_contents("{$dir}/template_mexdfeje_nte.svg");
+				$routeNum = str_replace("Nte", "", $routeNum);
+			}
+			elseif (str_contains($routeNum, "Ote")) {
+				$svg = file_get_contents("{$dir}/template_mexdfeje_ote.svg");
+				$routeNum = str_replace("Nte", "", $routeNum);
+			}
+			elseif (str_contains($routeNum, "Pte")) {
+				$svg = file_get_contents("{$dir}/template_mexdfeje_pte.svg");
+				$routeNum = str_replace("Nte", "", $routeNum);
+			}
+			elseif (str_contains($routeNum, "Sur")) {
+				$svg = file_get_contents("{$dir}/template_mexdfeje_sur.svg");
+				$routeNum = str_replace("Nte", "", $routeNum);
+			}
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
 		
         case 'usai':
         case 'usaif':
