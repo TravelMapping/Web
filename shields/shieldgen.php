@@ -1078,7 +1078,6 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'mozn':
 		case 'musa':
 		case 'musb':
-		case 'musm':
 		case 'mwim':
 		case 'rwanr':
 		case 'swzmr':
