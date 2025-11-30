@@ -450,15 +450,15 @@ function tm_shield_generate($r, $force_reload = false) {
 			}
 			elseif (str_contains($routeNum, "Ote")) {
 				$svg = file_get_contents("{$dir}/template_mexdfeje_ote.svg");
-				$routeNum = str_replace("Nte", "", $routeNum);
+				$routeNum = str_replace("Ote", "", $routeNum);
 			}
 			elseif (str_contains($routeNum, "Pte")) {
 				$svg = file_get_contents("{$dir}/template_mexdfeje_pte.svg");
-				$routeNum = str_replace("Nte", "", $routeNum);
+				$routeNum = str_replace("Pte", "", $routeNum);
 			}
 			elseif (str_contains($routeNum, "Sur")) {
 				$svg = file_get_contents("{$dir}/template_mexdfeje_sur.svg");
-				$routeNum = str_replace("Nte", "", $routeNum);
+				$routeNum = str_replace("Sur", "", $routeNum);
 			}
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
