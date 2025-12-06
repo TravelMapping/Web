@@ -663,6 +663,7 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'bolf':
         case 'canmbw':
         case 'chea':
+		case 'cypd':
         case 'czed':
         case 'czei':
         case 'deua':
@@ -699,6 +700,7 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'svng':
 		case 'svnr':
         case 'swel':
+		case 'turd':
 		case 'vent':
 		case 'zafn':
 		case 'zafr':
@@ -849,16 +851,45 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
 
         case 'roudn':
-            // replace placeholder, remove prefix, use wide svg files
+			$matches = [];
             $routeNum = str_replace("DN", "", $row['route']);
-            if (strlen($routeNum) > 2) {
-                $svg = file_get_contents("{$dir}/template_roudn_wide" . strlen($routeNum) . ".svg");
+			if (ctype_digit($row['route'][0])) {
+                if (strlen($routeNum) > 2) {
+					$svg = file_get_contents("{$dir}/template_roudn_wide" . strlen($routeNum) . ".svg");
+				}
+				else {
+					$svg = file_get_contents("{$dir}/template_roudn.svg");
+				}
+				if (preg_match('/(?<number>[0-9]+)(?<letter>[A-Za-z]+)/', $routeNum, $matches)) {
+					$svg = str_replace("***NUMBER***", $matches['number'], $svg);
+					$svg = str_replace("***LETTER***", $matches['letter'], $svg);
+					break;
+				}
+				else {
+					$svg = str_replace("***NUMBER***", $routeNum, $svg);
+					$svg = str_replace("***LETTER***", "", $svg);
+					break;
+				}
             }
 			else {
-				$svg = file_get_contents("{$dir}/template_roudn.svg");
+				if (str_starts_with($routeNum, 'VO')) {
+					$svg = file_get_contents("{$dir}/template_roudn_vo.svg");
+					$routeNum = str_replace("VO", "", $routeNum);
+					$svg = str_replace("***NUMBER***", $routeNum, $svg);
+					break;
+				}
+				else {
+					if (strlen($routeNum) > 2) {
+						$svg = file_get_contents("{$dir}/template_roudn_wide" . strlen($routeNum) . ".svg");
+					}
+					else {
+						$svg = file_get_contents("{$dir}/template_roudn.svg");
+					}
+					$svg = str_replace("***NUMBER***", $routeNum, $svg);
+					$svg = str_replace("***LETTER***", "", $svg);
+					break;
+				}
 			}
-            $svg = str_replace("***NUMBER***", $routeNum, $svg);
-            break;
 
 		case 'roudex':
             $routeNum = $row['route'];
@@ -874,7 +905,6 @@ function tm_shield_generate($r, $force_reload = false) {
 
         case 'andcs':
         case 'biha':
-		case 'cypd':
         case 'hrva':
 		case 'mkda':
         case 'prtip':
@@ -886,14 +916,12 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'srba':
         case 'svna':
         case 'svnh':
-        case 'turd':
 		case 'ukrm':
         case 'vnmct':
             // replace placeholder, add blank after prefix
             $routeNum = str_replace("A", "A ", $row['route']);
             $routeNum = str_replace("CS", "CS ", $routeNum);
             $routeNum = str_replace("CT", "CT.", $routeNum);
-            $routeNum = str_replace("D", "D ", $routeNum);
             $routeNum = str_replace("H", "H ", $routeNum);
             $routeNum = str_replace("IC", "IC ", $routeNum);
             $routeNum = str_replace("IP", "IP ", $routeNum);
@@ -935,8 +963,7 @@ function tm_shield_generate($r, $force_reload = false) {
 			break;
 		
         case 'turo':
-            // replace placeholder, add blank after prefix, use wide svg files
-            $routeNum = str_replace("O", "O ", $row['route']);
+            $routeNum = str_replace("O", "", $row['route']);
             $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
@@ -1678,9 +1705,16 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'usamn': // Minnesota
 			$routeNum = str_replace("MN", "", $row['route']);
 			if ($row['banner'] == "Bus") {
-				$svg = file_get_contents("{$dir}/template_usamn_bus.svg");
-				$svg = str_replace("***NUMBER***", $routeNum, $svg);
-				break;
+				if (strlen($routeNum) > 2) {
+					$svg = file_get_contents("{$dir}/template_usamn_bus_wide.svg");
+					$svg = str_replace("***NUMBER***", $routeNum, $svg);
+					break;
+				}
+				else {
+					$svg = file_get_contents("{$dir}/template_usamn_bus.svg");
+					$svg = str_replace("***NUMBER***", $routeNum, $svg);
+					break;
+				}
 			}
 			else {
 				if (strlen($routeNum) > 2) {
