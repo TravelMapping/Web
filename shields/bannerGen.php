@@ -92,6 +92,14 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 			else {
 				break;
 			}
+
+		case 'usatr': // No banner for Michigan, regular otherwise
+			if ($region == "MI") {
+				return 'not external';
+			}
+			else {
+				break;
+			}
 		
 		case 'usaca': // White text on green bg
 			$textColor = '#fff';
