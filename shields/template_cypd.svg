@@ -50,5 +50,7 @@
        style="fill:#f2f2f2;fill-rule:evenodd;stroke-width:10;stroke-dashoffset:34.8992" />
   </g>
   <text letter-spacing="60px" text-anchor="middle" word-spacing="-100px" text-align="center" font-size="450px" line-height="100%" y="0" x="0" font-family="&apos;Roadgeek 2014 Series EM&apos;" fill="#ffffff">
-     <tspan y="320" x="770">***NUMBER***</tspan></text>
+     <tspan y="320" x="260">D</tspan></text>
+  <text letter-spacing="60px" text-anchor="middle" word-spacing="-100px" text-align="center" font-size="450px" line-height="100%" y="0" x="0" font-family="&apos;Roadgeek 2014 Series EM&apos;" fill="#ffffff">
+     <tspan y="320" x="1030">***NUMBER***</tspan></text>
 </svg>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   width="1140"
+   height="500"
+   viewBox="0 0 301.6 132.3"
+   version="1.1"
+   id="svg8">
+  <defs
+     id="defs2" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <rect
+     y="-1.221e-05"
+     x="-0.009999"
+     height="132.3"
+     width="301.6"
+     id="rect833"
+     style="fill:#000000;fill-rule:evenodd;stroke-width:0.07;stroke-dashoffset:34.8992" />
+  <path
+     d="M 6.6,19.8 150.8,6.6 295.1,19.8 v 92.7 L 150.8,125.7 6.6,112.5 Z"
+     style="fill:#dd7500;fill-rule:evenodd;stroke-width:0.07;stroke-dashoffset:34.8992"
+     id="rect835" />
+  <rect
+     y="92.59"
+     x="144.2"
+     height="6.62"
+     width="13.2"
+     id="rect4327"
+     style="fill:#000000;fill-rule:evenodd;stroke-width:0.2646;stroke-dashoffset:34.8992" />
+  <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="125px" line-height="100%" y="0" x="0" font-family="&apos;Roadgeek 2014 Series EM" fill="#000000">
+     <tspan y="100" x="90">O</tspan></text>
+    <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="125px" line-height="100%" y="0" x="0" font-family="&apos;Roadgeek 2014 Series EM" fill="#000000">
+     <tspan y="100" x="220">***NUMBER***</tspan></text>
+</svg>
