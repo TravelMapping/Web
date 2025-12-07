@@ -15,8 +15,7 @@
    <rect id="rect44797" rx="37.5" ry="37.5" height="600" width="600" y="-236.83" x="554.39"/>
    <path id="rect44794" d="m25 25h550l-100 550h-350z" transform="translate(554.39 -236.83)" fill="#fff"/>
   </g>
-  <text id="text44828" style="word-spacing:0px;letter-spacing:0px;text-anchor:middle;text-align:center" xml:space="preserve" font-size="334.82px" line-height="100%" y="63.171711" x="798.16663" font-family="&apos;Roadgeek 2014 Series C&apos;" fill="#000000"><tspan id="tspan44830" y="63.171711" x="798.16663">***NUMBER***</tspan></text>
-  <text id="text44842" style="word-spacing:0px;letter-spacing:0px;text-anchor:middle;text-align:center" xml:space="preserve" font-size="251.87px" line-height="100%" y="63.172192" x="1007.9865" font-family="&apos;Roadgeek 2014 Series C&apos;" fill="#000000"><tspan id="tspan44844" y="63.172192" x="1007.9865">***LETTER***</tspan></text>
+  <text id="text44828" style="word-spacing:0px;letter-spacing:0px;text-anchor:middle;text-align:center" xml:space="preserve" font-size="370px" line-height="100%" y="63.171711" x="798.16663" font-family="&apos;Roadgeek 2014 Series C&apos;" fill="#000000"><tspan id="tspan44830" y="63.171711" x="855">***NUMBER***</tspan><tspan font-size="277.5px">***LETTER***</tspan></text>
   <g id="text45180">
    <path id="path45213" d="m740.19 238.17v-99.702h14.286v86.458h36.458v13.244h-50.744"/>
    <path id="path45215" d="m805 238.17v-99.702h13.988v99.702h-13.988"/>
