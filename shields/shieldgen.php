@@ -853,7 +853,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'roudn':
 			$matches = [];
             $routeNum = str_replace("DN", "", $row['route']);
-			if (ctype_digit($row['route'][0])) {
+			if (ctype_digit($routeNum[0])) {
                 if (strlen($routeNum) > 2) {
 					$svg = file_get_contents("{$dir}/template_roudn_wide" . strlen($routeNum) . ".svg");
 				}
