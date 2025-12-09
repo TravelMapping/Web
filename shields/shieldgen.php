@@ -1008,6 +1008,24 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
        
         // frad France Routes Départementales
+
+		case 'fraoccd34': // Hérault Routes Départementales
+            $routeNum = substr_replace($row['route'], "D ", 0, 1); // Use substr_replace here to avoid matching suffixes.
+            if (strlen($routeNum) > 7) {
+                $svg = file_get_contents("{$dir}/template_frad_wide7.svg");
+            } else {
+                $svg = file_get_contents("{$dir}/template_frad_wide" . strlen($routeNum) . ".svg");
+            }
+			$numParts = explode('E', $routeNum, 2);
+            $svg = str_replace("***NUMBER***", $numParts[0], $svg);
+            if (isset($numParts[1])) {
+                $numParts[1] = substr_replace($numParts[1], "E", 0, 0);
+				$svg = str_replace("***SUFFIX***", $numParts[1], $svg);
+            } else {
+                $svg = str_replace("***SUFFIX***", '', $svg);
+            }
+			break;
+		
         // fraxxxdnn
         case preg_match('/fra[a-z]{3}d[0-9]{2}/', $row['systemName']) ? $row['systemName'] : !$row['systemName']:
         case 'fragesd6ae':
@@ -1337,7 +1355,7 @@ function tm_shield_generate($r, $force_reload = false) {
 			break;
 		
 		case 'kgzem':
-			$routeNum = str_replace("EM", "ЭM-", $row['route']);
+			$routeNum = str_replace("EM", "", $row['route']);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
 			break;
 			
