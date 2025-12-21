@@ -1008,24 +1008,6 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
        
         // frad France Routes Départementales
-
-		case 'fraoccd34': // Hérault Routes Départementales
-            $routeNum = substr_replace($row['route'], "D ", 0, 1); // Use substr_replace here to avoid matching suffixes.
-            if (strlen($routeNum) > 7) {
-                $svg = file_get_contents("{$dir}/template_frad_wide7.svg");
-            } else {
-                $svg = file_get_contents("{$dir}/template_frad_wide" . strlen($routeNum) . ".svg");
-            }
-			$numParts = explode('E', $routeNum, 2);
-            $svg = str_replace("***NUMBER***", $numParts[0], $svg);
-            if (isset($numParts[1])) {
-                $numParts[1] = substr_replace($numParts[1], "E", 0, 0);
-				$svg = str_replace("***SUFFIX***", $numParts[1], $svg);
-            } else {
-                $svg = str_replace("***SUFFIX***", '', $svg);
-            }
-			break;
-		
         // fraxxxdnn
         case preg_match('/fra[a-z]{3}d[0-9]{2}/', $row['systemName']) ? $row['systemName'] : !$row['systemName']:
         case 'fragesd6ae':
@@ -1046,11 +1028,7 @@ function tm_shield_generate($r, $force_reload = false) {
             }
             
             $matches = [];
-            if (preg_match('/(?<number>[DN] [0-9]+)(?<suffix>[A-Za-z]+[0-9]?)/', $routeNum, $matches)) {
-                $svg = str_replace("***NUMBER***", $matches['number'], $svg);
-                $svg = str_replace("***SUFFIX***", $matches['suffix'], $svg);
-            }
-            else { // D 1.1 -> D 1^1
+            if (str_contains($routeNum, '.')) { // D 1.1 -> D 1^1
                 $numParts = explode('.',  $routeNum);
                 $svg = str_replace("***NUMBER***", $numParts[0], $svg);
                 if ( isset($numParts[1]) ) {
@@ -1059,6 +1037,17 @@ function tm_shield_generate($r, $force_reload = false) {
                     $svg = str_replace("***SUFFIX***", '', $svg);
                 }
             }
+			else { // D 1A11 > D 1^A11, D 1Bis > D 1^Bis, etc.
+				$matches = preg_split('~([a-zA-Z])~', $routeNum, 2, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+				$svg = str_replace("***NUMBER***", $matches[0] . $matches[1], $svg);
+				if ( isset($matches[3]) ) {
+                    $svg = str_replace("***SUFFIX***", $matches[2] . $matches[3], $svg);
+                } elseif ( isset($matches[2]) ){
+                    $svg = str_replace("***SUFFIX***", $matches[2], $svg);
+                } else {
+                    $svg = str_replace("***SUFFIX***", '', $svg);
+                }
+			}
             break;
             
 		// fram France Routes Métropolitaines
@@ -1085,15 +1074,27 @@ function tm_shield_generate($r, $force_reload = false) {
 			}
 
 			$matches = [];
-			if (preg_match('/(?<number>(M |T)[0-9]+)(?<suffix>[A-Za-z]+[0-9]?)/', $routeNum, $matches)) {
-				$svg = str_replace("***NUMBER***", $matches['number'], $svg);
-				$svg = str_replace("***SUFFIX***", $matches['suffix'], $svg);
+            if (str_contains($routeNum, '.')) { // M 1.1 -> M 1^1
+                $numParts = explode('.',  $routeNum);
+                $svg = str_replace("***NUMBER***", $numParts[0], $svg);
+                if ( isset($numParts[1]) ) {
+                    $svg = str_replace("***SUFFIX***", $numParts[1], $svg);
+                } else {
+                    $svg = str_replace("***SUFFIX***", '', $svg);
+                }
+            }
+			else { // M 1A11 > M 1^A11, M 1Bis > M 1^Bis, etc.
+				$matches = preg_split('~([a-zA-Z])~', $routeNum, 2, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+				$svg = str_replace("***NUMBER***", $matches[0] . $matches[1], $svg);
+				if ( isset($matches[3]) ) {
+                    $svg = str_replace("***SUFFIX***", $matches[2] . $matches[3], $svg);
+                } elseif ( isset($matches[2]) ){
+                    $svg = str_replace("***SUFFIX***", $matches[2], $svg);
+                } else {
+                    $svg = str_replace("***SUFFIX***", '', $svg);
+                }
 			}
-			else {
-				$svg = str_replace("***NUMBER***", $routeNum, $svg);
-				$svg = str_replace("***SUFFIX***", '', $svg);
-			}
-			break; 
+            break;
 		
         case 'nclt':
 		case 'pyft':
@@ -1350,7 +1351,7 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
 
 		case 'tjkrb':
-			$routeNum = str_replace("RB", "РБ", $row['route']);
+			$routeNum = str_replace("RB", "", $row['route']);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
 			break;
 		
