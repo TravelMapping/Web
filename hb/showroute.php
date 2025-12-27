@@ -299,7 +299,7 @@ if ($routeInfo['banner'] != '') {
 	$bannersArray = getBannerArray($routeInfo['banner']);
 	
 	foreach ($bannersArray as $singleBanner) {
-		$bannerSvg = tm_banner_generate($singleBanner, $routeInfo['systemName'], $routeInfo['region'], true);
+		$bannerSvg = tm_banner_generate($singleBanner, $routeInfo['systemName'], true);
 		if ( $bannerSvg == 'not external' || $bannerSvg == '' ) { // System/route doesn't use formal external banners so print nothing.
 			break;
 		} else {
