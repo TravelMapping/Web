@@ -106,7 +106,7 @@ SQL;
 				
 			// For each banner in the array, generate the banner
 			foreach ($bannersArray as $singleBanner) {
-				$bannerSvg = tm_banner_generate($singleBanner, $row['systemName'], $row['region'], $_GET['reload'] ?? false);
+				$bannerSvg = tm_banner_generate($singleBanner, $row['systemName'], $_GET['reload'] ?? false);
 				if ( $bannerSvg == 'not external' ) { // System doesn't use external banners so print nothing.
 					break;
 				}
