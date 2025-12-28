@@ -1,10 +1,61 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg xmlns="http://www.w3.org/2000/svg" height="120px" width="200px" version="1.1" viewBox="0 0 200 120">
-  <g fill-rule="evenodd">
-    <rect rx="0" ry="0" height="120" width="200" y="0" x="0" fill="#000"/>
-    <rect rx="0" ry="0" height="112" width="192" y="4.25" x="4.25" fill="#fafd4a"/>
-    <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="120px" line-height="100%" y="60" x="100" font-family="&apos;Roadgeek 2005 Mittelschrift&apos;" fill="#000">
-      <tspan y="100" x="100">***NUMBER***</tspan>
-    </text>
-  </g>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   id="Vrstva_1"
+   x="0px"
+   y="0px"
+   width="598.50684"
+   height="269.99994"
+   viewBox="0 0 609.84 354.33"
+   enable-background="new 0 0 756.85 354.33"
+   xml:space="preserve"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   sodipodi:docname="DW875-PL.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"><metadata
+   id="metadata15"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs13"><inkscape:perspective
+     sodipodi:type="inkscape:persp3d"
+     inkscape:vp_x="0 : 135 : 1"
+     inkscape:vp_y="0 : 1000 : 0"
+     inkscape:vp_z="1 : 135 : 1"
+     inkscape:persp3d-origin="0.5 : 90 : 1"
+     id="perspective8" /></defs><sodipodi:namedview
+   inkscape:window-height="712"
+   inkscape:window-width="1280"
+   inkscape:pageshadow="2"
+   inkscape:pageopacity="0.0"
+   guidetolerance="10.0"
+   gridtolerance="10.0"
+   objecttolerance="10.0"
+   borderopacity="1.0"
+   bordercolor="#666666"
+   pagecolor="#ffffff"
+   id="base"
+   showgrid="false"
+   inkscape:zoom="1.2923685"
+   inkscape:cx="206.5778"
+   inkscape:cy="118.71504"
+   inkscape:window-x="-4"
+   inkscape:window-y="-4"
+   inkscape:current-layer="Vrstva_1"
+   units="px"
+   showguides="true"
+   inkscape:guide-bbox="true" />
+<path
+   id="rect2780"
+   stroke-miterlimit="10"
+   d="M -54.99199,5.9054999 L 664.83184,5.9054999 C 678.64767,5.9054999 691.73476,17.787019 691.73476,32.808321 L 691.60965,321.52166 C 691.60965,336.54093 678.64769,348.42448 664.83184,348.42448 L -54.99199,348.42448 C -68.80681,348.42448 -81.89482,336.54093 -81.89482,321.52166 L -81.7697,32.808321 C -81.7697,17.788 -68.8058,5.9054999 -54.99199,5.9054999 z"
+   style="fill:#fafd4a;stroke:#000000;stroke-width:11.81099987;stroke-miterlimit:10;stroke-dasharray:none"
+   sodipodi:nodetypes="ccccccccc" />
+<text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="375px" line-height="100%" y="0" x="0" font-family="&apos;W-Droge Droge-Itinerary&apos;" fill="#000">
+     <tspan y="287.5" x="304.92">***NUMBER***</tspan></text>
 </svg>

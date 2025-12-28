@@ -1,1 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 600 600" width="600" height="600"><path d="m37.5 0h525c20.775 0 37.5 16.725 37.5 37.5v525c0 20.775-16.725 37.5-37.5 37.5h-525c-20.775 0-37.5-16.725-37.5-37.5v-525c0-20.775 16.725-37.5 37.5-37.5"/><path d="m87.5 50h425c20.775 0 37.5 16.725 37.5 37.5v425c0 20.775-16.725 37.5-37.5 37.5h-425c-20.775 0-37.5-16.725-37.5-37.5v-425c0-20.775 16.725-37.5 37.5-37.5" fill="#fff"/><text x="300.19" y="444.99" font-family="&apos;Roadgeek 2014 Series B&apos;" letter-spacing="0" word-spacing="0" text-anchor="middle" text-align="center" line-height="125%" font-size="516.22"><tspan x="300.19" y="444.99">***NUMBER***</tspan></text></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.0"
+   width="750"
+   height="600"
+   viewBox="0 0 750 600"
+   id="svg2">
+  <defs
+     id="defs4" />
+  <g
+     id="layer1">
+    <g
+       id="g1876">
+      <path
+         d="M 37.50003,-0.00048 L 712.50057,-0.00048 C 733.27559,-0.00048 750.0006,16.724533 750.0006,37.49955 L 750.0006,562.49997 C 750.0006,583.27499 733.27559,600 712.50057,600 L 37.50003,600 C 16.725013,600 0,583.27499 0,562.49997 L 0,37.49955 C 0,16.724533 16.725013,-0.00048 37.50003,-0.00048 z "
+         style="fill:black;fill-opacity:1;stroke:none"
+         id="rect5533" />
+      <path
+         d="M 87.50007,49.99956 L 662.50053,49.99956 C 683.27555,49.99956 700.00056,66.724573 700.00056,87.49959 L 700.00056,512.49993 C 700.00056,533.27495 683.27555,549.99996 662.50053,549.99996 L 87.50007,549.99996 C 66.725053,549.99996 50.00004,533.27495 50.00004,512.49993 L 50.00004,87.49959 C 50.00004,66.724573 66.725053,49.99956 87.50007,49.99956 z "
+         style="fill:white;fill-opacity:1;stroke:none"
+         id="rect5535" />
+    </g>
+  </g>
+<text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="515px" line-height="100%" y="0" x="0" font-family="&apos;Roadgeek 2014 Series C&apos;" fill="#000">
+     <tspan y="450" x="375">***NUMBER***</tspan></text>
+</svg>
