@@ -1,5 +1,5 @@
 <svg version="1.1"
-	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+	 xmlns="http://www.w3.org/2000/svg"
 	 x="0px" y="0px" width="482px" height="283px" viewBox="0 0 482 283" enable-background="new 0 0 482 283" xml:space="preserve">
 <defs>
 </defs>
@@ -41,6 +41,6 @@
 	c-0.779-0.82-1.72-1.66-2.819-2.52c1.5-0.801,2.645-1.516,3.435-2.146s1.515-1.444,2.175-2.444h-3.45v-8.011h5.971V40.795z
 	 M387.735,47.666v-2.311h-2.551v2.311H387.735z M391.304,45.355v2.311h2.58v-2.311H391.304z M391.304,50.486v1.979l2.341-1.979
 	H391.304z"/>
-	<text x="241" y="225" fill="#FFFFFF" font-family="&apos;Roadgeek 2014 Series E&apos;" font-size="150" text-align="center" text-anchor="middle" letter-spacing="0">
+	<text x="241px" y="225px" fill="#FFFFFF" font-family="&apos;Roadgeek 2014 Series E&apos;" font-size="150px" text-align="center" text-anchor="middle" letter-spacing="0">
     <tspan>***NUMBER***</tspan></text>
 </svg>
