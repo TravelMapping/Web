@@ -250,12 +250,10 @@ function tm_shield_generate($r, $force_reload = false) {
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
 			break;
 		
-		case 'ausnt':
 		case 'ausqld':
 		case 'auswa':	
 			// Australian State Routes
-			$routeNum = str_replace("NT", "", $row['route']);
-			$routeNum = str_replace("QLD", "", $routeNum);
+			$routeNum = str_replace("QLD", "", $row['route']);
 			$routeNum = str_replace("WA", "", $routeNum);
 			if (strlen($routeNum) > 2) {
 				$svg = file_get_contents("{$dir}/template_auss_wide.svg");	
@@ -755,10 +753,12 @@ function tm_shield_generate($r, $force_reload = false) {
 			break;
 		
         case 'autb':
-            // replace placeholder, remove prefix, use wide svg file for 3-digit numbers
             $routeNum = str_replace("B", "", $row['route']);
             $routeNum = str_replace("L", "", $routeNum);
-            if (strlen($routeNum) > 2) {
+            if (strlen($routeNum) > 3) {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
+            }
+			elseif (strlen($routeNum) > 2) {
                 $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
             }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
@@ -1329,20 +1329,14 @@ function tm_shield_generate($r, $force_reload = false) {
 
         case 'gbnm':
         case 'nirm':
-            $routeNum = str_replace("M", "", $row['route']);
-            if (strlen($routeNum) > 2) {
-                $svg = file_get_contents("{$dir}/template_gbnm_wide.svg");
-            }
-            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            $svg = file_get_contents("{$dir}/template_gbnm_wide" . strlen($row['route']) . ".svg");
+            $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;
-
+					
         case 'gbnam':
         case 'niram':
-            $routeNum = str_replace("M", "", $row['route']);
-            $routeNum = str_replace("A", "", $routeNum);
-            if (strlen($routeNum) > 2) {
-                $svg = file_get_contents("{$dir}/template_gbnam_wide.svg");
-            }
+			$svg = file_get_contents("{$dir}/template_gbnam_wide" . strlen($row['route']) . ".svg");
+            $routeNum = str_replace("M", "(M)", $row['route']);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
