@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg1149"
+   width="600"
+   height="600"
+   viewBox="0 0 600 600"
+   sodipodi:docname="great barrier reef td.svg"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1153">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath1981">
+      <path
+         d="m 287.113,53.023 h 62.545 v 30.341 h -62.545 z"
+         clip-rule="evenodd"
+         id="path1979" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="namedview1151"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="0.84096527"
+     inkscape:cx="513.69541"
+     inkscape:cy="388.24433"
+     inkscape:window-width="1920"
+     inkscape:window-height="1121"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g1157">
+    <inkscape:page
+       x="0"
+       y="0"
+       id="page1155"
+       width="793.70081"
+       height="1122.5197" />
+  </sodipodi:namedview>
+  <g
+     id="g1157"
+     inkscape:groupmode="layer"
+     inkscape:label="Page 1"
+     transform="matrix(1.3333333,0,0,-1.3333333,0,1122.5197)">
+    <g
+       id="g1519"
+       transform="matrix(2.2025354,0,0,2.2025354,225.00001,841.65193)">
+      <path
+         d="M 0,0 C -9.815,0 -20.496,-3.459 -28.146,-7.495 L -84.005,-36.61 c -8.949,-4.613 -18.042,-14.558 -18.042,-26.521 0,0 0,-0.288 0,-0.288 0,-3.748 1.876,-9.225 2.598,-11.531 l 34.497,-109.398 c 3.464,-10.954 14,-19.746 25.836,-19.746 h 78.087 c 11.98,0 22.517,8.648 25.981,19.746 L 99.449,-74.95 c 0.722,2.306 2.598,7.783 2.598,11.531 0,0 0,0.288 0,0.288 0,11.963 -9.093,21.908 -18.042,26.521 L 28.146,-7.495 C 20.496,-3.459 9.815,0 0,0 Z"
+         style="fill:#fefefe;fill-opacity:1;fill-rule:evenodd;stroke:#373435;stroke-width:0.216;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:22.926;stroke-dasharray:none;stroke-opacity:1"
+         id="path1521" />
+    </g>
+    <g
+       id="g1523"
+       transform="matrix(2.2025354,0,0,2.2025354,17.086389,691.81014)">
+      <path
+         d="m 0,0 c 11.403,-38.772 24.104,-78.553 36.806,-116.749 4.186,-7.783 10.104,-11.819 18.764,-12.539 h 77.51 c 9.526,0.72 16.743,6.053 19.774,15.133 l 34.497,109.254 c 3.031,10.378 3.031,15.711 -4.186,24.359 l -2.453,2.306 -2.743,2.018 -2.886,1.73 c -21.074,10.954 -42.58,23.782 -64.52,32.862 -3.608,1.154 -7.505,2.162 -11.258,2.595 -10.97,0.865 -19.486,-1.874 -29.157,-5.91 L 13.712,25.512 C 4.186,19.746 -2.598,11.675 0,0"
+         style="fill:#9b5019;fill-opacity:1;fill-rule:evenodd;stroke:none"
+         id="path1525" />
+    </g>
+    <g
+       id="g1527"
+       transform="matrix(2.2025354,0,0,2.2025354,134.43748,757.17302)">
+      <path
+         d="m 0,0 c 7.183,-5.771 41.238,-12.898 40.367,-43.956 -12.858,34.66 -53.524,22.591 -63.998,3.009 25.037,4.862 36.568,14.585 57.627,-3.756 C 23.687,-45.932 18.053,-51.46 17.212,-62.06 l 4.27,4.513 c 1.511,1.706 2.475,2.589 4.43,3.988 3.723,2.663 7.623,4.201 13.496,3.453 -1.202,-2.997 -3.624,-5.619 -5.4,-8.749 -5.82,-10.253 -10.28,-21.702 -13.828,-33.072 -4.584,-14.689 -8.703,-37.981 -7.81,-54.994 l 19.997,0.007 c 0.582,16.216 -3.542,22.301 -0.741,52.161 1,10.671 5.165,38.647 11.954,43.719 5.007,0.336 8.653,-3.871 10.305,-7.975 2.502,-6.215 0.593,-11.223 1.491,-17.291 2.832,3.639 5.433,7.62 4.88,14.341 -0.635,7.72 -3.832,8.924 -8.085,12.202 26.026,7.863 43.686,-21.917 50.218,-26.655 1.962,13.201 -10.356,28.375 -16.475,32.514 -14.324,9.689 -25.355,6.237 -38.206,-0.92 23.115,23.636 41.567,10.099 61.235,6.568 -7.439,13.782 -35.7,31.967 -59.272,6.69 -0.171,-0.183 -0.38,-0.406 -0.539,-0.575 l -1.156,-1.183 C 48.045,1.767 7.882,4.859 0,0"
+         style="fill:#fefefe;fill-opacity:1;fill-rule:evenodd;stroke:none"
+         id="path1529" />
+    </g>
+  </g>
+</svg>

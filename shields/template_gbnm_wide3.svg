@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="svg5"
+   width="524"
+   height="242"
+   viewBox="0 0 524 243"
+   version="1.1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs16" />
+  <rect
+     id="rect1"
+     x="6.6757e-9"
+     y="6.1035e-6"
+     width="524"
+     height="242"
+     rx="31" />
+  <rect
+     id="rect2"
+     x="1"
+     y="1"
+     width="522"
+     height="240"
+     rx="30"
+     fill="#fff" />
+  <rect
+     id="rect3"
+     x="16"
+     y="16"
+     width="492"
+     height="210"
+     rx="15"
+     fill="#0079c1" />
+  <g
+     id="g5"
+     fill="#fff">
+    <path
+       id="path3"
+       d="m380.87 201 2.68-85.926h-27.225l-16.928 85.926zm-17.774-119.93h21.442l1.27-40.07h-14.812zm36.959-40.07 1.27 40.07h21.583l-7.9-40.07z" />
+    <path
+       id="path4"
+       d="m446.04 108.3-0.706-1.694-1.27-1.41-1.692-0.988-1.834-0.282h-95.077l-1.975 0.282-1.693 0.988-1.27 1.41-0.705 1.694-3.95 17.777h-12.837v-16.508l-0.282-1.693-0.846-1.693-1.27-1.27-1.551-0.705-1.834-0.282h-14.248v-12.84h180v12.84h-14.389l-1.693 0.282-1.551 0.705-1.27 1.27-0.846 1.693-0.282 1.693v16.508h-12.838z" />
+    <path
+       id="path5"
+       d="m429.54 115.07h-27.085l2.68 85.926h41.474z" />
+  </g>
+  <text letter-spacing="5px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="75px" line-height="100%" y="0" x="0" font-family="&apos;Motorway Permanent Regular&apos;" fill="#fff">
+     <tspan y="161" x="156">***NUMBER***</tspan></text>
+</svg>

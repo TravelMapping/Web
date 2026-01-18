@@ -431,3 +431,16 @@
     font-style: normal;
 
 }
+
+@font-face {
+    font-family: 'Motorway Permanent Regular';
+    src: url('motorway_permanent-webfont.eot');
+    src: url('motorway_permanent-webfont.eot?#iefix') format('embedded-opentype'),
+         url('motorway_permanent-webfont.woff2') format('woff2'),
+         url('motorway_permanent-webfont.woff') format('woff'),
+         url('motorway_permanent-webfont.ttf') format('truetype'),
+         url('motorway_permanent-webfont.svg#motorwaypermanent') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
