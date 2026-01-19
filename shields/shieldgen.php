@@ -1336,8 +1336,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'gbnam':
         case 'niram':
 			$svg = file_get_contents("{$dir}/template_gbnam_wide" . strlen($row['route']) . ".svg");
-            $routeNum = str_replace("M", "(M)", $row['route']);
-            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            $svg = str_replace("***NUMBER***", $row['route'] . "(M)", $svg);
             break;
 
 		case 'tjkrb':
