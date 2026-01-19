@@ -32,8 +32,17 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 		case 'ausab':
 		case 'ausnb':
 		case 'ausqld':
+		case 'gbnam';
+		case 'niram';
 			return 'not external';
-		
+
+		case 'gbnm': // No banner for Tol, regular otherwise
+			if ($banner == "Tol") {
+				return 'not external';
+			}
+			else {
+				break;
+			}
 		
 		case 'usai': // White text on blue bg
 		case 'usaif':
