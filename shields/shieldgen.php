@@ -381,9 +381,7 @@ function tm_shield_generate($r, $force_reload = false) {
             
         case 'canyt':
             $routeNum = str_replace("YT", "", $row['route']);
-            if (file_exists("{$dir}/template_canyt" . $routeNum . ".svg")) {
-                $svg = file_get_contents("{$dir}/template_canyt" . $routeNum . ".svg");
-            }
+            $svg = file_get_contents("{$dir}/template_canyt" . $routeNum . ".svg");
             break;
             
         case 'mexd':
