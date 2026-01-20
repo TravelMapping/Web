@@ -371,9 +371,6 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
             
-        case 'cantch': //do nothing
-            break;
-            
         case 'cannst':
             $routeNum = str_replace("NS", "", $row['route']);
             if (strlen($routeNum) > 1) { //2-digit uses wide shield
@@ -383,13 +380,9 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
             
         case 'canyt':
-            // get rid of the extra YT on BC ones
             $routeNum = str_replace("YT", "", $row['route']);
             if (file_exists("{$dir}/template_canyt" . $routeNum . ".svg")) {
                 $svg = file_get_contents("{$dir}/template_canyt" . $routeNum . ".svg");
-            } 
-            else {
-                $svg = file_get_contents("{$dir}/generic_wide.svg");
             }
             break;
             
@@ -500,40 +493,15 @@ function tm_shield_generate($r, $force_reload = false) {
 
         case 'usausb':
             $routeNum = str_replace("US", "", $row['route']);
-            // let's not put the letter in when it shouldn't be
-        //$routeNum .= $row['banner'][0];
-            if (strlen($routeNum) === 3) {
+            if (strlen($routeNum) > 2) {
                 $svg = file_get_contents("{$dir}/template_usausb_wide.svg");
-            }
-            if (strlen($routeNum) > 3) {
-                $svg = file_get_contents("{$dir}/template_usausb_wide4.svg");
             }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
         case 'usansf':
-            $region = explode(".", $r)[0];
-            $routeNum = str_replace(strtoupper($region), "", $row['route']);
-            if (strlen($routeNum) > 2) {
-                if (file_exists("{$dir}/template_usa" . $region . "_wide.svg")) {
-                    $svg = file_get_contents("{$dir}/template_usa" . $region . "_wide.svg");
-                }
-                else {
-                    $svg = file_get_contents("{$dir}/generic_wide.svg");
-                }
-            }
-            else {
-                if (file_exists("{$dir}/template_usa" . $region . ".svg")) {
-                    $svg = file_get_contents("{$dir}/template_usa" . $region . ".svg");
-                }
-                else {
-                    $svg = file_get_contents("{$dir}/generic.svg");
-                }
-            }
-            $region = strtoupper($region);
-            $svg = str_replace("***NUMBER***", $routeNum, $svg);
-            $svg = str_replace("***SYS***", $region, $svg);
-            $svg = str_replace("***LETTER***", "", $svg); //hack to kill off the suffix for usaar
+            $svg = file_get_contents("{$dir}/template_usams.svg");
+            $svg = str_replace("***NUMBER***", "67", $svg);
             break;
 
         case 'belb':
@@ -792,10 +760,6 @@ function tm_shield_generate($r, $force_reload = false) {
 			$routeNum = str_replace("S", "", $routeNum);
 			$svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
-			break;
-		
-		case 'dnkmr':
-			$svg = file_get_contents("{$dir}/template_dnkmr.svg");
 			break;
 
 		case 'dnksr':
@@ -1415,24 +1379,12 @@ function tm_shield_generate($r, $force_reload = false) {
             break;		
        
        case 'hkgrt':
-             $routeNum = substr_replace($row['route'], '', 0, 2); // Strip "RT"
-                   
+            $routeNum = str_replace("RT", "", $row['route']);       
             if (strlen($routeNum) > 1) {
-                if (file_exists("{$dir}/template_" . $row['systemName'] . "_wide.svg")) {
-                    $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
-                }
-                // Fall back on a smaller template if one to handle larger numbers doesn't exist.
-                elseif (file_exists("{$dir}/template_" . $row['systemName'])) {
-                    $svg = file_get_contents("{$dir}/template_" . $row['systemName']);
-                }
+				$svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
             }
-            elseif (strlen($routeNum) > 0) {
-                if (file_exists("{$dir}/template_" . $row['systemName'])) {
-                    $svg = file_get_contents("{$dir}/template_" . $row['systemName']);
-                }
-            }
-             $svg = str_replace("***NUMBER***", $routeNum, $svg);
-             break;
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
        
         case 'idnt':
             if (str_starts_with($row['route'], 'J')) {
@@ -1472,7 +1424,6 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'usasf':
         case 'usanp':
         case 'cansf':
-        case 'usakyp':
         case 'usanyp':
         case 'gbrtr':
         case 'sctntr':
@@ -1756,14 +1707,12 @@ function tm_shield_generate($r, $force_reload = false) {
             $matches = [];
             $routeNum = str_replace('NE', "", $row['route']);
             if ($routeNum[0] === 'L') {
-                $svg_path = "{$dir}/template_usanes_link.svg";
-                $svg = file_get_contents($svg_path);
+                $svg = file_get_contents("{$dir}/template_usanes_link.svg");
                 $routeNum = str_replace('L', "", $routeNum);
                 preg_match('/(?<number>[0-9]+)(?<letter>[A-Za-z]+)/', $routeNum, $matches);
             }
             else { //S
-                $svg_path = "{$dir}/template_usanes_spur.svg";
-                $svg = file_get_contents($svg_path);
+                $svg = file_get_contents("{$dir}/template_usanes_spur.svg");
                 $routeNum = str_replace('S', "", $routeNum);
                 preg_match('/(?<number>[0-9]+)(?<letter>[A-Za-z]+)/', $routeNum, $matches);
             }
@@ -1994,14 +1943,9 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
 
 		case 'usanht':
-            if (file_exists("{$dir}/template_usanht_" . strtolower($row['route']) . ".svg")) {
-                $svg = file_get_contents("{$dir}/template_usanht_" . strtolower($row['route']) . ".svg");
-				break;
-            } 
-
 		case 'usatr':
-            if (file_exists("{$dir}/template_usatr_" . strtolower($row['route']) . ".svg")) {
-                $svg = file_get_contents("{$dir}/template_usatr_" . strtolower($row['route']) . ".svg");
+            if (file_exists("{$dir}/template_" . $row['systemName'] . "_" . strtolower($row['route']) . ".svg")) {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_" . strtolower($row['route']) . ".svg");
 				break;
             }
         
