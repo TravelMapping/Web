@@ -494,7 +494,6 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'luxa':
         case 'luxb':
         case 'myse':
-		case 'nlda':
         case 'nldr':
 		case 'nlds':
 		case 'nplh':
@@ -597,8 +596,6 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'alavt':
         case 'asim':
 		case 'bdirn':
-		case 'bela':
-        case 'belr':
 		case 'bgri':
 		case 'bolf':
         case 'canmbw':
@@ -680,7 +677,6 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
 
 		case 'czeii':
-		case 'svkii':
 			$routeNum = str_replace("II", "", $row['route']);
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
 			break;
@@ -768,11 +764,8 @@ function tm_shield_generate($r, $force_reload = false) {
 			if (strlen($routeNum > 5)) {
 				$svg = file_get_contents("{$dir}/template_bihm_wide6.svg");
 			}
-			elseif (strlen ($routeNum > 4)) {
+			elseif (strlen($routeNum > 4)) {
 				$svg = file_get_contents("{$dir}/template_bihm_wide5.svg");
-			}
-			else {
-				$svg = file_get_contents("{$dir}/template_bihm.svg");
 			}
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
 			break;
