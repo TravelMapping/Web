@@ -937,7 +937,8 @@ following sources of highway information.</p>
   <a href=https://www.conaset.cl/manualsenalizacion/construye.html>RutaCL Fonts</a>, 
   <a href=https://www.transportstyrelsen.se/sv/vagtrafik/trafikregler-och-vagmarken/trafikregler/om-vagmarken/teckensnitt/>Tratex Fonts</a>, 
   <a href=https://github.com/shoorick/russian-road-sign-font>Russian Road Sign Font</a>,
-  and <a href=https://osp.kitchen/foundry/w-droge/>W Droge Front</a>.</li>
+  <a href=https://osp.kitchen/foundry/w-droge/>W Droge Front</a>,
+  and <a href=https://www.roads.org.uk/fonts>Motorway Front</a>.</li>
 
 <p class="heading"><a name="contributors">Project Contributors</a></p>
 
