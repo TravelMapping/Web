@@ -102,6 +102,13 @@ function tm_shield_generate($r, $force_reload = false) {
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+		case 'braspa':
+		case 'braspi':
+			$routeNum = str_replace("SPA", "", $row['route']);
+			$routeNum = str_replace("SPI", "", $routeNum);
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
 		case 'bradf':
 			$routeNum = str_replace("DF", "", $row['route']);
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
@@ -766,6 +773,9 @@ function tm_shield_generate($r, $force_reload = false) {
 			}
 			elseif (strlen($routeNum > 4)) {
 				$svg = file_get_contents("{$dir}/template_bihm_wide5.svg");
+			}
+			else {
+				$svg = file_get_contents("{$dir}/template_bihm.svg");
 			}
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
 			break;
@@ -1723,17 +1733,14 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
 		
         case 'usatxl': // Texas Loops
+		case 'usatxs': // Texas Spurs
             $routeNum = str_replace("TXLp", "", $row['route']);
-			if (strlen($routeNum) > 2) {
-                $svg = file_get_contents("{$dir}/template_usatxl_wide.svg");
-            }
-            $svg = str_replace("***NUMBER***", $routeNum, $svg);
-            break;
-
-        case 'usatxs': // Texas Spurs
-            $routeNum = str_replace("TXSpr", "", $row['route']);
-			if (strlen($routeNum) > 2) {
-                $svg = file_get_contents("{$dir}/template_usatxs_wide.svg");
+			$routeNum = str_replace("TXSpr", "", $routeNum);
+			if (strlen($routeNum) > 3) {
+				$svg = file_get_contents("{$dir}/template_" . $row['systemName'] ."_wide4.svg");
+			}	
+			elseif (strlen($routeNum) > 2) {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] ."_wide.svg");
             }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;		
