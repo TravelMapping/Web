@@ -1733,17 +1733,14 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
 		
         case 'usatxl': // Texas Loops
+		case 'usatxs': // Texas Spurs
             $routeNum = str_replace("TXLp", "", $row['route']);
-			if (strlen($routeNum) > 2) {
-                $svg = file_get_contents("{$dir}/template_usatxl_wide.svg");
-            }
-            $svg = str_replace("***NUMBER***", $routeNum, $svg);
-            break;
-
-        case 'usatxs': // Texas Spurs
-            $routeNum = str_replace("TXSpr", "", $row['route']);
-			if (strlen($routeNum) > 2) {
-                $svg = file_get_contents("{$dir}/template_usatxs_wide.svg");
+			$routeNum = str_replace("TXSpr", "", $routeNum);
+			if (strlen($routeNum) > 3) {
+				$svg = file_get_contents("{$dir}/template_" . $row['systemName'] ."_wide4.svg");
+			}	
+			elseif (strlen($routeNum) > 2) {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] ."_wide.svg");
             }
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;		
