@@ -102,6 +102,13 @@ function tm_shield_generate($r, $force_reload = false) {
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+		case 'braspa':
+		case 'braspi':
+			$routeNum = str_replace("SPA", "", $row['route']);
+			$routeNum = str_replace("SPI", "", $routeNum);
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+
 		case 'bradf':
 			$routeNum = str_replace("DF", "", $row['route']);
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
