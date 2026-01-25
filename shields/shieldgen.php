@@ -768,14 +768,11 @@ function tm_shield_generate($r, $force_reload = false) {
 
 		case 'bihm':
 			$routeNum = str_replace("M", "M-", $row['route']);
-			if (strlen($routeNum > 5)) {
+			if (strlen($routeNum) > 5) {
 				$svg = file_get_contents("{$dir}/template_bihm_wide6.svg");
 			}
-			elseif (strlen($routeNum > 4)) {
+			elseif (strlen($routeNum) > 4) {
 				$svg = file_get_contents("{$dir}/template_bihm_wide5.svg");
-			}
-			else {
-				$svg = file_get_contents("{$dir}/template_bihm.svg");
 			}
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
 			break;
