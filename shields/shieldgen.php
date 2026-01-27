@@ -1157,7 +1157,40 @@ function tm_shield_generate($r, $force_reload = false) {
             }
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;
-            
+
+		// case 'gbna':
+		// case 'nira':
+		case 'imna':
+		// case 'jeya':
+		// case 'jeyb':
+			$shieldClass = null;
+			// Open the CSV file in read-only mode
+			if ($handle = fopen("shieldData_" . $row['systemName'] . ".csv", "r")) {
+				// Loop through each row of the file
+				while (($shieldRow = fgetcsv($handle)) !== FALSE) {
+					// Check if the value in the lookup column matches the desired value
+					if ($shieldRow[2] == $r) {
+						// Close the file
+						fclose($handle);
+						// Return the value from the desired return column
+						$shieldClass = $shieldRow[3];
+					}
+				}
+				// Close the file if no match is found
+				fclose($handle);
+			}
+			if ($shieldClass == "Primary") {
+                $svg = file_get_contents("{$dir}/template_gbna_wide" . strlen($row['route']) . "_primary.svg");
+            }
+            elseif ($shieldClass == "Both") {
+				$svg = file_get_contents("{$dir}/template_gbna_wide" . strlen($row['route']) . "_both.svg");
+            }
+            else {
+				$svg = file_get_contents("{$dir}/template_gbna_wide" . strlen($row['route']) . "_np.svg");
+            } 
+			$svg = str_replace("***NUMBER***", $row['route'], $svg);
+			break;
+		
         case 'gbnb':
         case 'nirb':
         case 'imnb':
