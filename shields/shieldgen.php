@@ -1165,7 +1165,7 @@ function tm_shield_generate($r, $force_reload = false) {
 		// case 'jeyb':
 			$shieldClass = null;
 			// Open the CSV file in read-only mode
-			if ($handle = fopen("shieldData_" . $row['systemName'] . ".csv", "r")) {
+			if (($handle = fopen("{$dir}/shieldData_" . $row['systemName'] . ".csv", "r")) !== FALSE) {
 				// Loop through each row of the file
 				while (($shieldRow = fgetcsv($handle)) !== FALSE) {
 					// Check if the value in the lookup column matches the desired value
