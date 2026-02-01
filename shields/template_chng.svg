@@ -2,7 +2,7 @@
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="354px" height="283px" viewBox="0 0 354 283" enable-background="new 0 0 354 283" xml:space="preserve">
+	 width="354px" height="283px" viewBox="0 0 354 283" enable-background="new 0 0 354 283">
 <path fill="#FFFFFF" d="M354.331,257.107c0,16.767-9.592,26.356-26.357,26.356L26.36,283.423c-16.766,0-26.358-9.591-26.358-26.356
 	L0,26.359C0,9.59,9.592,0,26.358,0h301.613c16.767,0,26.359,9.59,26.359,26.359L354.331,257.107L354.331,257.107z"/>
 <path fill="#008000" d="M343.27,249.786c0,15.288-7.332,22.619-22.616,22.619L33.68,272.364c-15.285,0-22.617-7.331-22.617-22.619
@@ -45,3 +45,4 @@
   <text letter-spacing="0px" text-anchor="middle" word-spacing="0px" text-align="center" font-size="175px" line-height="100%" y="0" x="0" font-family="&apos;Roadgeek 2014 Series E&apos;" fill="#ffffff">
      <tspan y="230" x="177">***NUMBER***</tspan></text>
 </svg>
+
