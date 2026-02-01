@@ -611,7 +611,6 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'czed':
         case 'czei':
         case 'deua':
-        case 'deub':
         case 'estp':
         case 'estt':
 		case 'eure':
@@ -713,6 +712,13 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+		case 'deub':
+            if (strlen($row['route']) > 3) {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+            }
+            $svg = str_replace("***NUMBER***", $row['route'], $svg);
+            break;
+		
         case 'cheh':
         case 'dnkpr':
         case 'finvt':
@@ -1164,20 +1170,11 @@ function tm_shield_generate($r, $force_reload = false) {
 		// case 'jeya':
 		// case 'jeyb':
 			$shieldClass = null;
-			// Open the CSV file in read-only mode
-			if (($handle = fopen("{$dir}/shieldData_" . $row['systemName'] . ".csv", "r")) !== FALSE) {
-				// Loop through each row of the file
-				while (($shieldRow = fgetcsv($handle)) !== FALSE) {
-					// Check if the value in the lookup column matches the desired value
-					if ($shieldRow[2] == $r) {
-						// Close the file
-						fclose($handle);
-						// Return the value from the desired return column
-						$shieldClass = $shieldRow[3];
-					}
+			$csv = array_map('str_getcsv', file("{$dir}/shieldData_" . $row['systemName'] . ".csv"));
+			foreach ($csv as $values) {
+				if ($values[2] == $r) {
+					$shieldClass = $values[3];
 				}
-				// Close the file if no match is found
-				fclose($handle);
 			}
 			if ($shieldClass == "Primary") {
                 $svg = file_get_contents("{$dir}/template_gbna_wide" . strlen($row['route']) . "_primary.svg");
