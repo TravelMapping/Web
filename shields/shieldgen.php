@@ -1165,7 +1165,7 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;
 
-		/*// case 'gbna':
+		// case 'gbna':
 		// case 'nira':
 		case 'imna':
 		// case 'jeya':
@@ -1187,7 +1187,7 @@ function tm_shield_generate($r, $force_reload = false) {
 				$svg = file_get_contents("{$dir}/template_gbna_wide" . strlen($row['route']) . "_np.svg");
             } 
 			$svg = str_replace("***NUMBER***", $row['route'], $svg);
-			break;*/
+			break;
 		
         case 'gbnb':
         case 'nirb':
