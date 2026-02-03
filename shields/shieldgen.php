@@ -1171,21 +1171,19 @@ function tm_shield_generate($r, $force_reload = false) {
 		// case 'jeya':
 		// case 'jeyb':
 			$shieldClass = null;
-			// Open the CSV file in read-only mode
-			if (($handle = fopen("{$dir}/shieldData_" . $row['systemName'] . ".csv", "r")) !== FALSE) {
+			$scdFile = "{$dir}/shieldData_" . $row['systemName'] . ".csv";
+			$handle = fopen($scdFile, "r");
+			if ($handle !== FALSE) {
 				// Loop through each row of the file
-				while (($shieldRow = fgetcsv($handle, 200, ";", escape: '')) !== FALSE) {
+				while (($shieldRow = fgetcsv($scdFile, 200, ";", escape: "")) !== FALSE) {
 					// Check if the value in the lookup column matches the desired value
 					if ($shieldRow[2] == $r) {
-						// Close the file
-						fclose($handle);
 						// Return the value from the desired return column
 						$shieldClass = $shieldRow[3];
 					}
 				}
-				// Close the file if no match is found
-				fclose($handle);
 			}
+			fclose($scdFile);
 			if ($shieldClass == "Primary") {
                 $svg = file_get_contents("{$dir}/template_gbna_wide" . strlen($row['route']) . "_primary.svg");
             }
