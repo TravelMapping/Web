@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <style type="text/css">
+<link rel="shortcut icon" type="image/png" href="/favicon.png">
 
 body, html {
   margin:0;
