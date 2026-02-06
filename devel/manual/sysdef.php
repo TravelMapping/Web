@@ -6,7 +6,7 @@
 <?php require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php" ?>
 <title>Travel Mapping Manual: Definition of a highway system</title>
 <link rel="stylesheet" type="text/css" href="/css/travelMapping.css">
-<link rel="shortcut icon" type="image/png" href="favicon.png">
+<link rel="shortcut icon" type="image/png" href="/favicon.png">
 </head>
 <body>
 
