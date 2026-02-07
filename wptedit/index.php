@@ -4,7 +4,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <style type="text/css">
-<link rel="shortcut icon" type="image/png" href="/favicon.png">
 
 body, html {
   margin:0;
@@ -132,7 +131,8 @@ color:white;
 }
 
 </style>
-
+<link rel="shortcut icon" type="image/png" href="/favicon.png">
+	
 <?php
   require $_SERVER['DOCUMENT_ROOT']."/lib/tmphpfuncs.php";
   tm_common_js();  
