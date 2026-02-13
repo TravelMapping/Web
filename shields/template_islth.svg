@@ -3,6 +3,6 @@
  <g id="layer1" transform="translate(20 -243.79)">
   <rect id="rect3006" style="color:#000000" rx="50" ry="50" height="400" width="800" y="243.79" x="-20"/>
   <rect id="rect3008" style="color:#000000" rx="25" ry="25" height="350" width="750" y="268.79" x="5" fill="#fff"/>
-  <text id="text3779" style="word-spacing:0px;letter-spacing:0px;text-anchor:middle;text-align:center" xml:space="preserve" font-size="350px" line-height="100%" y="604.45825" x="380" font-family="&apos;Roadgeek 2005 Mittelschrift&apos;" fill="#000000"><tspan id="tspan3781" font-weight="bold" y="570" x="375" font-family="&apos;Roadgeek 2005 Mittelschrift&apos;" fill="#000000">***NUMBER***</tspan></text>
+  <text id="text3779" style="word-spacing:0px;letter-spacing:0px;text-anchor:middle;text-align:center" xml:space="preserve" font-size="350px" line-height="100%" y="604.45825" x="380" fill="#000000"><tspan id="tspan3781" y="565" x="375" font-family="&apos;Roadgeek 2005 Transport Heavy&apos;" fill="#000000">***NUMBER***</tspan></text>
  </g>
 </svg>
