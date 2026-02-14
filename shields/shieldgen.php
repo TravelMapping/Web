@@ -491,7 +491,6 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'cypb':
         case 'hunm':
         case 'irlr':
-        case 'islf':
         case 'jamt':
         case 'jama':
 		case 'kazkaz':
@@ -516,15 +515,12 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;
 
+		case 'islf':
 		case 'mdar':
-			$routeNum = $row['route'];
-			if (strlen($routeNum) > 3) {
-				$svg = file_get_contents("{$dir}/template_mdar_wide.svg");
+			if (strlen($row['route']) > 3) {
+				$svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
 			}
-			else {
-				$svg = file_get_contents("{$dir}/template_mdar.svg");
-			}
-			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+			$svg = str_replace("***NUMBER***", $row['route'], $svg);
 			break;
 		
         case 'andcg':
@@ -616,6 +612,7 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'eure':
         case 'finkt':
         case 'finst':
+		case 'finvt':
         case 'frolv':
 		case 'hrvd':
 		case 'hrvz':
@@ -721,8 +718,6 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
 		
         case 'cheh':
-        case 'dnkpr':
-        case 'finvt':
         case 'norrv':
         case 'swer':
             // replace placeholder, remove prefix, use wide svg files for 2-/3-digit numbers
@@ -750,8 +745,10 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
 			break;
 
+		case 'dnkpr':
 		case 'dnksr':
-			$routeNum = str_replace("SR", "", $row['route']);
+			$routeNum = str_replace("PR", "", $row['route']);
+			$routeNum = str_replace("SR", "", $routeNum);
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 		
@@ -1457,6 +1454,7 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'ukra':
 		case 'espsf':
 		case 'norntv':
+		case 'frosl':
             $lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
             $index = 0;
             foreach ($lines as $line) {
