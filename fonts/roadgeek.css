@@ -444,3 +444,16 @@
     font-style: normal;
 
 }
+
+@font-face {
+    font-family: 'Tie';
+    src: url('tie-regular-webfont.eot');
+    src: url('tie-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('tie-regular-webfont.woff2') format('woff2'),
+         url('tie-regular-webfont.woff') format('woff'),
+         url('tie-regular-webfont.ttf') format('truetype'),
+         url('tie-regular-webfont.svg#tieregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
