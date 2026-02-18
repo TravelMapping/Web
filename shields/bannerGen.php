@@ -238,9 +238,9 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 			break;
 		case 'Sce':
 			$text = 'SCENIC';
-			$x = '302.6';
-			$y = '220.5';
-			$fontSize = '245px';
+			$x = '300.5';
+			$y = '220';
+			$fontSize = '235px';
 			$fontSeries = 'C';
 			
 			break;
