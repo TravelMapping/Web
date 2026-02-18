@@ -1406,7 +1406,13 @@ function tm_shield_generate($r, $force_reload = false) {
 			preg_match('/(?<letter>[A-Za-z]+)(?<number>[0-9]+)/', $row['route'], $matches);
 			$svg = str_replace("***NUMBER***", $matches['number'], $svg);
 			break;
-       
+
+		case 'deutr':
+			if (file_exists("{$dir}/template_" . $row['systemName'] . "_" . strtolower($row['route']) . ".svg")) {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_" . strtolower($row['route']) . ".svg");
+				break;
+            }
+		
         case 'usasf':
         case 'usanp':
         case 'cansf':
@@ -1455,6 +1461,12 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'espsf':
 		case 'norntv':
 		case 'frosl':
+		case 'bihsf':
+		case 'blrsf':
+		case 'gbrsf':
+		case 'russf':
+		case 'fratr':
+		case 'fintr':
             $lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
             $index = 0;
             foreach ($lines as $line) {
@@ -1474,36 +1486,6 @@ function tm_shield_generate($r, $force_reload = false) {
 				$svg = file_get_contents("{$dir}/template_gtmsf_vas.svg");
 			}
 			break;
-
-		case 'eursf':
-			$lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
-            $index = 0;
-			if ($row['region'] == "BIH") {
-				$svg = file_get_contents("{$dir}/template_bihsf.svg");
-			}
-			elseif ($row['region'] == "BLR") {
-				$svg = file_get_contents("{$dir}/template_blrsf.svg");
-			}
-			elseif ($row['region'] == "ENG") {
-				$svg = file_get_contents("{$dir}/template_engsf.svg");
-			}
-			elseif ($row['region'] == "RUS") {
-				$svg = file_get_contents("{$dir}/template_russf.svg");
-			}
-			else {
-				$svg = file_get_contents("{$dir}/template_eursf.svg");
-			}
-            foreach ($lines as $line) {
-                if (strlen($line) > 0) {
-                    $svg = str_replace("***NUMBER".($index + 1)."***", $line, $svg);
-                    $index++;
-                }
-            }
-            while ($index < 3) {
-                $svg = str_replace("***NUMBER".($index + 1)."***", "", $svg);
-                $index++;
-            }
-            break;
 
 		case 'frasf':
             $lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
