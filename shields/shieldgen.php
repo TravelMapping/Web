@@ -1467,6 +1467,7 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'russf':
 		case 'fratr':
 		case 'fintr':
+		case 'irltr':
             $lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
             $index = 0;
             foreach ($lines as $line) {
@@ -1481,6 +1482,24 @@ function tm_shield_generate($r, $force_reload = false) {
             }
             break;
 
+		case 'gbrtr':
+			if ($row['region'] == "ENG") {
+				$svg = file_get_contents("{$dir}/template_gbrtr_eng.svg");
+            }
+            $lines = explode(',',preg_replace('/(?!^)[A-Z]{3,}(?=[A-Z][a-z])|[A-Z][a-z]/', ',$0', $row['route']));
+            $index = 0;
+            foreach ($lines as $line) {
+                if (strlen($line) > 0) {
+                    $svg = str_replace("***NUMBER".($index + 1)."***", $line, $svg);
+                    $index++;
+                }
+            }
+            while ($index < 3) {
+                $svg = str_replace("***NUMBER".($index + 1)."***", "", $svg);
+                $index++;
+            }
+            break;
+		
 		case 'gtmsf':
 			if ($row['route'] == "VAS") {
 				$svg = file_get_contents("{$dir}/template_gtmsf_vas.svg");
