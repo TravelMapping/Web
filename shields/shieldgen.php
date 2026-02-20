@@ -1417,7 +1417,6 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'usanp':
         case 'cansf':
         case 'usanyp':
-        case 'gbrtr':
         case 'sctntr':
         case 'nzltr':
         case 'swemot':
