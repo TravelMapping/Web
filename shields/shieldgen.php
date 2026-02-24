@@ -489,6 +489,7 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'cism':
         case 'cypa':
         case 'cypb':
+		case 'eure':
         case 'hunm':
         case 'irlr':
         case 'jamt':
@@ -609,7 +610,6 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'deua':
         case 'estp':
         case 'estt':
-		case 'eure':
         case 'finkt':
         case 'finst':
 		case 'finvt':
@@ -918,7 +918,6 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'mtqa':
         case 'glpn':
         case 'gufn':
-        case 'reun':
         case 'mara':
         case 'tuna':
         case 'mtqn':
@@ -939,6 +938,7 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
 
 		case 'marn':
+		case 'reun':
             // replace placeholder, add blank after prefix, use wide svg files
             $routeNum = str_replace("N", "N ", $row['route']);
             $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
