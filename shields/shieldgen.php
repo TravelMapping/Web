@@ -498,6 +498,7 @@ function tm_shield_generate($r, $force_reload = false) {
 
         case 'belb':
         case 'bgra':
+		case 'chnjjjs':
 		case 'cisa':
 		case 'cism':
         case 'cypa':
@@ -1349,26 +1350,25 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
 
 		case 'chng':
-            $routeNum = $row['route'];
-            if (strlen($routeNum) > 3) {
+			$routeNum = substr($row['route'], 0, 3);
+			$suffix = substr($row['route'], 3);
+            if (strlen($row['route']) > 3) {
                 $svg = file_get_contents("{$dir}/template_chng_wide.svg");
             }
-			else {
-				$svg = file_get_contents("{$dir}/template_chng.svg");
-			}
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
+			$svg = str_replace("***SUFFIX***", $suffix, $svg);
             break;	
 		
         case 'chnbjs':
 		case 'chngds':
 		case 'chnhis':
-		case 'chnjjjs':
 		case 'chnnxs':
 		case 'chnsf':
 		case 'chnshs':
 		case 'chntjs':
 		case 'chnxzs':
-            $routeNum = $row['route'];
+            $routeNum = substr($row['route'], 0, 3);
+			$suffix = substr($row['route'], 3);
             if (strlen($routeNum) > 3) {
                 $svg = file_get_contents("{$dir}/template_chns_wide.svg");
             }
@@ -1376,7 +1376,8 @@ function tm_shield_generate($r, $force_reload = false) {
 				$svg = file_get_contents("{$dir}/template_chns.svg");
 			}
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
-            break;		
+			$svg = str_replace("***SUFFIX***", $suffix, $svg);
+            break;	
        
        case 'hkgrt':
             $routeNum = str_replace("RT", "", $row['route']);       
