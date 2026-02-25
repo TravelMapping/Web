@@ -126,6 +126,19 @@ function tm_shield_generate($r, $force_reload = false) {
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
 			break;
 
+		case 'colrn':
+			$routeNum = substr($row['route'], 2, 2);
+			$suffix = substr($row['route'], 4);
+			if (strlen($suffix) > 4) {
+				$svg = file_get_contents("{$dir}/template_colrn_wide6.svg");
+			}
+			elseif (strlen($suffix) > 2) {
+				$svg = file_get_contents("{$dir}/template_colrn_wide4.svg");
+			}
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+			$svg = str_replace("***SUFFIX***", $suffix, $svg);
+			break;
+		
 		case 'crirp':
 		case 'crirs':
 		case 'crirt':
