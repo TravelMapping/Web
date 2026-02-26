@@ -1369,7 +1369,7 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'chnxzs':
             $routeNum = substr($row['route'], 0, 3);
 			$suffix = substr($row['route'], 3);
-            if (strlen($routeNum) > 3) {
+            if (strlen($row['route']) > 3) {
                 $svg = file_get_contents("{$dir}/template_chns_wide.svg");
             }
 			else {
