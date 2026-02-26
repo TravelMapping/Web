@@ -42,5 +42,5 @@
 	 M387.735,47.666v-2.311h-2.551v2.311H387.735z M391.304,45.355v2.311h2.58v-2.311H391.304z M391.304,50.486v1.979l2.341-1.979
 	H391.304z"/>
 	<text x="241px" y="225px" fill="#FFFFFF" font-family="&apos;Roadgeek 2014 Series E&apos;" font-size="150px" text-align="center" text-anchor="middle" letter-spacing="0">
-    <tspan>***NUMBER***</tspan></text>
+    <tspan>***NUMBER***</tspan><tspan font-size="120px" dx="10px">***SUFFIX***</tspan></text>
 </svg>
