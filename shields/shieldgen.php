@@ -25,8 +25,8 @@ function tm_shield_generate($r, $force_reload = false) {
     $dir = $_SERVER['DOCUMENT_ROOT']."/shields";
 
     // check for existence of the requested shield for this specific route 
-    if (file_exists("{$dir}/shield_{$r}.svg")) {
-        return file_get_contents("{$dir}/shield_{$r}.svg");
+    if (file_exists("{$dir}/shield_" . strtolower($r) . ".svg")) {
+        return file_get_contents("{$dir}/shield_" . strtolower($r) . ".svg");
     }
 
     // check for existence of the requested shield in the cache
