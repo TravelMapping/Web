@@ -572,6 +572,7 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'mkdr':
 		case 'rksrr':
 		    $routeNum = str_replace("R", "R-", $row['route']);
+			$routeNum = str_replace("-T", "T-", $routeNum);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
 			break;
 		
