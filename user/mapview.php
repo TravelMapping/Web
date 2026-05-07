@@ -190,6 +190,9 @@ User: <?php tm_user_select(); ?>&nbsp;Units: <?php tm_units_select(); ?><br />
     <option value="untraveled">Highlight Untraveled</option>
     <option value="all">Highlight All</option>
     <option value="none">Highlight None</option>
+	<option value="hideuntraveled">Display Traveled Only</option>
+    <option value="hidetraveled">Display Untraveled Only</option>
+    <option value="hideall">Display None</option>
     </select>
     </td>
       <td>
