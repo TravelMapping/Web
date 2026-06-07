@@ -220,13 +220,13 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 			
 			break;
 		case 'His':
-			$text = 'HISTORIC';
-			$x = '300';
-			$y = '215';
-			$fontSize = '220px';
-			$fontSeries = 'B';
-
 			if ($system = 'usaca') {
+				$text = 'HISTORIC';
+				$x = '300';
+				$y = '215';
+				$fontSize = '220px';
+				$fontSeries = 'B';
+				
 				break;
 			}
 			else {

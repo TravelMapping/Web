@@ -1156,7 +1156,7 @@ function tm_shield_generate($r, $force_reload = false) {
 
 		case 'espcn':
 			$routeNum = substr_replace($row['route'], "-", 2, 0);
-			$numOnly = substr_replace($row['route'], "", 2, 0);
+			$numOnly = substr_replace($row['route'], "", 0, 2);
 			if (str_starts_with($routeNum, 'FV')) {
 				if ($numOnly < 3) {
 					$svg = file_get_contents("{$dir}/template_espa_wide4.svg");
@@ -1204,7 +1204,7 @@ function tm_shield_generate($r, $force_reload = false) {
 				}
 			}
 			else {
-				$svg = file_get_contents("{$dir}/template_espcn_orange_wide" . $strlen($routeNum) . ".svg");
+				$svg = file_get_contents("{$dir}/template_espcn_orange_wide" . strlen($routeNum) . ".svg");
 			}
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
 			break;
