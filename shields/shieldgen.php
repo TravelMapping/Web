@@ -1154,6 +1154,61 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
+		case 'espcn':
+			$routeNum = substr_replace($row['route'], "-", 2, 0);
+			$numOnly = substr_replace($row['route'], "", 2, 0);
+			if (str_starts_with($routeNum, 'FV')) {
+				if ($numOnly < 3) {
+					$svg = file_get_contents("{$dir}/template_espa_wide4.svg");
+				}
+				elseif ($numOnly < 10) {
+					$svg = file_get_contents("{$dir}/template_espn_wide4.svg");
+				}
+				else {
+					$svg = file_get_contents("{$dir}/template_espcn_green_wide5.svg");
+				}
+			}
+			elseif (str_starts_with($routeNum, 'GC')) {
+				if ($numOnly < 10) {
+					$svg = file_get_contents("{$dir}/template_espa_wide4.svg");
+				}
+				else {
+					$svg = file_get_contents("{$dir}/template_espn_wide5.svg");
+				}
+			}
+			elseif (str_starts_with($routeNum, 'HI')) {
+				if ($numOnly < 10) {
+					$svg = file_get_contents("{$dir}/template_espcn_orange_wide4.svg");
+				}
+				else {
+					$svg = file_get_contents("{$dir}/template_espcn_green_wide5.svg");
+				}
+			}
+			elseif (str_starts_with($routeNum, 'LZ')) {
+				if ($numOnly < 3) {
+					$svg = file_get_contents("{$dir}/template_espn_wide4.svg");
+				}
+				elseif ($numOnly < 10) {
+					$svg = file_get_contents("{$dir}/template_espa_wide4.svg");
+				}
+				else {
+					$svg = file_get_contents("{$dir}/template_espcn_green_wide5.svg");
+				}
+			}
+			elseif (str_starts_with($routeNum, 'TF')) {
+				if ($numOnly < 10) {
+					$svg = file_get_contents("{$dir}/template_espa_wide4.svg");
+				}
+				else {
+					$svg = file_get_contents("{$dir}/template_espcn_orange_wide5.svg");
+				}
+			}
+			else {
+				$svg = file_get_contents("{$dir}/template_espcn_orange_wide" . $strlen($routeNum) . ".svg");
+			}
+			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+			break;
+
         case 'bela':
 		case 'belr':
             if (strlen($row['route']) > 3) {
