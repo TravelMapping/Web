@@ -219,6 +219,19 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 			$fontSeries = 'C';
 			
 			break;
+		case 'His':
+			$text = 'HISTORIC';
+			$x = '300';
+			$y = '215';
+			$fontSize = '220px';
+			$fontSeries = 'B';
+
+			if ($system = 'usaca') {
+				break;
+			}
+			else {
+				return '';
+			}
 		case 'Lp':
 			$text = 'LOOP';
 			$x = '293.81';
@@ -227,7 +240,6 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 			$fontSeries = 'D';
 			
 			break;
-
 		case 'Old':
 			$text = 'OLD';
 			$x = '300.5';
