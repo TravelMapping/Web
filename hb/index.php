@@ -43,6 +43,27 @@
             font-size: 14px;
 	}
 
+    /* Collapsible region select */
+    .crs-wrapper { display: inline-block; position: relative; vertical-align: middle; }
+    .crs-display {
+        border: 1px solid #aaa; padding: 1px 6px; cursor: pointer; background: white;
+        min-width: 180px; display: flex; justify-content: space-between; align-items: center;
+        user-select: none; font-size: 13px; height: 22px; box-sizing: border-box;
+    }
+    .crs-arrow { margin-left: 6px; font-size: 10px; }
+    .crs-dropdown {
+        position: absolute; top: 100%; left: 0; min-width: 100%; max-height: 300px;
+        overflow-y: auto; border: 1px solid #aaa; background: white; z-index: 1000; font-size: 13px;
+    }
+    .crs-option { padding: 2px 8px; cursor: pointer; white-space: nowrap; }
+    .crs-option:hover, .crs-option.crs-selected { background-color: #0078d7; color: white; }
+    .crs-group-label {
+        padding: 2px 8px; font-weight: bold; cursor: pointer;
+        background-color: #f0f0f0; white-space: nowrap; user-select: none;
+    }
+    .crs-group-label:hover { background-color: #ddd; }
+    .crs-group-item { padding-left: 20px; }
+    .crs-group-arrow { display: inline-block; width: 12px; font-size: 10px; }
     </style>
     <?php
     // check for region and/or system parameters
@@ -157,6 +178,94 @@ JS;
             ?>
         }
     );
+</script>
+<script type="text/javascript">
+function buildCollapsibleRegionSelect() {
+    var $select = $("#region");
+    if (!$select.length) return;
+
+    var selectedVal = $select.val() || "null";
+    var selectedText = "[None Selected]";
+    if (selectedVal !== "null") {
+        $select.find("option[value='" + selectedVal + "']").each(function() {
+            selectedText = $(this).text();
+        });
+    }
+
+    var $wrapper  = $('<div class="crs-wrapper"></div>');
+    var $display  = $('<div class="crs-display"><span class="crs-text"></span><span class="crs-arrow">&#9660;</span></div>');
+    $display.find(".crs-text").text(selectedText);
+    var $dropdown = $('<div class="crs-dropdown" style="display:none;"></div>');
+
+    var $none = $('<div class="crs-option" data-value="null">[None Selected]</div>');
+    if (selectedVal === "null") $none.addClass("crs-selected");
+    $dropdown.append($none);
+
+    $select.children().each(function() {
+        if (this.tagName === "OPTGROUP") {
+            var $group = $('<div class="crs-group"></div>');
+            var $label = $('<div class="crs-group-label"><span class="crs-group-arrow">&#9654;</span> </div>');
+            $label.append(document.createTextNode($(this).attr("label")));
+            var $items = $('<div class="crs-group-items" style="display:none;"></div>');
+            var groupHasSelected = false;
+            $(this).children("option").each(function() {
+                var val = this.value;
+                var $item = $('<div class="crs-option crs-group-item"></div>').attr("data-value", val).text($(this).text());
+                if (val === selectedVal) { $item.addClass("crs-selected"); groupHasSelected = true; }
+                $items.append($item);
+            });
+            if (groupHasSelected) {
+                $items.show();
+                $label.find(".crs-group-arrow").html("&#9660;");
+                $label.data("expanded", true);
+            }
+            $group.append($label).append($items);
+            $dropdown.append($group);
+        } else if (this.tagName === "OPTION" && this.value !== "null") {
+            var val = this.value;
+            var $opt = $('<div class="crs-option"></div>').attr("data-value", val).text($(this).text());
+            if (val === selectedVal) $opt.addClass("crs-selected");
+            $dropdown.append($opt);
+        }
+    });
+
+    $wrapper.append($display).append($dropdown);
+    $select.hide().after($wrapper);
+
+    $display.on("click", function(e) {
+        e.stopPropagation();
+        $dropdown.toggle();
+        $display.find(".crs-arrow").html($dropdown.is(":visible") ? "&#9650;" : "&#9660;");
+    });
+
+    $dropdown.on("click", ".crs-group-label", function(e) {
+        e.stopPropagation();
+        var $lbl = $(this);
+        var $items = $lbl.next(".crs-group-items");
+        var expanded = !!$lbl.data("expanded");
+        $items.toggle(!expanded);
+        $lbl.data("expanded", !expanded);
+        $lbl.find(".crs-group-arrow").html(!expanded ? "&#9660;" : "&#9654;");
+    });
+
+    $dropdown.on("click", ".crs-option", function(e) {
+        e.stopPropagation();
+        var val = $(this).data("value");
+        $select.val(val);
+        $display.find(".crs-text").text($(this).text());
+        $dropdown.find(".crs-selected").removeClass("crs-selected");
+        $(this).addClass("crs-selected");
+        $dropdown.hide();
+        $display.find(".crs-arrow").html("&#9660;");
+    });
+
+    $(document).on("click.crs", function() {
+        $dropdown.hide();
+        $display.find(".crs-arrow").html("&#9660;");
+    });
+}
+
+$(document).ready(function() { buildCollapsibleRegionSelect(); });
 </script>
 
 <?php
