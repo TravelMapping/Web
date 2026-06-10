@@ -36,7 +36,11 @@ if (array_key_exists("u", $_GET)) {
 	    ]);
     }
 } else if (isset($_COOKIE['lastuser'])) {
-    header("Location: ?u=" . $_COOKIE['lastuser'] . "&" . parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY)); /* Redirect browser */
+    $tmuri_path  = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $tmuri_query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
+    $tmredirect  = "u=" . rawurlencode($_COOKIE['lastuser']);
+    if ($tmuri_query) $tmredirect .= "&" . $tmuri_query;
+    header("Location: " . $tmuri_path . "?" . $tmredirect);
     exit;
 }
 
@@ -78,8 +82,12 @@ if (array_key_exists("units", $_GET)) {
    }
 }
 else if (isset($_COOKIE['units'])) {
-   header("Location: ?units=" .$_COOKIE['units'] . "&" . parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY)); /* Redirect browser */
-   exit;
+    $tmuri_path  = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $tmuri_query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
+    $tmredirect  = "units=" . rawurlencode($_COOKIE['units']);
+    if ($tmuri_query) $tmredirect .= "&" . $tmuri_query;
+    header("Location: " . $tmuri_path . "?" . $tmredirect);
+    exit;
 }
 
 ?>

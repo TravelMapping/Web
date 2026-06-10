@@ -64,6 +64,7 @@
     .crs-group-label:hover { background-color: #ddd; }
     .crs-group-item { padding-left: 20px; }
     .crs-group-arrow { display: inline-block; width: 12px; font-size: 10px; }
+    .crs-option.crs-focused, .crs-group-label.crs-focused { outline: 2px solid #005fa3; outline-offset: -2px; }
     </style>
     <?php
     // check for region and/or system parameters
@@ -193,7 +194,7 @@ function buildCollapsibleRegionSelect() {
     }
 
     var $wrapper  = $('<div class="crs-wrapper"></div>');
-    var $display  = $('<div class="crs-display"><span class="crs-text"></span><span class="crs-arrow">&#9660;</span></div>');
+    var $display  = $('<div class="crs-display" tabindex="0"><span class="crs-text"></span><span class="crs-arrow">&#9660;</span></div>');
     $display.find(".crs-text").text(selectedText);
     var $dropdown = $('<div class="crs-dropdown" style="display:none;"></div>');
 
@@ -232,16 +233,117 @@ function buildCollapsibleRegionSelect() {
     $wrapper.append($display).append($dropdown);
     $select.hide().after($wrapper);
 
+    // ── helpers ──────────────────────────────────────────────────────────────
+
+    function openDropdown() {
+        $dropdown.show();
+        $display.find(".crs-arrow").html("&#9650;");
+        // focus the currently-selected option, or the first item
+        var $sel = $dropdown.find(".crs-selected:visible");
+        var toFocus = $sel.length ? $sel[0] : $dropdown.find(".crs-option:visible")[0];
+        setFocused(toFocus);
+        if (toFocus) toFocus.scrollIntoView({ block: "nearest" });
+    }
+
+    function closeDropdown() {
+        $dropdown.hide();
+        $display.find(".crs-arrow").html("&#9660;");
+        $dropdown.find(".crs-focused").removeClass("crs-focused");
+    }
+
+    function setFocused(el) {
+        $dropdown.find(".crs-focused").removeClass("crs-focused");
+        if (el) $(el).addClass("crs-focused");
+    }
+
+    function visibleNavigable() {
+        // group labels + options that are currently visible
+        return $dropdown.find(".crs-group-label:visible, .crs-option:visible").toArray();
+    }
+
+    function moveFocus(delta) {
+        var items = visibleNavigable();
+        if (!items.length) return;
+        var cur = $dropdown.find(".crs-focused")[0];
+        var idx = items.indexOf(cur);
+        idx = (idx + delta + items.length) % items.length;
+        setFocused(items[idx]);
+        items[idx].scrollIntoView({ block: "nearest" });
+    }
+
+    function activateFocused() {
+        var $f = $dropdown.find(".crs-focused");
+        if ($f.hasClass("crs-group-label")) {
+            $f.trigger("click");          // toggle group
+        } else if ($f.hasClass("crs-option")) {
+            selectOption($f);
+        }
+    }
+
+    function selectOption($opt) {
+        var val = $opt.data("value");
+        $select.val(val);
+        $display.find(".crs-text").text($opt.text());
+        $dropdown.find(".crs-selected").removeClass("crs-selected");
+        $opt.addClass("crs-selected");
+        closeDropdown();
+        $display.focus();
+    }
+
+    function expandGroupOf(el) {
+        var $group = $(el).closest(".crs-group");
+        if (!$group.length) return;
+        var $lbl   = $group.find(".crs-group-label");
+        var $items = $group.find(".crs-group-items");
+        if (!$items.is(":visible")) {
+            $items.show();
+            $lbl.data("expanded", true);
+            $lbl.find(".crs-group-arrow").html("&#9660;");
+        }
+    }
+
+    // ── type-ahead ───────────────────────────────────────────────────────────
+
+    var taBuffer = "", taTimer = null;
+
+    function typeahead(ch) {
+        taBuffer += ch.toLowerCase();
+        clearTimeout(taTimer);
+        taTimer = setTimeout(function() { taBuffer = ""; }, 800);
+
+        var $opts = $dropdown.find(".crs-option");   // all, including hidden
+        var cur   = $dropdown.find(".crs-focused")[0];
+        var all   = $opts.toArray();
+        var start = cur ? (all.indexOf(cur) + 1) : 0;
+
+        // search from current position, wrap around
+        for (var i = 0; i < all.length; i++) {
+            var el = all[(start + i) % all.length];
+            if ($(el).text().toLowerCase().indexOf(taBuffer) === 0) {
+                expandGroupOf(el);           // auto-expand group if needed
+                setFocused(el);
+                el.scrollIntoView({ block: "nearest" });
+                return;
+            }
+        }
+        // no match — reset buffer to just this character and retry once
+        if (taBuffer.length > 1) {
+            taBuffer = ch.toLowerCase();
+            typeahead("");    // retry (taBuffer already set, ch="" won't append)
+        }
+    }
+
+    // ── mouse events ─────────────────────────────────────────────────────────
+
     $display.on("click", function(e) {
         e.stopPropagation();
-        $dropdown.toggle();
-        $display.find(".crs-arrow").html($dropdown.is(":visible") ? "&#9650;" : "&#9660;");
+        $dropdown.is(":visible") ? closeDropdown() : openDropdown();
     });
 
     $dropdown.on("click", ".crs-group-label", function(e) {
         e.stopPropagation();
-        var $lbl = $(this);
-        var $items = $lbl.next(".crs-group-items");
+        var $lbl     = $(this);
+        var $items   = $lbl.next(".crs-group-items");
         var expanded = !!$lbl.data("expanded");
         $items.toggle(!expanded);
         $lbl.data("expanded", !expanded);
@@ -250,18 +352,41 @@ function buildCollapsibleRegionSelect() {
 
     $dropdown.on("click", ".crs-option", function(e) {
         e.stopPropagation();
-        var val = $(this).data("value");
-        $select.val(val);
-        $display.find(".crs-text").text($(this).text());
-        $dropdown.find(".crs-selected").removeClass("crs-selected");
-        $(this).addClass("crs-selected");
-        $dropdown.hide();
-        $display.find(".crs-arrow").html("&#9660;");
+        selectOption($(this));
     });
 
-    $(document).on("click.crs", function() {
-        $dropdown.hide();
-        $display.find(".crs-arrow").html("&#9660;");
+    $(document).on("click.crs", function() { closeDropdown(); });
+
+    // ── keyboard events ───────────────────────────────────────────────────────
+
+    $display.on("keydown", function(e) {
+        var open = $dropdown.is(":visible");
+        switch (e.key) {
+            case "ArrowDown":
+                e.preventDefault();
+                open ? moveFocus(1) : openDropdown();
+                break;
+            case "ArrowUp":
+                e.preventDefault();
+                open ? moveFocus(-1) : openDropdown();
+                break;
+            case "Enter":
+            case " ":
+                e.preventDefault();
+                open ? activateFocused() : openDropdown();
+                break;
+            case "Escape":
+                if (open) { e.preventDefault(); closeDropdown(); }
+                break;
+            case "Tab":
+                if (open) closeDropdown();
+                break;
+            default:
+                if (e.key.length === 1 && !e.ctrlKey && !e.metaKey) {
+                    if (!open) openDropdown();
+                    typeahead(e.key);
+                }
+        }
     });
 }
 
