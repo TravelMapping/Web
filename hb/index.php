@@ -17,9 +17,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" type="text/css" href="/css/travelMapping.css" />
-    <link rel="stylesheet" type="text/css" href="/fonts/roadgeek.css" />
-    <link rel="shortcut icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" type="text/css" href="css/travelMapping.css" />
+    <link rel="stylesheet" type="text/css" href="fonts/roadgeek.css" />
+    <link rel="shortcut icon" type="image/png" href="web/favicon.png">
     <style type="text/css">
         #routebox {
             left: 0px;
@@ -43,6 +43,23 @@
             font-size: 14px;
 	}
 
+    /* Collapsible region select */
+    .crs-wrapper { display: inline-block; position: relative; vertical-align: middle; }
+    .crs-dropdown {
+        position: absolute; top: 100%; left: 0; min-width: 100%; max-height: 300px;
+        overflow-y: auto; border: 1px solid #767676; background: Field; z-index: 1000; font: inherit;
+    }
+    .crs-option { padding: 1px 3px; cursor: default; white-space: nowrap; }
+    .crs-option:hover, .crs-option.crs-selected { background-color: Highlight; color: HighlightText; }
+    .crs-group-label {
+        padding: 1px 3px; font-weight: bold; cursor: default;
+        background-color: #ddd; background-color: ButtonFace;
+        white-space: nowrap; user-select: none;
+    }
+    .crs-group-label:hover { background-color: #bbb; background-color: ButtonFace; filter: brightness(0.93); }
+    .crs-group-item { padding-left: 20px; }
+    .crs-group-arrow { display: inline-block; width: 10px; font-size: 9px; }
+    .crs-option.crs-focused, .crs-group-label.crs-focused { outline: 2px solid Highlight; outline-offset: -2px; }
     </style>
     <?php
     // check for region and/or system parameters
@@ -89,7 +106,7 @@
 
     ?>
     <?php tm_common_js(); ?>
-    <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
+    <script src="lib/tmjsfuncs.js" type="text/javascript"></script>
     <title>Travel Mapping <?php echo $tmMode_s; ?> Browser</title>
 </head>
 <?php 
@@ -157,6 +174,173 @@ JS;
             ?>
         }
     );
+</script>
+<script type="text/javascript">
+function buildCollapsibleRegionSelect() {
+    var $select = $("#region");
+    if (!$select.length) return;
+
+    var selectedVal = $select.val() || "null";
+
+    var $dropdown = $('<div class="crs-dropdown" style="display:none; position:absolute; top:100%; left:0; z-index:1000; min-width:100%; max-height:300px; overflow-y:auto;"></div>');
+
+    var $none = $('<div class="crs-option" data-value="null">[None Selected]</div>');
+    if (selectedVal === "null") $none.addClass("crs-selected");
+    $dropdown.append($none);
+
+    $select.children().each(function() {
+        if (this.tagName === "OPTGROUP") {
+            var $group = $('<div class="crs-group"></div>');
+            var $label = $('<div class="crs-group-label"><span class="crs-group-arrow">&#9654;</span> </div>');
+            $label.append(document.createTextNode($(this).attr("label")));
+            var $items = $('<div class="crs-group-items" style="display:none;"></div>');
+            var groupHasSelected = false;
+            $(this).children("option").each(function() {
+                var val = this.value;
+                var $item = $('<div class="crs-option crs-group-item"></div>').attr("data-value", val).text($(this).text());
+                if (val === selectedVal) { $item.addClass("crs-selected"); groupHasSelected = true; }
+                $items.append($item);
+            });
+            if (groupHasSelected) {
+                $items.show();
+                $label.find(".crs-group-arrow").html("&#9660;");
+                $label.data("expanded", true);
+            }
+            $group.append($label).append($items);
+            $dropdown.append($group);
+        } else if (this.tagName === "OPTION" && this.value !== "null") {
+            var val = this.value;
+            var $opt = $('<div class="crs-option"></div>').attr("data-value", val).text($(this).text());
+            if (val === selectedVal) $opt.addClass("crs-selected");
+            $dropdown.append($opt);
+        }
+    });
+
+    $select.wrap('<div class="crs-wrapper" style="display:inline-block; position:relative; vertical-align:middle;"></div>');
+    $select.after($dropdown);
+    var $wrapper = $select.parent();
+    $select.attr("tabindex", "-1");
+    $wrapper.attr("tabindex", "0");
+
+    function openDropdown() {
+        $dropdown.show();
+        var $sel = $dropdown.find(".crs-selected:visible");
+        var toFocus = $sel.length ? $sel[0] : $dropdown.find(".crs-option:visible")[0];
+        setFocused(toFocus);
+        if (toFocus) toFocus.scrollIntoView({ block: "nearest" });
+    }
+
+    function closeDropdown() {
+        $dropdown.hide();
+        $dropdown.find(".crs-focused").removeClass("crs-focused");
+    }
+
+    function setFocused(el) {
+        $dropdown.find(".crs-focused").removeClass("crs-focused");
+        if (el) $(el).addClass("crs-focused");
+    }
+
+    function visibleNavigable() {
+        return $dropdown.find(".crs-group-label:visible, .crs-option:visible").toArray();
+    }
+
+    function moveFocus(delta) {
+        var items = visibleNavigable();
+        if (!items.length) return;
+        var cur = $dropdown.find(".crs-focused")[0];
+        var idx = items.indexOf(cur);
+        idx = (idx + delta + items.length) % items.length;
+        setFocused(items[idx]);
+        items[idx].scrollIntoView({ block: "nearest" });
+    }
+
+    function activateFocused() {
+        var $f = $dropdown.find(".crs-focused");
+        if ($f.hasClass("crs-group-label")) { $f.trigger("click"); }
+        else if ($f.hasClass("crs-option"))  { selectOption($f); }
+    }
+
+    function selectOption($opt) {
+        var val = $opt.data("value");
+        $select.val(val);
+        $dropdown.find(".crs-selected").removeClass("crs-selected");
+        $opt.addClass("crs-selected");
+        closeDropdown();
+        $wrapper[0].focus();
+    }
+
+    function expandGroupOf(el) {
+        var $group = $(el).closest(".crs-group");
+        if (!$group.length) return;
+        var $lbl   = $group.find(".crs-group-label");
+        var $items = $group.find(".crs-group-items");
+        if (!$items.is(":visible")) {
+            $items.show();
+            $lbl.data("expanded", true);
+            $lbl.find(".crs-group-arrow").html("&#9660;");
+        }
+    }
+
+    var taBuffer = "", taTimer = null;
+
+    function typeahead(ch) {
+        taBuffer += ch.toLowerCase();
+        clearTimeout(taTimer);
+        taTimer = setTimeout(function() { taBuffer = ""; }, 800);
+        var all   = $dropdown.find(".crs-option").toArray();
+        var cur   = $dropdown.find(".crs-focused")[0];
+        var start = cur ? (all.indexOf(cur) + 1) : 0;
+        for (var i = 0; i < all.length; i++) {
+            var el = all[(start + i) % all.length];
+            if ($(el).text().toLowerCase().indexOf(taBuffer) === 0) {
+                expandGroupOf(el);
+                setFocused(el);
+                el.scrollIntoView({ block: "nearest" });
+                return;
+            }
+        }
+        if (taBuffer.length > 1) { taBuffer = ch.toLowerCase(); typeahead(""); }
+    }
+
+    $select.on("mousedown", function(e) {
+        e.preventDefault();
+        $wrapper[0].focus();
+        $dropdown.is(":visible") ? closeDropdown() : openDropdown();
+    });
+    $select.on("click", function(e) { e.stopPropagation(); });
+
+    $wrapper.on("keydown", function(e) {
+        var open = $dropdown.is(":visible");
+        switch (e.key) {
+            case "ArrowDown": e.preventDefault(); open ? moveFocus(1)      : openDropdown(); break;
+            case "ArrowUp":   e.preventDefault(); open ? moveFocus(-1)     : openDropdown(); break;
+            case "Enter":
+            case " ":         e.preventDefault(); open ? activateFocused() : openDropdown(); break;
+            case "Escape":    if (open) { e.preventDefault(); closeDropdown(); } break;
+            case "Tab":       if (open) closeDropdown(); break;
+            default:
+                if (e.key.length === 1 && !e.ctrlKey && !e.metaKey) {
+                    e.preventDefault();
+                    if (!open) openDropdown();
+                    typeahead(e.key);
+                }
+        }
+    });
+
+    $dropdown.on("click", ".crs-group-label", function(e) {
+        e.stopPropagation();
+        var $lbl = $(this), $items = $lbl.next(".crs-group-items"), expanded = !!$lbl.data("expanded");
+        $items.toggle(!expanded);
+        $lbl.data("expanded", !expanded);
+        $lbl.find(".crs-group-arrow").html(!expanded ? "&#9660;" : "&#9654;");
+    });
+
+    $dropdown.on("click", ".crs-option", function(e) { e.stopPropagation(); selectOption($(this)); });
+    $dropdown.on("click", function(e) { e.stopPropagation(); });
+    $(document).on("click.crs", function() { closeDropdown(); });
+}
+
+$(document).ready(function() { buildCollapsibleRegionSelect(); });
 </script>
 
 <?php
