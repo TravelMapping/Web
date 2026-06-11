@@ -17,9 +17,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" type="text/css" href="/css/travelMapping.css" />
-    <link rel="stylesheet" type="text/css" href="/fonts/roadgeek.css" />
-    <link rel="shortcut icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" type="text/css" href="css/travelMapping.css" />
+    <link rel="stylesheet" type="text/css" href="fonts/roadgeek.css" />
+    <link rel="shortcut icon" type="image/png" href="web/favicon.png">
     <style type="text/css">
         #routebox {
             left: 0px;
@@ -45,26 +45,21 @@
 
     /* Collapsible region select */
     .crs-wrapper { display: inline-block; position: relative; vertical-align: middle; }
-    .crs-display {
-        border: 1px solid #aaa; padding: 1px 6px; cursor: pointer; background: white;
-        min-width: 180px; display: flex; justify-content: space-between; align-items: center;
-        user-select: none; font-size: 13px; height: 22px; box-sizing: border-box;
-    }
-    .crs-arrow { margin-left: 6px; font-size: 10px; }
     .crs-dropdown {
         position: absolute; top: 100%; left: 0; min-width: 100%; max-height: 300px;
-        overflow-y: auto; border: 1px solid #aaa; background: white; z-index: 1000; font-size: 13px;
+        overflow-y: auto; border: 1px solid #767676; background: Field; z-index: 1000; font: inherit;
     }
-    .crs-option { padding: 2px 8px; cursor: pointer; white-space: nowrap; }
-    .crs-option:hover, .crs-option.crs-selected { background-color: #0078d7; color: white; }
+    .crs-option { padding: 1px 3px; cursor: default; white-space: nowrap; }
+    .crs-option:hover, .crs-option.crs-selected { background-color: Highlight; color: HighlightText; }
     .crs-group-label {
-        padding: 2px 8px; font-weight: bold; cursor: pointer;
-        background-color: #f0f0f0; white-space: nowrap; user-select: none;
+        padding: 1px 3px; font-weight: bold; cursor: default;
+        background-color: #ddd; background-color: ButtonFace;
+        white-space: nowrap; user-select: none;
     }
-    .crs-group-label:hover { background-color: #ddd; }
+    .crs-group-label:hover { background-color: #bbb; background-color: ButtonFace; filter: brightness(0.93); }
     .crs-group-item { padding-left: 20px; }
-    .crs-group-arrow { display: inline-block; width: 12px; font-size: 10px; }
-    .crs-option.crs-focused, .crs-group-label.crs-focused { outline: 2px solid #005fa3; outline-offset: -2px; }
+    .crs-group-arrow { display: inline-block; width: 10px; font-size: 9px; }
+    .crs-option.crs-focused, .crs-group-label.crs-focused { outline: 2px solid Highlight; outline-offset: -2px; }
     </style>
     <?php
     // check for region and/or system parameters
@@ -111,7 +106,7 @@
 
     ?>
     <?php tm_common_js(); ?>
-    <script src="../lib/tmjsfuncs.js" type="text/javascript"></script>
+    <script src="lib/tmjsfuncs.js" type="text/javascript"></script>
     <title>Travel Mapping <?php echo $tmMode_s; ?> Browser</title>
 </head>
 <?php 
@@ -186,17 +181,8 @@ function buildCollapsibleRegionSelect() {
     if (!$select.length) return;
 
     var selectedVal = $select.val() || "null";
-    var selectedText = "[None Selected]";
-    if (selectedVal !== "null") {
-        $select.find("option[value='" + selectedVal + "']").each(function() {
-            selectedText = $(this).text();
-        });
-    }
 
-    var $wrapper  = $('<div class="crs-wrapper"></div>');
-    var $display  = $('<div class="crs-display" tabindex="0"><span class="crs-text"></span><span class="crs-arrow">&#9660;</span></div>');
-    $display.find(".crs-text").text(selectedText);
-    var $dropdown = $('<div class="crs-dropdown" style="display:none;"></div>');
+    var $dropdown = $('<div class="crs-dropdown" style="display:none; position:absolute; top:100%; left:0; z-index:1000; min-width:100%; max-height:300px; overflow-y:auto;"></div>');
 
     var $none = $('<div class="crs-option" data-value="null">[None Selected]</div>');
     if (selectedVal === "null") $none.addClass("crs-selected");
@@ -230,15 +216,14 @@ function buildCollapsibleRegionSelect() {
         }
     });
 
-    $wrapper.append($display).append($dropdown);
-    $select.hide().after($wrapper);
-
-    // ── helpers ──────────────────────────────────────────────────────────────
+    $select.wrap('<div class="crs-wrapper" style="display:inline-block; position:relative; vertical-align:middle;"></div>');
+    $select.after($dropdown);
+    var $wrapper = $select.parent();
+    $select.attr("tabindex", "-1");
+    $wrapper.attr("tabindex", "0");
 
     function openDropdown() {
         $dropdown.show();
-        $display.find(".crs-arrow").html("&#9650;");
-        // focus the currently-selected option, or the first item
         var $sel = $dropdown.find(".crs-selected:visible");
         var toFocus = $sel.length ? $sel[0] : $dropdown.find(".crs-option:visible")[0];
         setFocused(toFocus);
@@ -247,7 +232,6 @@ function buildCollapsibleRegionSelect() {
 
     function closeDropdown() {
         $dropdown.hide();
-        $display.find(".crs-arrow").html("&#9660;");
         $dropdown.find(".crs-focused").removeClass("crs-focused");
     }
 
@@ -257,7 +241,6 @@ function buildCollapsibleRegionSelect() {
     }
 
     function visibleNavigable() {
-        // group labels + options that are currently visible
         return $dropdown.find(".crs-group-label:visible, .crs-option:visible").toArray();
     }
 
@@ -273,21 +256,17 @@ function buildCollapsibleRegionSelect() {
 
     function activateFocused() {
         var $f = $dropdown.find(".crs-focused");
-        if ($f.hasClass("crs-group-label")) {
-            $f.trigger("click");          // toggle group
-        } else if ($f.hasClass("crs-option")) {
-            selectOption($f);
-        }
+        if ($f.hasClass("crs-group-label")) { $f.trigger("click"); }
+        else if ($f.hasClass("crs-option"))  { selectOption($f); }
     }
 
     function selectOption($opt) {
         var val = $opt.data("value");
         $select.val(val);
-        $display.find(".crs-text").text($opt.text());
         $dropdown.find(".crs-selected").removeClass("crs-selected");
         $opt.addClass("crs-selected");
         closeDropdown();
-        $display.focus();
+        $wrapper[0].focus();
     }
 
     function expandGroupOf(el) {
@@ -302,92 +281,63 @@ function buildCollapsibleRegionSelect() {
         }
     }
 
-    // ── type-ahead ───────────────────────────────────────────────────────────
-
     var taBuffer = "", taTimer = null;
 
     function typeahead(ch) {
         taBuffer += ch.toLowerCase();
         clearTimeout(taTimer);
         taTimer = setTimeout(function() { taBuffer = ""; }, 800);
-
-        var $opts = $dropdown.find(".crs-option");   // all, including hidden
+        var all   = $dropdown.find(".crs-option").toArray();
         var cur   = $dropdown.find(".crs-focused")[0];
-        var all   = $opts.toArray();
         var start = cur ? (all.indexOf(cur) + 1) : 0;
-
-        // search from current position, wrap around
         for (var i = 0; i < all.length; i++) {
             var el = all[(start + i) % all.length];
             if ($(el).text().toLowerCase().indexOf(taBuffer) === 0) {
-                expandGroupOf(el);           // auto-expand group if needed
+                expandGroupOf(el);
                 setFocused(el);
                 el.scrollIntoView({ block: "nearest" });
                 return;
             }
         }
-        // no match — reset buffer to just this character and retry once
-        if (taBuffer.length > 1) {
-            taBuffer = ch.toLowerCase();
-            typeahead("");    // retry (taBuffer already set, ch="" won't append)
-        }
+        if (taBuffer.length > 1) { taBuffer = ch.toLowerCase(); typeahead(""); }
     }
 
-    // ── mouse events ─────────────────────────────────────────────────────────
-
-    $display.on("click", function(e) {
-        e.stopPropagation();
+    $select.on("mousedown", function(e) {
+        e.preventDefault();
+        $wrapper[0].focus();
         $dropdown.is(":visible") ? closeDropdown() : openDropdown();
     });
+    $select.on("click", function(e) { e.stopPropagation(); });
 
-    $dropdown.on("click", ".crs-group-label", function(e) {
-        e.stopPropagation();
-        var $lbl     = $(this);
-        var $items   = $lbl.next(".crs-group-items");
-        var expanded = !!$lbl.data("expanded");
-        $items.toggle(!expanded);
-        $lbl.data("expanded", !expanded);
-        $lbl.find(".crs-group-arrow").html(!expanded ? "&#9660;" : "&#9654;");
-    });
-
-    $dropdown.on("click", ".crs-option", function(e) {
-        e.stopPropagation();
-        selectOption($(this));
-    });
-
-    $(document).on("click.crs", function() { closeDropdown(); });
-
-    // ── keyboard events ───────────────────────────────────────────────────────
-
-    $display.on("keydown", function(e) {
+    $wrapper.on("keydown", function(e) {
         var open = $dropdown.is(":visible");
         switch (e.key) {
-            case "ArrowDown":
-                e.preventDefault();
-                open ? moveFocus(1) : openDropdown();
-                break;
-            case "ArrowUp":
-                e.preventDefault();
-                open ? moveFocus(-1) : openDropdown();
-                break;
+            case "ArrowDown": e.preventDefault(); open ? moveFocus(1)      : openDropdown(); break;
+            case "ArrowUp":   e.preventDefault(); open ? moveFocus(-1)     : openDropdown(); break;
             case "Enter":
-            case " ":
-                e.preventDefault();
-                open ? activateFocused() : openDropdown();
-                break;
-            case "Escape":
-                if (open) { e.preventDefault(); closeDropdown(); }
-                break;
-            case "Tab":
-                if (open) closeDropdown();
-                break;
+            case " ":         e.preventDefault(); open ? activateFocused() : openDropdown(); break;
+            case "Escape":    if (open) { e.preventDefault(); closeDropdown(); } break;
+            case "Tab":       if (open) closeDropdown(); break;
             default:
                 if (e.key.length === 1 && !e.ctrlKey && !e.metaKey) {
+                    e.preventDefault();
                     if (!open) openDropdown();
                     typeahead(e.key);
                 }
         }
     });
+
+    $dropdown.on("click", ".crs-group-label", function(e) {
+        e.stopPropagation();
+        var $lbl = $(this), $items = $lbl.next(".crs-group-items"), expanded = !!$lbl.data("expanded");
+        $items.toggle(!expanded);
+        $lbl.data("expanded", !expanded);
+        $lbl.find(".crs-group-arrow").html(!expanded ? "&#9660;" : "&#9654;");
+    });
+
+    $dropdown.on("click", ".crs-option", function(e) { e.stopPropagation(); selectOption($(this)); });
+    $dropdown.on("click", function(e) { e.stopPropagation(); });
+    $(document).on("click.crs", function() { closeDropdown(); });
 }
 
 $(document).ready(function() { buildCollapsibleRegionSelect(); });
