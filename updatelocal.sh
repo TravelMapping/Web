@@ -35,10 +35,10 @@ for dir in $all_dirs; do
 done
 
 # 4. Create/re-create shields cache directory
-if [ -d "$dir/shields/cache" ]; then
-    rm -rf $dir/shields/cache
+if [ -d "$TARGET_DIR/shields/cache" ]; then
+    rm -rf $TARGET_DIR/shields/cache
 fi
-mkdir $dir/shields/cache
-chmod 777 $dir/shields/cache
+mkdir $TARGET_DIR/shields/cache
+chmod 777 $TARGET_DIR/shields/cache
 
 echo "Local web deployment to $TARGET_DIR complete."
