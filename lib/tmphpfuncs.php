@@ -95,17 +95,21 @@ else if ($tmmode_s == "ski trails") {
 // to be included before any other output is generated
 // to avoid warnings from setcookie
 
+if (!headers_sent()) {
+    header('Content-Type: text/html; charset=utf-8');
+}
+
 // make the connection
-echo "<!-- mysqli connecting to database ".$tmdbname." on ".$tmdbhost." -->\n";
 mysqli_report(MYSQLI_REPORT_STRICT);
 try {
     $tmdb = new mysqli($tmdbhost, $tmdbuser, $tmdbpasswd, $tmdbname);
-    $tmdb->set_charset('utf8');
+    $tmdb->set_charset('utf8mb4');
 }
 catch ( Exception $e ) {
     echo "<h1 style='color: red'>Failed to connect to database ".$tmdbname." on ".$tmdbhost." Please look <a href=\"https://travelmapping.github.io/\">here</a> for possible updates.</h1>";
     exit;
 }
+echo "<!-- mysqli connected to database ".$tmdbname." on ".$tmdbhost." -->\n";
 
 // function to combine a query with a little error check
 function tmdb_query($sql_command) {
