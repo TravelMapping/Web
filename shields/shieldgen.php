@@ -521,11 +521,6 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
-        case 'usansf':
-            $svg = file_get_contents("{$dir}/template_usams.svg");
-            $svg = str_replace("***NUMBER***", "67", $svg);
-            break;
-
         case 'belb':
         case 'bgra':
 		case 'chnjjjs':
