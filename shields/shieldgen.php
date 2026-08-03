@@ -533,6 +533,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'irlr':
         case 'jamt':
         case 'jama':
+		case 'jpne':
 		case 'kazkaz':
 		case 'kazkz':
         case 'lkaa':
@@ -959,7 +960,6 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'mtqa':
         case 'glpn':
         case 'gufn':
-        case 'mara':
         case 'tuna':
         case 'mtqn':
         case 'sena':
@@ -978,7 +978,6 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
-		case 'marn':
 		case 'reun':
             // replace placeholder, add blank after prefix, use wide svg files
             $routeNum = str_replace("N", "N ", $row['route']);
@@ -1243,9 +1242,18 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;		
 		
+		case 'jpnh':
 		case 'luxn':
+		case 'marn':
 			$routeNum = str_replace("N", "", $row['route']);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+			
+		case 'mara':
+			if (strlen($row['route']) > 3) {
+                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide.svg");
+            }
+            $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;
 
 		case 'nlda':
@@ -1408,16 +1416,6 @@ function tm_shield_generate($r, $force_reload = false) {
 		
         case 'twnf':
             $routeNum = str_replace("F", "", $row['route']);
-            $svg = str_replace("***NUMBER***", $routeNum, $svg);
-            break;
-        
-        case 'jpne':
-            // might need to have a wide version of the template
-            $svg = str_replace("***NUMBER***", $row['route'], $svg);
-            break;
-		
-        case 'jpnh':
-            $routeNum = str_replace("N", "", $row['route']);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 
