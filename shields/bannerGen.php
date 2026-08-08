@@ -1,23 +1,28 @@
 <!-- /shields/bannerGen.php: generate banner plates -->
 <?php
 /*
-	Generate a single specified svg banner for the specified system.
+	Generate a single specified svg banner for the specified route.
 	
 	Params:
 		String $banner - The type of bannered route (Bus, Alt etc...)
-		String $system - The system code
+		String $r - The TM "root" such as ny.i090 or bc.tchyel .
 		Boolean $force_reload - force regeneration of the banner. Default is false.
 		
 	Returns a string:
 		Returns the svg code if successful.
 		Returns an empty string if the banner isn't recognized.
-		Returns 'not external' for systems that don't use external banners.
+		Returns 'not external' for routes that don't use external banners.
 
 */
-function tm_banner_generate($banner, $system, $force_reload = false) {
+function tm_banner_generate($banner, $r, $force_reload = false) {
 	
 	// Specify the shields directory
-  $dir = $_SERVER['DOCUMENT_ROOT']."/shields";
+  	$dir = $_SERVER['DOCUMENT_ROOT']."/shields";
+
+	$sql_command = "SELECT * FROM routes WHERE root = '" . $r . "';";
+    $res = tmdb_query($sql_command);
+    $row = $res->fetch_assoc();
+    $res->free();
 	
 	$borderColor = '#000';
 	$fillColor = '#fff';
@@ -27,7 +32,7 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 	$usamsScenic = false;
 	
 	// Identify system, color scheme, and template type
-	switch ($system) {
+	switch ($row['systemName']) {
 		case 'usaib': // Return a 'not external' string for systems that don't generally use external banners
 		case 'ausab':
 		case 'ausnb':
@@ -102,13 +107,13 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 				break;
 			}
 
-		// case 'usatr': // No banner for Michigan, regular otherwise (Needs to be fixed)
-			// if ($region == "MI") {
-				// return 'not external';
-			// }
-			// else {
-				// break;
-			// }
+		case 'usatr': // No banner for Michigan, regular otherwise
+			if ($row['region'] == "MI") {
+				return 'not external';
+			}
+			else {
+				break;
+			}
 		
 		case 'usaca': // White text on green bg
 			$textColor = '#fff';
@@ -220,18 +225,13 @@ function tm_banner_generate($banner, $system, $force_reload = false) {
 			
 			break;
 		case 'His':
-			if ($system = 'usaca') {
-				$text = 'HISTORIC';
-				$x = '300';
-				$y = '215';
-				$fontSize = '220px';
-				$fontSeries = 'B';
+			$text = 'HISTORIC';
+			$x = '300';
+			$y = '215';
+			$fontSize = '220px';
+			$fontSeries = 'B';
 				
-				break;
-			}
-			else {
-				return '';
-			}
+			break;
 		case 'Lp':
 			$text = 'LOOP';
 			$x = '293.81';
