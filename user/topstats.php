@@ -333,6 +333,7 @@
                 <th class="clinched">Length (<span class="unitsText"><?php tm_echo_units(); ?></span>)</th>
         </thead>
         <tbody id="longestClinchedRoutes">
+            <tr><td colspan="2" style="text-align:center">Loading Data</td></tr>
         </tbody>
     </table>
 </span><span style="display: inline-block; vertical-align: top;">
@@ -344,6 +345,7 @@
                 <th class="clinched">Length (<span class="unitsText"><?php tm_echo_units(); ?></span>)</th>
         </thead>
         <tbody id="longestTraveledRoutes">
+            <tr><td colspan="3" style="text-align:center">Loading Data</td></tr>
         </tbody>
     </table>
 </span><span style="display: inline-block; vertical-align: top;">
@@ -355,6 +357,7 @@
                 <th class="clinched">Length (<span class="unitsText"><?php tm_echo_units(); ?></span>)</th>
         </thead>
         <tbody id="closestToClinchedTraveledRoutes">
+            <tr><td colspan="3" style="text-align:center">Loading Data</td></tr>
         </tbody>
     </table>
 </span>
