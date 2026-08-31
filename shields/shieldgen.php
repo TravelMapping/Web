@@ -1272,7 +1272,7 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'jeya':
 		case 'jeyb':
 			$shieldClass = null;
-			$csv = array_map('str_getcsv', file("{$dir}/shieldData_" . $row['systemName'] . ".csv"));
+			$csv = array_map(fn($line) => str_getcsv($line, escape: ""), file("{$dir}/shieldData_" . $row['systemName'] . ".csv"));
 			foreach ($csv as $values) {
 				if ($values[2] == $r) {
 					$shieldClass = $values[3];
@@ -1897,7 +1897,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'usatn': // Tennessee
             $routeNum = str_replace("TN", "", $row['route']);
 			$shieldClass = null;
-			$csv = array_map('str_getcsv', file("{$dir}/shieldData_" . $row['systemName'] . ".csv"));
+			$csv = array_map(fn($line) => str_getcsv($line, escape: ""), file("{$dir}/shieldData_" . $row['systemName'] . ".csv"));
 			foreach ($csv as $values) {
 				if ($values[2] == $r) {
 					$shieldClass = $values[3];
