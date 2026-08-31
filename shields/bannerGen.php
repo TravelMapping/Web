@@ -106,6 +106,14 @@ function tm_banner_generate($banner, $r, $force_reload = false) {
 			else {
 				break;
 			}
+			
+		case 'usatn': // No banner for Alt, regular otherwise
+			if ($banner == "Alt") {
+				return 'not external';
+			}
+			else {
+				break;
+			}
 
 		case 'usatr': // No banner for Michigan, regular otherwise
 			if ($row['region'] == "MI") {
