@@ -1266,25 +1266,18 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;
 
-		/*// case 'gbna':
-		// case 'nira':
+		case 'gbna':
+		case 'nira':
 		case 'imna':
-		// case 'jeya':
-		// case 'jeyb':
+		case 'jeya':
+		case 'jeyb':
 			$shieldClass = null;
-			$scdFile = "{$dir}/shieldData_" . $row['systemName'] . ".csv";
-			$handle = fopen($scdFile, "r");
-			if ($handle !== FALSE) {
-				// Loop through each row of the file
-				while (($shieldRow = fgetcsv($scdFile, 200, ";", escape: "")) !== FALSE) {
-					// Check if the value in the lookup column matches the desired value
-					if ($shieldRow[2] == $r) {
-						// Return the value from the desired return column
-						$shieldClass = $shieldRow[3];
-					}
+			$csv = array_map('str_getcsv', file("{$dir}/shieldData_" . $row['systemName'] . ".csv"));
+			foreach ($csv as $values) {
+				if ($values[2] == $r) {
+					$shieldClass = $values[3];
 				}
 			}
-			fclose($scdFile);
 			if ($shieldClass == "Primary") {
                 $svg = file_get_contents("{$dir}/template_gbna_wide" . strlen($row['route']) . "_primary.svg");
             }
@@ -1295,7 +1288,7 @@ function tm_shield_generate($r, $force_reload = false) {
 				$svg = file_get_contents("{$dir}/template_gbna_wide" . strlen($row['route']) . "_np.svg");
             } 
 			$svg = str_replace("***NUMBER***", $row['route'], $svg);
-			break;*/
+			break;
 		
         case 'gbnb':
         case 'nirb':
@@ -1901,7 +1894,43 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
 		
-        case 'usatxl': // Texas Loops
+        case 'usatn': // Tennessee
+            $routeNum = str_replace("TN", "", $row['route']);
+			$shieldClass = null;
+			$csv = array_map('str_getcsv', file("{$dir}/shieldData_" . $row['systemName'] . ".csv"));
+			foreach ($csv as $values) {
+				if ($values[2] == $r) {
+					$shieldClass = $values[3];
+				}
+			}
+            if ($shieldClass == "Secondary") {
+                if (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_usatn2_wide.svg");
+                }
+                else {
+                    $svg = file_get_contents("{$dir}/template_usatn2.svg");
+                }
+            }
+            elseif ($shieldClass == "Both") {
+                if (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_usatn_wide.svg");
+                }
+                else {
+                    $svg = file_get_contents("{$dir}/template_usatn.svg");
+                }
+            }
+            else {
+                if (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_usatn_wide.svg");
+                }
+                else {
+                    $svg = file_get_contents("{$dir}/template_usatn.svg");
+                }
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+		
+		case 'usatxl': // Texas Loops
 		case 'usatxs': // Texas Spurs
             $routeNum = str_replace("TXLp", "", $row['route']);
 			$routeNum = str_replace("TXSpr", "", $routeNum);
@@ -2003,7 +2032,6 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'usari': // Rhode Island
         case 'usasc': // South Carolina
         case 'usasd': // South Dakota
-        case 'usatn': // Tennessee
         case 'usatx': // Texas
         case 'usatxre': // Texas Recreation Roads
         case 'usaut': // Utah
