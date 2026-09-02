@@ -902,6 +902,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'prtvr':
         case 'rksr':
         case 'srba':
+		case 'stpen':
         case 'svna':
         case 'svnh':
 		case 'ukrm':
@@ -1946,11 +1947,36 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'usavt': // Vermont
             $matches = [];
             $routeNum = str_replace("VT", "", $row['route']);
-			if (strlen($routeNum) > 3) {
-                $svg = file_get_contents("{$dir}/template_usavt_wide4.svg");
+			$shieldClass = null;
+			$csv = array_map(fn($line) => str_getcsv($line, escape: ""), file("{$dir}/shieldData_" . $row['systemName'] . ".csv"));
+			foreach ($csv as $values) {
+				if ($values[2] == $r) {
+					$shieldClass = $values[3];
+				}
+			}
+			if ($shieldClass == "Town") {
+                if (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_usaky_wide.svg");
+                }
+                else {
+                    $svg = file_get_contents("{$dir}/template_usaky.svg");
+                }
             }
-			elseif (strlen($routeNum) > 2) {
-                $svg = file_get_contents("{$dir}/template_usavt_wide.svg");
+            elseif ($shieldClass == "Both") {
+                if (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_usavt_wide.svg");
+                }
+                else {
+                    $svg = file_get_contents("{$dir}/template_usavt.svg");
+                }
+            }
+            else {
+                if (strlen($routeNum) > 3) {
+                    $svg = file_get_contents("{$dir}/template_usavt_wide4.svg");
+                }
+                elseif (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_usavt_wide.svg");
+                }
             }
             if (preg_match('/(?<number>[0-9]+)(?<letter>[A-Za-z]+)/', $routeNum, $matches)) {
                $svg = str_replace("***NUMBER***", $matches['number'], $svg);
