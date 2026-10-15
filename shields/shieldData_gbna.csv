@@ -63,6 +63,7 @@ ENG,A39,eng.a0039,Both
 ENG,A39Bri,eng.a0039bri,Both
 ENG,A40Lon,eng.a0040lon,Non-Primary
 ENG,A40,eng.a0040,Both
+ENG,A40Che,eng.a0040che,Primary
 WLS,A40,wls.a0040,Primary
 WLS,A40Hav,wls.a0040hav,Both
 ENG,A41Lon,eng.a0041lon,Both
@@ -478,7 +479,6 @@ ENG,A414,eng.a0414,Both
 ENG,A415,eng.a0415,Non-Primary
 ENG,A416,eng.a0416,Non-Primary
 ENG,A417,eng.a0417,Both
-ENG,A417Led,eng.a0417led,Both
 ENG,A417Glo,eng.a0417glo,Primary
 ENG,A418,eng.a0418,Primary
 ENG,A418Kin,eng.a0418kin,Primary
@@ -685,7 +685,6 @@ ENG,A579,eng.a0579,Both
 ENG,A580,eng.a0580,Primary
 ENG,A581,eng.a0581,Non-Primary
 ENG,A582,eng.a0582,Primary
-ENG,A582Cot,eng.a0582cot,Primary
 ENG,A583,eng.a0583,Both
 ENG,A584,eng.a0584,Non-Primary
 ENG,A585,eng.a0585,Primary
@@ -1400,6 +1399,7 @@ ENG,A3217,eng.a3217,Non-Primary
 ENG,A3218,eng.a3218,Non-Primary
 ENG,A3219,eng.a3219,Non-Primary
 ENG,A3220,eng.a3220,Primary
+ENG,A3222,eng.a3222,Non-Primary
 ENG,A3259,eng.a3259,Non-Primary
 ENG,A3290,eng.a3290,Non-Primary
 ENG,A3400,eng.a3400,Non-Primary
