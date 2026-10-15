@@ -1139,7 +1139,7 @@ function tm_shield_generate($r, $force_reload = false) {
 		case 'espn':
 		case 'espvg':
             $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($row['route']) . ".svg");
-            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;
 
         case 'espan':
@@ -1158,7 +1158,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'espri':
         case 'espvc':
             $svg = file_get_contents("{$dir}/template_espxx_wide" . strlen($row['route']) . ".svg");
-            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;
 
 		case 'espcn':
