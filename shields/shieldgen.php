@@ -1678,7 +1678,52 @@ function tm_shield_generate($r, $force_reload = false) {
             	break;
             }
 
-        case 'usaga': // Georgia
+        case 'usafl': // Florida
+            $routeNum = str_replace("FL", "", $row['route']);
+			$shieldClass = null;
+			$csv = array_map(fn($line) => str_getcsv($line, escape: ""), file("{$dir}/shieldData_" . $row['systemName'] . ".csv"));
+			foreach ($csv as $values) {
+				if ($values[2] == $r) {
+					$shieldClass = $values[3];
+				}
+			}
+            if ($shieldClass == "Toll") {
+                if (strlen($routeNum) > 3) {
+                    $svg = file_get_contents("{$dir}/template_usafl_toll_wide4.svg");
+                }
+				elseif (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_usafl_toll_wide.svg");
+                }
+                else {
+                    $svg = file_get_contents("{$dir}/template_usafl_toll.svg");
+                }
+            }
+            elseif ($shieldClass == "Both") {
+                if (strlen($routeNum) > 3) {
+                    $svg = file_get_contents("{$dir}/template_usafl_wide4.svg");
+                }
+				elseif (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_usafl_wide.svg");
+                }
+                else {
+                    $svg = file_get_contents("{$dir}/template_usafl.svg");
+                }
+            }
+            else {
+                if (strlen($routeNum) > 3) {
+                    $svg = file_get_contents("{$dir}/template_usafl_wide4.svg");
+                }
+				elseif (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_usafl_wide.svg");
+                }
+                else {
+                    $svg = file_get_contents("{$dir}/template_usafl.svg");
+                }
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+		
+		case 'usaga': // Georgia
             $routeNum = str_replace("GA", "", $row['route']);
             $system = "";
             $sys_map['Alt'] = "ALT";
@@ -1991,7 +2036,6 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'usact': // Connecticut
         case 'usadc': // District of Columbia
         case 'usade': // Delaware
-        case 'usafl': // Florida
         case 'usagu': // Guam
         case 'usahi': // Hawaii
         case 'usaia': // Iowa
