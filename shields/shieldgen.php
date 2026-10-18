@@ -1132,25 +1132,14 @@ function tm_shield_generate($r, $force_reload = false) {
             $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
             break;
-
-        case 'espcg':
+		
+		case 'espa':
+		case 'espcg':
+		case 'espct':
 		case 'espn':
 		case 'espvg':
-            // replace placeholder, add hyphen after prefix, use wide svg files
-            $routeNum = str_replace("N", "N-", $row['route']);
-			$routeNum = str_replace("CG", "CG-", $routeNum);
-			$routeNum = str_replace("VG", "VG-", $routeNum);
-            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
-            $svg = str_replace("***NUMBER***", $routeNum, $svg);
-            break;
-
-        case 'espct':
-            // replace placeholder, add hyphen after prefix, use wide svg files
-            // note that C can be a suffix also, so str_replace doesn't
-            // get it done
-            $routeNum = substr_replace($row['route'], "-", 1, 0);
-            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($routeNum) . ".svg");
-            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide" . strlen($row['route']) . ".svg");
+            $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;
 
         case 'espan':
@@ -1168,21 +1157,13 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'esppv':
         case 'espri':
         case 'espvc':
-            // replace placeholder, add hyphen after prefix, use wide svg files
-            // note that prefix can be 1 of 2 letters, sometimes within the
-            // same system..
-            $hyphenpos = 2;
-            if (ctype_digit($row['route'][1])) {
-                $hyphenpos = 1;
-            }
-            $routeNum = substr_replace($row['route'], "-", $hyphenpos, 0);
-            $svg = file_get_contents("{$dir}/template_espxx_wide" . strlen($routeNum) . ".svg");
-            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            $svg = file_get_contents("{$dir}/template_espxx_wide" . strlen($row['route']) . ".svg");
+            $svg = str_replace("***NUMBER***", $row['route'], $svg);
             break;
 
 		case 'espcn':
-			$routeNum = substr_replace($row['route'], "-", 2, 0);
-			$numOnly = substr_replace($row['route'], "", 0, 2);
+			$routeNum = $row['route'];
+			$numOnly = substr_replace($routeNum, "", 0, 2);
 			if (str_starts_with($routeNum, 'FV')) {
 				if ($numOnly < 3) {
 					$svg = file_get_contents("{$dir}/template_espa_wide4.svg");
@@ -1204,7 +1185,7 @@ function tm_shield_generate($r, $force_reload = false) {
 			}
 			elseif (str_starts_with($routeNum, 'HI')) {
 				if ($numOnly < 10) {
-					$svg = file_get_contents("{$dir}/template_espcn_orange_wide4.svg");
+					$svg = file_get_contents("{$dir}/template_espxx_wide4.svg");
 				}
 				else {
 					$svg = file_get_contents("{$dir}/template_espcn_green_wide5.svg");
@@ -1226,11 +1207,11 @@ function tm_shield_generate($r, $force_reload = false) {
 					$svg = file_get_contents("{$dir}/template_espa_wide4.svg");
 				}
 				else {
-					$svg = file_get_contents("{$dir}/template_espcn_orange_wide5.svg");
+					$svg = file_get_contents("{$dir}/template_espxx_wide5.svg");
 				}
 			}
 			else {
-				$svg = file_get_contents("{$dir}/template_espcn_orange_wide" . strlen($routeNum) . ".svg");
+				$svg = file_get_contents("{$dir}/template_espxx_wide" . strlen($routeNum) . ".svg");
 			}
 			$svg = str_replace("***NUMBER***", $routeNum, $svg);
 			break;
@@ -1338,25 +1319,6 @@ function tm_shield_generate($r, $force_reload = false) {
 				$svg = str_replace("***NUMBER***", $routeNum, $svg);
 				break;
 			}
-            
-        case 'espa':
-            // replace placeholder, use wide svg files for
-            // 3-/4-/5-digit numbers (Spain is simplified: national
-            // (blue) motorway signs are generally used for national and
-            // regional motorways, numbering w/o "-" (e.g. A1 instead of
-            // A-1))
-            
-            if (strlen($row['route']) > 2) {
-                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide3.svg");
-            }
-            if (strlen($row['route']) > 3) {
-                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide4.svg");
-            }
-            if (strlen($row['route']) > 4) {
-                $svg = file_get_contents("{$dir}/template_" . $row['systemName'] . "_wide5.svg");
-            }
-            $svg = str_replace("***NUMBER***", $row['route'], $svg);
-            break;
 
         case 'deubwl':
         case 'deubyst':
@@ -1716,7 +1678,52 @@ function tm_shield_generate($r, $force_reload = false) {
             	break;
             }
 
-        case 'usaga': // Georgia
+        case 'usafl': // Florida
+            $routeNum = str_replace("FL", "", $row['route']);
+			$shieldClass = null;
+			$csv = array_map(fn($line) => str_getcsv($line, escape: ""), file("{$dir}/shieldData_" . $row['systemName'] . ".csv"));
+			foreach ($csv as $values) {
+				if ($values[2] == $r) {
+					$shieldClass = $values[3];
+				}
+			}
+            if ($shieldClass == "Toll") {
+                if (strlen($routeNum) > 3) {
+                    $svg = file_get_contents("{$dir}/template_usafl_toll_wide4.svg");
+                }
+				elseif (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_usafl_toll_wide.svg");
+                }
+                else {
+                    $svg = file_get_contents("{$dir}/template_usafl_toll.svg");
+                }
+            }
+            elseif ($shieldClass == "Both") {
+                if (strlen($routeNum) > 3) {
+                    $svg = file_get_contents("{$dir}/template_usafl_wide4.svg");
+                }
+				elseif (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_usafl_wide.svg");
+                }
+                else {
+                    $svg = file_get_contents("{$dir}/template_usafl.svg");
+                }
+            }
+            else {
+                if (strlen($routeNum) > 3) {
+                    $svg = file_get_contents("{$dir}/template_usafl_wide4.svg");
+                }
+				elseif (strlen($routeNum) > 2) {
+                    $svg = file_get_contents("{$dir}/template_usafl_wide.svg");
+                }
+                else {
+                    $svg = file_get_contents("{$dir}/template_usafl.svg");
+                }
+            }
+            $svg = str_replace("***NUMBER***", $routeNum, $svg);
+            break;
+		
+		case 'usaga': // Georgia
             $routeNum = str_replace("GA", "", $row['route']);
             $system = "";
             $sys_map['Alt'] = "ALT";
@@ -2029,7 +2036,6 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'usact': // Connecticut
         case 'usadc': // District of Columbia
         case 'usade': // Delaware
-        case 'usafl': // Florida
         case 'usagu': // Guam
         case 'usahi': // Hawaii
         case 'usaia': // Iowa
