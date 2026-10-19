@@ -1971,10 +1971,10 @@ function tm_shield_generate($r, $force_reload = false) {
             }
             elseif ($shieldClass == "Both") {
                 if (strlen($routeNum) > 2) {
-                    $svg = file_get_contents("{$dir}/template_usavt_wide.svg");
+                    $svg = file_get_contents("{$dir}/template_usavt_both_wide.svg");
                 }
                 else {
-                    $svg = file_get_contents("{$dir}/template_usavt.svg");
+                    $svg = file_get_contents("{$dir}/template_usavt_both.svg");
                 }
             }
             else {
