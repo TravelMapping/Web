@@ -1700,13 +1700,13 @@ function tm_shield_generate($r, $force_reload = false) {
             }
             elseif ($shieldClass == "Both") {
                 if (strlen($routeNum) > 3) {
-                    $svg = file_get_contents("{$dir}/template_usafl_wide4.svg");
+                    $svg = file_get_contents("{$dir}/template_usafl_both_wide4.svg");
                 }
 				elseif (strlen($routeNum) > 2) {
-                    $svg = file_get_contents("{$dir}/template_usafl_wide.svg");
+                    $svg = file_get_contents("{$dir}/template_usafl_both_wide.svg");
                 }
                 else {
-                    $svg = file_get_contents("{$dir}/template_usafl.svg");
+                    $svg = file_get_contents("{$dir}/template_usafl_both.svg");
                 }
             }
             else {
@@ -1921,10 +1921,10 @@ function tm_shield_generate($r, $force_reload = false) {
             }
             elseif ($shieldClass == "Both") {
                 if (strlen($routeNum) > 2) {
-                    $svg = file_get_contents("{$dir}/template_usatn_wide.svg");
+                    $svg = file_get_contents("{$dir}/template_usatn12_wide.svg");
                 }
                 else {
-                    $svg = file_get_contents("{$dir}/template_usatn.svg");
+                    $svg = file_get_contents("{$dir}/template_usatn12.svg");
                 }
             }
             else {
@@ -1971,10 +1971,10 @@ function tm_shield_generate($r, $force_reload = false) {
             }
             elseif ($shieldClass == "Both") {
                 if (strlen($routeNum) > 2) {
-                    $svg = file_get_contents("{$dir}/template_usavt_wide.svg");
+                    $svg = file_get_contents("{$dir}/template_usavt_both_wide.svg");
                 }
                 else {
-                    $svg = file_get_contents("{$dir}/template_usavt.svg");
+                    $svg = file_get_contents("{$dir}/template_usavt_both.svg");
                 }
             }
             else {
