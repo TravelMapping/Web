@@ -1921,10 +1921,10 @@ function tm_shield_generate($r, $force_reload = false) {
             }
             elseif ($shieldClass == "Both") {
                 if (strlen($routeNum) > 2) {
-                    $svg = file_get_contents("{$dir}/template_usatn_wide.svg");
+                    $svg = file_get_contents("{$dir}/template_usatn12_wide.svg");
                 }
                 else {
-                    $svg = file_get_contents("{$dir}/template_usatn.svg");
+                    $svg = file_get_contents("{$dir}/template_usatn12.svg");
                 }
             }
             else {
