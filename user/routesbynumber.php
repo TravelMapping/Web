@@ -156,7 +156,7 @@ traveled both.  Also note that things like banners are ignored: if you
 have traveled a Business US 41 somewhere, it would be listed here
 simply as a "US41".  For a more accurate and complete list of routes
 traveled (albeit not organized by route number), see the <a
-href="/shields/clinched.php?<?php echo
+href="/shields/clinched.php?u=<?php echo
 $tmuser;?>&amp;cort=traveled">traveled/clinched routes page</a>.
     
 </p>
