@@ -1411,6 +1411,50 @@ function tm_shield_generate($r, $force_reload = false) {
 			else {
 				$svg = file_get_contents("{$dir}/template_chns.svg");
 			}
+            $provinceAbbreviations = [
+                'CHN-AH' => '皖',
+                'CHN-BJ' => '京',
+                'CHN-CQ' => '渝',
+                'CHN-FJ' => '闽',
+                'CHN-GD' => '粤',
+                'CHN-GS' => '甘',
+                'CHN-GX' => '桂',
+                'CHN-GZ' => '贵',
+                'CHN-HA' => '豫',
+                'CHN-HB' => '鄂',
+                'CHN-HE' => '冀',
+                'CHN-HI' => '琼',
+                'CHN-HL' => '黑',
+                'CHN-HN' => '湘',
+                'CHN-JL' => '吉',
+                'CHN-JS' => '苏',
+                'CHN-JX' => '赣',
+                'CHN-LN' => '辽',
+                'CHN-NM' => '蒙',
+                'CHN-NX' => '宁',
+                'CHN-QH' => '青',
+                'CHN-SC' => '川',
+                'CHN-SD' => '鲁',
+                'CHN-SH' => '沪',
+                'CHN-SN' => '陕',
+                'CHN-SX' => '晋',
+                'CHN-TJ' => '津',
+                'CHN-XJ' => '新',
+                'CHN-XZ' => '藏',
+                'CHN-YN' => '云',
+                'CHN-ZJ' => '浙',
+            ];
+            $province = $row['systemName'] === 'chnsf'
+                ? $row['region']
+                : 'CHN-' . strtoupper(substr($row['systemName'], 3, -1));
+            if (isset($provinceAbbreviations[$province])) {
+                $header = $provinceAbbreviations[$province] . '高速';
+            }
+            else {
+                trigger_error("Unknown Chinese shield region: " . $province, E_USER_WARNING);
+                $header = '省高速';
+            }
+            $svg = str_replace("***HEADER***", $header, $svg);
             $svg = str_replace("***NUMBER***", $routeNum, $svg);
 			$svg = str_replace("***SUFFIX***", $suffix, $svg);
             break;	
