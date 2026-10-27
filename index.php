@@ -40,6 +40,7 @@ along with other users' stats and maps.
      echo '<li><a href="https://tmrail.teresco.org/">a site very early in development that tracks railway travels</a></li>';
   }
 ?>
+  <li><a href="https://tmairports.teresco.org">a site very early in development that tracks airport travels</a></li>
   <li><a href="/ios/">an independently developed app for iPhone and iPad</a></li>
   </ul>
 </p>
