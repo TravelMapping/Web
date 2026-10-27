@@ -10,6 +10,7 @@ rootdir=tmdevel
 shieldsdir=
 wpteditdir=
 fontsdir=
+iosdir=
 otherdirs="user lib devel devel/manual hb css graphs"
 while (( "$#" )); do
 
@@ -45,12 +46,16 @@ while (( "$#" )); do
 	fontsdir=fonts
     fi
     
+    if [ "$1" == "--ios" ]; then
+	iosdir=ios
+    fi
+    
     shift
 done
 
-echo "Updating to $server:$basedir$rootdir, directories . $otherdirs $shieldsdir $wpteditdir $fontsdir"
+echo "Updating to $server:$basedir$rootdir, directories . $otherdirs $shieldsdir $wpteditdir $fontsdir $iosdir"
 scp *.php favicon.* $server:$basedir$rootdir
-for dir in $otherdirs $shieldsdir $wpteditdir $fontsdir; do
+for dir in $otherdirs $shieldsdir $wpteditdir $fontsdir $iosdir; do
     ssh $server mkdir -p $basedir$rootdir/$dir
     scp $dir/*.{php,js,svg,css,png,gif,ttf,woff,woff2,html,eot,txt,csv} $server:$basedir$rootdir/$dir
 done
