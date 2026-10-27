@@ -14,7 +14,7 @@ if [ -z "$TARGET_DIR" ]; then
 fi
 
 # Include all optional directories directly in the copy list
-all_dirs="user lib devel devel/manual hb css graphs shields wptedit fonts"
+all_dirs="user lib devel devel/manual hb css graphs ios shields wptedit fonts"
 
 echo "Installing Web assets into local directory: $TARGET_DIR"
 

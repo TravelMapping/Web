@@ -11,7 +11,7 @@ shieldsdir=
 wpteditdir=
 fontsdir=
 iosdir=
-otherdirs="user lib devel devel/manual hb css graphs"
+otherdirs="user lib devel devel/manual hb css graphs ios"
 while (( "$#" )); do
 
     if [ "$1" == "--prod" ]; then
