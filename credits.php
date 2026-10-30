@@ -424,6 +424,7 @@ following sources of highway information.</p>
 	    <ul>
 <li><a href="http://www.putevi-srbije.rs/pdf/serbia_main_and_regional_road.pdf">Road Network Map</a>. PDF map of the road network of Serbia and Kosovo from Road of Serbia.</li>
 <li><a href="https://www.mit-ks.net/repository/docs/2025_10_13_080459_Listaerrugeve.pdf">List of Roads Under the Responsibility of "MMPHI"</a>. Route list from the Ministry of Infrastructure and Transport.</li>
+<li><a href="https://www.mit-ks.net/repository/docs/2025_10_13_080605_Harta_e_Rrugeve_MMPHI_2025.jpg">Map of the Road Network Under the Responsibility of "MMPHI"</a>. Route map from the Ministry of Infrastructure and Transport.</li>
 <li><a href="https://geoportal.rks-gov.net/portal/main">Kosovo Geoportal</a>. GIS app showing roadway classification.</li>
 	    </ul>
 	  </li>
@@ -949,7 +950,7 @@ following sources of highway information.</p>
 
 <ul>
   <li>The project's free, public repositories are hosted on <a href="https://github.com">GitHub</a></li>
-  <li>Site update code uses <a href="https://www.python.org/">Python</a></li>
+  <li>Site update code uses <a href="https://www.python.org/">Python</a> and <a href="https://cplusplus.com/">C++</a></li>
   <li>The web server is hosted
   at <a href="https://www.siena.edu">Siena College</a>, and is
   a <a href="http://freebsd.org">FreeBSD server</a>

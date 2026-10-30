@@ -1162,58 +1162,13 @@ function tm_shield_generate($r, $force_reload = false) {
             break;
 
 		case 'espcn':
-			$routeNum = $row['route'];
-			$numOnly = substr_replace($routeNum, "", 0, 2);
-			if (str_starts_with($routeNum, 'FV')) {
-				if ($numOnly < 3) {
-					$svg = file_get_contents("{$dir}/template_espa_wide4.svg");
-				}
-				elseif ($numOnly < 10) {
-					$svg = file_get_contents("{$dir}/template_espn_wide4.svg");
-				}
-				else {
-					$svg = file_get_contents("{$dir}/template_espcn_green_wide5.svg");
-				}
-			}
-			elseif (str_starts_with($routeNum, 'GC')) {
-				if ($numOnly < 10) {
-					$svg = file_get_contents("{$dir}/template_espa_wide4.svg");
-				}
-				else {
-					$svg = file_get_contents("{$dir}/template_espn_wide5.svg");
-				}
-			}
-			elseif (str_starts_with($routeNum, 'HI')) {
-				if ($numOnly < 10) {
-					$svg = file_get_contents("{$dir}/template_espxx_wide4.svg");
-				}
-				else {
-					$svg = file_get_contents("{$dir}/template_espcn_green_wide5.svg");
-				}
-			}
-			elseif (str_starts_with($routeNum, 'LZ')) {
-				if ($numOnly < 3) {
-					$svg = file_get_contents("{$dir}/template_espn_wide4.svg");
-				}
-				elseif ($numOnly < 10) {
-					$svg = file_get_contents("{$dir}/template_espa_wide4.svg");
-				}
-				else {
-					$svg = file_get_contents("{$dir}/template_espcn_green_wide5.svg");
-				}
-			}
-			elseif (str_starts_with($routeNum, 'TF')) {
-				if ($numOnly < 10) {
-					$svg = file_get_contents("{$dir}/template_espa_wide4.svg");
-				}
-				else {
-					$svg = file_get_contents("{$dir}/template_espxx_wide5.svg");
-				}
+			if (str_starts_with($row['route'], 'FV') || str_starts_with($row['route'], 'GC') || str_starts_with($row['route'], 'LZ')) {
+				$svg = file_get_contents("{$dir}/template_espn_wide" . strlen($row['route']) . ".svg");
 			}
 			else {
-				$svg = file_get_contents("{$dir}/template_espxx_wide" . strlen($routeNum) . ".svg");
+				$svg = file_get_contents("{$dir}/template_espxx_wide" . strlen($row['route']) . ".svg");
 			}
-			$svg = str_replace("***NUMBER***", $routeNum, $svg);
+			$svg = str_replace("***NUMBER***", $row['route'], $svg);
 			break;
 
         case 'bela':
@@ -1398,6 +1353,7 @@ function tm_shield_generate($r, $force_reload = false) {
         case 'chnbjs':
 		case 'chngds':
 		case 'chnhis':
+		case 'chnjls':
 		case 'chnnxs':
 		case 'chnsf':
 		case 'chnshs':
